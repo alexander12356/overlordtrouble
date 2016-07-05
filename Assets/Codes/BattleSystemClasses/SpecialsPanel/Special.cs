@@ -14,8 +14,9 @@ public class Special
     public int level = 1;
     public Element element;
 
-    public Special(Element p_Element)
+    public Special(string p_Title, Element p_Element)
     {
+        title = p_Title;
         element = p_Element;
     }
 }

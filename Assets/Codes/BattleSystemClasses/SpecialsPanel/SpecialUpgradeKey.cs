@@ -3,13 +3,22 @@ using UnityEngine.UI;
 
 public class SpecialUpgradeKey : MonoBehaviour
 {
-    private KeyCode m_Key;
+    private KeyCode m_Key= KeyCode.UpArrow;
 
-    private Image m_Image;
+    private Image m_Image = null;
+
+    private bool m_Upgraded = false;
+
+    private void Awake()
+    {
+        m_Image = GetComponent<Image>();
+    }
 
     public void SetKey(KeyCode p_Key)
     {
-        string l_Path = "Sprites/BattleSystem/UI";
+        m_Key = p_Key;
+
+        string l_Path = "Sprites/BattleSystem/UI/";
         switch (p_Key)
         {
             case KeyCode.UpArrow:
@@ -28,8 +37,25 @@ public class SpecialUpgradeKey : MonoBehaviour
         m_Image.sprite = Resources.Load<Sprite>(l_Path);
     }
 
-    public void Upgrade()
+    public bool Upgraded
     {
-        m_Image.color = Color.blue;
+        get
+        {
+            return m_Upgraded;
+        }
+
+        set
+        {
+            m_Upgraded = value;
+
+            if (m_Upgraded)
+            {
+                m_Image.color = Color.blue;
+            }
+            else
+            {
+                m_Image.color = Color.white;
+            }
+        }
     }
 }

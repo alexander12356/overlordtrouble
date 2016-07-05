@@ -80,5 +80,7 @@ public class PanelManager : MonoBehaviour
         m_PanelList[p_PanelName].gameObject.SetActive(true);
     }
 
+
+
     #endregion
 }

@@ -34,7 +34,7 @@ public class SpecialSelectPanel : Panel
         {
             SpecialIcon l_NewSpecialIcon = Instantiate(m_SpecialIconPrefab);
             l_NewSpecialIcon.transform.SetParent(m_SelectedSpecialListTransform);
-            l_NewSpecialIcon.SetSpecial(p_Id);
+            l_NewSpecialIcon.id = p_Id;
             l_NewSpecialIcon.transform.localScale = Vector3.one;
 
             m_SpecialIcons.Add(p_Id, l_NewSpecialIcon);
@@ -46,13 +46,14 @@ public class SpecialSelectPanel : Panel
         switch (p_Key)
         {
             case 0:
-                for (int i = 0; i < m_SpecialIcons.Count; i++)
-                {
-                    m_SpecialList.Add(new Special(Special.Element.Fire));
-                }
-
-                SpecialUpgradePanel.GetInstance().SetSpecials(m_SpecialList);
                 PanelManager.GetInstance().Show(PanelEnum.SpecialUpdate);
+
+                foreach (string p_Id in m_SpecialIcons.Keys)
+                {
+                    m_SpecialList.Add(new Special(p_Id, Special.Element.Fire));
+                }
+                SpecialUpgradePanel.GetInstance().SetSpecials(m_SpecialList);
+                
                 break;
             case 1:
                 PanelManager.GetInstance().Show(PanelEnum.Main);

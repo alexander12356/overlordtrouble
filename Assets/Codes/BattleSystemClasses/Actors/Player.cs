@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -82,5 +84,10 @@ public class Player : MonoBehaviour
     {
         BattleSystem.GetInstance().Died(BattleSystem.ActorID.Player);
         isDied = true;
+    }
+
+    public void SpecialAttack(List<Special> m_SpecialList)
+    {
+        EndTurn();
     }
 }

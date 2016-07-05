@@ -6,13 +6,13 @@ using System.Collections.Generic;
 public class SpecialUpgradePanel : MonoBehaviour
 {
     [SerializeField]
-    private SpecialIcon m_SpecialIconPrefab;
+    private SpecialIcon m_SpecialIconPrefab = null;
 
     [SerializeField]
-    private SpecialUpgradeKey m_SpecialUpgradeKeyPrefab;
+    private SpecialUpgradeKey m_SpecialUpgradeKeyPrefab = null;
 
     [SerializeField]
-    private Transform m_SpecialIconsConteiner;
+    private Transform m_SpecialIconsConteiner = null;
 
     private static SpecialUpgradePanel m_Instance;
 
@@ -20,7 +20,9 @@ public class SpecialUpgradePanel : MonoBehaviour
 
     private List<Special> m_SpecialList;
 
-    private List<SpecialIcon> m_SpecialIcons;
+    private List<SpecialIcon> m_SpecialIcons = new List<SpecialIcon>();
+
+    private List<SpecialUpgradeKey> m_SpecialUpgradeKeyList = new List<SpecialUpgradeKey>();
 
     public static SpecialUpgradePanel GetInstance()
     {
@@ -35,13 +37,24 @@ public class SpecialUpgradePanel : MonoBehaviour
     public void SetSpecials(List<Special> p_SpecialList)
     {
         m_SpecialList = p_SpecialList;
+        CreateIcons(m_SpecialList);
 
         RunTimer();
+    }
+
+    public void RunTimer()
+    {
+        RandomizeSpecialKeys();
+
+
+
+        Debug.Log("Upgrade Time START");
     }
 
     private void RandomizeSpecialKeys()
     {
         m_SpecialKeys.Clear();
+        m_SpecialUpgradeKeyList.Clear();
         int l_KeyCode = 0;
         for (int i = 0; i < m_SpecialList.Count; i++)
         {
@@ -68,45 +81,59 @@ public class SpecialUpgradePanel : MonoBehaviour
             SpecialUpgradeKey l_SpecialUpgradeKey = Instantiate(m_SpecialUpgradeKeyPrefab);
             l_SpecialUpgradeKey.SetKey(l_Key);
             l_SpecialUpgradeKey.transform.SetParent(m_SpecialIcons[i].transform);
-            l_SpecialUpgradeKey.transform.localPosition = Vector3.zero;
+            l_SpecialUpgradeKey.transform.localScale = Vector3.one;
+            l_SpecialUpgradeKey.transform.localPosition = new Vector3(0.0f, 70.0f, 0.0f);
+
+            m_SpecialUpgradeKeyList.Add(l_SpecialUpgradeKey);
         }
     }
 
-    public void RunTimer()
+    private int specialCount = 0;
+    private float m_UpgradeTime = 0.0f;
+    private bool m_Start = false;
+    private void Update()
     {
-        RandomizeSpecialKeys();
-        StartCoroutine(UpgradeTimer());
-    }
-
-    float m_UpgradeTime = 0.0f;
-    private IEnumerator UpgradeTimer()
-    {
-        m_UpgradeTime = 0.0f;
-        while (m_UpgradeTime < 3.0f)
+        if (!m_Start)
+        {
+            return;
+        }
+        
+        if (m_UpgradeTime < 3.0f)
         {
             m_UpgradeTime += Time.deltaTime;
-            UpgradeKeyCatch();
-            yield return new WaitForEndOfFrame();
         }
-    }
+        else
+        {
+            m_Start = false;
+            Debug.Log("Upgrade Time END");
+            PanelManager.GetInstance().Show(PanelEnum.Main);
+            Player.GetInstance().SpecialAttack(m_SpecialList);
+            return;
+        }
+        
 
-    private int levelCount = 1;
-    private int specialCount = 0;
-    private void UpgradeKeyCatch()
-    {
         if (Input.GetKeyDown(m_SpecialKeys[specialCount]))
         {
+            m_SpecialUpgradeKeyList[specialCount].Upgraded = true;
+            m_SpecialList[specialCount].level++;
+
             specialCount++;
 
             if (specialCount >= m_SpecialKeys.Count)
             {
                 specialCount = 0;
-                levelCount++;
+
+                for (int i = 0; i < m_SpecialUpgradeKeyList.Count; i++)
+                {
+                    m_SpecialUpgradeKeyList[i].Upgraded = false;
+                    Destroy(m_SpecialUpgradeKeyList[i].gameObject);
+                }
+                RandomizeSpecialKeys();
             }
         }
         else
         {
-            //m_SpecialList[ m_SpecialKeys[specialCount];
+            
         }
     }
 
@@ -116,10 +143,15 @@ public class SpecialUpgradePanel : MonoBehaviour
         {
             SpecialIcon l_NewSpecialIcon = Instantiate(m_SpecialIconPrefab);
             l_NewSpecialIcon.transform.SetParent(m_SpecialIconsConteiner);
-            l_NewSpecialIcon.SetSpecial(p_SpecialList[i].title);
+            l_NewSpecialIcon.id = p_SpecialList[i].title;
             l_NewSpecialIcon.transform.localScale = Vector3.one;
 
             m_SpecialIcons.Add(l_NewSpecialIcon);
         }
+    }
+
+    private void ClearUpgradeKey()
+    {
+
     }
 }

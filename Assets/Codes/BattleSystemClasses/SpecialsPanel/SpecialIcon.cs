@@ -11,10 +11,18 @@ public class SpecialIcon : MonoBehaviour
         m_Text = GetComponentInChildren<Text>(); ;
     }
 
-    public void SetSpecial(string p_Id)
+    public string id
     {
-        m_Id = p_Id;
-        SetText(p_Id);
+        get
+        {
+            return m_Id;
+        }
+        set
+        {
+            m_Id = value;
+            SetText(m_Id);
+        }
+        
     }
 
     private void SetText(string p_NewText)
