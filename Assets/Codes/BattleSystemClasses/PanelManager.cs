@@ -58,6 +58,7 @@ public class PanelManager : MonoBehaviour
     public void ClosePanel(Panel p_Panel)
     {
         Panel l_PoppedPanel = m_PanelStack.Pop();
+        l_PoppedPanel.PopAction();
         Destroy(l_PoppedPanel.gameObject);
 
         m_PanelStack.Peek().gameObject.SetActive(true);

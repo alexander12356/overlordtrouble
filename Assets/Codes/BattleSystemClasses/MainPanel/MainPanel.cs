@@ -25,10 +25,7 @@ public class MainPanel : Panel
 
     private void Attack()
     {
-        //Player.GetInstance().Attack();
-        TextPanel l_TextPanel = Instantiate(PanelManager.GetInstance().textPanelPrefab);
-        PanelManager.GetInstance().ShowPanel(l_TextPanel);
-        l_TextPanel.SetText("Вы житель мелкого поселения монстров, уже давно как не было войны с людьми и ваше поселение смогло даже наладить торговые пути с некоторыми людскими поселками, однако многие другие люди все еще не доверяют вам как и многие другие монстры не доверяют им.");
+        Player.GetInstance().Attack();
     }
 
     private void Update()

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     #region Variables
     private static Player m_Instance = null;
-    private float m_Health = 5;
+    private float m_Health = 20;
     private float m_Mana   = 10;
-    private float m_DamageValue = 2;
+    private int[] m_DamageValue = new int[2] { 5, 8};
     private bool  m_IsDied = false;
     #endregion
 
@@ -22,18 +21,17 @@ public class Player : MonoBehaviour
     {
         Unblock();
     }
-
-    public void EndTurn()
-    {
-        Block();
-        TurnSystem.GetInstance().EndTurn();
-    }
     
     public void Attack()
     {
-        EnemyManager.GetInstance().GetEnemy().Damage(m_DamageValue);
+        int l_Damage = Random.Range(m_DamageValue[0], m_DamageValue[1]);
 
-        EndTurn();
+        EnemyManager.GetInstance().GetEnemy().Damage(l_Damage);
+
+        TextPanel l_NewTextPanel = Instantiate(PanelManager.GetInstance().textPanelPrefab);
+        l_NewTextPanel.AddPopAction(EndTurn);
+        l_NewTextPanel.SetText("Игрок нанес " + l_Damage + " урона врагу");
+        PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
     }
 
     public void Damage(float p_Value)
@@ -74,6 +72,11 @@ public class Player : MonoBehaviour
     {
         BattleSystem.GetInstance().Died(BattleSystem.ActorID.Player);
         m_IsDied = true;
+    }
+
+    private void EndTurn()
+    {
+        TurnSystem.GetInstance().EndTurn();
     }
     #endregion
 }
