@@ -44,14 +44,14 @@ public class Player : MonoBehaviour
     private void Block()
     {
         //  Блокировка панели
-        MainPanel.GetInstance().Block();
+        //MainPanel.GetInstance().Block();
     }
 
     // Разблокировка игрока
     private void Unblock()
     {
         //  Разблокировка панели
-        MainPanel.GetInstance().Unblock();
+        //MainPanel.GetInstance().Unblock();
     }
 
     // Атака

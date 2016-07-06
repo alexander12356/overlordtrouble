@@ -49,7 +49,7 @@ public class PanelManager : MonoBehaviour
 
     #endregion
 
-    #region Private Methods
+    #region Private
 
     private void Awake()
     {
@@ -58,16 +58,6 @@ public class PanelManager : MonoBehaviour
 
     private void Start()
     {
-        AddPanel(PanelEnum.Main, MainPanel.GetInstance().gameObject);
-        AddPanel(PanelEnum.SpecialSelect, SpecialSelectPanel.GetInstance().gameObject);
-        AddPanel(PanelEnum.SpecialUpdate, SpecialUpgradePanel.GetInstance().gameObject);
-        AddPanel(PanelEnum.WinPanel,  WinPanel.GetInstance().gameObject);
-        AddPanel(PanelEnum.LosePanel, LosePanel.GetInstance().gameObject);
-
-        HidePanel(PanelEnum.SpecialSelect);
-        HidePanel(PanelEnum.SpecialUpdate);
-        HidePanel(PanelEnum.WinPanel);
-        HidePanel(PanelEnum.LosePanel);
     }
 
     private void HidePanel(PanelEnum p_PanelName)
@@ -79,8 +69,6 @@ public class PanelManager : MonoBehaviour
     {
         m_PanelList[p_PanelName].gameObject.SetActive(true);
     }
-
-
 
     #endregion
 }
