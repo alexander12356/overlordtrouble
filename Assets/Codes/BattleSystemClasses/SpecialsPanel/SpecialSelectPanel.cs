@@ -46,7 +46,7 @@ public class SpecialSelectPanel : Panel
         switch (p_Key)
         {
             case 0:
-                PanelManager.GetInstance().Show(PanelEnum.SpecialUpdate);
+                //PanelManager.GetInstance().Show(PanelEnum.SpecialUpdate);
 
                 foreach (string p_Id in m_SpecialIcons.Keys)
                 {
@@ -56,7 +56,7 @@ public class SpecialSelectPanel : Panel
                 
                 break;
             case 1:
-                PanelManager.GetInstance().Show(PanelEnum.Main);
+                //PanelManager.GetInstance().Show(PanelEnum.Main);
                 break;
         }
     }

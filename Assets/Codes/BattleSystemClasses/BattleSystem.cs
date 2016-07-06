@@ -33,12 +33,12 @@ public class BattleSystem : Singleton<BattleSystem>
     private void Win()
     {
         PanelManager.GetInstance().GetComponent<CanvasGroup>().interactable = false;
-        PanelManager.GetInstance().Show(PanelEnum.WinPanel);
+        //PanelManager.GetInstance().Show(PanelEnum.WinPanel);
     }
 
     private void Lose()
     {
         PanelManager.GetInstance().GetComponent<CanvasGroup>().interactable = false;
-        PanelManager.GetInstance().Show(PanelEnum.LosePanel);
+        //PanelManager.GetInstance().Show(PanelEnum.LosePanel);
     }
 }

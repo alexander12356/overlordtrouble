@@ -3,11 +3,6 @@
 public class MainPanel : Panel
 {
     #region Variables
-    private static MainPanel m_Instance = null;
-
-    [SerializeField]
-    private CanvasGroup m_ButtonsCanvasGroup = null;
-
     [SerializeField]
     private ButtonList m_ButtonList = null;
 
@@ -18,14 +13,22 @@ public class MainPanel : Panel
     #endregion
 
     #region Private
+    private void Awake()
+    {
+        InitButtons();
+    }
+
     private void InitButtons()
     {
-        
+        m_ButtonList[0].AddAction(Attack);
     }
 
     private void Attack()
     {
-
+        //Player.GetInstance().Attack();
+        TextPanel l_TextPanel = Instantiate(PanelManager.GetInstance().textPanelPrefab);
+        PanelManager.GetInstance().ShowPanel(l_TextPanel);
+        l_TextPanel.SetText("Вы житель мелкого поселения монстров, уже давно как не было войны с людьми и ваше поселение смогло даже наладить торговые пути с некоторыми людскими поселками, однако многие другие люди все еще не доверяют вам как и многие другие монстры не доверяют им.");
     }
 
     private void Update()
@@ -40,7 +43,7 @@ public class MainPanel : Panel
             m_ButtonList.SelectMoveDown();
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z))
         {
             m_ButtonList.Action();
         }

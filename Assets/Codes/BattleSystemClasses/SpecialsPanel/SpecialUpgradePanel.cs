@@ -106,7 +106,7 @@ public class SpecialUpgradePanel : MonoBehaviour
         {
             m_Start = false;
             Debug.Log("Upgrade Time END");
-            PanelManager.GetInstance().Show(PanelEnum.Main);
+            //PanelManager.GetInstance().Show(PanelEnum.Main);
             Player.GetInstance().SpecialAttack(m_SpecialList);
             return;
         }

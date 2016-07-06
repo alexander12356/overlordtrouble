@@ -33,13 +33,23 @@ public class ButtonList : MonoBehaviour
 
     public void Action()
     {
+        m_ButtonsList[m_CurrentButtonId].RunAction();
+    }
 
+    public PanelButton this[int i]
+    {
+        get { return m_ButtonsList[i];  }
+        set { m_ButtonsList[i] = value; }
     }
     #endregion
 
     #region Private
 
     private void Awake()
+    {
+    }
+
+    private void Start()
     {
         CheckSelectPosition();
     }

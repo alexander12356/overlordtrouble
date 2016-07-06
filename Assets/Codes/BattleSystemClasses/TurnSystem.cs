@@ -16,10 +16,10 @@
         if (m_IsPlayerTurn)
         {
             //  Запуск игрока
-            if (!Player.GetInstance().isDied)
-            {
-                Player.GetInstance().Run();
-            }
+            //if (!Player.GetInstance().isDied)
+            //{
+            //    Player.GetInstance().Run();
+            //}
         }
         else
         {

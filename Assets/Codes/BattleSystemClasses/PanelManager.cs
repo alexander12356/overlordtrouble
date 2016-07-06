@@ -13,44 +13,58 @@ public enum PanelEnum
 public class PanelManager : MonoBehaviour
 {
     #region Variables
-
-    private Dictionary<PanelEnum, GameObject> m_PanelList = new Dictionary<PanelEnum, GameObject>();
-
-    private PanelEnum m_CurrentShowedPanel = PanelEnum.Main;
-
+    private Stack<Panel> m_PanelStack = new Stack<Panel>();
     private static PanelManager m_Instance;
+
+    [Header("Panels")]
+
+    [SerializeField]
+    private MainPanel m_MainPanelPrefab;
+
+    [SerializeField]
+    private TextPanel m_TextPanelPrefab;
 
     #endregion
 
     #region Interface
+    public MainPanel mainPanelPrefab
+    {
+        get { return m_MainPanelPrefab; }
+    }
+
+    public TextPanel textPanelPrefab
+    {
+        get { return m_TextPanelPrefab; }
+    }
 
     public static PanelManager GetInstance()
     {
         return m_Instance;
     }
 
-    public void AddPanel(PanelEnum p_PanelName, GameObject p_Panel)
+    public void ShowPanel(Panel p_NewPanel)
     {
-        m_PanelList.Add(p_PanelName, p_Panel);
-    }
-
-    public void Show(PanelEnum p_PanelName)
-    {
-        if (p_PanelName == m_CurrentShowedPanel)
+        if (m_PanelStack.Count > 0)
         {
-            return;
+            m_PanelStack.Peek().gameObject.SetActive(false);
         }
+        m_PanelStack.Push(p_NewPanel);
 
-        HidePanel(m_CurrentShowedPanel);
-        ShowPanel(p_PanelName);
-
-        m_CurrentShowedPanel = p_PanelName;
+        p_NewPanel.transform.SetParent(transform);
+        p_NewPanel.transform.localPosition = Vector3.zero;
+        p_NewPanel.transform.localScale = Vector3.one;
     }
 
+    public void ClosePanel(Panel p_Panel)
+    {
+        Panel l_PoppedPanel = m_PanelStack.Pop();
+        Destroy(l_PoppedPanel.gameObject);
+
+        m_PanelStack.Peek().gameObject.SetActive(true);
+    }
     #endregion
 
     #region Private
-
     private void Awake()
     {
         m_Instance = this;
@@ -58,17 +72,23 @@ public class PanelManager : MonoBehaviour
 
     private void Start()
     {
+        MainPanel l_MainPanel = Instantiate(m_MainPanelPrefab);
+        ShowPanel(l_MainPanel);
     }
 
-    private void HidePanel(PanelEnum p_PanelName)
+    private void LoadPanelsPrefabs()
     {
-        m_PanelList[p_PanelName].gameObject.SetActive(false);
     }
+    #endregion
 
-    private void ShowPanel(PanelEnum p_PanelName)
+    #region In Unity Editor Only
+    #if UNITY_EDITOR
+    [ContextMenu("Get panel prefabs!")]
+    public void GetPanelPrefabs()
     {
-        m_PanelList[p_PanelName].gameObject.SetActive(true);
+        m_MainPanelPrefab = Resources.Load<MainPanel>("Prefabs/Panels/MainPanel");
+        m_TextPanelPrefab = Resources.Load<TextPanel>("Prefabs/Panels/TextPanel");
     }
-
+    #endif
     #endregion
 }

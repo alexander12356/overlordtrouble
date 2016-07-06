@@ -4,33 +4,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region Variables
     private static Player m_Instance = null;
+    private float m_Health = 5;
+    private float m_Mana   = 10;
+    private float m_DamageValue = 2;
+    private bool  m_IsDied = false;
+    #endregion
 
-    // Жизнь
-    public float health = 5;
-
-    // Мана
-    public float mana = 10;
-
-    // Дамаг
-    public float damageValue = 2;
-
-    public bool isDied = false;
-
-    private void Awake()
-    {
-        m_Instance = this;
-    }
-
+    #region Interface
     static public Player GetInstance()
     {
         return m_Instance;
     }
-
-    // Запуск игрока
+    
     public void Run()
     {
-        // Разблокировка игрока
         Unblock();
     }
 
@@ -39,39 +28,21 @@ public class Player : MonoBehaviour
         Block();
         TurnSystem.GetInstance().EndTurn();
     }
-
-    // Блокировка Игрока
-    private void Block()
-    {
-        //  Блокировка панели
-        //MainPanel.GetInstance().Block();
-    }
-
-    // Разблокировка игрока
-    private void Unblock()
-    {
-        //  Разблокировка панели
-        //MainPanel.GetInstance().Unblock();
-    }
-
-    // Атака
+    
     public void Attack()
     {
-        // Взять врага из BattleSystem
-        // Нанести повреждения
-        Enemy.GetInstance().Damage(damageValue);
+        EnemyManager.GetInstance().GetEnemy().Damage(m_DamageValue);
 
         EndTurn();
     }
 
-    // Нанесение повреждения(кол-во дамага)
     public void Damage(float p_Value)
     {
-        health -= p_Value;
+        m_Health -= p_Value;
 
-        Debug.Log("Player health: " + health);
+        Debug.Log("Player health: " + m_Health);
 
-        if (health <= 0.0f)
+        if (m_Health <= 0.0f)
         {
             Died();
 
@@ -79,15 +50,30 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Смерть
-    private void Died()
-    {
-        BattleSystem.GetInstance().Died(BattleSystem.ActorID.Player);
-        isDied = true;
-    }
-
     public void SpecialAttack(List<Special> m_SpecialList)
     {
         EndTurn();
     }
+    #endregion
+
+    #region Private
+    private void Awake()
+    {
+        m_Instance = this;
+    }
+    
+    private void Block()
+    {
+    }
+    
+    private void Unblock()
+    {
+    }
+    
+    private void Died()
+    {
+        BattleSystem.GetInstance().Died(BattleSystem.ActorID.Player);
+        m_IsDied = true;
+    }
+    #endregion
 }
