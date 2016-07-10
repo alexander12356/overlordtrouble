@@ -28,8 +28,7 @@ public class PanelButton : MonoBehaviour
             }
             return m_Prefab;
         }
-    } 
-
+    }
     public string title
     {
         get { return m_Title; }
@@ -42,7 +41,6 @@ public class PanelButton : MonoBehaviour
             m_Text.text = m_Title = value;
         }
     }
-
     public bool selected
     {
         get
@@ -52,6 +50,17 @@ public class PanelButton : MonoBehaviour
         set
         {
             Select(value);
+        }
+    }
+    public Image selectedArrowImage
+    {
+        get
+        {
+            if (m_SelectedArrowImage == null)
+            {
+                m_SelectedArrowImage = GetComponentInChildren<Image>(true);
+            }
+            return m_SelectedArrowImage;
         }
     }
 
@@ -82,20 +91,16 @@ public class PanelButton : MonoBehaviour
     private void Awake()
     {
         m_Text = GetComponentInChildren<Text>();
-        m_SelectedArrowImage = GetComponentInChildren<Image>(true);
+        m_SelectedArrowImage = selectedArrowImage;
 
         m_Text.text = m_Title;
-        m_SelectedArrowImage.gameObject.SetActive(false);
-    }
-
-    private void Start()
-    {
+        selectedArrowImage.gameObject.SetActive(false);
     }
 
     private void Select(bool p_Selected)
     {
         m_Selected = p_Selected;
-        m_SelectedArrowImage.gameObject.SetActive(m_Selected);
+        selectedArrowImage.gameObject.SetActive(m_Selected);
     }
     #endregion
 }

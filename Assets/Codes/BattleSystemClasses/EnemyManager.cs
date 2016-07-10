@@ -3,6 +3,7 @@
 public class EnemyManager : Singleton<EnemyManager>
 {
     #region Interface
+    //TODO Kostil
     public List<Enemy> GetEnemy()
     {
         List<Enemy> l_EnemyList = new List<Enemy>();

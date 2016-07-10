@@ -34,7 +34,7 @@ public class SpecialButton : MonoBehaviour
 
     public void Select()
     {
-        SpecialSelectPanel.GetInstance().AddSpecial(m_Id);
+        //SpecialSelectPanel.GetInstance().AddSpecial(m_Id);
     }
 
     public void ChangeText(string p_NewText)

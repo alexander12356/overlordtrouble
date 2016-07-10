@@ -13,9 +13,48 @@ public class ButtonList : MonoBehaviour
     private int m_PrevButtonId = 0;
 
     private event KeyArrowActionHandler KeyArrowActioneEvent;
+    private bool m_IsActive = true;
     #endregion
 
     #region Interface
+    public int currentButtonId
+    {
+        get { return m_CurrentButtonId; }
+    }
+    public int prevButtonId
+    {
+        get { return m_PrevButtonId; }
+    }
+    public PanelButton this[int i]
+    {
+        get { return m_ButtonsList[i]; }
+        set { m_ButtonsList[i] = value; }
+    }
+    public PanelButton currentButton
+    {
+        get { return m_ButtonsList[m_CurrentButtonId]; }
+    }
+    public bool isActive
+    {
+        get { return m_IsActive; }
+        set
+        {
+            m_IsActive = value;
+            if (m_ButtonsList.Count == 0)
+            {
+                return;
+            }
+            if (m_IsActive)
+            {
+                currentButton.selected = true;
+            }
+            else
+            {
+                currentButton.selected = false;
+            }
+        }
+    }
+
     public void AddKeyArrowAction(KeyArrowActionHandler p_Action)
     {
         KeyArrowActioneEvent += p_Action;
@@ -24,16 +63,6 @@ public class ButtonList : MonoBehaviour
     public void RemoveKeyArrowAction(KeyArrowActionHandler p_Action)
     {
         KeyArrowActioneEvent -= p_Action;
-    }
-
-    public int currentButtonId
-    {
-        get { return m_CurrentButtonId; }
-    }
-
-    public int prevButtonId
-    {
-        get { return m_PrevButtonId; }
     }
 
     public void SelectMoveUp()
@@ -57,18 +86,20 @@ public class ButtonList : MonoBehaviour
         m_ButtonsList[m_CurrentButtonId].RunAction();
     }
 
-    public PanelButton this[int i]
-    {
-        get { return m_ButtonsList[i];  }
-        set { m_ButtonsList[i] = value; }
-    }
-
     public void AddButton(PanelButton p_Button)
     {
         p_Button.transform.SetParent(transform);
-        p_Button.transform.localPosition = new Vector3(-500, 130.0f - m_ButtonsList.Count * 50, 0.0f);
+        p_Button.transform.localPosition = new Vector3(220.0f, -70.0f - m_ButtonsList.Count * 50, 0.0f);
         p_Button.transform.localScale = Vector3.one;
         m_ButtonsList.Add(p_Button);
+    }
+
+    public void RemoveButton(int p_Id)
+    {
+        PanelButton l_DeletedButton = m_ButtonsList[p_Id];
+        Destroy(l_DeletedButton.gameObject);
+        m_ButtonsList.RemoveAt(p_Id);
+        ReconstructButtons();
     }
 
     public void UpdateKey()
@@ -107,7 +138,10 @@ public class ButtonList : MonoBehaviour
 
     private void Start()
     {
-        CheckSelectPosition();
+        if (isActive)
+        {
+            CheckSelectPosition();
+        }
     }
 
     private void CheckSelectPosition()
@@ -123,6 +157,15 @@ public class ButtonList : MonoBehaviour
 
         m_ButtonsList[m_PrevButtonId].selected = false;
         m_ButtonsList[m_CurrentButtonId].selected = true;
+    }
+
+    private void ReconstructButtons()
+    {
+        for (int i = 0; i < m_ButtonsList.Count; i++)
+        {
+            m_ButtonsList[i].transform.localPosition = new Vector3(220, -70.0f - i * 50, 0.0f);
+            m_ButtonsList[i].transform.localScale = Vector3.one;
+        }
     }
     #endregion
 }

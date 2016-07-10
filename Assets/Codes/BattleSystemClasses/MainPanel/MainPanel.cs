@@ -44,12 +44,19 @@ public class MainPanel : Panel
     private void InitButtons()
     {
         m_ButtonList[0].AddAction(Attack);
+        m_ButtonList[1].AddAction(Special);
     }
 
     private void Attack()
     {
         ChooseEnemyPanel l_ChooseEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
         PanelManager.GetInstance().ShowPanel(l_ChooseEnemyPanel);
+    }
+
+    private void Special()
+    {
+        SpecialSelectPanel l_SpecialSelectPanel = Instantiate(SpecialSelectPanel.prefab);
+        PanelManager.GetInstance().ShowPanel(l_SpecialSelectPanel);
     }
     #endregion
 }
