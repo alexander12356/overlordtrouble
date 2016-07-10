@@ -1,18 +1,23 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
-public class Player : MonoBehaviour
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Player : Actor
 {
     #region Variables
     private static Player m_Instance = null;
-    private float m_Health = 20;
-    private float m_Mana   = 10;
     private int[] m_DamageValue = new int[2] { 5, 8};
-    private bool  m_IsDied = false;
     private Animator m_Animator = null;
     private AudioClip m_AudioHit = null;
     private AudioClip m_AudioAttack = null;
     private AudioSource m_AudioSource = null;
+
+    [SerializeField]
+    private Text m_HealthText = null;
+
+    [SerializeField]
+    private Text m_ManaText = null;
     #endregion
 
     #region Interface
@@ -21,16 +26,13 @@ public class Player : MonoBehaviour
         return m_Instance;
     }
     
-    public void Run()
+    public override void Attack(Actor p_Actor)
     {
-        Unblock();
-    }
-    
-    public void Attack(Enemy p_Enemy)
-    {
+        base.Attack(p_Actor);
+
         int l_Damage = Random.Range(m_DamageValue[0], m_DamageValue[1]);
 
-        p_Enemy.Damage(l_Damage);
+        p_Actor.Damage(l_Damage);
 
         TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
         l_NewTextPanel.SetText("Игрок нанес " + l_Damage + " урона врагу");
@@ -40,13 +42,16 @@ public class Player : MonoBehaviour
         m_AudioSource.PlayOneShot(m_AudioAttack);
     }
 
-    public void Damage(float p_Value)
+    public override void Damage(int p_DamageValue)
     {
-        m_Health -= p_Value;
+        base.Damage(p_DamageValue);
 
-        Debug.Log("Player health: " + m_Health);
+        health -= p_DamageValue;
+        m_HealthText.text = "HP: " + health + "/" + baseHealth;
 
-        if (m_Health <= 0.0f)
+        Debug.Log("Player health: " + health);
+
+        if (health <= 0.0f)
         {
             Died();
 
@@ -61,36 +66,41 @@ public class Player : MonoBehaviour
     {
         EndTurn();
     }
+
+    public override void Died()
+    {
+        base.Died();
+
+        BattleSystem.GetInstance().Died(BattleSystem.ActorID.Player);
+    }
+
+    public override void InitStats()
+    {
+        base.InitStats();
+
+        health = baseHealth = 20;
+        mana = baseMana = 20;
+        isDead = true;
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        m_Instance = this;
+
+        InitComponents();
+        LoadSounds();
+    }
     #endregion
 
     #region Private
-    private void Awake()
+    private void InitComponents()
     {
-        m_Instance = this;
-
         m_Animator = GetComponent<Animator>();
         m_AudioSource = GetComponent<AudioSource>();
 
         LoadSounds();
-    }
-    
-    private void Block()
-    {
-    }
-    
-    private void Unblock()
-    {
-    }
-    
-    private void Died()
-    {
-        BattleSystem.GetInstance().Died(BattleSystem.ActorID.Player);
-        m_IsDied = true;
-    }
-
-    private void EndTurn()
-    {
-        TurnSystem.GetInstance().EndTurn();
     }
 
     private void LoadSounds()

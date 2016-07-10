@@ -30,7 +30,6 @@ public class PanelManager : MonoBehaviour
             m_PanelStack.Peek().Hide();
         }
         p_NewPanel.transform.SetParent(transform);
-        //p_NewPanel.Show();
 
         m_PanelStack.Push(p_NewPanel);
     }
@@ -39,8 +38,6 @@ public class PanelManager : MonoBehaviour
     {
         Panel l_PoppedPanel = m_PanelStack.Pop();
         l_PoppedPanel.Close();
-
-        //m_PanelStack.Peek().Show();
     }
     #endregion
 

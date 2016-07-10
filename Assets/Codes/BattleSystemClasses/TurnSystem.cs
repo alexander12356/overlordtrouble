@@ -9,22 +9,15 @@
 
     public void EndTurn()
     {
-        // Переключение флажка
         m_IsPlayerTurn = !m_IsPlayerTurn;
-
-        // Если ход игрока
+        
         if (m_IsPlayerTurn)
         {
-            //  Запуск игрока
-            //if (!Player.GetInstance().isDied)
-            //{
-            //    Player.GetInstance().Run();
-            //}
         }
         else
         {
             //  Запуск ИИ
-            if (!Enemy.GetInstance().isDied)
+            if (!Enemy.GetInstance().isDead)
             {
                 Enemy.GetInstance().Run();
             }            

@@ -53,7 +53,7 @@ public class ChooseEnemyPanel : Panel
         for (int i = 0; i < m_EnemyList.Count; i++)
         {
             PanelButton l_PanelButton = Instantiate(PanelButton.prefab);
-            l_PanelButton.title = m_EnemyList[i].mobName + " " + m_EnemyList[i].currHealth + "/" + m_EnemyList[i].maxHealth;
+            l_PanelButton.title = m_EnemyList[i].actorName + " " + m_EnemyList[i].health + "/" + m_EnemyList[i].baseHealth;
             l_PanelButton.AddAction(Choose);
 
             m_ButtonList.AddButton(l_PanelButton);
