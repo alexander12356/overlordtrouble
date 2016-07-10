@@ -15,28 +15,9 @@ public class PanelManager : MonoBehaviour
     #region Variables
     private Stack<Panel> m_PanelStack = new Stack<Panel>();
     private static PanelManager m_Instance;
-
-    [Header("Panels")]
-
-    [SerializeField]
-    private MainPanel m_MainPanelPrefab;
-
-    [SerializeField]
-    private TextPanel m_TextPanelPrefab;
-
     #endregion
 
     #region Interface
-    public MainPanel mainPanelPrefab
-    {
-        get { return m_MainPanelPrefab; }
-    }
-
-    public TextPanel textPanelPrefab
-    {
-        get { return m_TextPanelPrefab; }
-    }
-
     public static PanelManager GetInstance()
     {
         return m_Instance;
@@ -44,24 +25,22 @@ public class PanelManager : MonoBehaviour
 
     public void ShowPanel(Panel p_NewPanel)
     {
-        if (m_PanelStack.Count > 0)
+        if (m_PanelStack.Count > 0 && m_PanelStack.Peek().isShowed)
         {
-            m_PanelStack.Peek().gameObject.SetActive(false);
+            m_PanelStack.Peek().Hide();
         }
-        m_PanelStack.Push(p_NewPanel);
-
         p_NewPanel.transform.SetParent(transform);
-        p_NewPanel.transform.localPosition = Vector3.zero;
-        p_NewPanel.transform.localScale = Vector3.one;
+        //p_NewPanel.Show();
+
+        m_PanelStack.Push(p_NewPanel);
     }
 
     public void ClosePanel(Panel p_Panel)
     {
         Panel l_PoppedPanel = m_PanelStack.Pop();
-        l_PoppedPanel.PopAction();
-        Destroy(l_PoppedPanel.gameObject);
+        l_PoppedPanel.Close();
 
-        m_PanelStack.Peek().gameObject.SetActive(true);
+        //m_PanelStack.Peek().Show();
     }
     #endregion
 
@@ -73,23 +52,27 @@ public class PanelManager : MonoBehaviour
 
     private void Start()
     {
-        MainPanel l_MainPanel = Instantiate(m_MainPanelPrefab);
+        InitStartPanel();
+    }
+
+    private void InitStartPanel()
+    {
+        MainPanel l_MainPanel = Instantiate(MainPanel.prefab);
         ShowPanel(l_MainPanel);
     }
 
-    private void LoadPanelsPrefabs()
+    private void Update()
     {
+        Panel m_Panel = m_PanelStack.Peek();
+        
+        if (!m_Panel.isShowed && !m_Panel.moving)
+        {
+            m_Panel.Show();
+        }
+        else
+        {
+            m_Panel.UpdatePanel();
+        }
     }
-    #endregion
-
-    #region In Unity Editor Only
-    #if UNITY_EDITOR
-    [ContextMenu("Get panel prefabs!")]
-    public void GetPanelPrefabs()
-    {
-        m_MainPanelPrefab = Resources.Load<MainPanel>("Prefabs/Panels/MainPanel");
-        m_TextPanelPrefab = Resources.Load<TextPanel>("Prefabs/Panels/TextPanel");
-    }
-    #endif
     #endregion
 }

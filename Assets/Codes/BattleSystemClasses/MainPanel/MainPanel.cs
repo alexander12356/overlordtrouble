@@ -6,10 +6,33 @@ public class MainPanel : Panel
     [SerializeField]
     private ButtonList m_ButtonList = null;
 
-    #endregion   
+    private static MainPanel m_Prefab;
+    #endregion
 
     #region Interface
-    
+    public static MainPanel prefab
+    {
+        get
+        {
+            if (m_Prefab == null)
+            {
+                m_Prefab = Resources.Load<MainPanel>("Prefabs/Panels/MainPanel");
+            }
+            return m_Prefab;
+        }
+    }
+
+    public override void UpdatePanel()
+    {
+        base.UpdatePanel();
+
+        if (moving)
+        {
+            return;
+        }
+
+        m_ButtonList.UpdateKey();
+    }
     #endregion
 
     #region Private
@@ -25,25 +48,8 @@ public class MainPanel : Panel
 
     private void Attack()
     {
-        Player.GetInstance().Attack();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            m_ButtonList.SelectMoveUp();
-        }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            m_ButtonList.SelectMoveDown();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z))
-        {
-            m_ButtonList.Action();
-        }
+        ChooseEnemyPanel l_ChooseEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
+        PanelManager.GetInstance().ShowPanel(l_ChooseEnemyPanel);
     }
     #endregion
 }

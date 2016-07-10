@@ -13,9 +13,36 @@ public class PanelButton : MonoBehaviour
 
     [SerializeField]
     private string m_Title = string.Empty;
+
+    private static PanelButton m_Prefab = null;
     #endregion
 
     #region Interface
+    public static PanelButton prefab
+    {
+        get
+        {
+            if (m_Prefab == null)
+            {
+                m_Prefab = Resources.Load<PanelButton>("Prefabs/PanelButton");
+            }
+            return m_Prefab;
+        }
+    } 
+
+    public string title
+    {
+        get { return m_Title; }
+        set
+        {
+            if (m_Text == null)
+            {
+                m_Text = GetComponentInChildren<Text>();
+            }
+            m_Text.text = m_Title = value;
+        }
+    }
+
     public bool selected
     {
         get

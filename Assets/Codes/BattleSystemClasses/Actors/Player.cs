@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
     private float m_Mana   = 10;
     private int[] m_DamageValue = new int[2] { 5, 8};
     private bool  m_IsDied = false;
+    private Animator m_Animator = null;
+    private AudioClip m_AudioHit = null;
+    private AudioClip m_AudioAttack = null;
+    private AudioSource m_AudioSource = null;
     #endregion
 
     #region Interface
@@ -22,16 +26,18 @@ public class Player : MonoBehaviour
         Unblock();
     }
     
-    public void Attack()
+    public void Attack(Enemy p_Enemy)
     {
         int l_Damage = Random.Range(m_DamageValue[0], m_DamageValue[1]);
 
-        EnemyManager.GetInstance().GetEnemy().Damage(l_Damage);
+        p_Enemy.Damage(l_Damage);
 
-        TextPanel l_NewTextPanel = Instantiate(PanelManager.GetInstance().textPanelPrefab);
-        l_NewTextPanel.AddPopAction(EndTurn);
+        TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
         l_NewTextPanel.SetText("Игрок нанес " + l_Damage + " урона врагу");
+        l_NewTextPanel.AddButtonAction(EndTurn);
         PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
+
+        m_AudioSource.PlayOneShot(m_AudioAttack);
     }
 
     public void Damage(float p_Value)
@@ -46,6 +52,9 @@ public class Player : MonoBehaviour
 
             Debug.Log("Player is died");
         }
+
+        m_Animator.SetTrigger("Hit");
+        m_AudioSource.PlayOneShot(m_AudioHit);
     }
 
     public void SpecialAttack(List<Special> m_SpecialList)
@@ -58,6 +67,11 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         m_Instance = this;
+
+        m_Animator = GetComponent<Animator>();
+        m_AudioSource = GetComponent<AudioSource>();
+
+        LoadSounds();
     }
     
     private void Block()
@@ -77,6 +91,12 @@ public class Player : MonoBehaviour
     private void EndTurn()
     {
         TurnSystem.GetInstance().EndTurn();
+    }
+
+    private void LoadSounds()
+    {
+        m_AudioHit = Resources.Load<AudioClip>("Sounds/Player/Hit");
+        m_AudioAttack = Resources.Load<AudioClip>("Sounds/Player/Attack");
     }
     #endregion
 }
