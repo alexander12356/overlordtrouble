@@ -94,12 +94,34 @@ public class ButtonList : MonoBehaviour
         m_ButtonsList.Add(p_Button);
     }
 
-    public void RemoveButton(int p_Id)
+    public void RemoveButton(int p_Index)
     {
-        PanelButton l_DeletedButton = m_ButtonsList[p_Id];
+        PanelButton l_DeletedButton = m_ButtonsList[p_Index];
         Destroy(l_DeletedButton.gameObject);
-        m_ButtonsList.RemoveAt(p_Id);
+        m_ButtonsList.RemoveAt(p_Index);
         ReconstructButtons();
+    }
+
+    public void RemoveButton(PanelButton p_Button)
+    {
+        m_ButtonsList.Remove(p_Button);
+        Destroy(p_Button.gameObject);
+        ReconstructButtons();
+    }
+
+    public void RemoveButton(string p_Id)
+    {
+        for (int i = 0; i < m_ButtonsList.Count; i++)
+        {
+            if (m_ButtonsList[i].title == p_Id)
+            {
+                PanelButton l_PanelButton = m_ButtonsList[i];
+                m_ButtonsList.RemoveAt(i);
+                Destroy(l_PanelButton.gameObject);
+                ReconstructButtons();
+                return;
+            }
+        }        
     }
 
     public void UpdateKey()

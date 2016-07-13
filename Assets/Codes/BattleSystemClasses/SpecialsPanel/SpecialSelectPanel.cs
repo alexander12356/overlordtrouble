@@ -22,8 +22,8 @@ public class SpecialSelectPanel : Panel
     private ButtonList m_AddedSpecialButtonList = null;
 
     private ButtonListType m_CurrentButtonListType = ButtonListType.SpecialList;
-    private List<Special> m_SpecialList = new List<Special>();
-    private List<Special> m_AddedSpecialList = new List<Special>();
+    private Dictionary<string, Special> m_SpecialList = new Dictionary<string, Special>();
+    private Dictionary<string, Special> m_AddedSpecialList = new Dictionary<string, Special>();
     #endregion
 
     #region Interface
@@ -79,6 +79,7 @@ public class SpecialSelectPanel : Panel
         m_ConfirmButtonList.isActive = false;
         m_AddedSpecialButtonList.isActive = false;
 
+        m_ConfirmButtonList[0].AddAction(Confirm);
         m_ConfirmButtonList[1].AddAction(ReturnToMain);
 
         InitSpecialList();
@@ -90,22 +91,22 @@ public class SpecialSelectPanel : Panel
         PanelManager.GetInstance().ClosePanel(this);
     }
 
-    private void AddSpecial()
+    private void SelectSpecial()
     {
-        int l_AddedSpecialId = m_SpecialButtonList.currentButtonId;
+        PanelButton l_PanelButton = m_SpecialButtonList.currentButton;
 
-        if (m_AddedSpecialList.Contains(m_SpecialList[l_AddedSpecialId]))
+        if (m_AddedSpecialList.ContainsKey(l_PanelButton.title))
         {
-            m_AddedSpecialList.RemoveAt(l_AddedSpecialId);
-            m_AddedSpecialButtonList.RemoveButton(l_AddedSpecialId);
+            m_AddedSpecialList.Remove(l_PanelButton.title);
+            m_AddedSpecialButtonList.RemoveButton(l_PanelButton.title);
         }
         else
         {
-            m_AddedSpecialList.Add(m_SpecialList[l_AddedSpecialId]);
+            m_AddedSpecialList.Add(l_PanelButton.title, m_SpecialList[l_PanelButton.title]);
 
-            PanelButton l_PanelButton = Instantiate(PanelButton.prefab);
-            l_PanelButton.title = "SP" + l_AddedSpecialId;
-            m_AddedSpecialButtonList.AddButton(l_PanelButton);
+            PanelButton l_NewButton = Instantiate(PanelButton.prefab);
+            l_NewButton.title = l_PanelButton.title;
+            m_AddedSpecialButtonList.AddButton(l_NewButton);
         }
     }
 
@@ -114,19 +115,30 @@ public class SpecialSelectPanel : Panel
     {
         for (int  i = 0; i < 4; i++)
         {
-            Special l_Special = new Special("SP" + i, (Special.Element)i);
-            m_SpecialList.Add(l_Special);
+            Special l_Special = new Special("SP" + i);
+            m_SpecialList.Add(l_Special.id, l_Special);
         }
     }
 
     //TODO Kostil
     private void InitSpecialButtons()
     {
-        for (int i = 0; i < m_SpecialList.Count; i++)
+        foreach (string p_SpecialId in m_SpecialList.Keys)
         {
-            m_SpecialButtonList[i].AddAction(AddSpecial);
-            m_SpecialButtonList[i].title = m_SpecialList[i].title;
+            PanelButton l_SpecialButton = Instantiate(PanelButton.prefab);
+            l_SpecialButton.title = p_SpecialId;
+            l_SpecialButton.AddAction(SelectSpecial);
+            m_SpecialButtonList.AddButton(l_SpecialButton);
         }
+    }
+
+    private void Confirm()
+    {
+        PanelManager.GetInstance().ClosePanel(this);
+
+        SpecialUpgradePanel l_SpecialUpgradePanel = Instantiate(SpecialUpgradePanel.prefab);
+        l_SpecialUpgradePanel.SetSpecials(m_AddedSpecialList);
+        PanelManager.GetInstance().ShowPanel(l_SpecialUpgradePanel);
     }
     #endregion
 }
