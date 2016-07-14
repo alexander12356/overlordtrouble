@@ -24,6 +24,7 @@ public class SpecialSelectPanel : Panel
     private ButtonListType m_CurrentButtonListType = ButtonListType.SpecialList;
     private Dictionary<string, Special> m_SpecialList = new Dictionary<string, Special>();
     private Dictionary<string, Special> m_AddedSpecialList = new Dictionary<string, Special>();
+    private ChooseEnemyPanel m_ChooseEnemyPanel = null;
     #endregion
 
     #region Interface
@@ -99,14 +100,18 @@ public class SpecialSelectPanel : Panel
         {
             m_AddedSpecialList.Remove(l_PanelButton.title);
             m_AddedSpecialButtonList.RemoveButton(l_PanelButton.title);
+
+            Player.GetInstance().mana += m_SpecialList[l_PanelButton.title].mana;
         }
-        else
+        else if (Player.GetInstance().mana - m_SpecialList[l_PanelButton.title].mana >= 0)
         {
             m_AddedSpecialList.Add(l_PanelButton.title, m_SpecialList[l_PanelButton.title]);
 
             PanelButton l_NewButton = Instantiate(PanelButton.prefab);
             l_NewButton.title = l_PanelButton.title;
             m_AddedSpecialButtonList.AddButton(l_NewButton);
+
+            Player.GetInstance().mana -= m_SpecialList[l_PanelButton.title].mana;
         }
     }
 
@@ -136,8 +141,18 @@ public class SpecialSelectPanel : Panel
     {
         PanelManager.GetInstance().ClosePanel(this);
 
+        m_ChooseEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
+        m_ChooseEnemyPanel.AddChoosedAction(Attack);
+        PanelManager.GetInstance().ShowPanel(m_ChooseEnemyPanel);
+    }
+
+    private void Attack()
+    {
+        PanelManager.GetInstance().ClosePanel(this);
+
         SpecialUpgradePanel l_SpecialUpgradePanel = Instantiate(SpecialUpgradePanel.prefab);
         l_SpecialUpgradePanel.SetSpecials(m_AddedSpecialList);
+        l_SpecialUpgradePanel.SetEnemy(m_ChooseEnemyPanel.choosedEnemy);
         PanelManager.GetInstance().ShowPanel(l_SpecialUpgradePanel);
     }
     #endregion

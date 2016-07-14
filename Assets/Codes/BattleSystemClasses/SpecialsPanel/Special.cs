@@ -10,9 +10,11 @@
 
     #region Variables
     private string  m_Title;
-    private int     m_Level = 1;
+    private int     m_Level = 0;
     private Element m_Element;
     private string  m_Id;
+    private float   m_DamageValue = 5;
+    private float   m_Mana = 4.0f;
     #endregion
 
     #region Interface
@@ -35,6 +37,16 @@
     {
         get { return m_Id;  }
         set { m_Id = value; }
+    }
+    public float damageValue
+    {
+        get { return m_DamageValue;  }
+        set { m_DamageValue = value; }
+    }
+    public float mana
+    {
+        get { return m_Mana;  }
+        set { m_Mana = value; }
     }
 
     public Special(string p_Id)

@@ -63,6 +63,10 @@ public class PanelButton : MonoBehaviour
             return m_SelectedArrowImage;
         }
     }
+    public Text text
+    {
+        get { return m_Text; }
+    }
 
     public void AddAction(PanelButtonActionHandler p_Action)
     {

@@ -57,7 +57,7 @@ public class Enemy : Actor
         Attack(Player.GetInstance());
     }
 
-    public override void Damage(int p_DamageValue)
+    public override void Damage(float p_DamageValue)
     {
         base.Damage(p_DamageValue);
 
@@ -79,7 +79,7 @@ public class Enemy : Actor
     {
         base.Attack(p_Actor);
 
-        int l_DamageValue = Random.Range(m_DamageValue[0], m_DamageValue[1]);
+        float l_DamageValue = Random.Range(m_DamageValue[0], m_DamageValue[1]);
         p_Actor.Damage(l_DamageValue);
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);

@@ -57,10 +57,25 @@ public class SpecialUpgradeIcon : MonoBehaviour
 
     public void Upgrade()
     {
-        m_Special.level++;
         Color l_Color;
         ColorUtility.TryParseHtmlString("#004E0DFF", out l_Color);
-        m_Text.color = l_Color;
+
+        if (m_Special.level > 0)
+        {
+            PopUpText l_PopUpText = Instantiate(PopUpText.prefab);
+            l_PopUpText.text.color = l_Color;
+            l_PopUpText.SetText("+10%");
+
+            l_PopUpText.transform.SetParent(transform);
+            l_PopUpText.transform.localPosition = Vector3.zero;
+            l_PopUpText.transform.localScale    = Vector3.one;
+        }
+        else
+        {
+            m_Text.color = l_Color;
+        }
+
+        m_Special.level++;
     }
 
     public void Wrong()

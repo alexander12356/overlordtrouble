@@ -3,10 +3,10 @@
 public class Actor : MonoBehaviour
 {
     #region Variables
-    private int m_Health;
-    private int m_BaseHealth;
-    private int m_Mana;
-    private int m_BaseMana;
+    private float m_Health;
+    private float m_BaseHealth;
+    private float m_Mana;
+    private float m_BaseMana;
 
     private bool m_IsDead;
 
@@ -14,22 +14,30 @@ public class Actor : MonoBehaviour
     #endregion
 
     #region Interface
-    public int health
+    public float health
     {
         get { return m_Health;  }
-        set { m_Health = value; }
+        set
+        {
+            m_Health = value;
+            ChangeHealthValue();
+        }
     }
-    public int mana
+    public float mana
     {
         get { return m_Mana;  }
-        set { m_Mana = value; }
+        set
+        {
+            m_Mana = value;
+            ChangeManaValue();
+        }
     }
-    public int baseHealth
+    public float baseHealth
     {
         get { return m_BaseHealth;  }
         set { m_BaseHealth = value; }
     }
-    public int baseMana
+    public float baseMana
     {
         get { return m_BaseMana;  }
         set { m_BaseMana = value; }
@@ -54,7 +62,7 @@ public class Actor : MonoBehaviour
     {
     }
 
-    public virtual void Damage(int p_DamageValue)
+    public virtual void Damage(float p_DamageValue)
     {
     }
 
@@ -69,6 +77,14 @@ public class Actor : MonoBehaviour
     }
 
     public virtual void InitStats()
+    {
+    }
+
+    public virtual void ChangeManaValue()
+    {
+    }
+
+    public virtual void ChangeHealthValue()
     {
     }
     #endregion

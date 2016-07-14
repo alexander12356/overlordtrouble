@@ -18,7 +18,9 @@ public class SpecialUpgradePanel : Panel
     private List<SpecialUpgradeIcon> m_SpecialUpgradeIconList = new List<SpecialUpgradeIcon>();
     private int   m_CurrentKeyCounter = 0;
     private float m_Timer = 0.0f;
-    private float m_UpgradeTime = 10.0f;
+    private float m_UpgradeTime = 5.0f;
+    private Enemy m_Enemy = null;
+    private int   m_WrongSpecialCounter = 0;
     #endregion
 
     #region Interface
@@ -61,6 +63,7 @@ public class SpecialUpgradePanel : Panel
         else
         {
             PanelManager.GetInstance().ClosePanel(this);
+            Player.GetInstance().SpecialAttack(m_Enemy, m_AddedSpecialDictionary);
             return;
         }
 
@@ -74,9 +77,15 @@ public class SpecialUpgradePanel : Panel
             else
             {
                 m_SpecialUpgradeIconList[m_CurrentKeyCounter].Wrong();
+                m_WrongSpecialCounter++;
             }
             IncrementCurrentCounter();
         }
+    }
+
+    public void SetEnemy(Enemy p_Enemy)
+    {
+        m_Enemy = p_Enemy;
     }
     #endregion
 
@@ -132,6 +141,11 @@ public class SpecialUpgradePanel : Panel
 
     private void IncrementCurrentCounter()
     {
+        if (m_WrongSpecialCounter >= m_AddedSpecialDictionary.Count)
+        {
+            return;
+        }
+
         m_SpecialUpgradeIconList[m_CurrentKeyCounter].select = false;
 
         m_CurrentKeyCounter++;

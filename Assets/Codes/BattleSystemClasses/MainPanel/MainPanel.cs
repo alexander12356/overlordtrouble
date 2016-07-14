@@ -7,6 +7,7 @@ public class MainPanel : Panel
     private ButtonList m_ButtonList = null;
 
     private static MainPanel m_Prefab;
+    private ChooseEnemyPanel m_ChoosedEnemyPanel = null;
     #endregion
 
     #region Interface
@@ -49,14 +50,21 @@ public class MainPanel : Panel
 
     private void Attack()
     {
-        ChooseEnemyPanel l_ChooseEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
-        PanelManager.GetInstance().ShowPanel(l_ChooseEnemyPanel);
+        m_ChoosedEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
+        m_ChoosedEnemyPanel.AddChoosedAction(AttackEnemy);
+        PanelManager.GetInstance().ShowPanel(m_ChoosedEnemyPanel);
     }
 
     private void Special()
     {
         SpecialSelectPanel l_SpecialSelectPanel = Instantiate(SpecialSelectPanel.prefab);
         PanelManager.GetInstance().ShowPanel(l_SpecialSelectPanel);
+    }
+
+    private void AttackEnemy()
+    {
+        PanelManager.GetInstance().ClosePanel(m_ChoosedEnemyPanel);
+        Player.GetInstance().Attack(m_ChoosedEnemyPanel.choosedEnemy);
     }
     #endregion
 }

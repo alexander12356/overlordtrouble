@@ -42,12 +42,11 @@ public class Player : Actor
         m_AudioSource.PlayOneShot(m_AudioAttack);
     }
 
-    public override void Damage(int p_DamageValue)
+    public override void Damage(float p_DamageValue)
     {
         base.Damage(p_DamageValue);
 
         health -= p_DamageValue;
-        m_HealthText.text = "HP: " + health + "/" + baseHealth;
 
         Debug.Log("Player health: " + health);
 
@@ -62,9 +61,77 @@ public class Player : Actor
         m_AudioSource.PlayOneShot(m_AudioHit);
     }
 
-    public void SpecialAttack(List<Special> m_SpecialList)
+    //TODO отрефакторить
+    public void SpecialAttack(Enemy p_Enemy, Dictionary<string, Special> p_SpecialDictionary)
     {
-        EndTurn();
+        int l_BrokenSpecialCount = 0;
+        int l_UnbuffedSpecialCount = 0;
+        float l_DamageValue = 0;
+
+        List<Special> l_BuffedSpecialList = new List<Special>();
+        List<Special> l_SpecialList = new List<Special>();
+        foreach (string l_Key in p_SpecialDictionary.Keys)
+        {
+            if (p_SpecialDictionary[l_Key].level == - 1)
+            {
+                l_BrokenSpecialCount++;
+            }
+            else if (p_SpecialDictionary[l_Key].level == 0)
+            {
+                l_UnbuffedSpecialCount++;
+            }
+            else
+            {
+                l_BuffedSpecialList.Add(p_SpecialDictionary[l_Key]);
+            }
+            l_SpecialList.Add(p_SpecialDictionary[l_Key]);
+        }
+        if (l_BrokenSpecialCount == p_SpecialDictionary.Count)
+        {
+            l_DamageValue = 1.0f;
+
+            TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
+            l_NewTextPanel.SetText("Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName);
+            l_NewTextPanel.AddButtonAction(EndTurn);
+            PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
+        }
+        else if (l_UnbuffedSpecialCount == p_SpecialDictionary.Count)
+        {
+            l_DamageValue = l_SpecialList[0].damageValue - l_SpecialList[0].damageValue * 0.25f;
+
+            TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
+            l_NewTextPanel.SetText("Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName);
+            l_NewTextPanel.AddButtonAction(EndTurn);
+            PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
+        }
+        else
+        {
+            string l_UsedSpecialsName = "";
+            for (int i = 0; i < l_BuffedSpecialList.Count; i++)
+            {
+                if (i == l_BuffedSpecialList.Count - 2)
+                {
+                    l_UsedSpecialsName += l_BuffedSpecialList[i].title + " и ";
+                }
+                else if (i == l_BuffedSpecialList.Count - 1)
+                {
+                    l_UsedSpecialsName += l_BuffedSpecialList[i].title;
+                }
+                else
+                {
+                    l_UsedSpecialsName += l_BuffedSpecialList[i].title + ", ";
+                }
+
+                l_DamageValue += l_BuffedSpecialList[i].damageValue + (l_BuffedSpecialList[i].damageValue * 0.1f) * l_BuffedSpecialList[i].level;
+            }
+
+            TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
+            l_NewTextPanel.SetText("ГГ использовал на \"" + p_Enemy.actorName + "\" " + l_UsedSpecialsName + " он нанес " + l_DamageValue + " урона");
+            l_NewTextPanel.AddButtonAction(EndTurn);
+            PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
+        }
+        p_Enemy.Damage(l_DamageValue);
+        m_AudioSource.PlayOneShot(m_AudioAttack);
     }
 
     public override void Died()
@@ -91,6 +158,20 @@ public class Player : Actor
 
         InitComponents();
         LoadSounds();
+    }
+
+    public override void ChangeManaValue()
+    {
+        base.ChangeManaValue();
+
+        m_ManaText.text = "MP: " + mana + "/" + baseMana;
+    }
+
+    public override void ChangeHealthValue()
+    {
+        base.ChangeHealthValue();
+
+        m_HealthText.text = "HP: " + health + "/" + baseHealth;
     }
     #endregion
 
