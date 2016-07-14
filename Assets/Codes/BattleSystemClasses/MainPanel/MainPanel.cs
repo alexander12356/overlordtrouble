@@ -46,6 +46,7 @@ public class MainPanel : Panel
     {
         m_ButtonList[0].AddAction(Attack);
         m_ButtonList[1].AddAction(Special);
+        m_ButtonList[3].AddAction(Retreat);
     }
 
     private void Attack()
@@ -65,6 +66,11 @@ public class MainPanel : Panel
     {
         PanelManager.GetInstance().ClosePanel(m_ChoosedEnemyPanel);
         Player.GetInstance().Attack(m_ChoosedEnemyPanel.choosedEnemy);
+    }
+
+    private void Retreat()
+    {
+        Application.Quit();
     }
     #endregion
 }
