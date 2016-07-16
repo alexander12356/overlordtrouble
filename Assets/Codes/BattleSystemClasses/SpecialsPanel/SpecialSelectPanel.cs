@@ -71,6 +71,20 @@ public class SpecialSelectPanel : Panel
                 m_ConfirmButtonList.UpdateKey();
                 break;
         }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (m_CurrentButtonListType == ButtonListType.ConfirmList)
+            {
+                m_CurrentButtonListType = ButtonListType.SpecialList;
+                m_SpecialButtonList.isActive = true;
+                m_ConfirmButtonList.isActive = false;
+            }
+            else
+            {
+                ReturnToMain();
+            }
+        }
     }
     #endregion
 
@@ -89,6 +103,11 @@ public class SpecialSelectPanel : Panel
 
     private void ReturnToMain()
     {
+        foreach (Special l_Special in m_AddedSpecialList.Values)
+        {
+            Player.GetInstance().mana += l_Special.mana;
+        }
+
         PanelManager.GetInstance().ClosePanel(this);
     }
 
