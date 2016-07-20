@@ -1,23 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Actor
 {
+    #region Variables
     private static Enemy m_Instance = null;
+    private int[] m_DamageValue = new int[2] { 5, 8 };
+    private Animator m_Animator = null;
+    private AudioSource m_AudioSource = null;
+    private AudioClip m_AudioHit = null;
+    private AudioClip m_AudioAttack = null;
 
-    // Жизнь
-    public float health = 5;
-    // Мана
-    public float mana = 10;
+    private bool m_Selected = false;
 
-    // Дамаг
-    public float damageValue = 2;
+    [SerializeField]
+    private SpriteRenderer m_SelectedArrow = null;
+    #endregion
 
-    public bool isDied = false;
-
-    private void Awake()
+    #region Interface
+    public bool selected
     {
-        m_Instance = this;
+        get { return m_Selected; }
+        set
+        {
+            m_Selected = value;
+            m_SelectedArrow.gameObject.SetActive(m_Selected);
+        }
     }
 
     static public Enemy GetInstance()
@@ -25,35 +33,35 @@ public class Enemy : MonoBehaviour
         return m_Instance;
     }
 
-    // Запуск ИИ
+    public override void Awake()
+    {
+        base.Awake();
+
+        m_Instance = this;
+
+        InitComponents();
+        LoadSounds();
+    }
+
+    public override void InitStats()
+    {
+        base.InitStats();
+
+        actorName = "Nyashka";
+        health = baseHealth = 40;
+        mana = baseMana = 0;
+    }
+
     public void Run()
     {
-        // Запуск с кулдавном(Атака)
-        StartCoroutine(Attack(1));
+        Attack(Player.GetInstance());
     }
 
-    // Кулдавн(указатель на функцию)
-    private IEnumerator Attack(int seconds = 0)
+    public override void Damage(float p_DamageValue)
     {
-        if (seconds > 0)
-        {
-            yield return new WaitForSeconds(seconds);
-        }
+        base.Damage(p_DamageValue);
 
-        Player.GetInstance().Damage(damageValue);
-        
-        //  Конец хода
-        EndTurn();
-    }
-
-    private void EndTurn()
-    {
-        TurnSystem.GetInstance().EndTurn();
-    }
-
-    public void Damage(float p_Value)
-    {
-        health -= p_Value;
+        health -= p_DamageValue;
 
         Debug.Log("Enemy health: " + health);
 
@@ -63,12 +71,44 @@ public class Enemy : MonoBehaviour
 
             Debug.Log("Enemy is died");
         }
+        m_Animator.SetTrigger("Hit");
+        m_AudioSource.PlayOneShot(m_AudioHit);
     }
 
-    // Смерть
-    private void Died()
+    public override void Attack(Actor p_Actor)
     {
-        BattleSystem.GetInstance().Died(BattleSystem.ActorID.Enemy);
-        isDied = true;
+        base.Attack(p_Actor);
+
+        float l_DamageValue = Random.Range(m_DamageValue[0], m_DamageValue[1]);
+        p_Actor.Damage(l_DamageValue);
+
+        TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText("Няшка использовал удар и нанес " + l_DamageValue + " урона");
+        l_TextPanel.AddButtonAction(EndTurn);
+        PanelManager.GetInstance().ShowPanel(l_TextPanel);
+
+        m_AudioSource.PlayOneShot(m_AudioAttack);
     }
+
+    public override void Died()
+    {
+        base.Died();
+
+        BattleSystem.GetInstance().Died(BattleSystem.ActorID.Enemy);
+    }
+    #endregion
+
+    #region Private
+    private void LoadSounds()
+    {
+        m_AudioHit = Resources.Load<AudioClip>("Sounds/Enemy/Nyashka/Hit");
+        m_AudioAttack = Resources.Load<AudioClip>("Sounds/Enemy/Nyashka/Attack");
+    }
+
+    private void InitComponents()
+    {
+        m_Animator = GetComponent<Animator>();
+        m_AudioSource = GetComponent<AudioSource>();
+    }
+    #endregion
 }

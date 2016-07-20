@@ -1,50 +1,122 @@
 ﻿using UnityEngine;
-
-using System.Collections;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class SpecialUpgradePanel : MonoBehaviour
+public class SpecialUpgradePanel : Panel
 {
-    [SerializeField]
-    private SpecialIcon m_SpecialIconPrefab;
+    #region Variables
+    private static SpecialUpgradePanel m_Prefab = null;
 
     [SerializeField]
-    private SpecialUpgradeKey m_SpecialUpgradeKeyPrefab;
+    private Transform m_SpecialIconsConteiner = null;
 
     [SerializeField]
-    private Transform m_SpecialIconsConteiner;
-
-    private static SpecialUpgradePanel m_Instance;
+    private Image m_BarImage = null;
 
     private List<KeyCode> m_SpecialKeys = new List<KeyCode>();
+    private Dictionary<string, Special> m_AddedSpecialDictionary;
+    private List<SpecialUpgradeIcon> m_SpecialUpgradeIconList = new List<SpecialUpgradeIcon>();
+    private int   m_CurrentKeyCounter = 0;
+    private float m_Timer = 0.0f;
+    private float m_UpgradeTime = 5.0f;
+    private Enemy m_Enemy = null;
+    private int   m_WrongSpecialCounter = 0;
+    #endregion
 
-    private List<Special> m_SpecialList;
-
-    private List<SpecialIcon> m_SpecialIcons;
-
-    public static SpecialUpgradePanel GetInstance()
+    #region Interface
+    public static SpecialUpgradePanel prefab
     {
-        return m_Instance;
+        get
+        {
+            if (m_Prefab == null)
+            {
+                m_Prefab = Resources.Load<SpecialUpgradePanel>("Prefabs/Panels/SpecialUpgradePanel");
+            }
+            return m_Prefab;
+        }
     }
 
-    private void Awake()
+    public void SetSpecials(Dictionary<string, Special> p_AddedSpecials)
     {
-        m_Instance = this;
+        m_AddedSpecialDictionary = p_AddedSpecials;
+        CreateIcons(m_AddedSpecialDictionary);
+        RandomizeSpecialKeys();
     }
 
-    public void SetSpecials(List<Special> p_SpecialList)
+    public override void UpdatePanel()
     {
-        m_SpecialList = p_SpecialList;
+        base.UpdatePanel();
 
-        RunTimer();
+        if (moving)
+        {
+            return;
+        }
+
+        if (m_Timer < m_UpgradeTime)
+        {
+            m_Timer += Time.deltaTime;
+
+            Vector3 l_BarImageScale = m_BarImage.transform.localScale;
+            l_BarImageScale.x = 1.0f - (m_Timer / m_UpgradeTime);
+            m_BarImage.transform.localScale = l_BarImageScale;
+        }
+        else
+        {
+            PanelManager.GetInstance().ClosePanel(this);
+            Player.GetInstance().SpecialAttack(m_Enemy, m_AddedSpecialDictionary);
+            return;
+        }
+
+        KeyCode l_CurrentKey = m_SpecialUpgradeIconList[m_CurrentKeyCounter].arrowKey;
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(l_CurrentKey))
+            {
+                m_SpecialUpgradeIconList[m_CurrentKeyCounter].Upgrade();
+            }
+            else
+            {
+                m_SpecialUpgradeIconList[m_CurrentKeyCounter].Wrong();
+                m_WrongSpecialCounter++;
+            }
+            IncrementCurrentCounter();
+        }
+    }
+
+    public void SetEnemy(Enemy p_Enemy)
+    {
+        m_Enemy = p_Enemy;
+    }
+    #endregion
+
+    #region Private
+    private void CreateIcons(Dictionary<string, Special> p_AddedSpecialDictionary)
+    {
+        foreach (Special l_Special in p_AddedSpecialDictionary.Values)
+        {
+            SpecialUpgradeIcon l_SpecialUpgradeIcon = Instantiate(SpecialUpgradeIcon.prefab);
+            l_SpecialUpgradeIcon.SetTitle(l_Special.title);
+            l_SpecialUpgradeIcon.SetSpecial(l_Special);
+            l_SpecialUpgradeIcon.transform.SetParent(m_SpecialIconsConteiner);
+
+            l_SpecialUpgradeIcon.transform.localPosition = Vector3.zero;
+            l_SpecialUpgradeIcon.transform.localScale    = Vector3.one;
+
+            m_SpecialUpgradeIconList.Add(l_SpecialUpgradeIcon);
+        }
+        m_SpecialUpgradeIconList[0].select = true;
     }
 
     private void RandomizeSpecialKeys()
     {
-        m_SpecialKeys.Clear();
         int l_KeyCode = 0;
-        for (int i = 0; i < m_SpecialList.Count; i++)
+        for (int i = 0; i < m_SpecialUpgradeIconList.Count; i++)
         {
+            if (m_SpecialUpgradeIconList[i].isWrong)
+            {
+                continue;
+            }
+
             l_KeyCode = Random.Range(0, 4);
             KeyCode l_Key = KeyCode.UpArrow;
 
@@ -63,63 +135,32 @@ public class SpecialUpgradePanel : MonoBehaviour
                     l_Key = KeyCode.RightArrow;
                     break;
             }
-            m_SpecialKeys.Add(l_Key);
-
-            SpecialUpgradeKey l_SpecialUpgradeKey = Instantiate(m_SpecialUpgradeKeyPrefab);
-            l_SpecialUpgradeKey.SetKey(l_Key);
-            l_SpecialUpgradeKey.transform.SetParent(m_SpecialIcons[i].transform);
-            l_SpecialUpgradeKey.transform.localPosition = Vector3.zero;
+            m_SpecialUpgradeIconList[i].arrowKey = l_Key;
         }
     }
 
-    public void RunTimer()
+    private void IncrementCurrentCounter()
     {
-        RandomizeSpecialKeys();
-        StartCoroutine(UpgradeTimer());
-    }
-
-    float m_UpgradeTime = 0.0f;
-    private IEnumerator UpgradeTimer()
-    {
-        m_UpgradeTime = 0.0f;
-        while (m_UpgradeTime < 3.0f)
+        if (m_WrongSpecialCounter >= m_AddedSpecialDictionary.Count)
         {
-            m_UpgradeTime += Time.deltaTime;
-            UpgradeKeyCatch();
-            yield return new WaitForEndOfFrame();
+            return;
+        }
+
+        m_SpecialUpgradeIconList[m_CurrentKeyCounter].select = false;
+
+        m_CurrentKeyCounter++;
+        if (m_CurrentKeyCounter >= m_SpecialUpgradeIconList.Count)
+        {
+            m_CurrentKeyCounter = 0;
+            RandomizeSpecialKeys();
+        }
+
+        m_SpecialUpgradeIconList[m_CurrentKeyCounter].select = true;
+
+        if (m_SpecialUpgradeIconList[m_CurrentKeyCounter].isWrong)
+        {
+            IncrementCurrentCounter();
         }
     }
-
-    private int levelCount = 1;
-    private int specialCount = 0;
-    private void UpgradeKeyCatch()
-    {
-        if (Input.GetKeyDown(m_SpecialKeys[specialCount]))
-        {
-            specialCount++;
-
-            if (specialCount >= m_SpecialKeys.Count)
-            {
-                specialCount = 0;
-                levelCount++;
-            }
-        }
-        else
-        {
-            //m_SpecialList[ m_SpecialKeys[specialCount];
-        }
-    }
-
-    private void CreateIcons(List<Special> p_SpecialList)
-    {
-        for (int i = 0; i < p_SpecialList.Count; i++)
-        {
-            SpecialIcon l_NewSpecialIcon = Instantiate(m_SpecialIconPrefab);
-            l_NewSpecialIcon.transform.SetParent(m_SpecialIconsConteiner);
-            l_NewSpecialIcon.SetSpecial(p_SpecialList[i].title);
-            l_NewSpecialIcon.transform.localScale = Vector3.one;
-
-            m_SpecialIcons.Add(l_NewSpecialIcon);
-        }
-    }
+    #endregion
 }

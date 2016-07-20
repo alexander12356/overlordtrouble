@@ -2,45 +2,75 @@
 
 public class MainPanel : Panel
 {
-    private static MainPanel m_Instance = null;
-
-    public static MainPanel GetInstance()
-    {
-        return m_Instance;
-    }
-
+    #region Variables
     [SerializeField]
-    private CanvasGroup m_ButtonsCanvasGroup = null;
+    private ButtonList m_ButtonList = null;
 
-    public void ButtonDepress(int p_Key)
+    private static MainPanel m_Prefab;
+    private ChooseEnemyPanel m_ChoosedEnemyPanel = null;
+    #endregion
+
+    #region Interface
+    public static MainPanel prefab
     {
-        switch (p_Key)
+        get
         {
-            case 1:
-                Player.GetInstance().Attack();
-                break;
-            case 2:
-                PanelManager.GetInstance().Show(PanelEnum.SpecialSelect);
-                break;
-            case 3:
-                Application.Quit();
-                break;
+            if (m_Prefab == null)
+            {
+                m_Prefab = Resources.Load<MainPanel>("Prefabs/Panels/MainPanel");
+            }
+            return m_Prefab;
         }
     }
 
+    public override void UpdatePanel()
+    {
+        base.UpdatePanel();
+
+        if (moving)
+        {
+            return;
+        }
+
+        m_ButtonList.UpdateKey();
+    }
+    #endregion
+
+    #region Private
     private void Awake()
     {
-        m_Instance = this;
+        InitButtons();
     }
 
-    // Блокировка кнопок()
-    public void Unblock()
+    private void InitButtons()
     {
-        m_ButtonsCanvasGroup.interactable = true;
+        m_ButtonList[0].AddAction(Attack);
+        m_ButtonList[1].AddAction(Special);
+        m_ButtonList[3].AddAction(Retreat);
     }
 
-    public void Block()
+    private void Attack()
     {
-        m_ButtonsCanvasGroup.interactable = false;
+        m_ChoosedEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
+        m_ChoosedEnemyPanel.AddChoosedAction(AttackEnemy);
+        PanelManager.GetInstance().ShowPanel(m_ChoosedEnemyPanel);
     }
+
+    private void Special()
+    {
+        SpecialSelectPanel l_SpecialSelectPanel = Instantiate(SpecialSelectPanel.prefab);
+        PanelManager.GetInstance().ShowPanel(l_SpecialSelectPanel);
+    }
+
+    private void AttackEnemy()
+    {
+        PanelManager.GetInstance().ClosePanel(m_ChoosedEnemyPanel);
+        Player.GetInstance().Attack(m_ChoosedEnemyPanel.choosedEnemy);
+    }
+
+    private void Retreat()
+    {
+        Application.Quit();
+    }
+    #endregion
 }
