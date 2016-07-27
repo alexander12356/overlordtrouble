@@ -40,9 +40,12 @@ internal class MonsterInspector : Editor {
 				EditorGUI.indentLevel = 2;
 				monsters [i].ID = EditorGUILayout.IntField ("ID: ", monsters [i].ID);
 				monsters [i].name = EditorGUILayout.TextField ("Name: ", monsters [i].name);
-				monsters [i].description = EditorGUILayout.TextField ("Description: ", monsters [i].description);
-				monsters [i].attack = EditorGUILayout.IntField ("Attack: ", monsters [i].attack);
+				monsters [i].attackMin = EditorGUILayout.FloatField ("Minimal Attack :", monsters [i].attackMin);
+				monsters [i].attackMax = EditorGUILayout.FloatField ("Maximal Attack : ", monsters [i].attackMax);
+				monsters [i].attack = EditorGUILayout.FloatField ("Attack: ", monsters [i].attack);
 				monsters [i].hp = EditorGUILayout.IntField ("HP: ", monsters [i].hp);
+				monsters [i].Defence = EditorGUILayout.IntField ("Defence: ", monsters [i].Defence);
+				monsters [i].description = EditorGUILayout.TextField ("Description: ", monsters [i].description);
 				monsters [i].monsterSprite = (Sprite)EditorGUILayout.ObjectField ("Sprite",monsters [i].monsterSprite, typeof(Sprite));
 				GUILayout.Space (20f);
 				GUILayout.BeginHorizontal ();
@@ -53,25 +56,44 @@ internal class MonsterInspector : Editor {
 				}
 				if (GUILayout.Button ("Remove")) {
 					monstermanager.monsterList.Remove (monsters [i]);
+					string path = ("Assets/Resources/Prefabs/Monsters Prefab/"+monsters[i].name+".prefab");
+					FileUtil.DeleteFileOrDirectory (path);
+					string path2 = ("Assets/Resources/Prefabs/Monsters Prefab/" + monsters [i].ID + " EmptyMonster" + ".prefab");
+					FileUtil.DeleteFileOrDirectory (path2);
+					Object b = GameObject.Find (monsters [i].ID + " EmptyMonster");
+					Object.DestroyImmediate(b);
+					AssetDatabase.Refresh ();
 				}
 				GUILayout.EndHorizontal ();
 				GUILayout.Space (20f);
 			}
 			if (GUILayout.Button ("Add New Monster")) {
 				Monster newMonster = (Monster)ScriptableObject.CreateInstance<Monster> ();
-				newMonster.ID = monsters.Count + 1;
-				newMonster.name = null;
-				newMonster.description = null;
-				newMonster.attack = 0;
-				newMonster.hp = 0;
-				newMonster.EpicPercent = 0.0f;
-				newMonster.RarePercent = 0.0f;
-				newMonster.SimplePercent = 0.0f;
-				newMonster.GoldMin = 0.0f;
-				newMonster.GoldMax = 0.0f;
-				newMonster.GoldDrop = 0;
-				newMonster.monsterSprite = null;
+				GameObject newMonsterGO = new GameObject(" ");
+				newMonsterGO.AddComponent <MonsterScript>();
+
+				MonsterScript ms = newMonsterGO.GetComponent<MonsterScript> ();
+
+				ms.ID = newMonster.ID = monsters.Count + 1;
+				ms.name = newMonster.name = null;
+				ms.description = newMonster.description = null;
+				ms.attack = newMonster.attack = 0;
+				ms.hp = newMonster.hp = 0;
+				ms.EpicPercent = newMonster.EpicPercent = 0.0f;
+				ms.RarePercent = newMonster.RarePercent = 0.0f;
+				ms.SimplePercent = newMonster.SimplePercent = 0.0f;
+				ms.GoldMin = newMonster.GoldMin = 0.0f;
+				ms.GoldMax = newMonster.GoldMax = 0.0f;
+				ms.GoldDrop = newMonster.GoldDrop = 0;
+				ms.monsterSprite = newMonster.monsterSprite = null;
 				monstermanager.monsterList.Add (newMonster);
+				newMonsterGO.name = ms.ID + " EmptyMonster";
+				newMonsterGO.AddComponent<BoxCollider> ();
+				newMonsterGO.AddComponent<MeshFilter> ();
+				newMonsterGO.AddComponent<Animation> ();
+				newMonsterGO.AddComponent<MeshRenderer> ();
+				PrefabUtility.CreatePrefab ("Assets/Monsters Prefab/" + ms.ID +" EmptyMonster" + ".prefab",newMonsterGO);
+				AssetDatabase.Refresh ();
 			}
 			EditorGUI.indentLevel = 0;
 		}
