@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections;
 
 public class CreateMonsterToPrefab{
-	const string menuTitle = "Monster Manager/Create Prefab Selected Object";
+	const string menuTitle = "RPG Manager/Create Prefab Selected Object";
 
 	[MenuItem(menuTitle)]
 	static void CreatePrefab()

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MonsterDataBaseManager : EditorWindow {
-	[MenuItem("Monster Manager/MonsterDB")]
+	[MenuItem("RPG Manager/Monster Editor")]
 	static void Init(){
 		MonsterDataBaseManager	window = (MonsterDataBaseManager)EditorWindow.CreateInstance (typeof(MonsterDataBaseManager));
 		window.Show ();
