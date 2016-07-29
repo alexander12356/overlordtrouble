@@ -43,6 +43,6 @@ public class MonsterScript : MonoBehaviour {
 	}
 
 	void Update () {
-	
+		
 	}
 }

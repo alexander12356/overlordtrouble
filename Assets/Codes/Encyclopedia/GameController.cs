@@ -4,91 +4,123 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
-	[SerializeField] private GameObject[] MonstersPrefabs;
-	[SerializeField] private Sprite[] deltaSprites;
+	public GameObject[] MonstersList;
+	public GameObject[] ItemsList;
+	public GameObject[] WeaponList;
+	public GameObject[] ArmorList;
 
-	[SerializeField] private Image Splash;
-	[SerializeField] private Text MonsterName;
-	[SerializeField] private Text MonsterDescription;
-	[SerializeField] private Text MonsterAttack;
-	[SerializeField] private Text MonsterHp;
-	[SerializeField] private Text MonsterDefence;
-	[SerializeField] private Text MonsterElements;
-	[SerializeField] private Text MonsterGoldDrop;
-	[SerializeField] private Text MonsterSimpleDrop;
-	[SerializeField] private Text MonsterRareDrop;
-	[SerializeField] private Text MonsterEpicDrop;
+	[SerializeField] private Image Splash = null;
+	[SerializeField] private Text MonsterID = null;
+	[SerializeField] private Text MonsterName = null;
+	[SerializeField] private Text MonsterDescription = null;
+	[SerializeField] private Text MonsterAttack = null;
+	[SerializeField] private Text MonsterHp = null;
+	[SerializeField] private Text MonsterDefence = null;
+	[SerializeField] private Text MonsterElements = null;
+	[SerializeField] private Text MonsterGoldDrop = null;
+	[SerializeField] private Text MonsterSimpleDrop = null;
+	[SerializeField] private Text MonsterRareDrop = null;
+	[SerializeField] private Text MonsterEpicDrop = null;
 
+	[SerializeField] private InputField inf = null;
 
-
+	[SerializeField] private GameObject[] currentList;
 
 	private float fontSize = Screen.height / 10;
 
-	private int PressCounter = 0;
-
+	public int StepCounter = 0;
+	private int CurrentValue_OnDropDown = 0;
 	void Start(){
 		ChangeMonsterFace ();
 	}
 
 	void Awake()
 	{
-		MonstersPrefabs = Resources.LoadAll<GameObject> ("Prefabs/Monsters Prefab/");
+		CurrentValue_OnDropDown = gameObject.GetComponent<SearchScriptById_Enc> ().drop.value;
+		MonstersList = Resources.LoadAll<GameObject> ("Prefabs/Monsters Prefab/");
 		SettingsText ();
+		SwitchList ();
 	}
+
+
+
 	void SettingsText(){
 		GameObject[] MonsterText = GameObject.FindGameObjectsWithTag ("Encycl");
 		for (int i = 0; i < MonsterText.Length; i++) {
 			MonsterText [i].GetComponent<Text> ().fontSize = Screen.height / 15;
-			MonsterText [i].GetComponent<Text> ().color = Color.white;
+			MonsterText [i].GetComponent<Text> ().color = Color.black;
 			MonsterText [i].GetComponent<Text> ().fontStyle = FontStyle.Bold;
 		}
 	}
 
-	void ChangeMonsterFace(){
-		if (PressCounter < MonstersPrefabs.Length&&PressCounter > -1) {
-			Splash.sprite = MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().monsterSprite;
-			MonsterName.text = "Monster name: " + MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().name;
-			MonsterDescription.text = "Monster description: "+ MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().description;
-			MonsterAttack.text = "Damage: " + Mathf.RoundToInt(MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().attack).ToString();
-			MonsterHp.text = "Hp: " + Mathf.RoundToInt(MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().hp).ToString();
-			MonsterDefence.text = "Defence: " + Mathf.RoundToInt(MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().Defence).ToString();
+	public void ChangeMonsterFace(){
+		if (StepCounter < currentList.Length&&StepCounter > -1) {
+			Splash.sprite = MonstersList [StepCounter].GetComponent<MonsterScript> ().monsterSprite;
+			MonsterID.text = "ID: " + MonstersList [StepCounter].GetComponent<MonsterScript> ().ID;
+			MonsterName.text = "Monster name: " + MonstersList [StepCounter].GetComponent<MonsterScript> ().name;
+			MonsterDescription.text = "Monster description: "+ MonstersList [StepCounter].GetComponent<MonsterScript> ().description;
+			MonsterAttack.text = "Damage: " + Mathf.RoundToInt(MonstersList [StepCounter].GetComponent<MonsterScript> ().attack).ToString();
+			MonsterHp.text = "Hp: " + Mathf.RoundToInt(MonstersList [StepCounter].GetComponent<MonsterScript> ().hp).ToString();
+			MonsterDefence.text = "Defence: " + Mathf.RoundToInt(MonstersList [StepCounter].GetComponent<MonsterScript> ().Defence).ToString();
 			MonsterElements.text = "Monster Elements: ";
 			Elements ();		
-			MonsterGoldDrop.text = "Gold drop: ~" + MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().GoldDrop;
-			MonsterSimpleDrop.text = "Simple item drop Rate: " + MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().SimplePercent + "%";
-			MonsterRareDrop.text = "Rare item drop Rate: " + MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().RarePercent + "%";
-			MonsterEpicDrop.text = "Epic item drop Rate: " + MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().EpicPercent + "%";
+			MonsterGoldDrop.text = "Gold drop: ~" + MonstersList [StepCounter].GetComponent<MonsterScript> ().GoldDrop;
+			MonsterSimpleDrop.text = "Simple item drop Rate: " + MonstersList [StepCounter].GetComponent<MonsterScript> ().SimplePercent + "%";
+			MonsterRareDrop.text = "Rare item drop Rate: " + MonstersList [StepCounter].GetComponent<MonsterScript> ().RarePercent + "%";
+			MonsterEpicDrop.text = "Epic item drop Rate: " + MonstersList [StepCounter].GetComponent<MonsterScript> ().EpicPercent + "%";
 		}
 	}
 	void Elements (){
-		if (MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().Dark == true) {
+		if (MonstersList [StepCounter].GetComponent<MonsterScript> ().Dark == true) {
 			MonsterElements.text += "Dark. ";
 		}
-		if (MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().Light == true) {
+		if (MonstersList [StepCounter].GetComponent<MonsterScript> ().Light == true) {
 			MonsterElements.text += "Light. ";
 		}
-		if (MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().Fire == true) {
+		if (MonstersList [StepCounter].GetComponent<MonsterScript> ().Fire == true) {
 			MonsterElements.text += "Fire. ";
 		}
-		if (MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().Water == true) {
+		if (MonstersList [StepCounter].GetComponent<MonsterScript> ().Water == true) {
 			MonsterElements.text += "Water. ";
 		}
-		if (MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().Air == true) {
+		if (MonstersList [StepCounter].GetComponent<MonsterScript> ().Air == true) {
 			MonsterElements.text += "Air. ";
 		}
-		if (MonstersPrefabs [PressCounter].GetComponent<MonsterScript> ().Earth == true) {
+		if (MonstersList [StepCounter].GetComponent<MonsterScript> ().Earth == true) {
 			MonsterElements.text += "Earth. ";
 		}
 	}
 
 	void FixedUpdate () {
+		ChangeMonsterFace ();
 		if (Input.GetKeyDown (KeyCode.RightArrow)) {
-				PressCounter++;
+				StepCounter++;
 				ChangeMonsterFace ();
 		}
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-				PressCounter--;
+				StepCounter--;
 				ChangeMonsterFace ();
+		}
+		if (gameObject.GetComponent<SearchScriptById_Enc> ().drop.value != CurrentValue_OnDropDown) {
+			SwitchList();
+			CurrentValue_OnDropDown = gameObject.GetComponent<SearchScriptById_Enc> ().drop.value;
+		}
+	}
+
+	void SwitchList(){
+		switch (gameObject.GetComponent<SearchScriptById_Enc> ().drop.value) {
+		case 0:
+			currentList = MonstersList;
+			break;
+		case 1:
+			currentList = ItemsList;
+			break;
+		case 2:
+			currentList = WeaponList;
+			break;
+		case 3:
+			currentList = ArmorList;
+			break;
 		}
 	}
 }
