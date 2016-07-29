@@ -13,6 +13,7 @@ public class MonsterScript : MonoBehaviour {
 	public int hp = 0;
 	public int Defence = 0;
 
+	public string Elements;
 
 	public bool Elemental = false;
 	public bool Dark = false; 
