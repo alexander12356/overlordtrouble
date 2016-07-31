@@ -3,7 +3,7 @@
 public class JourneyNPC : JourneyActor
 {
     #region Variables
-    private CheckCollide m_DialogCollide = null;
+    //private CheckCollide m_DialogCollide = null;
     private bool m_DialogReady = false;
 
     [SerializeField]
@@ -18,7 +18,7 @@ public class JourneyNPC : JourneyActor
     {
         base.Awake();
 
-        m_DialogCollide = GetComponentInChildren<CheckCollide>();
+        //m_DialogCollide = GetComponentInChildren<CheckCollide>();
     }
 
     public override void Update()
