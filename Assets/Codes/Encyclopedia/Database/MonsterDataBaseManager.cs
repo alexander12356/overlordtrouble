@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MonsterDataBaseManager : EditorWindow {
-	[MenuItem("Monster Manager/MonsterDB")]
+	[MenuItem("RPG Manager/Monster Editor")]
 	static void Init(){
 		MonsterDataBaseManager	window = (MonsterDataBaseManager)EditorWindow.CreateInstance (typeof(MonsterDataBaseManager));
 		window.Show ();
@@ -55,9 +55,8 @@ public class MonsterDataBaseManager : EditorWindow {
 				GUILayout.Space (10f);
 				minGoldDrop = EditorGUILayout.FloatField ("Gold Min Drop: ", minGoldDrop);
 				maxGoldDrop = EditorGUILayout.FloatField ("Gold Max Drop: ", maxGoldDrop);
-				if (maxGoldDrop != null) {
-					Gold = EditorGUILayout.IntField ("Gold Drop :", Mathf.CeilToInt (Random.Range (minGoldDrop, maxGoldDrop)));
-				}
+				Gold = EditorGUILayout.IntField ("Gold Drop :", Mathf.CeilToInt (Random.Range (minGoldDrop, maxGoldDrop)));
+
 
 				if (GUILayout.Button ("Add New Item")) {
 					Monster newMonster = (Monster)ScriptableObject.CreateInstance<Monster> ();

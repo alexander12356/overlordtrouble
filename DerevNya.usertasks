@@ -1,0 +1,4 @@
+<ListOfTask>
+  <Task file="" description="подправить поиск по ID в списке монстров" priority="High" />
+  <Task file="" description="Добавить в бд оружие\броня\простые итемы" />
+</ListOfTask>

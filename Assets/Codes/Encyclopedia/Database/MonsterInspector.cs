@@ -7,7 +7,7 @@ using System.Collections.Generic;
 [CustomEditor(typeof(MonsterManager))]
 internal class MonsterInspector : Editor {
 	bool showingMonsters = false;
-	bool showingMonsterOptions = false;
+
 	bool EnabledBase = false;
 
 	void OnInspectiorUpdate(){
