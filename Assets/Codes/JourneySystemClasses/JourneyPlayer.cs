@@ -6,22 +6,22 @@ public class JourneyPlayer : JourneyActor
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             m_Animator.SetBool("Right", true);
             m_CurrentSpeed.x = m_Speed;
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             m_Animator.SetBool("Left", true);
             m_CurrentSpeed.x = -m_Speed;
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             m_Animator.SetBool("Up", true);
             m_CurrentSpeed.y = m_Speed;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
             m_Animator.SetBool("Down", true);
             m_CurrentSpeed.y = -m_Speed;
