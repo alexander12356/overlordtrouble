@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
+
 
 public class ItemDatabaseManager : EditorWindow  {
 	[MenuItem("RPG Manager/Item Editor")]
@@ -149,3 +151,4 @@ public class ItemDatabaseManager : EditorWindow  {
 		}
 	}
 }
+#endif
