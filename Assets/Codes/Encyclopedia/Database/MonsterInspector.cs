@@ -42,7 +42,7 @@ internal class MonsterInspector : Editor {
 				monsters [i].ID = EditorGUILayout.IntField ("ID: ", monsters [i].ID);
 				monsters [i].name = EditorGUILayout.TextField ("Name: ", monsters [i].name);
 				monsters [i].description = EditorGUILayout.TextField ("Description: ", monsters [i].description);
-				monsters [i].attack = EditorGUILayout.IntField ("Attack: ", monsters [i].attack);
+				monsters [i].attack = EditorGUILayout.FloatField ("Attack: ", monsters [i].attack);
 				monsters [i].hp = EditorGUILayout.IntField ("HP: ", monsters [i].hp);
 				monsters [i].monsterSprite = (Sprite)EditorGUILayout.ObjectField ("Sprite",monsters [i].monsterSprite, typeof(Sprite));
 				GUILayout.Space (20f);

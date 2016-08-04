@@ -86,7 +86,7 @@ public class MonsterDataBaseManager : EditorWindow {
 								
 								EditorGUILayout.BeginScrollView (Vector2.zero);
 								monsterManager.monsterList [i].name = EditorGUILayout.TextField ("Name: ", monsterManager.monsterList [i].name);
-								monsterManager.monsterList [i].attack = EditorGUILayout.IntField ("Attack: ", monsterManager.monsterList [i].attack);
+								monsterManager.monsterList [i].attack = EditorGUILayout.FloatField ("Attack: ", monsterManager.monsterList [i].attack);
 								monsterManager.monsterList [i].hp = EditorGUILayout.IntField ("HP: ", monsterManager.monsterList [i].hp);
 								monsterManager.monsterList [i].description = EditorGUILayout.TextField ("Description: ", monsterManager.monsterList [i].description);
 								monsterManager.monsterList [i].monsterSprite = (Sprite)EditorGUILayout.ObjectField ("Sprite: ", monsterManager.monsterList [i].monsterSprite, typeof(Sprite));
