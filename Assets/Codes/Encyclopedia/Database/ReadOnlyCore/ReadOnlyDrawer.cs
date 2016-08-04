@@ -1,6 +1,5 @@
-﻿/*using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
-
 [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 public class ReadOnlyDrawer : PropertyDrawer {
 	public override void OnGUI(Rect positions, SerializedProperty prop, GUIContent label)
@@ -26,4 +25,3 @@ public class ReadOnlyDrawer : PropertyDrawer {
 		EditorGUI.LabelField (positions, label.text, value);
 	}
 }
-*/
