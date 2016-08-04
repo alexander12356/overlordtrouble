@@ -17,11 +17,11 @@ public class CheckCollide : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.name == "Player")
         {
             if (m_EnterAction != null)
             {
-                m_EnterAction(collision.GetComponentInParent<JourneyPlayer>());
+                m_EnterAction(collision.GetComponent<JourneyPlayer>());
             }
         }
     }
@@ -33,11 +33,11 @@ public class CheckCollide : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.name == "Player")
         {
             if (m_ExitAction != null)
             {
-                m_ExitAction(collision.GetComponentInParent<JourneyPlayer>());
+                m_ExitAction(collision.GetComponent<JourneyPlayer>());
             }
         }
     }

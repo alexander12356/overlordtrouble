@@ -10,8 +10,7 @@ public class SearchScriptById_Enc : MonoBehaviour {
 
 
 
-
-	//добавить поиск по итемам
+	//исправить
 	public void SearchByID ()
 	{
 		if (drop.value == 0 && inf.text != null) {
