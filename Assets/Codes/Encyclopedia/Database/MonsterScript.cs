@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
-using UnityEditor;
 
 public class MonsterScript : MonoBehaviour {
-	[ReadOnlyAttribute]public int ID;
+	public int ID;
 	public string name = "";
 	public string description = "";
 	public float attackMin = 0f;
@@ -34,7 +32,7 @@ public class MonsterScript : MonoBehaviour {
 
 	[SerializeField]public float GoldMin = 0f;
 	[SerializeField]public float GoldMax = 0f;
-	[ReadOnlyAttribute]public int GoldDrop;
+	public int GoldDrop;
 
 
 
@@ -46,3 +44,4 @@ public class MonsterScript : MonoBehaviour {
 		
 	}
 }
+

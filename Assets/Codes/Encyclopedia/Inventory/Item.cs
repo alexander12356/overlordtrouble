@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using System.Collections;
 [System.Serializable]
 public class Item : ScriptableObject {
@@ -9,3 +10,4 @@ public class Item : ScriptableObject {
 	public int ID = 0;
 
 }
+#endif
