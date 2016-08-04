@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using System.Collections;
 [System.Serializable]
 public class Monster : ScriptableObject {
-	[ReadOnlyAttribute]public int ID = MonsterID.monsterID;
+	public int ID = MonsterID.monsterID;
 	public string name = "";
 	public string description = "";
 	public float attackMin = 0f;
@@ -31,5 +32,6 @@ public class Monster : ScriptableObject {
 
 	public float GoldMin = 0f;
 	public float GoldMax = 0f;
-	[ReadOnlyAttribute]public int GoldDrop;
+	public int GoldDrop;
 }
+#endif

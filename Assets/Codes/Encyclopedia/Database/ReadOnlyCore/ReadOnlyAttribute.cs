@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
+using UnityEditor;
 
-public class ReadOnlyAttribute : PropertyAttribute {
-}
+
+	public class ReadOnlyAttribute : PropertyAttribute {
+	}
+*/
