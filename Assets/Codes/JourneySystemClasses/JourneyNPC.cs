@@ -13,6 +13,9 @@ public class JourneyNPC : JourneyActor
 
     [SerializeField]
     private string m_NpcId = "TestNPC";
+
+    [SerializeField]
+    private BaseMovement m_BaseMovement = null;
     #endregion
 
     #region Interface
@@ -25,11 +28,21 @@ public class JourneyNPC : JourneyActor
         m_DialogCollide.SetCollideExitAction(DialogNotReady);
 
         m_SpriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+
+        if (!m_BaseMovement)
+        {
+            Debug.LogWarning("Movement logic is null");
+        }
     }
 
     public override void Update()
     {
         base.Update();
+
+        if (m_BaseMovement)
+        {
+            m_BaseMovement.LogicUpdate();
+        }
     }
 
     public void StartDialog()

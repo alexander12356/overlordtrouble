@@ -21,11 +21,22 @@ public class JourneyActor : MonoBehaviour
             return m_Transform;
         }
     }
+    public Animator myAnimator
+    {
+        get
+        {
+            if (m_Animator == null)
+            {
+                m_Animator = GetComponent<Animator>();
+            }
+            return m_Animator;
+        }
+    }
 
     public virtual void Awake()
     {
-        m_Animator = GetComponent<Animator>();
-        m_Transform = transform;
+        m_Animator  = myAnimator;
+        m_Transform = myTransform;
     }
 
     public virtual void Update()
