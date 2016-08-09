@@ -24,9 +24,19 @@ public class BaseMovement : MonoBehaviour
         m_JourneyActor = GetComponent<JourneyActor>();
     }
 
+    public virtual void LogicStart()
+    {
+
+    }
+
 	public virtual void LogicUpdate ()
     {
 	
 	}
+
+    public virtual void LogicStop()
+    {
+
+    }
     #endregion
 }

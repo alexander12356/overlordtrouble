@@ -4,10 +4,11 @@ using System;
 public class JourneyNPC : JourneyActor
 {
     #region Variables
-    private CheckCollide   m_DialogCollide     = null;
-    private Transform      m_SpeakorTransform  = null;
-    private SpriteRenderer[] m_SpriteRenderers = null;
-
+    private CheckCollide     m_DialogCollide    = null;
+    private Transform        m_SpeakorTransform = null;
+    private SpriteRenderer[] m_SpriteRenderers  = null;
+    private bool             m_StartDialog      = false;
+    private JourneyActor     m_JourneyActor     = null;
     [SerializeField]
     private string m_DialogId = "dialog for ";
 
@@ -39,7 +40,7 @@ public class JourneyNPC : JourneyActor
     {
         base.Update();
 
-        if (m_BaseMovement)
+        if (m_BaseMovement && !m_StartDialog)
         {
             m_BaseMovement.LogicUpdate();
         }
@@ -47,8 +48,18 @@ public class JourneyNPC : JourneyActor
 
     public void StartDialog()
     {
-        DialogManager.StartDialog(m_DialogId);
+        DialogManager.GetInstance().StartDialog(m_DialogId);
         ApplyTo(m_SpeakorTransform.position);
+        m_StartDialog = true;
+        m_BaseMovement.LogicStop();
+        m_JourneyActor.enabled = false;
+    }
+
+    public void EndDialog()
+    {
+        m_StartDialog = false;
+        m_BaseMovement.LogicStart();
+        m_JourneyActor.enabled = true;
     }
     #endregion
 
@@ -56,7 +67,9 @@ public class JourneyNPC : JourneyActor
     private void DialogReady(JourneyPlayer p_JourneyPlayer)
     {
         p_JourneyPlayer.AddActiveButtonAction(StartDialog);
+        p_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
 
+        m_JourneyActor     = p_JourneyPlayer;
         m_SpeakorTransform = p_JourneyPlayer.myTransform;
 
         m_SpriteRenderers[1].gameObject.SetActive(true);
@@ -65,6 +78,10 @@ public class JourneyNPC : JourneyActor
     private void DialogNotReady(JourneyPlayer p_JourneyPlayer)
     {
         p_JourneyPlayer.RemoveActiveButtonAction(StartDialog);
+        p_JourneyPlayer.RemoveDisactiveButtonAction(EndDialog);
+
+        m_JourneyActor     = null;
+        m_SpeakorTransform = null;
 
         m_SpriteRenderers[1].gameObject.SetActive(false);
     }

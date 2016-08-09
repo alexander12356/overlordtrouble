@@ -1,0 +1,7 @@
+<DialogList>
+	<Dialog id="test">
+		<Text id="0" avatarId="NPC1">Привет</Text>
+		<Text id="1" avatarId="NPC1">это типа первый</Text>
+		<Text id="2" avatarId="NPC1">диалог!</Text>
+	</Dialog>
+</DialogList>

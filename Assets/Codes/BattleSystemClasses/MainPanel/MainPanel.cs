@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainPanel : Panel
 {
@@ -70,7 +71,7 @@ public class MainPanel : Panel
 
     private void Retreat()
     {
-        Application.Quit();
+        SceneManager.LoadScene("DemoMainScene");
     }
     #endregion
 }

@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public delegate void ActiveButtonHandler();
+public delegate void ButtonHandler();
 public class JourneyPlayer : JourneyActor
 {
     #region Variables
-    public event ActiveButtonHandler m_ActiveButtonAction;
+    public event ButtonHandler m_ActiveButtonAction;
+    public event ButtonHandler m_DisactiveButtonAction;
     #endregion
 
     #region Interface
@@ -18,20 +20,41 @@ public class JourneyPlayer : JourneyActor
         {
             ActiveButtonAction();
         }
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            DisactiveButtonAction();
+        }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("DemoMainScene");
+        }
 
         transform.position += m_CurrentSpeed * Time.deltaTime;
     }
 
-    public void AddActiveButtonAction(ActiveButtonHandler p_Action)
+    public void AddActiveButtonAction(ButtonHandler p_Action)
     {
         m_ActiveButtonAction += p_Action;
     }
 
-    public void RemoveActiveButtonAction(ActiveButtonHandler p_Action)
+    public void RemoveActiveButtonAction(ButtonHandler p_Action)
     {
         if (m_ActiveButtonAction != null)
         {
             m_ActiveButtonAction -= p_Action;
+        }
+    }
+
+    public void AddDisactiveButtonAction(ButtonHandler p_Action)
+    {
+        m_DisactiveButtonAction += p_Action;
+    }
+
+    public void RemoveDisactiveButtonAction(ButtonHandler p_Action)
+    {
+        if (m_DisactiveButtonAction != null)
+        {
+            m_DisactiveButtonAction -= p_Action;
         }
     }
     #endregion
@@ -42,6 +65,14 @@ public class JourneyPlayer : JourneyActor
         if (m_ActiveButtonAction != null)
         {
             m_ActiveButtonAction();
+        }
+    }
+
+    private void DisactiveButtonAction()
+    {
+        if (m_DisactiveButtonAction != null)
+        {
+            m_DisactiveButtonAction();
         }
     }
 

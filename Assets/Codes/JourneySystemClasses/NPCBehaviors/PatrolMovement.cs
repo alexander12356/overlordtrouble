@@ -15,7 +15,7 @@ public class PatrolMovement : BaseMovement
 
     private int   m_CurrentPoint = 0;
     private float m_WaitTime = 0.0f;
-    private float m_MovingTime = 2.0f;
+    private float m_MovingTime = 1.0f;
     private float m_ElapsedTime = 0.0f;
     #endregion
 
@@ -23,6 +23,13 @@ public class PatrolMovement : BaseMovement
     public override void Awake()
     {
         base.Awake();
+    }
+
+    public override void LogicStart()
+    {
+        base.LogicStart();
+
+        journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, true);
     }
 
     public override void LogicUpdate()
@@ -45,6 +52,15 @@ public class PatrolMovement : BaseMovement
             }
         }
     }
+
+    public override void LogicStop()
+    {
+        base.LogicStop();
+
+        journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, false);
+    }
+
+
     #endregion
 
     #region Private
