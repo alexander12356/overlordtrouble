@@ -20,7 +20,8 @@ public class ChooseEnemyPanel : Panel
 
     private static ChooseEnemyPanel m_Prefab = null;
     private Enemy m_ChoosedEnemy = null;
-    private PanelActionHandler m_ChoosedAction = null;
+    private PanelActionHandler m_ConfirmAction = null;
+    private PanelActionHandler m_CancelAction = null;
     private ButtonListType m_CurrentButtonListType = ButtonListType.EnemyList;
     #endregion
 
@@ -74,15 +75,24 @@ public class ChooseEnemyPanel : Panel
 
     public void AddChoosedAction(PanelActionHandler p_Action)
     {
-        m_ChoosedAction += p_Action;
+        m_ConfirmAction += p_Action;
     }
 
     public void RemoveChoosedAction(PanelActionHandler p_Action)
     {
-        m_ChoosedAction -= p_Action;
+        m_ConfirmAction -= p_Action;
     }
 
-    
+    public void AddCancelAction(PanelActionHandler p_Action)
+    {
+        m_CancelAction += p_Action;
+    }
+
+    public void RemoveCancelAction(PanelActionHandler p_Action)
+    {
+        m_CancelAction -= p_Action;
+    }
+
     #endregion
 
     #region Private
@@ -142,21 +152,30 @@ public class ChooseEnemyPanel : Panel
         }
         else
         {
+            CancelAction();
             PanelManager.GetInstance().ClosePanel(this);
         }
     }
 
     private void ChoosedAction()
     {
-        if (m_ChoosedAction != null)
+        if (m_ConfirmAction != null)
         {
-            m_ChoosedAction();
+            m_ConfirmAction();
         }
     }
 
     private void Confirm()
     {
         ChoosedAction();
+    }
+
+    private void CancelAction()
+    {
+        if (m_CancelAction != null)
+        {
+            m_CancelAction();
+        }
     }
     #endregion
 }

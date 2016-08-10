@@ -103,10 +103,7 @@ public class SpecialSelectPanel : Panel
 
     private void ReturnToMain()
     {
-        foreach (Special l_Special in m_AddedSpecialList.Values)
-        {
-            Player.GetInstance().mana += l_Special.mana;
-        }
+        CancelChoose();
 
         PanelManager.GetInstance().ClosePanel(this);
     }
@@ -162,6 +159,7 @@ public class SpecialSelectPanel : Panel
 
         m_ChooseEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
         m_ChooseEnemyPanel.AddChoosedAction(Attack);
+        m_ChooseEnemyPanel.AddCancelAction(CancelChoose);
         PanelManager.GetInstance().ShowPanel(m_ChooseEnemyPanel);
     }
 
@@ -173,6 +171,14 @@ public class SpecialSelectPanel : Panel
         l_SpecialUpgradePanel.SetSpecials(m_AddedSpecialList);
         l_SpecialUpgradePanel.SetEnemy(m_ChooseEnemyPanel.choosedEnemy);
         PanelManager.GetInstance().ShowPanel(l_SpecialUpgradePanel);
+    }
+
+    private void CancelChoose()
+    {
+        foreach (Special l_Special in m_AddedSpecialList.Values)
+        {
+            Player.GetInstance().mana += l_Special.mana;
+        }
     }
     #endregion
 }
