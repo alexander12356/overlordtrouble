@@ -57,10 +57,8 @@ public class JourneyPlayer : JourneyActor
             m_DisactiveButtonAction -= p_Action;
         }
     }
-    #endregion
 
-    #region Private
-    private void ActiveButtonAction()
+    public void ActiveButtonAction()
     {
         if (m_ActiveButtonAction != null)
         {
@@ -68,14 +66,16 @@ public class JourneyPlayer : JourneyActor
         }
     }
 
-    private void DisactiveButtonAction()
+    public void DisactiveButtonAction()
     {
         if (m_DisactiveButtonAction != null)
         {
             m_DisactiveButtonAction();
         }
     }
+    #endregion
 
+    #region Private
     private void ControlUpdate()
     {
         if (Input.GetKey(KeyCode.RightArrow))

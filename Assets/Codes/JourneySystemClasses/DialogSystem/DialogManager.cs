@@ -6,7 +6,7 @@ public class DialogManager : MonoBehaviour
     private static DialogManager m_Instance = null;
 
     [SerializeField]
-    private DialogWindow m_DialogWindow = null;
+    private JourneyPlayer m_JourneyPlayer = null;
 
     public void Awake()
     {
@@ -20,13 +20,19 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialog(string p_DialogId)
     {
-        m_DialogWindow.gameObject.SetActive(true);
-        m_DialogWindow.SetText(DialogSystem.GetInstance().GetDialog(p_DialogId));
+        DialogWindow l_DialogWindow = Instantiate(DialogWindow.prefab);
+        l_DialogWindow.transform.SetParent(transform);
+        l_DialogWindow.transform.localScale = Vector3.one;
+
+        l_DialogWindow.gameObject.SetActive(true);
+        l_DialogWindow.SetDialog(DialogSystem.GetInstance().GetDialog(p_DialogId));
+        l_DialogWindow.Show();
         Debug.Log("Dialog started!");
     }
 
     public void EndDialog()
     {
+        m_JourneyPlayer.DisactiveButtonAction();
         Debug.Log("DialogEnded");
     }
 }
