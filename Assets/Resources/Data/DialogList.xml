@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0"?>
 <DialogList>
-	<Dialog id="WalkingNpc" avatarPath="Sprites/Locations/NPC/NPC1/DialogAvatar">
+	<Dialog id="WalkingNpc" avatarPath="Sprites/Creations/Npc/Avatar">
 		<Text id="0" avatarId="NPC1">Привет! ...</Text>
 		<Text id="1" avatarId="NPC1">Я тут хожу ...</Text>
 		<Text id="2" avatarId="NPC1">никого не трогаю! Круто правда? :)</Text>
 	</Dialog>
-	<Dialog id="StayNpc" avatarPath="Sprites/Locations/NPC/NPC1/DialogAvatar">
+	<Dialog id="StayNpc" avatarPath="Sprites/Creations/Npc/Avatar">
 		<Text id="0" avatarId="NPC1">Привет! ...</Text>
 		<Text id="1" avatarId="NPC1">Я тут стою, верчусь и  ...</Text>
 		<Text id="2" avatarId="NPC1">никого не трогаю! Круто правда? :)</Text>
 	</Dialog>
-	<Dialog id="Bokalisk" avatarPath="Sprites/Enemy/Bokalisk/DialogAvatar">
+	<Dialog id="Bokalisk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
 		<Text id="0" avatarId="Bokalisk">Кудах-кудах! ...</Text>
 		<Text id="1" avatarId="Bokalisk">Сейчас мы должны сразиться но ...</Text>
 		<Text id="2" avatarId="Bokalisk">это пока не сделано! :3</Text>

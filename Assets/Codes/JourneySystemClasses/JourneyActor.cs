@@ -5,6 +5,8 @@ public class JourneyActor : MonoBehaviour
     #region Interface
     protected Animator  m_Animator = null;
     protected Vector3   m_CurrentSpeed = Vector3.zero;
+
+    [SerializeField]
     protected float     m_Speed = 5.0f;
     protected Transform m_Transform = null;
     #endregion
