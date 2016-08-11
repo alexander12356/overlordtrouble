@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public class SearchScriptById_Enc : MonoBehaviour {
 
@@ -14,20 +15,27 @@ public class SearchScriptById_Enc : MonoBehaviour {
 	//добавить поиск по итемам
 	public void SearchByID ()
 	{
-		if (drop.value == 0 && inf.text != null) {
-			deltaGameObjects = gameObject.GetComponent<GameController> ().MonstersList;
-			for (int i = 0; i < deltaGameObjects.Length; i++) {
-				if (deltaGameObjects [i].GetComponent<MonsterScript> ().ID == int.Parse(inf.text)) {
-					gameObject.GetComponent<GameController> ().StepCounter = i;
-					gameObject.GetComponent<GameController> ().ChangeMonsterFace ();
+		try{
+			if (drop.value == 0 && inf.text != null && inf.text != " ") {
+				deltaGameObjects = gameObject.GetComponent<GameController> ().MonstersList;
+				for (int i = 0; i < deltaGameObjects.Length; i++) {
+					if (deltaGameObjects [i].GetComponent<MonsterScript> ().ID == int.Parse(inf.text)) {
+						gameObject.GetComponent<GameController> ().StepCounter = i;
+						gameObject.GetComponent<GameController> ().ChangeMonsterFace ();
+					}
 				}
 			}
+			if (drop.value == 1) {
+			}
+			if (drop.value == 2) {
+			}
+			if (drop.value == 3) {
+			}
 		}
-		if (drop.value == 1) {
-		}
-		if (drop.value == 2) {
-		}
-		if (drop.value == 3) {
+		catch(Exception e)
+		{
+			Debug.Log ("Ошибка ввода поиска по ИД: " + e);
 		}
 	}		
 }
+*/

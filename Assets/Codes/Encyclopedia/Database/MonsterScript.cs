@@ -34,7 +34,7 @@ public class MonsterScript : MonoBehaviour {
 	[SerializeField]public float GoldMax = 0f;
 	public int GoldDrop;
 
-
+	public bool Visability = false;
 
 
 	void Start () {
