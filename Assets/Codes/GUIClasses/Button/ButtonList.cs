@@ -113,7 +113,7 @@ public class ButtonList : MonoBehaviour
     {
         for (int i = 0; i < m_ButtonsList.Count; i++)
         {
-            if (m_ButtonsList[i].title == p_Id)
+            if (((PanelButton)m_ButtonsList[i]).title == p_Id)
             {
                 PanelButton l_PanelButton = m_ButtonsList[i];
                 m_ButtonsList.RemoveAt(i);
@@ -168,6 +168,11 @@ public class ButtonList : MonoBehaviour
 
     private void CheckSelectPosition()
     {
+        if (m_ButtonsList.Count == 0)
+        {
+            return;
+        }
+
         if (m_CurrentButtonId < 0)
         {
             m_CurrentButtonId = m_ButtonsList.Count - 1;

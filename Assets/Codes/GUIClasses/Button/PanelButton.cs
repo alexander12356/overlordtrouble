@@ -6,10 +6,10 @@ public delegate void PanelButtonActionHandler();
 public class PanelButton : MonoBehaviour
 {
     #region Variables
-    private Text  m_Text;
-    private Image m_SelectedArrowImage;
-    private bool  m_Selected;
     private event PanelButtonActionHandler Action;
+    private bool  m_Selected;
+    private Image m_SelectedImage;
+    private Text  m_Text;
 
     [SerializeField]
     private string m_Title = string.Empty;
@@ -24,7 +24,7 @@ public class PanelButton : MonoBehaviour
         {
             if (m_Prefab == null)
             {
-                m_Prefab = Resources.Load<PanelButton>("Prefabs/PanelButton");
+                m_Prefab = Resources.Load<PanelButton>("Prefabs/Button/PanelButton");
             }
             return m_Prefab;
         }
@@ -40,6 +40,10 @@ public class PanelButton : MonoBehaviour
             }
             m_Text.text = m_Title = value;
         }
+    }    
+    public Text text
+    {
+        get { return m_Text; }
     }
     public bool selected
     {
@@ -52,33 +56,29 @@ public class PanelButton : MonoBehaviour
             Select(value);
         }
     }
-    public Image selectedArrowImage
+    public Image selectedImage
     {
         get
         {
-            if (m_SelectedArrowImage == null)
+            if (m_SelectedImage == null)
             {
-                m_SelectedArrowImage = GetComponentInChildren<Image>(true);
+                m_SelectedImage = GetComponentInChildren<Image>(true);
             }
-            return m_SelectedArrowImage;
+            return m_SelectedImage;
         }
     }
-    public Text text
-    {
-        get { return m_Text; }
-    }
 
-    public void AddAction(PanelButtonActionHandler p_Action)
+    public virtual void AddAction(PanelButtonActionHandler p_Action)
     {
         Action += p_Action;
     }
 
-    public void RemoveAction(PanelButtonActionHandler p_Action)
+    public virtual void RemoveAction(PanelButtonActionHandler p_Action)
     {
         Action -= p_Action;
     }
 
-    public void RunAction()
+    public virtual void RunAction()
     {
         if (Action != null)
         {
@@ -86,25 +86,22 @@ public class PanelButton : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Button: " + m_Title + " not have a action!");
+            Debug.LogWarning("Button: " + gameObject.name + " not have a action!");
         }
     }
     #endregion
-
-    #region Private
     private void Awake()
     {
+        m_SelectedImage = selectedImage;
+        selectedImage.gameObject.SetActive(false);
+
         m_Text = GetComponentInChildren<Text>();
-        m_SelectedArrowImage = selectedArrowImage;
-
         m_Text.text = m_Title;
-        selectedArrowImage.gameObject.SetActive(false);
     }
 
-    private void Select(bool p_Selected)
+    private void Select(bool p_Value)
     {
-        m_Selected = p_Selected;
-        selectedArrowImage.gameObject.SetActive(m_Selected);
+        m_Selected = p_Value;
+        selectedImage.gameObject.SetActive(m_Selected);
     }
-    #endregion
 }

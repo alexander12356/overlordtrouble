@@ -12,6 +12,7 @@ public class DemoMainScene : MonoBehaviour
         m_ButtonList[0].AddAction(StartBattleSystem);
         m_ButtonList[1].AddAction(StartMap);
         m_ButtonList[2].AddAction(StartEncyclopedia);
+        m_ButtonList[3].AddAction(StartProfile);
     }
 
     private void Update()
@@ -32,5 +33,10 @@ public class DemoMainScene : MonoBehaviour
     private void StartEncyclopedia()
     {
         SceneManager.LoadScene("Encyclopedia");
+    }
+
+    private void StartProfile()
+    {
+        SceneManager.LoadScene("Profile");
     }
 }
