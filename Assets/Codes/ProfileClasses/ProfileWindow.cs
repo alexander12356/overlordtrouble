@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
+using System.Collections.Generic;
 
 public class ProfileWindow : MonoBehaviour
 {
@@ -10,8 +13,9 @@ public class ProfileWindow : MonoBehaviour
         SpecialList
     }
 
-    private ButtonList m_ButtonList;
+    private ButtonList m_ProfileButtonList;
     private ActivePanels m_CurrentActivePanel = ActivePanels.Profile;
+    private int m_SelectedSpecialCount = 0;
 
     [SerializeField]
     private ButtonList m_SpecialsButtonList = null;
@@ -19,13 +23,18 @@ public class ProfileWindow : MonoBehaviour
     [SerializeField]
     private ButtonList m_StatsButtonList = null;
 
-	public void Awake ()
+    [SerializeField]
+    private Text m_SpecialDescriptionText = null;
+
+    #region Interface
+    public void Awake ()
     {
-        m_ButtonList = GetComponent<ButtonList>();
-        m_ButtonList[0].AddAction(ActiveStatsPanel);
-        m_ButtonList[2].AddAction(ActiveSpecialListPanel);
+        m_ProfileButtonList = GetComponent<ButtonList>();
+        m_ProfileButtonList[0].AddAction(ActiveStatsPanel);
+        m_ProfileButtonList[2].AddAction(ActiveSpecialListPanel);
 
         m_SpecialsButtonList.isActive = false;
+        m_SpecialsButtonList.AddKeyArrowAction(ShowSpecialDescription);
         m_StatsButtonList.isActive = false;
 
         InitSpecials();
@@ -36,7 +45,7 @@ public class ProfileWindow : MonoBehaviour
         switch (m_CurrentActivePanel)
         {
             case ActivePanels.Profile:
-                m_ButtonList.UpdateKey();
+                m_ProfileButtonList.UpdateKey();
                 break;
             case ActivePanels.SpecialList:
                 m_SpecialsButtonList.UpdateKey();
@@ -66,7 +75,9 @@ public class ProfileWindow : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    #region Private
     private void InitSpecials()
     {
         for (int i = 0; i < 10; i++)
@@ -89,6 +100,7 @@ public class ProfileWindow : MonoBehaviour
         l_PanelButton.transform.SetParent(m_SpecialsButtonList.transform);
         l_PanelButton.transform.localPosition = Vector3.zero;
         l_PanelButton.transform.localScale = Vector3.one;
+        l_PanelButton.AddAction(SelectSpecial);
 
         return l_PanelButton;
     }
@@ -96,14 +108,14 @@ public class ProfileWindow : MonoBehaviour
     private void ActiveSpecialListPanel()
     {
         m_CurrentActivePanel = ActivePanels.SpecialList;
-        m_ButtonList.isActive = false;
+        m_ProfileButtonList.isActive = false;
         m_SpecialsButtonList.isActive = true;
     }
 
     private void ActiveProfilePanel()
     {
         m_CurrentActivePanel = ActivePanels.Profile;
-        m_ButtonList.isActive = true;
+        m_ProfileButtonList.isActive = true;
         m_SpecialsButtonList.isActive = false;
         m_StatsButtonList.isActive = false;
     }
@@ -112,6 +124,29 @@ public class ProfileWindow : MonoBehaviour
     {
         m_CurrentActivePanel = ActivePanels.Stats;
         m_StatsButtonList.isActive = true;
-        m_ButtonList.isActive = false;
+        m_ProfileButtonList.isActive = false;
     }
+
+    private void ShowSpecialDescription()
+    {
+        m_SpecialDescriptionText.text = m_SpecialsButtonList.currentButton.title + " description";
+    }
+
+    private void SelectSpecial()
+    {
+        if (m_SpecialsButtonList.currentButton.text.color != Color.green)
+        {
+            if (m_SelectedSpecialCount < 5)
+            {
+                m_SpecialsButtonList.currentButton.text.color = Color.green;
+                m_SelectedSpecialCount++;
+            }
+        }
+        else
+        {
+            m_SpecialsButtonList.currentButton.text.color = Color.black;
+            m_SelectedSpecialCount--;
+        }
+    }
+    #endregion
 }
