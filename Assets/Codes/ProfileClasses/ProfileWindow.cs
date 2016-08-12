@@ -26,6 +26,9 @@ public class ProfileWindow : MonoBehaviour
     [SerializeField]
     private Text m_SpecialDescriptionText = null;
 
+    [SerializeField]
+    private SpecialStatus m_SpecialStatus = null;
+
     #region Interface
     public void Awake ()
     {
@@ -130,6 +133,15 @@ public class ProfileWindow : MonoBehaviour
     private void ShowSpecialDescription()
     {
         m_SpecialDescriptionText.text = m_SpecialsButtonList.currentButton.title + " description";
+
+        if (m_SpecialsButtonList.currentButton.text.color == Color.green)
+        {
+            m_SpecialStatus.Selected(true);
+        }
+        else
+        {
+            m_SpecialStatus.Selected(false);
+        }        
     }
 
     private void SelectSpecial()
@@ -140,12 +152,14 @@ public class ProfileWindow : MonoBehaviour
             {
                 m_SpecialsButtonList.currentButton.text.color = Color.green;
                 m_SelectedSpecialCount++;
+                m_SpecialStatus.Selected(true);
             }
         }
         else
         {
             m_SpecialsButtonList.currentButton.text.color = Color.black;
             m_SelectedSpecialCount--;
+            m_SpecialStatus.Selected(false);
         }
     }
     #endregion
