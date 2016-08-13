@@ -118,42 +118,6 @@ public class Panel : MonoBehaviour
     #endregion
 
     #region Private
-    //private IEnumerator Showing()
-    //{
-    //    m_Moving = true;
-    //    myTransform.localPosition = new Vector3(1500.0f, 0.0f, 0.0f);
-    //    myTransform.localScale = Vector3.one;
-    //    Vector3 l_Position = myTransform.localPosition;
-
-    //    while (myTransform.localPosition.x >= 0)
-    //    {
-    //        l_Position.x -= m_ShowingSpeed * Time.deltaTime;
-    //        myTransform.localPosition = l_Position;
-    //        yield return new WaitForEndOfFrame();
-    //    }
-    //    myTransform.localPosition = Vector3.zero;
-    //    m_Moving = false;
-
-    //    EndShowing();
-    //}
-
-    //private IEnumerator Hiding()
-    //{
-    //    m_Moving = true;
-    //    Vector3 l_Position = myTransform.localPosition;
-    //    while (myTransform.localPosition.x >= -1180)
-    //    {
-    //        l_Position.x -= m_ShowingSpeed * Time.deltaTime;
-    //        myTransform.localPosition = l_Position;
-    //        yield return new WaitForEndOfFrame();
-    //    }
-
-    //    m_Moving = false;
-    //    myTransform.localPosition = new Vector3(-1180.0f, 0.0f, 0.0f);
-
-    //    EndHiding();
-    //}
-
     private void EndShowing()
     {
         m_IsShowed = true;

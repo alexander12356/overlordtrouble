@@ -21,10 +21,12 @@ public class BaseTransition : MonoBehaviour
 
     public virtual void Show()
     {
+        EndShowing();
     }
 
     public virtual void Hide()
     {
+        EndHiding();
     }
 
     public void AddEndShowAction(PanelActionHandler p_Action)

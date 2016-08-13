@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BattleSystem : Singleton<BattleSystem>
+public class BattleSystem : MonoBehaviour
 {
     public enum ActorID
     {
@@ -9,13 +9,26 @@ public class BattleSystem : Singleton<BattleSystem>
         Enemy
     }
 
+    private static BattleSystem m_Instance;
     private Player m_Player;
     private Enemy  m_Enemy;
 
-    public BattleSystem()
+    public static BattleSystem GetInstance()
     {
+        return m_Instance;
+    }
+
+    public void Awake()
+    {
+        m_Instance = this;
+
         m_Player = Player.GetInstance();
         m_Enemy = Enemy.GetInstance();
+    }
+
+    public void Start()
+    {
+        InitStartPanel();
     }
 
     public void Died(ActorID p_ActorID)
@@ -50,5 +63,11 @@ public class BattleSystem : Singleton<BattleSystem>
     private void RestartGame()
     {
         SceneManager.LoadScene("BattleSystem");
+    }
+
+    private void InitStartPanel()
+    {
+        MainPanel l_MainPanel = Instantiate(MainPanel.prefab);
+        PanelManager.GetInstance().ShowPanel(l_MainPanel);
     }
 }

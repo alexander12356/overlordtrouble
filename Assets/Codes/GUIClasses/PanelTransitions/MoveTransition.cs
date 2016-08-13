@@ -7,15 +7,11 @@ public class MoveTransition : BaseTransition
 
     public override void Show()
     {
-        base.Show();
-
         StartCoroutine(Showing());
     }
 
     public override void Hide()
     {
-        base.Hide();
-
         StartCoroutine(Hiding());
     }
 

@@ -23,11 +23,14 @@ public class PanelManager : MonoBehaviour
         return m_Instance;
     }
 
-    public void ShowPanel(Panel p_NewPanel)
+    public void ShowPanel(Panel p_NewPanel, bool p_WithOverlay = false)
     {
         if (m_PanelStack.Count > 0 && m_PanelStack.Peek().isShowed)
         {
-            m_PanelStack.Peek().Hide();
+            if (!p_WithOverlay)
+            {
+                m_PanelStack.Peek().Hide();
+            }
         }
         p_NewPanel.transform.SetParent(transform);
         p_NewPanel.gameObject.SetActive(false);
@@ -46,17 +49,6 @@ public class PanelManager : MonoBehaviour
     private void Awake()
     {
         m_Instance = this;
-    }
-
-    private void Start()
-    {
-        InitStartPanel();
-    }
-
-    private void InitStartPanel()
-    {
-        MainPanel l_MainPanel = Instantiate(MainPanel.prefab);
-        ShowPanel(l_MainPanel);
     }
 
     private void Update()
