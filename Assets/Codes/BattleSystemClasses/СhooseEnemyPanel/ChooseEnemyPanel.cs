@@ -42,6 +42,18 @@ public class ChooseEnemyPanel : Panel
         get { return m_ChoosedEnemy;  }
     }
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        InitEnemyList();
+        m_ConfirmButtonList.isActive = false;
+        m_ConfirmButtonList[0].AddAction(Confirm);
+        m_ConfirmButtonList[1].AddAction(Cancel);
+
+        m_EnemyButtonList.AddKeyArrowAction(SelectEnemyAvatar);
+    }
+
     public override void UpdatePanel()
     {
         base.UpdatePanel();
@@ -96,16 +108,6 @@ public class ChooseEnemyPanel : Panel
     #endregion
 
     #region Private
-    private void Awake()
-    {
-        InitEnemyList();
-        m_ConfirmButtonList.isActive = false;
-        m_ConfirmButtonList[0].AddAction(Confirm);
-        m_ConfirmButtonList[1].AddAction(Cancel);
-
-        m_EnemyButtonList.AddKeyArrowAction(SelectEnemyAvatar);
-    }
-
     private void InitEnemyList()
     {
         m_EnemyList = EnemyManager.GetInstance().GetEnemy();

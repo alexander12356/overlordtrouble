@@ -40,6 +40,20 @@ public class SpecialSelectPanel : Panel
         }
     }
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        m_ConfirmButtonList.isActive = false;
+        m_AddedSpecialButtonList.isActive = false;
+
+        m_ConfirmButtonList[0].AddAction(Confirm);
+        m_ConfirmButtonList[1].AddAction(ReturnToMain);
+
+        InitSpecialList();
+        InitSpecialButtons();
+    }
+
     public override void UpdatePanel()
     {
         base.UpdatePanel();
@@ -89,18 +103,6 @@ public class SpecialSelectPanel : Panel
     #endregion
 
     #region Private
-    private void Awake()
-    {
-        m_ConfirmButtonList.isActive = false;
-        m_AddedSpecialButtonList.isActive = false;
-
-        m_ConfirmButtonList[0].AddAction(Confirm);
-        m_ConfirmButtonList[1].AddAction(ReturnToMain);
-
-        InitSpecialList();
-        InitSpecialButtons();
-    }
-
     private void ReturnToMain()
     {
         CancelChoose();

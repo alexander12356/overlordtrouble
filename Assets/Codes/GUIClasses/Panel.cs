@@ -9,10 +9,9 @@ public class Panel : MonoBehaviour
     private event PanelActionHandler m_PopAction = null;
     private event PanelActionHandler m_PushAction = null;
     private Transform m_Transform;
-    private float m_ShowingSpeed = 1400.0f;
     private bool m_Close = false;
-    private bool m_Moving = false;
     private bool m_IsShowed = false;
+    private BaseTransition m_BaseTransition = null;
     #endregion
 
     #region Interface
@@ -20,15 +19,17 @@ public class Panel : MonoBehaviour
     {
         get { return m_IsShowed; }
     }
-
     public bool moving
     {
         get
         {
-            return m_Moving;
+            if (m_BaseTransition == null)
+            {
+                m_BaseTransition = GetComponent<BaseTransition>();
+            }
+            return m_BaseTransition.isMoving;
         }
     }
-
     public Transform myTransform
     {
         get
@@ -44,6 +45,15 @@ public class Panel : MonoBehaviour
         {
             m_Transform = value;
         }
+    }
+
+    public virtual void Awake()
+    {
+        m_Transform = transform;
+        m_BaseTransition = GetComponent<BaseTransition>();
+
+        m_BaseTransition.AddEndShowAction(EndShowing);
+        m_BaseTransition.AddEndHideAction(EndHiding);
     }
 
     public void AddPopAction(PanelActionHandler p_Action)
@@ -85,12 +95,14 @@ public class Panel : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
-        StartCoroutine(Showing());
+        //StartCoroutine(Showing());
+        m_BaseTransition.Show();
     }
 
     public void Hide()
     {
-        StartCoroutine(Hiding());
+        m_BaseTransition.Hide();
+        //StartCoroutine(Hiding());
     }
 
     public void Close()
@@ -106,54 +118,49 @@ public class Panel : MonoBehaviour
     #endregion
 
     #region Private
-    private void Awake()
-    {
-        m_Transform = transform;
-    }
+    //private IEnumerator Showing()
+    //{
+    //    m_Moving = true;
+    //    myTransform.localPosition = new Vector3(1500.0f, 0.0f, 0.0f);
+    //    myTransform.localScale = Vector3.one;
+    //    Vector3 l_Position = myTransform.localPosition;
 
-    protected IEnumerator Showing()
-    {
-        m_Moving = true;
-        myTransform.localPosition = new Vector3(1500.0f, 0.0f, 0.0f);
-        myTransform.localScale = Vector3.one;
-        Vector3 l_Position = myTransform.localPosition;
+    //    while (myTransform.localPosition.x >= 0)
+    //    {
+    //        l_Position.x -= m_ShowingSpeed * Time.deltaTime;
+    //        myTransform.localPosition = l_Position;
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //    myTransform.localPosition = Vector3.zero;
+    //    m_Moving = false;
 
-        while (myTransform.localPosition.x >= 0)
-        {
-            l_Position.x -= m_ShowingSpeed * Time.deltaTime;
-            myTransform.localPosition = l_Position;
-            yield return new WaitForEndOfFrame();
-        }
-        myTransform.localPosition = Vector3.zero;
-        m_Moving = false;
+    //    EndShowing();
+    //}
 
-        EndShowing();
-    }
+    //private IEnumerator Hiding()
+    //{
+    //    m_Moving = true;
+    //    Vector3 l_Position = myTransform.localPosition;
+    //    while (myTransform.localPosition.x >= -1180)
+    //    {
+    //        l_Position.x -= m_ShowingSpeed * Time.deltaTime;
+    //        myTransform.localPosition = l_Position;
+    //        yield return new WaitForEndOfFrame();
+    //    }
 
-    protected IEnumerator Hiding()
-    {
-        m_Moving = true;
-        Vector3 l_Position = myTransform.localPosition;
-        while (myTransform.localPosition.x >= -1180)
-        {
-            l_Position.x -= m_ShowingSpeed * Time.deltaTime;
-            myTransform.localPosition = l_Position;
-            yield return new WaitForEndOfFrame();
-        }
+    //    m_Moving = false;
+    //    myTransform.localPosition = new Vector3(-1180.0f, 0.0f, 0.0f);
 
-        m_Moving = false;
-        myTransform.localPosition = new Vector3(-1180.0f, 0.0f, 0.0f);
+    //    EndHiding();
+    //}
 
-        EndHiding();
-    }
-
-    protected void EndShowing()
+    private void EndShowing()
     {
         m_IsShowed = true;
         PushAction();
     }
 
-    protected void EndHiding()
+    private void EndHiding()
     {
         m_IsShowed = false;
         gameObject.SetActive(false);

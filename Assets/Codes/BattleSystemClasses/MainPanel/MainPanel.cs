@@ -24,6 +24,13 @@ public class MainPanel : Panel
         }
     }
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        InitButtons();
+    }
+
     public override void UpdatePanel()
     {
         base.UpdatePanel();
@@ -38,11 +45,6 @@ public class MainPanel : Panel
     #endregion
 
     #region Private
-    private void Awake()
-    {
-        InitButtons();
-    }
-
     private void InitButtons()
     {
         m_ButtonList[0].AddAction(Attack);

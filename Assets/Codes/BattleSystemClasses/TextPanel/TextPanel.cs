@@ -17,6 +17,25 @@ public class TextPanel : Panel
     #endregion
 
     #region Interface
+    public static TextPanel prefab
+    {
+        get
+        {
+            if (m_Prefab == null)
+            {
+                m_Prefab = Resources.Load<TextPanel>("Prefabs/Panels/TextPanel");
+            }
+            return m_Prefab;
+        }
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        m_Text = GetComponentInChildren<Text>();
+    }
+
     public void AddButtonAction(PanelButtonActionHandler p_Action)
     {
         m_ButtonAction += p_Action;
@@ -32,18 +51,6 @@ public class TextPanel : Panel
         if (m_ButtonAction != null)
         {
             m_ButtonAction();
-        }
-    }
-
-    public static TextPanel prefab
-    {
-        get
-        {
-            if (m_Prefab == null)
-            {
-                m_Prefab = Resources.Load<TextPanel>("Prefabs/Panels/TextPanel");
-            }
-            return m_Prefab;
         }
     }
 
@@ -79,11 +86,6 @@ public class TextPanel : Panel
     #endregion
 
     #region Private
-    private void Awake()
-    {
-        m_Text = GetComponentInChildren<Text>();
-    }
-
     private void Start()
     {
         AddPushAction(ShowText);
