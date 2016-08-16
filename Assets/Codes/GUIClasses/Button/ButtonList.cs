@@ -94,6 +94,11 @@ public class ButtonList : MonoBehaviour
         m_ButtonsList.Add(p_Button);
     }
 
+    public void InsertButton(PanelButton p_Button)
+    {
+        m_ButtonsList.Add(p_Button);
+    }
+
     public void RemoveButton(int p_Index)
     {
         PanelButton l_DeletedButton = m_ButtonsList[p_Index];
@@ -126,6 +131,11 @@ public class ButtonList : MonoBehaviour
 
     public void UpdateKey()
     {
+        if (!isActive)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             SelectMoveUp();

@@ -18,7 +18,7 @@ public class MoveTransition : BaseTransition
     private IEnumerator Showing()
     {
         m_IsMoving = true;
-        m_PanelTransform.localPosition = new Vector3(1500.0f, 0.0f, 0.0f);
+        m_PanelTransform.localPosition = new Vector3(1500.0f, m_PanelTransform.localPosition.y, 0.0f);
         m_PanelTransform.localScale = Vector3.one;
         Vector3 l_Position = m_PanelTransform.localPosition;
 
@@ -28,7 +28,7 @@ public class MoveTransition : BaseTransition
             m_PanelTransform.localPosition = l_Position;
             yield return new WaitForEndOfFrame();
         }
-        m_PanelTransform.localPosition = Vector3.zero;
+        m_PanelTransform.localPosition = new Vector3(0.0f, m_PanelTransform.localPosition.y, 0.0f);
         m_IsMoving = false;
 
         EndShowing();
@@ -46,7 +46,7 @@ public class MoveTransition : BaseTransition
         }
 
         m_IsMoving = false;
-        m_PanelTransform.localPosition = new Vector3(-1180.0f, 0.0f, 0.0f);
+        m_PanelTransform.localPosition = new Vector3(-1180.0f, m_PanelTransform.localPosition.y, 0.0f);
 
         EndHiding();
     }

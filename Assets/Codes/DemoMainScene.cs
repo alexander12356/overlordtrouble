@@ -13,6 +13,7 @@ public class DemoMainScene : MonoBehaviour
         m_ButtonList[1].AddAction(StartMap);
         m_ButtonList[2].AddAction(StartEncyclopedia);
         m_ButtonList[3].AddAction(StartProfile);
+        m_ButtonList[4].AddAction(StartImprove);
     }
 
     private void Update()
@@ -38,5 +39,10 @@ public class DemoMainScene : MonoBehaviour
     private void StartProfile()
     {
         SceneManager.LoadScene("Profile");
+    }
+
+    private void StartImprove()
+    {
+        SceneManager.LoadScene("Improve");
     }
 }

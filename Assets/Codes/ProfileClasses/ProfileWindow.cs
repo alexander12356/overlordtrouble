@@ -34,6 +34,7 @@ public class ProfileWindow : MonoBehaviour
     {
         m_ProfileButtonList = GetComponent<ButtonList>();
         m_ProfileButtonList[0].AddAction(ActiveStatsPanel);
+        m_ProfileButtonList[1].AddAction(StartImprove);
         m_ProfileButtonList[2].AddAction(ActiveSpecialListPanel);
 
         m_SpecialsButtonList.isActive = false;
@@ -161,6 +162,11 @@ public class ProfileWindow : MonoBehaviour
             m_SelectedSpecialCount--;
             m_SpecialStatus.Selected(false);
         }
+    }
+
+    private void StartImprove()
+    {
+        SceneManager.LoadScene("Improve");
     }
     #endregion
 }
