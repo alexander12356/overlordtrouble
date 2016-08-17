@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Improve : MonoBehaviour
+public class ImproveItem : MonoBehaviour
 {
     #region Variables
     private PanelButton m_PanelButton;

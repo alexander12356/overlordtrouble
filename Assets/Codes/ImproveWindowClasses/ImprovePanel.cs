@@ -4,14 +4,14 @@ using UnityEngine.SceneManagement;
 
 using System.Collections.Generic;
 
-public class ImproveListPanel : Panel
+public class ImprovePanel : Panel
 {
     #region Variables
     private ButtonList m_ImproveButtonList = null;
     private Animator   m_Animator = null;
 
     [SerializeField]
-    private List<Improve> m_ImproveList = null;
+    private List<ImproveItem> m_ImproveList = null;
 
     [SerializeField]
     private Image m_ImproveCompleteImage = null;
@@ -27,6 +27,7 @@ public class ImproveListPanel : Panel
         InitButtonActions();
 
         PanelManager.GetInstance().ShowPanel(this);
+        ImproveDataBase.GetInstance();
     }
 
     public override void UpdatePanel()
@@ -37,7 +38,7 @@ public class ImproveListPanel : Panel
 
         if (Input.GetKey(KeyCode.Escape))
         {
-            SceneManager.LoadScene("DemoMainScene");
+            ReturnToMainMenu();
         }
     }
 
@@ -45,7 +46,18 @@ public class ImproveListPanel : Panel
     {
         TextPanel m_TextPanel = Instantiate(TextPanel.prefab);
 
-        m_TextPanel.SetText("Вы выбрали класс " + m_ImproveList[m_ImproveButtonList.currentButtonId].improveId);
+        string l_ImproveName = m_ImproveList[m_ImproveButtonList.currentButtonId].improveId;
+        string l_ImproveSkillsText = ", вы получили следующие приемы:\n";
+        ImproveData l_ImproveData = ImproveDataBase.GetInstance().GetImprove(l_ImproveName);
+        l_ImproveSkillsText += l_ImproveData.skills[0].id;
+        for (int i = 1; i < l_ImproveData.skills.Count; i++)
+        {
+            l_ImproveSkillsText += ", " + l_ImproveData.skills[i].id;
+        }
+
+        string l_Text = "Вы выбрали класс " + l_ImproveName + l_ImproveSkillsText;
+        m_TextPanel.SetText(l_Text);
+        m_TextPanel.AddPopAction(ReturnToMainMenu);
 
         PanelManager.GetInstance().ShowPanel(m_TextPanel, true);
         Vector3 m_TextPanelLocalPosition = m_TextPanel.myTransform.localPosition;
@@ -61,8 +73,18 @@ public class ImproveListPanel : Panel
         for (int i = 0; i < m_ImproveList.Count; i++)
         {
             m_ImproveButtonList.InsertButton(m_ImproveList[i].improveButton);
-            m_ImproveButtonList[i].AddAction(ShowYesNoPanel);
+
+            if (i != m_ImproveList.Count - 1)
+            {
+                m_ImproveButtonList[i].AddAction(ShowYesNoPanel);
+            }
+            else
+            {
+                m_ImproveButtonList[i].AddAction(ReturnToMainMenu);
+            }
+            
         }
+        
     }
 
     private void ShowYesNoPanel()
@@ -89,8 +111,14 @@ public class ImproveListPanel : Panel
 
     private void ShowProfile()
     {
-        m_ImproveCompleteImage.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_ImproveList[m_ImproveButtonList.currentButtonId].improveId + "/Profile");
+        string l_ImproveId = m_ImproveList[m_ImproveButtonList.currentButtonId].improveId;
+        m_ImproveCompleteImage.sprite = Resources.Load<Sprite>(ImproveDataBase.GetInstance().GetImprove(l_ImproveId).profileImagePath);
         m_Animator.SetTrigger("Improve");
+    }
+
+    private void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("DemoMainScene");
     }
     #endregion
 }
