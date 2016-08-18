@@ -27,12 +27,11 @@ public class DialogManager : MonoBehaviour
         l_DialogWindow.gameObject.SetActive(true);
         l_DialogWindow.SetDialog(DialogSystem.GetInstance().GetDialog(p_DialogId));
         l_DialogWindow.Show();
-        Debug.Log("Dialog started!");
     }
 
     public void EndDialog()
     {
         m_JourneyPlayer.DisactiveButtonAction();
-        Debug.Log("DialogEnded");
+        JourneySystem.GetInstance().SetControl(ControlType.Player);
     }
 }

@@ -54,6 +54,11 @@ public class PanelManager : MonoBehaviour
 
     private void Update()
     {
+        if (m_PanelStack.Count == 0)
+        {
+            return;
+        }
+
         Panel m_Panel = m_PanelStack.Peek();
         
         if (!m_Panel.isShowed && !m_Panel.moving)

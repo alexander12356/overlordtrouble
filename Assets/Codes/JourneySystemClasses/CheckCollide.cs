@@ -10,7 +10,7 @@ public class CheckCollide : MonoBehaviour
     #endregion
 
     #region Interface
-    public void SetCollideEnterAction(CheckCollideHandler p_Action)
+    public void AddCollideEnterAction(CheckCollideHandler p_Action)
     {
         m_EnterAction += p_Action;
     }
@@ -26,7 +26,7 @@ public class CheckCollide : MonoBehaviour
         }
     }
 
-    public void SetCollideExitAction(CheckCollideHandler p_Action)
+    public void AddCollideExitAction(CheckCollideHandler p_Action)
     {
         m_ExitAction += p_Action;
     }
