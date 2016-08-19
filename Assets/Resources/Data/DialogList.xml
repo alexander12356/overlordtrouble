@@ -16,4 +16,8 @@
 		<Text id="2" avatarId="Bokalisk">это пока не сделано! :3</Text>
 		<Text id="3" avatarId="Bokalisk">Кудах-кудах!</Text>
 	</Dialog>
+  <Dialog id="Store" avatarPath="Sprites/Creations/Store/Avatar">
+    <Text id="0" avatarId="Store">Все мои товары отличаются большой прочностью и принадлежали храбрым воинам, которые вызвали в бой дракона</Text>
+    <Text id="1" avatarId="Store">Никто из них не выжил, в отличии от их экипировки</Text>
+  </Dialog>
 </DialogList>

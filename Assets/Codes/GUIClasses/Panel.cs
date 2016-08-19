@@ -105,8 +105,8 @@ public class Panel : MonoBehaviour
 
     public void Close()
     {
-        Hide();
         m_Close = true;
+        Hide();
     }
 
     public virtual void UpdatePanel()

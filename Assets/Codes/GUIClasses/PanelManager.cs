@@ -34,6 +34,7 @@ public class PanelManager : MonoBehaviour
         }
         p_NewPanel.myTransform.SetParent(transform);
         p_NewPanel.myTransform.localPosition = Vector3.zero;
+        p_NewPanel.myTransform.localScale = Vector3.one;
         p_NewPanel.gameObject.SetActive(false);
 
         m_PanelStack.Push(p_NewPanel);

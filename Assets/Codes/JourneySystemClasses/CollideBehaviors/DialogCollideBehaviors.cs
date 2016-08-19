@@ -31,6 +31,7 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
         base.ExitAction(p_JourneyPlayer);
 
         p_JourneyPlayer.RemoveActiveButtonAction(StartDialog);
+        p_JourneyPlayer.RemoveDisactiveButtonAction(EndDialog);
 
         m_ActiveButtonImage.enabled = false;
     }

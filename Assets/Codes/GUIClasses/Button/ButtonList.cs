@@ -13,6 +13,7 @@ public class ButtonList : MonoBehaviour
     private int m_PrevButtonId = 0;
 
     private event KeyArrowActionHandler KeyArrowActioneEvent;
+    private event PanelButtonActionHandler m_CancelAction;
     private bool m_IsActive = true;
     #endregion
 
@@ -65,6 +66,16 @@ public class ButtonList : MonoBehaviour
         KeyArrowActioneEvent -= p_Action;
     }
 
+    public void AddCancelAction(PanelButtonActionHandler p_Action)
+    {
+        m_CancelAction += p_Action;
+    }
+
+    public void RemoveCancelAction(PanelButtonActionHandler p_Action)
+    {
+        m_CancelAction -= p_Action;
+    }
+
     public void SelectMoveUp()
     {
         m_PrevButtonId = m_CurrentButtonId;
@@ -79,11 +90,6 @@ public class ButtonList : MonoBehaviour
         m_CurrentButtonId++;
 
         CheckSelectPosition();
-    }
-
-    public void Action()
-    {
-        m_ButtonsList[m_CurrentButtonId].RunAction();
     }
 
     public void AddButton(PanelButton p_Button)
@@ -148,9 +154,13 @@ public class ButtonList : MonoBehaviour
             KeyArrowAction();
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp(KeyCode.Z))
         {
-            Action();
+            ConfirmAction();
+        }
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            CancelAction();
         }
     }
     #endregion
@@ -202,6 +212,19 @@ public class ButtonList : MonoBehaviour
         {
             m_ButtonsList[i].transform.localPosition = new Vector3(220, -70.0f - i * 50, 0.0f);
             m_ButtonsList[i].transform.localScale = Vector3.one;
+        }
+    }
+
+    private void ConfirmAction()
+    {
+        m_ButtonsList[m_CurrentButtonId].RunAction();
+    }
+
+    private void CancelAction()
+    {
+        if (m_CancelAction != null)
+        {
+            m_CancelAction();
         }
     }
     #endregion
