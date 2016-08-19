@@ -3,16 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class DialogWindow : MonoBehaviour 
+public class DialogPanel : Panel 
 {
-    private enum State
-    {
-        Opened,
-        Closing,
-        Closed
-    }
-
-    private static DialogWindow m_Prefab;
+    private static DialogPanel m_Prefab;
 
     #region Variables
     private List<string> m_FullText;
@@ -21,37 +14,29 @@ public class DialogWindow : MonoBehaviour
     private int     m_CurrentWord      = 0;
     private int     m_CurrentPhrase    = 0;
     private float   m_ShowingTextSpeed = 0.05f;
-    private State   m_State            = State.Closed;
     private bool    m_IsTextShowing    = false;
 
     [SerializeField]
     private Image m_AvatarImage = null;
-
-    [SerializeField]
-    private Vector3 m_DestPos = Vector3.zero;
-
-    [SerializeField]
-    private Vector3 m_StartPos = Vector3.zero;
-
-    [SerializeField]
-    private float m_ShowSpeed = 0.0f;
     #endregion
 
     #region Interface
-    public static DialogWindow prefab
+    public static DialogPanel prefab
     {
         get
         {
             if (m_Prefab == null)
             {
-                m_Prefab = Resources.Load<DialogWindow>("Prefabs/Windows/DialogWindow");
+                m_Prefab = Resources.Load<DialogPanel>("Prefabs/Windows/DialogPanel");
             }
             return m_Prefab;
         }
     }
 
-    public void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
         m_Text = GetComponentInChildren<Text>();
     }
 
@@ -61,31 +46,23 @@ public class DialogWindow : MonoBehaviour
         m_AvatarImage.sprite = Resources.Load<Sprite>(p_Dialog.avatarImagePath);
     }
 
-    public void Update()
+    public override void UpdatePanel()
     {
-        if (m_State == State.Closed || m_State == State.Closing)
-        {
-            return;
-        }
+        base.UpdatePanel();
 
         if (Input.GetKeyUp(KeyCode.Z))
         {
             NextPhrase();
         }
     }
-
-    public void Show()
-    {
-        StartCoroutine(Showing());
-    }
-
-    public void Close()
-    {
-        StartCoroutine(Closing());
-    }
     #endregion
 
     #region Private
+    private void Start()
+    {
+        AddPushAction(ShowText);
+    }
+
     private void ShowText()
     {
         StartCoroutine(ShowingText());
@@ -119,39 +96,14 @@ public class DialogWindow : MonoBehaviour
             m_CurrentPhrase++;
             if (m_CurrentPhrase >= m_FullText.Count)
             {
-                Close();
+                PanelManager.GetInstance().ClosePanel(this);
+                DialogManager.GetInstance().EndDialog();
             }
             else
             {
                 ShowText();
             }
         }
-    }
-
-    private IEnumerator Showing()
-    {
-        while ((transform.localPosition - m_DestPos).sqrMagnitude > 0.05f)
-        {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, m_DestPos, m_ShowSpeed * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
-        }
-        m_State = State.Opened;
-
-        ShowText();
-    }
-
-    private IEnumerator Closing()
-    {
-        m_State = State.Closing;
-        while ((transform.localPosition - m_StartPos).sqrMagnitude > 0.05f)
-        {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, m_StartPos, m_ShowSpeed * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
-        }
-        m_State = State.Closed;
-
-        DialogManager.GetInstance().EndDialog();
-        Destroy(gameObject);
     }
     #endregion
 }

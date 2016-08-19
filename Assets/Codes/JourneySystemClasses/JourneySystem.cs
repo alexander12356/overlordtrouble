@@ -26,6 +26,7 @@ public class JourneySystem : MonoBehaviour
 	public void Awake ()
     {
         m_Instance = this;
+        SetControl(ControlType.Player);
     }
 
     public void StartDialog(string p_DialogId)
@@ -40,9 +41,11 @@ public class JourneySystem : MonoBehaviour
         switch (p_Type)
         {
             case ControlType.Panel:
+                DialogManager.GetInstance().enabled = true;
                 m_Player.StopLogic();
                 break;
             case ControlType.Player:
+                DialogManager.GetInstance().enabled = false;
                 m_Player.StartLogic();
                 break;
         }

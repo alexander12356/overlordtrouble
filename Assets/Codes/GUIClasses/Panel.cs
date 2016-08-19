@@ -95,14 +95,12 @@ public class Panel : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
-        //StartCoroutine(Showing());
         m_BaseTransition.Show();
     }
 
     public void Hide()
     {
         m_BaseTransition.Hide();
-        //StartCoroutine(Hiding());
     }
 
     public void Close()

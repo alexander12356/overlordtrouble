@@ -20,13 +20,11 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialog(string p_DialogId)
     {
-        DialogWindow l_DialogWindow = Instantiate(DialogWindow.prefab);
-        l_DialogWindow.transform.SetParent(transform);
-        l_DialogWindow.transform.localScale = Vector3.one;
+        DialogPanel l_DialogWindow = Instantiate(DialogPanel.prefab);
+        l_DialogWindow.SetDialog(DialogDataBase.GetInstance().GetDialog(p_DialogId));
 
-        l_DialogWindow.gameObject.SetActive(true);
-        l_DialogWindow.SetDialog(DialogSystem.GetInstance().GetDialog(p_DialogId));
-        l_DialogWindow.Show();
+        PanelManager.GetInstance().ShowPanel(l_DialogWindow, true);
+        l_DialogWindow.myTransform.localPosition = new Vector3(0.0f, -457.0f, 0);
     }
 
     public void EndDialog()

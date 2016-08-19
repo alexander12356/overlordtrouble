@@ -9,13 +9,13 @@ public struct Dialog
     public List<string> phrases;
 }
 
-public class DialogSystem : Singleton<DialogSystem>
+public class DialogDataBase : Singleton<DialogDataBase>
 {
     private string m_PathFile = "Data/DialogList";
     private bool isDialogStarting = false;
     private Dictionary<string, Dialog> m_DialogList = new Dictionary<string, Dialog>();
 
-    public DialogSystem ()
+    public DialogDataBase ()
     {
         Parse();
     }
