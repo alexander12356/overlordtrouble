@@ -8,13 +8,7 @@ public class DialogPanel : Panel
     private static DialogPanel m_Prefab;
 
     #region Variables
-    private List<string> m_FullText;
-
-    private Text    m_Text;
-    private int     m_CurrentWord      = 0;
-    private int     m_CurrentPhrase    = 0;
-    private float   m_ShowingTextSpeed = 0.05f;
-    private bool    m_IsTextShowing    = false;
+    private TextBox m_TextBox;
 
     [SerializeField]
     private Image m_AvatarImage = null;
@@ -37,12 +31,12 @@ public class DialogPanel : Panel
     {
         base.Awake();
 
-        m_Text = GetComponentInChildren<Text>();
+        m_TextBox = GetComponentInChildren<TextBox>();
     }
 
     public void SetDialog(Dialog p_Dialog)
     {
-        m_FullText = p_Dialog.phrases;
+        m_TextBox.SetText(p_Dialog.phrases);
         m_AvatarImage.sprite = Resources.Load<Sprite>(p_Dialog.avatarImagePath);
     }
 
@@ -50,60 +44,21 @@ public class DialogPanel : Panel
     {
         base.UpdatePanel();
 
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-            NextPhrase();
-        }
+        m_TextBox.UpdateTextBox();
     }
     #endregion
 
     #region Private
     private void Start()
     {
-        AddPushAction(ShowText);
+        AddPushAction(m_TextBox.ShowText);
+        m_TextBox.AddEndAction(DialogClose);
     }
 
-    private void ShowText()
+    private void DialogClose()
     {
-        StartCoroutine(ShowingText());
-    }
-
-    private IEnumerator ShowingText()
-    {
-        m_Text.text = "";
-        m_IsTextShowing = true;
-        while (m_CurrentWord < m_FullText[m_CurrentPhrase].Length)
-        {
-            m_Text.text += m_FullText[m_CurrentPhrase][m_CurrentWord];
-            m_CurrentWord++;
-            yield return new WaitForSeconds(m_ShowingTextSpeed);
-        }
-        m_CurrentWord = 0;
-        m_IsTextShowing = false;
-    }
-
-    private void NextPhrase()
-    {
-        if (m_IsTextShowing == true)
-        {
-            StopAllCoroutines();
-            m_Text.text = m_FullText[m_CurrentPhrase];
-            m_IsTextShowing = false;
-            m_CurrentWord = 0;
-        }
-        else
-        {
-            m_CurrentPhrase++;
-            if (m_CurrentPhrase >= m_FullText.Count)
-            {
-                PanelManager.GetInstance().ClosePanel(this);
-                DialogManager.GetInstance().EndDialog();
-            }
-            else
-            {
-                ShowText();
-            }
-        }
+        PanelManager.GetInstance().ClosePanel(this);
+        DialogManager.GetInstance().EndDialog();
     }
     #endregion
 }
