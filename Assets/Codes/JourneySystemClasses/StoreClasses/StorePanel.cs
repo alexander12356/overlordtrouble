@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class StorePanel : Panel
 {
     #region Variables
     private static StorePanel m_Prefab;
-    private ButtonList m_ButtonList = null;
-    private TextBox    m_TextBox = null;
+    private ButtonList m_ButtonList    = null;
+    private TextBox    m_TextBox       = null;
+    private StoreTab   m_CurrOpenedTab = null;
 
     [SerializeField]
     private ButtonList m_TabButtonsList = null;
 
     [SerializeField]
     private GameObject m_Window = null;
+
+    [SerializeField]
+    private List<StoreTab> m_StoreTabs = null;
     #endregion
 
     #region Interface
@@ -27,6 +31,13 @@ public class StorePanel : Panel
             return m_Prefab;
         }
     }
+    public ButtonList tabButtonList
+    {
+        get
+        {
+            return m_TabButtonsList;
+        }
+    }
 
     public override void Awake()
     {
@@ -34,7 +45,7 @@ public class StorePanel : Panel
 
         InitTextBox();
         InitButtonActions();
-        InitTabsButtonActions();
+        InitTabs();
 
         HideButtonList();
         m_TabButtonsList.isActive = false;
@@ -47,6 +58,7 @@ public class StorePanel : Panel
         m_ButtonList.UpdateKey();
         m_TabButtonsList.UpdateKey();
         m_TextBox.UpdateTextBox();
+        m_CurrOpenedTab.itemsButtonList.UpdateKey();
     }
 
     public override void PushAction()
@@ -67,9 +79,21 @@ public class StorePanel : Panel
         m_ButtonList[3].AddAction(CloseStore);
     }
 
-    private void InitTabsButtonActions()
+    private void InitTabs()
     {
         m_TabButtonsList.AddCancelAction(CloseTabs);
+        m_TabButtonsList.AddKeyArrowAction(ShowTab);
+        m_TabButtonsList[0].AddAction(ConfirmTab);
+        m_TabButtonsList[1].AddAction(ConfirmTab);
+        m_TabButtonsList[2].AddAction(ConfirmTab);
+        m_TabButtonsList[3].AddAction(ConfirmTab);
+
+        m_StoreTabs[1].SetItems(StoreDataBase.GetInstance().GetEquipmentItems());
+        m_StoreTabs[2].SetItems(StoreDataBase.GetInstance().GetSingleUseItems());
+        m_StoreTabs[3].SetItems(StoreDataBase.GetInstance().GetMultipleUseItems());
+
+        m_CurrOpenedTab = m_StoreTabs[0];
+        m_CurrOpenedTab.itemsButtonList.isActive = false;
     }
 
     private void InitTextBox()
@@ -135,5 +159,21 @@ public class StorePanel : Panel
     {
         m_ButtonList.isActive = true;
         m_ButtonList.gameObject.SetActive(true);
+    }
+
+    private void ShowTab()
+    {
+        m_CurrOpenedTab.gameObject.SetActive(false);
+        m_StoreTabs[m_TabButtonsList.currentButtonId].gameObject.SetActive(true);
+        m_CurrOpenedTab = m_StoreTabs[m_TabButtonsList.currentButtonId];
+    }
+
+    private void ConfirmTab()
+    {
+        m_CurrOpenedTab.Confirm();
+            
+        
+        m_TabButtonsList.isActive = false;
+        m_TabButtonsList.currentButton.selected = true;
     }
 }

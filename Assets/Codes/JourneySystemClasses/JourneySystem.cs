@@ -23,6 +23,7 @@ public class JourneySystem : MonoBehaviour
 	public void Awake ()
     {
         m_Instance = this;
+        LoadDataBases();
         SetControl(ControlType.Player);
     }
 
@@ -46,5 +47,13 @@ public class JourneySystem : MonoBehaviour
                 m_Player.StartLogic();
                 break;
         }
+    }
+
+    private void LoadDataBases()
+    {
+        SkillDataBase.GetInstance();
+        ImproveDataBase.GetInstance();
+        ItemDataBase.GetInstance();
+        StoreDataBase.GetInstance();
     }
 }

@@ -14,6 +14,8 @@ public class ButtonList : MonoBehaviour
 
     private event KeyArrowActionHandler KeyArrowActioneEvent;
     private event PanelButtonActionHandler m_CancelAction;
+
+    [SerializeField]
     private bool m_IsActive = true;
     #endregion
 
@@ -95,7 +97,7 @@ public class ButtonList : MonoBehaviour
     public void AddButton(PanelButton p_Button)
     {
         p_Button.transform.SetParent(transform);
-        p_Button.transform.localPosition = new Vector3(220.0f, -70.0f - m_ButtonsList.Count * 50, 0.0f);
+        p_Button.transform.localPosition = new Vector3(0.0f, -70.0f - m_ButtonsList.Count * 50, 0.0f);
         p_Button.transform.localScale = Vector3.one;
         m_ButtonsList.Add(p_Button);
     }
@@ -124,7 +126,7 @@ public class ButtonList : MonoBehaviour
     {
         for (int i = 0; i < m_ButtonsList.Count; i++)
         {
-            if (((PanelButton)m_ButtonsList[i]).title == p_Id)
+            if ((m_ButtonsList[i]).title == p_Id)
             {
                 PanelButton l_PanelButton = m_ButtonsList[i];
                 m_ButtonsList.RemoveAt(i);
