@@ -157,10 +157,12 @@ public class ButtonList : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp(KeyCode.Z))
         {
             ConfirmAction();
+            Input.ResetInputAxes();
         }
-        if (Input.GetKeyUp(KeyCode.X))
+        if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Backspace))
         {
             CancelAction();
+            Input.ResetInputAxes();
         }
     }
     #endregion

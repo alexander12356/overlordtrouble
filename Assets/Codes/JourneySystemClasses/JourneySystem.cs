@@ -15,9 +15,6 @@ public class JourneySystem : MonoBehaviour
     [SerializeField]
     private JourneyPlayer m_Player = null;
 
-    [SerializeField]
-    private PanelManager m_PanelManager = null;
-
     public static JourneySystem GetInstance()
     {
         return m_Instance;
@@ -41,11 +38,11 @@ public class JourneySystem : MonoBehaviour
         switch (p_Type)
         {
             case ControlType.Panel:
-                DialogManager.GetInstance().enabled = true;
+                PanelManager.GetInstance().enabled = true;
                 m_Player.StopLogic();
                 break;
             case ControlType.Player:
-                DialogManager.GetInstance().enabled = false;
+                PanelManager.GetInstance().enabled = false;
                 m_Player.StartLogic();
                 break;
         }

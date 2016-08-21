@@ -13,9 +13,10 @@ public class TextBox : MonoBehaviour
     private int  m_CurrentWord;
     private int  m_CurrentPhrase;
     private PanelActionHandler m_EndAction;
+    private bool m_Active = true;
 
     [SerializeField]
-    private float m_ShowingTextSpeed = 0.05f;
+    private float m_ShowingTextSpeed = 0.5f;
     #endregion
 
     #region Interface
@@ -27,18 +28,29 @@ public class TextBox : MonoBehaviour
     public void SetText(List<string> p_Text)
     {
         m_FullText = p_Text;
+
+        m_Text.text     = "";
+        m_CurrentPhrase = 0;
+        m_CurrentWord   = 0;
     }
 
     public void UpdateTextBox()
     {
+        if (!m_Active)
+        {
+            return;
+        }
+
         if (Input.GetKeyUp(KeyCode.Z))
         {
             NextPhrase();
+            Input.ResetInputAxes();
         }
     }
 
     public void ShowText()
     {
+        StopAllCoroutines();
         StartCoroutine(ShowingText());
     }
 
@@ -50,6 +62,11 @@ public class TextBox : MonoBehaviour
     public void RemoveEndAction(PanelActionHandler p_Action)
     {
         m_EndAction -= p_Action;
+    }
+
+    public void Activate(bool p_Value)
+    {
+        m_Active = p_Value;
     }
     #endregion
 

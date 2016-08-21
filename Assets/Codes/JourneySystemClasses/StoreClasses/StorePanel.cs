@@ -6,6 +6,7 @@ public class StorePanel : Panel
     #region Variables
     private static StorePanel m_Prefab;
     private ButtonList m_ButtonList = null;
+    private TextBox    m_TextBox = null;
 
     [SerializeField]
     private ButtonList m_TabButtonsList = null;
@@ -30,10 +31,12 @@ public class StorePanel : Panel
     public override void Awake()
     {
         base.Awake();
-        
+
+        InitTextBox();
         InitButtonActions();
         InitTabsButtonActions();
 
+        HideButtonList();
         m_TabButtonsList.isActive = false;
     }
 
@@ -43,8 +46,15 @@ public class StorePanel : Panel
 
         m_ButtonList.UpdateKey();
         m_TabButtonsList.UpdateKey();
+        m_TextBox.UpdateTextBox();
     }
 
+    public override void PushAction()
+    {
+        base.PushAction();
+
+        StartWelcomeDialog();
+    }
     #endregion
 
     private void InitButtonActions()
@@ -53,13 +63,19 @@ public class StorePanel : Panel
 
         m_ButtonList[0].AddAction(OpenTabs);
         m_ButtonList[1].AddAction(OpenTabs);
-        //m_ButtonList[2].AddAction(StartDialog);
+        m_ButtonList[2].AddAction(StartDialog);
         m_ButtonList[3].AddAction(CloseStore);
     }
 
     private void InitTabsButtonActions()
     {
         m_TabButtonsList.AddCancelAction(CloseTabs);
+    }
+
+    private void InitTextBox()
+    {
+        m_TextBox = GetComponentInChildren<TextBox>();
+        m_TextBox.Activate(false);
     }
 
     private void CloseStore()
@@ -83,10 +99,41 @@ public class StorePanel : Panel
 
     private void StartDialog()
     {
-        DialogPanel l_DialogPanel = Instantiate(DialogPanel.prefab);
-        l_DialogPanel.SetDialog(DialogDataBase.GetInstance().GetDialog("Store"));
+        HideButtonList();
 
-        PanelManager.GetInstance().ShowPanel(l_DialogPanel);
-        l_DialogPanel.myTransform.localPosition = new Vector3();
+        m_TextBox.Activate(true);
+        m_TextBox.SetText(DialogDataBase.GetInstance().GetDialog("StoreDialog").phrases);
+        m_TextBox.ShowText();
+
+        m_TextBox.AddEndAction(StartWelcomeDialog);
+    }
+
+    private void StartWelcomeDialog()
+    {
+        ShowButtonList();
+
+        m_TextBox.Activate(true);
+        m_TextBox.SetText(DialogDataBase.GetInstance().GetDialog("StoreWelcome").phrases);
+        m_TextBox.ShowText();
+
+        m_TextBox.AddEndAction(DisactiveTextBox);
+    }
+
+    private void DisactiveTextBox()
+    {
+        m_TextBox.Activate(false);
+        m_TextBox.RemoveEndAction(DisactiveTextBox);
+    }
+    
+    private void HideButtonList()
+    {
+        m_ButtonList.isActive = false;
+        m_ButtonList.gameObject.SetActive(false);
+    }
+
+    private void ShowButtonList()
+    {
+        m_ButtonList.isActive = true;
+        m_ButtonList.gameObject.SetActive(true);
     }
 }
