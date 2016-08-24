@@ -1,0 +1,38 @@
+{
+	"Strike" :
+	{
+		"Attack" : 3.5,
+		"Mana" : 5.0,
+		"DescriptionId" : ""
+	},
+	"Defense" :
+	{
+		"Attack" : 3.5,
+		"Mana" : 5.0,
+		"DescriptionId" : ""
+	},
+	"TailStrike" :
+	{
+		"Attack" : 3.5,
+		"Mana" : 5.0,
+		"DescriptionId" : ""
+	},
+	"ShellDefense" :
+	{
+		"Attack" : 3.5,
+		"Mana" : 5.0,
+		"DescriptionId" : ""
+	},
+	"BlobeStrike" :
+	{
+		"Attack" : 3.5,
+		"Mana" : 5.0,
+		"DescriptionId" : ""
+	},
+	"HealingWater" :
+	{
+		"Attack" : 3.5,
+		"Mana" : 5.0,
+		"DescriptionId" : ""
+	}
+}

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0"?>
+<DialogList>
+	<Dialog id="WalkingNpc" avatarPath="Sprites/Creations/Npc/Avatar">
+		<Text id="0" avatarId="NPC1">Привет! ...</Text>
+		<Text id="1" avatarId="NPC1">Я тут хожу ...</Text>
+		<Text id="2" avatarId="NPC1">никого не трогаю! Круто правда? :)</Text>
+	</Dialog>
+	<Dialog id="StayNpc" avatarPath="Sprites/Creations/Npc/Avatar">
+		<Text id="0" avatarId="NPC1">Привет! ...</Text>
+		<Text id="1" avatarId="NPC1">Я тут стою, верчусь и  ...</Text>
+		<Text id="2" avatarId="NPC1">никого не трогаю! Круто правда? :)</Text>
+	</Dialog>
+	<Dialog id="Bokalisk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
+		<Text id="0" avatarId="Bokalisk">Кудах-кудах! ...</Text>
+		<Text id="1" avatarId="Bokalisk">Сейчас мы должны сразиться но ...</Text>
+		<Text id="2" avatarId="Bokalisk">это пока не сделано! :3</Text>
+		<Text id="3" avatarId="Bokalisk">Кудах-кудах!</Text>
+	</Dialog>
+  <Dialog id="StoreWelcome" avatarPath="Sprites/Creations/Store/Avatar">
+    <Text id="0">Добро пожаловать в мой скромный магазинчик. Хотите ли произвести покупку?</Text>
+  </Dialog>
+  <Dialog id="StoreDialog" avatarPath="Sprites/Creations/Store/Avatar">
+    <Text id="0" avatarId="Store">Все мои товары отличаются большой прочностью и принадлежали храбрым воинам, которые вызвали в бой дракона</Text>
+    <Text id="1" avatarId="Store">Никто из них не выжил, в отличии от их экипировки</Text>
+  </Dialog>
+</DialogList>

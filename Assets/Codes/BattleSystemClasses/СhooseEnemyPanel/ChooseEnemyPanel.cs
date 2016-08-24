@@ -20,7 +20,8 @@ public class ChooseEnemyPanel : Panel
 
     private static ChooseEnemyPanel m_Prefab = null;
     private Enemy m_ChoosedEnemy = null;
-    private PanelActionHandler m_ChoosedAction = null;
+    private PanelActionHandler m_ConfirmAction = null;
+    private PanelActionHandler m_CancelAction = null;
     private ButtonListType m_CurrentButtonListType = ButtonListType.EnemyList;
     #endregion
 
@@ -39,6 +40,18 @@ public class ChooseEnemyPanel : Panel
     public Enemy choosedEnemy
     {
         get { return m_ChoosedEnemy;  }
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        InitEnemyList();
+        m_ConfirmButtonList.isActive = false;
+        m_ConfirmButtonList[0].AddAction(Confirm);
+        m_ConfirmButtonList[1].AddAction(Cancel);
+
+        m_EnemyButtonList.AddKeyArrowAction(SelectEnemyAvatar);
     }
 
     public override void UpdatePanel()
@@ -74,28 +87,27 @@ public class ChooseEnemyPanel : Panel
 
     public void AddChoosedAction(PanelActionHandler p_Action)
     {
-        m_ChoosedAction += p_Action;
+        m_ConfirmAction += p_Action;
     }
 
     public void RemoveChoosedAction(PanelActionHandler p_Action)
     {
-        m_ChoosedAction -= p_Action;
+        m_ConfirmAction -= p_Action;
     }
 
-    
+    public void AddCancelAction(PanelActionHandler p_Action)
+    {
+        m_CancelAction += p_Action;
+    }
+
+    public void RemoveCancelAction(PanelActionHandler p_Action)
+    {
+        m_CancelAction -= p_Action;
+    }
+
     #endregion
 
     #region Private
-    private void Awake()
-    {
-        InitEnemyList();
-        m_ConfirmButtonList.isActive = false;
-        m_ConfirmButtonList[0].AddAction(Confirm);
-        m_ConfirmButtonList[1].AddAction(Cancel);
-
-        m_EnemyButtonList.AddKeyArrowAction(SelectEnemyAvatar);
-    }
-
     private void InitEnemyList()
     {
         m_EnemyList = EnemyManager.GetInstance().GetEnemy();
@@ -142,21 +154,30 @@ public class ChooseEnemyPanel : Panel
         }
         else
         {
+            CancelAction();
             PanelManager.GetInstance().ClosePanel(this);
         }
     }
 
     private void ChoosedAction()
     {
-        if (m_ChoosedAction != null)
+        if (m_ConfirmAction != null)
         {
-            m_ChoosedAction();
+            m_ConfirmAction();
         }
     }
 
     private void Confirm()
     {
         ChoosedAction();
+    }
+
+    private void CancelAction()
+    {
+        if (m_CancelAction != null)
+        {
+            m_CancelAction();
+        }
     }
     #endregion
 }

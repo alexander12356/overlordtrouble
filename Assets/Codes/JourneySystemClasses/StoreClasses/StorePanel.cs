@@ -1,0 +1,179 @@
+﻿using UnityEngine;
+using System.Collections.Generic;
+
+public class StorePanel : Panel
+{
+    #region Variables
+    private static StorePanel m_Prefab;
+    private ButtonList m_ButtonList    = null;
+    private TextBox    m_TextBox       = null;
+    private StoreTab   m_CurrOpenedTab = null;
+
+    [SerializeField]
+    private ButtonList m_TabButtonsList = null;
+
+    [SerializeField]
+    private GameObject m_Window = null;
+
+    [SerializeField]
+    private List<StoreTab> m_StoreTabs = null;
+    #endregion
+
+    #region Interface
+    public static StorePanel prefab
+    {
+        get
+        {
+            if (m_Prefab == null)
+            {
+                m_Prefab = Resources.Load<StorePanel>("Prefabs/Panels/StorePanel");
+            }
+            return m_Prefab;
+        }
+    }
+    public ButtonList tabButtonList
+    {
+        get
+        {
+            return m_TabButtonsList;
+        }
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        InitTextBox();
+        InitButtonActions();
+        InitTabs();
+
+        HideButtonList();
+        m_TabButtonsList.isActive = false;
+    }
+
+    public override void UpdatePanel()
+    {
+        base.UpdatePanel();
+
+        m_ButtonList.UpdateKey();
+        m_TabButtonsList.UpdateKey();
+        m_TextBox.UpdateTextBox();
+        m_CurrOpenedTab.itemsButtonList.UpdateKey();
+    }
+
+    public override void PushAction()
+    {
+        base.PushAction();
+
+        StartWelcomeDialog();
+    }
+    #endregion
+
+    private void InitButtonActions()
+    {
+        m_ButtonList = GetComponentInChildren<ButtonList>();
+
+        m_ButtonList[0].AddAction(OpenTabs);
+        m_ButtonList[1].AddAction(OpenTabs);
+        m_ButtonList[2].AddAction(StartDialog);
+        m_ButtonList[3].AddAction(CloseStore);
+    }
+
+    private void InitTabs()
+    {
+        m_TabButtonsList.AddCancelAction(CloseTabs);
+        m_TabButtonsList.AddKeyArrowAction(ShowTab);
+        m_TabButtonsList[0].AddAction(ConfirmTab);
+        m_TabButtonsList[1].AddAction(ConfirmTab);
+        m_TabButtonsList[2].AddAction(ConfirmTab);
+        m_TabButtonsList[3].AddAction(ConfirmTab);
+
+        m_StoreTabs[1].SetItems(StoreDataBase.GetInstance().GetEquipmentItems());
+        m_StoreTabs[2].SetItems(StoreDataBase.GetInstance().GetSingleUseItems());
+        m_StoreTabs[3].SetItems(StoreDataBase.GetInstance().GetMultipleUseItems());
+
+        m_CurrOpenedTab = m_StoreTabs[0];
+        m_CurrOpenedTab.itemsButtonList.isActive = false;
+    }
+
+    private void InitTextBox()
+    {
+        m_TextBox = GetComponentInChildren<TextBox>();
+        m_TextBox.Activate(false);
+    }
+
+    private void CloseStore()
+    {
+        PanelManager.GetInstance().ClosePanel(this);
+    }
+
+    private void OpenTabs()
+    {
+        m_Window.SetActive(true);
+        m_ButtonList.isActive = false;
+        m_TabButtonsList.isActive = true;
+    }
+
+    private void CloseTabs()
+    {
+        m_Window.SetActive(false);
+        m_ButtonList.isActive = true;
+        m_TabButtonsList.isActive = false;
+    }
+
+    private void StartDialog()
+    {
+        HideButtonList();
+
+        m_TextBox.Activate(true);
+        m_TextBox.SetText(DialogDataBase.GetInstance().GetDialog("StoreDialog").phrases);
+        m_TextBox.ShowText();
+
+        m_TextBox.AddEndAction(StartWelcomeDialog);
+    }
+
+    private void StartWelcomeDialog()
+    {
+        ShowButtonList();
+
+        m_TextBox.Activate(true);
+        m_TextBox.SetText(DialogDataBase.GetInstance().GetDialog("StoreWelcome").phrases);
+        m_TextBox.ShowText();
+
+        m_TextBox.AddEndAction(DisactiveTextBox);
+    }
+
+    private void DisactiveTextBox()
+    {
+        m_TextBox.Activate(false);
+        m_TextBox.RemoveEndAction(DisactiveTextBox);
+    }
+    
+    private void HideButtonList()
+    {
+        m_ButtonList.isActive = false;
+        m_ButtonList.gameObject.SetActive(false);
+    }
+
+    private void ShowButtonList()
+    {
+        m_ButtonList.isActive = true;
+        m_ButtonList.gameObject.SetActive(true);
+    }
+
+    private void ShowTab()
+    {
+        m_CurrOpenedTab.gameObject.SetActive(false);
+        m_StoreTabs[m_TabButtonsList.currentButtonId].gameObject.SetActive(true);
+        m_CurrOpenedTab = m_StoreTabs[m_TabButtonsList.currentButtonId];
+    }
+
+    private void ConfirmTab()
+    {
+        m_CurrOpenedTab.Confirm();
+            
+        
+        m_TabButtonsList.isActive = false;
+        m_TabButtonsList.currentButton.selected = true;
+    }
+}

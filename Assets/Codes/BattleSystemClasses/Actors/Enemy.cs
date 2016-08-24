@@ -47,7 +47,7 @@ public class Enemy : Actor
     {
         base.InitStats();
 
-        actorName = "Nyashka";
+        actorName = "Гоповолк";
         health = baseHealth = 40;
         mana = baseMana = 0;
     }
@@ -83,7 +83,7 @@ public class Enemy : Actor
         p_Actor.Damage(l_DamageValue);
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText("Няшка использовал удар и нанес " + l_DamageValue + " урона");
+        l_TextPanel.SetText("Гоповолк использовал удар и нанес " + l_DamageValue + " урона");
         l_TextPanel.AddButtonAction(EndTurn);
         PanelManager.GetInstance().ShowPanel(l_TextPanel);
 

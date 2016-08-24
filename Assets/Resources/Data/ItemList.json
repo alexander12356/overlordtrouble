@@ -1,0 +1,71 @@
+{
+	"SingleUse" : 
+	[
+		{
+			"Id" : "HealthPotion",
+			"Image" : "Sprites/Items/SingleUse/HealthPotion",
+			"Actions":
+			[
+				{
+					"Id" : "AddStatValue",
+					"StatName" : "Health",
+					"Value" : 10
+				}
+			]
+		},
+		{
+			"Id" : "ManaPotion",
+			"Image" : "Sprites/Items/SingleUse/ManaPotion",
+			"Actions" :
+			[
+				{
+					"Id" : "AddStatValue",
+					"StatName" : "Mana",
+					"Value" : 7
+				}				
+			]
+		}
+	],
+	"MultipleUse" : 
+	[
+		{
+			"Id" : "FireBallScroll",
+			"Image" : "Sprites/Items/MultipleUse/FireBallScroll",
+			"Actions" :
+			[
+				{
+					"Id" : "AttackEnemy",
+					"StatName" : "Health",
+					"Value" : 5
+				}
+			]
+		},
+		{
+			"Id" : "AirDefenseScroll",
+			"Image" : "Sprites/Items/MultipleUse/AirDefenseScroll",
+			"Actions" :
+			[
+				{
+					"Id" : "StatBuff",
+					"StatName" : "Armor",
+					"Value" : 2
+				}
+			]
+		}
+	],
+	"Equipment"
+	[
+		{
+			"Id" : "AncientArmor",
+			"Image" : "Sprites/Items/Equipments/AncientArmor",
+			"Actions" : 
+			[
+				{
+					"Id" : "StatBuff",
+					"StatName" : "Armor",
+					"Value" : 3
+				}
+			]
+		}
+	]
+}

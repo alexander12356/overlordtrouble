@@ -40,6 +40,20 @@ public class SpecialSelectPanel : Panel
         }
     }
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        m_ConfirmButtonList.isActive = false;
+        m_AddedSpecialButtonList.isActive = false;
+
+        m_ConfirmButtonList[0].AddAction(Confirm);
+        m_ConfirmButtonList[1].AddAction(ReturnToMain);
+
+        InitSpecialList();
+        InitSpecialButtons();
+    }
+
     public override void UpdatePanel()
     {
         base.UpdatePanel();
@@ -89,24 +103,9 @@ public class SpecialSelectPanel : Panel
     #endregion
 
     #region Private
-    private void Awake()
-    {
-        m_ConfirmButtonList.isActive = false;
-        m_AddedSpecialButtonList.isActive = false;
-
-        m_ConfirmButtonList[0].AddAction(Confirm);
-        m_ConfirmButtonList[1].AddAction(ReturnToMain);
-
-        InitSpecialList();
-        InitSpecialButtons();
-    }
-
     private void ReturnToMain()
     {
-        foreach (Special l_Special in m_AddedSpecialList.Values)
-        {
-            Player.GetInstance().mana += l_Special.mana;
-        }
+        CancelChoose();
 
         PanelManager.GetInstance().ClosePanel(this);
     }
@@ -162,6 +161,7 @@ public class SpecialSelectPanel : Panel
 
         m_ChooseEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
         m_ChooseEnemyPanel.AddChoosedAction(Attack);
+        m_ChooseEnemyPanel.AddCancelAction(CancelChoose);
         PanelManager.GetInstance().ShowPanel(m_ChooseEnemyPanel);
     }
 
@@ -173,6 +173,14 @@ public class SpecialSelectPanel : Panel
         l_SpecialUpgradePanel.SetSpecials(m_AddedSpecialList);
         l_SpecialUpgradePanel.SetEnemy(m_ChooseEnemyPanel.choosedEnemy);
         PanelManager.GetInstance().ShowPanel(l_SpecialUpgradePanel);
+    }
+
+    private void CancelChoose()
+    {
+        foreach (Special l_Special in m_AddedSpecialList.Values)
+        {
+            Player.GetInstance().mana += l_Special.mana;
+        }
     }
     #endregion
 }

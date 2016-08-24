@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainPanel : Panel
 {
@@ -23,6 +24,13 @@ public class MainPanel : Panel
         }
     }
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        InitButtons();
+    }
+
     public override void UpdatePanel()
     {
         base.UpdatePanel();
@@ -37,11 +45,6 @@ public class MainPanel : Panel
     #endregion
 
     #region Private
-    private void Awake()
-    {
-        InitButtons();
-    }
-
     private void InitButtons()
     {
         m_ButtonList[0].AddAction(Attack);
@@ -70,7 +73,7 @@ public class MainPanel : Panel
 
     private void Retreat()
     {
-        Application.Quit();
+        SceneManager.LoadScene("DemoMainScene");
     }
     #endregion
 }
