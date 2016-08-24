@@ -114,11 +114,15 @@ public class ChooseEnemyPanel : Panel
 
         for (int i = 0; i < m_EnemyList.Count; i++)
         {
-            PanelButton l_PanelButton = Instantiate(PanelButton.prefab);
+			PanelButton l_PanelButton = Instantiate (PanelButton.prefab);
             l_PanelButton.title = m_EnemyList[i].actorName + " " + m_EnemyList[i].health + "/" + m_EnemyList[i].baseHealth;
+			l_PanelButton.titleSizeW = 500;
+
             l_PanelButton.AddAction(Choose);
 
-            m_EnemyButtonList.AddButton(l_PanelButton);
+			m_EnemyButtonList.AddButton(l_PanelButton);
+			l_PanelButton.transform.localPosition = new Vector3 (300f, gameObject.transform.localPosition.y - 50f, 0.0f);
+
         }
 
         m_EnemyList[0].selected = true;

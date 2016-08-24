@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class List_one : MonoBehaviour {
 	private GameObject prefabOption;
-	[SerializeField] private GameObject Listed;
+	//[SerializeField] private GameObject Listed;
 	[SerializeField]private GameObject Content;
 	private int Length = 0;
 	private GameObject deltaGO;

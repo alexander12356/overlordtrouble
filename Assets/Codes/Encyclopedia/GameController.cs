@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour {
 	private int CurrentValue_OnDropDown = 0;
 	void Start(){
 		ChangeMonsterFace ();
+
 	}
 
 	void Awake()
@@ -44,11 +45,10 @@ public class GameController : MonoBehaviour {
 			if (StepCounter <= MonstersList.Length && StepCounter > -1) {
 				if (gameObject.GetComponent<GameController> ().MonstersList [StepCounter].GetComponent<MonsterScript> ().Visability == true) {
 					Splash.sprite = MonstersList [StepCounter].GetComponent<MonsterScript> ().monsterSprite;
-					//MainStatsGroup.GetComponent<MainMonsterInfo> ().MonsterID.text = "ID: " + MonstersList [StepCounter].GetComponent<MonsterScript> ().ID;
-					//MainStatsGroup.GetComponent<MainMonsterInfo> ().MonsterName.text = "Monster name:\n " + MonstersList [StepCounter].GetComponent<MonsterScript> ().name;
 					MainStatsGroup.GetComponent<MainMonsterInfo> ().MonsterDescription.text = "Monster description:\n " + MonstersList [StepCounter].GetComponent<MonsterScript> ().description;
 					MainStatsGroup.GetComponent<MainMonsterInfo> ().MonsterElement.text = "Monster Elements:\n ";
-					Elements ();		
+					Elements ();	
+
 				}
 			}
 		}
@@ -86,12 +86,15 @@ public class GameController : MonoBehaviour {
 			StepCounter--;
 			ChangeMonsterFace ();
 		}
-		if (StepCounter > MonstersList.Length) {
-			StepCounter--;
+		ChangeMonsterFace ();
+	}
+
+	void FixedUpdate(){
+		if (StepCounter >= MonstersList.Length) {
+			StepCounter = MonstersList.Length;
 		}
 		if (StepCounter < -1) {
-			StepCounter++;
+			StepCounter = 0;
 		}
-		ChangeMonsterFace ();
 	}
 }

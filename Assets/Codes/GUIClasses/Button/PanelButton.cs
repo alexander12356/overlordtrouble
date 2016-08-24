@@ -10,9 +10,11 @@ public class PanelButton : MonoBehaviour
     private bool  m_Selected;
     private Image m_SelectedImage;
     private Text  m_Text;
+	private RectTransform m_RectTransform = null;
 
     [SerializeField]
     private string m_Title = string.Empty;
+
 
     private static PanelButton m_Prefab = null;
     #endregion
@@ -29,6 +31,37 @@ public class PanelButton : MonoBehaviour
             return m_Prefab;
         }
     }
+
+
+	public float titleSizeH
+	{
+		get 
+		{ 
+			return m_RectTransform.rect.height; 
+		}
+		set
+		{
+			Vector2 l_Vector2 = m_RectTransform.sizeDelta;
+			l_Vector2.y = value;
+			m_RectTransform.sizeDelta = l_Vector2;
+		}
+	}
+
+	public float titleSizeW
+	{
+		get 
+		{ 
+			return m_RectTransform.rect.width; 
+		}
+		set
+		{
+			Vector2 l_Vector2 = m_RectTransform.sizeDelta;
+			l_Vector2.x = value;
+			m_RectTransform.sizeDelta = l_Vector2;
+		}
+	}
+
+
     public string title
     {
         get { return m_Title; }
@@ -97,6 +130,8 @@ public class PanelButton : MonoBehaviour
 
         m_Text = GetComponentInChildren<Text>();
         m_Text.text = m_Title;
+
+		m_RectTransform = GetComponent<RectTransform> ();
     }
 
     private void Select(bool p_Value)
