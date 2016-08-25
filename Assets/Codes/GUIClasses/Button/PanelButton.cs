@@ -7,9 +7,9 @@ public class PanelButton : MonoBehaviour
 {
     #region Variables
     protected event PanelButtonActionHandler m_ConfirmAction;
-    private bool  m_Selected;
-    private Image m_SelectedImage;
-    private Text  m_Text;
+    private bool   m_Selected;
+    private Image  m_SelectedImage;
+    protected Text m_TitleText;
 	private RectTransform m_RectTransform = null;
 
     [SerializeField]
@@ -62,16 +62,16 @@ public class PanelButton : MonoBehaviour
         get { return m_Title; }
         set
         {
-            if (m_Text == null)
+            if (m_TitleText == null)
             {
-                m_Text = GetComponentInChildren<Text>();
+                m_TitleText = GetComponentInChildren<Text>();
             }
-            m_Text.text = m_Title = value;
+            m_TitleText.text = m_Title = value;
         }
     }    
     public Text text
     {
-        get { return m_Text; }
+        get { return m_TitleText; }
     }
     public bool selected
     {
@@ -101,8 +101,8 @@ public class PanelButton : MonoBehaviour
         m_SelectedImage = selectedImage;
         selectedImage.gameObject.SetActive(false);
 
-        m_Text = GetComponentInChildren<Text>();
-        m_Text.text = m_Title;
+        m_TitleText = GetComponentInChildren<Text>();
+        m_TitleText.text = m_Title;
 
 		m_RectTransform = GetComponent<RectTransform> ();
     }

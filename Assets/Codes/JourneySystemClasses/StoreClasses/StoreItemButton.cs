@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class StoreItemButton : PanelButton
+public class StoreItemButton : PanelButtonUpdateKey
 {
     #region Variables
-    private bool m_Active = false;
     private int m_CountToBuy = 0;
     private int m_ItemCost = 0;
     private static StoreItemButton   m_Prefab = null;
-    private event PanelButtonActionHandler m_CancelAction = null;
-    private event PanelActionHandler       m_BuyAction = null;
+    private event PanelActionHandler m_BuyAction = null;
     private const int m_MaxValue = 999;
     private const int m_MinValue = 0;
     private string m_ItemId = string.Empty;
@@ -56,10 +54,6 @@ public class StoreItemButton : PanelButton
             m_ItemCostText.text = m_ItemCost.ToString();
         }
     }
-    public bool isActive
-    {
-        get { return m_Active; }
-    }
     public string itemId
     {
         get { return m_ItemId; }
@@ -77,7 +71,7 @@ public class StoreItemButton : PanelButton
         m_Animator = GetComponent<Animator>();
     }
 
-    public void UpdateKey()
+    public override void UpdateKey()
     {
         if (!m_Active)
         {
@@ -122,21 +116,11 @@ public class StoreItemButton : PanelButton
         }
     }
 
-    public void Activate(bool p_Value)
+    public override void Activate(bool p_Value)
     {
-        m_Active = p_Value;
+        base.Activate(p_Value);
         m_BuyArrows.SetActive(m_Active);
         countToBuy = 0;
-    }
-
-    public void AddCancelAction(PanelButtonActionHandler p_Action)
-    {
-        m_CancelAction += p_Action;
-    }
-
-    public void RemoveCancelAction(PanelButtonActionHandler p_Action)
-    {
-        m_CancelAction -= p_Action;
     }
 
     public void AddBuyAction(PanelActionHandler p_Action)
@@ -154,14 +138,6 @@ public class StoreItemButton : PanelButton
     private void CancelBuy()
     {
         CancelAction();
-    }
-
-    private void CancelAction()
-    {
-        if (m_CancelAction != null)
-        {
-            m_CancelAction();
-        }
     }
     #endregion
 }

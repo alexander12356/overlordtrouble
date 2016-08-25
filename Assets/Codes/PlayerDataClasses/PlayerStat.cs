@@ -32,4 +32,9 @@ public class PlayerStat : Singleton<PlayerStat>
             return 0;
         }
     }
+
+    public void AddStatValue(string p_StatName, int p_Value)
+    {
+        m_Stats[p_StatName] = p_Value;
+    }
 }

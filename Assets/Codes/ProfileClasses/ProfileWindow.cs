@@ -16,6 +16,8 @@ public class ProfileWindow : MonoBehaviour
     private ButtonList m_ProfileButtonList;
     private ActivePanels m_CurrentActivePanel = ActivePanels.Profile;
     private int m_SelectedSpecialCount = 0;
+    private int m_StatImprovePoints = 0;
+    private bool m_HaveStatPoints = false;
 
     [SerializeField]
     private ButtonList m_SpecialsButtonList = null;
@@ -29,7 +31,22 @@ public class ProfileWindow : MonoBehaviour
     [SerializeField]
     private SpecialStatus m_SpecialStatus = null;
 
+    [SerializeField]
+    private Text m_StatImprovePointsText = null;
+
     #region Interface
+    public int statImprovePoints
+    {
+        get { return m_StatImprovePoints; }
+        set
+        {
+            m_StatImprovePoints = value;
+
+            PlayerData.GetInstance().statImprovePoints = m_StatImprovePoints;
+            m_StatImprovePointsText.text = "Осталось очков:" + m_StatImprovePoints.ToString();
+        }
+    }
+
     public void Awake ()
     {
         m_ProfileButtonList = GetComponent<ButtonList>();
@@ -45,27 +62,55 @@ public class ProfileWindow : MonoBehaviour
 
         InitStats();
         InitSpecials();
+
+        if (PlayerData.GetInstance().statImprovePoints > 0)
+        {
+            m_HaveStatPoints = true;
+            m_StatImprovePointsText.gameObject.SetActive(true);
+            statImprovePoints = PlayerData.GetInstance().statImprovePoints;
+        }
     }
 	
 	public void Update ()
     {
-        switch (m_CurrentActivePanel)
+        if (m_StatsButtonList.isActive && m_HaveStatPoints)
         {
-            case ActivePanels.Profile:
-                m_ProfileButtonList.UpdateKey();
-                break;
-            case ActivePanels.SpecialList:
-                m_SpecialsButtonList.UpdateKey();
-                break;
-            case ActivePanels.Stats:
-                m_StatsButtonList.UpdateKey();
-                break;
-        }        
+            if (Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                PanelButtonStat l_PanelButtonStat = (PanelButtonStat)m_StatsButtonList.currentButton;
+                if (l_PanelButtonStat.addedStatValue > 0)
+                {
+                    l_PanelButtonStat.addedStatValue -= 1;
+                    statImprovePoints += 1;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                PanelButtonStat l_PanelButtonStat = (PanelButtonStat)m_StatsButtonList.currentButton;
+                if (m_StatImprovePoints > 0)
+                {
+                    l_PanelButtonStat.addedStatValue += 1;
+                    statImprovePoints -= 1;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.Z))
+            {
+                ConfirmStatImprove();
+            }
+            else if (Input.GetKeyUp(KeyCode.X))
+            {
+                CancelStatImprove();
+            }
+        }
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             SceneManager.LoadScene("DemoMainScene");
         }
+
+        m_ProfileButtonList.UpdateKey();
+        m_SpecialsButtonList.UpdateKey();
+        m_StatsButtonList.UpdateKey();
     }
     #endregion
 
@@ -76,12 +121,14 @@ public class ProfileWindow : MonoBehaviour
 
         foreach (string l_key in l_PlayerStats.Keys)
         {
-            PanelButton l_PanelButton = Instantiate(PanelButton.prefab);
-            m_StatsButtonList.AddButton(l_PanelButton);
-            
-            l_PanelButton.title = l_key + " " + l_PlayerStats[l_key];
+            PanelButtonStat l_PanelButton = Instantiate(PanelButtonStat.prefab);
+
+            l_PanelButton.title = l_key;
+            l_PanelButton.statId = l_key;
+            l_PanelButton.statValue = PlayerStat.GetInstance().GetStats()[l_key];
             l_PanelButton.text.fontSize = 40;
-            //l_PanelButton.titleSizeW = 256;
+
+            m_StatsButtonList.AddButton(l_PanelButton);
         }
     }
 
@@ -90,8 +137,10 @@ public class ProfileWindow : MonoBehaviour
         for (int i = 0; i < 12; i++)
         {
             PanelButton l_PanelButton = CreateSpecialButton();
+
             l_PanelButton.title = "SP" + (i + 1);
             l_PanelButton.text.fontSize = 40;
+
             m_SpecialsButtonList.AddButton(l_PanelButton);
         }
     }
@@ -141,7 +190,7 @@ public class ProfileWindow : MonoBehaviour
         else
         {
             m_SpecialStatus.Selected(false);
-        }        
+        }
     }
 
     private void SelectSpecial()
@@ -163,9 +212,28 @@ public class ProfileWindow : MonoBehaviour
         }
     }
 
-    private void ImproveStat()
+    private void ConfirmStatImprove()
     {
+        for (int i = 0; i < m_StatsButtonList.count; i++)
+        {
+            PanelButtonStat l_PanelButtonStat = (PanelButtonStat)m_StatsButtonList[i];
+            l_PanelButtonStat.ConfirmAddedStatValue();
+            PlayerStat.GetInstance().GetStats()[l_PanelButtonStat.statId] = l_PanelButtonStat.statValue;
+        }
+        if (m_StatImprovePoints == 0)
+        {
+            m_HaveStatPoints = false;
+            m_StatImprovePointsText.gameObject.SetActive(false);
+        }
+    }
 
+    private void CancelStatImprove()
+    {
+        for (int i = 0; i < m_StatsButtonList.count; i++)
+        {
+            PanelButtonStat l_PanelButtonStat = (PanelButtonStat)m_StatsButtonList[i];
+            statImprovePoints += l_PanelButtonStat.CancelAddedStatValue();
+        }
     }
 
     private void StartImprove()
