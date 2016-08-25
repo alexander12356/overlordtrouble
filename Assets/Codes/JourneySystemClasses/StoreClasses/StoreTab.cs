@@ -42,6 +42,10 @@ public class StoreTab : MonoBehaviour
         l_Button.AddAction(SelectItem);
 
         itemsButtonList.AddButton(l_Button);
+
+        Vector3 l_ButtonPosition = l_Button.transform.localPosition;
+        l_ButtonPosition.x = 0.0f;
+        l_Button.transform.localPosition = l_ButtonPosition;
     }
 
     public void Confirm()
