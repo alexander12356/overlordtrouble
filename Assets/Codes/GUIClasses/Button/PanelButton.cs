@@ -31,8 +31,6 @@ public class PanelButton : MonoBehaviour
             return m_Prefab;
         }
     }
-
-
 	public float titleSizeH
 	{
 		get 
@@ -46,7 +44,6 @@ public class PanelButton : MonoBehaviour
 			m_RectTransform.sizeDelta = l_Vector2;
 		}
 	}
-
 	public float titleSizeW
 	{
 		get 
@@ -60,8 +57,6 @@ public class PanelButton : MonoBehaviour
 			m_RectTransform.sizeDelta = l_Vector2;
 		}
 	}
-
-
     public string title
     {
         get { return m_Title; }

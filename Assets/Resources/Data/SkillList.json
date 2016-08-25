@@ -1,4 +1,22 @@
 {
+	"WaterDrops" :
+	{
+		"Attack" : 1.5,
+		"Mana" : 1.0f,
+		"DescriptionId" : ""
+	},
+	"Slap" :
+	{
+		"Attack" : 2.0,
+		"Mana" : 5.0,
+		"DescriptionId" : ""
+	},
+	"ProtectiveCoat" :
+	{
+		"Attack" : 1.0f,
+		"Mana" : 5.0,
+		"DescriptionId" : ""
+	},
 	"Strike" :
 	{
 		"Attack" : 3.5,

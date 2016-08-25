@@ -43,6 +43,7 @@ public class ProfileWindow : MonoBehaviour
         m_StatsButtonList.isActive = false;
         m_StatsButtonList.AddCancelAction(ActiveProfilePanel);
 
+        InitStats();
         InitSpecials();
     }
 	
@@ -69,17 +70,28 @@ public class ProfileWindow : MonoBehaviour
     #endregion
 
     #region Private
+    private void InitStats()
+    {
+        Dictionary<string, int> l_PlayerStats = PlayerStat.GetInstance().GetStats();
+
+        foreach (string l_key in l_PlayerStats.Keys)
+        {
+            PanelButton l_PanelButton = Instantiate(PanelButton.prefab);
+            m_StatsButtonList.AddButton(l_PanelButton);
+            
+            l_PanelButton.title = l_key + " " + l_PlayerStats[l_key];
+            l_PanelButton.text.fontSize = 40;
+            //l_PanelButton.titleSizeW = 256;
+        }
+    }
+
     private void InitSpecials()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 12; i++)
         {
             PanelButton l_PanelButton = CreateSpecialButton();
             l_PanelButton.title = "SP" + (i + 1);
-
-            Vector3 l_Position = l_PanelButton.transform.localPosition;
-            l_Position.y -= i * 10;
-            l_PanelButton.transform.localPosition = l_Position;
-
+            l_PanelButton.text.fontSize = 40;
             m_SpecialsButtonList.AddButton(l_PanelButton);
         }
     }
@@ -149,6 +161,11 @@ public class ProfileWindow : MonoBehaviour
             m_SelectedSpecialCount--;
             m_SpecialStatus.Selected(false);
         }
+    }
+
+    private void ImproveStat()
+    {
+
     }
 
     private void StartImprove()

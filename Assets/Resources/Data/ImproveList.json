@@ -1,29 +1,28 @@
 {
-	"LesserWaterElemental":
-	{
-		"Profile" : "Sprites/Creations/LesserWaterElemental/Profile",
-		"Skills" :
-		[
-			"BlobeStrike",
-			"HealingWater"
-		]		
-	},
-	"ShellLizard":
-	{
-		"Profile" : "Sprites/Creations/ShellLizard/Profile",
-		"Skills" :
-		[
-			"TailStrike",
-			"ShellDefense"
-		]
-	},
-	"Brownie":
-	{
-		"Profile" : "Sprites/Creations/Brownie/Profile",
-		"Skills" :
-		[
-			"Strike",
-			"Defense"
-		]
-	}	
+  "DewElemental": {
+    "Profile": "Sprites/Creations/DewWaterElemental/Profile",
+    "Skills": [
+      "BlobeStrike"
+    ]
+  },
+  "LesserWaterElemental": {
+    "Profile": "Sprites/Creations/LesserWaterElemental/Profile",
+    "Skills": [
+      "HealingWater"
+    ]
+  },
+  "ShellLizard": {
+    "Profile": "Sprites/Creations/ShellLizard/Profile",
+    "Skills": [
+      "TailStrike",
+      "ShellDefense"
+    ]
+  },
+  "Brownie": {
+    "Profile": "Sprites/Creations/Brownie/Profile",
+    "Skills": [
+      "Strike",
+      "Defense"
+    ]
+  }
 }
