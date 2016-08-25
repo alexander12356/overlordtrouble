@@ -12,10 +12,10 @@ public class Player : Actor
     private AudioClip m_AudioHit = null;
     private AudioClip m_AudioAttack = null;
     private AudioSource m_AudioSource = null;
-
     [SerializeField]
     private Text m_HealthText = null;
-
+	[SerializeField] private GameObject healthBar;
+	[SerializeField] private GameObject manaBar;
     [SerializeField]
     private Text m_ManaText = null;
     #endregion
@@ -25,7 +25,8 @@ public class Player : Actor
     {
         return m_Instance;
     }
-    
+
+
     public override void Attack(Actor p_Actor)
     {
         base.Attack(p_Actor);
@@ -41,6 +42,7 @@ public class Player : Actor
 
         m_AudioSource.PlayOneShot(m_AudioAttack);
     }
+
 
     public override void Damage(float p_DamageValue)
     {
@@ -165,6 +167,9 @@ public class Player : Actor
         base.ChangeManaValue();
 
         m_ManaText.text = "MP: " + mana + "/" + baseMana;
+		float calc_mana = mana / baseMana;
+		setManaBar (calc_mana);
+
     }
 
     public override void ChangeHealthValue()
@@ -172,7 +177,17 @@ public class Player : Actor
         base.ChangeHealthValue();
 
         m_HealthText.text = "HP: " + health + "/" + baseHealth;
+		float calc_health = health / baseHealth;
+		setHealthBar (calc_health);
     }
+	void setHealthBar(float cur_health)
+	{
+		healthBar.transform.localScale = new Vector3 (cur_health, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+	}
+	void setManaBar(float cur_mana)
+	{
+		manaBar.transform.localScale = new Vector3 (cur_mana, manaBar.transform.localScale.y, manaBar.transform.localScale.z);
+	}
     #endregion
 
     #region Private
