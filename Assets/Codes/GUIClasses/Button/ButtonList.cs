@@ -101,7 +101,7 @@ public class ButtonList : MonoBehaviour
     public void AddButton(PanelButton p_Button)
     {
         p_Button.transform.SetParent(transform);
-        p_Button.transform.localPosition = new Vector3(0.0f, -70.0f - m_ButtonsList.Count * 50, 0.0f);
+        p_Button.transform.localPosition = new Vector3(120.0f, -60.0f - m_ButtonsList.Count * 50, 0.0f);
         p_Button.transform.localScale = Vector3.one;
         m_ButtonsList.Add(p_Button);
     }
