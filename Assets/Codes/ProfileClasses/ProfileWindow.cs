@@ -39,7 +39,9 @@ public class ProfileWindow : MonoBehaviour
 
         m_SpecialsButtonList.isActive = false;
         m_SpecialsButtonList.AddKeyArrowAction(ShowSpecialDescription);
+        m_SpecialsButtonList.AddCancelAction(ActiveProfilePanel);
         m_StatsButtonList.isActive = false;
+        m_StatsButtonList.AddCancelAction(ActiveProfilePanel);
 
         InitSpecials();
     }
@@ -62,21 +64,6 @@ public class ProfileWindow : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             SceneManager.LoadScene("DemoMainScene");
-        }
-
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            switch (m_CurrentActivePanel)
-            {
-                case ActivePanels.Profile:
-                    break;
-                case ActivePanels.SpecialList:
-                    ActiveProfilePanel();
-                    break;
-                case ActivePanels.Stats:
-                    ActiveProfilePanel();
-                    break;
-            }
         }
     }
     #endregion
