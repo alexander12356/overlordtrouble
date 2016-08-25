@@ -89,10 +89,10 @@ public class ImprovePanel : Panel
 
     private void ShowYesNoPanel()
     {
-        YesNoPanel m_YesNoPanel = Instantiate(YesNoPanel.prefab);
-        m_YesNoPanel.AddYesAction(Select);
-        m_YesNoPanel.AddYesAction(m_YesNoPanel.Cancel);
-        PanelManager.GetInstance().ShowPanel(m_YesNoPanel, true);
+        YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
+        l_YesNoPanel.AddYesAction(Select);
+        l_YesNoPanel.AddYesAction(l_YesNoPanel.Cancel);
+        PanelManager.GetInstance().ShowPanel(l_YesNoPanel, true);
     }
 
     private void Select()

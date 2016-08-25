@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class YesNoPanel : Panel
 {
@@ -8,6 +8,7 @@ public class YesNoPanel : Panel
     private ButtonList m_ButtonList = null;
     private PanelActionHandler m_YesAction;
     private PanelActionHandler m_NoAction;
+    private Text m_DescriptionText = null;
     #endregion
 
     #region Interface
@@ -27,6 +28,8 @@ public class YesNoPanel : Panel
     {
         base.Awake();
 
+        m_DescriptionText = GetComponentInChildren<Text>();
+
         m_ButtonList = GetComponent<ButtonList>();
         m_ButtonList[0].AddAction(YesAction);
         m_ButtonList[1].AddAction(Cancel);
@@ -41,6 +44,7 @@ public class YesNoPanel : Panel
 
     public void Cancel()
     {
+        NoAction();
         PanelManager.GetInstance().ClosePanel(this);
     }
 
@@ -52,6 +56,11 @@ public class YesNoPanel : Panel
     public void AddNoAction(PanelActionHandler p_Action)
     {
         m_NoAction += p_Action;
+    }
+
+    public void SetText(string p_Text)
+    {
+        m_DescriptionText.text = p_Text;
     }
     #endregion
 

@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 using System.Collections.Generic;
 
 public class StorePanel : Panel
@@ -8,12 +10,16 @@ public class StorePanel : Panel
     private ButtonList m_ButtonList    = null;
     private TextBox    m_TextBox       = null;
     private StoreTab   m_CurrOpenedTab = null;
+    private StoreItemButton m_CurrentSelectedItem = null;
 
     [SerializeField]
     private ButtonList m_TabButtonsList = null;
 
     [SerializeField]
     private GameObject m_Window = null;
+
+    [SerializeField]
+    private Text m_PlayerCoinsText = null;
 
     [SerializeField]
     private List<StoreTab> m_StoreTabs = null;
@@ -38,10 +44,25 @@ public class StorePanel : Panel
             return m_TabButtonsList;
         }
     }
+    public StoreItemButton currentSelectedItem
+    {
+        get { return m_CurrentSelectedItem;  }
+        set { m_CurrentSelectedItem = value; }
+    }
+    public int playerCoins
+    {
+        get { return PlayerInventory.GetInstance().coins; }
+        set
+        {
+            PlayerInventory.GetInstance().coins = value;
+            m_PlayerCoinsText.text = PlayerInventory.GetInstance().coins + " денег";
+        }
+    }
 
     public override void Awake()
     {
         base.Awake();
+        playerCoins = PlayerInventory.GetInstance().coins;
 
         InitTextBox();
         InitButtonActions();
@@ -57,8 +78,14 @@ public class StorePanel : Panel
 
         m_ButtonList.UpdateKey();
         m_TabButtonsList.UpdateKey();
-        m_TextBox.UpdateTextBox();
         m_CurrOpenedTab.itemsButtonList.UpdateKey();
+
+        if (m_CurrentSelectedItem != null)
+        {
+            m_CurrentSelectedItem.UpdateKey();
+        }
+
+        m_TextBox.UpdateTextBox();
     }
 
     public override void PushAction()
@@ -88,9 +115,24 @@ public class StorePanel : Panel
         m_TabButtonsList[2].AddAction(ConfirmTab);
         m_TabButtonsList[3].AddAction(ConfirmTab);
 
-        m_StoreTabs[1].SetItems(StoreDataBase.GetInstance().GetEquipmentItems());
-        m_StoreTabs[2].SetItems(StoreDataBase.GetInstance().GetSingleUseItems());
-        m_StoreTabs[3].SetItems(StoreDataBase.GetInstance().GetMultipleUseItems());
+        Dictionary<string, StoreItemData> l_StoreItems = StoreDataBase.GetInstance().GetStoreItem();
+        foreach (string l_Key in l_StoreItems.Keys)
+        {
+            ItemType l_ItemDataType = ItemDataBase.GetInstance().GetItem(l_Key).itemType;
+            switch (l_ItemDataType)
+            {
+                case ItemType.SingleUse:
+                    m_StoreTabs[2].AddItem(l_StoreItems[l_Key]);
+                    break;
+                case ItemType.MultipleUse:
+                    m_StoreTabs[3].AddItem(l_StoreItems[l_Key]);
+                    break;
+                case ItemType.Equipment:
+                    m_StoreTabs[1].AddItem(l_StoreItems[l_Key]);
+                    break;
+            }
+            m_StoreTabs[0].AddItem(l_StoreItems[l_Key]);
+        }
 
         m_CurrOpenedTab = m_StoreTabs[0];
         m_CurrOpenedTab.itemsButtonList.isActive = false;
@@ -166,12 +208,12 @@ public class StorePanel : Panel
         m_CurrOpenedTab.gameObject.SetActive(false);
         m_StoreTabs[m_TabButtonsList.currentButtonId].gameObject.SetActive(true);
         m_CurrOpenedTab = m_StoreTabs[m_TabButtonsList.currentButtonId];
+        //m_CurrOpenedTab.CheckCountInInventory();
     }
 
     private void ConfirmTab()
     {
         m_CurrOpenedTab.Confirm();
-            
         
         m_TabButtonsList.isActive = false;
         m_TabButtonsList.currentButton.selected = true;

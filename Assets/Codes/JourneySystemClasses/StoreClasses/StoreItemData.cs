@@ -1,11 +1,11 @@
 ﻿public struct StoreItemData
 {
     public string id;
-    public int count;
+    public int cost;
 
-    public StoreItemData(string p_Id, int p_Count)
+    public StoreItemData(string p_Id, int p_Cost)
     {
         id    = p_Id;
-        count = p_Count;
+        cost = p_Cost;
     }
 }

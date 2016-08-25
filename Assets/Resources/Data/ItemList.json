@@ -1,9 +1,10 @@
 {
-	"SingleUse" : 
+	"Items" : 
 	[
 		{
 			"Id" : "HealthPotion",
 			"Image" : "Sprites/Items/SingleUse/HealthPotion",
+			"Type" : "SingleUse",
 			"Actions":
 			[
 				{
@@ -16,6 +17,7 @@
 		{
 			"Id" : "ManaPotion",
 			"Image" : "Sprites/Items/SingleUse/ManaPotion",
+			"Type" : "SingleUse",
 			"Actions" :
 			[
 				{
@@ -24,13 +26,11 @@
 					"Value" : 7
 				}				
 			]
-		}
-	],
-	"MultipleUse" : 
-	[
+		},
 		{
 			"Id" : "FireBallScroll",
 			"Image" : "Sprites/Items/MultipleUse/FireBallScroll",
+			"Type" : "MultipleUse",
 			"Actions" :
 			[
 				{
@@ -43,6 +43,7 @@
 		{
 			"Id" : "AirDefenseScroll",
 			"Image" : "Sprites/Items/MultipleUse/AirDefenseScroll",
+			"Type" : "MultipleUse",
 			"Actions" :
 			[
 				{
@@ -51,13 +52,11 @@
 					"Value" : 2
 				}
 			]
-		}
-	],
-	"Equipment"
-	[
+		},
 		{
 			"Id" : "AncientArmor",
 			"Image" : "Sprites/Items/Equipments/AncientArmor",
+			"Type" : "Equipment",
 			"Actions" : 
 			[
 				{

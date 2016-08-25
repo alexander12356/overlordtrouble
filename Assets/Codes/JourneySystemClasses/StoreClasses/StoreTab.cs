@@ -2,14 +2,16 @@
 using UnityEngine.UI;
 
 using System.Collections.Generic;
-using System;
 
 public class StoreTab : MonoBehaviour
 {
+    #region Variables
     private ButtonList m_ItemsButtonList;
     private StorePanel m_StorePanel;
     private Text m_DescriptionText;
+    #endregion
 
+    #region Interface
     public ButtonList itemsButtonList
     {
         get
@@ -32,21 +34,14 @@ public class StoreTab : MonoBehaviour
         m_StorePanel = GetComponentInParent<StorePanel>();
     }
 
-    public void SetItems(Dictionary<string, StoreItemData> m_Items)
+    public void AddItem(StoreItemData p_StoreItemData)
     {
-        foreach(string l_ItemId in m_Items.Keys)
-        {
-            PanelButton l_Button = Instantiate(PanelButton.prefab);
-            l_Button.title = m_Items[l_ItemId].id;
-            itemsButtonList.AddButton(l_Button);
-        }
-    }
+        StoreItemButton l_Button = Instantiate(StoreItemButton.prefab);
+        l_Button.title = p_StoreItemData.id;
+        l_Button.itemId = p_StoreItemData.id;
+        l_Button.AddAction(SelectItem);
 
-    public void CancelAction()
-    {
-        m_ItemsButtonList.isActive = false;
-        m_StorePanel.tabButtonList.isActive = true;
-        m_DescriptionText.text = "Описание:";
+        itemsButtonList.AddButton(l_Button);
     }
 
     public void Confirm()
@@ -55,8 +50,66 @@ public class StoreTab : MonoBehaviour
         m_ItemsButtonList.isActive = true;
     }
 
+    public void CheckCountInInventory()
+    {
+        for (int i = 0; i < m_ItemsButtonList.count; i++)
+        {
+            StoreItemButton l_StoreItemButton = (StoreItemButton)m_ItemsButtonList[i];
+            l_StoreItemButton.itemCost = PlayerInventory.GetInstance().GetItemCount(l_StoreItemButton.itemId);
+        }
+    }
+    #endregion
+
+    #region Private
+    private void CancelAction()
+    {
+        m_ItemsButtonList.isActive = false;
+        m_StorePanel.tabButtonList.isActive = true;
+        m_DescriptionText.text = "Описание:";
+    }
+
     private void ShowItemDescription()
     {
-        m_DescriptionText.text = "Описание:\n" + m_ItemsButtonList.currentButton.title + "_Description";
+        StoreItemButton m_StoreItemButton = (StoreItemButton)m_ItemsButtonList.currentButton;
+        int l_CountInInventory = PlayerInventory.GetInstance().GetItemCount(m_StoreItemButton.itemId);
+        m_DescriptionText.text = "Описание:\n" + m_StoreItemButton.title + "_Description" + "\nУ тебя в инвентаре: " + l_CountInInventory;
     }
+
+    private void SelectItem()
+    {
+        StoreItemButton l_StoreItemButton = (StoreItemButton)m_ItemsButtonList.currentButton;
+        l_StoreItemButton.Activate(true);
+        l_StoreItemButton.AddCancelAction(DeselectItem);
+        l_StoreItemButton.AddBuyAction(Buy);
+        m_ItemsButtonList.isActive = false;
+
+        m_StorePanel.currentSelectedItem = l_StoreItemButton;
+    }
+
+    private void DeselectItem()
+    {
+        StoreItemButton l_StoreItemButton = (StoreItemButton)m_ItemsButtonList.currentButton;
+        l_StoreItemButton.Activate(false);
+        l_StoreItemButton.RemoveCancelAction(DeselectItem);
+        l_StoreItemButton.RemoveBuyAction(Buy);
+
+        m_StorePanel.currentSelectedItem = null;
+        m_ItemsButtonList.isActive = true;
+    }
+
+    private void Buy()
+    {
+        StoreItemButton l_StoreItemButton = (StoreItemButton)m_ItemsButtonList.currentButton;
+        int    l_CountToBuy = l_StoreItemButton.countToBuy;
+        string l_ItemId     = l_StoreItemButton.itemId;
+        int    l_ItemCost = l_StoreItemButton.itemCost;
+        
+        if (l_ItemCost * l_CountToBuy <= m_StorePanel.playerCoins)
+        {
+            m_StorePanel.playerCoins -= l_ItemCost * l_CountToBuy;
+            PlayerInventory.GetInstance().AddItem(l_ItemId, l_CountToBuy);
+            ShowItemDescription();
+        }
+    }
+    #endregion
 }

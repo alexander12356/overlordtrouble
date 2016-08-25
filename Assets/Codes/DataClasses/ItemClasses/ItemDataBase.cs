@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class ItemDataBase : Singleton<ItemDataBase>
 {
-    private Dictionary<string, ItemData> m_SingleUseItems   = new Dictionary<string, ItemData>();
-    private Dictionary<string, ItemData> m_MultipleUseItems = new Dictionary<string, ItemData>();
-    private Dictionary<string, ItemData> m_EquipmentItems   = new Dictionary<string, ItemData>();
+    private Dictionary<string, ItemData> m_Items   = new Dictionary<string, ItemData>();
     private string m_PathFile = "Data/ItemList";
 
     public ItemDataBase()
@@ -13,9 +12,22 @@ public class ItemDataBase : Singleton<ItemDataBase>
         Parse();
     }
 
-    public Dictionary<string, ItemData> GetSingleUseItems(string p_Id)
+    public Dictionary<string, ItemData> GetItemsDictionary(string p_Id)
     {
-        return m_SingleUseItems;
+        return m_Items;
+    }
+
+    public ItemData GetItem(string p_Id)
+    {
+        try
+        {
+            return m_Items[p_Id];
+        }
+        catch
+        {
+            Debug.LogError("Cannot find item, id: " + p_Id);
+            return new ItemData();
+        }
     }
 
     private void Parse()
@@ -33,21 +45,7 @@ public class ItemDataBase : Singleton<ItemDataBase>
 
         JSONObject l_ItemTypeList = new JSONObject(l_DecodedString);
 
-        for (int i = 0; i < l_ItemTypeList.Count; i++)
-        {
-            switch (l_ItemTypeList.keys[i])
-            {
-                case "SingleUse":
-                    m_SingleUseItems = ParseItems(l_ItemTypeList[i]);
-                    break;
-                case "MultipleUse":
-                    m_MultipleUseItems = ParseItems(l_ItemTypeList[i]);
-                    break;
-                case "Equipment":
-                    m_EquipmentItems = ParseItems(l_ItemTypeList[i]);
-                    break;
-            }
-        }
+        m_Items = ParseItems(l_ItemTypeList["Items"]);
     }
 
     private Dictionary<string, ItemData> ParseItems(JSONObject p_ItemListObject)
@@ -57,10 +55,11 @@ public class ItemDataBase : Singleton<ItemDataBase>
         {
             string l_ItemId    = p_ItemListObject[i]["Id"].str;
             string l_ImagePath = p_ItemListObject[i]["Image"].str;
+            ItemType l_ItemType = (ItemType)Enum.Parse(typeof(ItemType), p_ItemListObject[i]["Type"].str);
             //TODO ParseActions
             string l_Action    = p_ItemListObject[i]["Actions"][0]["Id"].str;
 
-            ItemData l_ItemData = new ItemData(l_ItemId, l_ImagePath, l_Action);
+            ItemData l_ItemData = new ItemData(l_ItemId, l_ImagePath, l_Action, l_ItemType);
             l_ItemList.Add(l_ItemId, l_ItemData);
         }
 

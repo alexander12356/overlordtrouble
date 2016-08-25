@@ -6,13 +6,13 @@ public delegate void PanelButtonActionHandler();
 public class PanelButton : MonoBehaviour
 {
     #region Variables
-    private event PanelButtonActionHandler Action;
+    protected event PanelButtonActionHandler m_ConfirmAction;
     private bool  m_Selected;
     private Image m_SelectedImage;
     private Text  m_Text;
 
     [SerializeField]
-    private string m_Title = string.Empty;
+    protected string m_Title = string.Empty;
 
     private static PanelButton m_Prefab = null;
     #endregion
@@ -68,29 +68,7 @@ public class PanelButton : MonoBehaviour
         }
     }
 
-    public virtual void AddAction(PanelButtonActionHandler p_Action)
-    {
-        Action += p_Action;
-    }
-
-    public virtual void RemoveAction(PanelButtonActionHandler p_Action)
-    {
-        Action -= p_Action;
-    }
-
-    public virtual void RunAction()
-    {
-        if (Action != null)
-        {
-            Action();
-        }
-        else
-        {
-            Debug.LogWarning("Button: " + gameObject.name + " not have a action!");
-        }
-    }
-    #endregion
-    private void Awake()
+    public virtual void Awake()
     {
         m_SelectedImage = selectedImage;
         selectedImage.gameObject.SetActive(false);
@@ -98,6 +76,29 @@ public class PanelButton : MonoBehaviour
         m_Text = GetComponentInChildren<Text>();
         m_Text.text = m_Title;
     }
+
+    public virtual void AddAction(PanelButtonActionHandler p_Action)
+    {
+        m_ConfirmAction += p_Action;
+    }
+
+    public virtual void RemoveAction(PanelButtonActionHandler p_Action)
+    {
+        m_ConfirmAction -= p_Action;
+    }
+
+    public virtual void RunAction()
+    {
+        if (m_ConfirmAction != null)
+        {
+            m_ConfirmAction();
+        }
+        else
+        {
+            Debug.LogWarning("Button: " + gameObject.name + " not have a action!");
+        }
+    }
+    #endregion
 
     private void Select(bool p_Value)
     {

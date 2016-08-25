@@ -57,6 +57,10 @@ public class ButtonList : MonoBehaviour
             }
         }
     }
+    public int count
+    {
+        get { return m_ButtonsList.Count; }
+    }
 
     public void AddKeyArrowAction(KeyArrowActionHandler p_Action)
     {

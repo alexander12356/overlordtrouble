@@ -4,28 +4,29 @@ using System.Collections.Generic;
 public class StoreDataBase : Singleton<StoreDataBase>
 {
     private string m_PathFile = "Data/StoreData";
-    private Dictionary<string, StoreItemData> m_SingleUseItems = null;
-    private Dictionary<string, StoreItemData> m_MultipleUseItems = null;
-    private Dictionary<string, StoreItemData> m_EquipmentItems = null;
+    private Dictionary<string, StoreItemData> m_StoreItems = new Dictionary<string, StoreItemData>();
 
     public StoreDataBase()
     {
         Parse();
     }
 
-    public Dictionary<string, StoreItemData> GetSingleUseItems()
+    public Dictionary<string, StoreItemData> GetStoreItem()
     {
-        return m_SingleUseItems;
+        return m_StoreItems;
     }
 
-    public Dictionary<string, StoreItemData> GetMultipleUseItems()
+    public StoreItemData GetItem(string p_Id)
     {
-        return m_MultipleUseItems;
-    }
-
-    public Dictionary<string, StoreItemData> GetEquipmentItems()
-    {
-        return m_EquipmentItems;
+        try
+        {
+            return m_StoreItems[p_Id];
+        }
+        catch
+        {
+            Debug.LogError("Cannot find item, id: " + p_Id);
+            return new StoreItemData();
+        }
     }
 
     private void Parse()
@@ -41,37 +42,15 @@ public class StoreDataBase : Singleton<StoreDataBase>
             Debug.LogError("CANNOT READ FOR " + GetType());
         }
 
-        JSONObject l_ItemTypeList = new JSONObject(l_DecodedString);
+        JSONObject l_ItemTypeList = new JSONObject(l_DecodedString)["Items"];
 
         for (int i = 0; i < l_ItemTypeList.Count; i++)
         {
-            switch (l_ItemTypeList.keys[i])
-            {
-                case "SingleUse":
-                    m_SingleUseItems = ParseItems(l_ItemTypeList[i]);
-                    break;
-                case "MultipleUse":
-                    m_MultipleUseItems = ParseItems(l_ItemTypeList[i]);
-                    break;
-                case "Equipment":
-                    m_EquipmentItems = ParseItems(l_ItemTypeList[i]);
-                    break;
-            }
+            string l_ItemId = l_ItemTypeList[i]["Id"].str;
+            int l_ItemCost = (int)l_ItemTypeList[i]["Cost"].n;
+
+            StoreItemData l_ItemData = new StoreItemData(l_ItemId, l_ItemCost);
+            m_StoreItems.Add(l_ItemId, l_ItemData);
         }
-    }
-
-    private Dictionary<string, StoreItemData> ParseItems(JSONObject p_ItemListObject)
-    {
-        Dictionary<string, StoreItemData> l_ItemList = new Dictionary<string, StoreItemData>();
-        for (int i = 0; i < p_ItemListObject.Count; i++)
-        {
-            string l_ItemId = p_ItemListObject[i]["Id"].str;
-            int l_ItemCount = (int)p_ItemListObject[i]["Count"].n;
-
-            StoreItemData l_ItemData = new StoreItemData(l_ItemId, l_ItemCount);
-            l_ItemList.Add(l_ItemId, l_ItemData);
-        }
-
-        return l_ItemList;
     }
 }

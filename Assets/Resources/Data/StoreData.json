@@ -1,31 +1,25 @@
 {
-	"SingleUse" :
-	[
+	"Items" :
+	{
 		{
 			"Id" : "HealthPotion",
-			"Count" : 10
+			"Cost" : 5
 		},
 		{
 			"Id" : "ManaPotion",
-			"Count" : 10
-		}
-	],
-	"MultipleUse" :
-	[
+			"Cost" : 5
+		},
 		{
 			"Id" : "FireBallScroll",
-			"Count" : 1
+			"Cost" : 30
 		},
 		{
 			"Id" : "AirDefenseScroll",
-			"Count" : 3
-		}
-	],
-	"Equipment" :
-	[
+			"Cost" : 15
+		},
 		{
 			"Id" : "AncientArmor",
-			"Count" : 1
+			"Cost" : 100
 		}
 	]
 }
