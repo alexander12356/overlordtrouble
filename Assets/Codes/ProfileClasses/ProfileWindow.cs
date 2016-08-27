@@ -80,8 +80,13 @@ public class ProfileWindow : MonoBehaviour
                 PanelButtonStat l_PanelButtonStat = (PanelButtonStat)m_StatsButtonList.currentButton;
                 if (l_PanelButtonStat.addedStatValue > 0)
                 {
+                    l_PanelButtonStat.PlayAnim("StatMinus");
                     l_PanelButtonStat.addedStatValue -= 1;
                     statImprovePoints += 1;
+                }
+                else
+                {
+                    l_PanelButtonStat.PlayAnim("StatCannotMinus");
                 }
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -89,8 +94,13 @@ public class ProfileWindow : MonoBehaviour
                 PanelButtonStat l_PanelButtonStat = (PanelButtonStat)m_StatsButtonList.currentButton;
                 if (m_StatImprovePoints > 0)
                 {
+                    l_PanelButtonStat.PlayAnim("StatPlus");
                     l_PanelButtonStat.addedStatValue += 1;
                     statImprovePoints -= 1;
+                }
+                else
+                {
+                    l_PanelButtonStat.PlayAnim("StatCannotPlus");
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Z))
@@ -126,7 +136,6 @@ public class ProfileWindow : MonoBehaviour
             l_PanelButton.title = l_key;
             l_PanelButton.statId = l_key;
             l_PanelButton.statValue = PlayerStat.GetInstance().GetStats()[l_key];
-            l_PanelButton.text.fontSize = 40;
 
             m_StatsButtonList.AddButton(l_PanelButton);
         }
@@ -136,25 +145,13 @@ public class ProfileWindow : MonoBehaviour
     {
         for (int i = 0; i < 12; i++)
         {
-            PanelButton l_PanelButton = CreateSpecialButton();
-
+            PanelButtonProfileSpecial l_PanelButton = Instantiate(PanelButtonProfileSpecial.prefab);
+            l_PanelButton.AddAction(SelectSpecial);
             l_PanelButton.title = "SP" + (i + 1);
             l_PanelButton.text.fontSize = 40;
 
             m_SpecialsButtonList.AddButton(l_PanelButton);
         }
-    }
-
-    private PanelButton CreateSpecialButton()
-    {
-        PanelButton l_PanelButton = Instantiate(PanelButton.prefab);
-
-        l_PanelButton.transform.SetParent(m_SpecialsButtonList.transform);
-        l_PanelButton.transform.localPosition = Vector3.zero;
-        l_PanelButton.transform.localScale = Vector3.one;
-        l_PanelButton.AddAction(SelectSpecial);
-
-        return l_PanelButton;
     }
 
     private void ActiveSpecialListPanel()
@@ -174,16 +171,20 @@ public class ProfileWindow : MonoBehaviour
 
     private void ActiveStatsPanel()
     {
-        m_CurrentActivePanel = ActivePanels.Stats;
-        m_StatsButtonList.isActive = true;
-        m_ProfileButtonList.isActive = false;
+        if (m_HaveStatPoints)
+        {
+            m_CurrentActivePanel = ActivePanels.Stats;
+            m_StatsButtonList.isActive = true;
+            m_ProfileButtonList.isActive = false;
+        }
     }
 
     private void ShowSpecialDescription()
     {
-        m_SpecialDescriptionText.text = m_SpecialsButtonList.currentButton.title + " description";
+        PanelButtonProfileSpecial l_PanelButtonProfileSpecial = (PanelButtonProfileSpecial)m_SpecialsButtonList.currentButton;
+        m_SpecialDescriptionText.text = l_PanelButtonProfileSpecial.title + " description";
 
-        if (m_SpecialsButtonList.currentButton.text.color == Color.green)
+        if (l_PanelButtonProfileSpecial.chosen)
         {
             m_SpecialStatus.Selected(true);
         }
@@ -195,18 +196,19 @@ public class ProfileWindow : MonoBehaviour
 
     private void SelectSpecial()
     {
-        if (m_SpecialsButtonList.currentButton.text.color != Color.green)
+        PanelButtonProfileSpecial l_PanelButtonProfileSpecial = (PanelButtonProfileSpecial)m_SpecialsButtonList.currentButton;
+        if (!l_PanelButtonProfileSpecial.chosen)
         {
             if (m_SelectedSpecialCount < 5)
             {
-                m_SpecialsButtonList.currentButton.text.color = Color.green;
+                l_PanelButtonProfileSpecial.chosen = true;
                 m_SelectedSpecialCount++;
                 m_SpecialStatus.Selected(true);
             }
         }
         else
         {
-            m_SpecialsButtonList.currentButton.text.color = Color.black;
+            l_PanelButtonProfileSpecial.chosen = false;
             m_SelectedSpecialCount--;
             m_SpecialStatus.Selected(false);
         }

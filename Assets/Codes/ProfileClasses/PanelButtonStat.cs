@@ -7,9 +7,7 @@ public class PanelButtonStat : PanelButton
     private string m_StatId = string.Empty;
     private int m_StatValue = 0;
     private int m_AddedStatValue = 0;
-
-    [SerializeField]
-    private GameObject m_Arrows = null;
+    private Animator m_Animator = null;
 
     [SerializeField]
     private Text m_StatValueText = null;
@@ -60,6 +58,13 @@ public class PanelButtonStat : PanelButton
         }
     }
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        m_Animator = GetComponent<Animator>();
+    }
+
     public void ConfirmAddedStatValue()
     {
         m_AddedStatValue = 0;
@@ -71,5 +76,10 @@ public class PanelButtonStat : PanelButton
         int l_AddedValue = addedStatValue;
         addedStatValue = 0;
         return l_AddedValue;
+    }
+
+    public void PlayAnim(string p_TriggerId)
+    {
+        m_Animator.SetTrigger(p_TriggerId);
     }
 }

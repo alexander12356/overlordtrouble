@@ -16,12 +16,12 @@ public class SpecialStatus : MonoBehaviour
     {
         if (p_Value)
         {
-            m_Image.color = Color.green;
+            m_Image.sprite = Resources.Load<Sprite>("Sprites/GUI/Profile/AttackChosen");
             m_Text.text = "Выбрано";
         }
         else
         {
-            m_Image.color = Color.grey;
+            m_Image.sprite = Resources.Load<Sprite>("Sprites/GUI/Profile/AttackUnchosen");
             m_Text.text = "Не выбрано";
         }
     }
