@@ -9,6 +9,8 @@ public class ImprovePanel : Panel
     #region Variables
     private ButtonList m_ImproveButtonList = null;
     private Animator   m_Animator = null;
+    private Image m_BackgroundAfterSelectImage = null;
+    private Image m_BackgroundBeforeSelectImage = null;
 
     [SerializeField]
     private List<ImproveItem> m_ImproveList = null;
@@ -22,9 +24,11 @@ public class ImprovePanel : Panel
     {
         base.Awake();
 
+        m_BackgroundAfterSelectImage  = myTransform.FindChild("BackgroundAfterSelect").GetComponent<Image>();
+        m_BackgroundBeforeSelectImage = myTransform.FindChild("BackgroundBeforeSelect").GetComponent<Image>();
         m_ImproveButtonList = GetComponent<ButtonList>();
         m_Animator = GetComponent<Animator>();
-        InitButtonActions();
+        InitImproveButtons();
 
         PanelManager.GetInstance().ShowPanel(this);
         ImproveDataBase.GetInstance();
@@ -42,11 +46,12 @@ public class ImprovePanel : Panel
         }
     }
 
+    // Called from Animation
     public void ImproveComplete()
     {
-        TextPanel m_TextPanel = Instantiate(TextPanel.prefab);
+        TextPanelImproveWindow m_TextPanel = Instantiate(TextPanelImproveWindow.prefab);
 
-        string l_ImproveName = m_ImproveList[m_ImproveButtonList.currentButtonId].improveId;
+        string l_ImproveName = ((PanelButtonImprove)m_ImproveButtonList.currentButton).improveData.id;
         string l_ImproveSkillsText = ", вы получили следующие приемы:\n";
         ImproveData l_ImproveData = ImproveDataBase.GetInstance().GetImprove(l_ImproveName);
         l_ImproveSkillsText += l_ImproveData.skills[0].id;
@@ -67,24 +72,16 @@ public class ImprovePanel : Panel
     #endregion
 
     #region Private
-    private void InitButtonActions()
+    private void InitImproveButtons()
     {
-        //TODO fix
-        for (int i = 0; i < m_ImproveList.Count; i++)
+        for (int i = 0; i < m_ImproveButtonList.count; i++)
         {
-            m_ImproveButtonList.InsertButton(m_ImproveList[i].improveButton);
-
-            if (i != m_ImproveList.Count - 1)
-            {
-                m_ImproveButtonList[i].AddAction(ShowYesNoPanel);
-            }
-            else
-            {
-                m_ImproveButtonList[i].AddAction(ReturnToMainMenu);
-            }
-            
+            m_ImproveButtonList[i].AddAction(ShowYesNoPanel);
         }
-        
+        ((PanelButtonImprove)m_ImproveButtonList[0]).improveData = ImproveDataBase.GetInstance().GetImprove("LesserWaterElemental");
+        ((PanelButtonImprove)m_ImproveButtonList[1]).improveData = ImproveDataBase.GetInstance().GetImprove("ShellLizard");
+        ((PanelButtonImprove)m_ImproveButtonList[2]).improveData = ImproveDataBase.GetInstance().GetImprove("Brownie");
+
     }
 
     private void ShowYesNoPanel()
@@ -97,22 +94,24 @@ public class ImprovePanel : Panel
 
     private void Select()
     {
-        m_ImproveList[m_ImproveButtonList.currentButtonId].Select();
-        m_ImproveList[m_ImproveButtonList.currentButtonId].AddShowProfileAction(ShowProfile);
-        for (int i = 0; i < m_ImproveList.Count; i++)
+        PanelButtonImprove l_PanelButtonImprove = (PanelButtonImprove)m_ImproveButtonList.currentButton;
+        l_PanelButtonImprove.Choose();
+        l_PanelButtonImprove.AddShowProfileAction(ShowProfile);
+
+        for (int i = 0; i < m_ImproveButtonList.count; i++)
         {
-            if (i != m_ImproveButtonList.currentButtonId)
+            if (m_ImproveButtonList[i] != l_PanelButtonImprove)
             {
-                m_ImproveList[i].Away();
-            }            
+                ((PanelButtonImprove)m_ImproveButtonList[i]).Away();
+            }
         }
         m_ImproveButtonList.isActive = false;
     }
 
     private void ShowProfile()
     {
-        string l_ImproveId = m_ImproveList[m_ImproveButtonList.currentButtonId].improveId;
-        m_ImproveCompleteImage.sprite = Resources.Load<Sprite>(ImproveDataBase.GetInstance().GetImprove(l_ImproveId).profileImagePath);
+        string l_ProfileImagePath = ((PanelButtonImprove)m_ImproveButtonList.currentButton).improveData.profileImagePath;
+        m_ImproveCompleteImage.sprite = Resources.Load<Sprite>(l_ProfileImagePath);
         m_Animator.SetTrigger("Improve");
     }
 
