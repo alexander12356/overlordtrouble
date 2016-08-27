@@ -23,7 +23,7 @@ public class PanelManager : MonoBehaviour
         return m_Instance;
     }
 
-    public void ShowPanel(Panel p_NewPanel, bool p_WithOverlay = false)
+    public void ShowPanel(Panel p_NewPanel, bool p_WithOverlay = false, Transform m_Parent = null)
     {
         if (m_PanelStack.Count > 0 && m_PanelStack.Peek().isShowed)
         {
@@ -32,7 +32,14 @@ public class PanelManager : MonoBehaviour
                 m_PanelStack.Peek().Hide();
             }
         }
-        p_NewPanel.myTransform.SetParent(transform);
+        if (m_Parent == null)
+        {
+            p_NewPanel.myTransform.SetParent(transform);
+        }
+        else
+        {
+            p_NewPanel.myTransform.SetParent(m_Parent);
+        }
         p_NewPanel.myTransform.localPosition = Vector3.zero;
         p_NewPanel.myTransform.localScale = Vector3.one;
         p_NewPanel.gameObject.SetActive(false);

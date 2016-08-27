@@ -14,6 +14,7 @@ public class TextBox : MonoBehaviour
     private int  m_CurrentPhrase;
     private PanelActionHandler m_EndAction;
     private bool m_Active = true;
+    private Animator m_Animator = null;
 
     [SerializeField]
     private float m_ShowingTextSpeed = 0.5f;
@@ -23,6 +24,7 @@ public class TextBox : MonoBehaviour
     public void Awake()
     {
         m_Text = GetComponentInChildren<Text>();
+        m_Animator = GetComponent<Animator>();
     }
 
     public void SetText(List<string> p_Text)
@@ -43,6 +45,10 @@ public class TextBox : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Z))
         {
+            if (m_Animator != null)
+            {
+                m_Animator.SetTrigger("Bumped");
+            }
             NextPhrase();
             Input.ResetInputAxes();
         }

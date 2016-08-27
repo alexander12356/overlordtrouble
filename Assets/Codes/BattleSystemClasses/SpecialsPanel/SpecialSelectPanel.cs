@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 using System.Collections.Generic;
 
 public class SpecialSelectPanel : Panel
 {
-    private enum ButtonListType
-    {
-        SpecialList,
-        ConfirmList
-    }
-
     #region Variables
     private static SpecialSelectPanel m_Instance = null;
+    private ChooseEnemyPanel m_ChooseEnemyPanel = null;
+    private List<string> m_ChoosedSkills = new List<string>();
 
     [SerializeField]
     private ButtonList m_SpecialButtonList = null;
@@ -20,11 +18,6 @@ public class SpecialSelectPanel : Panel
 
     [SerializeField]
     private ButtonList m_AddedSpecialButtonList = null;
-
-    private ButtonListType m_CurrentButtonListType = ButtonListType.SpecialList;
-    private Dictionary<string, Special> m_SpecialList = new Dictionary<string, Special>();
-    private Dictionary<string, Special> m_AddedSpecialList = new Dictionary<string, Special>();
-    private ChooseEnemyPanel m_ChooseEnemyPanel = null;
     #endregion
 
     #region Interface
@@ -50,8 +43,9 @@ public class SpecialSelectPanel : Panel
         m_ConfirmButtonList[0].AddAction(Confirm);
         m_ConfirmButtonList[1].AddAction(ReturnToMain);
 
-        InitSpecialList();
         InitSpecialButtons();
+
+        m_SpecialButtonList.AddKeyArrowAction(CheckScrolling);
     }
 
     public override void UpdatePanel()
@@ -63,34 +57,24 @@ public class SpecialSelectPanel : Panel
             return;
         }
 
-        if (m_CurrentButtonListType == ButtonListType.SpecialList && Input.GetKeyDown(KeyCode.RightArrow))
+        if (m_SpecialButtonList.isActive && Input.GetKeyDown(KeyCode.RightArrow))
         {
-            m_CurrentButtonListType = ButtonListType.ConfirmList;
             m_SpecialButtonList.isActive = false;
             m_ConfirmButtonList.isActive = true;
         }
-        if (m_CurrentButtonListType == ButtonListType.ConfirmList && Input.GetKeyDown(KeyCode.LeftArrow))
+        if (m_ConfirmButtonList && Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            m_CurrentButtonListType = ButtonListType.SpecialList;
             m_SpecialButtonList.isActive = true;
             m_ConfirmButtonList.isActive = false;
         }
 
-        switch (m_CurrentButtonListType)
-        {
-            case ButtonListType.SpecialList:
-                m_SpecialButtonList.UpdateKey();
-                break;
-            case ButtonListType.ConfirmList:
-                m_ConfirmButtonList.UpdateKey();
-                break;
-        }
+        m_SpecialButtonList.UpdateKey();
+        m_ConfirmButtonList.UpdateKey();
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (m_CurrentButtonListType == ButtonListType.ConfirmList)
+            if (m_ConfirmButtonList.isActive)
             {
-                m_CurrentButtonListType = ButtonListType.SpecialList;
                 m_SpecialButtonList.isActive = true;
                 m_ConfirmButtonList.isActive = false;
             }
@@ -98,6 +82,25 @@ public class SpecialSelectPanel : Panel
             {
                 ReturnToMain();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            int l_SpecialCount = m_SpecialButtonList.count - 1;
+            int l_CurrentSelectedSpecial = m_SpecialButtonList.currentButtonId;
+
+            int m_delta = m_SpecialButtonList.count % 3;
+
+            float l_Value = 1.0f - (float)l_CurrentSelectedSpecial / ((float)l_SpecialCount - m_delta);
+
+            if (l_Value < 0)
+            {
+                l_Value = 0;
+            }
+
+            ScrollRect l_ScrollRect = m_SpecialButtonList.transform.parent.GetComponent<ScrollRect>();
+
+            Debug.Log("Normilized Position: " + l_Value + ", ScrollRect normilized position: " + l_ScrollRect.verticalNormalizedPosition);
         }
     }
     #endregion
@@ -110,49 +113,42 @@ public class SpecialSelectPanel : Panel
         PanelManager.GetInstance().ClosePanel(this);
     }
 
-    private void SelectSpecial()
+    private void ChooseSpecial()
     {
-        PanelButton l_PanelButton = m_SpecialButtonList.currentButton;
+        PanelButtonSpecial l_PanelButton = (PanelButtonSpecial)m_SpecialButtonList.currentButton;
 
-        if (m_AddedSpecialList.ContainsKey(l_PanelButton.title))
+        if (l_PanelButton.isChosen)
         {
-            m_AddedSpecialList.Remove(l_PanelButton.title);
-            m_AddedSpecialButtonList.RemoveButton(l_PanelButton.title);
+            l_PanelButton.Choose(false);
+            m_ChoosedSkills.Remove(l_PanelButton.skillId);
+            Player.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;
 
-            Player.GetInstance().mana += m_SpecialList[l_PanelButton.title].mana;
+            m_AddedSpecialButtonList.RemoveButton(l_PanelButton.skillId);
         }
-        else if (Player.GetInstance().mana - m_SpecialList[l_PanelButton.title].mana >= 0)
+        else
         {
-            m_AddedSpecialList.Add(l_PanelButton.title, m_SpecialList[l_PanelButton.title]);
+            l_PanelButton.Choose(true);
+            m_ChoosedSkills.Add(l_PanelButton.skillId);
+            Player.GetInstance().mana -= SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;
 
-            PanelButton l_NewButton = Instantiate(PanelButton.prefab);
-            l_NewButton.title = l_PanelButton.title;
-            m_AddedSpecialButtonList.AddButton(l_NewButton);
-
-            Player.GetInstance().mana -= m_SpecialList[l_PanelButton.title].mana;
-        }
-    }
-
-    //TODO Kostil
-    private void InitSpecialList()
-    {
-        for (int  i = 0; i < 4; i++)
-        {
-            Special l_Special = new Special("SP" + i);
-            m_SpecialList.Add(l_Special.id, l_Special);
+            PanelButtonChosenSpecial l_PanelButtonChosenSpecial = Instantiate(PanelButtonChosenSpecial.prefab);
+            l_PanelButtonChosenSpecial.title = l_PanelButton.skillId;
+            m_AddedSpecialButtonList.AddButton(l_PanelButtonChosenSpecial);
         }
     }
 
     //TODO Kostil
     private void InitSpecialButtons()
     {
-        foreach (string p_SpecialId in m_SpecialList.Keys)
+        for (int i = 0; i < 8; i++)
         {
-            PanelButton l_SpecialButton = Instantiate(PanelButton.prefab);
-            l_SpecialButton.title = p_SpecialId;
-            l_SpecialButton.AddAction(SelectSpecial);
+            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
+            l_SpecialButton.skillId = "WaterDrops";
+            l_SpecialButton.AddAction(ChooseSpecial);
             m_SpecialButtonList.AddButton(l_SpecialButton);
         }
+
+        ReScaleBounds();
     }
 
     private void Confirm()
@@ -162,7 +158,7 @@ public class SpecialSelectPanel : Panel
         m_ChooseEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
         m_ChooseEnemyPanel.AddChoosedAction(Attack);
         m_ChooseEnemyPanel.AddCancelAction(CancelChoose);
-        PanelManager.GetInstance().ShowPanel(m_ChooseEnemyPanel);
+        PanelManager.GetInstance().ShowPanel(m_ChooseEnemyPanel, true, BattleSystem.GetInstance().mainPanelTransform);
     }
 
     private void Attack()
@@ -170,17 +166,49 @@ public class SpecialSelectPanel : Panel
         PanelManager.GetInstance().ClosePanel(this);
 
         SpecialUpgradePanel l_SpecialUpgradePanel = Instantiate(SpecialUpgradePanel.prefab);
-        l_SpecialUpgradePanel.SetSpecials(m_AddedSpecialList);
+        l_SpecialUpgradePanel.SetSkills(m_ChoosedSkills);
         l_SpecialUpgradePanel.SetEnemy(m_ChooseEnemyPanel.choosedEnemy);
         PanelManager.GetInstance().ShowPanel(l_SpecialUpgradePanel);
+        BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 
     private void CancelChoose()
     {
-        foreach (Special l_Special in m_AddedSpecialList.Values)
+        for (int i = 0; i < m_ChoosedSkills.Count; i++)
         {
-            Player.GetInstance().mana += l_Special.mana;
+            Player.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(m_ChoosedSkills[i]).mana;
         }
+    }
+
+    private void ReScaleBounds()
+    {
+        if (120.0f * m_SpecialButtonList.count > m_SpecialButtonList.rectTransform.sizeDelta.y)
+        {
+            Vector2 l_SizeDelta = m_SpecialButtonList.rectTransform.sizeDelta;
+            l_SizeDelta.y = 120.0f * m_SpecialButtonList.count;
+            m_SpecialButtonList.rectTransform.sizeDelta = l_SizeDelta;
+        }
+    }
+
+    private void CheckScrolling()
+    {
+        ScrollRect l_ScrollRect = m_SpecialButtonList.transform.parent.GetComponent<ScrollRect>();
+
+        int l_SpecialCount = m_SpecialButtonList.count - 1;
+        int l_CurrentSelectedSpecial = m_SpecialButtonList.currentButtonId;
+        
+        float l_Value = l_ScrollRect.verticalNormalizedPosition;
+
+        l_CurrentSelectedSpecial /= 3;
+        int m_delta = m_SpecialButtonList.count % 3;
+        l_Value = 1.0f - ((float)l_CurrentSelectedSpecial * 3) / ((float)l_SpecialCount - m_delta);
+
+        if (l_Value < 0)
+        {
+            l_Value = 0;
+        }
+
+        l_ScrollRect.verticalNormalizedPosition = l_Value;
     }
     #endregion
 }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using System.Collections.Generic;
+
 public class BattleSystem : MonoBehaviour
 {
     public enum ActorID
@@ -12,6 +14,18 @@ public class BattleSystem : MonoBehaviour
     private static BattleSystem m_Instance;
     private Player m_Player;
     private Enemy  m_Enemy;
+    private bool m_IsPlayerTurn = true;
+
+    [SerializeField]
+    private Transform m_MainPanelTransform;
+
+    [SerializeField]
+    private GameObject m_AvatarPanel = null;
+
+    public Transform mainPanelTransform
+    {
+        get { return m_MainPanelTransform; }
+    }
 
     public static BattleSystem GetInstance()
     {
@@ -44,10 +58,34 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    public void EndTurn()
+    {
+        m_IsPlayerTurn = !m_IsPlayerTurn;
+
+        if (m_IsPlayerTurn)
+        {
+            SetVisibleAvatarPanel(true);
+        }
+        else
+        {
+            SetVisibleAvatarPanel(false);
+            //  Запуск ИИ
+            if (!Enemy.GetInstance().isDead)
+            {
+                Enemy.GetInstance().Run();
+            }
+        }
+    }
+
+    public void SetVisibleAvatarPanel(bool p_Value)
+    {
+        m_AvatarPanel.SetActive(p_Value);
+    }
+
     private void Win()
     {
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText("Враги убиты.\nВы победили.\nГГ получает десять очков опыта и семки, шерсть 5 золотых, которые вы не увидите. Даже я сам не знаю для чего они. Кароч маладец. На шоколадка, воон лежит обернись... Шучу :)");
+        l_TextPanel.SetText(new List<string>() { "Враги убиты.\nВы победили.\nГГ получает десять очков опыта и семки, шерсть 5 золотых, которые вы не увидите. Даже я сам не знаю для чего они. Кароч маладец. На шоколадка, воон лежит обернись... Шучу :)" });
         l_TextPanel.AddButtonAction(RestartGame);
         PanelManager.GetInstance().ShowPanel(l_TextPanel);
     }
@@ -55,7 +93,7 @@ public class BattleSystem : MonoBehaviour
     private void Lose()
     {
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText("У ГГ больше нету сил сражаться далее, ГГ потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли.");
+        l_TextPanel.SetText(new List<string>() { "У ГГ больше нету сил сражаться далее, ГГ потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли." });
         l_TextPanel.AddButtonAction(RestartGame);
         PanelManager.GetInstance().ShowPanel(l_TextPanel);
     }

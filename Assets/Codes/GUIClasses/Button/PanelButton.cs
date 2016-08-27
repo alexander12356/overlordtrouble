@@ -7,9 +7,9 @@ public class PanelButton : MonoBehaviour
 {
     #region Variables
     protected event PanelButtonActionHandler m_ConfirmAction;
-    private bool   m_Selected;
-    private Image  m_SelectedImage;
-    protected Text m_TitleText;
+    private bool    m_Selected;
+    protected Image m_SelectedImage;
+    protected Text  m_TitleText;
 	private RectTransform m_RectTransform = null;
 
     [SerializeField]
@@ -35,7 +35,7 @@ public class PanelButton : MonoBehaviour
 	{
 		get 
 		{ 
-			return m_RectTransform.rect.height; 
+			return m_RectTransform.sizeDelta.y; 
 		}
 		set
 		{
@@ -128,11 +128,11 @@ public class PanelButton : MonoBehaviour
             Debug.LogWarning("Button: " + gameObject.name + " not have a action!");
         }
     }
-    #endregion
 
-    private void Select(bool p_Value)
+    public virtual void Select(bool p_Value)
     {
         m_Selected = p_Value;
         selectedImage.gameObject.SetActive(m_Selected);
     }
+    #endregion
 }

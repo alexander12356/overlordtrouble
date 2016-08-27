@@ -7,6 +7,9 @@ public class MainPanel : Panel
     [SerializeField]
     private ButtonList m_ButtonList = null;
 
+    [SerializeField]
+    private Transform m_DoughterPanelTransform = null;
+
     private static MainPanel m_Prefab;
     private ChooseEnemyPanel m_ChoosedEnemyPanel = null;
     #endregion
@@ -22,6 +25,10 @@ public class MainPanel : Panel
             }
             return m_Prefab;
         }
+    }
+    public Transform doughterTransform
+    {
+        get { return m_DoughterPanelTransform; }
     }
 
     public override void Awake()
@@ -56,13 +63,13 @@ public class MainPanel : Panel
     {
         m_ChoosedEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
         m_ChoosedEnemyPanel.AddChoosedAction(AttackEnemy);
-        PanelManager.GetInstance().ShowPanel(m_ChoosedEnemyPanel);
+        PanelManager.GetInstance().ShowPanel(m_ChoosedEnemyPanel, true, BattleSystem.GetInstance().mainPanelTransform);
     }
 
     private void Special()
     {
         SpecialSelectPanel l_SpecialSelectPanel = Instantiate(SpecialSelectPanel.prefab);
-        PanelManager.GetInstance().ShowPanel(l_SpecialSelectPanel);
+        PanelManager.GetInstance().ShowPanel(l_SpecialSelectPanel, true, BattleSystem.GetInstance().mainPanelTransform);
     }
 
     private void AttackEnemy()

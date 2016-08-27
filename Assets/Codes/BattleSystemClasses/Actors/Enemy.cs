@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Enemy : Actor
 {
@@ -83,7 +83,7 @@ public class Enemy : Actor
         p_Actor.Damage(l_DamageValue);
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText("Гоповолк использовал удар и нанес " + l_DamageValue + " урона");
+        l_TextPanel.SetText(new List<string>() { "Гоповолк использовал удар и нанес " + l_DamageValue + " урона" });
         l_TextPanel.AddButtonAction(EndTurn);
         PanelManager.GetInstance().ShowPanel(l_TextPanel);
 

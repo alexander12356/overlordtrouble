@@ -11,6 +11,7 @@ public class ButtonList : MonoBehaviour
 
     private int m_CurrentButtonId = 0;
     private int m_PrevButtonId = 0;
+    private RectTransform m_RectTransform = null;
 
     private event KeyArrowActionHandler KeyArrowActioneEvent;
     private event PanelButtonActionHandler m_CancelAction;
@@ -60,6 +61,17 @@ public class ButtonList : MonoBehaviour
     public int count
     {
         get { return m_ButtonsList.Count; }
+    }
+    public RectTransform rectTransform
+    {
+        get
+        {
+            if (m_RectTransform == null)
+            {
+                m_RectTransform = GetComponent<RectTransform>();
+            }
+            return m_RectTransform;
+        }
     }
 
     public void AddKeyArrowAction(KeyArrowActionHandler p_Action)

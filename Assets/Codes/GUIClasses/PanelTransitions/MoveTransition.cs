@@ -1,9 +1,21 @@
 ﻿using UnityEngine;
+
+using System;
 using System.Collections;
 
 public class MoveTransition : BaseTransition
 {
+    [SerializeField]
     private float m_ShowingSpeed = 1400.0f;
+
+    [SerializeField]
+    private Vector3 m_StartShowPosition = new Vector3(1500.0f, 0.0f);
+
+    [SerializeField]
+    private Vector3 m_DestShowPosition = new Vector3(0.0f, 0.0f);
+
+    [SerializeField]
+    private Vector3 m_HideDestPosition = new Vector3(-1180.0f, 0.0f);
 
     public override void Show()
     {
@@ -18,36 +30,31 @@ public class MoveTransition : BaseTransition
     private IEnumerator Showing()
     {
         m_IsMoving = true;
-        m_PanelTransform.localPosition = new Vector3(1500.0f, m_PanelTransform.localPosition.y, 0.0f);
-        m_PanelTransform.localScale = Vector3.one;
-        Vector3 l_Position = m_PanelTransform.localPosition;
 
-        while (m_PanelTransform.localPosition.x >= 0)
+        m_PanelTransform.localPosition = m_StartShowPosition;
+        while ((m_PanelTransform.localPosition - m_DestShowPosition).sqrMagnitude >= 0.05)
         {
-            l_Position.x -= m_ShowingSpeed * Time.deltaTime;
-            m_PanelTransform.localPosition = l_Position;
+            m_PanelTransform.localPosition = Vector2.MoveTowards(m_PanelTransform.localPosition, m_DestShowPosition, m_ShowingSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
-        m_PanelTransform.localPosition = new Vector3(0.0f, m_PanelTransform.localPosition.y, 0.0f);
-        m_IsMoving = false;
+        m_PanelTransform.localPosition = m_DestShowPosition;
 
+        m_IsMoving = false;
         EndShowing();
     }
 
     private IEnumerator Hiding()
     {
         m_IsMoving = true;
-        Vector3 l_Position = m_PanelTransform.localPosition;
-        while (m_PanelTransform.localPosition.x >= -1180)
+        m_PanelTransform.localPosition = m_DestShowPosition;
+        while ((m_PanelTransform.localPosition - m_HideDestPosition).sqrMagnitude >= 0.05)
         {
-            l_Position.x -= m_ShowingSpeed * Time.deltaTime;
-            m_PanelTransform.localPosition = l_Position;
+            m_PanelTransform.localPosition = Vector2.MoveTowards(m_PanelTransform.localPosition, m_HideDestPosition, m_ShowingSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
+        m_PanelTransform.localPosition = m_HideDestPosition;
 
         m_IsMoving = false;
-        m_PanelTransform.localPosition = new Vector3(-1180.0f, m_PanelTransform.localPosition.y, 0.0f);
-
         EndHiding();
     }
 }

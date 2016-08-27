@@ -56,7 +56,7 @@ public class ImprovePanel : Panel
         }
 
         string l_Text = "Вы выбрали класс " + l_ImproveName + l_ImproveSkillsText;
-        m_TextPanel.SetText(l_Text);
+        m_TextPanel.SetText(new List<string>() { l_Text });
         m_TextPanel.AddPopAction(ReturnToMainMenu);
 
         PanelManager.GetInstance().ShowPanel(m_TextPanel, true);

@@ -14,7 +14,7 @@ public class SpecialUpgradePanel : Panel
     private Image m_BarImage = null;
 
     private List<KeyCode> m_SpecialKeys = new List<KeyCode>();
-    private Dictionary<string, Special> m_AddedSpecialDictionary;
+    private List<string> m_AddedSkills;
     private List<SpecialUpgradeIcon> m_SpecialUpgradeIconList = new List<SpecialUpgradeIcon>();
     private int   m_CurrentKeyCounter = 0;
     private float m_Timer = 0.0f;
@@ -36,10 +36,10 @@ public class SpecialUpgradePanel : Panel
         }
     }
 
-    public void SetSpecials(Dictionary<string, Special> p_AddedSpecials)
+    public void SetSkills(List<string> p_AddedSkills)
     {
-        m_AddedSpecialDictionary = p_AddedSpecials;
-        CreateIcons(m_AddedSpecialDictionary);
+        m_AddedSkills = p_AddedSkills;
+        CreateIcons(m_AddedSkills);
         RandomizeSpecialKeys();
     }
 
@@ -63,7 +63,7 @@ public class SpecialUpgradePanel : Panel
         else
         {
             PanelManager.GetInstance().ClosePanel(this);
-            Player.GetInstance().SpecialAttack(m_Enemy, m_AddedSpecialDictionary);
+            Player.GetInstance().SpecialAttack(m_Enemy, m_SpecialUpgradeIconList);
             return;
         }
 
@@ -90,13 +90,15 @@ public class SpecialUpgradePanel : Panel
     #endregion
 
     #region Private
-    private void CreateIcons(Dictionary<string, Special> p_AddedSpecialDictionary)
+    private void CreateIcons(List<string> p_AddedSkills)
     {
-        foreach (Special l_Special in p_AddedSpecialDictionary.Values)
+        for (int i = 0; i < p_AddedSkills.Count; i++)
         {
+            SkillData l_SkillData = SkillDataBase.GetInstance().GetSkillData(p_AddedSkills[i]);
+
             SpecialUpgradeIcon l_SpecialUpgradeIcon = Instantiate(SpecialUpgradeIcon.prefab);
-            l_SpecialUpgradeIcon.SetTitle(l_Special.title);
-            l_SpecialUpgradeIcon.SetSpecial(l_Special);
+            l_SpecialUpgradeIcon.SetTitle(l_SkillData.id);
+            l_SpecialUpgradeIcon.skillId = p_AddedSkills[i];
             l_SpecialUpgradeIcon.transform.SetParent(m_SpecialIconsConteiner);
 
             l_SpecialUpgradeIcon.transform.localPosition = Vector3.zero;
@@ -141,7 +143,7 @@ public class SpecialUpgradePanel : Panel
 
     private void IncrementCurrentCounter()
     {
-        if (m_WrongSpecialCounter >= m_AddedSpecialDictionary.Count)
+        if (m_WrongSpecialCounter >= m_AddedSkills.Count)
         {
             return;
         }

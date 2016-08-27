@@ -6,13 +6,15 @@ public class SpecialUpgradeIcon : MonoBehaviour
     #region Variables
     private static SpecialUpgradeIcon m_Prefab = null;
     private KeyCode m_Key= KeyCode.UpArrow;
-    private Image m_WrongImage  = null;
-    private Image m_ArrowImage  = null;
-    private Image m_SelectImage = null;
+    private Image m_WrongImage     = null;
+    private Image m_ArrowImage     = null;
+    private Image m_SelectImage    = null;
+    private Image m_TextBackground = null;
     private Text  m_Text        = null;
     private bool  m_Wrong       = false;
     private bool  m_Selected    = false;
-    private Special m_Special   = null;
+    private int   m_SkillBuffCount = 0;
+    private string m_SkillId = string.Empty;
     #endregion
 
     #region Interface
@@ -49,6 +51,11 @@ public class SpecialUpgradeIcon : MonoBehaviour
             m_SelectImage.gameObject.SetActive(m_Selected);
         }
     }
+    public string skillId
+    {
+        get { return m_SkillId;  }
+        set { m_SkillId = value; }
+    }
 
     public void SetTitle(string p_Title)
     {
@@ -60,7 +67,7 @@ public class SpecialUpgradeIcon : MonoBehaviour
         Color l_Color;
         ColorUtility.TryParseHtmlString("#004E0DFF", out l_Color);
 
-        if (m_Special.level > 0)
+        if (m_SkillBuffCount > 0)
         {
             PopUpText l_PopUpText = Instantiate(PopUpText.prefab);
             l_PopUpText.text.color = l_Color;
@@ -72,26 +79,22 @@ public class SpecialUpgradeIcon : MonoBehaviour
         }
         else
         {
-            m_Text.color = l_Color;
+            m_TextBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/UpgradedSpecialIcon");
         }
 
-        m_Special.level++;
+        m_SkillBuffCount++;
     }
 
     public void Wrong()
     {
         m_Wrong = true;
-        m_Special.level = -1;
-
-        m_Text.gameObject.SetActive(false);
+        m_SkillBuffCount = -1;
+        
         m_ArrowImage.gameObject.SetActive(false);
         m_SelectImage.gameObject.SetActive(false);
         m_WrongImage.gameObject.SetActive(true);
-    }
 
-    public void SetSpecial(Special p_Special)
-    {
-        m_Special = p_Special;
+        m_TextBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/MissedSpecialIcon");
     }
     #endregion
 
@@ -104,9 +107,10 @@ public class SpecialUpgradeIcon : MonoBehaviour
     private void InitComponents()
     {
         Image[] l_Images = GetComponentsInChildren<Image>(true);
-        m_WrongImage = l_Images[0];
-        m_ArrowImage = l_Images[1];
-        m_SelectImage = l_Images[2];
+        m_TextBackground = l_Images[0];
+        m_WrongImage     = l_Images[1];
+        m_SelectImage    = l_Images[2];
+        m_ArrowImage     = l_Images[3];
 
         m_Text = GetComponentInChildren<Text>();
     }
@@ -115,7 +119,7 @@ public class SpecialUpgradeIcon : MonoBehaviour
     {
         m_Key = p_Key;
 
-        m_ArrowImage.sprite = Resources.Load<Sprite>("Sprites/BattleSystem/UI/Arrow");
+        m_ArrowImage.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/SpecialArrow");
         switch (p_Key)
         {
             case KeyCode.UpArrow:
@@ -131,6 +135,11 @@ public class SpecialUpgradeIcon : MonoBehaviour
                 m_ArrowImage.transform.localRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 180.0f));
                 break;
         }
+    }
+
+    public int GetBuffCount()
+    {
+        return m_SkillBuffCount;
     }
     #endregion
 }

@@ -35,9 +35,10 @@ public class Player : Actor
         p_Actor.Damage(l_Damage);
 
         TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
-        l_NewTextPanel.SetText("Игрок нанес " + l_Damage + " урона врагу");
+        l_NewTextPanel.SetText(new List<string>() { "Игрок нанес " + l_Damage + " урона врагу" });
         l_NewTextPanel.AddButtonAction(EndTurn);
         PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
+        BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
 
         m_AudioSource.PlayOneShot(m_AudioAttack);
     }
@@ -62,74 +63,75 @@ public class Player : Actor
     }
 
     //TODO отрефакторить
-    public void SpecialAttack(Enemy p_Enemy, Dictionary<string, Special> p_SpecialDictionary)
+    public void SpecialAttack(Enemy p_Enemy, List<SpecialUpgradeIcon> p_SpecialUpgradeIconList)
     {
         int l_BrokenSpecialCount = 0;
         int l_UnbuffedSpecialCount = 0;
-        float l_DamageValue = 0;
 
-        List<Special> l_BuffedSpecialList = new List<Special>();
-        List<Special> l_SpecialList = new List<Special>();
-        foreach (string l_Key in p_SpecialDictionary.Keys)
+        float l_DamageValue = 0;
+        string l_Text = string.Empty;
+
+        List<SkillData> l_BuffedSkills = new List<SkillData>();
+        for (int i = 0; i < p_SpecialUpgradeIconList.Count; i++)
         {
-            if (p_SpecialDictionary[l_Key].level == - 1)
+            if (p_SpecialUpgradeIconList[i].GetBuffCount() == - 1)
             {
                 l_BrokenSpecialCount++;
             }
-            else if (p_SpecialDictionary[l_Key].level == 0)
+            else if (p_SpecialUpgradeIconList[i].GetBuffCount() == 0)
             {
                 l_UnbuffedSpecialCount++;
             }
             else
             {
-                l_BuffedSpecialList.Add(p_SpecialDictionary[l_Key]);
+                SkillData l_SkillData = SkillDataBase.GetInstance().GetSkillData(p_SpecialUpgradeIconList[i].skillId);
+                l_SkillData.damage = l_SkillData.damage + (l_SkillData.damage * 0.1f) * p_SpecialUpgradeIconList[i].GetBuffCount();
+
+                l_BuffedSkills.Add(l_SkillData);
             }
-            l_SpecialList.Add(p_SpecialDictionary[l_Key]);
         }
-        if (l_BrokenSpecialCount == p_SpecialDictionary.Count)
+        if (l_BrokenSpecialCount == p_SpecialUpgradeIconList.Count)
         {
             l_DamageValue = 1.0f;
-
-            TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
-            l_NewTextPanel.SetText("Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName);
-            l_NewTextPanel.AddButtonAction(EndTurn);
-            PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
+            l_Text = "Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName;
         }
-        else if (l_UnbuffedSpecialCount == p_SpecialDictionary.Count)
+        else if (l_UnbuffedSpecialCount == p_SpecialUpgradeIconList.Count)
         {
-            l_DamageValue = l_SpecialList[0].damageValue - l_SpecialList[0].damageValue * 0.25f;
+            SkillData p_SkillData = SkillDataBase.GetInstance().GetSkillData(p_SpecialUpgradeIconList[0].skillId);
 
-            TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
-            l_NewTextPanel.SetText("Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName);
-            l_NewTextPanel.AddButtonAction(EndTurn);
-            PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
+            l_DamageValue = p_SkillData.damage - p_SkillData.damage * 0.25f;
+            l_Text = "Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName;
         }
         else
         {
             string l_UsedSpecialsName = "";
-            for (int i = 0; i < l_BuffedSpecialList.Count; i++)
+
+            for (int i = 0; i < l_BuffedSkills.Count; i++)
             {
-                if (i == l_BuffedSpecialList.Count - 2)
+                if (i == l_BuffedSkills.Count - 2)
                 {
-                    l_UsedSpecialsName += l_BuffedSpecialList[i].title + " и ";
+                    l_UsedSpecialsName += l_BuffedSkills[i].id + " и ";
                 }
-                else if (i == l_BuffedSpecialList.Count - 1)
+                else if (i == l_BuffedSkills.Count - 1)
                 {
-                    l_UsedSpecialsName += l_BuffedSpecialList[i].title;
+                    l_UsedSpecialsName += l_BuffedSkills[i].id;
                 }
                 else
                 {
-                    l_UsedSpecialsName += l_BuffedSpecialList[i].title + ", ";
+                    l_UsedSpecialsName += l_BuffedSkills[i].id + ", ";
                 }
-
-                l_DamageValue += l_BuffedSpecialList[i].damageValue + (l_BuffedSpecialList[i].damageValue * 0.1f) * l_BuffedSpecialList[i].level;
+                l_DamageValue += l_BuffedSkills[i].damage;
             }
-
-            TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
-            l_NewTextPanel.SetText("ГГ использовал на \"" + p_Enemy.actorName + "\" " + l_UsedSpecialsName + " он нанес " + l_DamageValue + " урона");
-            l_NewTextPanel.AddButtonAction(EndTurn);
-            PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
+            
+            l_Text = "ГГ использовал на \"" + p_Enemy.actorName + "\" " + l_UsedSpecialsName + " он нанес " + l_DamageValue + " урона";
         }
+
+        TextPanel l_TextNewPanel = Instantiate(TextPanel.prefab);
+        l_TextNewPanel.SetText(new List<string>() { l_Text });
+        l_TextNewPanel.AddButtonAction(EndTurn);
+        PanelManager.GetInstance().ShowPanel(l_TextNewPanel);
+        BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
+
         p_Enemy.Damage(l_DamageValue);
         m_AudioSource.PlayOneShot(m_AudioAttack);
     }

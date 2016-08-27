@@ -73,7 +73,7 @@ public class Actor : MonoBehaviour
 
     public virtual void EndTurn()
     {
-        TurnSystem.GetInstance().EndTurn();
+        BattleSystem.GetInstance().EndTurn();
     }
 
     public virtual void InitStats()

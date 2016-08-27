@@ -114,7 +114,7 @@ public class ChooseEnemyPanel : Panel
 
         for (int i = 0; i < m_EnemyList.Count; i++)
         {
-			PanelButton l_PanelButton = Instantiate (PanelButton.prefab);
+			PanelButtonEnemyChoise l_PanelButton = Instantiate (PanelButtonEnemyChoise.prefab);
             l_PanelButton.title = m_EnemyList[i].actorName + " " + m_EnemyList[i].health + "/" + m_EnemyList[i].baseHealth;
 			l_PanelButton.titleSizeW = 500;
 
@@ -132,13 +132,11 @@ public class ChooseEnemyPanel : Panel
     {
         m_ChoosedEnemy = m_EnemyList[m_EnemyButtonList.currentButtonId];
 
-        Color l_Color;
-        ColorUtility.TryParseHtmlString("#004E0DFF", out l_Color);
-        m_EnemyButtonList.currentButton.text.color = l_Color;
-
         m_EnemyButtonList.isActive = false;
         m_ConfirmButtonList.isActive = true;
         m_CurrentButtonListType = ButtonListType.ConfirmList;
+
+        m_EnemyButtonList.currentButton.selected = true;
     }
 
     private void SelectEnemyAvatar()
@@ -154,7 +152,6 @@ public class ChooseEnemyPanel : Panel
             m_CurrentButtonListType = ButtonListType.EnemyList;
             m_ConfirmButtonList.isActive = false;
             m_EnemyButtonList.isActive = true;
-            m_EnemyButtonList.currentButton.text.color = Color.black;
         }
         else
         {
