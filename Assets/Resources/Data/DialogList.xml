@@ -28,4 +28,9 @@
     <Text id="1" avatarId="VillageElder">Я староста этой деревни</Text>
 	<Text id="2" avatarId="VillageElder">Счастливого дня</Text>
   </Dialog>
+  <Dialog id="GoatPerson" avatarPath="Sprites/Creations/GoatPerson/Avatar">
+    <Text id="0" avatarId="GoatPerson">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
+    <Text id="1" avatarId="GoatPerson">Но сегодня до меня дошла мысль, что если наполнить ведра ровно до половины я смогу нести два ведра одновременно.</Text>
+	<Text id="2" avatarId="GoatPerson">Разве я не гений?</Text>
+  </Dialog>
 </DialogList>

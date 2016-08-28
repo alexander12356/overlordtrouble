@@ -53,5 +53,41 @@ public class JourneyNPC : JourneyActor
 
         m_BaseMovement.LogicStop();
     }
-    #endregion
+
+#if UNITY_EDITOR
+    [ContextMenu("GenerateStayNPC)")]
+    public void GenerateStayNPC()
+    {
+        gameObject.AddComponent<StayMovement>();
+        gameObject.AddComponent<DialogCollideBehaviors>();
+
+        GameObject l_RendererObject = new GameObject();
+        l_RendererObject.name = "Renderer";
+        l_RendererObject.AddComponent<SpriteRenderer>();
+        l_RendererObject.AddComponent<Animator>();
+        l_RendererObject.transform.SetParent(transform);
+        l_RendererObject.transform.localPosition = Vector3.zero;
+
+        GameObject l_ColliderObject = new GameObject();
+        l_ColliderObject.name = "Collider";
+        l_ColliderObject.AddComponent<BoxCollider2D>();
+        l_ColliderObject.transform.SetParent(transform);
+        l_ColliderObject.transform.localPosition = Vector3.zero;
+
+        GameObject l_CheckCollider = new GameObject();
+        l_CheckCollider.name = "CheckCollider";
+        l_CheckCollider.AddComponent<CheckCollide>();
+        l_CheckCollider.AddComponent<CircleCollider2D>();
+        l_CheckCollider.GetComponent<CircleCollider2D>().isTrigger = true;
+        l_CheckCollider.transform.SetParent(transform);
+        l_CheckCollider.transform.localPosition = Vector3.zero;
+
+        GameObject l_ActiveKey = new GameObject();
+        l_ActiveKey.name = "ActiveKey";
+        l_ActiveKey.AddComponent<SpriteRenderer>();
+        l_ActiveKey.transform.SetParent(transform);
+        l_ActiveKey.transform.localPosition = Vector3.zero;
+    }
+#endif
+#endregion
 }
