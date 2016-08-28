@@ -30,7 +30,7 @@ public class JourneyActor : MonoBehaviour
         {
             if (m_Animator == null)
             {
-                m_Animator = GetComponent<Animator>();
+                m_Animator = GetComponentInChildren<Animator>();
             }
             return m_Animator;
         }

@@ -23,4 +23,9 @@
     <Text id="0" avatarId="Store">Все мои товары отличаются большой прочностью и принадлежали храбрым воинам, которые вызвали в бой дракона</Text>
     <Text id="1" avatarId="Store">Никто из них не выжил, в отличии от их экипировки</Text>
   </Dialog>
+  <Dialog id="VillageElder" avatarPath="Sprites/Creations/VillageElder/Avatar">
+    <Text id="0" avatarId="VillageElder">Добрый день уважаемый</Text>
+    <Text id="1" avatarId="VillageElder">Я староста этой деревни</Text>
+	<Text id="2" avatarId="VillageElder">Счастливого дня</Text>
+  </Dialog>
 </DialogList>

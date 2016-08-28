@@ -6,12 +6,10 @@ public class JourneyNPC : JourneyActor
     #region Variables
     private CheckCollide     m_CheckCollide    = null;
     private BaseCollideBehaviors m_BaseCollideBehaviors = null;
+    private BaseMovement m_BaseMovement = null;
 
     [SerializeField]
     private string m_NpcId = "TestNPC";
-
-    [SerializeField]
-    private BaseMovement m_BaseMovement = null;
     #endregion
 
     #region Interface
@@ -25,6 +23,7 @@ public class JourneyNPC : JourneyActor
         m_CheckCollide.AddCollideEnterAction(m_BaseCollideBehaviors.EnterAction);
         m_CheckCollide.AddCollideExitAction(m_BaseCollideBehaviors.ExitAction);
 
+        m_BaseMovement = GetComponent<BaseMovement>();
         if (!m_BaseMovement)
         {
             Debug.LogWarning("Movement logic is null");
