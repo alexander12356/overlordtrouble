@@ -36,12 +36,17 @@ public class PatrolMovement : BaseMovement
     {
         base.LogicUpdate();
 
+        if (m_Patrol.Count == 0)
+        {
+            return;
+        }
+
         m_ElapsedTime += Time.deltaTime;
 
-        journeyActor.myTransform.position = Vector2.MoveTowards(journeyActor.myTransform.position, m_Patrol[m_CurrentPoint].position, m_MovingTime * Time.deltaTime);
+        journeyActor.myTransform.localPosition = Vector2.MoveTowards(journeyActor.myTransform.localPosition, m_Patrol[m_CurrentPoint].position, m_MovingTime * Time.deltaTime);
         journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, true);
 
-        if ((Vector2)journeyActor.myTransform.position == m_Patrol[m_CurrentPoint].position)
+        if ((Vector2)journeyActor.myTransform.localPosition == m_Patrol[m_CurrentPoint].position)
         {
             journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, false);
             m_CurrentPoint++;

@@ -60,7 +60,19 @@ public class JourneyNPC : JourneyActor
     {
         gameObject.AddComponent<StayMovement>();
         gameObject.AddComponent<DialogCollideBehaviors>();
+        GenerateBaseObjects();
+    }
 
+    [ContextMenu("GenerateMovingNPC)")]
+    public void GenerateMovingNPC()
+    {
+        gameObject.AddComponent<PatrolMovement>();
+        gameObject.AddComponent<DialogCollideBehaviors>();
+        GenerateBaseObjects();
+    }
+
+    private void GenerateBaseObjects()
+    {
         GameObject l_RendererObject = new GameObject();
         l_RendererObject.name = "Renderer";
         l_RendererObject.AddComponent<SpriteRenderer>();
