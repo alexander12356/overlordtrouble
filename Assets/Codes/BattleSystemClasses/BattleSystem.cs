@@ -65,13 +65,16 @@ public class BattleSystem : MonoBehaviour
         if (m_IsPlayerTurn)
         {
             SetVisibleAvatarPanel(true);
+            Player.GetInstance().RunTurn();
         }
         else
         {
             SetVisibleAvatarPanel(false);
+            Enemy.GetInstance().RunTurn();
             //  Запуск ИИ
             if (!Enemy.GetInstance().isDead)
             {
+                Player.GetInstance().RunTurn();
                 Enemy.GetInstance().Run();
             }
         }
@@ -84,6 +87,7 @@ public class BattleSystem : MonoBehaviour
 
     private void Win()
     {
+        SetVisibleAvatarPanel(false);
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "Враги убиты.\nВы победили.\nГГ получает десять очков опыта и семки, шерсть 5 золотых, которые вы не увидите. Даже я сам не знаю для чего они. Кароч маладец. На шоколадка, воон лежит обернись... Шучу :)" });
         l_TextPanel.AddButtonAction(RestartGame);
@@ -92,6 +96,7 @@ public class BattleSystem : MonoBehaviour
 
     private void Lose()
     {
+        SetVisibleAvatarPanel(false);
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "У ГГ больше нету сил сражаться далее, ГГ потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли." });
         l_TextPanel.AddButtonAction(RestartGame);

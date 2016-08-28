@@ -71,6 +71,14 @@ public class Actor : MonoBehaviour
         isDead = true;
     }
 
+    public virtual void RunTurn()
+    {
+        if (m_Health <= 0)
+        {
+            Died();
+        }
+    }
+
     public virtual void EndTurn()
     {
         BattleSystem.GetInstance().EndTurn();

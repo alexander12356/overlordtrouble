@@ -127,6 +127,11 @@ public class SpecialSelectPanel : Panel
         }
         else
         {
+            if (m_ChoosedSkills.Count >=4)
+            {
+                return;
+            }
+
             l_PanelButton.Choose(true);
             m_ChoosedSkills.Add(l_PanelButton.skillId);
             Player.GetInstance().mana -= SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;

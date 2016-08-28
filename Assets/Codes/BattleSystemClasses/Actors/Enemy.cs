@@ -64,13 +64,7 @@ public class Enemy : Actor
         health -= p_DamageValue;
 
         Debug.Log("Enemy health: " + health);
-
-        if (health <= 0.0f)
-        {
-            Died();
-
-            Debug.Log("Enemy is died");
-        }
+        
         m_Animator.SetTrigger("Hit");
         m_AudioSource.PlayOneShot(m_AudioHit);
     }

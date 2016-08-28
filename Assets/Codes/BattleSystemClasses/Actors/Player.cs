@@ -51,13 +51,6 @@ public class Player : Actor
 
         Debug.Log("Player health: " + health);
 
-        if (health <= 0.0f)
-        {
-            Died();
-
-            Debug.Log("Player is died");
-        }
-
         m_Animator.SetTrigger("Hit");
         m_AudioSource.PlayOneShot(m_AudioHit);
     }
