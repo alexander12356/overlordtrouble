@@ -81,18 +81,22 @@ public class StoreItemButton : PanelButtonUpdateKey
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             countToBuy += 1;
+            m_Animator.SetTrigger("RightArrow");
         }
         else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             countToBuy -= 1;
+            m_Animator.SetTrigger("LeftArrow");
         }
         else if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             countToBuy += 10;
+            m_Animator.SetTrigger("UpArrow");
         }
         else if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             countToBuy -= 10;
+            m_Animator.SetTrigger("DownArrow");
         }
         else if (Input.GetKeyUp(KeyCode.Z))
         {
