@@ -36,4 +36,7 @@
   <Dialog id="Terner" avatarPath="Sprites/Creations/Terner/Avatar">
     <Text id="0" avatarId="GoatPerson">Привет.</Text>
   </Dialog>
+  <Dialog id="VillageFountain" avatarPath="">
+    <Text id="0" avatarId="GoatPerson">Колодец... полон воды… ее можно пить.</Text>
+  </Dialog>
 </DialogList>

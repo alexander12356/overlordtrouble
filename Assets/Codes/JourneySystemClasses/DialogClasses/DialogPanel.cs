@@ -9,6 +9,7 @@ public class DialogPanel : Panel
 
     #region Variables
     private TextBox m_TextBox;
+    private Image m_BackgroundImage = null;
 
     [SerializeField]
     private Image m_AvatarImage = null;
@@ -32,12 +33,19 @@ public class DialogPanel : Panel
         base.Awake();
 
         m_TextBox = GetComponentInChildren<TextBox>();
+        m_BackgroundImage = GetComponentInChildren<Image>();
     }
 
     public void SetDialog(Dialog p_Dialog)
     {
         m_TextBox.SetText(p_Dialog.phrases);
         m_AvatarImage.sprite = Resources.Load<Sprite>(p_Dialog.avatarImagePath);
+
+        if (m_AvatarImage.sprite == null)
+        {
+            m_AvatarImage.enabled = false;
+            m_BackgroundImage.sprite = Resources.Load<Sprite>("Sprites/GUI/Dialogs/dialogue_without_portrait");
+        }
     }
 
     public override void UpdatePanel()

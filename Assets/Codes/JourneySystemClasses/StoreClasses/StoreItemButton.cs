@@ -100,7 +100,7 @@ public class StoreItemButton : PanelButtonUpdateKey
         }
         else if (Input.GetKeyUp(KeyCode.Z))
         {
-            if (PlayerInventory.GetInstance().coins > m_CountToBuy * m_ItemCost && m_CountToBuy > 0)
+            if (PlayerInventory.GetInstance().coins >= m_CountToBuy * m_ItemCost && m_CountToBuy > 0)
             {
                 YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
                 l_YesNoPanel.SetText("Вы действительно хотите купить " + title + "?");
