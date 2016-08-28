@@ -13,9 +13,6 @@ public class ImprovePanel : Panel
     private Image m_BackgroundBeforeSelectImage = null;
 
     [SerializeField]
-    private List<ImproveItem> m_ImproveList = null;
-
-    [SerializeField]
     private Image m_ImproveCompleteImage = null;
     #endregion
 
@@ -69,6 +66,13 @@ public class ImprovePanel : Panel
         m_TextPanelLocalPosition.y = -402;
         m_TextPanel.myTransform.localPosition = m_TextPanelLocalPosition;
     }
+
+    //Called from Animation
+    public void EndBlinking()
+    {
+        Select();
+    }
+
     #endregion
 
     #region Private
@@ -86,21 +90,28 @@ public class ImprovePanel : Panel
 
     private void ShowYesNoPanel()
     {
+        PanelButtonImprove l_PanelButtonImprove = (PanelButtonImprove)m_ImproveButtonList.currentButton;
+        l_PanelButtonImprove.ReadyChoose();
+
         YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
         l_YesNoPanel.AddYesAction(Select);
-        l_YesNoPanel.AddYesAction(l_YesNoPanel.Cancel);
+        l_YesNoPanel.AddNoAction(l_PanelButtonImprove.UnreadyChoose);
         PanelManager.GetInstance().ShowPanel(l_YesNoPanel, true);
     }
 
     private void Select()
     {
         PanelButtonImprove l_PanelButtonImprove = (PanelButtonImprove)m_ImproveButtonList.currentButton;
-        l_PanelButtonImprove.Choose();
-        l_PanelButtonImprove.AddShowProfileAction(ShowProfile);
+        l_PanelButtonImprove.StartBlinking();
+        l_PanelButtonImprove.AddAfterBlinkingAnimation(RemoveButtonsButExcept);
+        l_PanelButtonImprove.AddAfterSelectionAction(ShowProfile);
+    }
 
+    private void RemoveButtonsButExcept()
+    {
         for (int i = 0; i < m_ImproveButtonList.count; i++)
         {
-            if (m_ImproveButtonList[i] != l_PanelButtonImprove)
+            if (m_ImproveButtonList[i] != m_ImproveButtonList.currentButton)
             {
                 ((PanelButtonImprove)m_ImproveButtonList[i]).Away();
             }

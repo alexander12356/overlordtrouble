@@ -105,7 +105,6 @@ public class StoreItemButton : PanelButtonUpdateKey
                 YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
                 l_YesNoPanel.SetText("Вы действительно хотите купить " + title + "?");
                 l_YesNoPanel.AddYesAction(m_BuyAction);
-                l_YesNoPanel.AddYesAction(l_YesNoPanel.Cancel);
 
                 PanelManager.GetInstance().ShowPanel(l_YesNoPanel, true);
             }

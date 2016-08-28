@@ -32,7 +32,7 @@ public class YesNoPanel : Panel
 
         m_ButtonList = GetComponent<ButtonList>();
         m_ButtonList[0].AddAction(YesAction);
-        m_ButtonList[1].AddAction(Cancel);
+        m_ButtonList[1].AddAction(NoAction);
     }
 
     public override void UpdatePanel()
@@ -44,7 +44,6 @@ public class YesNoPanel : Panel
 
     public void Cancel()
     {
-        NoAction();
         PanelManager.GetInstance().ClosePanel(this);
     }
 
@@ -71,6 +70,7 @@ public class YesNoPanel : Panel
         {
             m_YesAction();
         }
+        Cancel();
     }
 
     private void NoAction()
@@ -79,6 +79,7 @@ public class YesNoPanel : Panel
         {
             m_NoAction();
         }
+        Cancel();
     }
     #endregion
 }

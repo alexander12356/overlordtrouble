@@ -5,13 +5,15 @@ using System.Collections;
 
 public class PanelButtonImprove : PanelButton
 {
+    #region Variables
     private Image m_SelectedBackground;
     private Image m_ImproveAvatarImage;
     private ImproveData m_ImproveData;
     private Transform m_Transform = null;
     private Animator  m_Animator  = null;
     private bool m_Chosen = false;
-    private PanelActionHandler m_ShowProfileAction = null;
+    private PanelActionHandler m_AfterSelectionAction = null;
+    private PanelActionHandler m_AfterBlinkingAction = null;
 
     [SerializeField]
     private Vector2 m_ChoosePosition = Vector2.zero;
@@ -24,7 +26,9 @@ public class PanelButtonImprove : PanelButton
 
     [SerializeField]
     private float m_AwaySpeed = 8.0f;
+    #endregion
 
+    #region Interface
     public ImproveData improveData
     {
         get { return m_ImproveData; }
@@ -67,8 +71,17 @@ public class PanelButtonImprove : PanelButton
     public void Choose()
     {
         m_Chosen = true;
-        m_SelectedBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/ImproveClass/СhosenСlass");
         StartCoroutine(Selecting());
+    }
+
+    public void ReadyChoose()
+    {
+        m_SelectedBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/ImproveClass/СhosenСlass");
+    }
+
+    public void UnreadyChoose()
+    {
+        m_SelectedBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/ImproveClass/SelectedClass");
     }
 
     public void Away()
@@ -79,17 +92,42 @@ public class PanelButtonImprove : PanelButton
     // Called from Animation
     public void ShowProfile()
     {
-        if (m_ShowProfileAction != null)
+        if (m_AfterSelectionAction != null)
         {
-            m_ShowProfileAction();
+            m_AfterSelectionAction();
         }
     }
 
-    public void AddShowProfileAction(PanelActionHandler m_Action)
+    public void AddAfterSelectionAction(PanelActionHandler m_Action)
     {
-        m_ShowProfileAction += m_Action;
+        m_AfterSelectionAction += m_Action;
     }
 
+    public void StartBlinking()
+    {
+        m_Animator.enabled = true;
+        m_Animator.SetTrigger("Blinking");
+    }
+
+    // Called from Animation
+    public void EndBlinking()
+    {
+        m_Animator.enabled = false;
+        Choose();
+
+        if (m_AfterBlinkingAction != null)
+        {
+            m_AfterBlinkingAction();
+        }
+    }
+
+    public void AddAfterBlinkingAnimation(PanelActionHandler p_Action)
+    {
+        m_AfterBlinkingAction += p_Action;
+    }
+    #endregion
+
+    #region Private
     private IEnumerator Selecting()
     {
         Vector2 m_CurrentPosition = m_Transform.localPosition;
@@ -117,5 +155,6 @@ public class PanelButtonImprove : PanelButton
             yield return new WaitForEndOfFrame();
         }
         m_Transform.localPosition = m_AwayPosition;
-    }
+    }    
+    #endregion
 }
