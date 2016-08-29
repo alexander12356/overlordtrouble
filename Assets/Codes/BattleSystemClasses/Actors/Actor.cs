@@ -55,7 +55,6 @@ public class Actor : MonoBehaviour
 
     public virtual void Awake()
     {
-        InitStats();
     }
 
     public virtual void Attack(Actor p_Actor)

@@ -36,15 +36,15 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
         m_ActiveButtonImage.enabled = false;
     }
 
+    public virtual void EndDialog()
+    {
+        m_JourneyActor.StartLogic();
+    }
+
     private void StartDialog()
     {
         JourneySystem.GetInstance().StartDialog(m_DialogId);
         m_JourneyActor.ApplyTo(m_PlayerPosition);
         m_JourneyActor.StopLogic();
-    }
-
-    private void EndDialog()
-    {
-        m_JourneyActor.StartLogic();
     }
 }

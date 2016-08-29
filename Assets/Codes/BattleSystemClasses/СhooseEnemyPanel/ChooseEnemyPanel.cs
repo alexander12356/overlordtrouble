@@ -110,7 +110,7 @@ public class ChooseEnemyPanel : Panel
     #region Private
     private void InitEnemyList()
     {
-        m_EnemyList = EnemyManager.GetInstance().GetEnemy();
+        m_EnemyList = BattleSystem.GetInstance().GetEnemyList();
 
         for (int i = 0; i < m_EnemyList.Count; i++)
         {

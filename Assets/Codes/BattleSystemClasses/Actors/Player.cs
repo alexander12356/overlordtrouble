@@ -139,19 +139,22 @@ public class Player : Actor
     {
         base.InitStats();
 
-        health = baseHealth = 20;
+        baseHealth = PlayerStat.GetInstance().GetStatValue("HealthPoints");
+        health = PlayerData.GetInstance().health;
+        
         mana = baseMana = 20;
         isDead = true;
     }
 
     public override void Awake()
     {
+        base.Awake();
+
         m_Instance = this;
 
         InitComponents();
         LoadSounds();
-
-        base.Awake();
+        InitStats();
     }
 
     public override void ChangeManaValue()
@@ -170,6 +173,7 @@ public class Player : Actor
         base.ChangeHealthValue();
 
         m_HealthText.text = "HP: " + health + "/" + baseHealth;
+        PlayerData.GetInstance().health = (int)health;
 
         Vector3 l_BarScale = m_HealthPointBar.transform.localScale;
         l_BarScale.x = health / baseHealth;

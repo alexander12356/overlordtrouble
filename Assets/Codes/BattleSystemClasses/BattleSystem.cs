@@ -13,23 +13,27 @@ public class BattleSystem : MonoBehaviour
 
     private static BattleSystem m_Instance;
     private Player m_Player;
-    private Enemy  m_Enemy;
+    private List<Enemy>  m_EnemyList = new List<Enemy>();
     private bool m_IsPlayerTurn = true;
+    private int m_CurrentEnemyNumber = 0;
+    private bool m_FromMap = false;
 
     [SerializeField]
-    private Transform m_MainPanelTransform;
+    private Transform m_MainPanelTransform = null;
 
     [SerializeField]
     private GameObject m_AvatarPanel = null;
 
-    public Transform mainPanelTransform
-    {
-        get { return m_MainPanelTransform; }
-    }
+    [SerializeField]
+    private Transform m_EnemyTransform = null;
 
     public static BattleSystem GetInstance()
     {
         return m_Instance;
+    }
+    public Transform mainPanelTransform
+    {
+        get { return m_MainPanelTransform; }
     }
 
     public void Awake()
@@ -37,7 +41,29 @@ public class BattleSystem : MonoBehaviour
         m_Instance = this;
 
         m_Player = Player.GetInstance();
-        m_Enemy = Enemy.GetInstance();
+
+        List<string> l_EnemyIds = BattleStarter.GetInstance().GetEnemy();
+
+        if (l_EnemyIds.Count == 0)
+        {
+            Enemy l_NewEnemy = Instantiate(Enemy.prefab);
+            l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy("Skwatwolf"));
+            l_NewEnemy.transform.SetParent(m_EnemyTransform);
+            l_NewEnemy.transform.localPosition = Vector3.zero;
+            m_EnemyList.Add(l_NewEnemy);
+        }
+        else
+        {
+            m_FromMap = true;
+            for (int i = 0; i < l_EnemyIds.Count; i++)
+            {
+                Enemy l_NewEnemy = Instantiate(Enemy.prefab);
+                l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy(l_EnemyIds[i]));
+                l_NewEnemy.transform.SetParent(m_EnemyTransform);
+                l_NewEnemy.transform.localPosition = Vector3.zero;
+                m_EnemyList.Add(l_NewEnemy);
+            }
+        }
     }
 
     public void Start()
@@ -70,12 +96,14 @@ public class BattleSystem : MonoBehaviour
         else
         {
             SetVisibleAvatarPanel(false);
-            Enemy.GetInstance().RunTurn();
+
+            Enemy l_NextEnemy = GetNextEnemy();
+            l_NextEnemy.RunTurn();
             //  Запуск ИИ
-            if (!Enemy.GetInstance().isDead)
+            if (!l_NextEnemy.isDead)
             {
                 Player.GetInstance().RunTurn();
-                Enemy.GetInstance().Run();
+                l_NextEnemy.Run();
             }
         }
     }
@@ -83,6 +111,11 @@ public class BattleSystem : MonoBehaviour
     public void SetVisibleAvatarPanel(bool p_Value)
     {
         m_AvatarPanel.SetActive(p_Value);
+    }
+
+    public List<Enemy> GetEnemyList()
+    {
+        return m_EnemyList;
     }
 
     private void Win()
@@ -105,12 +138,28 @@ public class BattleSystem : MonoBehaviour
 
     private void RestartGame()
     {
-        SceneManager.LoadScene("BattleSystem");
+        if (m_FromMap)
+        {
+            SceneManager.LoadScene("Town");
+        }
+        else
+        {
+            SceneManager.LoadScene("BattleSystem");
+        }
     }
 
     private void InitStartPanel()
     {
         MainPanel l_MainPanel = Instantiate(MainPanel.prefab);
         PanelManager.GetInstance().ShowPanel(l_MainPanel);
+    }
+
+    private Enemy GetNextEnemy()
+    {
+        if (m_CurrentEnemyNumber >= m_EnemyList.Count)
+        {
+            m_CurrentEnemyNumber = 0;
+        }
+        return m_EnemyList[m_CurrentEnemyNumber];
     }
 }

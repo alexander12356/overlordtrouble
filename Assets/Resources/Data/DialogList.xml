@@ -13,8 +13,7 @@
 	<Dialog id="Bokalisk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
 		<Text id="0" avatarId="Bokalisk">Куд-кудах! Куд-кудах! Вы откудах и кудах?</Text>
 		<Text id="1" avatarId="Bokalisk">Сейчас мы должны сразиться но ...</Text>
-		<Text id="2" avatarId="Bokalisk">это пока не сделано! :3</Text>
-		<Text id="3" avatarId="Bokalisk">Куд-кудах!</Text>
+		<Text id="2" avatarId="Bokalisk">СЮРПРАЙЗ МАЗА ФАКА! Сразимся! Куд-кудах!</Text>
 	</Dialog>
   <Dialog id="StoreWelcome" avatarPath="Sprites/Creations/Store/Avatar">
     <Text id="0">Добро пожаловать в мой скромный магазинчик. Хотите ли произвести покупку?</Text>

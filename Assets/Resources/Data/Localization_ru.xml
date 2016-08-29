@@ -36,4 +36,8 @@
 	<Text id="Elemental:Water">Вода</Text>
 	<Text id="Elemental:Earth">Земля</Text>
 	<Text id="Elemental:Mana">Мана</Text>
+	
+	<!-- enemy's -->
+	<Text id="Enemy:Bokalisk">Бокалиск</Text>
+	<Text id="Enemy:Skwatwolf">Гополак</Text>
 </Localization>

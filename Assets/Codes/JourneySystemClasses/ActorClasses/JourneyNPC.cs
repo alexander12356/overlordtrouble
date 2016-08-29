@@ -13,6 +13,11 @@ public class JourneyNPC : JourneyActor
     #endregion
 
     #region Interface
+    public string npcId
+    {
+        get { return m_NpcId; }
+    }
+
     public override void Awake()
     {
         base.Awake();

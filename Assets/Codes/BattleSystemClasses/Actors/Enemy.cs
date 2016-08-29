@@ -4,20 +4,31 @@ using System.Collections.Generic;
 public class Enemy : Actor
 {
     #region Variables
-    private static Enemy m_Instance = null;
-    private int[] m_DamageValue = new int[2] { 5, 8 };
+    private static Enemy m_Prefab = null;
+    private int[] m_DamageValue = new int[2];
     private Animator m_Animator = null;
     private AudioSource m_AudioSource = null;
     private AudioClip m_AudioHit = null;
     private AudioClip m_AudioAttack = null;
-
+    private EnemyData m_EnemyData;
     private bool m_Selected = false;
-
-    [SerializeField]
     private SpriteRenderer m_SelectedArrow = null;
+    private SpriteRenderer m_Renderer = null;
     #endregion
 
     #region Interface
+    public static Enemy prefab
+    {
+        get
+        {
+            if (m_Prefab == null)
+            {
+                m_Prefab = Resources.Load<Enemy>("Prefabs/BattleEnemy");
+            }
+            return m_Prefab;
+        }
+    }
+
     public bool selected
     {
         get { return m_Selected; }
@@ -28,28 +39,29 @@ public class Enemy : Actor
         }
     }
 
-    static public Enemy GetInstance()
-    {
-        return m_Instance;
-    }
-
     public override void Awake()
     {
         base.Awake();
 
-        m_Instance = this;
-
         InitComponents();
         LoadSounds();
+    }
+
+    public void SetData(EnemyData l_EnemyData)
+    {
+        m_EnemyData = l_EnemyData;
+        InitStats();
     }
 
     public override void InitStats()
     {
         base.InitStats();
 
-        actorName = "Гоповолк";
-        health = baseHealth = 40;
+        actorName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id);
+        health = baseHealth = m_EnemyData.health;
         mana = baseMana = 0;
+        m_DamageValue = m_EnemyData.damageValue.ToArray();
+        m_Renderer.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_EnemyData.id + "/BattleProfile");
     }
 
     public void Run()
@@ -77,7 +89,7 @@ public class Enemy : Actor
         p_Actor.Damage(l_DamageValue);
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { "Гоповолк использовал удар и нанес " + l_DamageValue + " урона" });
+        l_TextPanel.SetText(new List<string>() { actorName + " использовал удар и нанес " + l_DamageValue + " урона" });
         l_TextPanel.AddButtonAction(EndTurn);
         PanelManager.GetInstance().ShowPanel(l_TextPanel);
 
@@ -101,8 +113,10 @@ public class Enemy : Actor
 
     private void InitComponents()
     {
-        m_Animator = GetComponent<Animator>();
+        m_Animator = GetComponentInChildren<Animator>();
         m_AudioSource = GetComponent<AudioSource>();
+        m_Renderer = transform.FindChild("Renderer").GetComponent<SpriteRenderer>();
+        m_SelectedArrow = transform.FindChild("Selected").GetComponent<SpriteRenderer>();
     }
     #endregion
 }

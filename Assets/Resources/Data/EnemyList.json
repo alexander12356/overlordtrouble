@@ -1,0 +1,20 @@
+{
+	"Skwatwolf":
+	{
+		"Health" : 10,
+		"DamageValue" : 
+		[
+			5,
+			8
+		]
+	},
+	"Bokalisk":
+	{
+		"Health" : 10,
+		"DamageValue" :
+		[
+			2,
+			4
+		]
+	}
+}
