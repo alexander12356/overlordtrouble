@@ -51,13 +51,13 @@ public class ImprovePanel : Panel
         string l_ImproveName = ((PanelButtonImprove)m_ImproveButtonList.currentButton).improveData.id;
         string l_ImproveSkillsText = ", вы получили следующие приемы:\n";
         ImproveData l_ImproveData = ImproveDataBase.GetInstance().GetImprove(l_ImproveName);
-        l_ImproveSkillsText += l_ImproveData.skills[0].id;
+        l_ImproveSkillsText += LocalizationDataBase.GetInstance().GetText("Skill:" + l_ImproveData.skills[0].id);
         for (int i = 1; i < l_ImproveData.skills.Count; i++)
         {
-            l_ImproveSkillsText += ", " + l_ImproveData.skills[i].id;
+            l_ImproveSkillsText += ", " + LocalizationDataBase.GetInstance().GetText("Skill:" + l_ImproveData.skills[i].id);
         }
 
-        string l_Text = "Вы выбрали класс " + l_ImproveName + l_ImproveSkillsText;
+        string l_Text = "Вы выбрали класс " + LocalizationDataBase.GetInstance().GetText("Improvement:" + l_ImproveName) + l_ImproveSkillsText;
         m_TextPanel.SetText(new List<string>() { l_Text });
         m_TextPanel.AddPopAction(ReturnToMainMenu);
 

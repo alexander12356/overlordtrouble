@@ -101,17 +101,18 @@ public class Player : Actor
 
             for (int i = 0; i < l_BuffedSkills.Count; i++)
             {
+                string l_SkillLocalization = LocalizationDataBase.GetInstance().GetText("Skill:" + l_BuffedSkills[i].id);
                 if (i == l_BuffedSkills.Count - 2)
                 {
-                    l_UsedSpecialsName += l_BuffedSkills[i].id + " и ";
+                    l_UsedSpecialsName += l_SkillLocalization + " и ";
                 }
                 else if (i == l_BuffedSkills.Count - 1)
                 {
-                    l_UsedSpecialsName += l_BuffedSkills[i].id;
+                    l_UsedSpecialsName += l_SkillLocalization;
                 }
                 else
                 {
-                    l_UsedSpecialsName += l_BuffedSkills[i].id + ", ";
+                    l_UsedSpecialsName += l_SkillLocalization + ", ";
                 }
                 l_DamageValue += l_BuffedSkills[i].damage;
             }

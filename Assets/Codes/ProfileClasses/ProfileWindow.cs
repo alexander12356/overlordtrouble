@@ -129,13 +129,13 @@ public class ProfileWindow : MonoBehaviour
     {
         Dictionary<string, int> l_PlayerStats = PlayerStat.GetInstance().GetStats();
 
-        foreach (string l_key in l_PlayerStats.Keys)
+        foreach (string l_StatId in l_PlayerStats.Keys)
         {
             PanelButtonStat l_PanelButton = Instantiate(PanelButtonStat.prefab);
 
-            l_PanelButton.title = l_key;
-            l_PanelButton.statId = l_key;
-            l_PanelButton.statValue = PlayerStat.GetInstance().GetStats()[l_key];
+            l_PanelButton.title = LocalizationDataBase.GetInstance().GetText("Stat:" + l_StatId);
+            l_PanelButton.statId = l_StatId;
+            l_PanelButton.statValue = PlayerStat.GetInstance().GetStats()[l_StatId];
 
             m_StatsButtonList.AddButton(l_PanelButton);
         }

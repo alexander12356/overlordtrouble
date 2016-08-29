@@ -29,7 +29,7 @@ public class PanelButtonSpecial : PanelButton
         {
             m_SkillId = value;
 
-            string l_SkillName = SkillDataBase.GetInstance().GetSkillData(m_SkillId).id;
+            string l_SkillName = LocalizationDataBase.GetInstance().GetText("Skill:" + m_SkillId);
             float l_Damage = SkillDataBase.GetInstance().GetSkillData(m_SkillId).damage;
             float l_SpecialPoints = SkillDataBase.GetInstance().GetSkillData(m_SkillId).mana;
             description   = l_SkillName + "\n" + "Элемент: Вода\n" + "Урон: " + l_Damage;

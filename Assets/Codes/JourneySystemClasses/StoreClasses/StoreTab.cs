@@ -37,7 +37,7 @@ public class StoreTab : MonoBehaviour
     public void AddItem(StoreItemData p_StoreItemData)
     {
         StoreItemButton l_Button = Instantiate(StoreItemButton.prefab);
-        l_Button.title = p_StoreItemData.id;
+        l_Button.title = LocalizationDataBase.GetInstance().GetText("Item:" + p_StoreItemData.id);
         l_Button.itemId = p_StoreItemData.id;
         l_Button.AddAction(SelectItem);
 

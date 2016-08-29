@@ -137,7 +137,7 @@ public class SpecialSelectPanel : Panel
             Player.GetInstance().mana -= SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;
 
             PanelButtonChosenSpecial l_PanelButtonChosenSpecial = Instantiate(PanelButtonChosenSpecial.prefab);
-            l_PanelButtonChosenSpecial.title = l_PanelButton.skillId;
+            l_PanelButtonChosenSpecial.title = LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButton.skillId);
             m_AddedSpecialButtonList.AddButton(l_PanelButtonChosenSpecial);
         }
     }

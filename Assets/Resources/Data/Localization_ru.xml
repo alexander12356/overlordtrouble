@@ -1,0 +1,33 @@
+﻿<Localization>
+	<!-- skills	-->
+	<Text id="Skill:WaterDrops">Водяные капли</Text>
+	<Text id="Skill:Slap">Щлепок</Text>
+	<Text id="Skill:ProtectiveCoat">Защитная оболочка</Text>
+	<Text id="Skill:Strike">Удар</Text>
+	<Text id="Skill:Defense">Защита</Text>
+	<Text id="Skill:TailStrike">Удар хвостом</Text>
+	<Text id="Skill:ShellDefense">Панцирная защита</Text>
+	<Text id="Skill:BlobeStrike">Водяной удар</Text>
+	<Text id="Skill:HealingWater">Целебная вода</Text>
+	
+	<!-- stats -->
+	<Text id="Stat:HealthPoints">Жизнь</Text>
+	<Text id="Stat:SpecialPoints">Магия</Text>
+	<Text id="Stat:Attack">Атака</Text>
+	<Text id="Stat:Defense">Защита</Text>
+	<Text id="Stat:Speed">Скорость</Text>
+	<Text id="Stat:Fortune">Удача</Text>
+	
+	<!-- improvements -->
+	<Text id="Improvement:DewElemental">Элементаль капли</Text>
+	<Text id="Improvement:LesserWaterElemental">Меньший элементаль воды</Text>
+	<Text id="Improvement:ShellLizard">Ящер панциря</Text>
+	<Text id="Improvement:Brownie">Брауни</Text>
+	
+	<!-- items -->
+	<Text id="Item:HealthPotion">Целебное зелье</Text>
+	<Text id="Item:ManaPotion">Зелье магии</Text>
+	<Text id="Item:FireBallScroll">Свиток Огненного Шара</Text>
+	<Text id="Item:AirDefenseScroll">Свиток воздушной защита</Text>
+	<Text id="Item:AncientArmor">Древний доспех</Text>
+</Localization>

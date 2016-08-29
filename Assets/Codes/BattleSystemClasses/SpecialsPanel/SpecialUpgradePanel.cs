@@ -97,7 +97,7 @@ public class SpecialUpgradePanel : Panel
             SkillData l_SkillData = SkillDataBase.GetInstance().GetSkillData(p_AddedSkills[i]);
 
             SpecialUpgradeIcon l_SpecialUpgradeIcon = Instantiate(SpecialUpgradeIcon.prefab);
-            l_SpecialUpgradeIcon.SetTitle(l_SkillData.id);
+            l_SpecialUpgradeIcon.SetTitle(LocalizationDataBase.GetInstance().GetText("Skill:" + l_SkillData.id));
             l_SpecialUpgradeIcon.skillId = p_AddedSkills[i];
             l_SpecialUpgradeIcon.transform.SetParent(m_SpecialIconsConteiner);
 
