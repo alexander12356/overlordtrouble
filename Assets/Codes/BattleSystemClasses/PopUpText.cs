@@ -21,22 +21,10 @@ public class PopUpText : MonoBehaviour
             return m_Instance;
         }
     }
-    public Text text
-    {
-        get
-        {
-            return m_Text;
-        }
-    }
 
     public void EndPopUp()
     {
         Destroy(gameObject);
-    }
-
-    public void SetText(string p_Text)
-    {
-        m_Text.text = p_Text;
     }
     #endregion
 
@@ -44,7 +32,6 @@ public class PopUpText : MonoBehaviour
     private void Awake()
     {
         m_Animator = GetComponent<Animator>();
-        m_Text     = GetComponentInChildren<Text>();
     }
 
     private void Start()

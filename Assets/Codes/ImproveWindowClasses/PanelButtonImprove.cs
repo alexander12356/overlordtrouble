@@ -37,6 +37,18 @@ public class PanelButtonImprove : PanelButton
             m_ImproveData = value;
             title = LocalizationDataBase.GetInstance().GetText("Improvement:" + m_ImproveData.id);
             title += "\n" + LocalizationDataBase.GetInstance().GetText("Element") + ": " + LocalizationDataBase.GetInstance().GetText("Elemental:" + m_ImproveData.elementalId);
+            improveAvatar.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_ImproveData.id + "/ImproveAvatar");
+        }
+    }
+    public Image improveAvatar
+    {
+        get
+        {
+            if (m_ImproveAvatarImage == null)
+            {
+                m_ImproveAvatarImage = transform.FindChild("ImproveMask").FindChild("ImproveAvatar").GetComponent<Image>();
+            }
+            return m_ImproveAvatarImage;
         }
     }
 
@@ -45,7 +57,7 @@ public class PanelButtonImprove : PanelButton
         base.Awake();
 
         m_SelectedBackground = transform.FindChild("ImproveImageBackground").GetComponent<Image>();
-        m_ImproveAvatarImage = transform.FindChild("ImproveMask").GetComponentInChildren<Image>();
+        m_ImproveAvatarImage = improveAvatar;
         m_Animator = GetComponent<Animator>();
         m_Transform = transform;
     }

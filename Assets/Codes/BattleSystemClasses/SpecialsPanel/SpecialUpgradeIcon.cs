@@ -70,9 +70,6 @@ public class SpecialUpgradeIcon : MonoBehaviour
         if (m_SkillBuffCount > 0)
         {
             PopUpText l_PopUpText = Instantiate(PopUpText.prefab);
-            l_PopUpText.text.color = l_Color;
-            l_PopUpText.SetText("+10%");
-
             l_PopUpText.transform.SetParent(transform);
             l_PopUpText.transform.localPosition = Vector3.zero;
             l_PopUpText.transform.localScale    = Vector3.one;

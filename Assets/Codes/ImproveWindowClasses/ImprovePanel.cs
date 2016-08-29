@@ -123,6 +123,7 @@ public class ImprovePanel : Panel
     {
         string l_ProfileImagePath = ((PanelButtonImprove)m_ImproveButtonList.currentButton).improveData.profileImagePath;
         m_ImproveCompleteImage.sprite = Resources.Load<Sprite>(l_ProfileImagePath);
+        m_ImproveCompleteImage.SetNativeSize();
         m_Animator.SetTrigger("Improve");
     }
 
