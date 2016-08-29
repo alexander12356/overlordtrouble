@@ -30,4 +30,10 @@
 	<Text id="Item:FireBallScroll">Свиток Огненного Шара</Text>
 	<Text id="Item:AirDefenseScroll">Свиток воздушной защита</Text>
 	<Text id="Item:AncientArmor">Древний доспех</Text>
+	
+	<!-- elemental -->
+	<Text id="Element">Элемент</Text>
+	<Text id="Elemental:Water">Вода</Text>
+	<Text id="Elemental:Earth">Земля</Text>
+	<Text id="Elemental:Mana">Мана</Text>
 </Localization>

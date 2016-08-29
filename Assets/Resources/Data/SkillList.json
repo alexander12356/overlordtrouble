@@ -1,13 +1,13 @@
 {
 	"WaterDrops" :
 	{
-		"Attack" : 1.5,
+		"Attack" : 2,
 		"Mana" : 1.0,
 		"DescriptionId" : ""
 	},
 	"Slap" :
 	{
-		"Attack" : 2.0,
+		"Attack" : 3,
 		"Mana" : 5.0,
 		"DescriptionId" : ""
 	},

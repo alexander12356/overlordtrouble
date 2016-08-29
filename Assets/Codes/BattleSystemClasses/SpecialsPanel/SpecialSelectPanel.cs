@@ -86,19 +86,8 @@ public class SpecialSelectPanel : Panel
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            int l_SpecialCount = m_SpecialButtonList.count - 1;
-            int l_CurrentSelectedSpecial = m_SpecialButtonList.currentButtonId;
-
-            int m_delta = m_SpecialButtonList.count % 3;
-
-            float l_Value = 1.0f - (float)l_CurrentSelectedSpecial / ((float)l_SpecialCount - m_delta);
-
-            if (l_Value < 0)
-            {
-                l_Value = 0;
-            }
-
             ScrollRect l_ScrollRect = m_SpecialButtonList.transform.parent.GetComponent<ScrollRect>();
+            float l_Value = CalculateScrollVerticalNormalizedPostition();
 
             Debug.Log("Normilized Position: " + l_Value + ", ScrollRect normilized position: " + l_ScrollRect.verticalNormalizedPosition);
         }
@@ -123,11 +112,11 @@ public class SpecialSelectPanel : Panel
             m_ChoosedSkills.Remove(l_PanelButton.skillId);
             Player.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;
 
-            m_AddedSpecialButtonList.RemoveButton(l_PanelButton.skillId);
+            m_AddedSpecialButtonList.RemoveButton(LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButton.skillId));
         }
         else
         {
-            if (m_ChoosedSkills.Count >=4)
+            if (m_ChoosedSkills.Count >= 4 || Player.GetInstance().mana < SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana)
             {
                 return;
             }
@@ -145,15 +134,22 @@ public class SpecialSelectPanel : Panel
     //TODO Kostil
     private void InitSpecialButtons()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 4; i++)
         {
             PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
             l_SpecialButton.skillId = "WaterDrops";
             l_SpecialButton.AddAction(ChooseSpecial);
             m_SpecialButtonList.AddButton(l_SpecialButton);
         }
+        for (int i = 0; i < 3; i++)
+        {
+            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
+            l_SpecialButton.skillId = "Slap";
+            l_SpecialButton.AddAction(ChooseSpecial);
+            m_SpecialButtonList.AddButton(l_SpecialButton);
+        }
 
-        ReScaleBounds();
+        RescaleBounds();
     }
 
     private void Confirm()
@@ -185,12 +181,14 @@ public class SpecialSelectPanel : Panel
         }
     }
 
-    private void ReScaleBounds()
+    private void RescaleBounds()
     {
         if (120.0f * m_SpecialButtonList.count > m_SpecialButtonList.rectTransform.sizeDelta.y)
         {
+            int l_SpecialCount = GetBoundSpecialCount();
+
             Vector2 l_SizeDelta = m_SpecialButtonList.rectTransform.sizeDelta;
-            l_SizeDelta.y = 120.0f * m_SpecialButtonList.count;
+            l_SizeDelta.y = 120.0f * l_SpecialCount;
             m_SpecialButtonList.rectTransform.sizeDelta = l_SizeDelta;
         }
     }
@@ -198,22 +196,35 @@ public class SpecialSelectPanel : Panel
     private void CheckScrolling()
     {
         ScrollRect l_ScrollRect = m_SpecialButtonList.transform.parent.GetComponent<ScrollRect>();
+        l_ScrollRect.verticalNormalizedPosition = CalculateScrollVerticalNormalizedPostition();
+    }
 
-        int l_SpecialCount = m_SpecialButtonList.count - 1;
-        int l_CurrentSelectedSpecial = m_SpecialButtonList.currentButtonId;
-        
-        float l_Value = l_ScrollRect.verticalNormalizedPosition;
+    private float CalculateScrollVerticalNormalizedPostition()
+    {
+        int l_CurrentPage = m_SpecialButtonList.currentButtonId / 3;
+        int l_PageCount = GetBoundSpecialCount() / 3;
 
-        l_CurrentSelectedSpecial /= 3;
-        int m_delta = m_SpecialButtonList.count % 3;
-        l_Value = 1.0f - ((float)l_CurrentSelectedSpecial * 3) / ((float)l_SpecialCount - m_delta);
-
-        if (l_Value < 0)
+        if (l_PageCount == 1)
         {
-            l_Value = 0;
+            return 1.0f;
         }
 
-        l_ScrollRect.verticalNormalizedPosition = l_Value;
+        float l_NormalizedPosition = 1.0f - ((float)l_CurrentPage / ((float)l_PageCount - 1));
+
+        if (l_NormalizedPosition < 0)
+        {
+            l_NormalizedPosition = 0;
+        }
+        return l_NormalizedPosition;
+    }
+
+    private int GetBoundSpecialCount()
+    {
+        if (m_SpecialButtonList.count % 3 != 0)
+        {
+            return m_SpecialButtonList.count + (3 - m_SpecialButtonList.count % 3);
+        }
+        return m_SpecialButtonList.count;
     }
     #endregion
 }

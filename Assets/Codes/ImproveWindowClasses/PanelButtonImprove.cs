@@ -36,6 +36,7 @@ public class PanelButtonImprove : PanelButton
         {
             m_ImproveData = value;
             title = LocalizationDataBase.GetInstance().GetText("Improvement:" + m_ImproveData.id);
+            title += "\n" + LocalizationDataBase.GetInstance().GetText("Element") + ": " + LocalizationDataBase.GetInstance().GetText("Elemental:" + m_ImproveData.elementalId);
         }
     }
 

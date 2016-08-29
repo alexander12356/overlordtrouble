@@ -49,6 +49,7 @@ public class ImproveDataBase : Singleton<ImproveDataBase>
         for (int i = 0; i < l_JSONObject.Count; i++)
         {
             string l_ImproveId = l_JSONObject.keys[i];
+            string l_ElementalId = l_JSONObject[i]["Elemental"].str;
             string l_ProfileImagePath = l_JSONObject[i]["Profile"].str;
 
             List<SkillData> l_Skills = new List<SkillData>();
@@ -59,7 +60,7 @@ public class ImproveDataBase : Singleton<ImproveDataBase>
                 l_Skills.Add(l_SkillData);
             }
 
-            ImproveData l_ImproveData = new ImproveData(l_ImproveId, l_ProfileImagePath, l_Skills);
+            ImproveData l_ImproveData = new ImproveData(l_ImproveId, l_ProfileImagePath, l_ElementalId, l_Skills);
             m_ImproveDictionary.Add(l_ImproveId, l_ImproveData);
         }
     }

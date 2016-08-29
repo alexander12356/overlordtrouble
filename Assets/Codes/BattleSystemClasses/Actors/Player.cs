@@ -12,12 +12,10 @@ public class Player : Actor
     private AudioClip m_AudioHit = null;
     private AudioClip m_AudioAttack = null;
     private AudioSource m_AudioSource = null;
-
-    [SerializeField]
     private Text m_HealthText = null;
-
-    [SerializeField]
-    private Text m_ManaText = null;
+    private Text m_SpecialText = null;
+    private Image m_HealthPointBar = null;
+    private Image m_SpecialPointBar = null;
     #endregion
 
     #region Interface
@@ -148,19 +146,23 @@ public class Player : Actor
 
     public override void Awake()
     {
-        base.Awake();
-
         m_Instance = this;
 
         InitComponents();
         LoadSounds();
+
+        base.Awake();
     }
 
     public override void ChangeManaValue()
     {
         base.ChangeManaValue();
 
-        m_ManaText.text = "MP: " + mana + "/" + baseMana;
+        m_SpecialText.text = "MP: " + mana + "/" + baseMana;
+
+        Vector3 l_BarScale = m_SpecialPointBar.transform.localScale;
+        l_BarScale.x = mana / baseMana;
+        m_SpecialPointBar.transform.localScale = l_BarScale;
     }
 
     public override void ChangeHealthValue()
@@ -168,14 +170,23 @@ public class Player : Actor
         base.ChangeHealthValue();
 
         m_HealthText.text = "HP: " + health + "/" + baseHealth;
+
+        Vector3 l_BarScale = m_HealthPointBar.transform.localScale;
+        l_BarScale.x = health / baseHealth;
+        m_HealthPointBar.transform.localScale = l_BarScale;
     }
     #endregion
 
     #region Private
     private void InitComponents()
     {
-        m_Animator = GetComponent<Animator>();
+        m_Animator = GetComponentInChildren<Animator>();
         m_AudioSource = GetComponent<AudioSource>();
+
+        m_HealthText      = transform.FindChild("HealthText").GetComponent<Text>();
+        m_HealthPointBar  = transform.FindChild("HealthBar").GetComponent<Image>();
+        m_SpecialText     = transform.FindChild("SpecialText").GetComponent<Text>();
+        m_SpecialPointBar = transform.FindChild("SpecialBar").GetComponent<Image>();
 
         LoadSounds();
     }
