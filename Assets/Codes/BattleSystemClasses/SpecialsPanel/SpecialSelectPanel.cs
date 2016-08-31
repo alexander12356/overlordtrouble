@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using System;
+using System.Collections;
 using System.Collections.Generic;
 
 public class SpecialSelectPanel : Panel
@@ -9,6 +11,7 @@ public class SpecialSelectPanel : Panel
     private static SpecialSelectPanel m_Instance = null;
     private ChooseEnemyPanel m_ChooseEnemyPanel = null;
     private List<string> m_ChoosedSkills = new List<string>();
+    private ScrollRect m_ScrollRect = null;
 
     [SerializeField]
     private ButtonList m_SpecialButtonList = null;
@@ -18,6 +21,9 @@ public class SpecialSelectPanel : Panel
 
     [SerializeField]
     private ButtonList m_AddedSpecialButtonList = null;
+
+    [SerializeField]
+    private float m_ScrollSpeed = 3.0f;
     #endregion
 
     #region Interface
@@ -36,6 +42,8 @@ public class SpecialSelectPanel : Panel
     public override void Awake()
     {
         base.Awake();
+
+        m_ScrollRect = m_SpecialButtonList.transform.parent.GetComponent<ScrollRect>();
 
         m_ConfirmButtonList.isActive = false;
         m_AddedSpecialButtonList.isActive = false;
@@ -86,10 +94,9 @@ public class SpecialSelectPanel : Panel
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            ScrollRect l_ScrollRect = m_SpecialButtonList.transform.parent.GetComponent<ScrollRect>();
             float l_Value = CalculateScrollVerticalNormalizedPostition();
 
-            Debug.Log("Normilized Position: " + l_Value + ", ScrollRect normilized position: " + l_ScrollRect.verticalNormalizedPosition);
+            Debug.Log("Normilized Position: " + l_Value + ", ScrollRect normilized position: " + m_ScrollRect.verticalNormalizedPosition);
         }
     }
     #endregion
@@ -195,8 +202,8 @@ public class SpecialSelectPanel : Panel
 
     private void CheckScrolling()
     {
-        ScrollRect l_ScrollRect = m_SpecialButtonList.transform.parent.GetComponent<ScrollRect>();
-        l_ScrollRect.verticalNormalizedPosition = CalculateScrollVerticalNormalizedPostition();
+        //m_ScrollRect.verticalNormalizedPosition = CalculateScrollVerticalNormalizedPostition();
+        StartScrolling(CalculateScrollVerticalNormalizedPostition());
     }
 
     private float CalculateScrollVerticalNormalizedPostition()
@@ -225,6 +232,21 @@ public class SpecialSelectPanel : Panel
             return m_SpecialButtonList.count + (3 - m_SpecialButtonList.count % 3);
         }
         return m_SpecialButtonList.count;
+    }
+
+    private void StartScrolling(float p_DestNormilizedPosition)
+    {
+        StopAllCoroutines();
+        StartCoroutine(Scrolling(p_DestNormilizedPosition));
+    }
+
+    private IEnumerator Scrolling(float p_DestNormilizedPosition)
+    {
+        while (Math.Abs(m_ScrollRect.verticalNormalizedPosition - p_DestNormilizedPosition) > 0.05f)
+        {
+            m_ScrollRect.verticalNormalizedPosition = Mathf.MoveTowards(m_ScrollRect.verticalNormalizedPosition, p_DestNormilizedPosition, m_ScrollSpeed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
     }
     #endregion
 }
