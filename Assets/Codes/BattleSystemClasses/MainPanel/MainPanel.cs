@@ -80,7 +80,14 @@ public class MainPanel : Panel
 
     private void Retreat()
     {
-        SceneManager.LoadScene("DemoMainScene");
+        if (BattleSystem.GetInstance().isFromMap)
+        {
+            SceneManager.LoadScene("Town");
+        }
+        else
+        {
+            SceneManager.LoadScene("DemoMainScene");
+        }
     }
     #endregion
 }

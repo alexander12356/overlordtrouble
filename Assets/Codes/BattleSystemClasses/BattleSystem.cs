@@ -35,6 +35,10 @@ public class BattleSystem : MonoBehaviour
     {
         get { return m_MainPanelTransform; }
     }
+    public bool isFromMap
+    {
+        get { return m_FromMap; }
+    }
 
     public void Awake()
     {
@@ -46,6 +50,8 @@ public class BattleSystem : MonoBehaviour
 
         if (l_EnemyIds.Count == 0)
         {
+            PlayerData.GetInstance().health = 20;
+
             Enemy l_NewEnemy = Instantiate(Enemy.prefab);
             l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy("Skwatwolf"));
             l_NewEnemy.transform.SetParent(m_EnemyTransform);
@@ -133,6 +139,9 @@ public class BattleSystem : MonoBehaviour
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "У ГГ больше нету сил сражаться далее, ГГ потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли." });
         l_TextPanel.AddButtonAction(RestartGame);
+
+        PlayerData.GetInstance().health = 20;
+
         PanelManager.GetInstance().ShowPanel(l_TextPanel);
     }
 
