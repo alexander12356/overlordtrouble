@@ -11,7 +11,6 @@ public class SpecialSelectPanel : Panel
     private static SpecialSelectPanel m_Instance = null;
     private ChooseEnemyPanel m_ChooseEnemyPanel = null;
     private List<string> m_ChoosedSkills = new List<string>();
-    private ScrollRect m_ScrollRect = null;
 
     [SerializeField]
     private ButtonList m_SpecialButtonList = null;
@@ -23,7 +22,9 @@ public class SpecialSelectPanel : Panel
     private ButtonList m_AddedSpecialButtonList = null;
 
     [SerializeField]
-    private float m_ScrollSpeed = 3.0f;
+    private ButtonListScrolling m_ButtonListScrolling = null;
+
+
     #endregion
 
     #region Interface
@@ -43,8 +44,6 @@ public class SpecialSelectPanel : Panel
     {
         base.Awake();
 
-        m_ScrollRect = m_SpecialButtonList.transform.parent.GetComponent<ScrollRect>();
-
         m_ConfirmButtonList.isActive = false;
         m_AddedSpecialButtonList.isActive = false;
 
@@ -53,7 +52,8 @@ public class SpecialSelectPanel : Panel
 
         InitSpecialButtons();
 
-        m_SpecialButtonList.AddKeyArrowAction(CheckScrolling);
+        m_ButtonListScrolling.Init(120.0f, 3);
+        m_SpecialButtonList.AddKeyArrowAction(m_ButtonListScrolling.CheckScrolling);
     }
 
     public override void UpdatePanel()
@@ -90,13 +90,6 @@ public class SpecialSelectPanel : Panel
             {
                 ReturnToMain();
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            float l_Value = CalculateScrollVerticalNormalizedPostition();
-
-            Debug.Log("Normilized Position: " + l_Value + ", ScrollRect normilized position: " + m_ScrollRect.verticalNormalizedPosition);
         }
     }
     #endregion
@@ -155,8 +148,6 @@ public class SpecialSelectPanel : Panel
             l_SpecialButton.AddAction(ChooseSpecial);
             m_SpecialButtonList.AddButton(l_SpecialButton);
         }
-
-        RescaleBounds();
     }
 
     private void Confirm()
@@ -185,67 +176,6 @@ public class SpecialSelectPanel : Panel
         for (int i = 0; i < m_ChoosedSkills.Count; i++)
         {
             Player.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(m_ChoosedSkills[i]).mana;
-        }
-    }
-
-    private void RescaleBounds()
-    {
-        if (120.0f * m_SpecialButtonList.count > m_SpecialButtonList.rectTransform.sizeDelta.y)
-        {
-            int l_SpecialCount = GetBoundSpecialCount();
-
-            Vector2 l_SizeDelta = m_SpecialButtonList.rectTransform.sizeDelta;
-            l_SizeDelta.y = 120.0f * l_SpecialCount;
-            m_SpecialButtonList.rectTransform.sizeDelta = l_SizeDelta;
-        }
-    }
-
-    private void CheckScrolling()
-    {
-        //m_ScrollRect.verticalNormalizedPosition = CalculateScrollVerticalNormalizedPostition();
-        StartScrolling(CalculateScrollVerticalNormalizedPostition());
-    }
-
-    private float CalculateScrollVerticalNormalizedPostition()
-    {
-        int l_CurrentPage = m_SpecialButtonList.currentButtonId / 3;
-        int l_PageCount = GetBoundSpecialCount() / 3;
-
-        if (l_PageCount == 1)
-        {
-            return 1.0f;
-        }
-
-        float l_NormalizedPosition = 1.0f - ((float)l_CurrentPage / ((float)l_PageCount - 1));
-
-        if (l_NormalizedPosition < 0)
-        {
-            l_NormalizedPosition = 0;
-        }
-        return l_NormalizedPosition;
-    }
-
-    private int GetBoundSpecialCount()
-    {
-        if (m_SpecialButtonList.count % 3 != 0)
-        {
-            return m_SpecialButtonList.count + (3 - m_SpecialButtonList.count % 3);
-        }
-        return m_SpecialButtonList.count;
-    }
-
-    private void StartScrolling(float p_DestNormilizedPosition)
-    {
-        StopAllCoroutines();
-        StartCoroutine(Scrolling(p_DestNormilizedPosition));
-    }
-
-    private IEnumerator Scrolling(float p_DestNormilizedPosition)
-    {
-        while (Math.Abs(m_ScrollRect.verticalNormalizedPosition - p_DestNormilizedPosition) > 0.05f)
-        {
-            m_ScrollRect.verticalNormalizedPosition = Mathf.MoveTowards(m_ScrollRect.verticalNormalizedPosition, p_DestNormilizedPosition, m_ScrollSpeed * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
         }
     }
     #endregion

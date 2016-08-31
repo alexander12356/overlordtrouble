@@ -34,6 +34,9 @@ public class ProfileWindow : MonoBehaviour
     [SerializeField]
     private Text m_StatImprovePointsText = null;
 
+    [SerializeField]
+    private ButtonListScrolling m_SpecialButtonListScrolling = null;
+
     #region Interface
     public int statImprovePoints
     {
@@ -62,6 +65,9 @@ public class ProfileWindow : MonoBehaviour
 
         InitStats();
         InitSpecials();
+
+        m_SpecialButtonListScrolling.Init(51.0f, 6);
+        m_SpecialsButtonList.AddKeyArrowAction(m_SpecialButtonListScrolling.CheckScrolling);
 
         if (PlayerData.GetInstance().statImprovePoints > 0)
         {
@@ -241,6 +247,11 @@ public class ProfileWindow : MonoBehaviour
     private void StartImprove()
     {
         SceneManager.LoadScene("Improve");
+    }
+
+    private void ResizeSpecialList()
+    {
+        //m_SpecialsButtonList.gameObject.GetComponent<RectTransform>(). m_SpecialsButtonList.count
     }
     #endregion
 }
