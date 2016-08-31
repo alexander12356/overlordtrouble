@@ -22,12 +22,7 @@ public class List_one : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.UpArrow)) {
-			gameObject.GetComponent<GameController> ().StepCounter--;
-		}
-		if (Input.GetKeyDown (KeyCode.DownArrow)) {
-			gameObject.GetComponent<GameController> ().StepCounter++;
-		}
+		
 	}
 
 	private void ChangeList(){

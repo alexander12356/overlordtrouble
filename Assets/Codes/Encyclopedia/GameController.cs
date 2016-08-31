@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 
 	public GameObject[] MonstersList;
 
-
+	public int IgnoreSteps = -2;
 	[SerializeField] private Image Splash = null;
 	[SerializeField] private GameObject MainStatsGroup = null;
 
@@ -50,6 +50,9 @@ public class GameController : MonoBehaviour {
 					Elements ();	
 
 				}
+				else {
+					IgnoreSteps++;
+				}
 			}
 		}
 		catch(Exception e){
@@ -80,21 +83,22 @@ public class GameController : MonoBehaviour {
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.RightArrow)) {
 			StepCounter++;
-			ChangeMonsterFace ();
+
 		}
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
 			StepCounter--;
-			ChangeMonsterFace ();
 		}
-		ChangeMonsterFace ();
+		if (StepCounter > (MonstersList.Length-IgnoreSteps)) {
+			StepCounter = 0;
+		}
+		if (StepCounter <= -1) {
+			StepCounter = MonstersList.Length - IgnoreSteps;
+		}
+
 	}
 
 	void FixedUpdate(){
-		if (StepCounter >= MonstersList.Length) {
-			StepCounter = MonstersList.Length;
-		}
-		if (StepCounter < -1) {
-			StepCounter = 0;
-		}
+		
+		ChangeMonsterFace ();
 	}
 }
