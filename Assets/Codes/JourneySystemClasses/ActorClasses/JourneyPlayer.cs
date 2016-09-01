@@ -37,7 +37,9 @@ public class JourneyPlayer : JourneyActor
 
     public void AddActiveButtonAction(ButtonHandler p_Action)
     {
+        RemoveActiveButtonAction(p_Action);
         m_ActiveButtonAction += p_Action;
+        Debug.Log("Action add");
     }
 
     public void RemoveActiveButtonAction(ButtonHandler p_Action)
@@ -45,11 +47,13 @@ public class JourneyPlayer : JourneyActor
         if (m_ActiveButtonAction != null)
         {
             m_ActiveButtonAction -= p_Action;
+            Debug.Log("Action remove");
         }
     }
 
     public void AddDisactiveButtonAction(ButtonHandler p_Action)
     {
+        RemoveDisactiveButtonAction(p_Action);
         m_DisactiveButtonAction += p_Action;
     }
 

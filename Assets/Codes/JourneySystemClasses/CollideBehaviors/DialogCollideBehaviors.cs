@@ -38,8 +38,6 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
 
     private void StartDialog()
     {
-        Debug.Log("PlayerDirection: " + m_JourneyPlayer.direction + ", ObjectSide: " + GetMyObjectSide());
-
         if (m_JourneyPlayer.direction != GetMyObjectSide())
         {
             return;

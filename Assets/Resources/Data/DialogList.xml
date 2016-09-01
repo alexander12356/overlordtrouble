@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0"?>
 <DialogList>
-	<Dialog id="WalkingNpc" avatarPath="Sprites/Creations/Npc/Avatar">
-		<Text id="0" avatarId="NPC1">Привет! ...</Text>
-		<Text id="1" avatarId="NPC1">Я тут хожу ...</Text>
-		<Text id="2" avatarId="NPC1">никого не трогаю! Круто правда? :)</Text>
+	<Dialog id="SkeletonChild" avatarPath="Sprites/Creations/SkeletonChild/Avatar">
+		<Text id="0" avatarId="NPC1">Привет!</Text>
+		<Text id="1" avatarId="NPC1">Давай поиграем?</Text>
 	</Dialog>
-	<Dialog id="StayNpc" avatarPath="Sprites/Creations/Npc/Avatar">
-		<Text id="0" avatarId="NPC1">Привет! ...</Text>
-		<Text id="1" avatarId="NPC1">Я тут стою, верчусь и  ...</Text>
-		<Text id="2" avatarId="NPC1">никого не трогаю! Круто правда? :)</Text>
+	<Dialog id="SnailKid" avatarPath="Sprites/Creations/SnailKid/Avatar">
+		<Text id="0" avatarId="NPC1">Привет!</Text>
+		<Text id="1" avatarId="NPC1">Давай поиграем?</Text>
 	</Dialog>
 	<Dialog id="Bokalisk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
 		<Text id="0" avatarId="Bokalisk">Куд-кудах! Куд-кудах! Вы откудах и кудах?</Text>

@@ -87,11 +87,13 @@ public class JourneyActor : MonoBehaviour
     public virtual void StartLogic()
     {
         enabled = true;
+        m_Animator.SetBool("StopLogic", false);
     }
 
     public virtual void StopLogic()
     {
         enabled = false;
+        m_Animator.SetBool("StopLogic", true);
     }
     #endregion
 }
