@@ -3,6 +3,7 @@ using System;
 
 public enum JourneyActorDirection
 {
+    NONE = -1,
     Right,
     Left,
     Up,
@@ -43,7 +44,7 @@ public class JourneyActor : MonoBehaviour
             return m_Animator;
         }
     }
-    public JourneyActorDirection journeyActorDirection
+    public JourneyActorDirection direction
     {
         get { return m_JourneyActorDirection; }
     }

@@ -33,8 +33,6 @@ public class JourneyPlayer : JourneyActor
         m_CurrentDirection.x = Input.GetAxisRaw("Horizontal");
         m_CurrentDirection.y = Input.GetAxisRaw("Vertical");
         transform.Translate(m_Speed * m_CurrentDirection.normalized * Time.deltaTime);
-
-        Debug.Log("Player speed: " + (m_CurrentDirection * m_Speed));
     }
 
     public void AddActiveButtonAction(ButtonHandler p_Action)
