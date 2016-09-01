@@ -5,6 +5,8 @@ public delegate void ButtonHandler();
 public class JourneyPlayer : JourneyActor
 {
     #region Variables
+    private Vector3 m_CurrentDirection = Vector3.zero;
+
     public event ButtonHandler m_ActiveButtonAction;
     public event ButtonHandler m_DisactiveButtonAction;
     #endregion
@@ -13,8 +15,6 @@ public class JourneyPlayer : JourneyActor
     public override void Update()
     {
         base.Update();
-
-        ControlUpdate();
 
         if (Input.GetKeyUp(KeyCode.Z))
         {
@@ -29,7 +29,12 @@ public class JourneyPlayer : JourneyActor
             SceneManager.LoadScene("DemoMainScene");
         }
 
-        transform.position += m_CurrentSpeed * Time.deltaTime;
+        AnimationUpdate();
+        m_CurrentDirection.x = Input.GetAxisRaw("Horizontal");
+        m_CurrentDirection.y = Input.GetAxisRaw("Vertical");
+        transform.Translate(m_Speed * m_CurrentDirection.normalized * Time.deltaTime);
+
+        Debug.Log("Player speed: " + (m_CurrentDirection * m_Speed));
     }
 
     public void AddActiveButtonAction(ButtonHandler p_Action)
@@ -76,48 +81,44 @@ public class JourneyPlayer : JourneyActor
     #endregion
 
     #region Private
-    private void ControlUpdate()
+    private void AnimationUpdate()
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
             m_Animator.SetBool("Right", true);
-            m_CurrentSpeed.x = m_Speed;
+            m_JourneyActorDirection = JourneyActorDirection.Right;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             m_Animator.SetBool("Left", true);
-            m_CurrentSpeed.x = -m_Speed;
+            m_JourneyActorDirection = JourneyActorDirection.Left;
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
             m_Animator.SetBool("Up", true);
-            m_CurrentSpeed.y = m_Speed;
+            m_JourneyActorDirection = JourneyActorDirection.Up;
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
             m_Animator.SetBool("Down", true);
-            m_CurrentSpeed.y = -m_Speed;
+            m_JourneyActorDirection = JourneyActorDirection.Down;
         }
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             m_Animator.SetBool("Right", false);
-            m_CurrentSpeed.x = 0.0f;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             m_Animator.SetBool("Left", false);
-            m_CurrentSpeed.x = 0.0f;
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             m_Animator.SetBool("Up", false);
-            m_CurrentSpeed.y = 0.0f;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             m_Animator.SetBool("Down", false);
-            m_CurrentSpeed.y = 0.0f;
         }
     }
     #endregion
