@@ -3,17 +3,12 @@ using System.Collections;
 
 public class StoreCollideBehaviors : BaseCollideBehaviors
 {
-    [SerializeField]
-    private SpriteRenderer m_ActiveButtonImage = null;
-
     public override void EnterAction(JourneyPlayer p_JourneyPlayer)
     {
         base.EnterAction(p_JourneyPlayer);
         
         p_JourneyPlayer.AddActiveButtonAction(OpenStore);
         p_JourneyPlayer.AddDisactiveButtonAction(CloseStore);
-
-        m_ActiveButtonImage.enabled = true;
     }
 
     public override void ExitAction(JourneyPlayer p_JourneyPlayer)
@@ -22,8 +17,6 @@ public class StoreCollideBehaviors : BaseCollideBehaviors
 
         p_JourneyPlayer.RemoveActiveButtonAction(OpenStore);
         p_JourneyPlayer.RemoveDisactiveButtonAction(CloseStore);
-
-        m_ActiveButtonImage.enabled = false;
     }
 
     private void OpenStore()

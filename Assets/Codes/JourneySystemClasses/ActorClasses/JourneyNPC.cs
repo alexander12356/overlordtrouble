@@ -98,12 +98,6 @@ public class JourneyNPC : JourneyActor
         l_CheckCollider.GetComponent<CircleCollider2D>().isTrigger = true;
         l_CheckCollider.transform.SetParent(transform);
         l_CheckCollider.transform.localPosition = Vector3.zero;
-
-        GameObject l_ActiveKey = new GameObject();
-        l_ActiveKey.name = "ActiveKey";
-        l_ActiveKey.AddComponent<SpriteRenderer>();
-        l_ActiveKey.transform.SetParent(transform);
-        l_ActiveKey.transform.localPosition = Vector3.zero;
     }
 #endif
 #endregion

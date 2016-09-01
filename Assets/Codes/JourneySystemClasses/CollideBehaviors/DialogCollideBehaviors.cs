@@ -5,9 +5,6 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
 {
     [SerializeField]
     private string m_DialogId = string.Empty;
-
-    [SerializeField]
-    private SpriteRenderer m_ActiveButtonImage = null;
     private Vector3 m_PlayerPosition;
 
     public override void Awake()
@@ -22,8 +19,6 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
         m_PlayerPosition = p_JourneyPlayer.myTransform.position;
         p_JourneyPlayer.AddActiveButtonAction(StartDialog);
         p_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
-
-        m_ActiveButtonImage.enabled = true;
     }
 
     public override void ExitAction(JourneyPlayer p_JourneyPlayer)
@@ -32,8 +27,6 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
 
         p_JourneyPlayer.RemoveActiveButtonAction(StartDialog);
         p_JourneyPlayer.RemoveDisactiveButtonAction(EndDialog);
-
-        m_ActiveButtonImage.enabled = false;
     }
 
     public virtual void EndDialog()
