@@ -40,8 +40,6 @@ public class JourneyPlayer : JourneyActor
         AnimationUpdate();
         m_CurrentDirection.x = Input.GetAxisRaw("Horizontal");
         m_CurrentDirection.y = Input.GetAxisRaw("Vertical");
-
-        //transform.Translate(m_Speed * m_CurrentDirection.normalized * Time.deltaTime);
     }
 
     public void FixedUpdate()
