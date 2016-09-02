@@ -5,13 +5,21 @@ public delegate void ButtonHandler();
 public class JourneyPlayer : JourneyActor
 {
     #region Variables
-    private Vector3 m_CurrentDirection = Vector3.zero;
+    private Vector2 m_CurrentDirection = Vector2.zero;
+    private Rigidbody2D m_RigidBody2d = null;
 
     public event ButtonHandler m_ActiveButtonAction;
     public event ButtonHandler m_DisactiveButtonAction;
     #endregion
 
     #region Interface
+    public override void Awake()
+    {
+        base.Awake();
+
+        m_RigidBody2d = GetComponent<Rigidbody2D>();
+    }
+
     public override void Update()
     {
         base.Update();
@@ -32,7 +40,11 @@ public class JourneyPlayer : JourneyActor
         AnimationUpdate();
         m_CurrentDirection.x = Input.GetAxisRaw("Horizontal");
         m_CurrentDirection.y = Input.GetAxisRaw("Vertical");
-        transform.Translate(m_Speed * m_CurrentDirection.normalized * Time.deltaTime);
+
+        if (m_CurrentDirection != Vector2.zero)
+        {
+            m_RigidBody2d.MovePosition(m_RigidBody2d.position + m_Speed * m_CurrentDirection.normalized * Time.deltaTime);
+        }
     }
 
     public void AddActiveButtonAction(ButtonHandler p_Action)
