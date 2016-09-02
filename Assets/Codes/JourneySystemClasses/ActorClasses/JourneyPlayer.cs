@@ -46,10 +46,7 @@ public class JourneyPlayer : JourneyActor
 
     public void FixedUpdate()
     {
-        if (m_CurrentDirection != Vector2.zero)
-        {
-            m_RigidBody2d.MovePosition(m_RigidBody2d.position + m_Speed * m_CurrentDirection.normalized * Time.deltaTime);
-        }
+        m_RigidBody2d.MovePosition(m_RigidBody2d.position + m_Speed * m_CurrentDirection.normalized * Time.deltaTime);
     }
 
     public void AddActiveButtonAction(ButtonHandler p_Action)
