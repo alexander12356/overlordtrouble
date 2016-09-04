@@ -40,4 +40,7 @@
     <Text id="0" avatarId="GoatPerson">...</Text>
 	<Text id="1" avatarId="GoatPerson">*Он спит*</Text>
   </Dialog>
+  <Dialog id="Uniceros" avatarPath="Sprites/Creations/Uniceros/Avatar">
+    <Text id="0" avatarId="GoatPerson">Пьинь?</Text>
+  </Dialog>
 </DialogList>
