@@ -36,4 +36,8 @@
   <Dialog id="VillageFountain" avatarPath="">
     <Text id="0" avatarId="GoatPerson">Колодец... полон воды… ее можно пить.</Text>
   </Dialog>
+  <Dialog id="GiantCock" avatarPath="Sprites/Creations/GiantCock/Avatar">
+    <Text id="0" avatarId="GoatPerson">...</Text>
+	<Text id="1" avatarId="GoatPerson">*Он спит*</Text>
+  </Dialog>
 </DialogList>

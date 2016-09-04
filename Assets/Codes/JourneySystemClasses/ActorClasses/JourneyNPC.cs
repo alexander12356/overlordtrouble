@@ -98,6 +98,28 @@ public class JourneyNPC : JourneyActor
         l_CheckCollider.GetComponent<CircleCollider2D>().isTrigger = true;
         l_CheckCollider.transform.SetParent(transform);
         l_CheckCollider.transform.localPosition = Vector3.zero;
+
+        GameObject l_LayerChecker = new GameObject();
+        l_LayerChecker.name = "LayerChecker";
+        l_LayerChecker.AddComponent<LayerChecker>();
+        l_LayerChecker.transform.SetParent(transform);
+        l_LayerChecker.transform.localPosition = Vector3.zero;
+
+        GameObject l_Upper = new GameObject();
+        l_Upper.name = "Upper";
+        l_Upper.AddComponent<BoxCollider2D>();
+        l_Upper.GetComponent<BoxCollider2D>().isTrigger = true;
+        l_Upper.AddComponent<CheckCollide>();
+        l_Upper.transform.SetParent(l_LayerChecker.transform);
+        l_Upper.transform.localPosition = Vector3.zero;
+
+        GameObject l_Downer = new GameObject();
+        l_Downer.name = "Downer";
+        l_Downer.AddComponent<BoxCollider2D>();
+        l_Downer.GetComponent<BoxCollider2D>().isTrigger = true;
+        l_Downer.AddComponent<CheckCollide>();
+        l_Downer.transform.SetParent(l_LayerChecker.transform);
+        l_Downer.transform.localPosition = Vector3.zero;
     }
 #endif
 #endregion
