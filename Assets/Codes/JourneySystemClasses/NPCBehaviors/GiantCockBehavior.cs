@@ -29,6 +29,6 @@ public class GiantCockBehavior : BaseMovement
 
     private float GetWaitTime()
     {
-        return Random.Range(60.0f, 180.0f);
+        return Random.Range(30.0f, 60.0f);
     }
 }
