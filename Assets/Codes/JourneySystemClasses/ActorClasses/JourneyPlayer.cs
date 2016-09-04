@@ -5,7 +5,7 @@ public delegate void ButtonHandler();
 public class JourneyPlayer : JourneyActor
 {
     #region Variables
-    private Vector2 m_CurrentDirection = Vector2.zero;
+    private Vector2 m_InputDirection = Vector2.zero;
     private Rigidbody2D m_RigidBody2d = null;
 
     public event ButtonHandler m_ActiveButtonAction;
@@ -36,15 +36,42 @@ public class JourneyPlayer : JourneyActor
         {
             SceneManager.LoadScene("DemoMainScene");
         }
+        
+        m_InputDirection.x = Input.GetAxisRaw("Horizontal");
+        m_InputDirection.y = Input.GetAxisRaw("Vertical");
 
-        AnimationUpdate();
-        m_CurrentDirection.x = Input.GetAxisRaw("Horizontal");
-        m_CurrentDirection.y = Input.GetAxisRaw("Vertical");
+        if (m_InputDirection != Vector2.zero)
+        {
+            myAnimator.SetBool("IsWalking", true);
+            myAnimator.SetFloat("Input_X", m_InputDirection.x);
+            myAnimator.SetFloat("Input_Y", m_InputDirection.y);
+
+            if (m_InputDirection.x > 0)
+            {
+                m_ActorDirection = ActorDirection.Right;
+            }
+            else if (m_InputDirection.x < 0)
+            {
+                m_ActorDirection = ActorDirection.Left;
+            }
+            else if (m_InputDirection.y > 0)
+            {
+                m_ActorDirection = ActorDirection.Up;
+            }
+            else if (m_InputDirection.y < 0)
+            {
+                m_ActorDirection = ActorDirection.Down;
+            }
+        }
+        else
+        {
+            myAnimator.SetBool("IsWalking", false);
+        }
     }
 
     public void FixedUpdate()
     {
-        m_RigidBody2d.MovePosition(m_RigidBody2d.position + m_Speed * m_CurrentDirection.normalized * Time.deltaTime);
+        m_RigidBody2d.MovePosition(m_RigidBody2d.position + m_Speed * m_InputDirection.normalized * Time.deltaTime);
     }
 
     public void AddActiveButtonAction(ButtonHandler p_Action)
@@ -90,49 +117,6 @@ public class JourneyPlayer : JourneyActor
         if (m_DisactiveButtonAction != null)
         {
             m_DisactiveButtonAction();
-        }
-    }
-    #endregion
-
-    #region Private
-    private void AnimationUpdate()
-    {
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            m_Animator.SetBool("Right", true);
-            m_JourneyActorDirection = JourneyActorDirection.Right;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            m_Animator.SetBool("Left", true);
-            m_JourneyActorDirection = JourneyActorDirection.Left;
-        }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            m_Animator.SetBool("Up", true);
-            m_JourneyActorDirection = JourneyActorDirection.Up;
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            m_Animator.SetBool("Down", true);
-            m_JourneyActorDirection = JourneyActorDirection.Down;
-        }
-
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            m_Animator.SetBool("Right", false);
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            m_Animator.SetBool("Left", false);
-        }
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            m_Animator.SetBool("Up", false);
-        }
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            m_Animator.SetBool("Down", false);
         }
     }
     #endregion

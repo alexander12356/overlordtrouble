@@ -48,7 +48,7 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
         m_JourneyActor.StopLogic();
     }
 
-    private JourneyActorDirection GetMyObjectSide()
+    private ActorDirection GetMyObjectSide()
     {
         Vector2 l_Position = m_JourneyPlayer.myTransform.position;
         Vector2 l_ThisPosition = m_JourneyActor.myTransform.position; 
@@ -57,21 +57,21 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
 
         if ((l_Angle > 315.0f && l_Angle < 360.0f) || (l_Angle > 0.0f && l_Angle < 45.0f))
         {
-            return JourneyActorDirection.Left;
+            return ActorDirection.Left;
         }
         else if (l_Angle > 45.0f && l_Angle < 135.0f)
         {
-            return JourneyActorDirection.Down;
+            return ActorDirection.Down;
         }
         else if (l_Angle > 135.0f && l_Angle < 225.0f)
         {
-            return JourneyActorDirection.Right;
+            return ActorDirection.Right;
         }
         else if (l_Angle > 225.0f && l_Angle < 315.0f)
         {
-            return JourneyActorDirection.Up;
+            return ActorDirection.Up;
         }
 
-        return JourneyActorDirection.NONE;
+        return ActorDirection.NONE;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-public enum JourneyActorDirection
+public enum ActorDirection
 {
     NONE = -1,
     Right,
@@ -15,7 +15,7 @@ public class JourneyActor : MonoBehaviour
     #region Interface
     protected Animator  m_Animator = null;
     protected Transform m_Transform = null;
-    protected JourneyActorDirection m_JourneyActorDirection = JourneyActorDirection.Down;
+    protected ActorDirection m_ActorDirection = ActorDirection.Down;
 
     [SerializeField]
     protected float     m_Speed = 5.0f;
@@ -44,9 +44,9 @@ public class JourneyActor : MonoBehaviour
             return m_Animator;
         }
     }
-    public JourneyActorDirection direction
+    public ActorDirection direction
     {
-        get { return m_JourneyActorDirection; }
+        get { return m_ActorDirection; }
     }
 
     public virtual void Awake()
