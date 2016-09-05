@@ -36,9 +36,12 @@ public class JourneyPlayer : JourneyActor
         {
             SceneManager.LoadScene("DemoMainScene");
         }
-        
-        m_InputDirection.x = Input.GetAxisRaw("Horizontal");
-        m_InputDirection.y = Input.GetAxisRaw("Vertical");
+
+        if (enabled != false)
+        {
+            m_InputDirection.x = Input.GetAxisRaw("Horizontal");
+            m_InputDirection.y = Input.GetAxisRaw("Vertical");
+        }
 
         if (m_InputDirection != Vector2.zero)
         {
@@ -118,6 +121,13 @@ public class JourneyPlayer : JourneyActor
         {
             m_DisactiveButtonAction();
         }
+    }
+
+    public override void StopLogic()
+    {
+        base.StopLogic();
+
+        m_InputDirection = Vector2.zero;
     }
     #endregion
 }
