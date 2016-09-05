@@ -55,7 +55,7 @@ public class StorePanel : Panel
         set
         {
             PlayerInventory.GetInstance().coins = value;
-            m_PlayerCoinsText.text = PlayerInventory.GetInstance().coins + " денег";
+            m_PlayerCoinsText.text = PlayerInventory.GetInstance().coins + " монет";
         }
     }
 
@@ -93,6 +93,11 @@ public class StorePanel : Panel
         base.PushAction();
 
         StartWelcomeDialog();
+    }
+
+    public void AddTalkingAnimator(Animator p_TalkingAnimator)
+    {
+        m_TextBox.SetTalkingAnimator(p_TalkingAnimator);
     }
     #endregion
 

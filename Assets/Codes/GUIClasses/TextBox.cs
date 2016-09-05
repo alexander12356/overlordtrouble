@@ -14,7 +14,8 @@ public class TextBox : MonoBehaviour
     private int  m_CurrentPhrase;
     private PanelActionHandler m_EndAction;
     private bool m_Active = true;
-    private Animator m_Animator = null;
+    private Animator m_ActiveButtonAnimator = null;
+    private Animator m_TalkingAnimator = null;
 
     [SerializeField]
     private float m_ShowingTextSpeed = 0.5f;
@@ -24,7 +25,7 @@ public class TextBox : MonoBehaviour
     public void Awake()
     {
         m_Text = GetComponentInChildren<Text>();
-        m_Animator = GetComponent<Animator>();
+        m_ActiveButtonAnimator = GetComponent<Animator>();
     }
 
     public void SetText(List<string> p_Text)
@@ -36,6 +37,11 @@ public class TextBox : MonoBehaviour
         m_CurrentWord   = 0;
     }
 
+    public void SetTalkingAnimator(Animator p_TalkingAnimator)
+    {
+        m_TalkingAnimator = p_TalkingAnimator;
+    }
+
     public void UpdateTextBox()
     {
         if (!m_Active)
@@ -45,9 +51,9 @@ public class TextBox : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Z))
         {
-            if (m_Animator != null)
+            if (m_ActiveButtonAnimator != null)
             {
-                m_Animator.SetTrigger("Bumped");
+                m_ActiveButtonAnimator.SetTrigger("Bumped");
             }
             NextPhrase();
             Input.ResetInputAxes();
@@ -79,6 +85,11 @@ public class TextBox : MonoBehaviour
     #region Private
     private IEnumerator ShowingText()
     {
+        if (m_TalkingAnimator)
+        {
+            m_TalkingAnimator.SetBool("Talking", true);
+        }
+
         m_Text.text = "";
         m_IsTextShowing = true;
         while (m_CurrentWord < m_FullText[m_CurrentPhrase].Length)
@@ -89,12 +100,22 @@ public class TextBox : MonoBehaviour
         }
         m_CurrentWord = 0;
         m_IsTextShowing = false;
+
+        if (m_TalkingAnimator)
+        {
+            m_TalkingAnimator.SetBool("Talking", false);
+        }
     }
 
     private void NextPhrase()
     {
         if (m_IsTextShowing == true)
         {
+            if (m_TalkingAnimator)
+            {
+                m_TalkingAnimator.SetBool("Talking", false);
+            }
+
             StopAllCoroutines();
             m_Text.text = m_FullText[m_CurrentPhrase];
             m_IsTextShowing = false;
