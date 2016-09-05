@@ -128,6 +128,7 @@ public class JourneyPlayer : JourneyActor
         base.StopLogic();
 
         m_InputDirection = Vector2.zero;
+        FixedUpdate();
     }
     #endregion
 }
