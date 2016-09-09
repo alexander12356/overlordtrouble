@@ -1,11 +1,13 @@
 fileFormatVersion: 2
 guid: 6f593b52de2767443a1ec434c451877b
-timeCreated: 1473086883
+timeCreated: 1473408173
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: StoreDowner_0
     21300002: StoreDowner_1
+    21300004: StoreSpriteSheet_0
+    21300006: StoreSpriteSheet_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -55,7 +57,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: StoreDowner_0
+      name: StoreSpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -68,7 +70,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: StoreDowner_1
+      name: StoreSpriteSheet_1
       rect:
         serializedVersion: 2
         x: 256

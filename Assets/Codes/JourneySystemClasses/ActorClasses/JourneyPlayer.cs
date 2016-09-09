@@ -7,17 +7,24 @@ public class JourneyPlayer : JourneyActor
     #region Variables
     private Vector2 m_InputDirection = Vector2.zero;
     private Rigidbody2D m_RigidBody2d = null;
+    private int m_SortingOrder = 0;
 
     public event ButtonHandler m_ActiveButtonAction;
     public event ButtonHandler m_DisactiveButtonAction;
     #endregion
 
     #region Interface
+    public int sortingOrder
+    {
+        get { return m_SortingOrder; }
+    }
+
     public override void Awake()
     {
         base.Awake();
 
         m_RigidBody2d = GetComponent<Rigidbody2D>();
+        m_SortingOrder = GetComponentInChildren<SpriteRenderer>().sortingOrder;
     }
 
     public override void Update()

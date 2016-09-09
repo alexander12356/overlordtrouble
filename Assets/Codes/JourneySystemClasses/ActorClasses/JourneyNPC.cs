@@ -112,14 +112,6 @@ public class JourneyNPC : JourneyActor
         l_Upper.AddComponent<CheckCollide>();
         l_Upper.transform.SetParent(l_LayerChecker.transform);
         l_Upper.transform.localPosition = Vector3.zero;
-
-        GameObject l_Downer = new GameObject();
-        l_Downer.name = "Downer";
-        l_Downer.AddComponent<BoxCollider2D>();
-        l_Downer.GetComponent<BoxCollider2D>().isTrigger = true;
-        l_Downer.AddComponent<CheckCollide>();
-        l_Downer.transform.SetParent(l_LayerChecker.transform);
-        l_Downer.transform.localPosition = Vector3.zero;
     }
 #endif
 #endregion
