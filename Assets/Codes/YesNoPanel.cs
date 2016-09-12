@@ -39,6 +39,11 @@ public class YesNoPanel : Panel
     {
         base.UpdatePanel();
 
+        if(moving)
+        {
+            return;
+        }
+
         m_ButtonList.UpdateKey();
     }
 

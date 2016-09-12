@@ -105,6 +105,7 @@ public class ImprovePanel : Panel
         l_PanelButtonImprove.StartBlinking();
         l_PanelButtonImprove.AddAfterBlinkingAnimation(RemoveButtonsButExcept);
         l_PanelButtonImprove.AddAfterSelectionAction(ShowProfile);
+        m_ImproveButtonList.isActive = false;
     }
 
     private void RemoveButtonsButExcept()
