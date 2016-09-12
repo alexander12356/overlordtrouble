@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 using System.Collections.Generic;
+using System.Collections;
 
 public class ProfileWindow : MonoBehaviour
 {
@@ -15,9 +16,12 @@ public class ProfileWindow : MonoBehaviour
 
     private ButtonList m_ProfileButtonList;
     private ActivePanels m_CurrentActivePanel = ActivePanels.Profile;
-    private int m_SelectedSpecialCount = 0;
+    private ArrayList m_SelectedSpecialsList;
     private int m_StatImprovePoints = 0;
     private bool m_HaveStatPoints = false;
+
+    [SerializeField]
+    private int m_MaxSelectedSpecialCount = 5;
 
     [SerializeField]
     private ButtonList m_SpecialsButtonList = null;
@@ -158,6 +162,7 @@ public class ProfileWindow : MonoBehaviour
 
             m_SpecialsButtonList.AddButton(l_PanelButton);
         }
+        m_SelectedSpecialsList = new ArrayList();
     }
 
     private void ActiveSpecialListPanel()
@@ -205,18 +210,23 @@ public class ProfileWindow : MonoBehaviour
         PanelButtonProfileSpecial l_PanelButtonProfileSpecial = (PanelButtonProfileSpecial)m_SpecialsButtonList.currentButton;
         if (!l_PanelButtonProfileSpecial.chosen)
         {
-            if (m_SelectedSpecialCount < 5)
+            l_PanelButtonProfileSpecial.chosen = true;
+            m_SelectedSpecialsList.Add(l_PanelButtonProfileSpecial);
+            m_SpecialStatus.Selected(true);
+
+            if (m_SelectedSpecialsList.Count > m_MaxSelectedSpecialCount)
             {
-                l_PanelButtonProfileSpecial.chosen = true;
-                m_SelectedSpecialCount++;
-                m_SpecialStatus.Selected(true);
+                PanelButtonProfileSpecial l_PanelButtonProfileSpecialHead = (PanelButtonProfileSpecial)m_SelectedSpecialsList[0];
+                l_PanelButtonProfileSpecialHead.chosen = false;
+                m_SpecialStatus.Selected(false);
+                m_SelectedSpecialsList.RemoveAt(0);
             }
         }
         else
         {
             l_PanelButtonProfileSpecial.chosen = false;
-            m_SelectedSpecialCount--;
             m_SpecialStatus.Selected(false);
+            m_SelectedSpecialsList.Remove(l_PanelButtonProfileSpecial);
         }
     }
 
