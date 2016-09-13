@@ -80,15 +80,20 @@ public class TextBox : MonoBehaviour
     {
         m_Active = p_Value;
     }
+
+    public void SetTalking(bool p_Value)
+    {
+        if (m_TalkingAnimator)
+        {
+            m_TalkingAnimator.SetBool("Talking", p_Value);
+        }
+    }
     #endregion
 
     #region Private
     private IEnumerator ShowingText()
     {
-        if (m_TalkingAnimator)
-        {
-            m_TalkingAnimator.SetBool("Talking", true);
-        }
+        SetTalking(true);
 
         m_Text.text = "";
         m_IsTextShowing = true;
@@ -101,20 +106,14 @@ public class TextBox : MonoBehaviour
         m_CurrentWord = 0;
         m_IsTextShowing = false;
 
-        if (m_TalkingAnimator)
-        {
-            m_TalkingAnimator.SetBool("Talking", false);
-        }
+        SetTalking(false);
     }
 
     private void NextPhrase()
     {
         if (m_IsTextShowing == true)
         {
-            if (m_TalkingAnimator)
-            {
-                m_TalkingAnimator.SetBool("Talking", false);
-            }
+            SetTalking(false);
 
             StopAllCoroutines();
             m_Text.text = m_FullText[m_CurrentPhrase];
