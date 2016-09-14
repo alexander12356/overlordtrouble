@@ -24,6 +24,6 @@ public class Warp : MonoBehaviour {
 
             yield return StartCoroutine(scrFader.FadeToClear());
         }
-        else yield return null;
+        else yield break;
     }
 }
