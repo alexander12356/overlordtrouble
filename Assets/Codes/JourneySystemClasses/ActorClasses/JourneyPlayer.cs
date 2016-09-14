@@ -19,6 +19,19 @@ public class JourneyPlayer : JourneyActor
         get { return m_SortingOrder; }
     }
 
+    public void SetActive(bool active)
+    {
+        if(active)
+        {
+            enabled = true;
+        }
+        else
+        {
+            enabled = false;
+            myAnimator.SetBool("IsWalking", false);
+        }
+    }
+
     public override void Awake()
     {
         base.Awake();
