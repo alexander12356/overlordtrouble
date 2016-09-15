@@ -29,6 +29,7 @@ public class ScreenFader : MonoBehaviour {
             yield return null;
     }
 
+    // Called by Animation
     void AnimationComplete()
     {
         Debug.Log("Animation Complete");

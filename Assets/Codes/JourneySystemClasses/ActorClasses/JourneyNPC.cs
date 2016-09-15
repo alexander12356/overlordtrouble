@@ -60,7 +60,7 @@ public class JourneyNPC : JourneyActor
     }
 
 #if UNITY_EDITOR
-    [ContextMenu("GenerateStayNPC)")]
+    [ContextMenu("GenerateStayNPC")]
     public void GenerateStayNPC()
     {
         gameObject.AddComponent<StayMovement>();
@@ -68,7 +68,7 @@ public class JourneyNPC : JourneyActor
         GenerateBaseObjects();
     }
 
-    [ContextMenu("GenerateMovingNPC)")]
+    [ContextMenu("GenerateMovingNPC")]
     public void GenerateMovingNPC()
     {
         gameObject.AddComponent<PatrolMovement>();

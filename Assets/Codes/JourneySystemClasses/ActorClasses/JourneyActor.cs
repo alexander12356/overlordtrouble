@@ -16,6 +16,7 @@ public class JourneyActor : MonoBehaviour
     protected Animator  m_Animator = null;
     protected Transform m_Transform = null;
     protected ActorDirection m_ActorDirection = ActorDirection.Down;
+    protected int m_SortingOrder = 0;
 
     [SerializeField]
     protected float     m_Speed = 5.0f;
@@ -48,11 +49,16 @@ public class JourneyActor : MonoBehaviour
     {
         get { return m_ActorDirection; }
     }
+    public int sortingOrder
+    {
+        get { return m_SortingOrder; }
+    }
 
     public virtual void Awake()
     {
         m_Animator  = myAnimator;
         m_Transform = myTransform;
+        m_SortingOrder = GetComponentInChildren<SpriteRenderer>().sortingOrder;
     }
 
     public virtual void Update()

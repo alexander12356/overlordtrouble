@@ -3,20 +3,22 @@ using System.Collections;
 
 public class StoreCollideBehaviors : BaseCollideBehaviors
 {
-    public override void EnterAction(JourneyPlayer p_JourneyPlayer)
+    public override void EnterAction(JourneyActor p_JourneyActor)
     {
-        base.EnterAction(p_JourneyPlayer);
-        
-        p_JourneyPlayer.AddActiveButtonAction(OpenStore);
-        p_JourneyPlayer.AddDisactiveButtonAction(CloseStore);
+        base.EnterAction(p_JourneyActor);
+
+        JourneyPlayer l_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
+        l_JourneyPlayer.AddActiveButtonAction(OpenStore);
+        l_JourneyPlayer.AddDisactiveButtonAction(CloseStore);
     }
 
-    public override void ExitAction(JourneyPlayer p_JourneyPlayer)
+    public override void ExitAction(JourneyActor p_JourneyActor)
     {
-        base.ExitAction(p_JourneyPlayer);
+        base.ExitAction(p_JourneyActor);
 
-        p_JourneyPlayer.RemoveActiveButtonAction(OpenStore);
-        p_JourneyPlayer.RemoveDisactiveButtonAction(CloseStore);
+        JourneyPlayer l_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
+        l_JourneyPlayer.RemoveActiveButtonAction(OpenStore);
+        l_JourneyPlayer.RemoveDisactiveButtonAction(CloseStore);
     }
 
     private void OpenStore()

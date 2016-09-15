@@ -13,22 +13,22 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
         base.Awake();
     }
 
-    public override void EnterAction(JourneyPlayer p_JourneyPlayer)
+    public override void EnterAction(JourneyActor p_JourneyActor)
     {
-        base.EnterAction(p_JourneyPlayer);
+        base.EnterAction(p_JourneyActor);
 
-        m_JourneyPlayer = p_JourneyPlayer;
-        p_JourneyPlayer.AddActiveButtonAction(StartDialog);
-        p_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
+        m_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
+        m_JourneyPlayer.AddActiveButtonAction(StartDialog);
+        m_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
     }
 
-    public override void ExitAction(JourneyPlayer p_JourneyPlayer)
+    public override void ExitAction(JourneyActor p_JourneyActor)
     {
-        base.ExitAction(p_JourneyPlayer);
+        base.ExitAction(p_JourneyActor);
 
+        m_JourneyPlayer.RemoveActiveButtonAction(StartDialog);
+        m_JourneyPlayer.RemoveDisactiveButtonAction(EndDialog);
         m_JourneyPlayer = null;
-        p_JourneyPlayer.RemoveActiveButtonAction(StartDialog);
-        p_JourneyPlayer.RemoveDisactiveButtonAction(EndDialog);
     }
 
     public virtual void EndDialog()

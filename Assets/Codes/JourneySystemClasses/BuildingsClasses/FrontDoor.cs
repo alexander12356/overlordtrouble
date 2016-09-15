@@ -8,18 +8,24 @@ public class FrontDoor : MonoBehaviour
     private void Awake()
     {
         m_FrontDoorRenderer = transform.FindChild("FrontRenderer").GetComponent<SpriteRenderer>();
+
+        if (m_FrontDoorRenderer == null)
+        {
+            return;
+        }
+
         m_CheckCollide = GetComponentInChildren<CheckCollide>();
 
         m_CheckCollide.AddCollideEnterAction(OpenDoor);
         m_CheckCollide.AddCollideExitAction(CloseDoor);
     }
 
-    private void OpenDoor(JourneyPlayer p_JourneyPlayer)
+    private void OpenDoor(JourneyActor p_JourneyActor)
     {
         m_FrontDoorRenderer.enabled = false;
     }
 
-    private void CloseDoor(JourneyPlayer p_JourneyPlayer)
+    private void CloseDoor(JourneyActor p_JourneyActor)
     {
         m_FrontDoorRenderer.enabled = true;
     }

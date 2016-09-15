@@ -11,11 +11,11 @@ public class BaseCollideBehaviors : MonoBehaviour
         m_JourneyActor = GetComponent<JourneyActor>();
     }
 
-    public virtual void EnterAction(JourneyPlayer p_JourneyPlayer)
+    public virtual void EnterAction(JourneyActor p_JourneyActor)
     {
     }
 
-    public virtual void ExitAction(JourneyPlayer p_JourneyPlayer)
+    public virtual void ExitAction(JourneyActor p_JourneyActor)
     {
     }
 }
