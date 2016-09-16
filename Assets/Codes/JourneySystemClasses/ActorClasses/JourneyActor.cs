@@ -50,6 +50,10 @@ public class JourneyActor : MonoBehaviour
     {
         get { return m_ActorDirection; }
     }
+    public Transform pivotTransform
+    {
+        get { return m_PivotTransform; }
+    }
 
     public virtual void Awake()
     {

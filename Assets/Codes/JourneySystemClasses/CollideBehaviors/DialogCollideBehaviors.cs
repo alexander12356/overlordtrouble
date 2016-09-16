@@ -50,8 +50,8 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
 
     private ActorDirection GetMyObjectSide()
     {
-        Vector2 l_Position = m_JourneyPlayer.myTransform.position;
-        Vector2 l_ThisPosition = m_JourneyActor.myTransform.position; 
+        Vector2 l_Position = m_JourneyPlayer.pivotTransform.position;
+        Vector2 l_ThisPosition = m_JourneyActor.pivotTransform.position; 
         double l_Angle = Math.Atan2(l_Position.y - l_ThisPosition.y, l_Position.x - l_ThisPosition.x) / Math.PI * 180;
         l_Angle = (l_Angle < 0) ? l_Angle + 360 : l_Angle;
 
