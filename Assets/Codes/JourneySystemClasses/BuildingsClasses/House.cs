@@ -51,14 +51,14 @@ public class House : MonoBehaviour
     private void GenerateBaseObjects()
     {
         GameObject l_RendererObject = new GameObject();
-        l_RendererObject.name = "Renderer";
+        l_RendererObject.name = "OutsideRenderer";
         l_RendererObject.AddComponent<SpriteRenderer>();
         l_RendererObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
         l_RendererObject.transform.SetParent(transform);
         l_RendererObject.transform.localPosition = Vector3.zero;
 
         GameObject l_DoorBehindRenderer = new GameObject();
-        l_DoorBehindRenderer.name = "BehindRenderer";
+        l_DoorBehindRenderer.name = "InsideRenderer";
         l_DoorBehindRenderer.AddComponent<SpriteRenderer>();
         l_DoorBehindRenderer.transform.SetParent(transform);
         l_DoorBehindRenderer.transform.localPosition = Vector3.zero;
@@ -107,6 +107,11 @@ public class House : MonoBehaviour
         l_WarpExit.AddComponent<Warp>();
         l_WarpExit.transform.SetParent(l_Warps.transform);
         l_WarpExit.transform.localPosition = Vector3.zero;
+
+        GameObject l_Pivot = new GameObject();
+        l_Pivot.name = "Pivot";
+        l_Pivot.transform.SetParent(transform);
+        l_Pivot.transform.localPosition = Vector3.zero;
     }
 #endif
 }
