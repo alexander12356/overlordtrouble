@@ -16,7 +16,8 @@ public class JourneyActor : MonoBehaviour
     protected Animator  m_Animator = null;
     protected Transform m_Transform = null;
     protected ActorDirection m_ActorDirection = ActorDirection.Down;
-    protected int m_SortingOrder = 0;
+    protected SpriteRenderer m_SpriteRenderer = null;
+    private   Transform m_PivotTransform = null;
 
     [SerializeField]
     protected float     m_Speed = 5.0f;
@@ -49,16 +50,15 @@ public class JourneyActor : MonoBehaviour
     {
         get { return m_ActorDirection; }
     }
-    public int sortingOrder
-    {
-        get { return m_SortingOrder; }
-    }
 
     public virtual void Awake()
     {
         m_Animator  = myAnimator;
         m_Transform = myTransform;
-        m_SortingOrder = GetComponentInChildren<SpriteRenderer>().sortingOrder;
+        m_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        m_PivotTransform = transform.FindChild("Pivot");
+
+        UpdateSortingLayer();
     }
 
     public virtual void Update()
@@ -100,6 +100,11 @@ public class JourneyActor : MonoBehaviour
     {
         enabled = false;
         m_Animator.SetBool("StopLogic", true);
+    }
+
+    public void UpdateSortingLayer()
+    {
+        m_SpriteRenderer.sortingOrder = RoomSystem.GetInstance().GetSortingOrderBound(m_PivotTransform);
     }
     #endregion
 }

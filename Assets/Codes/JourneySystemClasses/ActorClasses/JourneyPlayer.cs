@@ -83,6 +83,8 @@ public class JourneyPlayer : JourneyActor
         {
             myAnimator.SetBool("IsWalking", false);
         }
+
+        UpdateSortingLayer();
     }
 
     public void FixedUpdate()
@@ -94,7 +96,6 @@ public class JourneyPlayer : JourneyActor
     {
         RemoveActiveButtonAction(p_Action);
         m_ActiveButtonAction += p_Action;
-        Debug.Log("Action add");
     }
 
     public void RemoveActiveButtonAction(ButtonHandler p_Action)
@@ -102,7 +103,6 @@ public class JourneyPlayer : JourneyActor
         if (m_ActiveButtonAction != null)
         {
             m_ActiveButtonAction -= p_Action;
-            Debug.Log("Action remove");
         }
     }
 

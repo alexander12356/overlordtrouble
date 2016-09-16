@@ -1,8 +1,51 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class House : MonoBehaviour
 {
+    private SpriteRenderer m_OutsideRenderer = null;
+    private SpriteRenderer m_InsideRenderer  = null;
+    private Transform      m_PivotTransform = null;
+    private FrontDoor[]    m_FrontDoors  = null;
+
+    public void Awake()
+    {
+        m_PivotTransform = transform.FindChild("Pivot");
+
+        Transform l_OutsideRendererTransform = transform.FindChild("OutsideRenderer");
+        Transform l_InsideRendererTransform  = transform.FindChild("InsideRenderer");
+        if (l_OutsideRendererTransform)
+        {
+            m_OutsideRenderer = l_OutsideRendererTransform.GetComponent<SpriteRenderer>();
+        }
+        if (l_InsideRendererTransform)
+        {
+            m_InsideRenderer = l_InsideRendererTransform.GetComponent<SpriteRenderer>();
+        }
+
+        m_FrontDoors = GetComponentsInChildren<FrontDoor>();
+
+        UpdateSortingOrder();
+    }
+
+    private void UpdateSortingOrder()
+    {
+        if (m_OutsideRenderer)
+        {
+            m_OutsideRenderer.sortingOrder = RoomSystem.GetInstance().GetSortingOrderBound(m_PivotTransform);
+        }
+        if (m_InsideRenderer)
+        {
+            m_InsideRenderer.sortingOrder = RoomSystem.GetInstance().GetSortingOrderBound(m_PivotTransform) - 1;
+        }
+        if (m_FrontDoors.Length > 0)
+        {
+            for (int i = 0; i < m_FrontDoors.Length; i++)
+            {
+                m_FrontDoors[i].sortingOrder = RoomSystem.GetInstance().GetSortingOrderBound(m_PivotTransform);
+            }
+        }
+    }
+
 #if UNITY_EDITOR
     [ContextMenu("GenerateSimpleHouse")]
     private void GenerateBaseObjects()
@@ -46,20 +89,6 @@ public class House : MonoBehaviour
         l_CheckCollider.AddComponent<CheckCollide>();
         l_CheckCollider.transform.SetParent(l_Door.transform);
         l_CheckCollider.transform.localPosition = Vector3.zero;
-
-        GameObject l_LayerChecker = new GameObject();
-        l_LayerChecker.name = "LayerChecker";
-        l_LayerChecker.AddComponent<LayerChecker>();
-        l_LayerChecker.transform.SetParent(transform);
-        l_LayerChecker.transform.localPosition = Vector3.zero;
-
-        GameObject l_Upper = new GameObject();
-        l_Upper.name = "Upper";
-        l_Upper.AddComponent<BoxCollider2D>();
-        l_Upper.GetComponent<BoxCollider2D>().isTrigger = true;
-        l_Upper.AddComponent<CheckCollide>();
-        l_Upper.transform.SetParent(l_LayerChecker.transform);
-        l_Upper.transform.localPosition = Vector3.zero;
 
         GameObject l_Warps = new GameObject();
         l_Warps.name = "Warps";

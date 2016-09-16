@@ -56,6 +56,8 @@ public class PatrolMovement : BaseMovement
                 m_CurrentPoint = 0;
             }
         }
+
+        journeyActor.UpdateSortingLayer();
     }
 
     public override void LogicStop()
