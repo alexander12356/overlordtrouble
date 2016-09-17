@@ -69,15 +69,15 @@ public class Enemy : Actor
         Attack(Player.GetInstance());
     }
 
-    public override void Damage(float p_DamageValue)
+    public override void Damage(float p_DamageValue, string p_AttackType)
     {
-        base.Damage(p_DamageValue);
+        base.Damage(p_DamageValue, p_AttackType);
 
         health -= p_DamageValue;
 
         Debug.Log("Enemy health: " + health);
         
-        m_Animator.SetTrigger("Hit");
+        m_Animator.SetTrigger(p_AttackType);
         m_AudioSource.PlayOneShot(m_AudioHit);
     }
 
@@ -86,7 +86,7 @@ public class Enemy : Actor
         base.Attack(p_Actor);
 
         float l_DamageValue = Random.Range(m_DamageValue[0], m_DamageValue[1]);
-        p_Actor.Damage(l_DamageValue);
+        p_Actor.Damage(l_DamageValue, "BaseAttack");
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { actorName + " использовал удар и нанес " + l_DamageValue + " урона" });
@@ -113,7 +113,7 @@ public class Enemy : Actor
 
     private void InitComponents()
     {
-        m_Animator = GetComponentInChildren<Animator>();
+        m_Animator = GetComponent<Animator>();
         m_AudioSource = GetComponent<AudioSource>();
         m_Renderer = transform.FindChild("Renderer").GetComponent<SpriteRenderer>();
         m_SelectedArrow = transform.FindChild("Selected").GetComponent<SpriteRenderer>();

@@ -61,7 +61,7 @@ public class Actor : MonoBehaviour
     {
     }
 
-    public virtual void Damage(float p_DamageValue)
+    public virtual void Damage(float p_DamageValue, string p_AttackType)
     {
     }
 

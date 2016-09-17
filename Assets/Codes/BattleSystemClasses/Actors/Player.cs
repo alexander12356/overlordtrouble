@@ -30,7 +30,7 @@ public class Player : Actor
 
         int l_Damage = Random.Range(m_DamageValue[0], m_DamageValue[1]);
 
-        p_Actor.Damage(l_Damage);
+        p_Actor.Damage(l_Damage, "BaseAttack");
 
         TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
         l_NewTextPanel.SetText(new List<string>() { "Игрок нанес " + l_Damage + " урона врагу" });
@@ -41,15 +41,15 @@ public class Player : Actor
         m_AudioSource.PlayOneShot(m_AudioAttack);
     }
 
-    public override void Damage(float p_DamageValue)
+    public override void Damage(float p_DamageValue, string p_AttackType)
     {
-        base.Damage(p_DamageValue);
+        base.Damage(p_DamageValue, p_AttackType);
 
         health -= p_DamageValue;
 
         Debug.Log("Player health: " + health);
 
-        m_Animator.SetTrigger("Hit");
+        m_Animator.SetTrigger(p_AttackType);
         m_AudioSource.PlayOneShot(m_AudioHit);
     }
 
@@ -124,7 +124,7 @@ public class Player : Actor
         PanelManager.GetInstance().ShowPanel(l_TextNewPanel);
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
 
-        p_Enemy.Damage(l_DamageValue);
+        p_Enemy.Damage(l_DamageValue, "Monstyle");
         m_AudioSource.PlayOneShot(m_AudioAttack);
     }
 
