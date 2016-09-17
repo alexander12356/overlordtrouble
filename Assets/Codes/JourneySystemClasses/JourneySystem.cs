@@ -5,7 +5,8 @@ using System;
 public enum ControlType
 {
     Player,
-    Panel
+    Panel,
+    Cutscene
 }
 
 public class JourneySystem : MonoBehaviour
@@ -24,7 +25,7 @@ public class JourneySystem : MonoBehaviour
     {
         m_Instance = this;
         LoadDataBases();
-        SetControl(ControlType.Player);
+        SetControl(ControlType.Cutscene);
     }
 
     public void StartDialog(string p_DialogId)
@@ -45,6 +46,11 @@ public class JourneySystem : MonoBehaviour
             case ControlType.Player:
                 PanelManager.GetInstance().enabled = false;
                 m_Player.StartLogic();
+                break;
+            case ControlType.Cutscene:
+                PanelManager.GetInstance().enabled = false;
+                m_Player.StopLogic();
+                CutsceneSystem.GetInstance().StartCutscene();
                 break;
         }
     }

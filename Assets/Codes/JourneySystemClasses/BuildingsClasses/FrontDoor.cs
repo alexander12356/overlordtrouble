@@ -36,11 +36,17 @@ public class FrontDoor : MonoBehaviour
 
     private void OpenDoor(JourneyActor p_JourneyActor)
     {
-        m_SpriteRenderer.enabled = false;
+        if (enabled)
+        {
+            m_SpriteRenderer.enabled = false;
+        }
     }
 
     private void CloseDoor(JourneyActor p_JourneyActor)
     {
-        m_SpriteRenderer.enabled = true;
+        if (enabled)
+        {
+            m_SpriteRenderer.enabled = true;
+        }
     }
 }

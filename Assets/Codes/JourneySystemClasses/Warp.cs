@@ -9,7 +9,7 @@ public class Warp : MonoBehaviour {
     IEnumerator OnTriggerEnter2D(Collider2D otherCollider)
     {
         Transform collTransform = otherCollider.gameObject.transform.parent;
-        if (collTransform.tag == "Player")
+        if (collTransform.tag == "Player" && enabled)
         {
             ScreenFader scrFader = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
 
