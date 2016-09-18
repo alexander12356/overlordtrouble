@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Actor : MonoBehaviour
+public class BattleActor : MonoBehaviour
 {
     #region Variables
     private float m_Health;
@@ -57,7 +57,7 @@ public class Actor : MonoBehaviour
     {
     }
 
-    public virtual void Attack(Actor p_Actor)
+    public virtual void Attack(BattleActor p_Actor)
     {
     }
 

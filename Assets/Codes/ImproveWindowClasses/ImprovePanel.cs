@@ -106,6 +106,9 @@ public class ImprovePanel : Panel
         l_PanelButtonImprove.AddAfterBlinkingAnimation(RemoveButtonsButExcept);
         l_PanelButtonImprove.AddAfterSelectionAction(ShowProfile);
         m_ImproveButtonList.isActive = false;
+
+        string l_ImproveId = ((PanelButtonImprove)m_ImproveButtonList.currentButton).improveData.id;
+        PlayerEnchancement.GetInstance().AddEnchancement(l_ImproveId);
     }
 
     private void RemoveButtonsButExcept()

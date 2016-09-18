@@ -10,7 +10,7 @@ public class ChooseEnemyPanel : Panel
         ConfirmList
     }
 
-    private List<Enemy> m_EnemyList;
+    private List<BattleEnemy> m_EnemyList;
 
     [SerializeField]
     private ButtonList m_EnemyButtonList = null;
@@ -19,7 +19,7 @@ public class ChooseEnemyPanel : Panel
     private ButtonList m_ConfirmButtonList = null;
 
     private static ChooseEnemyPanel m_Prefab = null;
-    private Enemy m_ChoosedEnemy = null;
+    private BattleEnemy m_ChoosedEnemy = null;
     private PanelActionHandler m_ConfirmAction = null;
     private PanelActionHandler m_CancelAction = null;
     private ButtonListType m_CurrentButtonListType = ButtonListType.EnemyList;
@@ -37,7 +37,7 @@ public class ChooseEnemyPanel : Panel
             return m_Prefab;
         }
     }
-    public Enemy choosedEnemy
+    public BattleEnemy choosedEnemy
     {
         get { return m_ChoosedEnemy;  }
     }

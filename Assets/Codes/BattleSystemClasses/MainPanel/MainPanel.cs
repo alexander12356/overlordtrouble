@@ -75,7 +75,7 @@ public class MainPanel : Panel
     private void AttackEnemy()
     {
         PanelManager.GetInstance().ClosePanel(m_ChoosedEnemyPanel);
-        Player.GetInstance().Attack(m_ChoosedEnemyPanel.choosedEnemy);
+        BattlePlayer.GetInstance().Attack(m_ChoosedEnemyPanel.choosedEnemy);
     }
 
     private void Retreat()

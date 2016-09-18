@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Enemy : Actor
+public class BattleEnemy : BattleActor
 {
     #region Variables
-    private static Enemy m_Prefab = null;
+    private static BattleEnemy m_Prefab = null;
     private int[] m_DamageValue = new int[2];
     private Animator m_Animator = null;
     private AudioSource m_AudioSource = null;
@@ -17,13 +17,13 @@ public class Enemy : Actor
     #endregion
 
     #region Interface
-    public static Enemy prefab
+    public static BattleEnemy prefab
     {
         get
         {
             if (m_Prefab == null)
             {
-                m_Prefab = Resources.Load<Enemy>("Prefabs/BattleEnemy");
+                m_Prefab = Resources.Load<BattleEnemy>("Prefabs/BattleEnemy");
             }
             return m_Prefab;
         }
@@ -66,7 +66,7 @@ public class Enemy : Actor
 
     public void Run()
     {
-        Attack(Player.GetInstance());
+        Attack(BattlePlayer.GetInstance());
     }
 
     public override void Damage(float p_DamageValue, string p_AttackType)
@@ -81,7 +81,7 @@ public class Enemy : Actor
         m_AudioSource.PlayOneShot(m_AudioHit);
     }
 
-    public override void Attack(Actor p_Actor)
+    public override void Attack(BattleActor p_Actor)
     {
         base.Attack(p_Actor);
 

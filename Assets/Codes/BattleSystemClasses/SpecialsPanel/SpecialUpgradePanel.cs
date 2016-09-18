@@ -19,7 +19,7 @@ public class SpecialUpgradePanel : Panel
     private int   m_CurrentKeyCounter = 0;
     private float m_Timer = 0.0f;
     private float m_UpgradeTime = 5.0f;
-    private Enemy m_Enemy = null;
+    private BattleEnemy m_Enemy = null;
     private int   m_WrongSpecialCounter = 0;
     #endregion
 
@@ -63,7 +63,7 @@ public class SpecialUpgradePanel : Panel
         else
         {
             PanelManager.GetInstance().ClosePanel(this);
-            Player.GetInstance().SpecialAttack(m_Enemy, m_SpecialUpgradeIconList);
+            BattlePlayer.GetInstance().SpecialAttack(m_Enemy, m_SpecialUpgradeIconList);
             return;
         }
 
@@ -83,7 +83,7 @@ public class SpecialUpgradePanel : Panel
         }
     }
 
-    public void SetEnemy(Enemy p_Enemy)
+    public void SetEnemy(BattleEnemy p_Enemy)
     {
         m_Enemy = p_Enemy;
     }

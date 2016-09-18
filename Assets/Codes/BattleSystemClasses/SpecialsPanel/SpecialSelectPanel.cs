@@ -110,20 +110,20 @@ public class SpecialSelectPanel : Panel
         {
             l_PanelButton.Choose(false);
             m_ChoosedSkills.Remove(l_PanelButton.skillId);
-            Player.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;
+            BattlePlayer.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;
 
             m_AddedSpecialButtonList.RemoveButton(LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButton.skillId));
         }
         else
         {
-            if (m_ChoosedSkills.Count >= 4 || Player.GetInstance().mana < SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana)
+            if (m_ChoosedSkills.Count >= 4 || BattlePlayer.GetInstance().mana < SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana)
             {
                 return;
             }
 
             l_PanelButton.Choose(true);
             m_ChoosedSkills.Add(l_PanelButton.skillId);
-            Player.GetInstance().mana -= SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;
+            BattlePlayer.GetInstance().mana -= SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;
 
             PanelButtonChosenSpecial l_PanelButtonChosenSpecial = Instantiate(PanelButtonChosenSpecial.prefab);
             l_PanelButtonChosenSpecial.title = LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButton.skillId);
@@ -175,7 +175,7 @@ public class SpecialSelectPanel : Panel
     {
         for (int i = 0; i < m_ChoosedSkills.Count; i++)
         {
-            Player.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(m_ChoosedSkills[i]).mana;
+            BattlePlayer.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(m_ChoosedSkills[i]).mana;
         }
     }
     #endregion

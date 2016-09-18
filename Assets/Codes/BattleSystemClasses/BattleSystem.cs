@@ -12,8 +12,8 @@ public class BattleSystem : MonoBehaviour
     }
 
     private static BattleSystem m_Instance;
-    private Player m_Player;
-    private List<Enemy>  m_EnemyList = new List<Enemy>();
+    private BattlePlayer m_Player;
+    private List<BattleEnemy>  m_EnemyList = new List<BattleEnemy>();
     private bool m_IsPlayerTurn = true;
     private int m_CurrentEnemyNumber = 0;
     private bool m_FromMap = false;
@@ -44,7 +44,7 @@ public class BattleSystem : MonoBehaviour
     {
         m_Instance = this;
 
-        m_Player = Player.GetInstance();
+        m_Player = BattlePlayer.GetInstance();
 
         List<string> l_EnemyIds = BattleStarter.GetInstance().GetEnemy();
 
@@ -52,7 +52,7 @@ public class BattleSystem : MonoBehaviour
         {
             PlayerData.GetInstance().health = 20;
 
-            Enemy l_NewEnemy = Instantiate(Enemy.prefab);
+            BattleEnemy l_NewEnemy = Instantiate(BattleEnemy.prefab);
             l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy("Skwatwolf"));
             l_NewEnemy.transform.SetParent(m_EnemyTransform);
             l_NewEnemy.transform.localPosition = Vector3.zero;
@@ -63,7 +63,7 @@ public class BattleSystem : MonoBehaviour
             m_FromMap = true;
             for (int i = 0; i < l_EnemyIds.Count; i++)
             {
-                Enemy l_NewEnemy = Instantiate(Enemy.prefab);
+                BattleEnemy l_NewEnemy = Instantiate(BattleEnemy.prefab);
                 l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy(l_EnemyIds[i]));
                 l_NewEnemy.transform.SetParent(m_EnemyTransform);
                 l_NewEnemy.transform.localPosition = Vector3.zero;
@@ -97,18 +97,18 @@ public class BattleSystem : MonoBehaviour
         if (m_IsPlayerTurn)
         {
             SetVisibleAvatarPanel(true);
-            Player.GetInstance().RunTurn();
+            BattlePlayer.GetInstance().RunTurn();
         }
         else
         {
             SetVisibleAvatarPanel(false);
 
-            Enemy l_NextEnemy = GetNextEnemy();
+            BattleEnemy l_NextEnemy = GetNextEnemy();
             l_NextEnemy.RunTurn();
             //  Запуск ИИ
             if (!l_NextEnemy.isDead)
             {
-                Player.GetInstance().RunTurn();
+                BattlePlayer.GetInstance().RunTurn();
                 l_NextEnemy.Run();
             }
         }
@@ -119,7 +119,7 @@ public class BattleSystem : MonoBehaviour
         m_AvatarPanel.SetActive(p_Value);
     }
 
-    public List<Enemy> GetEnemyList()
+    public List<BattleEnemy> GetEnemyList()
     {
         return m_EnemyList;
     }
@@ -163,7 +163,7 @@ public class BattleSystem : MonoBehaviour
         PanelManager.GetInstance().ShowPanel(l_MainPanel);
     }
 
-    private Enemy GetNextEnemy()
+    private BattleEnemy GetNextEnemy()
     {
         if (m_CurrentEnemyNumber >= m_EnemyList.Count)
         {

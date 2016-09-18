@@ -3,10 +3,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : Actor
+public class BattlePlayer : BattleActor
 {
     #region Variables
-    private static Player m_Instance = null;
+    private static BattlePlayer m_Instance = null;
     private int[] m_DamageValue = new int[2] { 5, 8};
     private Animator m_Animator = null;
     private AudioClip m_AudioHit = null;
@@ -19,12 +19,12 @@ public class Player : Actor
     #endregion
 
     #region Interface
-    static public Player GetInstance()
+    static public BattlePlayer GetInstance()
     {
         return m_Instance;
     }
     
-    public override void Attack(Actor p_Actor)
+    public override void Attack(BattleActor p_Actor)
     {
         base.Attack(p_Actor);
 
@@ -54,7 +54,7 @@ public class Player : Actor
     }
 
     //TODO отрефакторить
-    public void SpecialAttack(Enemy p_Enemy, List<SpecialUpgradeIcon> p_SpecialUpgradeIconList)
+    public void SpecialAttack(BattleEnemy p_Enemy, List<SpecialUpgradeIcon> p_SpecialUpgradeIconList)
     {
         int l_BrokenSpecialCount = 0;
         int l_UnbuffedSpecialCount = 0;
@@ -151,6 +151,9 @@ public class Player : Actor
         base.Awake();
 
         m_Instance = this;
+
+        Image l_AvatarImage = transform.FindChild("AvatarImage").GetComponent<Image>();
+        l_AvatarImage.sprite = PlayerEnchancement.GetInstance().GetBattleAvatar();
 
         InitComponents();
         LoadSounds();

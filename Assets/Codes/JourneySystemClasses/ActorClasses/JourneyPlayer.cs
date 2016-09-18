@@ -31,6 +31,8 @@ public class JourneyPlayer : JourneyActor
         base.Awake();
 
         m_RigidBody2d = GetComponent<Rigidbody2D>();
+
+        LoadImprove();
     }
 
     public override void Update()
@@ -142,6 +144,11 @@ public class JourneyPlayer : JourneyActor
 
         m_InputDirection = Vector2.zero;
         FixedUpdate();
+    }
+
+    public void LoadImprove()
+    {
+        m_Animator.runtimeAnimatorController = PlayerEnchancement.GetInstance().GetAnimatorController();
     }
     #endregion
 }
