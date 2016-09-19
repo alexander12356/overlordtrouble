@@ -134,7 +134,7 @@ public class SpecialSelectPanel : Panel
     //TODO Kostil
     private void InitSpecialButtons()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
             l_SpecialButton.skillId = "WaterDrops";
@@ -145,6 +145,13 @@ public class SpecialSelectPanel : Panel
         {
             PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
             l_SpecialButton.skillId = "Slap";
+            l_SpecialButton.AddAction(ChooseSpecial);
+            m_SpecialButtonList.AddButton(l_SpecialButton);
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
+            l_SpecialButton.skillId = "TailWhap";
             l_SpecialButton.AddAction(ChooseSpecial);
             m_SpecialButtonList.AddButton(l_SpecialButton);
         }

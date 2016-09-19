@@ -30,7 +30,9 @@ public class BattlePlayer : BattleActor
 
         int l_Damage = Random.Range(m_DamageValue[0], m_DamageValue[1]);
 
-        p_Actor.Damage(l_Damage, "BaseAttack");
+        p_Actor.Damage(l_Damage);
+        AttackEffectsSystem.GetInstance().AddEffect((BattleEnemy)p_Actor, "BaseAttack");
+        AttackEffectsSystem.GetInstance().PlayEffects();
 
         TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
         l_NewTextPanel.SetText(new List<string>() { "Игрок нанес " + l_Damage + " урона врагу" });
@@ -41,15 +43,12 @@ public class BattlePlayer : BattleActor
         m_AudioSource.PlayOneShot(m_AudioAttack);
     }
 
-    public override void Damage(float p_DamageValue, string p_AttackType)
+    public override void Damage(float p_DamageValue)
     {
-        base.Damage(p_DamageValue, p_AttackType);
+        base.Damage(p_DamageValue);
 
         health -= p_DamageValue;
-
-        Debug.Log("Player health: " + health);
-
-        m_Animator.SetTrigger(p_AttackType);
+        
         m_AudioSource.PlayOneShot(m_AudioHit);
     }
 
@@ -85,6 +84,8 @@ public class BattlePlayer : BattleActor
         {
             l_DamageValue = 1.0f;
             l_Text = "Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName;
+
+            AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, "BaseAttack");
         }
         else if (l_UnbuffedSpecialCount == p_SpecialUpgradeIconList.Count)
         {
@@ -92,6 +93,8 @@ public class BattlePlayer : BattleActor
 
             l_DamageValue = p_SkillData.damage - p_SkillData.damage * 0.25f;
             l_Text = "Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName;
+
+            AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, "BaseAttack");
         }
         else
         {
@@ -113,10 +116,14 @@ public class BattlePlayer : BattleActor
                     l_UsedSpecialsName += l_SkillLocalization + ", ";
                 }
                 l_DamageValue += l_BuffedSkills[i].damage;
+
+                AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, l_BuffedSkills[i].id + "Monstyle");
             }
             
             l_Text = "ГГ использовал на \"" + p_Enemy.actorName + "\" " + l_UsedSpecialsName + " он нанес " + l_DamageValue + " урона";
         }
+
+        AttackEffectsSystem.GetInstance().PlayEffects();
 
         TextPanel l_TextNewPanel = Instantiate(TextPanel.prefab);
         l_TextNewPanel.SetText(new List<string>() { l_Text });
@@ -124,7 +131,7 @@ public class BattlePlayer : BattleActor
         PanelManager.GetInstance().ShowPanel(l_TextNewPanel);
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
 
-        p_Enemy.Damage(l_DamageValue, "Monstyle");
+        p_Enemy.Damage(l_DamageValue);
         m_AudioSource.PlayOneShot(m_AudioAttack);
     }
 

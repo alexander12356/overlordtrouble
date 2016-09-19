@@ -61,7 +61,7 @@ public class BattleActor : MonoBehaviour
     {
     }
 
-    public virtual void Damage(float p_DamageValue, string p_AttackType)
+    public virtual void Damage(float p_DamageValue)
     {
     }
 

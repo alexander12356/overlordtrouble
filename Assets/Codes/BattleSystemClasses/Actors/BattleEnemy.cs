@@ -28,7 +28,6 @@ public class BattleEnemy : BattleActor
             return m_Prefab;
         }
     }
-
     public bool selected
     {
         get { return m_Selected; }
@@ -37,6 +36,10 @@ public class BattleEnemy : BattleActor
             m_Selected = value;
             m_SelectedArrow.gameObject.SetActive(m_Selected);
         }
+    }
+    public SpriteRenderer spriteRenderer
+    {
+        get { return m_Renderer; }
     }
 
     public override void Awake()
@@ -69,15 +72,14 @@ public class BattleEnemy : BattleActor
         Attack(BattlePlayer.GetInstance());
     }
 
-    public override void Damage(float p_DamageValue, string p_AttackType)
+    public override void Damage(float p_DamageValue)
     {
-        base.Damage(p_DamageValue, p_AttackType);
+        base.Damage(p_DamageValue);
 
         health -= p_DamageValue;
 
         Debug.Log("Enemy health: " + health);
-        
-        m_Animator.SetTrigger(p_AttackType);
+
         m_AudioSource.PlayOneShot(m_AudioHit);
     }
 
@@ -86,7 +88,7 @@ public class BattleEnemy : BattleActor
         base.Attack(p_Actor);
 
         float l_DamageValue = Random.Range(m_DamageValue[0], m_DamageValue[1]);
-        p_Actor.Damage(l_DamageValue, "BaseAttack");
+        p_Actor.Damage(l_DamageValue);
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { actorName + " использовал удар и нанес " + l_DamageValue + " урона" });
