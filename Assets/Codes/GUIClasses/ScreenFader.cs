@@ -32,7 +32,6 @@ public class ScreenFader : MonoBehaviour {
     // Called by Animation
     void AnimationComplete()
     {
-        Debug.Log("Animation Complete");
         isFading = false;
     }
 }
