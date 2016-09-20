@@ -1,0 +1,11 @@
+<AudioList>
+	<Audio id="Player_BaseAttack" path="Sounds/Player/Attack"/>
+	<Audio id="Player_Hit"        path="Sounds/Player/Hit"/>
+	
+	<Audio id="Skwatwolf_Attack" path="Sounds/Skwatwolf/Attack"/>
+	<Audio id="Skwatwolf_Hit"    path="Sounds/Skwatwolf/hit"/>
+	
+	<Audio id="TailWhapMonstyle"   path="Sounds/Monstyle/TailWhap"/>
+	<Audio id="WaterDropsMonstyle" path="Sounds/Monstyle/WaterDrops"/>
+	<Audio id="SlapMonstyle"       path="Sounds/Monstyle/Slap"/>
+</AudioList>

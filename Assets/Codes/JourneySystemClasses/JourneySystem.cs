@@ -57,9 +57,6 @@ public class JourneySystem : MonoBehaviour
 
     private void LoadDataBases()
     {
-        SkillDataBase.GetInstance();
-        ImproveDataBase.GetInstance();
-        ItemDataBase.GetInstance();
-        StoreDataBase.GetInstance();
+        DataLoader.GetInstance();
     }
 }

@@ -6,6 +6,7 @@ public class AttackEffect : MonoBehaviour
     private Animator m_Animator = null;
     private Transform m_Renderer = null;
     private AudioSource m_AudioSource = null;
+    private string m_Id = string.Empty;
 
     public Animator myAnimator
     {
@@ -58,6 +59,11 @@ public class AttackEffect : MonoBehaviour
     {
         myAnimator.SetTrigger("Start");
 
-        //m_AudioSource.PlayOneShot();
+        m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_Id));
+    }
+
+    public void SetId(string p_Id)
+    {
+        m_Id = p_Id;
     }
 }

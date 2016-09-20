@@ -44,6 +44,8 @@ public class BattleSystem : MonoBehaviour
     {
         m_Instance = this;
 
+        DataLoader.GetInstance();
+
         m_Player = BattlePlayer.GetInstance();
 
         List<string> l_EnemyIds = BattleStarter.GetInstance().GetEnemy();

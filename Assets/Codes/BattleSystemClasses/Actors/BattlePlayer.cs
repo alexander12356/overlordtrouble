@@ -9,8 +9,6 @@ public class BattlePlayer : BattleActor
     private static BattlePlayer m_Instance = null;
     private int[] m_DamageValue = new int[2] { 5, 8};
     private Animator m_Animator = null;
-    private AudioClip m_AudioHit = null;
-    private AudioClip m_AudioAttack = null;
     private AudioSource m_AudioSource = null;
     private Text m_HealthText = null;
     private Text m_SpecialText = null;
@@ -31,7 +29,7 @@ public class BattlePlayer : BattleActor
         int l_Damage = Random.Range(m_DamageValue[0], m_DamageValue[1]);
 
         p_Actor.Damage(l_Damage);
-        AttackEffectsSystem.GetInstance().AddEffect((BattleEnemy)p_Actor, "BaseAttack");
+        AttackEffectsSystem.GetInstance().AddEffect((BattleEnemy)p_Actor, "Player_BaseAttack");
         AttackEffectsSystem.GetInstance().PlayEffects();
 
         TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
@@ -39,8 +37,6 @@ public class BattlePlayer : BattleActor
         l_NewTextPanel.AddButtonAction(EndTurn);
         PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
-
-        m_AudioSource.PlayOneShot(m_AudioAttack);
     }
 
     public override void Damage(float p_DamageValue)
@@ -48,8 +44,6 @@ public class BattlePlayer : BattleActor
         base.Damage(p_DamageValue);
 
         health -= p_DamageValue;
-        
-        m_AudioSource.PlayOneShot(m_AudioHit);
     }
 
     //TODO отрефакторить
@@ -123,16 +117,16 @@ public class BattlePlayer : BattleActor
             l_Text = "ГГ использовал на \"" + p_Enemy.actorName + "\" " + l_UsedSpecialsName + " он нанес " + l_DamageValue + " урона";
         }
 
+        p_Enemy.Damage(l_DamageValue);
+
+        TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { l_Text });
+        l_TextPanel.AddButtonAction(EndTurn);
+        PanelManager.GetInstance().ShowPanel(l_TextPanel);
+
         AttackEffectsSystem.GetInstance().PlayEffects();
 
-        TextPanel l_TextNewPanel = Instantiate(TextPanel.prefab);
-        l_TextNewPanel.SetText(new List<string>() { l_Text });
-        l_TextNewPanel.AddButtonAction(EndTurn);
-        PanelManager.GetInstance().ShowPanel(l_TextNewPanel);
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
-
-        p_Enemy.Damage(l_DamageValue);
-        m_AudioSource.PlayOneShot(m_AudioAttack);
     }
 
     public override void Died()
@@ -163,7 +157,6 @@ public class BattlePlayer : BattleActor
         l_AvatarImage.sprite = PlayerEnchancement.GetInstance().GetBattleAvatar();
 
         InitComponents();
-        LoadSounds();
         InitStats();
     }
 
@@ -201,14 +194,6 @@ public class BattlePlayer : BattleActor
         m_HealthPointBar  = transform.FindChild("HealthBar").GetComponent<Image>();
         m_SpecialText     = transform.FindChild("SpecialText").GetComponent<Text>();
         m_SpecialPointBar = transform.FindChild("SpecialBar").GetComponent<Image>();
-
-        LoadSounds();
-    }
-
-    private void LoadSounds()
-    {
-        m_AudioHit = Resources.Load<AudioClip>("Sounds/Player/Hit");
-        m_AudioAttack = Resources.Load<AudioClip>("Sounds/Player/Attack");
     }
     #endregion
 }

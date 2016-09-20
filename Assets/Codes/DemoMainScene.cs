@@ -7,6 +7,8 @@ public class DemoMainScene : MonoBehaviour
 
     private void Awake()
     {
+        DataLoader.GetInstance();
+
         m_ButtonList = GetComponent<ButtonList>();
 
         m_ButtonList[0].AddAction(StartBattleSystem);

@@ -1,6 +1,6 @@
 ﻿<Localization>
-	<!-- skills	-->
-	<Text id="Skill:WaterDrops">Водяные капли</Text>
+	<!-- Monstyle	-->
+	<Text id="Skill:WaterDrops">Капли</Text>
 	<Text id="Skill:Slap">Щлепок</Text>
 	<Text id="Skill:ProtectiveCoat">Защитная оболочка</Text>
 	<Text id="Skill:Strike">Удар</Text>
