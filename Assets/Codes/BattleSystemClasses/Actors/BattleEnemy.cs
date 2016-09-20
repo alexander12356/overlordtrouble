@@ -8,8 +8,6 @@ public class BattleEnemy : BattleActor
     private int[] m_DamageValue = new int[2];
     private Animator m_Animator = null;
     private AudioSource m_AudioSource = null;
-    private AudioClip m_AudioHit = null;
-    private AudioClip m_AudioAttack = null;
     private EnemyData m_EnemyData;
     private bool m_Selected = false;
     private SpriteRenderer m_SelectedArrow = null;
@@ -47,7 +45,6 @@ public class BattleEnemy : BattleActor
         base.Awake();
 
         InitComponents();
-        LoadSounds();
     }
 
     public void SetData(EnemyData l_EnemyData)
@@ -77,10 +74,6 @@ public class BattleEnemy : BattleActor
         base.Damage(p_DamageValue);
 
         health -= p_DamageValue;
-
-        Debug.Log("Enemy health: " + health);
-
-        m_AudioSource.PlayOneShot(m_AudioHit);
     }
 
     public override void Attack(BattleActor p_Actor)
@@ -95,7 +88,7 @@ public class BattleEnemy : BattleActor
         l_TextPanel.AddButtonAction(EndTurn);
         PanelManager.GetInstance().ShowPanel(l_TextPanel);
 
-        m_AudioSource.PlayOneShot(m_AudioAttack);
+        m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_EnemyData.id + "_Attack"));
     }
 
     public override void Died()
@@ -104,15 +97,14 @@ public class BattleEnemy : BattleActor
 
         BattleSystem.GetInstance().Died(BattleSystem.ActorID.Enemy);
     }
+
+    public void PlayHitSound()
+    {
+        m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_EnemyData.id + "_Hit"));
+    }
     #endregion
 
     #region Private
-    private void LoadSounds()
-    {
-        m_AudioHit = Resources.Load<AudioClip>("Sounds/Enemy/Nyashka/Hit");
-        m_AudioAttack = Resources.Load<AudioClip>("Sounds/Enemy/Nyashka/Attack");
-    }
-
     private void InitComponents()
     {
         m_Animator = GetComponent<Animator>();

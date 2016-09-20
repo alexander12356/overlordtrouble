@@ -21,6 +21,7 @@ public class SpecialUpgradePanel : Panel
     private float m_UpgradeTime = 5.0f;
     private BattleEnemy m_Enemy = null;
     private int   m_WrongSpecialCounter = 0;
+    private bool  m_IsAllWrong = false;
     #endregion
 
     #region Interface
@@ -52,35 +53,8 @@ public class SpecialUpgradePanel : Panel
             return;
         }
 
-        if (m_Timer < m_UpgradeTime)
-        {
-            m_Timer += Time.deltaTime;
-
-            Vector3 l_BarImageScale = m_BarImage.transform.localScale;
-            l_BarImageScale.x = 1.0f - (m_Timer / m_UpgradeTime);
-            m_BarImage.transform.localScale = l_BarImageScale;
-        }
-        else
-        {
-            PanelManager.GetInstance().ClosePanel(this);
-            BattlePlayer.GetInstance().SpecialAttack(m_Enemy, m_SpecialUpgradeIconList);
-            return;
-        }
-
-        KeyCode l_CurrentKey = m_SpecialUpgradeIconList[m_CurrentKeyCounter].arrowKey;
-        if (Input.anyKeyDown)
-        {
-            if (Input.GetKeyDown(l_CurrentKey))
-            {
-                m_SpecialUpgradeIconList[m_CurrentKeyCounter].Upgrade();
-            }
-            else
-            {
-                m_SpecialUpgradeIconList[m_CurrentKeyCounter].Wrong();
-                m_WrongSpecialCounter++;
-            }
-            IncrementCurrentCounter();
-        }
+        CalculateTime();
+        CheckKeyDown();
     }
 
     public void SetEnemy(BattleEnemy p_Enemy)
@@ -141,13 +115,31 @@ public class SpecialUpgradePanel : Panel
         }
     }
 
-    private void IncrementCurrentCounter()
+    private void CheckKeyDown()
     {
-        if (m_WrongSpecialCounter >= m_AddedSkills.Count)
+        if (m_IsAllWrong)
         {
             return;
         }
 
+        KeyCode l_CurrentKey = m_SpecialUpgradeIconList[m_CurrentKeyCounter].arrowKey;
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(l_CurrentKey))
+            {
+                m_SpecialUpgradeIconList[m_CurrentKeyCounter].Upgrade();
+            }
+            else
+            {
+                m_SpecialUpgradeIconList[m_CurrentKeyCounter].Wrong();
+                m_WrongSpecialCounter++;
+            }
+            IncrementCurrentCounter();
+        }
+    }
+
+    private void IncrementCurrentCounter()
+    {
         m_SpecialUpgradeIconList[m_CurrentKeyCounter].select = false;
 
         m_CurrentKeyCounter++;
@@ -155,6 +147,12 @@ public class SpecialUpgradePanel : Panel
         {
             m_CurrentKeyCounter = 0;
             RandomizeSpecialKeys();
+
+            if (m_WrongSpecialCounter >= m_SpecialUpgradeIconList.Count)
+            {
+                m_IsAllWrong = true;
+                return;
+            }
         }
 
         m_SpecialUpgradeIconList[m_CurrentKeyCounter].select = true;
@@ -162,6 +160,24 @@ public class SpecialUpgradePanel : Panel
         if (m_SpecialUpgradeIconList[m_CurrentKeyCounter].isWrong)
         {
             IncrementCurrentCounter();
+        }
+    }
+
+    private void CalculateTime()
+    {
+        if (m_Timer < m_UpgradeTime)
+        {
+            m_Timer += Time.deltaTime;
+
+            Vector3 l_BarImageScale = m_BarImage.transform.localScale;
+            l_BarImageScale.x = 1.0f - (m_Timer / m_UpgradeTime);
+            m_BarImage.transform.localScale = l_BarImageScale;
+        }
+        else
+        {
+            PanelManager.GetInstance().ClosePanel(this);
+            BattlePlayer.GetInstance().SpecialAttack(m_Enemy, m_SpecialUpgradeIconList);
+            return;
         }
     }
     #endregion

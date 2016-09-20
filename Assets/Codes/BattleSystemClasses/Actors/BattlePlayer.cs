@@ -79,7 +79,7 @@ public class BattlePlayer : BattleActor
             l_DamageValue = 1.0f;
             l_Text = "Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName;
 
-            AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, "BaseAttack");
+            AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, "Player_BaseAttack");
         }
         else if (l_UnbuffedSpecialCount == p_SpecialUpgradeIconList.Count)
         {
@@ -88,7 +88,7 @@ public class BattlePlayer : BattleActor
             l_DamageValue = p_SkillData.damage - p_SkillData.damage * 0.25f;
             l_Text = "Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName;
 
-            AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, "BaseAttack");
+            AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, "Player_BaseAttack");
         }
         else
         {

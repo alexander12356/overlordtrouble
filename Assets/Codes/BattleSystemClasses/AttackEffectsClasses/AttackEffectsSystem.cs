@@ -28,7 +28,7 @@ public class AttackEffectsSystem : MonoBehaviour
         AttackEffect l_AttackEffectsPrefab = Resources.Load<AttackEffect>("Prefabs/BattleEffects/" + p_EffectId);
 
         AttackEffect l_AttackEffect = Instantiate(l_AttackEffectsPrefab);
-        l_AttackEffect.SetId(p_EffectId);
+        l_AttackEffect.SetData(p_EffectId, p_Target);
         l_AttackEffect.transform.SetParent(p_Target.transform);
         l_AttackEffect.transform.localPosition = Vector3.zero;
 

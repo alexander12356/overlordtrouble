@@ -7,6 +7,7 @@ public class AttackEffect : MonoBehaviour
     private Transform m_Renderer = null;
     private AudioSource m_AudioSource = null;
     private string m_Id = string.Empty;
+    private BattleEnemy m_BattleEnemy = null;
 
     public Animator myAnimator
     {
@@ -60,13 +61,15 @@ public class AttackEffect : MonoBehaviour
         myAnimator.SetTrigger("Start");
     }
 
-    public void SetId(string p_Id)
+    public void SetData(string p_Id, BattleEnemy p_Target)
     {
         m_Id = p_Id;
+        m_BattleEnemy = p_Target;
     }
 
     public void PlaySound()
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_Id));
+        m_BattleEnemy.PlayHitSound();
     }
 }
