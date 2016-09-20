@@ -58,12 +58,15 @@ public class AttackEffect : MonoBehaviour
     public void PlayEffect()
     {
         myAnimator.SetTrigger("Start");
-
-        m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_Id));
     }
 
     public void SetId(string p_Id)
     {
         m_Id = p_Id;
+    }
+
+    public void PlaySound()
+    {
+        m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_Id));
     }
 }
