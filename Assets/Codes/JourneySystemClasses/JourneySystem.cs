@@ -25,7 +25,7 @@ public class JourneySystem : MonoBehaviour
     {
         m_Instance = this;
         LoadDataBases();
-        SetControl(ControlType.Cutscene);
+        CutsceneSystem.GetInstance().StartCutscene("Intro");
     }
 
     public void StartDialog(string p_DialogId)
@@ -42,15 +42,17 @@ public class JourneySystem : MonoBehaviour
             case ControlType.Panel:
                 PanelManager.GetInstance().enabled = true;
                 m_Player.StopLogic();
+                CutsceneSystem.GetInstance().enabled = false;
                 break;
             case ControlType.Player:
                 PanelManager.GetInstance().enabled = false;
                 m_Player.StartLogic();
+                CutsceneSystem.GetInstance().enabled = false;
                 break;
             case ControlType.Cutscene:
                 PanelManager.GetInstance().enabled = false;
                 m_Player.StopLogic();
-                CutsceneSystem.GetInstance().StartCutscene();
+                CutsceneSystem.GetInstance().enabled = true;
                 break;
         }
     }

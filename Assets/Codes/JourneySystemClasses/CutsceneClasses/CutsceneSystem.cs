@@ -5,8 +5,9 @@ using System.Collections.Generic;
 public class CutsceneSystem : MonoBehaviour
 {
     private static CutsceneSystem m_Instance = null;
+    private string m_CurrentCutscene = string.Empty;
     private int m_CurrentStep = -1;
-    private List<BaseStep> m_Steps = new List<BaseStep>();
+    private Dictionary<string, List<BaseStep>> m_Cutscenes = new Dictionary<string, List<BaseStep>>();
 
     public static CutsceneSystem GetInstance()
     {
@@ -20,9 +21,13 @@ public class CutsceneSystem : MonoBehaviour
         LoadCutscene();
     }
 
-    public void StartCutscene()
+    public void StartCutscene(string p_Id)
     {
-        enabled = true;
+        JourneySystem.GetInstance().SetControl(ControlType.Cutscene);
+
+        m_CurrentCutscene = p_Id;
+        m_CurrentStep = -1;
+        
         NextStep();
     }
 
@@ -36,25 +41,42 @@ public class CutsceneSystem : MonoBehaviour
     {
         m_CurrentStep++;
 
-        if (m_CurrentStep > m_Steps.Count - 1)
+        if (m_CurrentStep > m_Cutscenes[m_CurrentCutscene].Count - 1)
         {
             EndCutscene();
             return;
         }
 
-        m_Steps[m_CurrentStep].StartStep();
+        m_Cutscenes[m_CurrentCutscene][m_CurrentStep].StartStep();
     }
 
     public void Update()
     {
-        m_Steps[m_CurrentStep].UpdateStep();
+        if (Input.GetKeyUp(KeyCode.Z))
+        {
+            Skip();
+        }
+
+        m_Cutscenes[m_CurrentCutscene][m_CurrentStep].UpdateStep();
     }
 
     private void LoadCutscene()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            m_Steps.Add(transform.GetChild(i).GetComponent<BaseStep>());
+            Transform l_Cutscene = transform.GetChild(i).transform;
+            List<BaseStep> l_Steps = new List<BaseStep>();
+            for (int j = 0; j < l_Cutscene.childCount; j++)
+            {
+                l_Steps.Add(l_Cutscene.GetChild(j).GetComponent<BaseStep>());
+            }
+            m_Cutscenes.Add(l_Cutscene.gameObject.name, l_Steps);
         }
+    }
+
+    public void Skip()
+    {
+        EndCutscene();
+        StartCutscene("Skip");
     }
 }
