@@ -5,6 +5,9 @@
 	<Audio id="Skwatwolf_Attack" path="Sounds/Skwatwolf/Attack"/>
 	<Audio id="Skwatwolf_Hit"    path="Sounds/Skwatwolf/hit"/>
 	
+	<Audio id="Bokalisk_Attack" path="Sounds/Skwatwolf/Attack"/>
+	<Audio id="Bokalisk_Hit"    path="Sounds/Skwatwolf/hit"/>
+	
 	<Audio id="TailWhapMonstyle"   path="Sounds/Monstyle/TailWhap"/>
 	<Audio id="WaterDropsMonstyle" path="Sounds/Monstyle/WaterDrops"/>
 	<Audio id="SlapMonstyle"       path="Sounds/Monstyle/Slap"/>
