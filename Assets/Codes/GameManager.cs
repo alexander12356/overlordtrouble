@@ -9,6 +9,14 @@ public class GameManager : MonoBehaviour
 
     public static GameManager GetInstance()
     {
+        if (m_Instance == null)
+        {
+            GameObject gameObject = new GameObject();
+            gameObject.name = "GameManager";
+            gameObject.AddComponent<GameManager>();
+
+            m_Instance = gameObject.GetComponent<GameManager>();
+        }
         return m_Instance;
     }
 
