@@ -18,5 +18,6 @@ public class DataLoader : Singleton<DataLoader>
         LocalizationDataBase.GetInstance();
         SkillDataBase.GetInstance();
         StoreDataBase.GetInstance();
+        BattleDataBase.GetInstance();
     }
 }

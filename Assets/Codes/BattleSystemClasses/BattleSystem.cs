@@ -16,7 +16,7 @@ public class BattleSystem : MonoBehaviour
     private List<BattleEnemy>  m_EnemyList = new List<BattleEnemy>();
     private bool m_IsPlayerTurn = true;
     private int m_CurrentEnemyNumber = 0;
-    private bool m_FromMap = false;
+    private BattleData m_BattleData;
 
     [SerializeField]
     private Transform m_MainPanelTransform = null;
@@ -35,9 +35,9 @@ public class BattleSystem : MonoBehaviour
     {
         get { return m_MainPanelTransform; }
     }
-    public bool isFromMap
+    public BattleData battleData
     {
-        get { return m_FromMap; }
+        get { return m_BattleData; }
     }
 
     public void Awake()
@@ -48,30 +48,7 @@ public class BattleSystem : MonoBehaviour
 
         m_Player = BattlePlayer.GetInstance();
 
-        List<string> l_EnemyIds = BattleStarter.GetInstance().GetEnemy();
-
-        if (l_EnemyIds.Count == 0)
-        {
-            PlayerData.GetInstance().health = 20;
-
-            BattleEnemy l_NewEnemy = Instantiate(BattleEnemy.prefab);
-            l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy("Skwatwolf"));
-            l_NewEnemy.transform.SetParent(m_EnemyTransform);
-            l_NewEnemy.transform.localPosition = Vector3.zero;
-            m_EnemyList.Add(l_NewEnemy);
-        }
-        else
-        {
-            m_FromMap = true;
-            for (int i = 0; i < l_EnemyIds.Count; i++)
-            {
-                BattleEnemy l_NewEnemy = Instantiate(BattleEnemy.prefab);
-                l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy(l_EnemyIds[i]));
-                l_NewEnemy.transform.SetParent(m_EnemyTransform);
-                l_NewEnemy.transform.localPosition = Vector3.zero;
-                m_EnemyList.Add(l_NewEnemy);
-            }
-        }
+        InitBattle();
     }
 
     public void Start()
@@ -131,7 +108,7 @@ public class BattleSystem : MonoBehaviour
         SetVisibleAvatarPanel(false);
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "Враги убиты.\nВы победили.\nГГ получает десять очков опыта и семки, шерсть 5 золотых, которые вы не увидите. Даже я сам не знаю для чего они. Кароч маладец. На шоколадка, воон лежит обернись... Шучу :)" });
-        l_TextPanel.AddButtonAction(RestartGame);
+        l_TextPanel.AddButtonAction(ReturnToJourney);
         PanelManager.GetInstance().ShowPanel(l_TextPanel);
     }
 
@@ -140,22 +117,34 @@ public class BattleSystem : MonoBehaviour
         SetVisibleAvatarPanel(false);
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "У ГГ больше нету сил сражаться далее, ГГ потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли." });
-        l_TextPanel.AddButtonAction(RestartGame);
+        l_TextPanel.AddButtonAction(ReturnToMainMenu);
 
         PlayerData.GetInstance().health = 20;
 
         PanelManager.GetInstance().ShowPanel(l_TextPanel);
     }
 
-    private void RestartGame()
+    private void ReturnToJourney()
     {
-        if (m_FromMap)
+        if (m_BattleData.id == "TestBattle")
         {
-            SceneManager.LoadScene("Town");
+            SceneManager.LoadScene("BattleSystem");
         }
         else
         {
+            SceneManager.LoadScene("Town");
+        }
+    }
+
+    private void ReturnToMainMenu()
+    {
+        if (m_BattleData.id == "TestBattle")
+        {
             SceneManager.LoadScene("BattleSystem");
+        }
+        else
+        {
+            SceneManager.LoadScene("DemoMainScene");
         }
     }
 
@@ -172,5 +161,32 @@ public class BattleSystem : MonoBehaviour
             m_CurrentEnemyNumber = 0;
         }
         return m_EnemyList[m_CurrentEnemyNumber];
+    }
+
+    private void InitBattle()
+    {
+        m_BattleData = BattleStarter.GetInstance().GetBattle();
+        
+        for (int i = 0; i < m_BattleData.enemyList.Count; i++)
+        {
+            BattleEnemy l_NewEnemy = Instantiate(BattleEnemy.prefab);
+            l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy(m_BattleData.enemyList[i]));
+            l_NewEnemy.transform.SetParent(m_EnemyTransform);
+            l_NewEnemy.transform.localPosition = Vector3.zero;
+            m_EnemyList.Add(l_NewEnemy);
+        }
+
+        if (m_BattleData.playerSettings != null)
+        {
+            foreach (string l_Key in m_BattleData.playerSettings.Keys)
+            {
+                switch (l_Key)
+                {
+                    case "HP":
+                        PlayerData.GetInstance().health = m_BattleData.playerSettings[l_Key];
+                        break;
+                }
+            }
+        }
     }
 }

@@ -3,32 +3,15 @@ using System.Collections.Generic;
 
 public class BattleStarter : Singleton<BattleStarter>
 {
-    private List<string> m_EnemyIds = new List<string>();
+    private BattleData m_BattleData;
 
-    public void AddEnemy(string p_EnemyId)
+    public void InitBattle(string p_BattleId)
     {
-        m_EnemyIds.Add(p_EnemyId);
+        m_BattleData = BattleDataBase.GetInstance().GetBattle(p_BattleId);
     }
 
-    public void SetPlayerPosition(Vector3 p_PlayerPosition)
+    public BattleData GetBattle()
     {
-
-    }
-
-    public List<string> GetEnemy(bool p_WithRemoveList = true)
-    {
-        List<string> l_EnemyList = new List<string>();
-
-        // TODO kostill
-        for (int i = 0; i < m_EnemyIds.Count; i++)
-        {
-            l_EnemyList.Add(m_EnemyIds[i]);
-        }
-
-        if (p_WithRemoveList)
-        {
-            m_EnemyIds.Clear();
-        }
-        return l_EnemyList;
+        return m_BattleData;
     }
 }

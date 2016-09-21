@@ -22,7 +22,7 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
         }
         catch
         {
-            Debug.LogError("Cannot find Improve for id: " + p_EnemyId);
+            Debug.LogError("Cannot find EnemyData for id: " + p_EnemyId);
             return new EnemyData();
         }
     }

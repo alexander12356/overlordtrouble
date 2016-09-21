@@ -1,0 +1,28 @@
+{
+	"BattleAtFarm1":
+	{
+		"Enemy": 
+		[
+			"Bokalisk"
+		]
+	},
+	"BattleAtFarm2":
+	{
+		"Enemy": 
+		[
+			"Bokalisk",
+			"Bokalisk"
+		]
+	},
+	"TestBattle":
+	{
+		"Enemy": 
+		[
+			"Skwatwolf"
+		],
+		"Player":
+		{
+			"HP" : 20
+		}
+	}
+}
