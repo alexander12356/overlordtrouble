@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using System.Collections;
 using System.Collections.Generic;
 
 public class BattleSystem : MonoBehaviour
@@ -103,6 +104,11 @@ public class BattleSystem : MonoBehaviour
         return m_EnemyList;
     }
 
+    public void Retreat()
+    {
+        ReturnToJourney();
+    }
+
     private void Win()
     {
         SetVisibleAvatarPanel(false);
@@ -128,11 +134,11 @@ public class BattleSystem : MonoBehaviour
     {
         if (m_BattleData.id == "TestBattle")
         {
-            SceneManager.LoadScene("BattleSystem");
+            PanelManager.GetInstance().ChangeScene("DemoMainScene");
         }
         else
         {
-            SceneManager.LoadScene("Town");
+            PanelManager.GetInstance().ChangeScene("Town");
         }
     }
 
@@ -140,11 +146,11 @@ public class BattleSystem : MonoBehaviour
     {
         if (m_BattleData.id == "TestBattle")
         {
-            SceneManager.LoadScene("BattleSystem");
+            PanelManager.GetInstance().ChangeScene("BattleSystem");
         }
         else
         {
-            SceneManager.LoadScene("DemoMainScene");
+            PanelManager.GetInstance().ChangeScene("DemoMainScene");
         }
     }
 
@@ -166,7 +172,11 @@ public class BattleSystem : MonoBehaviour
     private void InitBattle()
     {
         m_BattleData = BattleStarter.GetInstance().GetBattle();
-        
+        if (m_BattleData.id == null)
+        {
+            m_BattleData = BattleDataBase.GetInstance().GetBattle("TestBattle");
+        }
+
         for (int i = 0; i < m_BattleData.enemyList.Count; i++)
         {
             BattleEnemy l_NewEnemy = Instantiate(BattleEnemy.prefab);

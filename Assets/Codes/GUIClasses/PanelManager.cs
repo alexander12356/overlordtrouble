@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
+using System.Collections;
 using System.Collections.Generic;
 
 public enum PanelEnum
@@ -15,9 +18,15 @@ public class PanelManager : MonoBehaviour
     #region Variables
     private Stack<Panel> m_PanelStack = new Stack<Panel>();
     private static PanelManager m_Instance;
+    private ScreenFader m_ScreenFader;
     #endregion
 
     #region Interface
+    public ScreenFader screenFader
+    {
+        get { return m_ScreenFader; }
+    }
+
     public static PanelManager GetInstance()
     {
         return m_Instance;
@@ -52,12 +61,20 @@ public class PanelManager : MonoBehaviour
         Panel l_PoppedPanel = m_PanelStack.Pop();
         l_PoppedPanel.Close();
     }
+
+    public void ChangeScene(string p_SceneId, LoadSceneMode p_SceneMode = LoadSceneMode.Single)
+    {
+        StartCoroutine(ChangeSceneWithFading(p_SceneId, p_SceneMode));
+        enabled = false;
+    }
     #endregion
 
     #region Private
     private void Awake()
     {
         m_Instance = this;
+
+        m_ScreenFader = transform.parent.FindChild("ScreenFader").GetComponent<ScreenFader>();
     }
 
     private void Update()
@@ -68,7 +85,7 @@ public class PanelManager : MonoBehaviour
         }
 
         Panel m_Panel = m_PanelStack.Peek();
-        
+
         if (!m_Panel.isShowed && !m_Panel.moving)
         {
             m_Panel.Show();
@@ -77,6 +94,12 @@ public class PanelManager : MonoBehaviour
         {
             m_Panel.UpdatePanel();
         }
+    }
+
+    private IEnumerator ChangeSceneWithFading(string p_SceneId, LoadSceneMode p_LoadSceneMode)
+    {
+        yield return StartCoroutine(screenFader.FadeToBlack());
+        GameManager.GetInstance().LoadScene(p_SceneId, p_LoadSceneMode);
     }
     #endregion
 }

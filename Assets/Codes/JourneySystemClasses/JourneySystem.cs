@@ -4,6 +4,7 @@ using System;
 
 public enum ControlType
 {
+    None,
     Player,
     Panel,
     Cutscene
@@ -53,6 +54,11 @@ public class JourneySystem : MonoBehaviour
                 PanelManager.GetInstance().enabled = false;
                 m_Player.StopLogic();
                 CutsceneSystem.GetInstance().enabled = true;
+                break;
+            case ControlType.None:
+                PanelManager.GetInstance().enabled = false;
+                m_Player.StopLogic();
+                CutsceneSystem.GetInstance().enabled = false;
                 break;
         }
     }

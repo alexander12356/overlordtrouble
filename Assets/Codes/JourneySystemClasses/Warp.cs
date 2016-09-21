@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Warp : MonoBehaviour {
-
+    
     [SerializeField]
     private Transform warpTarget = null;
 
@@ -11,18 +11,18 @@ public class Warp : MonoBehaviour {
         Transform collTransform = otherCollider.gameObject.transform.parent;
         if (collTransform.tag == "Player" && enabled)
         {
-            ScreenFader scrFader = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
+            ScreenFader l_ScreenFader = PanelManager.GetInstance().screenFader;
 
             collTransform.GetComponent<JourneyPlayer>().SetActive(false);
 
-            yield return StartCoroutine(scrFader.FadeToBlack());
+            yield return StartCoroutine(l_ScreenFader.FadeToBlack());
 
             collTransform.position = warpTarget.position;
             Camera.main.transform.position = warpTarget.position;
 
             collTransform.GetComponent<JourneyPlayer>().SetActive(true);
 
-            yield return StartCoroutine(scrFader.FadeToClear());
+            yield return StartCoroutine(l_ScreenFader.FadeToClear());
         }
         else yield break;
     }
