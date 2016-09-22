@@ -20,6 +20,11 @@ public class JourneySystem : MonoBehaviour
     [SerializeField]
     private PanelManager m_PanelManager = null;
 
+    public PanelManager panelManager
+    {
+        get { return m_PanelManager; }
+    }
+
     public static JourneySystem GetInstance()
     {
         return m_Instance;
@@ -44,26 +49,42 @@ public class JourneySystem : MonoBehaviour
         switch (p_Type)
         {
             case ControlType.Panel:
-                PanelManager.GetInstance().enabled = true;
+                m_PanelManager.enabled = true;
                 m_Player.StopLogic();
                 CutsceneSystem.GetInstance().enabled = false;
                 break;
             case ControlType.Player:
-                PanelManager.GetInstance().enabled = false;
+                m_PanelManager.enabled = false;
                 m_Player.StartLogic();
                 CutsceneSystem.GetInstance().enabled = false;
                 break;
             case ControlType.Cutscene:
-                PanelManager.GetInstance().enabled = false;
+                m_PanelManager.enabled = false;
                 m_Player.StopLogic();
                 CutsceneSystem.GetInstance().enabled = true;
                 break;
             case ControlType.None:
-                PanelManager.GetInstance().enabled = false;
+                m_PanelManager.enabled = false;
                 m_Player.StopLogic();
                 CutsceneSystem.GetInstance().enabled = false;
                 break;
         }
+    }
+
+    public void ShowPanel(Panel p_Panel, bool p_WithOverlay = false, Transform m_Parent = null)
+    {
+        m_PanelManager.ShowPanel(p_Panel, p_WithOverlay, m_Parent);
+    }
+
+    public void StartBattle()
+    {
+        m_PanelManager.StartBattle();
+        SetControl(ControlType.None);
+    }
+
+    public void StartLocation(string p_LocationId)
+    {
+        m_PanelManager.StartLocation(p_LocationId);
     }
 
     private void LoadDataBases()

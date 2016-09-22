@@ -26,15 +26,13 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
     {
         base.ExitAction(p_JourneyActor);
 
-        m_JourneyPlayer.RemoveActiveButtonAction(StartDialog);
-        m_JourneyPlayer.RemoveDisactiveButtonAction(EndDialog);
-        m_JourneyPlayer = null;
+        ClearActions();
     }
 
     public virtual void EndDialog()
     {
         m_JourneyActor.StartLogic();
-    }
+    }    
 
     private void StartDialog()
     {
@@ -73,5 +71,20 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
         }
 
         return ActorDirection.NONE;
+    }
+
+    private void OnDestroy()
+    {
+        ClearActions();
+    }
+
+    private void ClearActions()
+    {
+        if (m_JourneyPlayer)
+        {
+            m_JourneyPlayer.RemoveActiveButtonAction(StartDialog);
+            m_JourneyPlayer.RemoveDisactiveButtonAction(EndDialog);
+            m_JourneyPlayer = null;
+        }
     }
 }

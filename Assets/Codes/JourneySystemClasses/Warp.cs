@@ -11,7 +11,7 @@ public class Warp : MonoBehaviour {
         Transform collTransform = otherCollider.gameObject.transform.parent;
         if (collTransform.tag == "Player" && enabled)
         {
-            ScreenFader l_ScreenFader = PanelManager.GetInstance().screenFader;
+            ScreenFader l_ScreenFader = JourneySystem.GetInstance().panelManager.screenFader;
 
             collTransform.GetComponent<JourneyPlayer>().SetActive(false);
 

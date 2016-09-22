@@ -28,7 +28,7 @@ public class StoreCollideBehaviors : BaseCollideBehaviors
         StorePanel l_StorePanel = Instantiate(StorePanel.prefab);
         l_StorePanel.AddPopAction(CloseStore);
         l_StorePanel.AddTalkingAnimator(m_JourneyActor.myAnimator);
-        PanelManager.GetInstance().ShowPanel(l_StorePanel);
+        JourneySystem.GetInstance().ShowPanel(l_StorePanel);
     }
 
     private void CloseStore()

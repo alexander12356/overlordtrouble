@@ -27,7 +27,7 @@ public class ImprovePanel : Panel
         m_Animator = GetComponent<Animator>();
         InitImproveButtons();
 
-        PanelManager.GetInstance().ShowPanel(this);
+        ImproveWindow.GetInstance().ShowPanel(this);
         ImproveDataBase.GetInstance();
     }
 
@@ -61,7 +61,7 @@ public class ImprovePanel : Panel
         m_TextPanel.SetText(new List<string>() { l_Text });
         m_TextPanel.AddPopAction(ReturnToMainMenu);
 
-        PanelManager.GetInstance().ShowPanel(m_TextPanel, true);
+        ImproveWindow.GetInstance().ShowPanel(m_TextPanel, true);
         Vector3 m_TextPanelLocalPosition = m_TextPanel.myTransform.localPosition;
         m_TextPanelLocalPosition.y = -402;
         m_TextPanel.myTransform.localPosition = m_TextPanelLocalPosition;
@@ -96,7 +96,7 @@ public class ImprovePanel : Panel
         YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
         l_YesNoPanel.AddYesAction(Select);
         l_YesNoPanel.AddNoAction(l_PanelButtonImprove.UnreadyChoose);
-        PanelManager.GetInstance().ShowPanel(l_YesNoPanel, true);
+        ImproveWindow.GetInstance().ShowPanel(l_YesNoPanel, true);
     }
 
     private void Select()

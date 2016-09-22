@@ -27,11 +27,6 @@ public class PanelManager : MonoBehaviour
         get { return m_ScreenFader; }
     }
 
-    public static PanelManager GetInstance()
-    {
-        return m_Instance;
-    }
-
     public void ShowPanel(Panel p_NewPanel, bool p_WithOverlay = false, Transform m_Parent = null)
     {
         if (m_PanelStack.Count > 0 && m_PanelStack.Peek().isShowed)

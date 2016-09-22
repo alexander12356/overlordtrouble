@@ -23,7 +23,7 @@ public class DialogManager : MonoBehaviour
         DialogPanel l_DialogWindow = Instantiate(DialogPanel.prefab);
         l_DialogWindow.SetDialog(DialogDataBase.GetInstance().GetDialog(p_DialogId));
 
-        PanelManager.GetInstance().ShowPanel(l_DialogWindow, true);
+        JourneySystem.GetInstance().ShowPanel(l_DialogWindow, true);
         l_DialogWindow.myTransform.localPosition = new Vector3(0.0f, -457.0f, 0);
     }
 
