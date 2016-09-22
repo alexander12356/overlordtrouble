@@ -9,12 +9,17 @@ public class PatrolMovement : BaseMovement
     {
         public Vector2 position;
         public string  animationName;
+
+        public PatrolPosition(Vector2 p_Position, string p_AnimationName)
+        {
+            position = p_Position;
+            animationName = p_AnimationName;
+        }
     }
     [SerializeField]
     private List<PatrolPosition> m_Patrol = null;
 
     private int   m_CurrentPoint = 0;
-    private float m_WaitTime = 0.0f;
     private float m_MovingTime = 1.0f;
     private float m_ElapsedTime = 0.0f;
     #endregion

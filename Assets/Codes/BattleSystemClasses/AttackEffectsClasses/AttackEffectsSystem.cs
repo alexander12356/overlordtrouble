@@ -9,7 +9,6 @@ public class AttackEffectsSystem : MonoBehaviour
     private List<AttackEffect> m_AttackEffectList = new List<AttackEffect>();
     private int m_CurrentEffect = 0;
     private BattleEnemy m_BattleEnemy = null;
-    private PanelActionHandler m_EndAction = null;
 
     public static AttackEffectsSystem GetInstance()
     {

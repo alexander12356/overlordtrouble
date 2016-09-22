@@ -6,7 +6,6 @@ public class PopUpText : MonoBehaviour
     #region Variables
     private static PopUpText m_Instance = null;
     private Animator m_Animator = null;
-    private Text m_Text = null;
     #endregion
 
     #region Interface

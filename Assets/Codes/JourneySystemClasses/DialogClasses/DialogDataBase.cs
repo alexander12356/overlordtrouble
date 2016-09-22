@@ -12,7 +12,6 @@ public struct Dialog
 public class DialogDataBase : Singleton<DialogDataBase>
 {
     private string m_PathFile = "Data/DialogList";
-    private bool isDialogStarting = false;
     private Dictionary<string, Dialog> m_DialogList = new Dictionary<string, Dialog>();
 
     public DialogDataBase ()

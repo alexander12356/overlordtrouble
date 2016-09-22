@@ -7,7 +7,7 @@ public class ButtonList : MonoBehaviour
 {
     #region Variables
     [SerializeField]
-    private List<PanelButton> m_ButtonsList;
+    private List<PanelButton> m_ButtonsList = null;
 
     private int m_CurrentButtonId = 0;
     private int m_PrevButtonId = 0;

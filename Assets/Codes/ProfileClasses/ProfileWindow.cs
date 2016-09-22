@@ -15,7 +15,6 @@ public class ProfileWindow : MonoBehaviour
     }
 
     private ButtonList m_ProfileButtonList;
-    private ActivePanels m_CurrentActivePanel = ActivePanels.Profile;
     private ArrayList m_SelectedSpecialsList;
     private int m_StatImprovePoints = 0;
     private bool m_HaveStatPoints = false;
@@ -167,14 +166,12 @@ public class ProfileWindow : MonoBehaviour
 
     private void ActiveSpecialListPanel()
     {
-        m_CurrentActivePanel = ActivePanels.SpecialList;
         m_ProfileButtonList.isActive = false;
         m_SpecialsButtonList.isActive = true;
     }
 
     private void ActiveProfilePanel()
     {
-        m_CurrentActivePanel = ActivePanels.Profile;
         m_ProfileButtonList.isActive = true;
         m_SpecialsButtonList.isActive = false;
         m_StatsButtonList.isActive = false;
@@ -184,7 +181,6 @@ public class ProfileWindow : MonoBehaviour
     {
         if (m_HaveStatPoints)
         {
-            m_CurrentActivePanel = ActivePanels.Stats;
             m_StatsButtonList.isActive = true;
             m_ProfileButtonList.isActive = false;
         }

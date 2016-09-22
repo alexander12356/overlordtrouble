@@ -6,13 +6,13 @@ public class CameraFollow : MonoBehaviour
     private Camera m_Camera = null;
     private Transform m_Transform = null;
     private Vector3 m_Delta = Vector3.zero;
+    private Vector3 borderMin, borderMax;
 
     [SerializeField]
     private Transform m_Target = null;
     [SerializeField]
-    private BoxCollider2D Bounds;
-    private Vector3 borderMin, borderMax;
-	
+    private BoxCollider2D Bounds = null;
+    
 	public void Start()
     {
         m_Camera = GetComponent<Camera>();

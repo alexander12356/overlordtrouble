@@ -5,10 +5,6 @@ using UnityEngine;
 public class TextPanel : Panel
 {
     #region Variables
-    private string m_FullText = "Тестовый текст";
-    private int m_CurrentWord = 0;
-    private float m_ShowingTextSpeed = 0.05f;
-    private bool m_EndShowing = false;
     private static TextPanel m_Prefab = null;
     private PanelButtonActionHandler m_ButtonAction = null;
     private TextBox m_TextBox;
