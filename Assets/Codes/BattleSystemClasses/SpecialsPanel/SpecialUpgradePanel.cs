@@ -175,7 +175,7 @@ public class SpecialUpgradePanel : Panel
         }
         else
         {
-            PanelManager.GetInstance().ClosePanel(this);
+            Close();
             BattlePlayer.GetInstance().SpecialAttack(m_Enemy, m_SpecialUpgradeIconList);
             return;
         }

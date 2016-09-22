@@ -28,6 +28,9 @@ public class BattleSystem : MonoBehaviour
     [SerializeField]
     private Transform m_EnemyTransform = null;
 
+    [SerializeField]
+    private PanelManager m_PanelManager = null;
+
     public static BattleSystem GetInstance()
     {
         return m_Instance;
@@ -106,7 +109,23 @@ public class BattleSystem : MonoBehaviour
 
     public void Retreat()
     {
+        BattleStarter.GetInstance().BattleRetreat();
         ReturnToJourney();
+    }
+
+    public void ShowPanel(Panel p_Panel, bool p_WithOverlay = false, Transform p_Parent = null)
+    {
+        m_PanelManager.ShowPanel(p_Panel, p_WithOverlay, p_Parent);
+    }
+
+    public void StartLocation(string p_LocationId)
+    {
+        m_PanelManager.StartLocation(p_LocationId);
+    }
+
+    public void EndBattle()
+    {
+        m_PanelManager.EndBattle();
     }
 
     private void Win()
@@ -115,7 +134,8 @@ public class BattleSystem : MonoBehaviour
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "Враги убиты.\nВы победили.\nГГ получает десять очков опыта и семки, шерсть 5 золотых, которые вы не увидите. Даже я сам не знаю для чего они. Кароч маладец. На шоколадка, воон лежит обернись... Шучу :)" });
         l_TextPanel.AddButtonAction(ReturnToJourney);
-        PanelManager.GetInstance().ShowPanel(l_TextPanel);
+        ShowPanel(l_TextPanel);
+        BattleStarter.GetInstance().BattleWin();
     }
 
     private void Lose()
@@ -127,18 +147,18 @@ public class BattleSystem : MonoBehaviour
 
         PlayerData.GetInstance().health = 20;
 
-        PanelManager.GetInstance().ShowPanel(l_TextPanel);
+        ShowPanel(l_TextPanel);
     }
 
     private void ReturnToJourney()
     {
         if (m_BattleData.id == "TestBattle")
         {
-            PanelManager.GetInstance().ChangeScene("DemoMainScene");
+            StartLocation("DemoMainScene");
         }
         else
         {
-            PanelManager.GetInstance().ChangeScene("Town");
+            EndBattle();
         }
     }
 
@@ -146,18 +166,18 @@ public class BattleSystem : MonoBehaviour
     {
         if (m_BattleData.id == "TestBattle")
         {
-            PanelManager.GetInstance().ChangeScene("BattleSystem");
+            StartLocation("BattleSystem");
         }
         else
         {
-            PanelManager.GetInstance().ChangeScene("DemoMainScene");
+            StartLocation("DemoMainScene");
         }
     }
 
     private void InitStartPanel()
     {
         MainPanel l_MainPanel = Instantiate(MainPanel.prefab);
-        PanelManager.GetInstance().ShowPanel(l_MainPanel);
+        ShowPanel(l_MainPanel);
     }
 
     private BattleEnemy GetNextEnemy()
@@ -174,7 +194,8 @@ public class BattleSystem : MonoBehaviour
         m_BattleData = BattleStarter.GetInstance().GetBattle();
         if (m_BattleData.id == null)
         {
-            m_BattleData = BattleDataBase.GetInstance().GetBattle("TestBattle");
+            BattleStarter.GetInstance().InitBattle(null, "TestBattle");
+            m_BattleData = BattleStarter.GetInstance().GetBattle();
         }
 
         for (int i = 0; i < m_BattleData.enemyList.Count; i++)

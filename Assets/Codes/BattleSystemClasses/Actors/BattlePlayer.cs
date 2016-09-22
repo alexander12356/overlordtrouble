@@ -35,7 +35,7 @@ public class BattlePlayer : BattleActor
         TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
         l_NewTextPanel.SetText(new List<string>() { "Игрок нанес " + l_Damage + " урона врагу" });
         l_NewTextPanel.AddButtonAction(EndTurn);
-        PanelManager.GetInstance().ShowPanel(l_NewTextPanel);
+        BattleSystem.GetInstance().ShowPanel(l_NewTextPanel);
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 
@@ -122,7 +122,7 @@ public class BattlePlayer : BattleActor
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { l_Text });
         l_TextPanel.AddButtonAction(EndTurn);
-        PanelManager.GetInstance().ShowPanel(l_TextPanel);
+        BattleSystem.GetInstance().ShowPanel(l_TextPanel);
 
         AttackEffectsSystem.GetInstance().PlayEffects();
 

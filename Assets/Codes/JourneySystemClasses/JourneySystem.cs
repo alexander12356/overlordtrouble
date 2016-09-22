@@ -17,12 +17,15 @@ public class JourneySystem : MonoBehaviour
     [SerializeField]
     private JourneyPlayer m_Player = null;
 
+    [SerializeField]
+    private PanelManager m_PanelManager = null;
+
     public static JourneySystem GetInstance()
     {
         return m_Instance;
     }
 
-	public void Awake ()
+    public void Awake()
     {
         m_Instance = this;
         LoadDataBases();

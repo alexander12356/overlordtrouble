@@ -156,7 +156,7 @@ public class ChooseEnemyPanel : Panel
         else
         {
             CancelAction();
-            PanelManager.GetInstance().ClosePanel(this);
+            Close();
         }
     }
 

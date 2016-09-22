@@ -52,20 +52,29 @@ public class PanelManager : MonoBehaviour
         p_NewPanel.myTransform.localPosition = Vector3.zero;
         p_NewPanel.myTransform.localScale = Vector3.one;
         p_NewPanel.gameObject.SetActive(false);
+        p_NewPanel.SetPanelManager(this);
 
         m_PanelStack.Push(p_NewPanel);
     }
 
-    public void ClosePanel(Panel p_Panel)
+    public void ClosePanel()
     {
-        Panel l_PoppedPanel = m_PanelStack.Pop();
-        l_PoppedPanel.Close();
+        m_PanelStack.Pop();
     }
 
-    public void ChangeScene(string p_SceneId, LoadSceneMode p_SceneMode = LoadSceneMode.Single)
+    public void StartBattle()
     {
-        StartCoroutine(ChangeSceneWithFading(p_SceneId, p_SceneMode));
-        enabled = false;
+        StartCoroutine(StartingBattle());
+    }
+
+    public void EndBattle()
+    {
+        StartCoroutine(EndingBattle());
+    }
+
+    public void StartLocation(string p_LocationId)
+    {
+        StartCoroutine(StartingLocation(p_LocationId));
     }
     #endregion
 
@@ -96,10 +105,25 @@ public class PanelManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ChangeSceneWithFading(string p_SceneId, LoadSceneMode p_LoadSceneMode)
+    private IEnumerator StartingBattle()
     {
         yield return StartCoroutine(screenFader.FadeToBlack());
-        GameManager.GetInstance().LoadScene(p_SceneId, p_LoadSceneMode);
+
+        GameManager.GetInstance().StartBattle();
+    }
+
+    private IEnumerator EndingBattle()
+    {
+        yield return StartCoroutine(screenFader.FadeToBlack());
+
+        GameManager.GetInstance().EndBattle();
+    }
+
+    private IEnumerator StartingLocation(string p_LocationId)
+    {
+        yield return StartCoroutine(screenFader.FadeToBlack());
+
+        GameManager.GetInstance().StartLocation(p_LocationId);
     }
     #endregion
 }

@@ -12,6 +12,7 @@ public class Panel : MonoBehaviour
     private bool m_Close = false;
     private bool m_IsShowed = false;
     private BaseTransition m_BaseTransition = null;
+    private PanelManager m_PanelManager = null;
     #endregion
 
     #region Interface
@@ -103,8 +104,9 @@ public class Panel : MonoBehaviour
         m_BaseTransition.Hide();
     }
 
-    public void Close()
+    public virtual void Close()
     {
+        m_PanelManager.ClosePanel();
         m_Close = true;
         Hide();
     }
@@ -112,6 +114,11 @@ public class Panel : MonoBehaviour
     public virtual void UpdatePanel()
     {
         
+    }
+
+    public void SetPanelManager(PanelManager p_PanelManager)
+    {
+        m_PanelManager = p_PanelManager;
     }
     #endregion
 

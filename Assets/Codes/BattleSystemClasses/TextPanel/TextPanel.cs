@@ -81,7 +81,7 @@ public class TextPanel : Panel
 
     private void CloseTextPanel()
     {
-        PanelManager.GetInstance().ClosePanel(this);
+        Close();
         ButtonAction();
     }
     #endregion

@@ -63,18 +63,18 @@ public class MainPanel : Panel
     {
         m_ChoosedEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
         m_ChoosedEnemyPanel.AddChoosedAction(AttackEnemy);
-        PanelManager.GetInstance().ShowPanel(m_ChoosedEnemyPanel, true, BattleSystem.GetInstance().mainPanelTransform);
+        BattleSystem.GetInstance().ShowPanel(m_ChoosedEnemyPanel, true, BattleSystem.GetInstance().mainPanelTransform);
     }
 
     private void Special()
     {
         SpecialSelectPanel l_SpecialSelectPanel = Instantiate(SpecialSelectPanel.prefab);
-        PanelManager.GetInstance().ShowPanel(l_SpecialSelectPanel, true, BattleSystem.GetInstance().mainPanelTransform);
+        BattleSystem.GetInstance().ShowPanel(l_SpecialSelectPanel, true, BattleSystem.GetInstance().mainPanelTransform);
     }
 
     private void AttackEnemy()
     {
-        PanelManager.GetInstance().ClosePanel(m_ChoosedEnemyPanel);
+        m_ChoosedEnemyPanel.Close();
         BattlePlayer.GetInstance().Attack(m_ChoosedEnemyPanel.choosedEnemy);
     }
 

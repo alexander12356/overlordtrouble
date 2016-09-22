@@ -49,7 +49,7 @@ public class YesNoPanel : Panel
 
     public void Cancel()
     {
-        PanelManager.GetInstance().ClosePanel(this);
+        Close();
     }
 
     public void AddYesAction(PanelActionHandler p_Action)

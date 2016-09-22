@@ -8,8 +8,8 @@ public class DialogBattleCollideBehaviors : DialogCollideBehaviors
 
     public override void EndDialog()
     {
-        BattleStarter.GetInstance().InitBattle(m_BattleId);
-        PanelManager.GetInstance().ChangeScene("BattleSystem");//, LoadSceneMode.Additive);
+        BattleStarter.GetInstance().InitBattle(m_JourneyActor, m_BattleId);
+        PanelManager.GetInstance().StartBattle();
         JourneySystem.GetInstance().SetControl(ControlType.None);
     }
 }

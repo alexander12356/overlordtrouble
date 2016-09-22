@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -6,6 +7,7 @@ public class GameManager : MonoBehaviour
     private static GameManager m_Instance = null;
     private string m_PrevSceneName = string.Empty;
     private string m_CurrentSceneName = string.Empty;
+    private JourneyNPC m_JourneyNpc = null;
 
     public static GameManager GetInstance()
     {
@@ -26,31 +28,20 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadScene(string p_SceneId, LoadSceneMode p_LoadSceneMode)
+    public void StartLocation(string p_LocationId)
     {
-        if (p_LoadSceneMode == LoadSceneMode.Additive)
-        {
-            m_PrevSceneName = SceneManager.GetActiveScene().name;
-            SetActiveForAllObjects(false);
-        }
-
-        if (p_SceneId == m_PrevSceneName)
-        {
-            SceneManager.UnloadScene(m_CurrentSceneName);
-            m_CurrentSceneName = p_SceneId;
-            m_PrevSceneName = string.Empty;
-            SetActiveForAllObjects(true);
-        }
-        else
-        {
-            SceneManager.LoadScene(p_SceneId, p_LoadSceneMode);
-            m_CurrentSceneName = p_SceneId;
-        }        
+        SceneManager.LoadScene(p_LocationId);
     }
 
-    private void UnloadScene()
+    public void StartBattle()
     {
-        SceneManager.UnloadScene(SceneManager.GetActiveScene().name);
+        SetActiveForAllObjects(false);
+        SceneManager.LoadScene("BattleSystem", LoadSceneMode.Additive);
+    }
+
+    public void EndBattle()
+    {
+        SceneManager.UnloadScene("BattleSystem");
         SetActiveForAllObjects(true);
     }
 

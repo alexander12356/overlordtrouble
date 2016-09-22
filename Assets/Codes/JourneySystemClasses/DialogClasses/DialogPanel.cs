@@ -65,7 +65,7 @@ public class DialogPanel : Panel
 
     private void DialogClose()
     {
-        PanelManager.GetInstance().ClosePanel(this);
+        Close();
         DialogManager.GetInstance().EndDialog();
     }
     #endregion

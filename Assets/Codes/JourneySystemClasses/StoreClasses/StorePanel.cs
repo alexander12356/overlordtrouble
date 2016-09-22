@@ -152,7 +152,7 @@ public class StorePanel : Panel
     private void CloseStore()
     {
         m_TextBox.SetTalking(false);
-        PanelManager.GetInstance().ClosePanel(this);
+        Close();
     }
 
     private void OpenTabs()

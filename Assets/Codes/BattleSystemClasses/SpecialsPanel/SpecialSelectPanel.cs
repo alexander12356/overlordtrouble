@@ -99,7 +99,7 @@ public class SpecialSelectPanel : Panel
     {
         CancelChoose();
 
-        PanelManager.GetInstance().ClosePanel(this);
+        Close();
     }
 
     private void ChooseSpecial()
@@ -159,22 +159,21 @@ public class SpecialSelectPanel : Panel
 
     private void Confirm()
     {
-        PanelManager.GetInstance().ClosePanel(this);
-
         m_ChooseEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
         m_ChooseEnemyPanel.AddChoosedAction(Attack);
         m_ChooseEnemyPanel.AddCancelAction(CancelChoose);
-        PanelManager.GetInstance().ShowPanel(m_ChooseEnemyPanel, true, BattleSystem.GetInstance().mainPanelTransform);
+        BattleSystem.GetInstance().ShowPanel(m_ChooseEnemyPanel, true, BattleSystem.GetInstance().mainPanelTransform);
     }
 
     private void Attack()
     {
-        PanelManager.GetInstance().ClosePanel(this);
+        Close();
+        m_ChooseEnemyPanel.Close();
 
         SpecialUpgradePanel l_SpecialUpgradePanel = Instantiate(SpecialUpgradePanel.prefab);
         l_SpecialUpgradePanel.SetSkills(m_ChoosedSkills);
         l_SpecialUpgradePanel.SetEnemy(m_ChooseEnemyPanel.choosedEnemy);
-        PanelManager.GetInstance().ShowPanel(l_SpecialUpgradePanel);
+        BattleSystem.GetInstance().ShowPanel(l_SpecialUpgradePanel);
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 

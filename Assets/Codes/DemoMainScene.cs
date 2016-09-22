@@ -25,7 +25,7 @@ public class DemoMainScene : MonoBehaviour
 
     private void StartBattleSystem()
     {
-        BattleStarter.GetInstance().InitBattle("TestBattle");
+        BattleStarter.GetInstance().InitBattle(null, "TestBattle");
         SceneManager.LoadScene("BattleSystem");
     }
 
