@@ -22,6 +22,7 @@ public class BattleStarter : Singleton<BattleStarter>
         if (m_BattleData.id != "TestBattle")
         {
             Object.Destroy(m_Enemy.gameObject);
+            JourneySystem.GetInstance().SetControl(ControlType.Player);
         }
     }
 
@@ -30,6 +31,7 @@ public class BattleStarter : Singleton<BattleStarter>
         if (m_BattleData.id != "TestBattle")
         {
             m_Enemy.StartLogic();
+            JourneySystem.GetInstance().SetControl(ControlType.Player);
         }
     }
 }

@@ -29,7 +29,7 @@ public class DialogManager : MonoBehaviour
 
     public void EndDialog()
     {
-        m_JourneyPlayer.DisactiveButtonAction();
         JourneySystem.GetInstance().SetControl(ControlType.Player);
+        m_JourneyPlayer.DisactiveButtonAction();
     }
 }
