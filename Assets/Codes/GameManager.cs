@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager m_Instance = null;
-    private string m_PrevSceneName = string.Empty;
-    private string m_CurrentSceneName = string.Empty;
-    private JourneyNPC m_JourneyNpc = null;
 
     public static GameManager GetInstance()
     {

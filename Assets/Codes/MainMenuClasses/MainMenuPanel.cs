@@ -3,23 +3,28 @@ using System.Collections;
 
 public class MainMenuPanel : Panel
 {
+    private static MainMenuPanel m_Prefab;
     private ButtonList m_ButtonList = null;
-    private PanelManager m_PanelManager = null;
+    
+    public static MainMenuPanel prefab
+    {
+        get
+        {
+            if (m_Prefab == null)
+            {
+                m_Prefab = Resources.Load<MainMenuPanel>("Prefabs/Panels/MainMenuPanel");
+            }
+            return m_Prefab;
+        }
+    }
 
     public override void Awake()
     {
         base.Awake();
 
-        m_PanelManager = GetComponentInParent<PanelManager>();
-
         m_ButtonList = GetComponentInChildren<ButtonList>();
         m_ButtonList[0].AddAction(RunNewGame);
         m_ButtonList[1].AddAction(QuitGame);
-    }
-
-    public void Update()
-    {
-        UpdatePanel();
     }
 
     public override void UpdatePanel()
@@ -30,13 +35,13 @@ public class MainMenuPanel : Panel
 
         if (Input.GetKeyUp(KeyCode.F12))
         {
-            m_PanelManager.StartLocation("DemoMainScene");
+            MainMenuSystem.GetInstance().StartLocation("DemoMainScene");
         }
     }
 
     private void RunNewGame()
     {
-        m_PanelManager.StartLocation("Town");
+        MainMenuSystem.GetInstance().StartLocation("Town");
     }
 
     private void QuitGame()
