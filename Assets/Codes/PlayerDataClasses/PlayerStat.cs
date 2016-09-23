@@ -7,12 +7,16 @@ public class PlayerStat : Singleton<PlayerStat>
 
     public PlayerStat()
     {
-        m_Stats.Add("HealthPoints", 20);
-        m_Stats.Add("SpecialPoints", 20);
-        m_Stats.Add("Attack", 1);
-        m_Stats.Add("Defense", 0);
-        m_Stats.Add("Speed", 1);
-        m_Stats.Add("Fortune", 0);
+    }
+
+    public void SetStatData(JSONObject p_JsonObject)
+    {
+        m_Stats.Add("HealthPoints",   (int)p_JsonObject["HealthPoints"].f);
+        m_Stats.Add("MonstylePoints", (int)p_JsonObject["MonstylePoints"].f);
+        m_Stats.Add("Attack",         (int)p_JsonObject["Attack"].f);
+        m_Stats.Add("Defense",        (int)p_JsonObject["Defense"].f);
+        m_Stats.Add("Speed",          (int)p_JsonObject["Speed"].f);
+        m_Stats.Add("Fortune",        (int)p_JsonObject["Fortune"].f);
     }
 
     public Dictionary<string, int> GetStats()
@@ -36,5 +40,10 @@ public class PlayerStat : Singleton<PlayerStat>
     public void AddStatValue(string p_StatName, int p_Value)
     {
         m_Stats[p_StatName] = p_Value;
+    }
+
+    public void ResetData()
+    {
+        m_Stats = new Dictionary<string, int>();
     }
 }

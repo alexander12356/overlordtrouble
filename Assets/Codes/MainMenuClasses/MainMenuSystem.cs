@@ -19,10 +19,18 @@ public class MainMenuSystem : MonoBehaviour
 
         MainMenuPanel m_MainMenuPanel = Instantiate(MainMenuPanel.prefab);
         m_PanelManager.ShowPanel(m_MainMenuPanel);
+
+        PlayerData.GetInstance();
     }
 
     public void StartLocation(string p_LocationId)
     {
         m_PanelManager.StartLocation(p_LocationId);
+        LoadDataBases();
+    }
+
+    private void LoadDataBases()
+    {
+        DataLoader.GetInstance();
     }
 }

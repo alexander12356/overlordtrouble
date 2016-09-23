@@ -9,6 +9,6 @@ public class DialogBattleCollideBehaviors : DialogCollideBehaviors
     public override void EndDialog()
     {
         BattleStarter.GetInstance().InitBattle(m_JourneyActor, m_BattleId);
-        JourneySystem.GetInstance().StartBattle();
+        JourneySystem.GetInstance().AddScene("BattleSystem");
     }
 }

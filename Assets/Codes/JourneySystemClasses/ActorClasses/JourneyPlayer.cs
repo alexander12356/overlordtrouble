@@ -152,23 +152,11 @@ public class JourneyPlayer : JourneyActor
     }
     #endregion
 
-    private void ConfirmReturnToMenu()
-    {
-        JourneySystem.GetInstance().StartLocation("MainMenu");
-    }
-
-    private void CancelReturnToMenu()
-    {
-        JourneySystem.GetInstance().SetControl(ControlType.Player);
-    }
-
     private void RunPauseMenu()
     {
         JourneySystem.GetInstance().SetControl(ControlType.Panel);
-        YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
-        l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("ReturnMainMenu"));
-        l_YesNoPanel.AddYesAction(ConfirmReturnToMenu);
-        l_YesNoPanel.AddNoAction(CancelReturnToMenu);
-        JourneySystem.GetInstance().ShowPanel(l_YesNoPanel);
+
+        PauseMenuPanel l_PauseMenuPanel = Instantiate(PauseMenuPanel.prefab);
+        JourneySystem.GetInstance().ShowPanel(l_PauseMenuPanel);
     }
 }

@@ -7,7 +7,7 @@ public class BattlePlayer : BattleActor
 {
     #region Variables
     private static BattlePlayer m_Instance = null;
-    private int[] m_DamageValue = new int[2] { 5, 8};
+    private int[] m_AttackValue;
     private Animator m_Animator = null;
     private AudioSource m_AudioSource = null;
     private Text m_HealthText = null;
@@ -26,7 +26,7 @@ public class BattlePlayer : BattleActor
     {
         base.Attack(p_Actor);
 
-        int l_Damage = Random.Range(m_DamageValue[0], m_DamageValue[1]);
+        int l_Damage = Random.Range(m_AttackValue[0], m_AttackValue[1]);
 
         p_Actor.Damage(l_Damage);
         AttackEffectsSystem.GetInstance().AddEffect((BattleEnemy)p_Actor, "Player_BaseAttack");
@@ -142,9 +142,11 @@ public class BattlePlayer : BattleActor
 
         baseHealth = PlayerStat.GetInstance().GetStatValue("HealthPoints");
         health = PlayerData.GetInstance().health;
-        
-        mana = baseMana = 20;
-        isDead = true;
+
+        baseMana = PlayerStat.GetInstance().GetStatValue("MonstylePoints");
+        mana = PlayerData.GetInstance().monstylePoints;
+
+        m_AttackValue = PlayerData.GetInstance().attackValue;
     }
 
     public override void Awake()

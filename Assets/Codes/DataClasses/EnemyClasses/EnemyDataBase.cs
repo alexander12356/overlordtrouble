@@ -48,9 +48,10 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
         {
             string l_ImproveId = l_JSONObject.keys[i];
             float  l_Health = l_JSONObject[i]["Health"].f;
+            int l_Experience = (int)l_JSONObject[i]["Experience"].i;
             List<int> l_DamageValue = new List<int>() { (int)l_JSONObject[i]["DamageValue"][0].i, (int)l_JSONObject[i]["DamageValue"][1].i };
 
-            EnemyData l_ImproveData = new EnemyData(l_ImproveId, l_Health, l_DamageValue);
+            EnemyData l_ImproveData = new EnemyData(l_ImproveId, l_Health, l_Experience, l_DamageValue);
             m_EnemyBase.Add(l_ImproveId, l_ImproveData);
         }
     }

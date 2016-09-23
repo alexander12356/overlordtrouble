@@ -2,6 +2,7 @@
 	"Skwatwolf":
 	{
 		"Health" : 30,
+		"Experience" : 50,
 		"DamageValue" : 
 		[
 			5,
@@ -11,6 +12,7 @@
 	"Bokalisk":
 	{
 		"Health" : 10,
+		"Experience" : 15,
 		"DamageValue" :
 		[
 			2,

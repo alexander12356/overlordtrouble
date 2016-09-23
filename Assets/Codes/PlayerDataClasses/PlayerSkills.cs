@@ -22,4 +22,9 @@ public class PlayerSkills : Singleton<PlayerSkills>
             m_SkillList.Add(p_SkillList[i]);
         }        
     }
+
+    public void ResetData()
+    {
+        m_SkillList = new List<SkillData>();
+    }
 }

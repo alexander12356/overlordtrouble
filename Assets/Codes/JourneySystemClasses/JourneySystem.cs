@@ -33,7 +33,6 @@ public class JourneySystem : MonoBehaviour
     public void Awake()
     {
         m_Instance = this;
-        LoadDataBases();
         CutsceneSystem.GetInstance().StartCutscene("Intro");
     }
 
@@ -76,9 +75,9 @@ public class JourneySystem : MonoBehaviour
         m_PanelManager.ShowPanel(p_Panel, p_WithOverlay, m_Parent);
     }
 
-    public void StartBattle()
+    public void AddScene(string p_SceneId)
     {
-        m_PanelManager.StartBattle();
+        m_PanelManager.AddScene(p_SceneId);
         SetControl(ControlType.None);
     }
 
@@ -87,8 +86,8 @@ public class JourneySystem : MonoBehaviour
         m_PanelManager.StartLocation(p_LocationId);
     }
 
-    private void LoadDataBases()
+    public void OpenProfile()
     {
-        DataLoader.GetInstance();
+        m_PanelManager.OpenProfile();
     }
 }

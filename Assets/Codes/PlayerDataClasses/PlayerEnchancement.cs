@@ -13,7 +13,6 @@ public class PlayerEnchancement : Singleton<PlayerEnchancement>
 
     public PlayerEnchancement()
     {
-        AddEnchancement("DewElemental");
     }
 
     public void AddEnchancement(string p_Id)
@@ -34,5 +33,13 @@ public class PlayerEnchancement : Singleton<PlayerEnchancement>
     {
         string l_Temp = "Sprites/Creations/" + m_CurrentEnchancement + "/" + "Avatar";
         return Resources.Load<Sprite>(l_Temp);
+    }
+
+    public void ResetData()
+    {
+        m_Enchancement = new List<ImproveData>();
+        m_CurrentEnchancement = string.Empty;
+
+        AddEnchancement("DewElemental");
     }
 }

@@ -3,30 +3,27 @@
     "Profile": "Sprites/Creations/DewWaterElemental/Profile",
 	"Elemental":"Water",
     "Skills": [
-      "BlobeStrike"
+      "WaterDrops"
     ]
   },
   "LesserWaterElemental": {
     "Profile": "Sprites/Creations/LesserWaterElemental/Profile",
 	"Elemental": "Water",
     "Skills": [
-      "HealingWater"
+      "Slap"
     ]
   },
   "ShellLizard": {
     "Profile": "Sprites/Creations/ShellLizard/Profile",
 	"Elemental": "Earth",
     "Skills": [
-      "TailWhap",
-      "ShellDefense"
+      "TailWhap"
     ]
   },
   "Brownie": {
     "Profile": "Sprites/Creations/Brownie/Profile",
 	"Elemental": "Mana",
     "Skills": [
-      "Strike",
-      "Defense"
     ]
   }
 }

@@ -125,7 +125,7 @@ public class BattleSystem : MonoBehaviour
 
     public void EndBattle()
     {
-        m_PanelManager.EndBattle();
+        m_PanelManager.UnloadScene();
     }
 
     public string GetBattleId()
@@ -149,8 +149,6 @@ public class BattleSystem : MonoBehaviour
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "У ГГ больше нету сил сражаться далее, ГГ потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли." });
         l_TextPanel.AddButtonAction(ReturnToMainMenu);
-
-        PlayerData.GetInstance().health = 20;
 
         ShowPanel(l_TextPanel);
     }

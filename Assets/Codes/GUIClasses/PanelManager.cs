@@ -57,19 +57,24 @@ public class PanelManager : MonoBehaviour
         m_PanelStack.Pop();
     }
 
-    public void StartBattle()
+    public void AddScene(string p_SceneId)
     {
-        StartCoroutine(StartingBattle());
+        StartCoroutine(AddingScene(p_SceneId));
     }
 
-    public void EndBattle()
+    public void UnloadScene()
     {
-        StartCoroutine(EndingBattle());
+        StartCoroutine(UnloadingScene());
     }
 
     public void StartLocation(string p_LocationId)
     {
         StartCoroutine(StartingLocation(p_LocationId));
+    }
+
+    public void OpenProfile()
+    {
+        //StartCoroutine();
     }
     #endregion
 
@@ -100,18 +105,18 @@ public class PanelManager : MonoBehaviour
         }
     }
 
-    private IEnumerator StartingBattle()
+    private IEnumerator AddingScene(string p_SceneId)
     {
         yield return StartCoroutine(screenFader.FadeToBlack());
 
-        GameManager.GetInstance().StartBattle();
+        GameManager.GetInstance().AddScene(p_SceneId);
     }
 
-    private IEnumerator EndingBattle()
+    private IEnumerator UnloadingScene()
     {
         yield return StartCoroutine(screenFader.FadeToBlack());
 
-        GameManager.GetInstance().EndBattle();
+        GameManager.GetInstance().UnloadScene();
     }
 
     private IEnumerator StartingLocation(string p_LocationId)

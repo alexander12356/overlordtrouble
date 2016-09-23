@@ -197,7 +197,14 @@ public class SpecialSelectPanel : Panel
 
     private void InitSpecials()
     {
-        InitTestSpecials();
+        List<SkillData> l_PlayerSkills = PlayerSkills.GetInstance().skillList;
+        for (int i = 0; i < l_PlayerSkills.Count; i++)
+        {
+            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
+            l_SpecialButton.skillId = l_PlayerSkills[i].id;
+            l_SpecialButton.AddAction(ChooseSpecial);
+            m_SpecialButtonList.AddButton(l_SpecialButton);
+        }
     }
     #endregion
 }

@@ -41,6 +41,7 @@ public class MainMenuPanel : Panel
 
     private void RunNewGame()
     {
+        PlayerData.GetInstance().ResetData();
         MainMenuSystem.GetInstance().StartLocation("Town");
     }
 

@@ -15,4 +15,10 @@ public class HardPorn : MonoBehaviour
     string a9 = "..............\n.............\n        ";
 
     string m_MessageForPeopleWithLongNoses = "Yes, i can did it :)";
+
+    public void Awake()
+    {
+        a += a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9;
+        m_MessageForPeopleWithLongNoses += a;
+    }
 }

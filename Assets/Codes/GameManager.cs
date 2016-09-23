@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager m_Instance = null;
+    private string m_CurrentSceneName = string.Empty;
 
     public static GameManager GetInstance()
     {
@@ -26,18 +27,20 @@ public class GameManager : MonoBehaviour
 
     public void StartLocation(string p_LocationId)
     {
+        m_CurrentSceneName = p_LocationId;
         SceneManager.LoadScene(p_LocationId);
     }
 
-    public void StartBattle()
+    public void AddScene(string p_SceneId)
     {
+        m_CurrentSceneName = p_SceneId;
         SetActiveForAllObjects(false);
-        SceneManager.LoadScene("BattleSystem", LoadSceneMode.Additive);
+        SceneManager.LoadScene(p_SceneId, LoadSceneMode.Additive);
     }
 
-    public void EndBattle()
+    public void UnloadScene()
     {
-        SceneManager.UnloadScene("BattleSystem");
+        SceneManager.UnloadScene(m_CurrentSceneName);
         SetActiveForAllObjects(true);
     }
 
