@@ -49,7 +49,7 @@ public class JourneyPlayer : JourneyActor
         }
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            SceneManager.LoadScene("DemoMainScene");
+            RunPauseMenu();
         }
 
         if (enabled != false)
@@ -151,4 +151,24 @@ public class JourneyPlayer : JourneyActor
         m_Animator.runtimeAnimatorController = PlayerEnchancement.GetInstance().GetAnimatorController();
     }
     #endregion
+
+    private void ConfirmReturnToMenu()
+    {
+        JourneySystem.GetInstance().StartLocation("MainMenu");
+    }
+
+    private void CancelReturnToMenu()
+    {
+        JourneySystem.GetInstance().SetControl(ControlType.Player);
+    }
+
+    private void RunPauseMenu()
+    {
+        JourneySystem.GetInstance().SetControl(ControlType.Panel);
+        YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
+        l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("ReturnMainMenu"));
+        l_YesNoPanel.AddYesAction(ConfirmReturnToMenu);
+        l_YesNoPanel.AddNoAction(CancelReturnToMenu);
+        JourneySystem.GetInstance().ShowPanel(l_YesNoPanel);
+    }
 }

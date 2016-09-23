@@ -40,4 +40,7 @@
 	<!-- enemy's -->
 	<Text id="Enemy:Bokalisk">Бокалиск</Text>
 	<Text id="Enemy:Skwatwolf">Гополак</Text>
+	
+	<!-- UI -->>
+	<Text id="ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>
 </Localization>

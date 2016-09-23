@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class SpecialSelectPanel : Panel
 {
     #region Variables
-    private static SpecialSelectPanel m_Instance = null;
+    private static SpecialSelectPanel m_Prefab = null;
     private ChooseEnemyPanel m_ChooseEnemyPanel = null;
     private List<string> m_ChoosedSkills = new List<string>();
 
@@ -23,8 +23,6 @@ public class SpecialSelectPanel : Panel
 
     [SerializeField]
     private ButtonListScrolling m_ButtonListScrolling = null;
-
-
     #endregion
 
     #region Interface
@@ -32,11 +30,11 @@ public class SpecialSelectPanel : Panel
     {
         get
         {
-            if (m_Instance == null)
+            if (m_Prefab == null)
             {
-                m_Instance = Resources.Load<SpecialSelectPanel>("Prefabs/Panels/SelectSpecialPanel");
+                m_Prefab = Resources.Load<SpecialSelectPanel>("Prefabs/Panels/SelectSpecialPanel");
             }
-            return m_Instance;
+            return m_Prefab;
         }
     }
 
@@ -134,26 +132,13 @@ public class SpecialSelectPanel : Panel
     //TODO Kostil
     private void InitSpecialButtons()
     {
-        for (int i = 0; i < 3; i++)
+        if (BattleSystem.GetInstance().GetBattleId() == "TestBattle")
         {
-            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
-            l_SpecialButton.skillId = "WaterDrops";
-            l_SpecialButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_SpecialButton);
+            InitTestSpecials();
         }
-        for (int i = 0; i < 3; i++)
+        else
         {
-            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
-            l_SpecialButton.skillId = "Slap";
-            l_SpecialButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_SpecialButton);
-        }
-        for (int i = 0; i < 3; i++)
-        {
-            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
-            l_SpecialButton.skillId = "TailWhap";
-            l_SpecialButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_SpecialButton);
+            InitSpecials();
         }
     }
 
@@ -183,6 +168,36 @@ public class SpecialSelectPanel : Panel
         {
             BattlePlayer.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(m_ChoosedSkills[i]).mana;
         }
+    }
+
+    private void InitTestSpecials()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
+            l_SpecialButton.skillId = "WaterDrops";
+            l_SpecialButton.AddAction(ChooseSpecial);
+            m_SpecialButtonList.AddButton(l_SpecialButton);
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
+            l_SpecialButton.skillId = "Slap";
+            l_SpecialButton.AddAction(ChooseSpecial);
+            m_SpecialButtonList.AddButton(l_SpecialButton);
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
+            l_SpecialButton.skillId = "TailWhap";
+            l_SpecialButton.AddAction(ChooseSpecial);
+            m_SpecialButtonList.AddButton(l_SpecialButton);
+        }
+    }
+
+    private void InitSpecials()
+    {
+        InitTestSpecials();
     }
     #endregion
 }

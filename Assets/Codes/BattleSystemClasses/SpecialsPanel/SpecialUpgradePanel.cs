@@ -12,8 +12,7 @@ public class SpecialUpgradePanel : Panel
 
     [SerializeField]
     private Image m_BarImage = null;
-
-    private List<KeyCode> m_SpecialKeys = new List<KeyCode>();
+    
     private List<string> m_AddedSkills;
     private List<SpecialUpgradeIcon> m_SpecialUpgradeIconList = new List<SpecialUpgradeIcon>();
     private int   m_CurrentKeyCounter = 0;

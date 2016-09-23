@@ -128,10 +128,15 @@ public class BattleSystem : MonoBehaviour
         m_PanelManager.EndBattle();
     }
 
+    public string GetBattleId()
+    {
+        return m_BattleData.id;
+    }
+
     private void Win()
     {
         SetVisibleAvatarPanel(false);
-        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+        TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "Враги убиты.\nВы победили.\nГГ получает десять очков опыта и семки, шерсть 5 золотых, которые вы не увидите. Даже я сам не знаю для чего они. Кароч маладец. На шоколадка, воон лежит обернись... Шучу :)" });
         l_TextPanel.AddButtonAction(ReturnToJourney);
         ShowPanel(l_TextPanel);
@@ -141,7 +146,7 @@ public class BattleSystem : MonoBehaviour
     private void Lose()
     {
         SetVisibleAvatarPanel(false);
-        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+        TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "У ГГ больше нету сил сражаться далее, ГГ потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли." });
         l_TextPanel.AddButtonAction(ReturnToMainMenu);
 
@@ -170,7 +175,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            StartLocation("DemoMainScene");
+            StartLocation("MainMenu");
         }
     }
 
