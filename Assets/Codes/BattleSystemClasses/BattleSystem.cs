@@ -12,6 +12,7 @@ public class BattleSystem : MonoBehaviour
         Enemy
     }
 
+    #region Variables
     private static BattleSystem m_Instance;
     private BattlePlayer m_Player;
     private List<BattleEnemy>  m_EnemyList = new List<BattleEnemy>();
@@ -19,6 +20,7 @@ public class BattleSystem : MonoBehaviour
     private int m_CurrentEnemyNumber = 0;
     private BattleData m_BattleData;
     private int m_Experience = 0;
+    private string m_LevelupNotificationText = string.Empty;
 
     [SerializeField]
     private Transform m_MainPanelTransform = null;
@@ -31,7 +33,9 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField]
     private PanelManager m_PanelManager = null;
+    #endregion
 
+    #region Interface
     public static BattleSystem GetInstance()
     {
         return m_Instance;
@@ -49,6 +53,7 @@ public class BattleSystem : MonoBehaviour
     {
         m_Instance = this;
         m_Player = BattlePlayer.GetInstance();
+        PlayerData.GetInstance().AddLevelupNotification(LevelupNotification);
 
         if (GameManager.IsInstance() == false)
         {
@@ -140,15 +145,26 @@ public class BattleSystem : MonoBehaviour
     public void AddExperience(int p_Experience)
     {
         m_Experience += p_Experience;
+        PlayerData.GetInstance().AddExperience(m_Experience);
     }
+    #endregion
 
+    #region Private
     private void Win()
     {
         SetVisibleAvatarPanel(false);
+
+        List<string> l_WinText = new List<string>();
+        l_WinText.Add("Враги убиты.\nВы победили.\nГГ получает " + m_Experience + " exp");
+        if (m_LevelupNotificationText != string.Empty)
+        {
+            l_WinText.Add(m_LevelupNotificationText);
+        }
+
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { "Враги убиты.\nВы победили.\nГГ получает " + m_Experience + " exp" });
-        PlayerData.GetInstance().AddExperience(m_Experience);
+        l_TextPanel.SetText(l_WinText);
         l_TextPanel.AddButtonAction(ReturnToJourney);
+        
         ShowPanel(l_TextPanel);
         BattleStarter.GetInstance().BattleWin();
     }
@@ -233,4 +249,11 @@ public class BattleSystem : MonoBehaviour
             }
         }
     }
+
+    private void LevelupNotification()
+    {
+        string l_LevelText = (PlayerData.GetInstance().GetLevel() + 1).ToString();
+        m_LevelupNotificationText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Levelup", l_LevelText);
+    }
+    #endregion
 }

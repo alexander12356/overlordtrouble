@@ -12,7 +12,7 @@
 	"Bokalisk":
 	{
 		"Health" : 10,
-		"Experience" : 40,
+		"Experience" : 15,
 		"DamageValue" :
 		[
 			2,

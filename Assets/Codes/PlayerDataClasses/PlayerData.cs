@@ -5,6 +5,7 @@ using System;
 
 public class PlayerData : Singleton<PlayerData>
 {
+    #region Variables
     private string m_ProfileDataPathFile = "Data/PlayerData";
     private string m_LevelupListPathFile = "Data/LevelupList";
     private string m_ClassupListPathFile = "Data/ClassupList";
@@ -24,7 +25,11 @@ public class PlayerData : Singleton<PlayerData>
     private int m_MonstylePoints = 0;
     private List<int> m_Levelup = new List<int>();
     private List<int> m_Classup = new List<int>();
+    private PanelActionHandler m_LevelupNotification = null;
+    private PanelActionHandler m_ClassupNotification = null;
+    #endregion
 
+    #region Interface
     public int health
     {
         get { return m_HealthPoints;  }
@@ -157,6 +162,18 @@ public class PlayerData : Singleton<PlayerData>
         AddExperience(999);
     }
 
+    public void AddLevelupNotification(PanelActionHandler p_Action)
+    {
+        m_LevelupNotification += p_Action;
+    }
+
+    public void AddClassupNotification(PanelActionHandler p_Action)
+    {
+        m_ClassupNotification += p_Action;
+    }
+    #endregion
+
+    #region Private
     private void Parse()
     {
         string l_DecodedString = "";
@@ -234,6 +251,8 @@ public class PlayerData : Singleton<PlayerData>
         {
             m_Level++;
             m_StatImprovePoints += 4;
+            LevelupNotification();
+
             CheckClassup();
             CheckLevelup();
         }
@@ -245,6 +264,26 @@ public class PlayerData : Singleton<PlayerData>
         {
             m_Class++;
             m_ClassImprovePoints++;
+            ClassupNotification();
         }
     }
+
+    private void LevelupNotification()
+    {
+        if (m_LevelupNotification != null)
+        {
+            m_LevelupNotification();
+            m_LevelupNotification = null;
+        }
+    }
+
+    private void ClassupNotification()
+    {
+        if (m_ClassupNotification != null)
+        {
+            m_ClassupNotification();
+            m_ClassupNotification = null;
+        }
+    }
+    #endregion
 }

@@ -45,4 +45,5 @@
 	<Text id="GUI:Journey:ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>
 	<Text id="GUI:Profile:Level">Уровень</Text>
 	<Text id="GUI:Profile:NextLevelup">до следующего уровня:</Text>
+	<Text id="GUI:BattleSystem:Levelup">Игрок повысился до %dго уровня</Text>
 </Localization>

@@ -6,50 +6,64 @@ using UnityEngine;
 public class LocalizationDataBase : Singleton<LocalizationDataBase>
 {
     #region Variables
-    private Dictionary<string, string> texts = null;
-	private const string pathFile = "Data/Localization";
+    private Dictionary<string, string> m_Texts = null;
+	private const string m_PathFile = "Data/Localization";
     #endregion
 
     #region Interface
     public LocalizationDataBase()
 	{
-		string langId = DetectLanguage();
-		Parse(langId);
+		string l_LangId = DetectLanguage();
+		Parse(l_LangId);
 	}
 
-    public string GetText(string ID)
+    public string GetText(string p_Id)
     {
-        if (!texts.ContainsKey(ID))
+        if (!m_Texts.ContainsKey(p_Id))
         {
-            Debug.LogWarning("Cannot find localization of " + ID);
-            return ID;
+            Debug.LogWarning("Cannot find localization of " + p_Id);
+            return p_Id;
         }
-        return texts[ID];
+        return m_Texts[p_Id];
+    }
+
+    public string GetText(string p_Id, string p_Value)
+    {
+        if (!m_Texts.ContainsKey(p_Id))
+        {
+            Debug.LogWarning("Cannot find localization of " + p_Id);
+            return p_Id;
+        }
+
+        string l_Text = m_Texts[p_Id];
+
+        l_Text = l_Text.Replace("%d", p_Value);
+        return l_Text;
     }
     #endregion
 
     #region Private
     private string DetectLanguage()
 	{
-		string langId = "en";
+		string l_LangId = "en";
 		switch (Application.systemLanguage)
 		{
 			case SystemLanguage.English:
-				langId = "en";
+				l_LangId = "en";
 				break;
 			case SystemLanguage.Russian:
-				langId = "ru";
+				l_LangId = "ru";
 				break;
 		}
-		return langId;
+		return l_LangId;
 	}
 
 	private void Parse(string langId)
 	{
-		texts = null;
-		texts = new Dictionary<string, string>();
+		m_Texts = null;
+		m_Texts = new Dictionary<string, string>();
 
-		TextAsset _lta = (TextAsset)Resources.Load(pathFile + "_" + langId);
+		TextAsset _lta = (TextAsset)Resources.Load(m_PathFile + "_" + langId);
 		XmlDocument xmlDoc = new XmlDocument();
 		xmlDoc.InnerXml = _lta.text;
 		XmlNodeList _texts = xmlDoc.GetElementsByTagName("Text");
@@ -69,7 +83,7 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
 				}
 			}
 
-			texts.Add(textID, curText.InnerText);
+			m_Texts.Add(textID, curText.InnerText);
 		}
 	}
     #endregion
