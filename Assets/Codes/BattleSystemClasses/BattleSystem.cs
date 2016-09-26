@@ -204,6 +204,7 @@ public class BattleSystem : MonoBehaviour
 
     private void InitBattle()
     {
+        m_BattleData = BattleStarter.GetInstance().GetBattle();
         if (GameManager.GetInstance().isTesting)
         {
             BattleStarter.GetInstance().InitBattle(null, "TestBattle");
