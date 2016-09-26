@@ -134,6 +134,11 @@ public class PlayerData : Singleton<PlayerData>
         m_PlayerEnchancement.AddEnchancement(p_EnchancementId);
     }
 
+    public Sprite GetProfileAvatar()
+    {
+        return m_PlayerEnchancement.GetProfileAvatar();
+    }
+
     public RuntimeAnimatorController GetAnimatorController()
     {
         return m_PlayerEnchancement.GetAnimatorController();

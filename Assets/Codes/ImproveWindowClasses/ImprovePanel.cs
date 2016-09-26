@@ -21,14 +21,12 @@ public class ImprovePanel : Panel
     {
         base.Awake();
 
+        ImproveSystem.GetInstance().ShowPanel(this);
         m_BackgroundAfterSelectImage  = myTransform.FindChild("BackgroundAfterSelect").GetComponent<Image>();
         m_BackgroundBeforeSelectImage = myTransform.FindChild("BackgroundBeforeSelect").GetComponent<Image>();
         m_ImproveButtonList = GetComponent<ButtonList>();
         m_Animator = GetComponent<Animator>();
         InitImproveButtons();
-
-        ImproveWindow.GetInstance().ShowPanel(this);
-        ImproveDataBase.GetInstance();
     }
 
     public override void UpdatePanel()
@@ -37,7 +35,7 @@ public class ImprovePanel : Panel
 
         m_ImproveButtonList.UpdateKey();
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.X))
         {
             ReturnToMainMenu();
         }
@@ -46,31 +44,34 @@ public class ImprovePanel : Panel
     // Called from Animation
     public void ImproveComplete()
     {
-        TextPanelImproveWindow m_TextPanel = Instantiate(TextPanelImproveWindow.prefab);
-
         string l_ImproveName = ((PanelButtonImprove)m_ImproveButtonList.currentButton).improveData.id;
         string l_ImproveSkillsText = ", вы получили следующие приемы:\n";
-        ImproveData l_ImproveData = ImproveDataBase.GetInstance().GetImprove(l_ImproveName);
-        l_ImproveSkillsText += LocalizationDataBase.GetInstance().GetText("Skill:" + l_ImproveData.skills[0].id);
-        for (int i = 1; i < l_ImproveData.skills.Count; i++)
-        {
-            l_ImproveSkillsText += ", " + LocalizationDataBase.GetInstance().GetText("Skill:" + l_ImproveData.skills[i].id);
-        }
 
+        ImproveData l_ImproveData = ImproveDataBase.GetInstance().GetImprove(l_ImproveName);
+        for (int i = 0; i < l_ImproveData.skills.Count; i++)
+        {
+            l_ImproveSkillsText += LocalizationDataBase.GetInstance().GetText("Skill:" + l_ImproveData.skills[i].id);
+            if (i < l_ImproveData.skills.Count - 1)
+            {
+                l_ImproveSkillsText += ", ";
+            }
+        }
         string l_Text = "Вы выбрали класс " + LocalizationDataBase.GetInstance().GetText("Improvement:" + l_ImproveName) + l_ImproveSkillsText;
+
+        TextPanelImproveWindow m_TextPanel = Instantiate(TextPanelImproveWindow.prefab);
         m_TextPanel.SetText(new List<string>() { l_Text });
         m_TextPanel.AddPopAction(ReturnToMainMenu);
 
-        ImproveWindow.GetInstance().ShowPanel(m_TextPanel, true);
+        ImproveSystem.GetInstance().ShowPanel(m_TextPanel, true);
         Vector3 m_TextPanelLocalPosition = m_TextPanel.myTransform.localPosition;
         m_TextPanelLocalPosition.y = -402;
         m_TextPanel.myTransform.localPosition = m_TextPanelLocalPosition;
     }
 
-    //Called from Animation
+    // Called from Animation
     public void EndBlinking()
     {
-        Select();
+        SelectImprove();
     }
 
     #endregion
@@ -94,16 +95,16 @@ public class ImprovePanel : Panel
         l_PanelButtonImprove.ReadyChoose();
 
         YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
-        l_YesNoPanel.AddYesAction(Select);
+        l_YesNoPanel.AddYesAction(SelectImprove);
         l_YesNoPanel.AddNoAction(l_PanelButtonImprove.UnreadyChoose);
-        ImproveWindow.GetInstance().ShowPanel(l_YesNoPanel, true);
+        ImproveSystem.GetInstance().ShowPanel(l_YesNoPanel, true);
     }
 
-    private void Select()
+    private void SelectImprove()
     {
         PanelButtonImprove l_PanelButtonImprove = (PanelButtonImprove)m_ImproveButtonList.currentButton;
         l_PanelButtonImprove.StartBlinking();
-        l_PanelButtonImprove.AddAfterBlinkingAnimation(RemoveButtonsButExcept);
+        l_PanelButtonImprove.AddAfterBlinkingAnimation(RemoveImproveIconsButExcept);
         l_PanelButtonImprove.AddAfterSelectionAction(ShowProfile);
         m_ImproveButtonList.isActive = false;
 
@@ -111,7 +112,7 @@ public class ImprovePanel : Panel
         PlayerData.GetInstance().AddEnchancement(l_ImproveId);
     }
 
-    private void RemoveButtonsButExcept()
+    private void RemoveImproveIconsButExcept()
     {
         for (int i = 0; i < m_ImproveButtonList.count; i++)
         {
@@ -133,7 +134,14 @@ public class ImprovePanel : Panel
 
     private void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("DemoMainScene");
+        if (GameManager.GetInstance().isTesting)
+        {
+            ImproveSystem.GetInstance().StartLocation("DemoMainScene");
+        }
+        else
+        {
+            ImproveSystem.GetInstance().UnloadScene();
+        }
     }
     #endregion
 }

@@ -14,7 +14,6 @@ public class ProfilePanel : Panel
         SpecialList
     }
 
-    
     private ArrayList m_SelectedSpecialsList;
     private int m_StatImprovePoints = 0;
     private bool m_HaveStatPoints = false;
@@ -31,6 +30,7 @@ public class ProfilePanel : Panel
     private Text m_NextLevelupText = null;
     private SpecialStatus m_SpecialStatus = null;
     private Image m_ClassupBackgroundImage = null;
+    private Image m_ProfileAvatar = null;
 
     [SerializeField]
     private int m_MaxSelectedSpecialCount = 4;
@@ -48,7 +48,7 @@ public class ProfilePanel : Panel
         }
     }
 
-    public override void Awake ()
+    public override void Awake()
     {
         base.Awake();
 
@@ -65,8 +65,8 @@ public class ProfilePanel : Panel
         CheckCanClassup();
         CheckCanStatImprove();
     }
-	
-	public void Update ()
+
+    public void Update()
     {
         if (m_StatsButtonList.isActive && m_HaveStatPoints)
         {
@@ -125,6 +125,12 @@ public class ProfilePanel : Panel
         m_SpecialsButtonList.UpdateKey();
         m_StatsButtonList.UpdateKey();
     }
+
+    public void OnEnable()
+    {
+        LoadEnchancement();
+    }
+
     #endregion
 
     #region Private
@@ -249,7 +255,7 @@ public class ProfilePanel : Panel
     {
         if (m_HaveClassupPoints)
         {
-            //PanelManager..LoadScene("Improve");
+            ProfileSystem.GetInstance().AddScene("Improve");
         }
     }
 
@@ -259,7 +265,7 @@ public class ProfilePanel : Panel
         m_SpecialsButtonList.isActive = false;
         m_SpecialsButtonList.AddKeyArrowAction(ShowSpecialDescription);
         m_SpecialsButtonList.AddCancelAction(ActiveProfilePanel);
-        
+
         m_SpecialButtonListScrolling = transform.FindChild("SpecialList").GetComponentInChildren<ButtonListScrolling>();
         m_SpecialButtonListScrolling.Init(51.0f, 6);
         m_SpecialsButtonList.AddKeyArrowAction(m_SpecialButtonListScrolling.CheckScrolling);
@@ -297,10 +303,14 @@ public class ProfilePanel : Panel
         m_NextLevelupText = transform.FindChild("Experience").GetComponentInChildren<Text>();
         m_SpecialStatus = transform.FindChild("SpecialSelect").GetComponent<SpecialStatus>();
         m_ClassupBackgroundImage = transform.FindChild("Improve").FindChild("Background").GetComponent<Image>();
+        m_ProfileAvatar = transform.FindChild("Avatar").GetComponentInChildren<Image>();
 
         m_LevelText.text = LocalizationDataBase.GetInstance().GetText("GUI:Profile:Level") + " " + (PlayerData.GetInstance().GetLevel() + 1);
         m_PlayerNameText.text = PlayerData.GetInstance().GetPlayerName();
         m_NextLevelupText.text = LocalizationDataBase.GetInstance().GetText("GUI:Profile:NextLevelup") + " " + PlayerData.GetInstance().GetNextLevelupExperience() + " exp";
+
+        m_ProfileAvatar.sprite = PlayerData.GetInstance().GetProfileAvatar();
+        m_ProfileAvatar.SetNativeSize();
     }
 
     private void CheckCanClassup()
@@ -310,6 +320,15 @@ public class ProfilePanel : Panel
             m_ClassupBackgroundImage.sprite = Resources.Load<Sprite>("Sprites/GUI/Profile/ClassupActivated");
             m_HaveClassupPoints = true;
         }
+    }
+
+    private void LoadEnchancement()
+    {
+        m_ProfileAvatar.sprite = PlayerData.GetInstance().GetProfileAvatar();
+        m_ProfileAvatar.SetNativeSize();
+
+        m_SpecialsButtonList.Clear();
+        InitMonstyles();
     }
     #endregion
 }

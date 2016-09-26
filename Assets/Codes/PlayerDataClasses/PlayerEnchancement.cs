@@ -18,6 +18,12 @@ public class PlayerEnchancement
         m_CurrentEnchancement = p_Id;
     }
 
+    public Sprite GetProfileAvatar()
+    {
+        string l_AvatarPath = "Sprites/Creations/" + m_CurrentEnchancement + "/Profile";
+        return Resources.Load<Sprite>(l_AvatarPath);
+    }
+
     public RuntimeAnimatorController GetAnimatorController()
     {
         string l_Temp = "Sprites/Creations/" + m_CurrentEnchancement + "/" + m_CurrentEnchancement + "Animator";
@@ -26,7 +32,7 @@ public class PlayerEnchancement
 
     public Sprite GetBattleAvatar()
     {
-        string l_Temp = "Sprites/Creations/" + m_CurrentEnchancement + "/" + "Avatar";
+        string l_Temp = "Sprites/Creations/" + m_CurrentEnchancement + "/Avatar";
         return Resources.Load<Sprite>(l_Temp);
     }
 

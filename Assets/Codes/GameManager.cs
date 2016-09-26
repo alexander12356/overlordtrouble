@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using System.Collections.Generic;
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager m_Instance = null;
     private string m_CurrentSceneName = string.Empty;
     private bool m_IsTesting = true;
+    private Stack<string> p_SceneIds = new Stack<string>();
 
     public bool isTesting
     {
@@ -43,26 +46,28 @@ public class GameManager : MonoBehaviour
 
     public void StartLocation(string p_LocationId)
     {
+        p_SceneIds.Clear();
+        p_SceneIds.Push(p_LocationId);
         m_CurrentSceneName = p_LocationId;
         SceneManager.LoadScene(p_LocationId);
     }
 
     public void AddScene(string p_SceneId)
     {
-        m_CurrentSceneName = p_SceneId;
         SetActiveForAllObjects(false);
+        p_SceneIds.Push(p_SceneId);
         SceneManager.LoadScene(p_SceneId, LoadSceneMode.Additive);
     }
 
     public void UnloadScene()
     {
-        SceneManager.UnloadScene(m_CurrentSceneName);
+        SceneManager.UnloadScene(p_SceneIds.Pop());
         SetActiveForAllObjects(true);
     }
 
     private void SetActiveForAllObjects(bool p_Value)
     {
-        GameObject[] l_RootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+        GameObject[] l_RootGameObjects = SceneManager.GetSceneByName(p_SceneIds.Peek()).GetRootGameObjects();
 
         for (int i = 0; i < l_RootGameObjects.Length; i++)
         {

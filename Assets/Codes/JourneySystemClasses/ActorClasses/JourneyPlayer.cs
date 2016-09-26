@@ -15,7 +15,7 @@ public class JourneyPlayer : JourneyActor
     #region Interface
     public void SetActive(bool active)
     {
-        if(active)
+        if (active)
         {
             enabled = true;
         }
@@ -31,8 +31,6 @@ public class JourneyPlayer : JourneyActor
         base.Awake();
 
         m_RigidBody2d = GetComponent<Rigidbody2D>();
-
-        LoadImprove();
     }
 
     public override void Update()

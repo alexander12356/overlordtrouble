@@ -39,8 +39,8 @@ public class JourneySystem : MonoBehaviour
         {
             GameManager.GetInstance();
             PlayerData.GetInstance().ResetData();
-            m_Player.LoadImprove();
         }
+        m_Player.LoadImprove();
     }
 
     public void StartDialog(string p_DialogId)
@@ -96,5 +96,10 @@ public class JourneySystem : MonoBehaviour
     public void OpenProfile()
     {
         m_PanelManager.OpenProfile();
+    }
+
+    public void OnEnable()
+    {
+        m_Player.LoadImprove();
     }
 }
