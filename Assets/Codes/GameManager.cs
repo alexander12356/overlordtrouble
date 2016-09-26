@@ -26,6 +26,15 @@ public class GameManager : MonoBehaviour
         return m_Instance;
     }
 
+    public static bool IsInstance()
+    {
+        if (m_Instance == null)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public void Awake()
     {
         m_Instance = this;

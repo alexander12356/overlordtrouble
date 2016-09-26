@@ -52,6 +52,12 @@ public class ProfilePanel : Panel
     {
         base.Awake();
 
+        if (GameManager.IsInstance() == false)
+        {
+            GameManager.GetInstance();
+            PlayerData.GetInstance().InitTestStats();
+        }
+
         InitAdditionalInfo();
         InitButtonLists();
         InitStats();

@@ -34,6 +34,13 @@ public class JourneySystem : MonoBehaviour
     {
         m_Instance = this;
         CutsceneSystem.GetInstance().StartCutscene("Intro");
+
+        if (GameManager.IsInstance() == false)
+        {
+            GameManager.GetInstance();
+            PlayerData.GetInstance().ResetData();
+            m_Player.LoadImprove();
+        }
     }
 
     public void StartDialog(string p_DialogId)

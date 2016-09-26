@@ -48,10 +48,13 @@ public class BattleSystem : MonoBehaviour
     public void Awake()
     {
         m_Instance = this;
-
-        DataLoader.GetInstance();
-
         m_Player = BattlePlayer.GetInstance();
+
+        if (GameManager.IsInstance() == false)
+        {
+            GameManager.GetInstance();
+            PlayerData.GetInstance().InitTestStats();
+        }
 
         InitBattle();
     }
@@ -201,8 +204,7 @@ public class BattleSystem : MonoBehaviour
 
     private void InitBattle()
     {
-        m_BattleData = BattleStarter.GetInstance().GetBattle();
-        if (m_BattleData.id == null)
+        if (GameManager.GetInstance().isTesting)
         {
             BattleStarter.GetInstance().InitBattle(null, "TestBattle");
             m_BattleData = BattleStarter.GetInstance().GetBattle();
