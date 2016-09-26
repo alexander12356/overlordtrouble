@@ -67,6 +67,11 @@ public class PanelManager : MonoBehaviour
         StartCoroutine(UnloadingScene());
     }
 
+    public void UnloadAndLoadScene(string p_SceneId)
+    {
+        StartCoroutine(UnloadingAndLoadingScene(p_SceneId));
+    }
+
     public void StartLocation(string p_LocationId)
     {
         StartCoroutine(StartingLocation(p_LocationId));
@@ -124,6 +129,14 @@ public class PanelManager : MonoBehaviour
         yield return StartCoroutine(screenFader.FadeToBlack());
 
         GameManager.GetInstance().StartLocation(p_LocationId);
+    }
+
+    private IEnumerator UnloadingAndLoadingScene(string p_SceneId)
+    {
+        yield return StartCoroutine(screenFader.FadeToBlack());
+
+        GameManager.GetInstance().UnloadScene();
+        GameManager.GetInstance().AddScene(p_SceneId);
     }
     #endregion
 }

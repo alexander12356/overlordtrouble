@@ -46,4 +46,5 @@
 	<Text id="GUI:Profile:Level">Уровень</Text>
 	<Text id="GUI:Profile:NextLevelup">до следующего уровня:</Text>
 	<Text id="GUI:BattleSystem:Levelup">Игрок повысился до %dго уровня</Text>
+	<Text id="GUI:BattleSystem:Classup">достиг достаточного уровня для повышение класса!</Text>
 </Localization>

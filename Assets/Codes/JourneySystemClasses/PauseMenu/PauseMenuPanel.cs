@@ -49,7 +49,7 @@ public class PauseMenuPanel : Panel
     {
         JourneySystem.GetInstance().SetControl(ControlType.Panel);
         YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
-        l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("ReturnMainMenu"));
+        l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("GUI:Journey:ReturnMainMenu"));
         l_YesNoPanel.AddYesAction(ConfirmReturnToMenu);
         JourneySystem.GetInstance().ShowPanel(l_YesNoPanel);
     }

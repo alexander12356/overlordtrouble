@@ -110,6 +110,7 @@ public class ImprovePanel : Panel
 
         string l_ImproveId = ((PanelButtonImprove)m_ImproveButtonList.currentButton).improveData.id;
         PlayerData.GetInstance().AddEnchancement(l_ImproveId);
+        PlayerData.GetInstance().classImprovePoints--;
     }
 
     private void RemoveImproveIconsButExcept()
