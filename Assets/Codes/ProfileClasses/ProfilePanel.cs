@@ -108,9 +108,17 @@ public class ProfilePanel : Panel
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.X))
         {
-            SceneManager.LoadScene("DemoMainScene");
+            if (GameManager.GetInstance().isTesting)
+            {
+                ProfileSystem.GetInstance().StartLocation("DemoMainScene");
+            }
+            else
+            {
+                ProfileSystem.GetInstance().UnloadScene();
+                JourneySystem.GetInstance().SetControl(ControlType.Panel);
+            }
         }
 
         m_ProfileButtonList.UpdateKey();
