@@ -5,13 +5,20 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager m_Instance = null;
     private string m_CurrentSceneName = string.Empty;
+    private bool m_IsTesting = true;
+
+    public bool isTesting
+    {
+        get { return m_IsTesting;  }
+        set { m_IsTesting = value; }
+    }
 
     public static GameManager GetInstance()
     {
         if (m_Instance == null)
         {
             GameObject gameObject = new GameObject();
-            gameObject.name = "GameManager";
+            gameObject.name = "SceneManager";
             gameObject.AddComponent<GameManager>();
 
             m_Instance = gameObject.GetComponent<GameManager>();

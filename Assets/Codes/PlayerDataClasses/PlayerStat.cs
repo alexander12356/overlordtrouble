@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerStat : Singleton<PlayerStat>
+public class PlayerStat
 {
     private Dictionary<string, int> m_Stats = new Dictionary<string, int>();
 

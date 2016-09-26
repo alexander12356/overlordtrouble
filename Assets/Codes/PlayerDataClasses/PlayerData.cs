@@ -5,7 +5,13 @@ using System;
 
 public class PlayerData : Singleton<PlayerData>
 {
-    private string m_PathFile = "Data/PlayerData";
+    private string m_ProfileDataPathFile = "Data/PlayerData";
+    private string m_LevelupListPathFile = "Data/LevelupList";
+    private string m_ClassupListPathFile = "Data/ClassupList";
+
+    private PlayerStat m_PlayerStat = null;
+    private PlayerSkills m_PlayerSkills = null;
+    private PlayerEnchancement m_PlayerEnchancement = null;
 
     private string m_PlayerName = "";
     private int[] m_AttackValue  = new int[2];
@@ -39,17 +45,27 @@ public class PlayerData : Singleton<PlayerData>
         get { return m_AttackValue; }
         set { }
     }
+    public int classImprovePoints
+    {
+        get { return m_ClassImprovePoints; }
+        set { m_ClassImprovePoints = value; }
+    }
 
     public void ResetData()
     {
-        PlayerStat.GetInstance().ResetData();
-        PlayerSkills.GetInstance().ResetData();
-        PlayerEnchancement.GetInstance().ResetData();
+        m_PlayerStat.ResetData();
+        m_PlayerSkills.ResetData();
+        m_PlayerEnchancement.ResetData();
         Parse();
+        ParseLevelupList();
+        ParseClassupList();
     }
 
     public PlayerData()
     {
+        m_PlayerStat = new PlayerStat();
+        m_PlayerSkills = new PlayerSkills();
+        m_PlayerEnchancement = new PlayerEnchancement();
     }
 
     public void AddExperience(int p_Experience)
@@ -63,12 +79,90 @@ public class PlayerData : Singleton<PlayerData>
         Parse();
     }
 
+    public int GetLevel()
+    {
+        return m_Level;
+    }
+
+    public string GetPlayerName()
+    {
+        return m_PlayerName;
+    }
+
+    public void AddSkills(List<SkillData> p_SkillList)
+    {
+        m_PlayerSkills.AddSkills(p_SkillList);
+    }
+
+    public List<SkillData> GetSkills()
+    {
+        return m_PlayerSkills.GetSkills();
+    }
+
+    public void SelectSkill(string p_Id)
+    {
+        m_PlayerSkills.SelectSkill(p_Id);
+    }
+
+    public void UnselectSkill(string p_Id)
+    {
+        m_PlayerSkills.UnselectSkill(p_Id);
+    }
+
+    public Dictionary<string, SkillData> GetSelectedSkills()
+    {
+        return m_PlayerSkills.GetSelectedSkills();
+    }
+
+    public Dictionary<string, int> GetStats()
+    {
+        return m_PlayerStat.GetStats();
+    }
+
+    public int GetStatValue(string p_StatId)
+    {
+        return m_PlayerStat.GetStatValue(p_StatId);
+    }
+
+    public void AddEnchancement(string p_EnchancementId)
+    {
+        m_PlayerEnchancement.AddEnchancement(p_EnchancementId);
+    }
+
+    public RuntimeAnimatorController GetAnimatorController()
+    {
+        return m_PlayerEnchancement.GetAnimatorController();
+    }
+
+    public Sprite GetBattleAvatar()
+    {
+        return m_PlayerEnchancement.GetBattleAvatar();
+    }
+
+    public int GetNextLevelupExperience()
+    {
+        if (m_Level < m_Levelup.Count)
+        {
+            return m_Levelup[m_Level] - m_Experience;
+        }
+        else
+        {
+            return m_Experience;
+        }
+    }
+
+    public void InitTestStats()
+    {
+        ResetData();
+        AddExperience(999);
+    }
+
     private void Parse()
     {
         string l_DecodedString = "";
         try
         {
-            TextAsset l_TextAsset = (TextAsset)Resources.Load(m_PathFile);
+            TextAsset l_TextAsset = (TextAsset)Resources.Load(m_ProfileDataPathFile);
             l_DecodedString = l_TextAsset.ToString();
         }
         catch
@@ -86,25 +180,68 @@ public class PlayerData : Singleton<PlayerData>
         m_Level = (int)l_JSONObject["Level"].f;
         m_Class = (int)l_JSONObject["Class"].f;
         m_Experience = (int)l_JSONObject["Experience"].f;
-        PlayerStat.GetInstance().SetStatData(l_JSONObject["Stats"]);
+        m_PlayerStat.SetStatData(l_JSONObject["Stats"]);
 
-        m_HealthPoints = PlayerStat.GetInstance().GetStatValue("HealthPoints");
-        m_MonstylePoints = PlayerStat.GetInstance().GetStatValue("HealthPoints");
+        m_HealthPoints = m_PlayerStat.GetStatValue("HealthPoints");
+        m_MonstylePoints = m_PlayerStat.GetStatValue("HealthPoints");
+    }
+
+    private void ParseLevelupList()
+    {
+        string l_DecodedString = "";
+        try
+        {
+            TextAsset l_TextAsset = (TextAsset)Resources.Load(m_LevelupListPathFile);
+            l_DecodedString = l_TextAsset.ToString();
+        }
+        catch
+        {
+            Debug.LogError("CANNOT READ FOR " + GetType());
+        }
+
+        JSONObject l_JSONObject = new JSONObject(l_DecodedString);
+        
+        for (int i = 0; i < l_JSONObject["Levelup"].Count; i++)
+        {
+            m_Levelup.Add((int)l_JSONObject["Levelup"][i].i);
+        }
+    }
+
+    private void ParseClassupList()
+    {
+        string l_DecodedString = "";
+        try
+        {
+            TextAsset l_TextAsset = (TextAsset)Resources.Load(m_ClassupListPathFile);
+            l_DecodedString = l_TextAsset.ToString();
+        }
+        catch
+        {
+            Debug.LogError("CANNOT READ FOR " + GetType());
+        }
+
+        JSONObject l_JSONObject = new JSONObject(l_DecodedString);
+
+        for (int i = 0; i < l_JSONObject["Classup"].Count; i++)
+        {
+            m_Classup.Add((int)l_JSONObject["Classup"][i].i);
+        }
     }
 
     private void CheckLevelup()
     {
-        if (m_Levelup[m_Level] <= m_Experience)
+        if (m_Level < m_Levelup.Count && m_Levelup[m_Level] <= m_Experience)
         {
             m_Level++;
             m_StatImprovePoints += 4;
             CheckClassup();
+            CheckLevelup();
         }
     }
 
     private void CheckClassup()
     {
-        if (m_Classup[m_Class] < m_Level)
+        if (m_Class < m_Classup.Count && m_Classup[m_Class] <= m_Level)
         {
             m_Class++;
             m_ClassImprovePoints++;

@@ -108,7 +108,7 @@ public class ImprovePanel : Panel
         m_ImproveButtonList.isActive = false;
 
         string l_ImproveId = ((PanelButtonImprove)m_ImproveButtonList.currentButton).improveData.id;
-        PlayerEnchancement.GetInstance().AddEnchancement(l_ImproveId);
+        PlayerData.GetInstance().AddEnchancement(l_ImproveId);
     }
 
     private void RemoveButtonsButExcept()

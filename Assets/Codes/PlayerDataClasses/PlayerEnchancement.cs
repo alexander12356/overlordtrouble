@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerEnchancement : Singleton<PlayerEnchancement>
+public class PlayerEnchancement
 {
     private List<ImproveData> m_Enchancement = new List<ImproveData>();
     private string m_CurrentEnchancement = string.Empty;
-
-    public List<ImproveData> enchancement
-    {
-        get { return m_Enchancement; }
-    }
 
     public PlayerEnchancement()
     {
@@ -18,7 +13,7 @@ public class PlayerEnchancement : Singleton<PlayerEnchancement>
     public void AddEnchancement(string p_Id)
     {
         ImproveData l_ImproveData = ImproveDataBase.GetInstance().GetImprove(p_Id);
-        PlayerSkills.GetInstance().AddSkills(l_ImproveData.skills);
+        PlayerData.GetInstance().AddSkills(l_ImproveData.skills);
 
         m_CurrentEnchancement = p_Id;
     }

@@ -140,10 +140,10 @@ public class BattlePlayer : BattleActor
     {
         base.InitStats();
 
-        baseHealth = PlayerStat.GetInstance().GetStatValue("HealthPoints");
+        baseHealth = PlayerData.GetInstance().GetStatValue("HealthPoints");
         health = PlayerData.GetInstance().health;
 
-        baseMana = PlayerStat.GetInstance().GetStatValue("MonstylePoints");
+        baseMana = PlayerData.GetInstance().GetStatValue("MonstylePoints");
         mana = PlayerData.GetInstance().monstylePoints;
 
         m_AttackValue = PlayerData.GetInstance().attackValue;
@@ -156,7 +156,7 @@ public class BattlePlayer : BattleActor
         m_Instance = this;
 
         Image l_AvatarImage = transform.FindChild("AvatarImage").GetComponent<Image>();
-        l_AvatarImage.sprite = PlayerEnchancement.GetInstance().GetBattleAvatar();
+        l_AvatarImage.sprite = PlayerData.GetInstance().GetBattleAvatar();
 
         InitComponents();
         InitStats();

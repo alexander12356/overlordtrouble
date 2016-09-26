@@ -18,6 +18,7 @@ public class BattleSystem : MonoBehaviour
     private bool m_IsPlayerTurn = true;
     private int m_CurrentEnemyNumber = 0;
     private BattleData m_BattleData;
+    private int m_Experience = 0;
 
     [SerializeField]
     private Transform m_MainPanelTransform = null;
@@ -133,11 +134,17 @@ public class BattleSystem : MonoBehaviour
         return m_BattleData.id;
     }
 
+    public void AddExperience(int p_Experience)
+    {
+        m_Experience += p_Experience;
+    }
+
     private void Win()
     {
         SetVisibleAvatarPanel(false);
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { "Враги убиты.\nВы победили.\nГГ получает десять очков опыта и семки, шерсть 5 золотых, которые вы не увидите. Даже я сам не знаю для чего они. Кароч маладец. На шоколадка, воон лежит обернись... Шучу :)" });
+        l_TextPanel.SetText(new List<string>() { "Враги убиты.\nВы победили.\nГГ получает " + m_Experience + " exp" });
+        PlayerData.GetInstance().AddExperience(m_Experience);
         l_TextPanel.AddButtonAction(ReturnToJourney);
         ShowPanel(l_TextPanel);
         BattleStarter.GetInstance().BattleWin();

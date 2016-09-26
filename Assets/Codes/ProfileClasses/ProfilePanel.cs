@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
 
-public class ProfileWindow : MonoBehaviour
+public class ProfilePanel : Panel
 {
     private enum ActivePanels
     {
@@ -14,31 +14,26 @@ public class ProfileWindow : MonoBehaviour
         SpecialList
     }
 
-    private ButtonList m_ProfileButtonList;
+    
     private ArrayList m_SelectedSpecialsList;
     private int m_StatImprovePoints = 0;
     private bool m_HaveStatPoints = false;
+    private bool m_HaveClassupPoints = false;
 
-    [SerializeField]
-    private int m_MaxSelectedSpecialCount = 5;
-
-    [SerializeField]
     private ButtonList m_SpecialsButtonList = null;
-
-    [SerializeField]
     private ButtonList m_StatsButtonList = null;
-
-    [SerializeField]
-    private Text m_SpecialDescriptionText = null;
-
-    [SerializeField]
-    private SpecialStatus m_SpecialStatus = null;
-
-    [SerializeField]
-    private Text m_StatImprovePointsText = null;
-
-    [SerializeField]
+    private ButtonList m_ProfileButtonList = null;
     private ButtonListScrolling m_SpecialButtonListScrolling = null;
+    private Text m_SpecialDescriptionText = null;
+    private Text m_StatImprovePointsText = null;
+    private Text m_LevelText = null;
+    private Text m_PlayerNameText = null;
+    private Text m_NextLevelupText = null;
+    private SpecialStatus m_SpecialStatus = null;
+    private Image m_ClassupBackgroundImage = null;
+
+    [SerializeField]
+    private int m_MaxSelectedSpecialCount = 4;
 
     #region Interface
     public int statImprovePoints
@@ -53,31 +48,16 @@ public class ProfileWindow : MonoBehaviour
         }
     }
 
-    public void Awake ()
+    public override void Awake ()
     {
-        m_ProfileButtonList = GetComponent<ButtonList>();
-        m_ProfileButtonList[0].AddAction(ActiveStatsPanel);
-        m_ProfileButtonList[1].AddAction(StartImprove);
-        m_ProfileButtonList[2].AddAction(ActiveSpecialListPanel);
+        base.Awake();
 
-        m_SpecialsButtonList.isActive = false;
-        m_SpecialsButtonList.AddKeyArrowAction(ShowSpecialDescription);
-        m_SpecialsButtonList.AddCancelAction(ActiveProfilePanel);
-        m_StatsButtonList.isActive = false;
-        m_StatsButtonList.AddCancelAction(ActiveProfilePanel);
-
+        InitAdditionalInfo();
+        InitButtonLists();
         InitStats();
-        InitSpecials();
-
-        m_SpecialButtonListScrolling.Init(51.0f, 6);
-        m_SpecialsButtonList.AddKeyArrowAction(m_SpecialButtonListScrolling.CheckScrolling);
-
-        if (PlayerData.GetInstance().statImprovePoints > 0)
-        {
-            m_HaveStatPoints = true;
-            m_StatImprovePointsText.gameObject.SetActive(true);
-            statImprovePoints = PlayerData.GetInstance().statImprovePoints;
-        }
+        InitMonstyles();
+        CheckCanClassup();
+        CheckCanStatImprove();
     }
 	
 	public void Update ()
@@ -136,7 +116,7 @@ public class ProfileWindow : MonoBehaviour
     #region Private
     private void InitStats()
     {
-        Dictionary<string, int> l_PlayerStats = PlayerStat.GetInstance().GetStats();
+        Dictionary<string, int> l_PlayerStats = PlayerData.GetInstance().GetStats();
 
         foreach (string l_StatId in l_PlayerStats.Keys)
         {
@@ -144,19 +124,20 @@ public class ProfileWindow : MonoBehaviour
 
             l_PanelButton.title = LocalizationDataBase.GetInstance().GetText("Stat:" + l_StatId);
             l_PanelButton.statId = l_StatId;
-            l_PanelButton.statValue = PlayerStat.GetInstance().GetStats()[l_StatId];
+            l_PanelButton.statValue = l_PlayerStats[l_StatId];
 
             m_StatsButtonList.AddButton(l_PanelButton);
         }
     }
 
-    private void InitSpecials()
+    private void InitMonstyles()
     {
-        for (int i = 0; i < 12; i++)
+        List<SkillData> m_MonstyleList = PlayerData.GetInstance().GetSkills();
+        for (int i = 0; i < m_MonstyleList.Count; i++)
         {
             PanelButtonProfileSpecial l_PanelButton = Instantiate(PanelButtonProfileSpecial.prefab);
             l_PanelButton.AddAction(SelectSpecial);
-            l_PanelButton.title = "SP" + (i + 1);
+            l_PanelButton.title = LocalizationDataBase.GetInstance().GetText("Skill:" + m_MonstyleList[i].id);
             l_PanelButton.text.fontSize = 40;
 
             m_SpecialsButtonList.AddButton(l_PanelButton);
@@ -232,7 +213,7 @@ public class ProfileWindow : MonoBehaviour
         {
             PanelButtonStat l_PanelButtonStat = (PanelButtonStat)m_StatsButtonList[i];
             l_PanelButtonStat.ConfirmAddedStatValue();
-            PlayerStat.GetInstance().GetStats()[l_PanelButtonStat.statId] = l_PanelButtonStat.statValue;
+            PlayerData.GetInstance().GetStats()[l_PanelButtonStat.statId] = l_PanelButtonStat.statValue;
         }
         if (m_StatImprovePoints == 0)
         {
@@ -250,14 +231,71 @@ public class ProfileWindow : MonoBehaviour
         }
     }
 
-    private void StartImprove()
+    private void OpenImprovePanel()
     {
-        SceneManager.LoadScene("Improve");
+        if (m_HaveClassupPoints)
+        {
+            //PanelManager..LoadScene("Improve");
+        }
     }
 
-    private void ResizeSpecialList()
+    private void InitButtonLists()
     {
-        //m_SpecialsButtonList.gameObject.GetComponent<RectTransform>(). m_SpecialsButtonList.count
+        m_SpecialsButtonList = transform.FindChild("SpecialList").FindChild("MaskSpecialList").GetComponentInChildren<ButtonList>();
+        m_SpecialsButtonList.isActive = false;
+        m_SpecialsButtonList.AddKeyArrowAction(ShowSpecialDescription);
+        m_SpecialsButtonList.AddCancelAction(ActiveProfilePanel);
+        
+        m_SpecialButtonListScrolling = transform.FindChild("SpecialList").GetComponentInChildren<ButtonListScrolling>();
+        m_SpecialButtonListScrolling.Init(51.0f, 6);
+        m_SpecialsButtonList.AddKeyArrowAction(m_SpecialButtonListScrolling.CheckScrolling);
+
+        m_StatsButtonList = transform.FindChild("Stats").GetComponentInChildren<ButtonList>();
+        m_StatsButtonList.isActive = false;
+        m_StatsButtonList.AddCancelAction(ActiveProfilePanel);
+
+        m_ProfileButtonList = GetComponent<ButtonList>();
+        m_ProfileButtonList[0].AddAction(ActiveStatsPanel);
+        m_ProfileButtonList[1].AddAction(OpenImprovePanel);
+        m_ProfileButtonList[2].AddAction(ActiveSpecialListPanel);
+    }
+
+    private void CheckCanStatImprove()
+    {
+        if (PlayerData.GetInstance().statImprovePoints > 0)
+        {
+            m_HaveStatPoints = true;
+            m_StatImprovePointsText.gameObject.SetActive(true);
+            statImprovePoints = PlayerData.GetInstance().statImprovePoints;
+        }
+        else
+        {
+            m_StatImprovePointsText.gameObject.SetActive(false);
+        }
+    }
+
+    private void InitAdditionalInfo()
+    {
+        m_SpecialDescriptionText = transform.FindChild("SpecialDescription").GetComponentInChildren<Text>();
+        m_StatImprovePointsText = transform.FindChild("StatPoints").GetComponentInChildren<Text>();
+        m_LevelText = transform.FindChild("Level").GetComponentInChildren<Text>();
+        m_PlayerNameText = transform.FindChild("Name").GetComponentInChildren<Text>();
+        m_NextLevelupText = transform.FindChild("Experience").GetComponentInChildren<Text>();
+        m_SpecialStatus = transform.FindChild("SpecialSelect").GetComponent<SpecialStatus>();
+        m_ClassupBackgroundImage = transform.FindChild("Improve").FindChild("Background").GetComponent<Image>();
+
+        m_LevelText.text = LocalizationDataBase.GetInstance().GetText("GUI:Profile:Level") + " " + (PlayerData.GetInstance().GetLevel() + 1);
+        m_PlayerNameText.text = PlayerData.GetInstance().GetPlayerName();
+        m_NextLevelupText.text = LocalizationDataBase.GetInstance().GetText("GUI:Profile:NextLevelup") + " " + PlayerData.GetInstance().GetNextLevelupExperience() + " exp";
+    }
+
+    private void CheckCanClassup()
+    {
+        if (PlayerData.GetInstance().classImprovePoints > 0)
+        {
+            m_ClassupBackgroundImage.sprite = Resources.Load<Sprite>("Sprites/GUI/Profile/ClassupActivated");
+            m_HaveClassupPoints = true;
+        }
     }
     #endregion
 }

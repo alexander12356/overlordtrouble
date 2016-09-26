@@ -12,7 +12,7 @@
 	
 	<!-- stats -->
 	<Text id="Stat:HealthPoints">Жизнь</Text>
-	<Text id="Stat:SpecialPoints">Магия</Text>
+	<Text id="Stat:MonstylePoints">Монстайл</Text>
 	<Text id="Stat:Attack">Атака</Text>
 	<Text id="Stat:Defense">Защита</Text>
 	<Text id="Stat:Speed">Скорость</Text>
@@ -42,5 +42,7 @@
 	<Text id="Enemy:Skwatwolf">Гополак</Text>
 	
 	<!-- UI -->>
-	<Text id="ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>
+	<Text id="GUI:Journey:ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>
+	<Text id="GUI:Profile:Level">Уровень</Text>
+	<Text id="GUI:Profile:NextLevelup">до следующего уровня:</Text>
 </Localization>

@@ -95,6 +95,7 @@ public class BattleEnemy : BattleActor
     {
         base.Died();
 
+        BattleSystem.GetInstance().AddExperience(m_EnemyData.experience);
         BattleSystem.GetInstance().Died(BattleSystem.ActorID.Enemy);
     }
 

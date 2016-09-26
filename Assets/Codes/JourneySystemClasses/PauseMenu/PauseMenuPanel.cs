@@ -23,7 +23,7 @@ public class PauseMenuPanel : Panel
         base.Awake();
 
         m_ButtonList = GetComponentInChildren<ButtonList>();
-        //m_ButtonList[0].AddAction(OpenProfilePanel);
+        m_ButtonList[0].AddAction(OpenProfilePanel);
         m_ButtonList[3].AddAction(OpenQuitQuestionPanel);
     }
 

@@ -132,7 +132,7 @@ public class SpecialSelectPanel : Panel
     //TODO Kostil
     private void InitSpecialButtons()
     {
-        if (BattleSystem.GetInstance().GetBattleId() == "TestBattle")
+        if (GameManager.GetInstance().isTesting)
         {
             InitTestSpecials();
         }
@@ -197,7 +197,7 @@ public class SpecialSelectPanel : Panel
 
     private void InitSpecials()
     {
-        List<SkillData> l_PlayerSkills = PlayerSkills.GetInstance().skillList;
+        List<SkillData> l_PlayerSkills = PlayerData.GetInstance().GetSkills();
         for (int i = 0; i < l_PlayerSkills.Count; i++)
         {
             PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);

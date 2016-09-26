@@ -33,9 +33,15 @@ public class MainMenuPanel : Panel
 
         m_ButtonList.UpdateKey();
 
-        if (Input.GetKeyUp(KeyCode.F12))
+        if (Input.GetKeyUp(KeyCode.F12) && GameManager.GetInstance().isTesting)
         {
             MainMenuSystem.GetInstance().StartLocation("DemoMainScene");
+            GameManager.GetInstance().isTesting = true;
+            PlayerData.GetInstance().InitTestStats();
+        }
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            GameManager.GetInstance().UnloadScene();
         }
     }
 
@@ -43,6 +49,7 @@ public class MainMenuPanel : Panel
     {
         PlayerData.GetInstance().ResetData();
         MainMenuSystem.GetInstance().StartLocation("Town");
+        GameManager.GetInstance().isTesting = false;
     }
 
     private void QuitGame()

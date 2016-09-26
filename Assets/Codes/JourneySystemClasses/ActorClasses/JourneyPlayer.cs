@@ -148,7 +148,7 @@ public class JourneyPlayer : JourneyActor
 
     public void LoadImprove()
     {
-        m_Animator.runtimeAnimatorController = PlayerEnchancement.GetInstance().GetAnimatorController();
+        m_Animator.runtimeAnimatorController = PlayerData.GetInstance().GetAnimatorController();
     }
     #endregion
 
