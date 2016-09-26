@@ -26,7 +26,7 @@ public class ImprovePanel : Panel
         m_BackgroundBeforeSelectImage = myTransform.FindChild("BackgroundBeforeSelect").GetComponent<Image>();
         m_ImproveButtonList = GetComponent<ButtonList>();
         m_Animator = GetComponent<Animator>();
-        InitImproveButtons();
+        InitImproveIcons();
     }
 
     public override void UpdatePanel()
@@ -78,9 +78,9 @@ public class ImprovePanel : Panel
     #endregion
 
     #region Private
-    private void InitImproveButtons()
+    private void InitImproveIcons()
     {
-        for (int i = 0; i < m_ImproveButtonList.count; i++)
+        for (int i = 0; i < m_ImproveButtonList.count - 1; i++)
         {
             m_ImproveButtonList[i].AddAction(ShowYesNoPanel);
         }
@@ -88,6 +88,7 @@ public class ImprovePanel : Panel
         ((PanelButtonImprove)m_ImproveButtonList[1]).improveData = ImproveDataBase.GetInstance().GetImprove("ShellLizard");
         ((PanelButtonImprove)m_ImproveButtonList[2]).improveData = ImproveDataBase.GetInstance().GetImprove("Brownie");
 
+        m_ImproveButtonList[m_ImproveButtonList.count - 1].AddAction(ReturnToMainMenu);
     }
 
     private void ShowYesNoPanel()

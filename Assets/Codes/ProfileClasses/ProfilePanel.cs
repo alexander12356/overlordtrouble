@@ -127,6 +127,7 @@ public class ProfilePanel : Panel
 
     public void OnEnable()
     {
+        CheckCanClassup();
         LoadEnchancement();
     }
 
@@ -318,6 +319,11 @@ public class ProfilePanel : Panel
         {
             m_ClassupBackgroundImage.sprite = Resources.Load<Sprite>("Sprites/GUI/Profile/ClassupActivated");
             m_HaveClassupPoints = true;
+        }
+        else
+        {
+            m_ClassupBackgroundImage.sprite = Resources.Load<Sprite>("Sprites/GUI/Profile/ClassupUnactivated");
+            m_HaveClassupPoints = false;
         }
     }
 
