@@ -28,7 +28,7 @@ public class TextPanel : Panel
         base.Awake();
 
         m_TextBox = GetComponent<TextBox>();
-        m_TextBox.AddEndAction(CloseTextPanel);
+        m_TextBox.AddEndAction(ButtonAction);
 
         AddPushAction(ShowText);
     }
@@ -73,12 +73,6 @@ public class TextPanel : Panel
     private void ShowText()
     {
         m_TextBox.ShowText();
-    }
-
-    private void CloseTextPanel()
-    {
-        Close();
-        ButtonAction();
     }
     #endregion
 }

@@ -58,14 +58,15 @@ public class ImprovePanel : Panel
         }
         string l_Text = "Вы выбрали класс " + LocalizationDataBase.GetInstance().GetText("Improvement:" + l_ImproveName) + l_ImproveSkillsText;
 
-        TextPanelImproveWindow m_TextPanel = Instantiate(TextPanelImproveWindow.prefab);
-        m_TextPanel.SetText(new List<string>() { l_Text });
-        m_TextPanel.AddPopAction(ReturnToMainMenu);
+        TextPanelImproveWindow l_TextPanel = Instantiate(TextPanelImproveWindow.prefab);
+        l_TextPanel.SetText(new List<string>() { l_Text });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+        l_TextPanel.AddPopAction(ReturnToMainMenu);
 
-        ImproveSystem.GetInstance().ShowPanel(m_TextPanel, true);
-        Vector3 m_TextPanelLocalPosition = m_TextPanel.myTransform.localPosition;
+        ImproveSystem.GetInstance().ShowPanel(l_TextPanel, true);
+        Vector3 m_TextPanelLocalPosition = l_TextPanel.myTransform.localPosition;
         m_TextPanelLocalPosition.y = -402;
-        m_TextPanel.myTransform.localPosition = m_TextPanelLocalPosition;
+        l_TextPanel.myTransform.localPosition = m_TextPanelLocalPosition;
     }
 
     // Called from Animation

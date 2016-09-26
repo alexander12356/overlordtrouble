@@ -51,10 +51,9 @@ public class ProfilePanel : Panel
     public override void Awake()
     {
         base.Awake();
-
-        if (GameManager.IsInstance() == false)
+        
+        if (GameManager.GetInstance().isTesting)
         {
-            GameManager.GetInstance();
             PlayerData.GetInstance().InitTestStats();
         }
 

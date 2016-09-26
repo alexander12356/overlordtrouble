@@ -85,6 +85,7 @@ public class BattleEnemy : BattleActor
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { actorName + " использовал удар и нанес " + l_DamageValue + " урона" });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
         l_TextPanel.AddButtonAction(EndTurn);
         BattleSystem.GetInstance().ShowPanel(l_TextPanel);
 
