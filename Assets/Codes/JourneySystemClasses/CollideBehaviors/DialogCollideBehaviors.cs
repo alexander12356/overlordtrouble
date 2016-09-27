@@ -17,9 +17,14 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
     {
         base.EnterAction(p_JourneyActor);
 
-        m_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
-        m_JourneyPlayer.AddActiveButtonAction(StartDialog);
-        m_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
+        if (m_JourneyPlayer == null)
+        {
+            m_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
+            m_JourneyPlayer.AddActiveButtonAction(StartDialog);
+            m_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
+
+            //m_JourneyActor.StopLogic();
+        }
     }
 
     public override void ExitAction(JourneyActor p_JourneyActor)
@@ -85,6 +90,8 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
             m_JourneyPlayer.RemoveActiveButtonAction(StartDialog);
             m_JourneyPlayer.RemoveDisactiveButtonAction(EndDialog);
             m_JourneyPlayer = null;
+
+            //m_JourneyActor.StartLogic();
         }
     }
 }
