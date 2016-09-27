@@ -63,10 +63,14 @@ public class ProfilePanel : Panel
         InitMonstyles();
         CheckCanClassup();
         CheckCanStatImprove();
+
+        ProfileSystem.GetInstance().ShowPanel(this);
     }
 
-    public void Update()
+    public override void UpdatePanel()
     {
+        base.UpdatePanel();
+
         if (m_StatsButtonList.isActive && m_HaveStatPoints)
         {
             if (Input.GetKeyUp(KeyCode.LeftArrow))
@@ -104,16 +108,6 @@ public class ProfilePanel : Panel
             else if (Input.GetKeyUp(KeyCode.X))
             {
                 CancelStatImprove();
-            }
-        }
-
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            ProfileSystem.GetInstance().UnloadScene();
-
-            if (JourneySystem.IsInstance())
-            {
-                JourneySystem.GetInstance().SetControl(ControlType.Panel);
             }
         }
 
@@ -275,6 +269,7 @@ public class ProfilePanel : Panel
         m_ProfileButtonList[0].AddAction(ActiveStatsPanel);
         m_ProfileButtonList[1].AddAction(OpenImprovePanel);
         m_ProfileButtonList[2].AddAction(ActiveSpecialListPanel);
+        m_ProfileButtonList.AddCancelAction(ReturnToJourney);
     }
 
     private void CheckCanStatImprove()
@@ -331,6 +326,16 @@ public class ProfilePanel : Panel
 
         m_SpecialsButtonList.Clear();
         InitMonstyles();
+    }
+
+    private void ReturnToJourney()
+    {
+        ProfileSystem.GetInstance().UnloadScene();
+
+        if (JourneySystem.IsInstance())
+        {
+            JourneySystem.GetInstance().SetControl(ControlType.Panel);
+        }
     }
     #endregion
 }

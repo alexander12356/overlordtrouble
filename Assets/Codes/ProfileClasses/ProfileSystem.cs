@@ -6,7 +6,7 @@ public class ProfileSystem : MonoBehaviour
     private static ProfileSystem m_Instance = null;
 
     [SerializeField]
-    private PanelManager m_PanelManager;
+    private PanelManager m_PanelManager = null;
 
     public static ProfileSystem GetInstance()
     {
@@ -16,6 +16,11 @@ public class ProfileSystem : MonoBehaviour
     public void Awake()
     {
         m_Instance = this;
+    }
+
+    public void ShowPanel(Panel p_Panel)
+    {
+        m_PanelManager.ShowPanel(p_Panel);
     }
 
     public void StartLocation(string p_LocationId)
