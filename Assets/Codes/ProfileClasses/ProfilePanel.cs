@@ -109,13 +109,10 @@ public class ProfilePanel : Panel
 
         if (Input.GetKeyUp(KeyCode.X))
         {
-            if (GameManager.GetInstance().isTesting)
+            ProfileSystem.GetInstance().UnloadScene();
+
+            if (JourneySystem.IsInstance())
             {
-                ProfileSystem.GetInstance().StartLocation("DemoMainScene");
-            }
-            else
-            {
-                ProfileSystem.GetInstance().UnloadScene();
                 JourneySystem.GetInstance().SetControl(ControlType.Panel);
             }
         }

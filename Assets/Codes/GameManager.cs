@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private static GameManager m_Instance = null;
     private string m_CurrentSceneName = string.Empty;
     private bool m_IsTesting = true;
-    private Stack<string> p_SceneIds = new Stack<string>();
+    private Stack<string> m_SceneIds = new Stack<string>();
 
     public bool isTesting
     {
@@ -46,29 +46,52 @@ public class GameManager : MonoBehaviour
 
     public void StartLocation(string p_LocationId)
     {
-        p_SceneIds.Clear();
-        p_SceneIds.Push(p_LocationId);
+        m_SceneIds.Clear();
+        m_SceneIds.Push(p_LocationId);
         m_CurrentSceneName = p_LocationId;
         SceneManager.LoadScene(p_LocationId);
     }
 
     public void AddScene(string p_SceneId)
     {
+        if (m_SceneIds.Count == 0)
+        {
+            if (isTesting)
+            {
+                m_SceneIds.Push(SceneManager.GetActiveScene().name);
+            }
+            else
+            {
+                Debug.LogError("Oppanki");
+            }
+        }
         SetActiveForAllObjects(false);
-        p_SceneIds.Push(p_SceneId);
+        m_SceneIds.Push(p_SceneId);
         SceneManager.LoadScene(p_SceneId, LoadSceneMode.Additive);
     }
 
     public void UnloadScene()
     {
-        SceneManager.UnloadScene(p_SceneIds.Pop());
+        if (m_SceneIds.Count == 0)
+        {
+            if (isTesting)
+            {
+                SceneManager.LoadScene("DemoMainScene");
+                return;
+            }
+            else
+            {
+                Debug.LogError("Oppanki");
+            }
+        }
+
+        SceneManager.UnloadScene(m_SceneIds.Pop());
         SetActiveForAllObjects(true);
     }
 
     private void SetActiveForAllObjects(bool p_Value)
     {
-        GameObject[] l_RootGameObjects = SceneManager.GetSceneByName(p_SceneIds.Peek()).GetRootGameObjects();
-
+        GameObject[] l_RootGameObjects = SceneManager.GetSceneByName(m_SceneIds.Peek()).GetRootGameObjects();
         for (int i = 0; i < l_RootGameObjects.Length; i++)
         {
             l_RootGameObjects[i].SetActive(p_Value);

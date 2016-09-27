@@ -137,14 +137,7 @@ public class ImprovePanel : Panel
 
     private void ReturnToMainMenu()
     {
-        if (GameManager.GetInstance().isTesting)
-        {
-            ImproveSystem.GetInstance().StartLocation("DemoMainScene");
-        }
-        else
-        {
-            ImproveSystem.GetInstance().UnloadScene();
-        }
+        ImproveSystem.GetInstance().UnloadScene();
     }
     #endregion
 }

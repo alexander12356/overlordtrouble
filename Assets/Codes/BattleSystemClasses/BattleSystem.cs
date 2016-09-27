@@ -189,7 +189,7 @@ public class BattleSystem : MonoBehaviour
             return;
         }
 
-        if (GameManager.GetInstance().isTesting)
+        if (m_BattleData.id == "TestBattle")
         {
             StartLocation("DemoMainScene");
         }
@@ -203,7 +203,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (m_BattleData.id == "TestBattle")
         {
-            StartLocation("BattleSystem");
+            StartLocation("DemoMainScene");
         }
         else
         {
