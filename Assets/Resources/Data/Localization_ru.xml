@@ -12,7 +12,7 @@
 	
 	<!-- stats -->
 	<Text id="Stat:HealthPoints">Жизнь</Text>
-	<Text id="Stat:MonstylePoints">Монстайл</Text>
+	<Text id="Stat:MonstylePoints">Энергия</Text>
 	<Text id="Stat:Attack">Атака</Text>
 	<Text id="Stat:Defense">Защита</Text>
 	<Text id="Stat:Speed">Скорость</Text>
