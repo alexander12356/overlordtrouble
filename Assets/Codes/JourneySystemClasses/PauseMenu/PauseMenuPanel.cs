@@ -25,6 +25,7 @@ public class PauseMenuPanel : Panel
         m_ButtonList = GetComponentInChildren<ButtonList>();
         m_ButtonList[0].AddAction(OpenProfilePanel);
         m_ButtonList[3].AddAction(OpenQuitQuestionPanel);
+        m_ButtonList.AddCancelAction(ReturnToJourney);
     }
 
     public override void UpdatePanel()
@@ -33,8 +34,7 @@ public class PauseMenuPanel : Panel
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            JourneySystem.GetInstance().SetControl(ControlType.Player);
-            Close();
+            ReturnToJourney();
         }
 
         m_ButtonList.UpdateKey();
@@ -57,5 +57,11 @@ public class PauseMenuPanel : Panel
     private void OpenProfilePanel()
     {
         JourneySystem.GetInstance().AddScene("Profile");
+    }
+
+    private void ReturnToJourney()
+    {
+        JourneySystem.GetInstance().SetControl(ControlType.Player);
+        Close();
     }
 }
