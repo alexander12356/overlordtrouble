@@ -33,7 +33,7 @@ public class MainMenuPanel : Panel
 
         m_ButtonList.UpdateKey();
 
-        if (Input.GetKeyUp(KeyCode.F12) && GameManager.GetInstance().isTesting)
+        if (Input.GetKeyUp(KeyCode.F12))
         {
             MainMenuSystem.GetInstance().StartLocation("DemoMainScene");
             GameManager.GetInstance().isTesting = true;

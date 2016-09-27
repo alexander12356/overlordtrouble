@@ -229,7 +229,7 @@ public class BattleSystem : MonoBehaviour
     private void InitBattle()
     {
         m_BattleData = BattleStarter.GetInstance().GetBattle();
-        if (GameManager.GetInstance().isTesting)
+        if (m_BattleData.id == null)
         {
             BattleStarter.GetInstance().InitBattle(null, "TestBattle");
             m_BattleData = BattleStarter.GetInstance().GetBattle();
