@@ -1,6 +1,7 @@
 {
 	"BattleAtFarm1":
 	{
+		"Location" : "ChickenFight",
 		"Enemy": 
 		[
 			"Bokalisk"
@@ -8,6 +9,7 @@
 	},
 	"BattleAtFarm2":
 	{
+		"Location" : "ChickenFight",
 		"Enemy": 
 		[
 			"Bokalisk",
@@ -16,6 +18,7 @@
 	},
 	"TestBattle":
 	{
+		"Location" : "RoadThugs",
 		"Enemy": 
 		[
 			"Skwatwolf"

@@ -35,6 +35,9 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField]
     private PanelManager m_PanelManager = null;
+
+    [SerializeField]
+    private SpriteRenderer m_LocationBackground = null;
     #endregion
 
     #region Interface
@@ -183,27 +186,26 @@ public class BattleSystem : MonoBehaviour
 
     private void ReturnToJourney()
     {
+        if (m_BattleData.id == "TestBattle")
+        {
+            SceneManager.LoadScene("DemoMainScene");
+            return;
+        }
+
         if (m_IsClassup)
         {
             m_PanelManager.UnloadAndLoadScene("Improve");
             return;
         }
 
-        if (m_BattleData.id == "TestBattle")
-        {
-            StartLocation("DemoMainScene");
-        }
-        else
-        {
-            m_PanelManager.UnloadScene();
-        }
+        m_PanelManager.UnloadScene();
     }
 
     private void ReturnToMainMenu()
     {
         if (m_BattleData.id == "TestBattle")
         {
-            StartLocation("DemoMainScene");
+            SceneManager.LoadScene("DemoMainScene");
         }
         else
         {
@@ -234,6 +236,8 @@ public class BattleSystem : MonoBehaviour
             BattleStarter.GetInstance().InitBattle(null, "TestBattle");
             m_BattleData = BattleStarter.GetInstance().GetBattle();
         }
+
+        m_LocationBackground.sprite = Resources.Load<Sprite>("Sprites/BattleSystem/Background/" + m_BattleData.locationBackground);
 
         for (int i = 0; i < m_BattleData.enemyList.Count; i++)
         {

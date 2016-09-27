@@ -47,6 +47,7 @@ public class BattleDataBase : Singleton<BattleDataBase>
         for (int i = 0; i < l_JSONObject.Count; i++)
         {
             string l_BattleId = l_JSONObject.keys[i];
+            string l_LocationBackground = l_JSONObject[i]["Location"].str;
             List<string> p_EnemyList = new List<string>();
             Dictionary<string, int> p_PlayerSettings = new Dictionary<string, int>();
 
@@ -62,7 +63,7 @@ public class BattleDataBase : Singleton<BattleDataBase>
                 }
             }
 
-            BattleData l_ImproveData = new BattleData(l_BattleId, p_EnemyList, p_PlayerSettings);
+            BattleData l_ImproveData = new BattleData(l_BattleId, l_LocationBackground, p_EnemyList, p_PlayerSettings);
             m_BattleBase.Add(l_BattleId, l_ImproveData);
         }
     }
