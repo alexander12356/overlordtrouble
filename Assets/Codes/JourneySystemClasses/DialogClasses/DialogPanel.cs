@@ -52,6 +52,12 @@ public class DialogPanel : Panel
     {
         base.UpdatePanel();
 
+        //TODO думать надо как от этого избавиться (см. задачу https://trello.com/c/bkpmIxhr/104-z)
+        if (moving)
+        {
+            return;
+        }
+
         m_TextBox.UpdateTextBox();
     }
     #endregion
