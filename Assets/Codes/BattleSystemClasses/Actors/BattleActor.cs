@@ -65,6 +65,14 @@ public class BattleActor : MonoBehaviour
     {
     }
 
+    public virtual void CheckDeath()
+    {
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
     public virtual void Die()
     {
         isDead = true;
@@ -77,10 +85,6 @@ public class BattleActor : MonoBehaviour
 
     public virtual void RunTurn()
     {
-        if (m_Health <= 0)
-        {
-            Die();
-        }
     }
 
     public virtual void EndTurn()

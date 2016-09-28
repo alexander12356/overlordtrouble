@@ -12,34 +12,38 @@
 		<Text id="0" avatarId="Bokalisk">Куд-кудах! Куд-кудах!</Text>
 		<Text id="1" avatarId="Bokalisk">Драка маза и факах!</Text>
 	</Dialog>
+	<Dialog id="Bokalisk1" avatarPath="Sprites/Creations/Bokalisk/Avatar">
+		<Text id="0" avatarId="Bokalisk">Куд-кудахи! Куд-кудахи!</Text>
+		<Text id="1" avatarId="Bokalisk">Грааа!!! Имя нам легион!!!</Text>
+	</Dialog>
   <Dialog id="StoreWelcome" avatarPath="Sprites/Creations/Store/Avatar">
-    <Text id="0">Добро пожаловать в мой скромный магазинчик. Хотите ли произвести покупку?</Text>
+	<Text id="0">Добро пожаловать в мой скромный магазинчик. Хотите ли произвести покупку?</Text>
   </Dialog>
   <Dialog id="StoreDialog" avatarPath="Sprites/Creations/Store/Avatar">
-    <Text id="0" avatarId="Store">Все мои товары отличаются большой прочностью и принадлежали храбрым воинам, которые вызвали в бой дракона</Text>
-    <Text id="1" avatarId="Store">Никто из них не выжил, в отличии от их экипировки</Text>
+	<Text id="0" avatarId="Store">Все мои товары отличаются большой прочностью и принадлежали храбрым воинам, которые вызвали в бой дракона</Text>
+	<Text id="1" avatarId="Store">Никто из них не выжил, в отличии от их экипировки</Text>
   </Dialog>
   <Dialog id="VillageElder" avatarPath="Sprites/Creations/VillageElder/Avatar">
-    <Text id="0" avatarId="VillageElder">Добрый день уважаемый</Text>
-    <Text id="1" avatarId="VillageElder">Я староста этой деревни</Text>
+	<Text id="0" avatarId="VillageElder">Добрый день уважаемый</Text>
+	<Text id="1" avatarId="VillageElder">Я староста этой деревни</Text>
 	<Text id="2" avatarId="VillageElder">Счастливого дня</Text>
   </Dialog>
   <Dialog id="GoatPerson" avatarPath="Sprites/Creations/GoatPerson/Avatar">
-    <Text id="0" avatarId="GoatPerson">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
-    <Text id="1" avatarId="GoatPerson">Но сегодня до меня дошла мысль, что если наполнить ведра ровно до половины я смогу нести два ведра одновременно.</Text>
+	<Text id="0" avatarId="GoatPerson">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
+	<Text id="1" avatarId="GoatPerson">Но сегодня до меня дошла мысль, что если наполнить ведра ровно до половины я смогу нести два ведра одновременно.</Text>
 	<Text id="2" avatarId="GoatPerson">Разве я не гений?</Text>
   </Dialog>
   <Dialog id="Terner" avatarPath="Sprites/Creations/Terner/Avatar">
-    <Text id="0" avatarId="GoatPerson">Привет.</Text>
+	<Text id="0" avatarId="GoatPerson">Привет.</Text>
   </Dialog>
   <Dialog id="VillageFountain" avatarPath="">
-    <Text id="0" avatarId="GoatPerson">Колодец... полон воды… ее можно пить.</Text>
+	<Text id="0" avatarId="GoatPerson">Колодец... полон воды… ее можно пить.</Text>
   </Dialog>
   <Dialog id="GiantCock" avatarPath="Sprites/Creations/GiantCock/Avatar">
-    <Text id="0" avatarId="GoatPerson">...</Text>
+	<Text id="0" avatarId="GoatPerson">...</Text>
 	<Text id="1" avatarId="GoatPerson">*Он спит*</Text>
   </Dialog>
   <Dialog id="Uniceros" avatarPath="Sprites/Creations/Uniceros/Avatar">
-    <Text id="0" avatarId="GoatPerson">Пьинь?</Text>
+	<Text id="0" avatarId="GoatPerson">Пьинь?</Text>
   </Dialog>
 </DialogList>

@@ -65,8 +65,10 @@ public class BattleEnemy : BattleActor
         m_Animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Sprites/Creations/" + m_EnemyData.id + "/" + m_EnemyData.id + "BattleAnimator");
     }
 
-    public void Run()
+    public override void RunTurn()
     {
+        base.RunTurn();
+
         Attack(BattlePlayer.GetInstance());
     }
 
@@ -76,7 +78,7 @@ public class BattleEnemy : BattleActor
 
         health -= p_DamageValue;
     }
-
+    
     public override void Attack(BattleActor p_Actor)
     {
         base.Attack(p_Actor);
@@ -119,11 +121,6 @@ public class BattleEnemy : BattleActor
     public void PlayHitSound()
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_EnemyData.id + "_Hit"));
-    }
-
-    public void Destroy()
-    {
-        GameObject.Destroy(gameObject);
     }
     #endregion
 

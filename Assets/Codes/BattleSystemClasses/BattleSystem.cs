@@ -16,13 +16,14 @@ public class BattleSystem : MonoBehaviour
     private static BattleSystem m_Instance;
     private BattlePlayer m_Player;
     private List<BattleEnemy>  m_EnemyList = new List<BattleEnemy>();
-    private bool m_IsPlayerTurn = true;
-    private int m_CurrentEnemyNumber = 0;
     private BattleData m_BattleData;
     private int m_Experience = 0;
     private string m_LevelupNotificationText = string.Empty;
     private string m_ClassupNotificationText = string.Empty;
     private bool m_IsClassup = false;
+    private int m_CurrentTurn = -1;
+    private bool m_IsWin = false;
+    private bool m_IsLose = false;
 
     [SerializeField]
     private Transform m_MainPanelTransform = null;
@@ -77,9 +78,24 @@ public class BattleSystem : MonoBehaviour
 
     public void EndTurn()
     {
-        m_IsPlayerTurn = !m_IsPlayerTurn;
+        if (m_EnemyList.Count == 0)
+        {
+            Win();
+            return;
+        }
 
-        if (m_IsPlayerTurn)
+        if (m_IsLose)
+        {
+            return;
+        }
+
+        m_CurrentTurn++;
+        if (m_CurrentTurn >= m_EnemyList.Count)
+        {
+            m_CurrentTurn = -1;
+        }
+
+        if (m_CurrentTurn == -1)
         {
             SetVisibleAvatarPanel(true);
             BattlePlayer.GetInstance().RunTurn();
@@ -87,15 +103,7 @@ public class BattleSystem : MonoBehaviour
         else
         {
             SetVisibleAvatarPanel(false);
-
-            BattleEnemy l_NextEnemy = GetNextEnemy();
-            l_NextEnemy.RunTurn();
-            //  Запуск ИИ
-            if (!l_NextEnemy.isDead)
-            {
-                BattlePlayer.GetInstance().RunTurn();
-                l_NextEnemy.Run();
-            }
+            m_EnemyList[m_CurrentTurn].RunTurn();
         }
     }
 
@@ -112,11 +120,6 @@ public class BattleSystem : MonoBehaviour
     public void EnemyDied(BattleEnemy p_BattleEnemy)
     {
         m_EnemyList.Remove(p_BattleEnemy);
-
-        if (m_EnemyList.Count == 0)
-        {
-            Win();
-        }
     }
 
     public void PlayerDied()
@@ -155,6 +158,7 @@ public class BattleSystem : MonoBehaviour
     #region Private
     private void Win()
     {
+        m_IsWin = true;
         SetVisibleAvatarPanel(false);
 
         List<string> l_WinText = new List<string>();
@@ -178,7 +182,9 @@ public class BattleSystem : MonoBehaviour
 
     private void Lose()
     {
+        m_IsLose = true;
         SetVisibleAvatarPanel(false);
+
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "У ГГ больше нету сил сражаться далее, ГГ потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли." });
         l_TextPanel.AddButtonAction(ReturnToMainMenu);
@@ -219,15 +225,6 @@ public class BattleSystem : MonoBehaviour
     {
         MainPanel l_MainPanel = Instantiate(MainPanel.prefab);
         ShowPanel(l_MainPanel);
-    }
-
-    private BattleEnemy GetNextEnemy()
-    {
-        if (m_CurrentEnemyNumber >= m_EnemyList.Count)
-        {
-            m_CurrentEnemyNumber = 0;
-        }
-        return m_EnemyList[m_CurrentEnemyNumber];
     }
 
     private void InitBattle()

@@ -14,6 +14,8 @@ public class BattlePlayer : BattleActor
     private Text m_SpecialText = null;
     private Image m_HealthPointBar = null;
     private Image m_SpecialPointBar = null;
+    private TextPanel m_TextPanel = null;
+    private BattleActor m_AttackTarget = null;
     #endregion
 
     #region Interface
@@ -28,15 +30,15 @@ public class BattlePlayer : BattleActor
 
         int l_Damage = Random.Range(m_AttackValue[0], m_AttackValue[1]);
 
+        m_AttackTarget = p_Actor;
         p_Actor.Damage(l_Damage);
         AttackEffectsSystem.GetInstance().AddEffect((BattleEnemy)p_Actor, "Player_BaseAttack");
         AttackEffectsSystem.GetInstance().PlayEffects();
 
-        TextPanel l_NewTextPanel = Instantiate(TextPanel.prefab);
-        l_NewTextPanel.SetText(new List<string>() { "Игрок нанес " + l_Damage + " урона врагу" });
-        l_NewTextPanel.AddButtonAction(l_NewTextPanel.Close);
-        l_NewTextPanel.AddButtonAction(EndTurn);
-        BattleSystem.GetInstance().ShowPanel(l_NewTextPanel);
+        m_TextPanel = Instantiate(TextPanel.prefab);
+        m_TextPanel.SetText(new List<string>() { "Игрок нанес " + l_Damage + " урона врагу" });
+        m_TextPanel.AddButtonAction(CloseTextPanel);
+        BattleSystem.GetInstance().ShowPanel(m_TextPanel);
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 
@@ -45,11 +47,18 @@ public class BattlePlayer : BattleActor
         base.Damage(p_DamageValue);
 
         health -= p_DamageValue;
+
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
     //TODO отрефакторить
     public void SpecialAttack(BattleEnemy p_Enemy, List<SpecialUpgradeIcon> p_SpecialUpgradeIconList)
     {
+        m_AttackTarget = p_Enemy;
+
         int l_BrokenSpecialCount = 0;
         int l_UnbuffedSpecialCount = 0;
 
@@ -120,11 +129,10 @@ public class BattlePlayer : BattleActor
 
         p_Enemy.Damage(l_DamageValue);
 
-        TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { l_Text });
-        l_TextPanel.AddButtonAction(l_TextPanel.Close);
-        l_TextPanel.AddButtonAction(EndTurn);
-        BattleSystem.GetInstance().ShowPanel(l_TextPanel);
+        m_TextPanel = Instantiate(TextPanel.prefab);
+        m_TextPanel.SetText(new List<string>() { l_Text });
+        m_TextPanel.AddButtonAction(CloseTextPanel);
+        BattleSystem.GetInstance().ShowPanel(m_TextPanel);
 
         AttackEffectsSystem.GetInstance().PlayEffects();
 
@@ -198,6 +206,16 @@ public class BattlePlayer : BattleActor
         m_HealthPointBar  = transform.FindChild("HealthBar").GetComponent<Image>();
         m_SpecialText     = transform.FindChild("SpecialText").GetComponent<Text>();
         m_SpecialPointBar = transform.FindChild("SpecialBar").GetComponent<Image>();
+    }
+
+    private void CloseTextPanel()
+    {
+        if (AttackEffectsSystem.GetInstance().IsAllAnimationEnd())
+        {
+            m_AttackTarget.CheckDeath();
+            m_TextPanel.Close();
+            EndTurn();
+        }
     }
     #endregion
 }

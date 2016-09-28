@@ -45,6 +45,11 @@ public class AttackEffectsSystem : MonoBehaviour
         PlayNextEffect();
     }
 
+    public bool IsAllAnimationEnd()
+    {
+        return m_AttackEffectList.Count == 0;
+    }
+
     private void PlayNextEffect()
     {
         m_CurrentEffect++;

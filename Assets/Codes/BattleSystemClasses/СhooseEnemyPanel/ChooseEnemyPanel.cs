@@ -78,13 +78,6 @@ public class ChooseEnemyPanel : Panel
         }
     }
 
-    public override void PopAction()
-    {
-        base.PopAction();
-
-        m_EnemyList[m_EnemyButtonList.currentButtonId].selected = false;
-    }
-
     public void AddChoosedAction(PanelActionHandler p_Action)
     {
         m_ConfirmAction += p_Action;
@@ -170,6 +163,7 @@ public class ChooseEnemyPanel : Panel
 
     private void Confirm()
     {
+        m_EnemyList[m_EnemyButtonList.currentButtonId].selected = false;
         ChoosedAction();
     }
 
