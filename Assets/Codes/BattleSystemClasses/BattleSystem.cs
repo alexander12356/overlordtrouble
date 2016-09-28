@@ -75,19 +75,6 @@ public class BattleSystem : MonoBehaviour
         InitStartPanel();
     }
 
-    public void Died(ActorID p_ActorID)
-    {
-        switch (p_ActorID)
-        {
-            case ActorID.Player:
-                Lose();
-                break;
-            case ActorID.Enemy:
-                Win();
-                break;
-        }
-    }
-
     public void EndTurn()
     {
         m_IsPlayerTurn = !m_IsPlayerTurn;
@@ -120,6 +107,21 @@ public class BattleSystem : MonoBehaviour
     public List<BattleEnemy> GetEnemyList()
     {
         return m_EnemyList;
+    }
+
+    public void EnemyDied(BattleEnemy p_BattleEnemy)
+    {
+        m_EnemyList.Remove(p_BattleEnemy);
+
+        if (m_EnemyList.Count == 0)
+        {
+            Win();
+        }
+    }
+
+    public void PlayerDied()
+    {
+        Lose();
     }
 
     public void Retreat()
@@ -244,7 +246,13 @@ public class BattleSystem : MonoBehaviour
             BattleEnemy l_NewEnemy = Instantiate(BattleEnemy.prefab);
             l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy(m_BattleData.enemyList[i]));
             l_NewEnemy.transform.SetParent(m_EnemyTransform);
-            l_NewEnemy.transform.localPosition = Vector3.zero;
+
+            float l_X = 2.25f * (m_BattleData.enemyList.Count - 1);
+            l_X = -l_X + (l_X * i);
+            Vector3 l_LocalPosition = Vector3.zero;
+            l_LocalPosition.x = l_X;
+            l_NewEnemy.transform.localPosition = l_LocalPosition;
+
             m_EnemyList.Add(l_NewEnemy);
         }
 

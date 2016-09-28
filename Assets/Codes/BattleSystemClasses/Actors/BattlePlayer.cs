@@ -131,11 +131,11 @@ public class BattlePlayer : BattleActor
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 
-    public override void Died()
+    public override void Die()
     {
-        base.Died();
+        base.Die();
 
-        BattleSystem.GetInstance().Died(BattleSystem.ActorID.Player);
+        BattleSystem.GetInstance().PlayerDied();
     }
 
     public override void InitStats()

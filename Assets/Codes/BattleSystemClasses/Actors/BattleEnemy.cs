@@ -99,17 +99,31 @@ public class BattleEnemy : BattleActor
         BattleSystem.GetInstance().ShowPanel(l_TextPanel);
     }
 
+    public override void Die()
+    {
+        base.Die();
+
+        BattleSystem.GetInstance().AddExperience(m_EnemyData.experience);
+        BattleSystem.GetInstance().EnemyDied(this);
+        m_Animator.SetTrigger("Die");
+    }
+
+    // Called from Animation
     public override void Died()
     {
         base.Died();
 
-        BattleSystem.GetInstance().AddExperience(m_EnemyData.experience);
-        BattleSystem.GetInstance().Died(BattleSystem.ActorID.Enemy);
+        Destroy(gameObject);
     }
 
     public void PlayHitSound()
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_EnemyData.id + "_Hit"));
+    }
+
+    public void Destroy()
+    {
+        GameObject.Destroy(gameObject);
     }
     #endregion
 

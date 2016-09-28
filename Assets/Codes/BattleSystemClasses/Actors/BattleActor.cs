@@ -65,16 +65,21 @@ public class BattleActor : MonoBehaviour
     {
     }
 
-    public virtual void Died()
+    public virtual void Die()
     {
         isDead = true;
+    }
+
+    public virtual void Died()
+    {
+
     }
 
     public virtual void RunTurn()
     {
         if (m_Health <= 0)
         {
-            Died();
+            Die();
         }
     }
 
