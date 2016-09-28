@@ -45,9 +45,10 @@ public class SkillDataBase : Singleton<SkillDataBase>
             string l_SkillId = l_JSONObject.keys[i];
             float l_Attack = l_JSONObject[i]["Attack"].f;
             float l_Mana = l_JSONObject[i]["Mana"].f;
+            string l_Element = l_JSONObject[i]["Element"].str;
             string l_DescriptionId = l_JSONObject[i]["DescriptionId"].str;
 
-            SkillData l_SkillData = new SkillData(l_SkillId, l_Attack, l_Mana, l_DescriptionId);
+            SkillData l_SkillData = new SkillData(l_SkillId, l_Attack, l_Mana, l_Element, l_DescriptionId);
             m_SkillDictionary.Add(l_SkillId, l_SkillData);
         }
     }

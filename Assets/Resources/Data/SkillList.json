@@ -3,54 +3,21 @@
 	{
 		"Attack" : 2,
 		"Mana" : 1.0,
+		"Element" : "Water",
 		"DescriptionId" : ""
 	},
 	"Slap" :
 	{
 		"Attack" : 3,
 		"Mana" : 5.0,
-		"DescriptionId" : ""
-	},
-	"ProtectiveCoat" :
-	{
-		"Attack" : 1.0f,
-		"Mana" : 5.0,
-		"DescriptionId" : ""
-	},
-	"Strike" :
-	{
-		"Attack" : 3.5,
-		"Mana" : 5.0,
-		"DescriptionId" : ""
-	},
-	"Defense" :
-	{
-		"Attack" : 3.5,
-		"Mana" : 5.0,
+		"Element" : "Water",
 		"DescriptionId" : ""
 	},
 	"TailWhap" :
 	{
 		"Attack" : 3.5,
 		"Mana" : 5.0,
-		"DescriptionId" : ""
-	},
-	"ShellDefense" :
-	{
-		"Attack" : 3.5,
-		"Mana" : 5.0,
-		"DescriptionId" : ""
-	},
-	"BlobeStrike" :
-	{
-		"Attack" : 3.5,
-		"Mana" : 5.0,
-		"DescriptionId" : ""
-	},
-	"HealingWater" :
-	{
-		"Attack" : 3.5,
-		"Mana" : 5.0,
+		"Element" : "Earth",
 		"DescriptionId" : ""
 	}
 }
