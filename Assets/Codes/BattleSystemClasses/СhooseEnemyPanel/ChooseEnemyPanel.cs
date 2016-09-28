@@ -148,6 +148,7 @@ public class ChooseEnemyPanel : Panel
         }
         else
         {
+            m_EnemyList[m_EnemyButtonList.currentButtonId].selected = false;
             CancelAction();
             Close();
         }

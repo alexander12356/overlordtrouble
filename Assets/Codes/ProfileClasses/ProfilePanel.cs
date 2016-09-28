@@ -224,6 +224,17 @@ public class ProfilePanel : Panel
         {
             PanelButtonStat l_PanelButtonStat = (PanelButtonStat)m_StatsButtonList[i];
             l_PanelButtonStat.ConfirmAddedStatValue();
+            
+            switch (l_PanelButtonStat.statId)
+            {
+                case "HealthPoints":
+                    PlayerData.GetInstance().health += l_PanelButtonStat.statValue - PlayerData.GetInstance().GetStats()[l_PanelButtonStat.statId];
+                    break;
+                case "MonstylePoints":
+                    PlayerData.GetInstance().monstylePoints += l_PanelButtonStat.statValue - PlayerData.GetInstance().GetStats()[l_PanelButtonStat.statId];
+                    break;
+            }
+
             PlayerData.GetInstance().GetStats()[l_PanelButtonStat.statId] = l_PanelButtonStat.statValue;
         }
         if (m_StatImprovePoints == 0)
