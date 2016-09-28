@@ -265,7 +265,7 @@ public class BattleSystem : MonoBehaviour
     private void LevelupNotification()
     {
         string l_LevelText = (PlayerData.GetInstance().GetLevel() + 1).ToString();
-        m_LevelupNotificationText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Levelup", l_LevelText);
+        m_LevelupNotificationText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Levelup", new string[] { l_LevelText });
     }
 
     private void ClassupNotification()

@@ -49,9 +49,19 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
             string l_ImproveId = l_JSONObject.keys[i];
             float  l_Health = l_JSONObject[i]["Health"].f;
             int l_Experience = (int)l_JSONObject[i]["Experience"].i;
-            List<int> l_DamageValue = new List<int>() { (int)l_JSONObject[i]["DamageValue"][0].i, (int)l_JSONObject[i]["DamageValue"][1].i };
 
-            EnemyData l_ImproveData = new EnemyData(l_ImproveId, l_Health, l_Experience, l_DamageValue);
+            List<EnemyAttackData> l_AttackList = new List<EnemyAttackData>();
+            for (int j = 0; j < l_JSONObject[i]["Attacks"].Count; j++)
+            {
+                string l_AttackId = l_JSONObject[i]["Attacks"][j]["Id"].str;
+                int l_Temp1 = (int)l_JSONObject[i]["Attacks"][j]["DamageValue"][0].i;
+                List<int> l_AttackValue = new List<int>() { (int)l_JSONObject[i]["Attacks"][j]["DamageValue"][0].i, (int)l_JSONObject[i]["Attacks"][j]["DamageValue"][1].i };
+
+                EnemyAttackData l_EnemyAttack = new EnemyAttackData(l_AttackId, l_AttackValue);
+                l_AttackList.Add(l_EnemyAttack);
+            }
+
+            EnemyData l_ImproveData = new EnemyData(l_ImproveId, l_Health, l_Experience, l_AttackList);
             m_EnemyBase.Add(l_ImproveId, l_ImproveData);
         }
     }

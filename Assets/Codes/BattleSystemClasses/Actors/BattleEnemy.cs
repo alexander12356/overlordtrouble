@@ -5,13 +5,13 @@ public class BattleEnemy : BattleActor
 {
     #region Variables
     private static BattleEnemy m_Prefab = null;
-    private int[] m_DamageValue = new int[2];
     private Animator m_Animator = null;
     private AudioSource m_AudioSource = null;
     private EnemyData m_EnemyData;
     private bool m_Selected = false;
     private SpriteRenderer m_SelectedArrow = null;
     private SpriteRenderer m_Renderer = null;
+    private List<EnemyAttackData> m_AttackList = null;
     #endregion
 
     #region Interface
@@ -60,8 +60,9 @@ public class BattleEnemy : BattleActor
         actorName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id);
         health = baseHealth = m_EnemyData.health;
         mana = baseMana = 0;
-        m_DamageValue = m_EnemyData.damageValue.ToArray();
+        m_AttackList = m_EnemyData.attackList;
         m_Renderer.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_EnemyData.id + "/BattleProfile");
+        m_Animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Sprites/Creations/" + m_EnemyData.id + "/" + m_EnemyData.id + "BattleAnimator");
     }
 
     public void Run()
@@ -80,16 +81,22 @@ public class BattleEnemy : BattleActor
     {
         base.Attack(p_Actor);
 
-        float l_DamageValue = Random.Range(m_DamageValue[0], m_DamageValue[1]);
-        p_Actor.Damage(l_DamageValue);
+        EnemyAttackData l_AttackData = m_EnemyData.attackList[Random.Range(0, m_EnemyData.attackList.Count)];
+        float l_Damage = Random.Range(l_AttackData.damageValue[0], l_AttackData.damageValue[1]);
+        string l_EnemyName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id);
+        string l_AttackName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id + ":" + l_AttackData.id);
+        string l_AttackText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EnemyAttack", new string[] { l_EnemyName, l_AttackName, l_Damage.ToString() });
+
+        p_Actor.Damage(l_Damage);
+        m_Animator.SetTrigger(l_AttackData.id);
+        //TODO добавить возможность разных звуков
+        m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_EnemyData.id + "_Attack"));
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { actorName + " использовал удар и нанес " + l_DamageValue + " урона" });
+        l_TextPanel.SetText(new List<string>() { l_AttackText });
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
         l_TextPanel.AddButtonAction(EndTurn);
         BattleSystem.GetInstance().ShowPanel(l_TextPanel);
-
-        m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_EnemyData.id + "_Attack"));
     }
 
     public override void Died()

@@ -3,20 +3,40 @@
 	{
 		"Health" : 30,
 		"Experience" : 50,
-		"DamageValue" : 
+		"Attacks" :
 		[
-			5,
-			8
+			{
+				"Id" : "BladesAttack",
+				"DamageValue" : 
+				[
+					3,
+					6
+				]
+			},
+			{
+				"Id" : "Racket",
+				"DamageValue" : 
+				[
+					7,
+					10
+				]
+			}
 		]
 	},
 	"Bokalisk":
 	{
 		"Health" : 10,
 		"Experience" : 15,
-		"DamageValue" :
+		"Attacks" :
 		[
-			2,
-			4
+			{
+				"Id" : "PeckerAttack",
+				"DamageValue" :
+				[
+					2,
+					4
+				]
+			}
 		]
 	}
 }

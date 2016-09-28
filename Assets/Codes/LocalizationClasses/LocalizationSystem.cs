@@ -27,7 +27,7 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
         return m_Texts[p_Id];
     }
 
-    public string GetText(string p_Id, string p_Value)
+    public string GetText(string p_Id, string[] p_Value)
     {
         if (!m_Texts.ContainsKey(p_Id))
         {
@@ -37,7 +37,13 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
 
         string l_Text = m_Texts[p_Id];
 
-        l_Text = l_Text.Replace("%d", p_Value);
+        for (int i = 0; i < p_Value.Length; i++)
+        {
+            int l_Index = l_Text.IndexOf("%d");
+            l_Text = l_Text.Remove(l_Index, 2);
+            l_Text = l_Text.Insert(l_Index, p_Value[i]);
+        }
+
         return l_Text;
     }
     #endregion
