@@ -18,11 +18,9 @@ public class BattleSystem : MonoBehaviour
     private List<BattleEnemy>  m_EnemyList = new List<BattleEnemy>();
     private BattleData m_BattleData;
     private int m_Experience = 0;
-    private string m_LevelupNotificationText = string.Empty;
-    private string m_ClassupNotificationText = string.Empty;
     private bool m_IsClassup = false;
     private int m_CurrentTurn = -1;
-    private bool m_IsWin = false;
+    private bool m_IsLevelup = false;
     private bool m_IsLose = false;
 
     [SerializeField]
@@ -158,18 +156,20 @@ public class BattleSystem : MonoBehaviour
     #region Private
     private void Win()
     {
-        m_IsWin = true;
         SetVisibleAvatarPanel(false);
 
         List<string> l_WinText = new List<string>();
         l_WinText.Add("Враги убиты.\nВы победили.\nГГ получает " + m_Experience + " exp");
-        if (m_LevelupNotificationText != string.Empty)
+        if (m_IsLevelup)
         {
-            l_WinText.Add(m_LevelupNotificationText);
+            string l_LevelText = (PlayerData.GetInstance().GetLevel() + 1).ToString();
+            string l_LevelupNotificationText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Levelup", new string[] { l_LevelText });
+            l_WinText.Add(l_LevelupNotificationText);
         }
-        if (m_ClassupNotificationText != string.Empty)
+        if (m_IsClassup)
         {
-            l_WinText.Add(m_ClassupNotificationText);
+            string l_ClassupNotificationText = PlayerData.GetInstance().GetPlayerName() + " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Classup");
+            l_WinText.Add(l_ClassupNotificationText);
         }
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
@@ -269,14 +269,12 @@ public class BattleSystem : MonoBehaviour
 
     private void LevelupNotification()
     {
-        string l_LevelText = (PlayerData.GetInstance().GetLevel() + 1).ToString();
-        m_LevelupNotificationText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Levelup", new string[] { l_LevelText });
+        m_IsLevelup = true;
     }
 
     private void ClassupNotification()
     {
         m_IsClassup = true;
-        m_ClassupNotificationText = PlayerData.GetInstance().GetPlayerName() + " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Classup");
     }
     #endregion
 }
