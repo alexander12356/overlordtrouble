@@ -17,14 +17,13 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
     {
         base.EnterAction(p_JourneyActor);
 
-        if (m_JourneyPlayer == null)
-        {
-            m_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
-            if (m_JourneyPlayer.isFreeForActions)
-            {    
-                m_JourneyPlayer.AddActiveButtonAction(StartDialog);
-                m_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
-            }
+        m_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
+        //m_JourneyActor.spriteRenderer.color = Color.blue;
+        if (m_JourneyPlayer.isFreeForActions)
+        { 
+            //m_JourneyActor.spriteRenderer.color = Color.red;
+            m_JourneyPlayer.AddActiveButtonAction(StartDialog);
+            m_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
         }
     }
 
@@ -92,7 +91,7 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
             m_JourneyPlayer.RemoveDisactiveButtonAction(EndDialog);
             m_JourneyPlayer = null;
 
-            //m_JourneyActor.StartLogic();
+            //m_JourneyActor.spriteRenderer.color = Color.white;
         }
     }
 }

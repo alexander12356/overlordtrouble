@@ -54,6 +54,10 @@ public class JourneyActor : MonoBehaviour
     {
         get { return m_PivotTransform; }
     }
+    public SpriteRenderer spriteRenderer
+    {
+        get { return m_SpriteRenderer; }
+    }
 
     public virtual void Awake()
     {
