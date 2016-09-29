@@ -10,6 +10,11 @@ public class JourneyPlayer : JourneyActor
 
     public event ButtonHandler m_ActiveButtonAction;
     public event ButtonHandler m_DisactiveButtonAction;
+
+    public bool isFreeForActions
+    {
+        get { return m_ActiveButtonAction == null; }
+    }
     #endregion
 
     #region Interface

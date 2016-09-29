@@ -20,10 +20,11 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
         if (m_JourneyPlayer == null)
         {
             m_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
-            m_JourneyPlayer.AddActiveButtonAction(StartDialog);
-            m_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
-
-            //m_JourneyActor.StopLogic();
+            if (m_JourneyPlayer.isFreeForActions)
+            {    
+                m_JourneyPlayer.AddActiveButtonAction(StartDialog);
+                m_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
+            }
         }
     }
 
