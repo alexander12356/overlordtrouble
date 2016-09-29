@@ -177,6 +177,7 @@ public class BattlePlayer : BattleActor
         base.ChangeManaValue();
 
         m_SpecialText.text = "MP: " + mana + "/" + baseMana;
+        PlayerData.GetInstance().monstylePoints = (int)mana;
 
         Vector3 l_BarScale = m_SpecialPointBar.transform.localScale;
         l_BarScale.x = mana / baseMana;
