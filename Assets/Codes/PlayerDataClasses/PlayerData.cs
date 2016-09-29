@@ -58,6 +58,7 @@ public class PlayerData : Singleton<PlayerData>
 
     public void ResetData()
     {
+        Reset();
         m_PlayerStat.ResetData();
         m_PlayerSkills.ResetData();
         m_PlayerEnchancement.ResetData();
@@ -289,6 +290,23 @@ public class PlayerData : Singleton<PlayerData>
             m_ClassupNotification();
             m_ClassupNotification = null;
         }
+    }
+
+    private void Reset()
+    {
+        m_PlayerName = "";
+        m_AttackValue = new int[2];
+        m_Level = 0;
+        m_Class = 0;
+        m_Experience = 0;
+        m_ClassImprovePoints = 0;
+        m_StatImprovePoints = 0;
+        m_HealthPoints = 0;
+        m_MonstylePoints = 0;
+        m_Levelup = new List<int>();
+        m_Classup = new List<int>();
+        m_LevelupNotification = null;
+        m_ClassupNotification = null;
     }
     #endregion
 }
