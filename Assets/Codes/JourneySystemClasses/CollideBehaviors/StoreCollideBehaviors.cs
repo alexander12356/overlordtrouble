@@ -1,24 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StoreCollideBehaviors : BaseCollideBehaviors
+public class StoreCollideBehaviors : BaseCollideBehavior
 {
-    public override void EnterAction(JourneyActor p_JourneyActor)
+    public override void RunAction(JourneyActor p_Sender)
     {
-        base.EnterAction(p_JourneyActor);
+        base.RunAction(p_Sender);
 
-        JourneyPlayer l_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
-        l_JourneyPlayer.AddActiveButtonAction(OpenStore);
-        l_JourneyPlayer.AddDisactiveButtonAction(CloseStore);
+        OpenStore();
     }
 
-    public override void ExitAction(JourneyActor p_JourneyActor)
+    public override void StopAction()
     {
-        base.ExitAction(p_JourneyActor);
+        base.StopAction();
 
-        JourneyPlayer l_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
-        l_JourneyPlayer.RemoveActiveButtonAction(OpenStore);
-        l_JourneyPlayer.RemoveDisactiveButtonAction(CloseStore);
+        CloseStore();
     }
 
     private void OpenStore()

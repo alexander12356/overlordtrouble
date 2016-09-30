@@ -2,58 +2,40 @@
 
 using System;
 
-public class DialogCollideBehaviors : BaseCollideBehaviors
+public class DialogCollideBehaviors : BaseCollideBehavior
 {
     [SerializeField]
     private string m_DialogId = string.Empty;
-    private JourneyPlayer m_JourneyPlayer = null;
 
     public override void Awake()
     {
         base.Awake();
     }
 
-    public override void EnterAction(JourneyActor p_JourneyActor)
+    public override void RunAction(JourneyActor p_Sender)
     {
-        base.EnterAction(p_JourneyActor);
+        base.RunAction(p_Sender);
 
-        m_JourneyPlayer = (JourneyPlayer)p_JourneyActor;
-        //m_JourneyActor.spriteRenderer.color = Color.blue;
-        if (m_JourneyPlayer.isFreeForActions)
-        { 
-            //m_JourneyActor.spriteRenderer.color = Color.red;
-            m_JourneyPlayer.AddActiveButtonAction(StartDialog);
-            m_JourneyPlayer.AddDisactiveButtonAction(EndDialog);
-        }
-    }
-
-    public override void ExitAction(JourneyActor p_JourneyActor)
-    {
-        base.ExitAction(p_JourneyActor);
-
-        ClearActions();
-    }
-
-    public virtual void EndDialog()
-    {
-        m_JourneyActor.StartLogic();
-    }    
-
-    private void StartDialog()
-    {
-        if (m_JourneyPlayer.direction != GetMyObjectSide())
+        if (p_Sender.direction != GetMyObjectSide(p_Sender))
         {
             return;
         }
 
         JourneySystem.GetInstance().StartDialog(m_DialogId);
-        m_JourneyActor.ApplyTo(m_JourneyPlayer.myTransform.position);
+        m_JourneyActor.ApplyTo(p_Sender.myTransform.position);
         m_JourneyActor.StopLogic();
     }
 
-    private ActorDirection GetMyObjectSide()
+    public override void StopAction()
     {
-        Vector2 l_Position = m_JourneyPlayer.pivotTransform.position;
+        base.StopAction();
+
+        m_JourneyActor.StartLogic();
+    }
+
+    private ActorDirection GetMyObjectSide(JourneyActor p_OtherActor)
+    {
+        Vector2 l_Position = p_OtherActor.pivotTransform.position;
         Vector2 l_ThisPosition = m_JourneyActor.pivotTransform.position; 
         double l_Angle = Math.Atan2(l_Position.y - l_ThisPosition.y, l_Position.x - l_ThisPosition.x) / Math.PI * 180;
         l_Angle = (l_Angle < 0) ? l_Angle + 360 : l_Angle;
@@ -76,22 +58,5 @@ public class DialogCollideBehaviors : BaseCollideBehaviors
         }
 
         return ActorDirection.NONE;
-    }
-
-    private void OnDestroy()
-    {
-        ClearActions();
-    }
-
-    private void ClearActions()
-    {
-        if (m_JourneyPlayer)
-        {
-            m_JourneyPlayer.RemoveActiveButtonAction(StartDialog);
-            m_JourneyPlayer.RemoveDisactiveButtonAction(EndDialog);
-            m_JourneyPlayer = null;
-
-            //m_JourneyActor.spriteRenderer.color = Color.white;
-        }
     }
 }

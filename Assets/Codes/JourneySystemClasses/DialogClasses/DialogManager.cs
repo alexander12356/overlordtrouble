@@ -30,6 +30,6 @@ public class DialogManager : MonoBehaviour
     public void EndDialog()
     {
         JourneySystem.GetInstance().SetControl(ControlType.Player);
-        m_JourneyPlayer.DisactiveButtonAction();
+        m_JourneyPlayer.PressDisactiveButtonAction();
     }
 }

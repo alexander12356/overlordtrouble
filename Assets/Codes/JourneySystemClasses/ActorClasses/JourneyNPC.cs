@@ -4,8 +4,6 @@ using System;
 public class JourneyNPC : JourneyActor
 {
     #region Variables
-    private CheckCollide     m_CheckCollide    = null;
-    private BaseCollideBehaviors m_BaseCollideBehaviors = null;
     private BaseMovement m_BaseMovement = null;
 
     [SerializeField]
@@ -21,12 +19,6 @@ public class JourneyNPC : JourneyActor
     public override void Awake()
     {
         base.Awake();
-
-        m_BaseCollideBehaviors = GetComponent<BaseCollideBehaviors>();
-        m_CheckCollide = GetComponentInChildren<CheckCollide>();
-
-        m_CheckCollide.AddCollideEnterAction(m_BaseCollideBehaviors.EnterAction);
-        m_CheckCollide.AddCollideExitAction(m_BaseCollideBehaviors.ExitAction);
 
         m_BaseMovement = GetComponent<BaseMovement>();
         if (!m_BaseMovement)

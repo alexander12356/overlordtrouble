@@ -24,12 +24,14 @@ public class JourneySystem : MonoBehaviour
     {
         get { return m_PanelManager; }
     }
-
+    public JourneyPlayer player
+    {
+        get { return m_Player; }
+    }
     public static JourneySystem GetInstance()
     {
         return m_Instance;
     }
-
     public static bool IsInstance()
     {
         if (m_Instance == null)

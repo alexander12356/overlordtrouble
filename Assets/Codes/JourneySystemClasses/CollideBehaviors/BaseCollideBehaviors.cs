@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class BaseCollideBehaviors : MonoBehaviour
+public class BaseCollideBehavior : MonoBehaviour
 {
     protected JourneyActor m_JourneyActor = null;
 
@@ -11,11 +11,11 @@ public class BaseCollideBehaviors : MonoBehaviour
         m_JourneyActor = GetComponent<JourneyActor>();
     }
 
-    public virtual void EnterAction(JourneyActor p_JourneyActor)
+    public virtual void RunAction(JourneyActor p_Sender)
     {
     }
 
-    public virtual void ExitAction(JourneyActor p_JourneyActor)
+    public virtual void StopAction()
     {
     }
 }

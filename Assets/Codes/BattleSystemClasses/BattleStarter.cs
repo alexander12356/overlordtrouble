@@ -21,6 +21,7 @@ public class BattleStarter : Singleton<BattleStarter>
     {
         if (m_BattleData.id != "TestBattle")
         {
+            JourneySystem.GetInstance().player.RemoveCollideActor(m_Enemy);
             Object.Destroy(m_Enemy.gameObject);
             JourneySystem.GetInstance().SetControl(ControlType.Player);
         }

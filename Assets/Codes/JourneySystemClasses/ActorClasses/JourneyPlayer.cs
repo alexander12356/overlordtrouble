@@ -1,20 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using System.Collections.Generic;
+
 public delegate void ButtonHandler();
 public class JourneyPlayer : JourneyActor
 {
     #region Variables
     private Vector2 m_InputDirection = Vector2.zero;
     private Rigidbody2D m_RigidBody2d = null;
-
-    public event ButtonHandler m_ActiveButtonAction;
-    public event ButtonHandler m_DisactiveButtonAction;
-
-    public bool isFreeForActions
-    {
-        get { return m_ActiveButtonAction == null; }
-    }
+    private List<JourneyActor> m_InteractableActors = new List<JourneyActor>();
+    private BaseCollideBehavior m_CurrentCollideBehavior = null;
     #endregion
 
     #region Interface
@@ -35,6 +31,7 @@ public class JourneyPlayer : JourneyActor
     {
         base.Awake();
 
+        InitCheckCollider();
         m_RigidBody2d = GetComponent<Rigidbody2D>();
     }
 
@@ -44,11 +41,11 @@ public class JourneyPlayer : JourneyActor
 
         if (Input.GetKeyUp(KeyCode.Z))
         {
-            ActiveButtonAction();
+            PressActiveButtonAction();
         }
         if (Input.GetKeyUp(KeyCode.X))
         {
-            DisactiveButtonAction();
+            PressDisactiveButtonAction();
         }
         if (Input.GetKeyUp(KeyCode.Escape))
         {
@@ -97,50 +94,6 @@ public class JourneyPlayer : JourneyActor
         m_RigidBody2d.MovePosition(m_RigidBody2d.position + m_Speed * m_InputDirection.normalized * Time.deltaTime);
     }
 
-    public void AddActiveButtonAction(ButtonHandler p_Action)
-    {
-        RemoveActiveButtonAction(p_Action);
-        m_ActiveButtonAction += p_Action;
-    }
-
-    public void RemoveActiveButtonAction(ButtonHandler p_Action)
-    {
-        if (m_ActiveButtonAction != null)
-        {
-            m_ActiveButtonAction -= p_Action;
-        }
-    }
-
-    public void AddDisactiveButtonAction(ButtonHandler p_Action)
-    {
-        RemoveDisactiveButtonAction(p_Action);
-        m_DisactiveButtonAction += p_Action;
-    }
-
-    public void RemoveDisactiveButtonAction(ButtonHandler p_Action)
-    {
-        if (m_DisactiveButtonAction != null)
-        {
-            m_DisactiveButtonAction -= p_Action;
-        }
-    }
-
-    public void ActiveButtonAction()
-    {
-        if (m_ActiveButtonAction != null)
-        {
-            m_ActiveButtonAction();
-        }
-    }
-
-    public void DisactiveButtonAction()
-    {
-        if (m_DisactiveButtonAction != null)
-        {
-            m_DisactiveButtonAction();
-        }
-    }
-
     public override void StopLogic()
     {
         base.StopLogic();
@@ -153,7 +106,35 @@ public class JourneyPlayer : JourneyActor
     {
         m_Animator.runtimeAnimatorController = PlayerData.GetInstance().GetAnimatorController();
     }
+
+    public void AddCollideActor(JourneyActor p_JourneyActor)
+    {
+        if (m_InteractableActors.Contains(p_JourneyActor))
+        {
+            return;
+        }
+        m_InteractableActors.Add(p_JourneyActor);
+    }
+
+    public void RemoveCollideActor(JourneyActor p_JourneyActor)
+    {
+        m_InteractableActors.Remove(p_JourneyActor);
+    }
+
+    public void PressDisactiveButtonAction()
+    {
+        m_CurrentCollideBehavior.StopAction();
+    }
     #endregion
+
+    #region Private
+    private void InitCheckCollider()
+    {
+        CheckCollide l_CheckCollide = myTransform.FindChild("CheckCollide").GetComponent<CheckCollide>();
+
+        l_CheckCollide.AddCollideEnterAction(AddCollideActor);
+        l_CheckCollide.AddCollideExitAction(RemoveCollideActor);
+    }
 
     private void RunPauseMenu()
     {
@@ -162,4 +143,33 @@ public class JourneyPlayer : JourneyActor
         PauseMenuPanel l_PauseMenuPanel = Instantiate(PauseMenuPanel.prefab);
         JourneySystem.GetInstance().ShowPanel(l_PauseMenuPanel);
     }
+
+    private void PressActiveButtonAction()
+    {
+        if (m_InteractableActors.Count == 0)
+        {
+            return;
+        }
+
+        float[] l_Distances = new float[m_InteractableActors.Count];
+        for (int i = 0; i < m_InteractableActors.Count; i++)
+        {
+            l_Distances[i] = (myTransform.position - m_InteractableActors[i].myTransform.position).sqrMagnitude;
+        }
+
+        int l_MinId = 0;
+        float l_MinValue = l_Distances[0];
+        for (int i = 0; i < l_Distances.Length; i++)
+        {
+            if (l_MinValue > l_Distances[i])
+            {
+                l_MinValue = l_Distances[i];
+                l_MinId = i;
+            }
+        }
+
+        m_CurrentCollideBehavior = m_InteractableActors[l_MinId].GetComponent<BaseCollideBehavior>();
+        m_CurrentCollideBehavior.RunAction(this);
+    }
+    #endregion
 }
