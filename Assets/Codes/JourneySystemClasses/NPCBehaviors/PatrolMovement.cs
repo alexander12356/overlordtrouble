@@ -9,18 +9,19 @@ public class PatrolMovement : BaseMovement
     {
         public Vector2 position;
         public string  animationName;
+        public float   speed;
 
-        public PatrolPosition(Vector2 p_Position, string p_AnimationName)
+        public PatrolPosition(Vector2 p_Position, string p_AnimationName, float p_Speed)
         {
             position = p_Position;
             animationName = p_AnimationName;
+            speed = p_Speed;
         }
     }
     [SerializeField]
     private List<PatrolPosition> m_Patrol = null;
 
     private int   m_CurrentPoint = 0;
-    private float m_MovingTime = 1.0f;
     private float m_ElapsedTime = 0.0f;
     #endregion
 
@@ -46,19 +47,30 @@ public class PatrolMovement : BaseMovement
             return;
         }
 
-        m_ElapsedTime += Time.deltaTime;
-
-        journeyActor.myTransform.localPosition = Vector2.MoveTowards(journeyActor.myTransform.localPosition, m_Patrol[m_CurrentPoint].position, m_MovingTime * Time.deltaTime);
-        journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, true);
-
-        if ((Vector2)journeyActor.myTransform.localPosition == m_Patrol[m_CurrentPoint].position)
+        if (m_Patrol[m_CurrentPoint].animationName.Contains("Delay"))
         {
-            journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, false);
-            m_CurrentPoint++;
-
-            if (m_CurrentPoint >= m_Patrol.Count)
+            m_ElapsedTime += Time.deltaTime;
+            journeyActor.myAnimator.SetTrigger(m_Patrol[m_CurrentPoint].animationName.Remove(0, 4));
+            if (m_Patrol[m_CurrentPoint].speed <= m_ElapsedTime)
             {
-                m_CurrentPoint = 0;
+                m_ElapsedTime = 0.0f;
+                m_CurrentPoint++;
+            }
+        }
+        else
+        {
+            journeyActor.myTransform.localPosition = Vector2.MoveTowards(journeyActor.myTransform.localPosition, m_Patrol[m_CurrentPoint].position, m_Patrol[m_CurrentPoint].speed * Time.deltaTime);
+            journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, true);
+
+            if ((Vector2)journeyActor.myTransform.localPosition == m_Patrol[m_CurrentPoint].position)
+            {
+                journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, false);
+                m_CurrentPoint++;
+
+                if (m_CurrentPoint >= m_Patrol.Count)
+                {
+                    m_CurrentPoint = 0;
+                }
             }
         }
 
@@ -71,8 +83,6 @@ public class PatrolMovement : BaseMovement
 
         journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, false);
     }
-
-
     #endregion
 
     #region Private
