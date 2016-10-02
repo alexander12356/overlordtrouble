@@ -34,7 +34,18 @@
 		"Location" : "ForestCreeps",
 		"Enemy": 
 		[
-			"Dualent",
+			"Dualent"
+		],
+		"Player":
+		{
+			"HP" : 20
+		}
+	},
+	"TestBattle3":
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
 			"ThirdsortRobber"
 		],
 		"Player":

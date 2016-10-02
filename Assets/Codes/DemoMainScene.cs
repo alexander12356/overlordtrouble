@@ -17,6 +17,7 @@ public class DemoMainScene : MonoBehaviour
         m_ButtonList[3].AddAction(StartEncyclopedia);
         m_ButtonList[4].AddAction(StartProfile);
         m_ButtonList[5].AddAction(StartImprove);
+        m_ButtonList[6].AddAction(StartTestBattle3);
     }
 
     private void Update()
@@ -38,6 +39,12 @@ public class DemoMainScene : MonoBehaviour
     private void StartTestBattle2()
     {
         BattleStarter.GetInstance().InitBattle(null, "TestBattle2");
+        SceneManager.LoadScene("BattleSystem");
+    }
+
+    private void StartTestBattle3()
+    {
+        BattleStarter.GetInstance().InitBattle(null, "TestBattle3");
         SceneManager.LoadScene("BattleSystem");
     }
 

@@ -50,7 +50,7 @@ public class PatrolMovement : BaseMovement
         if (m_Patrol[m_CurrentPoint].animationName.Contains("Delay"))
         {
             m_ElapsedTime += Time.deltaTime;
-            journeyActor.myAnimator.SetTrigger(m_Patrol[m_CurrentPoint].animationName.Remove(0, 4));
+            journeyActor.myAnimator.SetTrigger(m_Patrol[m_CurrentPoint].animationName.Remove(0, 5));
             if (m_Patrol[m_CurrentPoint].speed <= m_ElapsedTime)
             {
                 m_ElapsedTime = 0.0f;
