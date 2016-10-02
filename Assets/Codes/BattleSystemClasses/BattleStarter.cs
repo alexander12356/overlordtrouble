@@ -19,7 +19,7 @@ public class BattleStarter : Singleton<BattleStarter>
 
     public void BattleWin()
     {
-        if (m_BattleData.id != "TestBattle")
+        if (!m_BattleData.id.Contains("TestBattle"))
         {
             JourneySystem.GetInstance().player.RemoveCollideActor(m_Enemy);
             Object.Destroy(m_Enemy.gameObject);
@@ -29,7 +29,7 @@ public class BattleStarter : Singleton<BattleStarter>
 
     public void BattleRetreat()
     {
-        if (m_BattleData.id != "TestBattle")
+        if (!m_BattleData.id.Contains("TestBattle"))
         {
             m_Enemy.StartLogic();
             JourneySystem.GetInstance().SetControl(ControlType.Player);

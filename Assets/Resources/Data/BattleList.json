@@ -28,5 +28,18 @@
 		{
 			"HP" : 20
 		}
+	},
+	"TestBattle2":
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"ThirdsortRobber"
+		],
+		"Player":
+		{
+			"HP" : 20
+		}
 	}
 }

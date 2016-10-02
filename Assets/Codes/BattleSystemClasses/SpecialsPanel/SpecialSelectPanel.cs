@@ -132,7 +132,7 @@ public class SpecialSelectPanel : Panel
     //TODO Kostil
     private void InitSpecialButtons()
     {
-        if (BattleSystem.GetInstance().battleData.id == "TestBattle")
+        if (BattleSystem.GetInstance().battleData.id.Contains("TestBattle"))
         {
             InitTestSpecials();
         }

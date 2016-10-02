@@ -43,6 +43,10 @@
 	<Text id="Enemy:Skwatwolf">Гополак</Text>
 	<Text id="Enemy:Skwatwolf:BladesAttack">Удар когтями</Text>
 	<Text id="Enemy:Skwatwolf:Racket">Рэкет</Text>
+	<Text id="Enemy:Dualent">Дуальэнт</Text>
+	<Text id="Enemy:Dualent:Attack">Удар</Text>
+	<Text id="Enemy:ThirdsortRobber">Третьесортный разбойник</Text>
+	<Text id="Enemy:ThirdsortRobber:Attack">Пнуть ножом</Text>
 	
 	<!-- UI -->>
 	<Text id="GUI:Journey:ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>

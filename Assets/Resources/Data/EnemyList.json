@@ -38,5 +38,37 @@
 				]
 			}
 		]
+	},
+	"Dualent":
+	{
+		"Health" : 8,
+		"Experience" : 15,
+		"Attacks" :
+		[
+			{
+				"Id" : "Attack",
+				"DamageValue" :
+				[
+					2,
+					4
+				]
+			}
+		]
+	},
+	"ThirdsortRobber":
+	{
+		"Health" : 8,
+		"Experience" : 15,
+		"Attacks" :
+		[
+			{
+				"Id" : "Attack",
+				"DamageValue" :
+				[
+					2,
+					4
+				]
+			}
+		]
 	}
 }

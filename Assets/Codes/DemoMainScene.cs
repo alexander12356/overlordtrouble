@@ -11,11 +11,12 @@ public class DemoMainScene : MonoBehaviour
 
         m_ButtonList = GetComponent<ButtonList>();
 
-        m_ButtonList[0].AddAction(StartBattleSystem);
-        m_ButtonList[1].AddAction(StartMap);
-        m_ButtonList[2].AddAction(StartEncyclopedia);
-        m_ButtonList[3].AddAction(StartProfile);
-        m_ButtonList[4].AddAction(StartImprove);
+        m_ButtonList[0].AddAction(StartTestBattle1);
+        m_ButtonList[1].AddAction(StartTestBattle2);
+        m_ButtonList[2].AddAction(StartMap);
+        m_ButtonList[3].AddAction(StartEncyclopedia);
+        m_ButtonList[4].AddAction(StartProfile);
+        m_ButtonList[5].AddAction(StartImprove);
     }
 
     private void Update()
@@ -28,9 +29,15 @@ public class DemoMainScene : MonoBehaviour
         m_ButtonList.UpdateKey();
     }
 
-    private void StartBattleSystem()
+    private void StartTestBattle1()
     {
         BattleStarter.GetInstance().InitBattle(null, "TestBattle");
+        SceneManager.LoadScene("BattleSystem");
+    }
+
+    private void StartTestBattle2()
+    {
+        BattleStarter.GetInstance().InitBattle(null, "TestBattle2");
         SceneManager.LoadScene("BattleSystem");
     }
 

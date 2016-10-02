@@ -194,7 +194,7 @@ public class BattleSystem : MonoBehaviour
 
     private void ReturnToJourney()
     {
-        if (m_BattleData.id == "TestBattle")
+        if (m_BattleData.id.Contains("TestBattle"))
         {
             SceneManager.LoadScene("DemoMainScene");
             return;
@@ -211,7 +211,7 @@ public class BattleSystem : MonoBehaviour
 
     private void ReturnToMainMenu()
     {
-        if (m_BattleData.id == "TestBattle")
+        if (m_BattleData.id.Contains("TestBattle"))
         {
             SceneManager.LoadScene("DemoMainScene");
         }
@@ -245,7 +245,7 @@ public class BattleSystem : MonoBehaviour
             l_NewEnemy.transform.SetParent(m_EnemyTransform);
 
             float l_X = 2.25f * (m_BattleData.enemyList.Count - 1);
-            l_X = -l_X + (l_X * i);
+            l_X = -l_X + (4.5f * i);
             Vector3 l_LocalPosition = Vector3.zero;
             l_LocalPosition.x = l_X;
             l_NewEnemy.transform.localPosition = l_LocalPosition;
