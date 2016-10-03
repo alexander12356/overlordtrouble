@@ -10,7 +10,6 @@ public class BattleEnemy : BattleActor
     private EnemyData m_EnemyData;
     private bool m_Selected = false;
     private SpriteRenderer m_SelectedArrow = null;
-    private SpriteRenderer m_Renderer = null;
     private List<EnemyAttackData> m_AttackList = null;
     #endregion
 
@@ -35,10 +34,6 @@ public class BattleEnemy : BattleActor
             m_SelectedArrow.gameObject.SetActive(m_Selected);
         }
     }
-    public SpriteRenderer spriteRenderer
-    {
-        get { return m_Renderer; }
-    }
 
     public override void Awake()
     {
@@ -61,7 +56,7 @@ public class BattleEnemy : BattleActor
         health = baseHealth = m_EnemyData.health;
         mana = baseMana = 0;
         m_AttackList = m_EnemyData.attackList;
-        m_Renderer.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_EnemyData.id + "/BattleProfile");
+        m_SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_EnemyData.id + "/BattleProfile");
         m_Animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Sprites/Creations/" + m_EnemyData.id + "/" + m_EnemyData.id + "BattleAnimator");
     }
 
@@ -90,9 +85,8 @@ public class BattleEnemy : BattleActor
         string l_AttackText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EnemyAttack", new string[] { l_EnemyName, l_AttackName, l_Damage.ToString() });
 
         p_Actor.Damage(l_Damage);
-        m_Animator.SetTrigger(l_AttackData.id);
-        //TODO добавить возможность разных звуков
-        m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_EnemyData.id + "_Attack"));
+        AttackEffectsSystem.GetInstance().AddEffect(p_Actor, this, "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id);
+        AttackEffectsSystem.GetInstance().PlayEffects();
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { l_AttackText });
@@ -118,7 +112,7 @@ public class BattleEnemy : BattleActor
         Destroy(gameObject);
     }
 
-    public void PlayHitSound()
+    public override void PlayHitSound()
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_EnemyData.id + "_Hit"));
     }
@@ -129,7 +123,7 @@ public class BattleEnemy : BattleActor
     {
         m_Animator = GetComponent<Animator>();
         m_AudioSource = GetComponent<AudioSource>();
-        m_Renderer = transform.FindChild("Renderer").GetComponent<SpriteRenderer>();
+        m_SpriteRenderer = transform.FindChild("Renderer").GetComponent<SpriteRenderer>();
         m_SelectedArrow = transform.FindChild("Selected").GetComponent<SpriteRenderer>();
     }
     #endregion

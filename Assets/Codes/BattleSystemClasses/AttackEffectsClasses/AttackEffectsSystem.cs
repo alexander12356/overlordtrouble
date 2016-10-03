@@ -8,7 +8,8 @@ public class AttackEffectsSystem : MonoBehaviour
 
     private List<AttackEffect> m_AttackEffectList = new List<AttackEffect>();
     private int m_CurrentEffect = 0;
-    private BattleEnemy m_BattleEnemy = null;
+    private BattleActor m_TargetActor = null;
+    private BattleActor m_TargetForEffect = null;
 
     public static AttackEffectsSystem GetInstance()
     {
@@ -20,15 +21,16 @@ public class AttackEffectsSystem : MonoBehaviour
         m_Instance = this;
     }
 
-    public void AddEffect(BattleEnemy p_Target, string p_EffectId)
+    public void AddEffect(BattleActor p_Target, BattleActor p_TargetForEffect, string p_EffectPath)
     {
-        m_BattleEnemy = p_Target;
+        m_TargetActor = p_Target;
+        m_TargetForEffect = p_TargetForEffect;
 
-        AttackEffect l_AttackEffectsPrefab = Resources.Load<AttackEffect>("Prefabs/BattleEffects/" + p_EffectId);
+        AttackEffect l_AttackEffectsPrefab = Resources.Load<AttackEffect>(p_EffectPath);//"Prefabs/BattleEffects/" + p_EffectPath);
 
         AttackEffect l_AttackEffect = Instantiate(l_AttackEffectsPrefab);
-        l_AttackEffect.SetData(p_EffectId, p_Target);
-        l_AttackEffect.transform.SetParent(p_Target.transform);
+        l_AttackEffect.SetTarget(p_Target);
+        l_AttackEffect.transform.SetParent(m_TargetForEffect.transform);
         l_AttackEffect.transform.localPosition = Vector3.zero;
 
         m_AttackEffectList.Add(l_AttackEffect);
@@ -36,7 +38,7 @@ public class AttackEffectsSystem : MonoBehaviour
 
     public void PlayEffects()
     {
-        m_BattleEnemy.spriteRenderer.transform.SetParent(m_AttackEffectList[m_CurrentEffect].enemyRendererTransform);
+        m_TargetForEffect.spriteRenderer.transform.SetParent(m_AttackEffectList[m_CurrentEffect].enemyRendererTransform);
         m_AttackEffectList[m_CurrentEffect].PlayEffect();
     }
 
@@ -60,7 +62,7 @@ public class AttackEffectsSystem : MonoBehaviour
             return;
         }
 
-        m_BattleEnemy.spriteRenderer.transform.SetParent(m_AttackEffectList[m_CurrentEffect].enemyRendererTransform);
+        m_TargetForEffect.spriteRenderer.transform.SetParent(m_AttackEffectList[m_CurrentEffect].enemyRendererTransform);
         m_AttackEffectList[m_CurrentEffect].PlayEffect();
     }
 
@@ -68,6 +70,8 @@ public class AttackEffectsSystem : MonoBehaviour
     {
         m_CurrentEffect = 0;
         m_AttackEffectList.Clear();
-        m_BattleEnemy.spriteRenderer.transform.SetParent(m_BattleEnemy.transform);
+        m_TargetForEffect.spriteRenderer.transform.SetParent(m_TargetForEffect.transform);
+        m_TargetActor = null;
+        m_TargetForEffect = null;
     }
 }

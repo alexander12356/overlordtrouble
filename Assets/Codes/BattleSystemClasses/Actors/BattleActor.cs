@@ -7,10 +7,9 @@ public class BattleActor : MonoBehaviour
     private float m_BaseHealth;
     private float m_Mana;
     private float m_BaseMana;
-
     private bool m_IsDead;
-
     private string m_ActorName = "Actor";
+    protected SpriteRenderer m_SpriteRenderer = null;
     #endregion
 
     #region Interface
@@ -52,6 +51,10 @@ public class BattleActor : MonoBehaviour
         get { return m_ActorName;  }
         set { m_ActorName = value; }
     }
+    public SpriteRenderer spriteRenderer
+    {
+        get { return m_SpriteRenderer; }
+    }
 
     public virtual void Awake()
     {
@@ -80,7 +83,6 @@ public class BattleActor : MonoBehaviour
 
     public virtual void Died()
     {
-
     }
 
     public virtual void RunTurn()
@@ -101,6 +103,10 @@ public class BattleActor : MonoBehaviour
     }
 
     public virtual void ChangeHealthValue()
+    {
+    }
+
+    public virtual void PlayHitSound()
     {
     }
     #endregion

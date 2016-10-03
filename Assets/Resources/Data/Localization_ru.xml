@@ -41,7 +41,7 @@
 	<Text id="Enemy:Bokalisk">Бокалиск</Text>
 	<Text id="Enemy:Bokalisk:PeckerAttack">Удар клювом</Text>
 	<Text id="Enemy:Skwatwolf">Гополак</Text>
-	<Text id="Enemy:Skwatwolf:BladesAttack">Удар когтями</Text>
+	<Text id="Enemy:Skwatwolf:Fisting">Удар кулаком</Text>
 	<Text id="Enemy:Skwatwolf:Racket">Рэкет</Text>
 	<Text id="Enemy:Dualent">Дуалэнт</Text>
 	<Text id="Enemy:Dualent:Attack">Удар</Text>
