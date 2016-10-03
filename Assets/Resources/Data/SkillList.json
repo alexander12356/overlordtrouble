@@ -19,5 +19,12 @@
 		"Mana" : 5.0,
 		"Element" : "Earth",
 		"DescriptionId" : ""
+	},
+	"StonePress" :
+	{
+		"Attack" : 10,
+		"Mana" : 10.0,
+		"Element" : "Earth",
+		"DescriptionId" : ""
 	}
 }

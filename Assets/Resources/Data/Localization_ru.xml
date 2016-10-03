@@ -9,6 +9,7 @@
 	<Text id="Skill:ShellDefense">Панцирная защита</Text>
 	<Text id="Skill:BlobeStrike">Водяной удар</Text>
 	<Text id="Skill:HealingWater">Целебная вода</Text>
+	<Text id="Skill:StonePress">Каменный пресс</Text>
 	
 	<!-- stats -->
 	<Text id="Stat:HealthPoints">Жизнь</Text>

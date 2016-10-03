@@ -193,6 +193,13 @@ public class SpecialSelectPanel : Panel
             l_SpecialButton.AddAction(ChooseSpecial);
             m_SpecialButtonList.AddButton(l_SpecialButton);
         }
+        for (int i = 0; i < 3; i++)
+        {
+            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
+            l_SpecialButton.skillId = "StonePress";
+            l_SpecialButton.AddAction(ChooseSpecial);
+            m_SpecialButtonList.AddButton(l_SpecialButton);
+        }
     }
 
     private void InitSpecials()
