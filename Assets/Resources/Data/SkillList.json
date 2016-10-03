@@ -23,7 +23,7 @@
 	"StonePress" :
 	{
 		"Attack" : 10,
-		"Mana" : 10.0,
+		"Mana" : 5.0,
 		"Element" : "Earth",
 		"DescriptionId" : ""
 	}
