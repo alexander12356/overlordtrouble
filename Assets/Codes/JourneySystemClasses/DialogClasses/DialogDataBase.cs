@@ -37,7 +37,7 @@ public class DialogDataBase : Singleton<DialogDataBase>
 
             foreach (XmlNode l_TextNode in l_DialogNode.ChildNodes)
             {
-                l_TextList.Add(l_TextNode.InnerText);
+                l_TextList.Add(LocalizationDataBase.GetInstance().GetText(l_TextNode.InnerText));
             }
             
             string l_DialogId    = l_DialogNode.Attributes[0].Value;

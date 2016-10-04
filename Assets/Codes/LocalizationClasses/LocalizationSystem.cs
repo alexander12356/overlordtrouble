@@ -7,7 +7,7 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
 {
     #region Variables
     private Dictionary<string, string> m_Texts = null;
-	private const string m_PathFile = "Data/Localization";
+	private const string m_PathFile = "Data/Localizations/Localization";
     #endregion
 
     #region Interface
@@ -89,7 +89,7 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
 				}
 			}
 
-			m_Texts.Add(textID, curText.InnerText);
+            m_Texts.Add(textID, curText.InnerText.Replace("\\n", Environment.NewLine));
 		}
 	}
     #endregion

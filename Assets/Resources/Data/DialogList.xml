@@ -1,49 +1,49 @@
 ﻿<?xml version="1.0"?>
 <DialogList>
 	<Dialog id="SkeletonChild" avatarPath="Sprites/Creations/SkeletonChild/Avatar">
-		<Text id="0" avatarId="NPC1">Привет!</Text>
-		<Text id="1" avatarId="NPC1">Давай поиграем?</Text>
+		<Text id="0" avatarId="NPC1">Dialog:SkeletonChild:1</Text>
+		<Text id="1" avatarId="NPC1">Dialog:SkeletonChild:2</Text>
 	</Dialog>
 	<Dialog id="SnailKid" avatarPath="Sprites/Creations/SnailKid/Avatar">
-		<Text id="0" avatarId="NPC1">Привет!</Text>
-		<Text id="1" avatarId="NPC1">Давай поиграем?</Text>
+		<Text id="0" avatarId="NPC1">SnailKid:1</Text>
+		<Text id="1" avatarId="NPC1">SnailKid:2</Text>
 	</Dialog>
 	<Dialog id="Bokalisk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
-		<Text id="0" avatarId="Bokalisk">Куд-кудах! Куд-кудах!</Text>
-		<Text id="1" avatarId="Bokalisk">Драка маза и факах!</Text>
+		<Text id="0" avatarId="Bokalisk">Dialog:Bokalisk:1</Text>
+		<Text id="1" avatarId="Bokalisk">Dialog:Bokalisk:2</Text>
 	</Dialog>
 	<Dialog id="Bokalisk1" avatarPath="Sprites/Creations/Bokalisk/Avatar">
-		<Text id="0" avatarId="Bokalisk">Куд-кудахи! Куд-кудахи!</Text>
-		<Text id="1" avatarId="Bokalisk">Грааа!!! Имя нам легион!!!</Text>
+		<Text id="0" avatarId="Bokalisk">Dialog:Bokalisk1:1</Text>
+		<Text id="1" avatarId="Bokalisk">Dialog:Bokalisk1:2</Text>
 	</Dialog>
   <Dialog id="StoreWelcome" avatarPath="Sprites/Creations/Store/Avatar">
-	<Text id="0">Добро пожаловать в мой скромный магазинчик. Хотите ли произвести покупку?</Text>
+	<Text id="0">Dialog:Store:Welcome</Text>
   </Dialog>
   <Dialog id="StoreDialog" avatarPath="Sprites/Creations/Store/Avatar">
-	<Text id="0" avatarId="Store">Все мои товары отличаются большой прочностью и принадлежали храбрым воинам, которые вызвали в бой дракона</Text>
-	<Text id="1" avatarId="Store">Никто из них не выжил, в отличии от их экипировки</Text>
+	<Text id="0" avatarId="Store">Dialog:Store:1</Text>
+	<Text id="1" avatarId="Store">Dialog:Store:2</Text>
   </Dialog>
   <Dialog id="VillageElder" avatarPath="Sprites/Creations/VillageElder/Avatar">
-	<Text id="0" avatarId="VillageElder">Добрый день уважаемый</Text>
-	<Text id="1" avatarId="VillageElder">Я староста этой деревни</Text>
-	<Text id="2" avatarId="VillageElder">Счастливого дня</Text>
+	<Text id="0" avatarId="VillageElder">Dialog:VillageElder:1</Text>
+	<Text id="1" avatarId="VillageElder">Dialog:VillageElder:2</Text>
+	<Text id="2" avatarId="VillageElder">Dialog:VillageElder:3</Text>
   </Dialog>
   <Dialog id="GoatPerson" avatarPath="Sprites/Creations/GoatPerson/Avatar">
-	<Text id="0" avatarId="GoatPerson">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
-	<Text id="1" avatarId="GoatPerson">Но сегодня до меня дошла мысль, что если наполнить ведра ровно до половины я смогу нести два ведра одновременно.</Text>
-	<Text id="2" avatarId="GoatPerson">Разве я не гений?</Text>
+	<Text id="0" avatarId="GoatPerson">Dialog:GoatPerson:1</Text>
+	<Text id="1" avatarId="GoatPerson">Dialog:GoatPerson:2</Text>
+	<Text id="2" avatarId="GoatPerson">Dialog:GoatPerson:3</Text>
   </Dialog>
   <Dialog id="Terner" avatarPath="Sprites/Creations/Terner/Avatar">
-	<Text id="0" avatarId="GoatPerson">Привет.</Text>
+	<Text id="0" avatarId="GoatPerson">Dialog:Terner:1</Text>
   </Dialog>
   <Dialog id="VillageFountain" avatarPath="">
-	<Text id="0" avatarId="GoatPerson">Колодец... полон воды… ее можно пить.</Text>
+	<Text id="0" avatarId="GoatPerson">Dialog:OldWell</Text>
   </Dialog>
   <Dialog id="GiantCock" avatarPath="Sprites/Creations/GiantCock/Avatar">
-	<Text id="0" avatarId="GoatPerson">...</Text>
-	<Text id="1" avatarId="GoatPerson">*Он спит*</Text>
+	<Text id="0" avatarId="GoatPerson">Dialog:GiantCock:1</Text>
+	<Text id="1" avatarId="GoatPerson">Dialog:GiantCock:2</Text>
   </Dialog>
   <Dialog id="Uniceros" avatarPath="Sprites/Creations/Uniceros/Avatar">
-	<Text id="0" avatarId="GoatPerson">Пьинь?</Text>
+	<Text id="0" avatarId="GoatPerson">Dialog:Uniceros:1</Text>
   </Dialog>
 </DialogList>
