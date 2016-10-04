@@ -175,9 +175,14 @@ public class SpecialUpgradePanel : Panel
         else
         {
             Close();
-            BattlePlayer.GetInstance().SpecialAttack(m_Enemy, m_SpecialUpgradeIconList);
+            AddPopAction(SpecialAttack);
             return;
         }
+    }
+
+    private void SpecialAttack()
+    {
+        BattlePlayer.GetInstance().SpecialAttack(m_Enemy, m_SpecialUpgradeIconList);
     }
     #endregion
 }
