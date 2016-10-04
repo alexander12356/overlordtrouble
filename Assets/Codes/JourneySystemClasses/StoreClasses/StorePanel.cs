@@ -55,7 +55,7 @@ public class StorePanel : Panel
         set
         {
             PlayerInventory.GetInstance().coins = value;
-            m_PlayerCoinsText.text = PlayerInventory.GetInstance().coins + " монет";
+            m_PlayerCoinsText.text = PlayerInventory.GetInstance().coins + " " + LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Monet");
         }
     }
 
@@ -106,9 +106,13 @@ public class StorePanel : Panel
         m_ButtonList = GetComponentInChildren<ButtonList>();
 
         m_ButtonList[0].AddAction(OpenTabs);
+        m_ButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Buy");
         m_ButtonList[1].AddAction(OpenTabs);
+        m_ButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Sell");
         m_ButtonList[2].AddAction(StartDialog);
+        m_ButtonList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Talk");
         m_ButtonList[3].AddAction(CloseStore);
+        m_ButtonList[3].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Leave");
     }
 
     private void InitTabs()
@@ -116,9 +120,13 @@ public class StorePanel : Panel
         m_TabButtonsList.AddCancelAction(CloseTabs);
         m_TabButtonsList.AddKeyArrowAction(ShowTab);
         m_TabButtonsList[0].AddAction(ConfirmTab);
+        m_TabButtonsList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Tab:All");
         m_TabButtonsList[1].AddAction(ConfirmTab);
+        m_TabButtonsList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Tab:Equipments");
         m_TabButtonsList[2].AddAction(ConfirmTab);
+        m_TabButtonsList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Tab:SingleUse");
         m_TabButtonsList[3].AddAction(ConfirmTab);
+        m_TabButtonsList[3].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Tab:MultipleUse");
 
         Dictionary<string, StoreItemData> l_StoreItems = StoreDataBase.GetInstance().GetStoreItem();
         foreach (string l_Key in l_StoreItems.Keys)

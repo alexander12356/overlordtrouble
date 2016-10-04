@@ -5,8 +5,8 @@
 		<Text id="1" avatarId="NPC1">Dialog:SkeletonChild:2</Text>
 	</Dialog>
 	<Dialog id="SnailKid" avatarPath="Sprites/Creations/SnailKid/Avatar">
-		<Text id="0" avatarId="NPC1">SnailKid:1</Text>
-		<Text id="1" avatarId="NPC1">SnailKid:2</Text>
+		<Text id="0" avatarId="NPC1">Dialog:SnailKid:1</Text>
+		<Text id="1" avatarId="NPC1">Dialog:SnailKid:2</Text>
 	</Dialog>
 	<Dialog id="Bokalisk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
 		<Text id="0" avatarId="Bokalisk">Dialog:Bokalisk:1</Text>

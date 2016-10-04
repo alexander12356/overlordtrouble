@@ -1,0 +1,126 @@
+﻿<Localization>
+	<!-- Monstyle	-->
+	<Text id="Skill:WaterDrops">Water drops</Text>
+	<Text id="Skill:WaterDrops:Description">Attack technique: 2sп\n\n2 points of damage on all enemies\n\nElement: Water\n\nThose things hurt a little more than finger touch</Text>
+	<Text id="Skill:Slap">Slap</Text>
+	<Text id="Skill:ProtectiveCoat">Protective coat</Text>
+	<Text id="Skill:Strike">Strike</Text>
+	<Text id="Skill:Defense">Defence</Text>
+	<Text id="Skill:TailWhap">Tail whap</Text>
+	<Text id="Skill:ShellDefense">Shell defence</Text>
+	<Text id="Skill:BlobeStrike">Bubble strike</Text>
+	<Text id="Skill:HealingWater">Healing water</Text>
+	<Text id="Skill:StonePress">Pillar attack</Text>
+	
+	<!-- stats -->
+	<Text id="Stat:HealthPoints">HP</Text>
+	<Text id="Stat:MonstylePoints">SP</Text>
+	<Text id="Stat:Attack">Attack</Text>
+	<Text id="Stat:Defense">Defence</Text>
+	<Text id="Stat:Speed">Speed</Text>
+	<Text id="Stat:Fortune">Luck</Text>
+	
+	<!-- improvements -->
+	<Text id="Improvement:DewElemental">Dew elemental</Text>
+	<Text id="Improvement:DewElemental:Description">Element: Water\n\nDew elemental are creatures that stay lower hierarchically than lesser water elementals. However they are more rare than some high elementals. The reason is that they are not summoned by magic but are given birth by parents. They are very meek creatures.</Text>
+	<Text id="Improvement:DewElemental:Specialty">Speciality:\n10% chance to dodge any attack.</Text>
+	
+	<Text id="Improvement:LesserWaterElemental">Lesser water elemental</Text>
+	<Text id="Improvement:ShellLizard">Shell lizard</Text>
+	<Text id="Improvement:Brownie">Brownie</Text>
+	
+	<!-- items -->
+	<Text id="Item:HealthPotion">Health potion</Text>
+	<Text id="Item:ManaPotion">Mana potion</Text>
+	<Text id="Item:FireBallScroll">Fire ball scroll</Text>
+	<Text id="Item:AirDefenseScroll">Air armor scroll</Text>
+	<Text id="Item:AncientArmor">Ancient armor</Text>
+	
+	<!-- elemental -->
+	<Text id="Element">Element</Text>
+	<Text id="Elemental:Water">Water</Text>
+	<Text id="Elemental:Earth">Earth</Text>
+	<Text id="Elemental:Mana">Mana</Text>
+	
+	<!-- enemy's -->
+	<Text id="Enemy:Bokalisk">Bokalisk</Text>
+	<Text id="Enemy:Bokalisk:PeckerAttack">Big pecker</Text>
+	<Text id="Enemy:Skwatwolf">Squatwolf</Text>
+	<Text id="Enemy:Skwatwolf:Fisting">Punch</Text>
+	<Text id="Enemy:Skwatwolf:Racket">Thug rage</Text>
+	<Text id="Enemy:Dualent">Dualent</Text>
+	<Text id="Enemy:Dualent:Attack">Strike</Text>
+	<Text id="Enemy:ThirdsortRobber">Third sort robber</Text>
+	<Text id="Enemy:ThirdsortRobber:Attack">Shank</Text>
+	
+	<!-- UI -->
+	<Text id="GUI:Journey:ReturnMainMenu">Are you sure you want to go to the main menu? Unsaved data will be lost.</Text>
+	<Text id="GUI:Journey:Store:Buy">Buy</Text>
+	<Text id="GUI:Journey:Store:Sell">Sell</Text>
+	<Text id="GUI:Journey:Store:Talk">Talk</Text>
+	<Text id="GUI:Journey:Store:Leave">Leave</Text>
+	<Text id="GUI:Journey:Store:Description">Description\n</Text>
+	<Text id="GUI:Journey:Store:InInventory">\nIn your inventory: </Text>
+	<Text id="GUI:Journey:Store:Monet">Monett</Text>
+	<Text id="GUI:Journey:Store:Tab:All">All</Text>
+	<Text id="GUI:Journey:Store:Tab:Equipments">Stuff</Text>
+	<Text id="GUI:Journey:Store:Tab:SingleUse">Single use items</Text>
+	<Text id="GUI:Journey:Store:Tab:MultipleUse">Multiple use items</Text>
+	
+	<Text id="GUI:Profile:Level">Level</Text>
+	<Text id="GUI:Profile:NextLevelup">Until next level:</Text>
+	<Text id="GUI:Profile:StatsPoints">Points left: %d</Text>
+	<Text id="GUI:Profile:OpenImprovePanel">Class up</Text>
+	<Text id="GUI:Profile:SpecialSelected">Selected</Text>
+	<Text id="GUI:Profile:SpecialUnselected">Not selected</Text>
+	<Text id="GUI:Profile:SpecialTitle">Monstyle</Text>
+	
+	<Text id="GUI:BattleSystem:Levelup">Leveled up to %d level</Text>
+	<Text id="GUI:BattleSystem:Classup">Got class up!</Text>
+	<Text id="GUI:BattleSystem:SelectMonstyle:Damage">Damage</Text>
+	<Text id="GUI:BattleSystem:EnemyAttack">%d used %d and deal'd %d damage</Text>
+	<Text id="GUI:BattleSystem:PlayerAttack">Player deal'd %d damage on the enemy</Text>
+	<Text id="GUI:BattleSystem:BadAttack">Your futile efforts made %d damage on %d</Text>
+	<Text id="GUI:BattleSystem:SpecialAttack">Bobble used "%d" %d it did %d damage</Text>
+	<Text id="GUI:BattleSystem:MainPanelAttack">Attack</Text>
+	<Text id="GUI:BattleSystem:MainPanelMonstyle">Monstyle</Text>
+	<Text id="GUI:BattleSystem:MainPanelItems">Items</Text>
+	<Text id="GUI:BattleSystem:MainPanelRetreat">Run</Text>
+	<Text id="GUI:BattleSystem:Select">Select</Text>
+	<Text id="GUI:BattleSystem:Cancel">Back</Text>
+	<Text id="GUI:BattleSystem:UseSpecials">Use</Text>
+	<Text id="GUI:BattleSystem:Win">Enemies are defeated.\nYou won.\nBobble got %d exp</Text>
+	<Text id="GUI:BattleSystem:Lose">Bobbl can't fight much longer, Bobbl lost consciousness.\nNo one left to continue the fight...\nYou lost.</Text>
+	
+	<Text id="GUI:Improve:StayMyself">Stay myself</Text>
+	<Text id="GUI:Improve:AreYouShure">Are you sure you want to choose this class? You won't be able to turn back.</Text>
+	<Text id="GUI:Improve:СlassChoosed">You choose %d, you got next techniques:\n%d</Text>
+	<Text id="GUI:YesNoPanel:Confirm">Confirm</Text>
+	<Text id="GUI:YesNoPanel:Cancel">Cancel</Text>
+	<Text id="GUI:MainMenuPanel:NewGame">New game</Text>
+	<Text id="GUI:MainMenuPanel:Exit">Exit</Text>
+	
+	<!-- Dialogs -->
+	<Text id="Dialog:SkeletonChild:1">Hi!</Text>
+	<Text id="Dialog:SkeletonChild:2">Look at this flower! It is so lovely!</Text>
+	<Text id="Dialog:SnailKid:1">Hi.</Text>
+	<Text id="Dialog:SnailKid:2">This flower suddenly appeared here today. We're doing happy dance to make it grow.</Text>
+	<Text id="Dialog:Bokalisk:1">Bok-bok-bok. Buk bugag!</Text>
+	<Text id="Dialog:Bokalisk:2">BOOKOOOOO!!!</Text>
+	<Text id="Dialog:Bokalisk1:1">Bookook!</Text>
+	<Text id="Dialog:Bokalisk1:2">Book BOOOK BUGAAAAAG!</Text>
+	<Text id="Dialog:Store:Welcome">Welcome to my humble little store! Do you want to buy something?</Text>
+	<Text id="Dialog:Store:1">All of my merchandise belonged to the brave warriors, that had enough guts to challenge a dragon!</Text>
+	<Text id="Dialog:Store:2">Well none of them survived, unlike their splendid equipment!</Text>
+	<Text id="Dialog:VillageElder:1">You've waked up i see.</Text>
+	<Text id="Dialog:VillageElder:2">I'm still sleepy.</Text>
+	<Text id="Dialog:VillageElder:3">That's all for now.</Text>
+	<Text id="Dialog:GoatPerson:1">Usually i use one bucket 'cause imma not strong enough for two.</Text>
+	<Text id="Dialog:GoatPerson:2">But today i here got an idea! If i fill only a half o' the bucket i can hold two o' dem at the same time!</Text>
+	<Text id="Dialog:GoatPerson:3">Am i not the genius?</Text>
+	<Text id="Dialog:Terner:1">He-hey lil' one!</Text>
+	<Text id="Dialog:OldWell">It is a well... it has water… you drink water.</Text>
+	<Text id="Dialog:GiantCock:1">...</Text>
+	<Text id="Dialog:GiantCock:2">*He's sleeping*</Text>
+	<Text id="Dialog:Uniceros:1">Pyin?</Text>
+</Localization>

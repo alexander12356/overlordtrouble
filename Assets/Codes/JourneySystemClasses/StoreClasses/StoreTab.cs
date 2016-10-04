@@ -31,6 +31,7 @@ public class StoreTab : MonoBehaviour
         m_ItemsButtonList.AddKeyArrowAction(ShowItemDescription);
 
         m_DescriptionText = GetComponentInChildren<Text>();
+        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
         m_StorePanel = GetComponentInParent<StorePanel>();
     }
 
@@ -69,14 +70,16 @@ public class StoreTab : MonoBehaviour
     {
         m_ItemsButtonList.isActive = false;
         m_StorePanel.tabButtonList.isActive = true;
-        m_DescriptionText.text = "Описание:";
+        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
     }
 
     private void ShowItemDescription()
     {
         StoreItemButton m_StoreItemButton = (StoreItemButton)m_ItemsButtonList.currentButton;
         int l_CountInInventory = PlayerInventory.GetInstance().GetItemCount(m_StoreItemButton.itemId);
-        m_DescriptionText.text = "Описание:\n" + m_StoreItemButton.title + "_Description" + "\nУ тебя в инвентаре: " + l_CountInInventory;
+        string l_DescriptionText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
+        string l_InInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
+        m_DescriptionText.text = l_DescriptionText + m_StoreItemButton.title + "_Description" + l_InInventoryText + l_CountInInventory;
     }
 
     private void SelectItem()
