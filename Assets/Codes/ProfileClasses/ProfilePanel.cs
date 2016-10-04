@@ -28,6 +28,9 @@ public class ProfilePanel : Panel
     private Text m_LevelText = null;
     private Text m_PlayerNameText = null;
     private Text m_NextLevelupText = null;
+    private Text m_ClassName = null;
+    private Text m_ClassDescription = null;
+    private Text m_ClassSpecialty = null;
     private SpecialStatus m_SpecialStatus = null;
     private Image m_ClassupBackgroundImage = null;
     private Image m_ProfileAvatar = null;
@@ -44,7 +47,7 @@ public class ProfilePanel : Panel
             m_StatImprovePoints = value;
 
             PlayerData.GetInstance().statImprovePoints = m_StatImprovePoints;
-            m_StatImprovePointsText.text = "Осталось очков:" + m_StatImprovePoints.ToString();
+            m_StatImprovePointsText.text = LocalizationDataBase.GetInstance().GetText("GUI:Profile:StatsPoints", new string[] { m_StatImprovePoints.ToString() });
         }
     }
 
@@ -148,7 +151,7 @@ public class ProfilePanel : Panel
         {
             PanelButtonProfileSpecial l_PanelButton = Instantiate(PanelButtonProfileSpecial.prefab);
             l_PanelButton.AddAction(SelectSpecial);
-            l_PanelButton.title = LocalizationDataBase.GetInstance().GetText("Skill:" + m_MonstyleList[i].id);
+            l_PanelButton.monstyleId = m_MonstyleList[i].id;
             l_PanelButton.text.fontSize = 40;
 
             m_SpecialsButtonList.AddButton(l_PanelButton);
@@ -181,7 +184,7 @@ public class ProfilePanel : Panel
     private void ShowSpecialDescription()
     {
         PanelButtonProfileSpecial l_PanelButtonProfileSpecial = (PanelButtonProfileSpecial)m_SpecialsButtonList.currentButton;
-        m_SpecialDescriptionText.text = l_PanelButtonProfileSpecial.title + " description";
+        m_SpecialDescriptionText.text = LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButtonProfileSpecial.monstyleId + ":Description");
 
         if (l_PanelButtonProfileSpecial.chosen)
         {
@@ -279,6 +282,7 @@ public class ProfilePanel : Panel
         m_ProfileButtonList = GetComponent<ButtonList>();
         m_ProfileButtonList[0].AddAction(ActiveStatsPanel);
         m_ProfileButtonList[1].AddAction(OpenImprovePanel);
+        m_ProfileButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:Profile:OpenImprovePanel");
         m_ProfileButtonList[2].AddAction(ActiveSpecialListPanel);
         m_ProfileButtonList.AddCancelAction(ReturnToJourney);
     }
@@ -307,6 +311,9 @@ public class ProfilePanel : Panel
         m_SpecialStatus = transform.FindChild("SpecialSelect").GetComponent<SpecialStatus>();
         m_ClassupBackgroundImage = transform.FindChild("Improve").FindChild("Background").GetComponent<Image>();
         m_ProfileAvatar = transform.FindChild("Avatar").GetComponentInChildren<Image>();
+        m_ClassName = transform.FindChild("ImprovementTitle").GetComponentInChildren<Text>();
+        m_ClassDescription = transform.FindChild("ImprovementDescription").GetComponentInChildren<Text>();
+        m_ClassSpecialty = transform.FindChild("ImprovementSpecialty").GetComponentInChildren<Text>();
 
         m_LevelText.text = LocalizationDataBase.GetInstance().GetText("GUI:Profile:Level") + " " + (PlayerData.GetInstance().GetLevel() + 1);
         m_PlayerNameText.text = PlayerData.GetInstance().GetPlayerName();
@@ -337,6 +344,7 @@ public class ProfilePanel : Panel
 
         m_SpecialsButtonList.Clear();
         InitMonstyles();
+        InitClassDescription();
     }
 
     private void ReturnToJourney()
@@ -347,6 +355,13 @@ public class ProfilePanel : Panel
         {
             JourneySystem.GetInstance().SetControl(ControlType.Panel);
         }
+    }
+
+    private void InitClassDescription()
+    {
+        m_ClassName.text = LocalizationDataBase.GetInstance().GetText("Improvement:" + PlayerData.GetInstance().GetCurrentEnchancement());
+        m_ClassDescription.text = LocalizationDataBase.GetInstance().GetText("Improvement:" + PlayerData.GetInstance().GetCurrentEnchancement() + ":Description");
+        m_ClassSpecialty.text = LocalizationDataBase.GetInstance().GetText("Improvement:" + PlayerData.GetInstance().GetCurrentEnchancement() + ":Specialty");
     }
     #endregion
 }

@@ -5,6 +5,7 @@ public class PanelButtonProfileSpecial : PanelButton
     private static PanelButtonProfileSpecial m_Prefab;
     private bool m_Chosen = false;
     private Color m_PrevColor;
+    private string m_MonstyleId = string.Empty;
 
     public static PanelButtonProfileSpecial prefab
     {
@@ -31,6 +32,15 @@ public class PanelButtonProfileSpecial : PanelButton
             {
                 text.color = Color.black;
             }
+        }
+    }
+    public string monstyleId
+    {
+        get { return m_MonstyleId; }
+        set
+        {
+            m_MonstyleId = value;
+            title = LocalizationDataBase.GetInstance().GetText("Skill:" + m_MonstyleId);
         }
     }
 
