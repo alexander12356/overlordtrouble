@@ -44,19 +44,20 @@ public class ImprovePanel : Panel
     // Called from Animation
     public void ImproveComplete()
     {
-        string l_ImproveName = ((PanelButtonImprove)m_ImproveButtonList.currentButton).improveData.id;
-        string l_ImproveSkillsText = ", вы получили следующие приемы:\n";
+        string l_ImproveId = ((PanelButtonImprove)m_ImproveButtonList.currentButton).improveData.id;
+        string l_SkillsText = string.Empty;
+        string l_ImproveName = LocalizationDataBase.GetInstance().GetText("Improvement:" + l_ImproveId);
 
-        ImproveData l_ImproveData = ImproveDataBase.GetInstance().GetImprove(l_ImproveName);
+        ImproveData l_ImproveData = ImproveDataBase.GetInstance().GetImprove(l_ImproveId);
         for (int i = 0; i < l_ImproveData.skills.Count; i++)
         {
-            l_ImproveSkillsText += LocalizationDataBase.GetInstance().GetText("Skill:" + l_ImproveData.skills[i].id);
+            l_SkillsText += LocalizationDataBase.GetInstance().GetText("Skill:" + l_ImproveData.skills[i].id);
             if (i < l_ImproveData.skills.Count - 1)
             {
-                l_ImproveSkillsText += ", ";
+                l_SkillsText += ", ";
             }
         }
-        string l_Text = "Вы выбрали класс " + LocalizationDataBase.GetInstance().GetText("Improvement:" + l_ImproveName) + l_ImproveSkillsText;
+        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:Improve:СlassChoosed", new string[] { l_ImproveName, l_SkillsText });
 
         TextPanelImproveWindow l_TextPanel = Instantiate(TextPanelImproveWindow.prefab);
         l_TextPanel.SetText(new List<string>() { l_Text });
@@ -89,6 +90,7 @@ public class ImprovePanel : Panel
         ((PanelButtonImprove)m_ImproveButtonList[2]).improveData = ImproveDataBase.GetInstance().GetImprove("Brownie");
 
         m_ImproveButtonList[m_ImproveButtonList.count - 1].AddAction(ReturnToMainMenu);
+        m_ImproveButtonList[m_ImproveButtonList.count - 1].title = LocalizationDataBase.GetInstance().GetText("GUI:Improve:StayMyself");
     }
 
     private void ShowYesNoPanel()
@@ -99,6 +101,7 @@ public class ImprovePanel : Panel
         YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
         l_YesNoPanel.AddYesAction(SelectImprove);
         l_YesNoPanel.AddNoAction(l_PanelButtonImprove.UnreadyChoose);
+        l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("GUI:Improve:AreYouShure"));
         ImproveSystem.GetInstance().ShowPanel(l_YesNoPanel, true);
     }
 

@@ -46,7 +46,9 @@ public class SpecialSelectPanel : Panel
         m_AddedSpecialButtonList.isActive = false;
 
         m_ConfirmButtonList[0].AddAction(Confirm);
+        m_ConfirmButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:UseSpecials");
         m_ConfirmButtonList[1].AddAction(ReturnToMain);
+        m_ConfirmButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Cancel");
 
         InitSpecialButtons();
 

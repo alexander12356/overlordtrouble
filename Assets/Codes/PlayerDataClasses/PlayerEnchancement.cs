@@ -18,6 +18,11 @@ public class PlayerEnchancement
         m_CurrentEnchancement = p_Id;
     }
 
+    public string GetCurrentEnchancement()
+    {
+        return m_CurrentEnchancement;
+    }
+
     public Sprite GetProfileAvatar()
     {
         string l_AvatarPath = "Sprites/Creations/" + m_CurrentEnchancement + "/Profile";

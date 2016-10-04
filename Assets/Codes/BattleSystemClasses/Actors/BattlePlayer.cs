@@ -35,8 +35,9 @@ public class BattlePlayer : BattleActor
         AttackEffectsSystem.GetInstance().AddEffect(p_Actor, p_Actor, "Prefabs/BattleEffects/Player/Player_BaseAttack");
         AttackEffectsSystem.GetInstance().PlayEffects();
 
+        string l_AttackText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:PlayerAttack", new string[] { l_Damage.ToString() });
         m_TextPanel = Instantiate(TextPanel.prefab);
-        m_TextPanel.SetText(new List<string>() { "Игрок нанес " + l_Damage + " урона врагу" });
+        m_TextPanel.SetText(new List<string>() { l_AttackText });
         m_TextPanel.AddButtonAction(CloseTextPanel);
         BattleSystem.GetInstance().ShowPanel(m_TextPanel);
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
@@ -87,7 +88,7 @@ public class BattlePlayer : BattleActor
         if (l_BrokenSpecialCount == p_SpecialUpgradeIconList.Count)
         {
             l_DamageValue = 1.0f;
-            l_Text = "Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName;
+            l_Text = LocalizationDataBase.GetInstance().GetText("GUI: BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
 
             AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, p_Enemy, "Prefabs/BattleEffects/Player/Player_BaseAttack");
         }
@@ -96,7 +97,7 @@ public class BattlePlayer : BattleActor
             SkillData p_SkillData = SkillDataBase.GetInstance().GetSkillData(p_SpecialUpgradeIconList[0].skillId);
 
             l_DamageValue = p_SkillData.damage - p_SkillData.damage * 0.25f;
-            l_Text = "Плод твоих напрасных усилий был равен " + l_DamageValue + " очкам урона по " + p_Enemy.actorName;
+            l_Text = LocalizationDataBase.GetInstance().GetText("GUI: BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
 
             AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, p_Enemy, "Prefabs/BattleEffects/Player/Player_BaseAttack");
         }
@@ -106,25 +107,25 @@ public class BattlePlayer : BattleActor
 
             for (int i = 0; i < l_BuffedSkills.Count; i++)
             {
-                string l_SkillLocalization = LocalizationDataBase.GetInstance().GetText("Skill:" + l_BuffedSkills[i].id);
+                string l_SkillName = LocalizationDataBase.GetInstance().GetText("Skill:" + l_BuffedSkills[i].id);
                 if (i == l_BuffedSkills.Count - 2)
                 {
-                    l_UsedSpecialsName += l_SkillLocalization + " и ";
+                    l_UsedSpecialsName += l_SkillName + " и ";
                 }
                 else if (i == l_BuffedSkills.Count - 1)
                 {
-                    l_UsedSpecialsName += l_SkillLocalization;
+                    l_UsedSpecialsName += l_SkillName;
                 }
                 else
                 {
-                    l_UsedSpecialsName += l_SkillLocalization + ", ";
+                    l_UsedSpecialsName += l_SkillName + ", ";
                 }
                 l_DamageValue += l_BuffedSkills[i].damage;
 
                 AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, p_Enemy, "Prefabs/BattleEffects/Monstyle/" + l_BuffedSkills[i].id + "Monstyle");
             }
-            
-            l_Text = "ГГ использовал на \"" + p_Enemy.actorName + "\" " + l_UsedSpecialsName + " он нанес " + l_DamageValue + " урона";
+
+            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:SpecialAttack", new string[] { p_Enemy.actorName, l_UsedSpecialsName, l_DamageValue.ToString() });
         }
 
         p_Enemy.Damage(l_DamageValue);

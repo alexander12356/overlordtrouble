@@ -177,6 +177,11 @@ public class PlayerData : Singleton<PlayerData>
     {
         m_ClassupNotification += p_Action;
     }
+
+    public string GetCurrentEnchancement()
+    {
+        return m_PlayerEnchancement.GetCurrentEnchancement();
+    }
     #endregion
 
     #region Private

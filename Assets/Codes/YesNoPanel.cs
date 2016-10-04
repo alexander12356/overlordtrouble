@@ -32,7 +32,9 @@ public class YesNoPanel : Panel
 
         m_ButtonList = GetComponent<ButtonList>();
         m_ButtonList[0].AddAction(YesAction);
+        m_ButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:YesNoPanel:Confirm");
         m_ButtonList[1].AddAction(NoAction);
+        m_ButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:YesNoPanel:Cancel");
     }
 
     public override void UpdatePanel()

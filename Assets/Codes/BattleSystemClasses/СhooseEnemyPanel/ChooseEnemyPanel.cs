@@ -49,7 +49,9 @@ public class ChooseEnemyPanel : Panel
         InitEnemyList();
         m_ConfirmButtonList.isActive = false;
         m_ConfirmButtonList[0].AddAction(Confirm);
+        m_ConfirmButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Select");
         m_ConfirmButtonList[1].AddAction(Cancel);
+        m_ConfirmButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Cancel");
 
         m_EnemyButtonList.AddKeyArrowAction(SelectEnemyAvatar);
     }

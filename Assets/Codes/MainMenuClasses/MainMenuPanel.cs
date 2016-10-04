@@ -24,7 +24,9 @@ public class MainMenuPanel : Panel
 
         m_ButtonList = GetComponentInChildren<ButtonList>();
         m_ButtonList[0].AddAction(RunNewGame);
+        m_ButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:NewGame");
         m_ButtonList[1].AddAction(QuitGame);
+        m_ButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:Exit");
     }
 
     public override void UpdatePanel()

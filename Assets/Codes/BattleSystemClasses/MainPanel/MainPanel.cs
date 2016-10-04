@@ -55,8 +55,12 @@ public class MainPanel : Panel
     private void InitButtons()
     {
         m_ButtonList[0].AddAction(Attack);
+        m_ButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MainPanelAttack");
         m_ButtonList[1].AddAction(Special);
+        m_ButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MainPanelMonstyle");
+        m_ButtonList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MainPanelItems");
         m_ButtonList[3].AddAction(Retreat);
+        m_ButtonList[3].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MainPanelRetreat");
     }
 
     private void Attack()

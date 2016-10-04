@@ -159,7 +159,7 @@ public class BattleSystem : MonoBehaviour
         SetVisibleAvatarPanel(false);
 
         List<string> l_WinText = new List<string>();
-        l_WinText.Add("Враги убиты.\nВы победили.\nГГ получает " + m_Experience + " exp");
+        l_WinText.Add(LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Win", new string[] { m_Experience.ToString() }));
         if (m_IsLevelup)
         {
             string l_LevelText = (PlayerData.GetInstance().GetLevel() + 1).ToString();
@@ -186,7 +186,7 @@ public class BattleSystem : MonoBehaviour
         SetVisibleAvatarPanel(false);
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { "У ГГ больше нету сил сражаться далее, ГГ потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли." });
+        l_TextPanel.SetText(new List<string>() { LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Lose") });
         l_TextPanel.AddButtonAction(ReturnToMainMenu);
 
         ShowPanel(l_TextPanel);
