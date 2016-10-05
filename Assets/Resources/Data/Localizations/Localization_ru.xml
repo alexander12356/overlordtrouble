@@ -112,7 +112,7 @@
 	<Text id="Dialog:Store:Welcome">Добро пожаловать в мой скромный магазинчик. Хотите ли произвести покупку?</Text>
 	<Text id="Dialog:Store:1">Все мои товары отличаются большой прочностью и принадлежали храбрым воинам, которые вызвали на бой дракона</Text>
 	<Text id="Dialog:Store:2">Никто из них не выжил, в отличии от их экипировки</Text>
-	<Text id="Dialog:VillageElder:1">Вижу ты проснулся.</Text>
+	<Text id="Dialog:VillageElder:1">Вижу, ты проснулся.</Text>
 	<Text id="Dialog:VillageElder:2">Я все еще сонный.</Text>
 	<Text id="Dialog:VillageElder:3">На этом пока все.</Text>
 	<Text id="Dialog:GoatPerson:1">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
