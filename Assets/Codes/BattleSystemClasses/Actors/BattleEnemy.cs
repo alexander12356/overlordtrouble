@@ -11,6 +11,7 @@ public class BattleEnemy : BattleActor
     private bool m_Selected = false;
     private SpriteRenderer m_SelectedArrow = null;
     private List<EnemyAttackData> m_AttackList = null;
+    private TextPanel m_TextPanel = null;
     #endregion
 
     #region Interface
@@ -88,11 +89,10 @@ public class BattleEnemy : BattleActor
         AttackEffectsSystem.GetInstance().AddEffect(p_Actor, this, "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id);
         AttackEffectsSystem.GetInstance().PlayEffects();
 
-        TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { l_AttackText });
-        l_TextPanel.AddButtonAction(l_TextPanel.Close);
-        l_TextPanel.AddButtonAction(EndTurn);
-        BattleSystem.GetInstance().ShowPanel(l_TextPanel);
+        m_TextPanel = Instantiate(TextPanel.prefab);
+        m_TextPanel.SetText(new List<string>() { l_AttackText });
+        m_TextPanel.AddButtonAction(CloseTextPanel);
+        BattleSystem.GetInstance().ShowPanel(m_TextPanel);
     }
 
     public override void Die()
@@ -125,6 +125,15 @@ public class BattleEnemy : BattleActor
         m_AudioSource = GetComponent<AudioSource>();
         m_SpriteRenderer = transform.FindChild("Renderer").GetComponent<SpriteRenderer>();
         m_SelectedArrow = transform.FindChild("Selected").GetComponent<SpriteRenderer>();
+    }
+
+    private void CloseTextPanel()
+    {
+        if (AttackEffectsSystem.GetInstance().IsAllAnimationEnd())
+        {
+            m_TextPanel.Close();
+            EndTurn();
+        }
     }
     #endregion
 }
