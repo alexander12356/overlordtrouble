@@ -122,7 +122,7 @@ public class SpecialUpgradePanel : Panel
         }
 
         KeyCode l_CurrentKey = m_SpecialUpgradeIconList[m_CurrentKeyCounter].arrowKey;
-        if (Input.anyKeyDown)
+        if (IsArrowDown())
         {
             if (Input.GetKeyDown(l_CurrentKey))
             {
@@ -183,6 +183,15 @@ public class SpecialUpgradePanel : Panel
     private void SpecialAttack()
     {
         BattlePlayer.GetInstance().SpecialAttack(m_Enemy, m_SpecialUpgradeIconList);
+    }
+
+    private bool IsArrowDown()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            return true;
+        }
+        return false;
     }
     #endregion
 }
