@@ -46,6 +46,11 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
 
         return l_Text;
     }
+
+    public void ChangeLanguage(string p_LangId)
+    {
+        Parse(p_LangId);
+    }
     #endregion
 
     #region Private

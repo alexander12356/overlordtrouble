@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainMenuPanel : Panel
 {
@@ -41,9 +41,17 @@ public class MainMenuPanel : Panel
             GameManager.GetInstance().isTesting = true;
             PlayerData.GetInstance().InitTestStats();
         }
-        if (Input.GetKeyUp(KeyCode.X))
+        else if (Input.GetKeyUp(KeyCode.X))
         {
             GameManager.GetInstance().UnloadScene();
+        }
+        else if (Input.GetKeyUp(KeyCode.R))
+        {
+            ChangeLaguage("ru");
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            ChangeLaguage("en");
         }
     }
 
@@ -57,5 +65,11 @@ public class MainMenuPanel : Panel
     private void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void ChangeLaguage(string p_LangId)
+    {
+        LocalizationDataBase.GetInstance().ChangeLanguage(p_LangId);
+        SceneManager.LoadScene("MainMenu");
     }
 }
