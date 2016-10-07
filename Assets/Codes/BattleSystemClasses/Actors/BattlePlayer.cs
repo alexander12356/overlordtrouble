@@ -88,7 +88,7 @@ public class BattlePlayer : BattleActor
         if (l_BrokenSpecialCount == p_SpecialUpgradeIconList.Count)
         {
             l_DamageValue = 1.0f;
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI: BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
+            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
 
             AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, p_Enemy, "Prefabs/BattleEffects/Player/Player_BaseAttack");
         }
@@ -97,7 +97,7 @@ public class BattlePlayer : BattleActor
             SkillData p_SkillData = SkillDataBase.GetInstance().GetSkillData(p_SpecialUpgradeIconList[0].skillId);
 
             l_DamageValue = p_SkillData.damage - p_SkillData.damage * 0.25f;
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI: BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
+            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
 
             AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, p_Enemy, "Prefabs/BattleEffects/Player/Player_BaseAttack");
         }
