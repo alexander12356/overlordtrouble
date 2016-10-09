@@ -20,6 +20,13 @@
 		"Element" : "Earth",
 		"DescriptionId" : ""
 	},
+	"Slash" :
+	{
+		"Attack" : 3.5,
+		"Mana" : 5.0,
+		"Element" : "Earth",
+		"DescriptionId" : ""
+	},
 	"StonePress" :
 	{
 		"Attack" : 10,

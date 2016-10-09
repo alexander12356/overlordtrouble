@@ -17,7 +17,8 @@
     "Profile": "Sprites/Creations/ShellLizard/Profile",
 	"Elemental": "Earth",
     "Skills": [
-      "TailWhap"
+      "TailWhap",
+	  "Slash"
     ]
   },
   "Brownie": {

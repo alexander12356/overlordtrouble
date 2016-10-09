@@ -37,7 +37,7 @@ public class MainMenuPanel : Panel
 
         if (Input.GetKeyUp(KeyCode.F12))
         {
-            MainMenuSystem.GetInstance().StartLocation("DemoMainScene");
+            SceneManager.LoadScene("DemoMainScene");
             GameManager.GetInstance().isTesting = true;
             PlayerData.GetInstance().InitTestStats();
         }
