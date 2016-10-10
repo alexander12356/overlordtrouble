@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: e5130b3b27e5dd7469ae2091c3ce2cc7
+timeCreated: 1476079024
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Kelvinch
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 9d168550ef6afe74eae99e9bb5c87b99, type: 3}
+  - {fileID: 12800000, guid: 50bd57360d614874291ea0cce374539d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
