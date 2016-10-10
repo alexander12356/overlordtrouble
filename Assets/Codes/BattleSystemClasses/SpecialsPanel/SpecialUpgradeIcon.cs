@@ -102,20 +102,6 @@ public class SpecialUpgradeIcon : MonoBehaviour
     {
         return m_SkillBuffCount;
     }
-
-    public void AddIncrementAction(PanelActionHandler p_Action)
-    {
-        m_IncrementCurrentIcon += p_Action;
-    }
-
-    // Called from Animation
-    public void NextIcon()
-    {
-        if (m_IncrementCurrentIcon != null)
-        {
-            m_IncrementCurrentIcon();
-        }
-    }
     #endregion
 
     #region Private

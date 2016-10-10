@@ -73,7 +73,6 @@ public class SpecialUpgradePanel : Panel
             l_SpecialUpgradeIcon.SetTitle(LocalizationDataBase.GetInstance().GetText("Skill:" + l_SkillData.id));
             l_SpecialUpgradeIcon.skillId = p_AddedSkills[i];
             l_SpecialUpgradeIcon.transform.SetParent(m_SpecialIconsConteiner);
-            l_SpecialUpgradeIcon.AddIncrementAction(IncrementCurrentCounter);
 
             l_SpecialUpgradeIcon.transform.localPosition = Vector3.zero;
             l_SpecialUpgradeIcon.transform.localScale    = Vector3.one;
@@ -134,7 +133,7 @@ public class SpecialUpgradePanel : Panel
                 m_SpecialUpgradeIconList[m_CurrentKeyCounter].Wrong();
                 m_WrongSpecialCounter++;
             }
-            //IncrementCurrentCounter();
+            IncrementCurrentCounter();
         }
     }
 
