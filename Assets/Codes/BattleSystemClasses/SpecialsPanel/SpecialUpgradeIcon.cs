@@ -15,6 +15,8 @@ public class SpecialUpgradeIcon : MonoBehaviour
     private bool  m_Selected    = false;
     private int   m_SkillBuffCount = 0;
     private string m_SkillId = string.Empty;
+    private Animator m_Animator = null;
+    private event PanelActionHandler m_IncrementCurrentIcon = null;
     #endregion
 
     #region Interface
@@ -80,6 +82,7 @@ public class SpecialUpgradeIcon : MonoBehaviour
         }
 
         m_SkillBuffCount++;
+        m_Animator.SetTrigger("Upgrade");
     }
 
     public void Wrong()
@@ -92,6 +95,26 @@ public class SpecialUpgradeIcon : MonoBehaviour
         m_WrongImage.gameObject.SetActive(true);
 
         m_TextBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/MissedSpecialIcon");
+        m_Animator.SetTrigger("Wrong");
+    }
+
+    public int GetBuffCount()
+    {
+        return m_SkillBuffCount;
+    }
+
+    public void AddIncrementAction(PanelActionHandler p_Action)
+    {
+        m_IncrementCurrentIcon += p_Action;
+    }
+
+    // Called from Animation
+    public void NextIcon()
+    {
+        if (m_IncrementCurrentIcon != null)
+        {
+            m_IncrementCurrentIcon();
+        }
     }
     #endregion
 
@@ -110,13 +133,14 @@ public class SpecialUpgradeIcon : MonoBehaviour
         m_ArrowImage     = l_Images[3];
 
         m_Text = GetComponentInChildren<Text>();
+        m_Animator = GetComponent<Animator>();
     }
 
     private void SetKey(KeyCode p_Key)
     {
         m_Key = p_Key;
 
-        m_ArrowImage.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/SpecialArrow");
+        m_ArrowImage.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/SpecialUpgradeIcon/SpecialArrow");
         switch (p_Key)
         {
             case KeyCode.UpArrow:
@@ -132,11 +156,6 @@ public class SpecialUpgradeIcon : MonoBehaviour
                 m_ArrowImage.transform.localRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 180.0f));
                 break;
         }
-    }
-
-    public int GetBuffCount()
-    {
-        return m_SkillBuffCount;
     }
     #endregion
 }
