@@ -11,13 +11,13 @@ public class DemoMainScene : MonoBehaviour
 
         m_ButtonList = GetComponent<ButtonList>();
 
-        m_ButtonList[0].AddAction(StartTestBattle1);
-        m_ButtonList[1].AddAction(StartTestBattle2);
-        m_ButtonList[2].AddAction(StartMap);
-        m_ButtonList[3].AddAction(StartEncyclopedia);
-        m_ButtonList[4].AddAction(StartProfile);
-        m_ButtonList[5].AddAction(StartImprove);
-        m_ButtonList[6].AddAction(StartTestBattle3);
+        m_ButtonList[0].AddAction(StartGopolak);
+        m_ButtonList[1].AddAction(StartMap);
+        m_ButtonList[2].AddAction(StartEncyclopedia);
+        m_ButtonList[3].AddAction(StartProfile);
+        m_ButtonList[4].AddAction(StartImprove);
+        m_ButtonList[5].AddAction(StartDualent);
+        m_ButtonList[6].AddAction(StartThirdsort);
     }
 
     private void Update()
@@ -30,21 +30,21 @@ public class DemoMainScene : MonoBehaviour
         m_ButtonList.UpdateKey();
     }
 
-    private void StartTestBattle1()
+    private void StartGopolak()
     {
-        BattleStarter.GetInstance().InitBattle(null, "TestBattle");
+        BattleStarter.GetInstance().InitBattle(null, "TestBattleSkwatwolf");
         SceneManager.LoadScene("BattleSystem");
     }
 
-    private void StartTestBattle2()
+    private void StartDualent()
     {
-        BattleStarter.GetInstance().InitBattle(null, "TestBattle2");
+        BattleStarter.GetInstance().InitBattle(null, "TestBattleDualent");
         SceneManager.LoadScene("BattleSystem");
     }
 
-    private void StartTestBattle3()
+    private void StartThirdsort()
     {
-        BattleStarter.GetInstance().InitBattle(null, "TestBattle3");
+        BattleStarter.GetInstance().InitBattle(null, "TestBattleThirdsort");
         SceneManager.LoadScene("BattleSystem");
     }
 

@@ -17,7 +17,7 @@
 			"Bokalisk"
 		]
 	},
-	"TestBattle":
+	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",
 		"Enemy": 
@@ -30,7 +30,7 @@
 			"MP" : 20
 		}
 	},
-	"TestBattle2":
+	"TestBattleDualent":
 	{
 		"Location" : "ForestCreeps",
 		"Enemy": 
@@ -43,7 +43,7 @@
 			"MP" : 20
 		}
 	},
-	"TestBattle3":
+	"TestBattleThirdsort":
 	{
 		"Location" : "ForestCreeps",
 		"Enemy": 
