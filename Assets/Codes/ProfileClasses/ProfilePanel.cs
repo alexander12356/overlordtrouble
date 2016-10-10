@@ -152,7 +152,6 @@ public class ProfilePanel : Panel
             PanelButtonProfileSpecial l_PanelButton = Instantiate(PanelButtonProfileSpecial.prefab);
             l_PanelButton.AddAction(SelectSpecial);
             l_PanelButton.monstyleId = m_MonstyleList[i].id;
-            l_PanelButton.text.fontSize = 40;
 
             m_SpecialsButtonList.AddButton(l_PanelButton);
         }
