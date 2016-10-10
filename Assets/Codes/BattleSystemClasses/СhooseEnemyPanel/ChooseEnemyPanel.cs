@@ -167,7 +167,8 @@ public class ChooseEnemyPanel : Panel
     private void Confirm()
     {
         m_EnemyList[m_EnemyButtonList.currentButtonId].selected = false;
-        ChoosedAction();
+        Close();
+        AddPopAction(ChoosedAction);
     }
 
     private void CancelAction()

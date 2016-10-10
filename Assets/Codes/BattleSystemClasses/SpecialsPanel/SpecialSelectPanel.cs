@@ -155,13 +155,7 @@ public class SpecialSelectPanel : Panel
     private void Attack()
     {
         Close();
-        m_ChooseEnemyPanel.Close();
-
-        SpecialUpgradePanel l_SpecialUpgradePanel = Instantiate(SpecialUpgradePanel.prefab);
-        l_SpecialUpgradePanel.SetSkills(m_ChoosedSkills);
-        l_SpecialUpgradePanel.SetEnemy(m_ChooseEnemyPanel.choosedEnemy);
-        BattleSystem.GetInstance().ShowPanel(l_SpecialUpgradePanel);
-        BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
+        AddPopAction(ShowUpgradePanel);
     }
 
     private void CancelChoose()
@@ -214,6 +208,15 @@ public class SpecialSelectPanel : Panel
             l_SpecialButton.AddAction(ChooseSpecial);
             m_SpecialButtonList.AddButton(l_SpecialButton);
         }
+    }
+
+    private void ShowUpgradePanel()
+    {
+        SpecialUpgradePanel l_SpecialUpgradePanel = Instantiate(SpecialUpgradePanel.prefab);
+        l_SpecialUpgradePanel.SetSkills(m_ChoosedSkills);
+        l_SpecialUpgradePanel.SetEnemy(m_ChooseEnemyPanel.choosedEnemy);
+        BattleSystem.GetInstance().ShowPanel(l_SpecialUpgradePanel);
+        BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
     #endregion
 }

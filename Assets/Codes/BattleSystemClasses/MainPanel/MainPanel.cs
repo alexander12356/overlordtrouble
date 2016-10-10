@@ -78,7 +78,6 @@ public class MainPanel : Panel
 
     private void AttackEnemy()
     {
-        m_ChoosedEnemyPanel.Close();
         BattlePlayer.GetInstance().Attack(m_ChoosedEnemyPanel.choosedEnemy);
     }
 
