@@ -18,9 +18,9 @@ public class ProfileSystem : MonoBehaviour
         m_Instance = this;
     }
 
-    public void ShowPanel(Panel p_Panel)
+    public void ShowPanel(Panel p_Panel, bool p_WithOverlay = false)
     {
-        m_PanelManager.ShowPanel(p_Panel);
+        m_PanelManager.ShowPanel(p_Panel, p_WithOverlay);
     }
 
     public void StartLocation(string p_LocationId)

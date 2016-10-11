@@ -75,6 +75,7 @@
 	<Text id="GUI:Profile:SpecialSelected">Выбрано</Text>
 	<Text id="GUI:Profile:SpecialUnselected">Не выбрано</Text>
 	<Text id="GUI:Profile:SpecialTitle">Монстайл</Text>
+	<Text id="GUI:Profile:QuestionImproveStats">Вы уверены?</Text>
 	
 	<Text id="GUI:BattleSystem:Levelup">Игрок повысился до %dго уровня</Text>
 	<Text id="GUI:BattleSystem:Classup">достиг достаточного уровня для повышение класса!</Text>

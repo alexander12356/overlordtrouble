@@ -16,6 +16,7 @@ public class ProfilePanel : Panel
 
     private ArrayList m_SelectedSpecialsList;
     private int m_StatImprovePoints = 0;
+    private int m_BaseStatImprovePoints = 0;
     private bool m_HaveStatPoints = false;
     private bool m_HaveClassupPoints = false;
 
@@ -45,8 +46,6 @@ public class ProfilePanel : Panel
         set
         {
             m_StatImprovePoints = value;
-
-            PlayerData.GetInstance().statImprovePoints = m_StatImprovePoints;
             m_StatImprovePointsText.text = LocalizationDataBase.GetInstance().GetText("GUI:Profile:StatsPoints", new string[] { m_StatImprovePoints.ToString() });
         }
     }
@@ -93,7 +92,7 @@ public class ProfilePanel : Panel
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 PanelButtonStat l_PanelButtonStat = (PanelButtonStat)m_StatsButtonList.currentButton;
-                if (m_StatImprovePoints > 0)
+                if (statImprovePoints > 0)
                 {
                     l_PanelButtonStat.PlayAnim("StatPlus");
                     l_PanelButtonStat.addedStatValue += 1;
@@ -106,7 +105,10 @@ public class ProfilePanel : Panel
             }
             else if (Input.GetKeyDown(KeyCode.Z))
             {
-                ConfirmStatImprove();
+                if (m_BaseStatImprovePoints != m_StatImprovePoints)
+                {
+                    QuestionStatImprove();
+                }
             }
             else if (Input.GetKeyUp(KeyCode.X))
             {
@@ -220,8 +222,19 @@ public class ProfilePanel : Panel
         }
     }
 
+    private void QuestionStatImprove()
+    {
+        YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
+        l_YesNoPanel.AddYesAction(ConfirmStatImprove);
+        l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("GUI:Profile:QuestionImproveStats"));
+
+        ProfileSystem.GetInstance().ShowPanel(l_YesNoPanel, true);
+    }
+
     private void ConfirmStatImprove()
     {
+        PlayerData.GetInstance().statImprovePoints = m_BaseStatImprovePoints = m_StatImprovePoints;
+
         for (int i = 0; i < m_StatsButtonList.count; i++)
         {
             PanelButtonStat l_PanelButtonStat = (PanelButtonStat)m_StatsButtonList[i];
@@ -239,7 +252,7 @@ public class ProfilePanel : Panel
 
             PlayerData.GetInstance().GetStats()[l_PanelButtonStat.statId] = l_PanelButtonStat.statValue;
         }
-        if (m_StatImprovePoints == 0)
+        if (statImprovePoints == 0)
         {
             m_HaveStatPoints = false;
             m_StatImprovePointsText.gameObject.SetActive(false);
@@ -292,7 +305,7 @@ public class ProfilePanel : Panel
         {
             m_HaveStatPoints = true;
             m_StatImprovePointsText.gameObject.SetActive(true);
-            statImprovePoints = PlayerData.GetInstance().statImprovePoints;
+            statImprovePoints = m_BaseStatImprovePoints = PlayerData.GetInstance().statImprovePoints;
         }
         else
         {

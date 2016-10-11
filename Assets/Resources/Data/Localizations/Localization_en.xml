@@ -75,6 +75,7 @@
 	<Text id="GUI:Profile:SpecialSelected">Selected</Text>
 	<Text id="GUI:Profile:SpecialUnselected">Not selected</Text>
 	<Text id="GUI:Profile:SpecialTitle">Monstyle</Text>
+	<Text id="GUI:Profile:QuestionImproveStats">Are you sure?</Text>
 	
 	<Text id="GUI:BattleSystem:Levelup">Leveled up to %d level</Text>
 	<Text id="GUI:BattleSystem:Classup">Got class up!</Text>
