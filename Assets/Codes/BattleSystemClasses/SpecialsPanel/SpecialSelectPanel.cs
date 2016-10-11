@@ -97,7 +97,7 @@ public class SpecialSelectPanel : Panel
     #region Private
     private void ReturnToMain()
     {
-        CancelChoose();
+        ResetChoosedSkills();
 
         Close();
     }
@@ -145,18 +145,33 @@ public class SpecialSelectPanel : Panel
 
     private void Confirm()
     {
+        AddPopAction(ShowChooseEnemy);
+        Close();
+    }
+
+    private void ShowChooseEnemy()
+    {
         m_ChooseEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
         m_ChooseEnemyPanel.AddChoosedAction(Attack);
+        m_ChooseEnemyPanel.AddCancelAction(CancelChooseEnemy);
         BattleSystem.GetInstance().ShowPanel(m_ChooseEnemyPanel, true, BattleSystem.GetInstance().mainPanelTransform);
     }
 
     private void Attack()
     {
-        Close();
-        AddPopAction(ShowUpgradePanel);
+        //Close();
+        ShowUpgradePanel();
     }
 
-    private void CancelChoose()
+    private void CancelChooseEnemy()
+    {
+        ResetChoosedSkills();
+
+        SpecialSelectPanel l_SpecialSelectPanel = Instantiate(prefab);
+        BattleSystem.GetInstance().ShowPanel(l_SpecialSelectPanel, true, BattleSystem.GetInstance().mainPanelTransform);
+    }
+
+    private void ResetChoosedSkills()
     {
         for (int i = 0; i < m_ChoosedSkills.Count; i++)
         {
