@@ -131,7 +131,6 @@ public class SpecialSelectPanel : Panel
         }
     }
 
-    //TODO Kostil
     private void InitSpecialButtons()
     {
         if (BattleSystem.GetInstance().battleData.id.Contains("TestBattle"))
@@ -148,7 +147,6 @@ public class SpecialSelectPanel : Panel
     {
         m_ChooseEnemyPanel = Instantiate(ChooseEnemyPanel.prefab);
         m_ChooseEnemyPanel.AddChoosedAction(Attack);
-        m_ChooseEnemyPanel.AddCancelAction(CancelChoose);
         BattleSystem.GetInstance().ShowPanel(m_ChooseEnemyPanel, true, BattleSystem.GetInstance().mainPanelTransform);
     }
 
@@ -164,6 +162,7 @@ public class SpecialSelectPanel : Panel
         {
             BattlePlayer.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(m_ChoosedSkills[i]).mana;
         }
+        m_ChoosedSkills.Clear();
     }
 
     private void InitTestSpecials()

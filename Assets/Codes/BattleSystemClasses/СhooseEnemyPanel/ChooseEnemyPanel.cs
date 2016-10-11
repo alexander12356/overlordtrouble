@@ -4,12 +4,6 @@ using System.Collections.Generic;
 public class ChooseEnemyPanel : Panel
 {
     #region Variables
-    private enum ButtonListType
-    {
-        EnemyList,
-        ConfirmList
-    }
-
     private List<BattleEnemy> m_EnemyList;
 
     [SerializeField]
@@ -22,7 +16,6 @@ public class ChooseEnemyPanel : Panel
     private BattleEnemy m_ChoosedEnemy = null;
     private PanelActionHandler m_ConfirmAction = null;
     private PanelActionHandler m_CancelAction = null;
-    private ButtonListType m_CurrentButtonListType = ButtonListType.EnemyList;
     #endregion
 
     #region Interface
@@ -65,14 +58,8 @@ public class ChooseEnemyPanel : Panel
             return;
         }
 
-        if (m_CurrentButtonListType == ButtonListType.EnemyList)
-        {
-            m_EnemyButtonList.UpdateKey();
-        }
-        else if (m_CurrentButtonListType == ButtonListType.ConfirmList)
-        {
-            m_ConfirmButtonList.UpdateKey();
-        }
+        m_EnemyButtonList.UpdateKey();
+        m_ConfirmButtonList.UpdateKey();
 
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -129,7 +116,6 @@ public class ChooseEnemyPanel : Panel
 
         m_EnemyButtonList.isActive = false;
         m_ConfirmButtonList.isActive = true;
-        m_CurrentButtonListType = ButtonListType.ConfirmList;
 
         m_EnemyButtonList.currentButton.selected = true;
     }
@@ -142,9 +128,8 @@ public class ChooseEnemyPanel : Panel
 
     private void Cancel()
     {
-        if (m_CurrentButtonListType == ButtonListType.ConfirmList)
+        if (m_ConfirmButtonList.isActive)
         {
-            m_CurrentButtonListType = ButtonListType.EnemyList;
             m_ConfirmButtonList.isActive = false;
             m_EnemyButtonList.isActive = true;
         }
