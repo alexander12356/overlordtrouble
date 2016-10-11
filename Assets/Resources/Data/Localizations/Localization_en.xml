@@ -97,8 +97,8 @@
 	<Text id="GUI:Improve:StayMyself">Stay myself</Text>
 	<Text id="GUI:Improve:AreYouShure">Are you sure you want to choose this class? You won't be able to turn back.</Text>
 	<Text id="GUI:Improve:СlassChoosed">You choose %d, you got next techniques:\n%d</Text>
-	<Text id="GUI:YesNoPanel:Confirm">Confirm</Text>
-	<Text id="GUI:YesNoPanel:Cancel">Cancel</Text>
+	<Text id="GUI:YesNoPanel:Confirm">Yes</Text>
+	<Text id="GUI:YesNoPanel:Cancel">No</Text>
 	<Text id="GUI:MainMenuPanel:NewGame">New game</Text>
 	<Text id="GUI:MainMenuPanel:Exit">Exit</Text>
 	

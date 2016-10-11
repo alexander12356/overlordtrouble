@@ -95,10 +95,10 @@
 	<Text id="GUI:BattleSystem:And">и</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Побуду собой</Text>
-	<Text id="GUI:Improve:AreYouShure">Вы уверены что хотите выбрать этот класс? Вернуть обратно уже не выйдет.</Text>
+	<Text id="GUI:Improve:AreYouShure">Вы уверены что хотите выбрать этот\nкласс?\nВернуть обратно уже не выйдет.</Text>
 	<Text id="GUI:Improve:СlassChoosed">Вы выбрали класс %d, вы получили следующие приемы:\n%d</Text>
-	<Text id="GUI:YesNoPanel:Confirm">Выбрать</Text>
-	<Text id="GUI:YesNoPanel:Cancel">Отменить</Text>
+	<Text id="GUI:YesNoPanel:Confirm">Да</Text>
+	<Text id="GUI:YesNoPanel:Cancel">Нет</Text>
 	<Text id="GUI:MainMenuPanel:NewGame">Новая игра</Text>
 	<Text id="GUI:MainMenuPanel:Exit">Выход</Text>
 	
