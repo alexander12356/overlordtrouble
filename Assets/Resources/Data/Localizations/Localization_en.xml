@@ -92,6 +92,7 @@
 	<Text id="GUI:BattleSystem:UseSpecials">Use</Text>
 	<Text id="GUI:BattleSystem:Win">Enemies are defeated.\nYou won.\nBobble got %d exp</Text>
 	<Text id="GUI:BattleSystem:Lose">Bobbl can't fight much longer, Bobbl lost consciousness.\nNo one left to continue the fight...\nYou lost.</Text>
+	<Text id="GUI:BattleSystem:And">and</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Stay myself</Text>
 	<Text id="GUI:Improve:AreYouShure">Are you sure you want to choose this class? You won't be able to turn back.</Text>

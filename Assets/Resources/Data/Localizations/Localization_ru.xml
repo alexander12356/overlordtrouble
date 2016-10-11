@@ -92,6 +92,7 @@
 	<Text id="GUI:BattleSystem:UseSpecials">Исполнить</Text>
 	<Text id="GUI:BattleSystem:Win">Враги убиты.\nВы победили.\nГГ получает %d exp</Text>
 	<Text id="GUI:BattleSystem:Lose">Кеша больше не может сражаться дальше, Кеша потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли.</Text>
+	<Text id="GUI:BattleSystem:And">и</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Побуду собой</Text>
 	<Text id="GUI:Improve:AreYouShure">Вы уверены что хотите выбрать этот класс? Вернуть обратно уже не выйдет.</Text>

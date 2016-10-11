@@ -110,7 +110,7 @@ public class BattlePlayer : BattleActor
                 string l_SkillName = LocalizationDataBase.GetInstance().GetText("Skill:" + l_BuffedSkills[i].id);
                 if (i == l_BuffedSkills.Count - 2)
                 {
-                    l_UsedSpecialsName += l_SkillName + " и ";
+                    l_UsedSpecialsName += l_SkillName + " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
                 }
                 else if (i == l_BuffedSkills.Count - 1)
                 {
