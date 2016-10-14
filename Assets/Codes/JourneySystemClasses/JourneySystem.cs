@@ -54,11 +54,11 @@ public class JourneySystem : MonoBehaviour
         m_Player.LoadImprove();
     }
 
-    public void StartDialog(string p_DialogId)
+    public void StartDialog(string p_DialogId, int p_SubDialogId)
     {
         SetControl(ControlType.Panel);
 
-        DialogManager.GetInstance().StartDialog(p_DialogId);
+        DialogManager.GetInstance().StartDialog(p_DialogId, p_SubDialogId);
     }
 
     public void SetControl(ControlType p_Type)

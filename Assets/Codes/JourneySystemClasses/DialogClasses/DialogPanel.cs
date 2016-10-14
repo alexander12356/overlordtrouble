@@ -36,10 +36,14 @@ public class DialogPanel : Panel
         m_BackgroundImage = GetComponentInChildren<Image>();
     }
 
-    public void SetDialog(Dialog p_Dialog)
+    public void SetDialog(List<string> p_Phrases)
     {
-        m_TextBox.SetText(p_Dialog.phrases);
-        m_AvatarImage.sprite = Resources.Load<Sprite>(p_Dialog.avatarImagePath);
+        m_TextBox.SetText(p_Phrases);
+    }
+
+    public void SetAvatar(string p_AvatarPath)
+    {
+        m_AvatarImage.sprite = Resources.Load<Sprite>(p_AvatarPath);
 
         if (m_AvatarImage.sprite == null)
         {
@@ -52,7 +56,6 @@ public class DialogPanel : Panel
     {
         base.UpdatePanel();
 
-        //TODO думать надо как от этого избавиться (см. задачу https://trello.com/c/bkpmIxhr/104-z)
         if (moving)
         {
             return;

@@ -1,49 +1,54 @@
 ﻿<?xml version="1.0"?>
 <DialogList>
 	<Dialog id="SkeletonChild" avatarPath="Sprites/Creations/SkeletonChild/Avatar">
-		<Text id="0" avatarId="NPC1">Dialog:SkeletonChild:1</Text>
-		<Text id="1" avatarId="NPC1">Dialog:SkeletonChild:2</Text>
+		<Text>Dialog:SkeletonChild:1</Text>
+		<Text>Dialog:SkeletonChild:2</Text>
 	</Dialog>
 	<Dialog id="SnailKid" avatarPath="Sprites/Creations/SnailKid/Avatar">
-		<Text id="0" avatarId="NPC1">Dialog:SnailKid:1</Text>
-		<Text id="1" avatarId="NPC1">Dialog:SnailKid:2</Text>
+		<Text>Dialog:SnailKid:1</Text>
+		<Text>Dialog:SnailKid:2</Text>
 	</Dialog>
 	<Dialog id="Bokalisk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
-		<Text id="0" avatarId="Bokalisk">Dialog:Bokalisk:1</Text>
-		<Text id="1" avatarId="Bokalisk">Dialog:Bokalisk:2</Text>
+		<Text>Dialog:Bokalisk:1</Text>
+		<Text>Dialog:Bokalisk:2</Text>
 	</Dialog>
 	<Dialog id="Bokalisk1" avatarPath="Sprites/Creations/Bokalisk/Avatar">
-		<Text id="0" avatarId="Bokalisk">Dialog:Bokalisk1:1</Text>
-		<Text id="1" avatarId="Bokalisk">Dialog:Bokalisk1:2</Text>
+		<Text>Dialog:Bokalisk1:1</Text>
+		<Text>Dialog:Bokalisk1:2</Text>
 	</Dialog>
-  <Dialog id="StoreWelcome" avatarPath="Sprites/Creations/Store/Avatar">
-	<Text id="0">Dialog:Store:Welcome</Text>
-  </Dialog>
-  <Dialog id="StoreDialog" avatarPath="Sprites/Creations/Store/Avatar">
-	<Text id="0" avatarId="Store">Dialog:Store:1</Text>
-	<Text id="1" avatarId="Store">Dialog:Store:2</Text>
-  </Dialog>
-  <Dialog id="VillageElder" avatarPath="Sprites/Creations/VillageElder/Avatar">
-	<Text id="0" avatarId="VillageElder">Dialog:VillageElder:1</Text>
-	<Text id="1" avatarId="VillageElder">Dialog:VillageElder:2</Text>
-	<Text id="2" avatarId="VillageElder">Dialog:VillageElder:3</Text>
-  </Dialog>
-  <Dialog id="GoatPerson" avatarPath="Sprites/Creations/GoatPerson/Avatar">
-	<Text id="0" avatarId="GoatPerson">Dialog:GoatPerson:1</Text>
-	<Text id="1" avatarId="GoatPerson">Dialog:GoatPerson:2</Text>
-	<Text id="2" avatarId="GoatPerson">Dialog:GoatPerson:3</Text>
-  </Dialog>
-  <Dialog id="Terner" avatarPath="Sprites/Creations/Terner/Avatar">
-	<Text id="0" avatarId="GoatPerson">Dialog:Terner:1</Text>
-  </Dialog>
-  <Dialog id="VillageFountain" avatarPath="">
-	<Text id="0" avatarId="GoatPerson">Dialog:OldWell</Text>
-  </Dialog>
-  <Dialog id="GiantCock" avatarPath="Sprites/Creations/GiantCock/Avatar">
-	<Text id="0" avatarId="GoatPerson">Dialog:GiantCock:1</Text>
-	<Text id="1" avatarId="GoatPerson">Dialog:GiantCock:2</Text>
-  </Dialog>
-  <Dialog id="Uniceros" avatarPath="Sprites/Creations/Uniceros/Avatar">
-	<Text id="0" avatarId="GoatPerson">Dialog:Uniceros:1</Text>
-  </Dialog>
+	<Dialog id="StoreWelcome" avatarPath="Sprites/Creations/Store/Avatar">
+		<Text>Dialog:Store:Welcome</Text>
+	</Dialog>
+	<Dialog id="StoreDialog" avatarPath="Sprites/Creations/Store/Avatar">
+		<Text>Dialog:Store:1</Text>
+		<Text>Dialog:Store:2</Text>
+	</Dialog>
+	<Dialog id="VillageElder" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<Text>Dialog:VillageElder:1</Text>
+		<Text>Dialog:VillageElder:2</Text>
+		<Text>Dialog:VillageElder:3</Text>
+	</Dialog>
+	<Dialog id="GoatPerson" avatarPath="Sprites/Creations/GoatPerson/Avatar">
+		<SubDialog>
+			<Text>Dialog:GoatPerson:1</Text>
+			<Text>Dialog:GoatPerson:2</Text>
+			<Text>Dialog:GoatPerson:3</Text>
+		</SubDialog>
+		<SubDialog>
+			<Text>Dialog:GoatPerson:3</Text>
+		</SubDialog>
+	</Dialog>
+	<Dialog id="Terner" avatarPath="Sprites/Creations/Terner/Avatar">
+		<Text>Dialog:Terner:1</Text>
+	</Dialog>
+	<Dialog id="VillageFountain" avatarPath="">
+		<Text>Dialog:OldWell</Text>
+	</Dialog>
+	<Dialog id="GiantCock" avatarPath="Sprites/Creations/GiantCock/Avatar">
+		<Text>Dialog:GiantCock:1</Text>
+		<Text>Dialog:GiantCock:2</Text>
+	</Dialog>
+	<Dialog id="Uniceros" avatarPath="Sprites/Creations/Uniceros/Avatar">
+		<Text>Dialog:Uniceros:1</Text>
+	</Dialog>
 </DialogList>

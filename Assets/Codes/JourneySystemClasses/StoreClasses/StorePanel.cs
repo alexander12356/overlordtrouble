@@ -182,7 +182,7 @@ public class StorePanel : Panel
         HideButtonList();
 
         m_TextBox.Activate(true);
-        m_TextBox.SetText(DialogDataBase.GetInstance().GetDialog("StoreDialog").phrases);
+        m_TextBox.SetText(DialogDataBase.GetInstance().GetDialog("StoreDialog").subDialogs[0].phrases);
         m_TextBox.ShowText();
 
         m_TextBox.AddEndAction(StartWelcomeDialog);
@@ -193,7 +193,7 @@ public class StorePanel : Panel
         ShowButtonList();
 
         m_TextBox.Activate(true);
-        m_TextBox.SetText(DialogDataBase.GetInstance().GetDialog("StoreWelcome").phrases);
+        m_TextBox.SetText(DialogDataBase.GetInstance().GetDialog("StoreWelcome").subDialogs[0].phrases);
         m_TextBox.ShowText();
 
         m_TextBox.AddEndAction(DisactiveTextBox);

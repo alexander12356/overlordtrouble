@@ -18,13 +18,15 @@ public class DialogManager : MonoBehaviour
         return m_Instance;
     }
 
-    public void StartDialog(string p_DialogId)
+    public void StartDialog(string p_DialogId, int p_SubDialogId)
     {
-        DialogPanel l_DialogWindow = Instantiate(DialogPanel.prefab);
-        l_DialogWindow.SetDialog(DialogDataBase.GetInstance().GetDialog(p_DialogId));
+        Dialog l_Dialog = DialogDataBase.GetInstance().GetDialog(p_DialogId);
+        SubDialog l_SubDialog = l_Dialog.subDialogs[p_SubDialogId];
 
+        DialogPanel l_DialogWindow = Instantiate(DialogPanel.prefab);
+        l_DialogWindow.SetAvatar(l_Dialog.avatarImagePath);
+        l_DialogWindow.SetDialog(l_SubDialog.phrases);
         JourneySystem.GetInstance().ShowPanel(l_DialogWindow, true);
-        l_DialogWindow.myTransform.localPosition = new Vector3(0.0f, -457.0f, 0);
     }
 
     public void EndDialog()

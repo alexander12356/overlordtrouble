@@ -4,6 +4,8 @@ using System;
 
 public class DialogCollideBehaviors : BaseCollideBehavior
 {
+    private int p_SubDialogId = 0;
+
     [SerializeField]
     private string m_DialogId = string.Empty;
 
@@ -21,7 +23,14 @@ public class DialogCollideBehaviors : BaseCollideBehavior
             return;
         }
 
-        JourneySystem.GetInstance().StartDialog(m_DialogId);
+        JourneySystem.GetInstance().StartDialog(m_DialogId, p_SubDialogId);
+
+        Dialog l_Dialog = DialogDataBase.GetInstance().GetDialog(m_DialogId);
+        if (l_Dialog.subDialogs.Count > p_SubDialogId + 1)
+        {
+            p_SubDialogId++;
+        }
+
         m_JourneyActor.ApplyTo(p_Sender.myTransform.position);
         m_JourneyActor.StopLogic();
     }
