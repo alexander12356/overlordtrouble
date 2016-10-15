@@ -83,7 +83,6 @@ public class GameController : MonoBehaviour {
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.RightArrow)) {
 			StepCounter++;
-
 		}
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
 			StepCounter--;
