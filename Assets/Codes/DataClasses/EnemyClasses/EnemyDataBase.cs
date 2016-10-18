@@ -14,6 +14,11 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
         Parse();
     }
 
+    public Dictionary<string, EnemyData> GetEnemyBase()
+    {
+        return m_EnemyBase;
+    }
+
     public EnemyData GetEnemy(string p_EnemyId)
     {
         try
@@ -49,6 +54,7 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
             string l_ImproveId = l_JSONObject.keys[i];
             float  l_Health = l_JSONObject[i]["Health"].f;
             int l_Experience = (int)l_JSONObject[i]["Experience"].i;
+            string l_Elemental = l_JSONObject[i]["Elemental"].str;
 
             List<EnemyAttackData> l_AttackList = new List<EnemyAttackData>();
             for (int j = 0; j < l_JSONObject[i]["Attacks"].Count; j++)
@@ -61,7 +67,7 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
                 l_AttackList.Add(l_EnemyAttack);
             }
 
-            EnemyData l_ImproveData = new EnemyData(l_ImproveId, l_Health, l_Experience, l_AttackList);
+            EnemyData l_ImproveData = new EnemyData(l_ImproveId, l_Health, l_Elemental, l_Experience, l_AttackList);
             m_EnemyBase.Add(l_ImproveId, l_ImproveData);
         }
     }
