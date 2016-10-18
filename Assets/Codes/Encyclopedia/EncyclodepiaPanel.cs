@@ -19,7 +19,7 @@ public class EncyclodepiaPanel: Panel {
 
         InitAdditionalInfo();
         InitButtonLists();
-        InitMonsterList();      
+        InitMonsterList();
     }
 
     public void Start()
@@ -40,7 +40,7 @@ public class EncyclodepiaPanel: Panel {
         m_EnemyList.isActive = true;
 
         m_EnemyListScrolling = transform.FindChild("EnemyList").GetComponentInChildren<ButtonListScrolling>();
-        m_EnemyListScrolling.Init(60.0f, 14);
+        //m_EnemyListScrolling.Init(60.0f, 15);
         m_EnemyList.AddKeyArrowAction(m_EnemyListScrolling.CheckScrolling);
     }
 
@@ -62,6 +62,8 @@ public class EncyclodepiaPanel: Panel {
             l_PanelButton.enemyId = l_EnemyBase[l_Key].id;
             m_EnemyList.AddButton(l_PanelButton);
         }
+        m_EnemyListScrolling.Init(60.0f, 15);
+        m_EnemyListScrolling.scrollRect.verticalNormalizedPosition = 1.0f;
     }
 
     public override void UpdatePanel()
