@@ -42,6 +42,7 @@ public class EncyclodepiaPanel: Panel {
         m_EnemyListScrolling = transform.FindChild("EnemyList").GetComponentInChildren<ButtonListScrolling>();
         //m_EnemyListScrolling.Init(60.0f, 15);
         m_EnemyList.AddKeyArrowAction(m_EnemyListScrolling.CheckScrolling);
+        m_EnemyList.AddCancelAction(ReturnToJourney);
     }
 
     private void ShowEnemyInfo()
@@ -71,5 +72,15 @@ public class EncyclodepiaPanel: Panel {
         base.UpdatePanel();
 
         m_EnemyList.UpdateKey();
+    }
+
+    private void ReturnToJourney()
+    {
+        EncyclopediaSystem.GetInstance().UnloadScene();
+
+        if (JourneySystem.IsInstance())
+        {
+            JourneySystem.GetInstance().SetControl(ControlType.Panel);
+        }
     }
 }

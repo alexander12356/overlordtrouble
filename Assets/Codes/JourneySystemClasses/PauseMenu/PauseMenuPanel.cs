@@ -24,6 +24,7 @@ public class PauseMenuPanel : Panel
 
         m_ButtonList = GetComponentInChildren<ButtonList>();
         m_ButtonList[0].AddAction(OpenProfilePanel);
+        m_ButtonList[2].AddAction(OpenEncyclopedia);
         m_ButtonList[3].AddAction(OpenQuitQuestionPanel);
         m_ButtonList.AddCancelAction(ReturnToJourney);
     }
@@ -57,6 +58,11 @@ public class PauseMenuPanel : Panel
     private void OpenProfilePanel()
     {
         JourneySystem.GetInstance().AddScene("Profile");
+    }
+
+    private void OpenEncyclopedia()
+    {
+        JourneySystem.GetInstance().AddScene("Encyclopedia");
     }
 
     private void ReturnToJourney()
