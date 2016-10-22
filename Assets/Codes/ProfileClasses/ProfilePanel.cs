@@ -158,6 +158,7 @@ public class ProfilePanel : Panel
             m_SpecialsButtonList.AddButton(l_PanelButton);
         }
         m_SelectedSpecialsList = new ArrayList();
+        m_SpecialButtonListScrolling.Init(51.0f, 6);
     }
 
     private void ActiveSpecialListPanel()
@@ -284,7 +285,6 @@ public class ProfilePanel : Panel
         m_SpecialsButtonList.AddCancelAction(ActiveProfilePanel);
 
         m_SpecialButtonListScrolling = transform.FindChild("SpecialList").GetComponentInChildren<ButtonListScrolling>();
-        m_SpecialButtonListScrolling.Init(51.0f, 6);
         m_SpecialsButtonList.AddKeyArrowAction(m_SpecialButtonListScrolling.CheckScrolling);
 
         m_StatsButtonList = transform.FindChild("Stats").GetComponentInChildren<ButtonList>();
