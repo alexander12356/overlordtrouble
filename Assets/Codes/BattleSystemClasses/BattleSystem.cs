@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-using System.Collections;
 using System.Collections.Generic;
 
 public class BattleSystem : MonoBehaviour
@@ -15,22 +14,20 @@ public class BattleSystem : MonoBehaviour
     #region Variables
     private static BattleSystem m_Instance;
     private BattlePlayer m_Player;
-    private List<BattleEnemy>  m_EnemyList = new List<BattleEnemy>();
-    private BattleData m_BattleData;
     private int m_Experience = 0;
     private bool m_IsClassup = false;
-    private int m_CurrentTurn = -1;
     private bool m_IsLevelup = false;
-    private bool m_IsLose = false;
+
+    protected List<BattleEnemy> m_EnemyList = new List<BattleEnemy>();
+    protected int m_CurrentTurn = -1;
+    protected bool m_IsLose = false;
+    protected BattleData m_BattleData;
 
     [SerializeField]
     private Transform m_MainPanelTransform = null;
 
     [SerializeField]
     private GameObject m_AvatarPanel = null;
-
-    [SerializeField]
-    private Transform m_EnemyTransform = null;
 
     [SerializeField]
     private PanelManager m_PanelManager = null;
@@ -53,7 +50,7 @@ public class BattleSystem : MonoBehaviour
         get { return m_BattleData; }
     }
 
-    public void Awake()
+    public virtual void Awake()
     {
         m_Instance = this;
         m_Player = BattlePlayer.GetInstance();
@@ -65,44 +62,15 @@ public class BattleSystem : MonoBehaviour
             GameManager.GetInstance();
             PlayerData.GetInstance().InitTestStats();
         }
-
-        InitBattle();
     }
 
-    public void Start()
+    public virtual void Start()
     {
         InitStartPanel();
     }
 
-    public void EndTurn()
+    public virtual void EndTurn()
     {
-        if (m_EnemyList.Count == 0)
-        {
-            Win();
-            return;
-        }
-
-        if (m_IsLose)
-        {
-            return;
-        }
-
-        m_CurrentTurn++;
-        if (m_CurrentTurn >= m_EnemyList.Count)
-        {
-            m_CurrentTurn = -1;
-        }
-
-        if (m_CurrentTurn == -1)
-        {
-            SetVisibleAvatarPanel(true);
-            BattlePlayer.GetInstance().RunTurn();
-        }
-        else
-        {
-            SetVisibleAvatarPanel(false);
-            m_EnemyList[m_CurrentTurn].RunTurn();
-        }
     }
 
     public void SetVisibleAvatarPanel(bool p_Value)
@@ -151,10 +119,8 @@ public class BattleSystem : MonoBehaviour
         m_Experience += p_Experience;
         PlayerData.GetInstance().AddExperience(m_Experience);
     }
-    #endregion
 
-    #region Private
-    private void Win()
+    public void Win()
     {
         SetVisibleAvatarPanel(false);
 
@@ -175,11 +141,22 @@ public class BattleSystem : MonoBehaviour
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(l_WinText);
         l_TextPanel.AddButtonAction(ReturnToJourney);
-        
+
         ShowPanel(l_TextPanel);
         BattleStarter.GetInstance().BattleWin();
     }
 
+    public virtual void InitBattle()
+    {
+    }
+
+    public void InitLocationBackground(string p_LocationId)
+    {
+        m_LocationBackground.sprite = Resources.Load<Sprite>("Sprites/BattleSystem/Background/" + p_LocationId);
+    }
+    #endregion
+
+    #region Private
     private void Lose()
     {
         m_IsLose = true;
@@ -225,49 +202,6 @@ public class BattleSystem : MonoBehaviour
     {
         MainPanel l_MainPanel = Instantiate(MainPanel.prefab);
         ShowPanel(l_MainPanel);
-    }
-
-    private void InitBattle()
-    {
-        m_BattleData = BattleStarter.GetInstance().GetBattle();
-        if (m_BattleData.id == null)
-        {
-            BattleStarter.GetInstance().InitBattle(null, "TestBattleSkwatwolf");
-            m_BattleData = BattleStarter.GetInstance().GetBattle();
-        }
-
-        m_LocationBackground.sprite = Resources.Load<Sprite>("Sprites/BattleSystem/Background/" + m_BattleData.locationBackground);
-
-        for (int i = 0; i < m_BattleData.enemyList.Count; i++)
-        {
-            BattleEnemy l_NewEnemy = Instantiate(BattleEnemy.prefab);
-            l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy(m_BattleData.enemyList[i]));
-            l_NewEnemy.transform.SetParent(m_EnemyTransform);
-
-            float l_X = 2.25f * (m_BattleData.enemyList.Count - 1);
-            l_X = -l_X + (4.5f * i);
-            Vector3 l_LocalPosition = Vector3.zero;
-            l_LocalPosition.x = l_X;
-            l_NewEnemy.transform.localPosition = l_LocalPosition;
-
-            m_EnemyList.Add(l_NewEnemy);
-        }
-
-        if (m_BattleData.playerSettings != null)
-        {
-            foreach (string l_Key in m_BattleData.playerSettings.Keys)
-            {
-                switch (l_Key)
-                {
-                    case "HP":
-                        PlayerData.GetInstance().health = m_BattleData.playerSettings[l_Key];
-                        break;
-                    case "MP":
-                        PlayerData.GetInstance().monstylePoints = m_BattleData.playerSettings[l_Key];
-                        break;
-                }
-            }
-        }
     }
 
     private void LevelupNotification()
