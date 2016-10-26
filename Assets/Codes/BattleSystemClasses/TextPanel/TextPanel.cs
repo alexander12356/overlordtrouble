@@ -67,6 +67,11 @@ public class TextPanel : Panel
 
         m_TextBox.UpdateTextBox();
     }
+
+    public void SetTalkingAnimator(Animator p_Animator)
+    {
+        m_TextBox.SetTalkingAnimator(p_Animator);
+    }
     #endregion
 
     #region Private

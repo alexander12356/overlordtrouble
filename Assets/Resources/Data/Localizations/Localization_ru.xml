@@ -60,6 +60,12 @@
 	<Text id="Enemy:Dualent:Description">Один из низших представителей иерархии лесных монстров. Нечто среднее между кустом и небольшим деревцем, но больше похожее на гнилое полено. Немного туповаты. Благодаря наличию двух голов имеют прекрасный обзор.</Text>
 	<Text id="Enemy:ThirdsortRobber:Description">Не представляет из себя ничего особенного. Его удел и его судьба - получить тумаков от героя на ранных уровнях. Обычно ошивается в тавернах с сомнительной репутацией.</Text>
 	
+	<!-- Bosses -->
+	<!-- Leshii -->
+	<Text id="Boss:Leshii:RightHand">Правая рука</Text>
+	<Text id="Boss:Leshii:Body">Тело</Text>
+	<Text id="Boss:Leshii:LeftHand">Левая рука</Text>
+	
 	<!-- UI -->
 	<Text id="GUI:Journey:ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>
 	<Text id="GUI:Journey:Store:Buy">Купить</Text>

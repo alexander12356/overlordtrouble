@@ -56,7 +56,7 @@ public class BattlePlayer : BattleActor
     }
 
     //TODO отрефакторить
-    public void SpecialAttack(BattleEnemy p_Enemy, List<SpecialUpgradeIcon> p_SpecialUpgradeIconList)
+    public void SpecialAttack(BattleActor p_Enemy, List<SpecialUpgradeIcon> p_SpecialUpgradeIconList)
     {
         m_AttackTarget = p_Enemy;
 

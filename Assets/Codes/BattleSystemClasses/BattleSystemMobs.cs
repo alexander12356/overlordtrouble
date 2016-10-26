@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MobsBattleSystem : BattleSystem
+public class BattleSystemMobs : BattleSystem
 {
     [SerializeField]
     private Transform m_EnemyTransform = null;

@@ -123,8 +123,18 @@ public class BattleEnemy : BattleActor
     {
         m_Animator = GetComponent<Animator>();
         m_AudioSource = GetComponent<AudioSource>();
-        m_SpriteRenderer = transform.FindChild("Renderer").GetComponent<SpriteRenderer>();
-        m_SelectedArrow = transform.FindChild("Selected").GetComponent<SpriteRenderer>();
+
+        Transform l_RendererTransform = transform.FindChild("Renderer");
+        if (l_RendererTransform != null)
+        {
+            m_SpriteRenderer = l_RendererTransform.GetComponent<SpriteRenderer>();
+        }
+
+        Transform l_SelectedTransform = transform.FindChild("Selected");
+        if (l_SelectedTransform != null)
+        {
+            m_SelectedArrow = l_SelectedTransform.GetComponent<SpriteRenderer>();
+        }
     }
 
     private void CloseTextPanel()
