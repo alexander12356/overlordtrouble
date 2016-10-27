@@ -74,6 +74,9 @@
 	<Text id="GUI:Journey:Store:Tab:SingleUse">Разовые</Text>
 	<Text id="GUI:Journey:Store:Tab:MultipleUse">Многоразовые</Text>
 	
+	<Text id="GUI:Journey:Inventory:SlotWeapon">Оружие</Text>
+	<Text id="GUI:Journey:Inventory:Slot">Слот</Text>
+	
 	<Text id="GUI:Profile:Level">Уровень</Text>
 	<Text id="GUI:Profile:NextLevelup">до следующего уровня:</Text>
 	<Text id="GUI:Profile:StatsPoints">Осталось очков: %d</Text>

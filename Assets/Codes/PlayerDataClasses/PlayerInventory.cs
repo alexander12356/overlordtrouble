@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PlayerInventory : Singleton<PlayerInventory>
 {
     #region Variables;
-    private Dictionary<string, int> m_Items = new Dictionary<string, int>();
+    private Dictionary<string, InventoryItemData> m_Items = new Dictionary<string, InventoryItemData>();
     private int m_Coins = 200;
     #endregion
 
@@ -13,6 +13,11 @@ public class PlayerInventory : Singleton<PlayerInventory>
     {
         get { return m_Coins; }
         set { m_Coins = value; }
+    }
+
+    public Dictionary<string, InventoryItemData> GetInventoryItems()
+    {
+        return m_Items;
     }
 
     public PlayerInventory()
@@ -24,11 +29,17 @@ public class PlayerInventory : Singleton<PlayerInventory>
     {
         if (m_Items.ContainsKey(p_ItemId))
         {
-            m_Items[p_ItemId] += p_Count;
+            InventoryItemData lInventoryItemData;
+            lInventoryItemData.id = p_ItemId;
+            lInventoryItemData.count = m_Items[p_ItemId].count + p_Count;
+            m_Items[p_ItemId] = lInventoryItemData;
         }
         else
         {
-            m_Items.Add(p_ItemId, p_Count);
+            InventoryItemData lInventoryItemData;
+            lInventoryItemData.id = p_ItemId;
+            lInventoryItemData.count = p_Count;
+            m_Items.Add(p_ItemId, lInventoryItemData);
         }
     }
 
@@ -36,7 +47,7 @@ public class PlayerInventory : Singleton<PlayerInventory>
     {
         if (m_Items.ContainsKey(p_Id))
         {
-            return m_Items[p_Id];
+            return m_Items[p_Id].count;
         }
         else
         {

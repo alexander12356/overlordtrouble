@@ -68,6 +68,9 @@
 	<Text id="GUI:Journey:Store:Tab:SingleUse">Single use items</Text>
 	<Text id="GUI:Journey:Store:Tab:MultipleUse">Multiple use items</Text>
 	
+	<Text id="GUI:Journey:Inventory:SlotWeapon">Weapon</Text>
+	<Text id="GUI:Journey:Inventory:Slot">Slot</Text>
+	
 	<Text id="GUI:Profile:Level">Level</Text>
 	<Text id="GUI:Profile:NextLevelup">Until next level:</Text>
 	<Text id="GUI:Profile:StatsPoints">Points left: %d</Text>

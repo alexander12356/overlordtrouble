@@ -44,7 +44,7 @@ public class ButtonList : MonoBehaviour
         set
         {
             m_IsActive = value;
-            if (m_ButtonsList.Count == 0)
+            if (m_ButtonsList != null && m_ButtonsList.Count == 0)
             {
                 return;
             }
