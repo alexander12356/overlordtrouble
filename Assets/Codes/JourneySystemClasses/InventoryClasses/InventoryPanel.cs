@@ -36,13 +36,6 @@ public class InventoryPanel : Panel
     {
         base.Awake();
 
-        // Тестовое заполнение предметами 
-        PlayerInventory.GetInstance().AddItem("TestItem1", 1);
-        PlayerInventory.GetInstance().AddItem("TestItem2", 1);
-        PlayerInventory.GetInstance().AddItem("TestItem3", 1);
-        PlayerInventory.GetInstance().AddItem("TestItemWeapon1", 1);
-        PlayerInventory.GetInstance().AddItem("TestItemWeapon2", 1);
-
         InitTabs();
         InitSlots();
 
@@ -72,16 +65,11 @@ public class InventoryPanel : Panel
 
     private void InitSlots()
     {
-        // TODO : Сделать нормально 
         InventoryEquipmentTab lEquipmentTab = (InventoryEquipmentTab)mInventoryTabs[0];
-
-        string lSlotWeaponTitle = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:SlotWeapon");
-        lEquipmentTab.AddSlot(eSlotType.weapon, lSlotWeaponTitle);
-
-        for (int i = 2; i < 5; i++)
+        Dictionary<string, InventorySlotData> lSlotData = PlayerInventory.GetInstance().GetInventorySlotData();
+        foreach (var lKey in lSlotData.Keys)
         {
-            string lSlotTitle = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Slot") + " " + i.ToString();
-            lEquipmentTab.AddSlot(eSlotType.normal, lSlotTitle);
+            lEquipmentTab.AddSlot(lSlotData[lKey]);
         }
     }
 
@@ -105,6 +93,7 @@ public class InventoryPanel : Panel
     private void CloseInventory()
     {
         JourneySystem.GetInstance().SetControl(ControlType.Player);
+        PlayerInventory.GetInstance().Save();
         Close();
     }
 }

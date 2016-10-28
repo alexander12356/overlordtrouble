@@ -9,7 +9,6 @@ public class InventoryEquipmentTab : InventoryTab
     private ButtonList mSlotButtonList;
     private ButtonList mItemButtonList;
     private InventoryPanel mInventoryPanel;
-    private Dictionary<string, InventorySlotData> mChoosedItems = new Dictionary<string, InventorySlotData>();
     private Text mDescriptionText;
 
     public ButtonList slotButtonList
@@ -67,19 +66,33 @@ public class InventoryEquipmentTab : InventoryTab
     // TODO : Сделать нормальное описание предметов
     private void ShowItemDescription()
     {
-        InventoryEquipmentButton lEqButton = (InventoryEquipmentButton)mItemButtonList.currentButton;
-        int lCountInInventory = PlayerInventory.GetInstance().GetItemCount(lEqButton.itemId);
-        string lDescriptionText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
-        string lInInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
-        mDescriptionText.text = lDescriptionText + lEqButton.title + "_Description" + lInInventoryText + lCountInInventory;
+        if (mItemButtonList != null && mItemButtonList.count > 0)
+        {
+            InventoryEquipmentButton lEqButton = (InventoryEquipmentButton)mItemButtonList.currentButton;
+            int lCountInInventory = PlayerInventory.GetInstance().GetItemCount(lEqButton.itemId);
+            string lDescriptionText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
+            string lInInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
+            mDescriptionText.text = lDescriptionText + lEqButton.title + "_Description" + lInInventoryText + lCountInInventory;
+        }
     }
 
-    public void AddSlot(eSlotType pSlotType, string pSlotTitle)
+    public void AddSlot(InventorySlotData pSlotData)
     {
         InventorySlotButton lButton = Instantiate(InventorySlotButton.prefab);
-        lButton.slotType = pSlotType;
-        lButton.title = pSlotTitle;
+        lButton.slotData = pSlotData;
         lButton.AddAction(SelectItemList);
+        switch (pSlotData.slotType)
+        {
+            case eSlotType.normal:
+                lButton.title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Slot") + " " + slotButtonList.count;
+                break;
+            case eSlotType.weapon:
+                lButton.title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:SlotWeapon");
+                break;
+            case eSlotType.universal:
+                lButton.title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Slot") + " " + slotButtonList.count + 1;
+                break;
+        }
 
         slotButtonList.AddButton(lButton);
     }
@@ -91,7 +104,7 @@ public class InventoryEquipmentTab : InventoryTab
         lButton.itemId = pInventoryItemData.id;
         lButton.AddAction(SelectItem);
 
-        if (mChoosedItems.ContainsKey(lButton.itemId))
+        if (PlayerInventory.GetInstance().SlotsContainsItem(lButton.itemId))
             lButton.equipped = true;
 
         itemButtonList.AddButton(lButton);
@@ -116,8 +129,8 @@ public class InventoryEquipmentTab : InventoryTab
         }
         foreach(var lKey in lInventoryItems.Keys)
         {
-            if (mChoosedItems.ContainsKey(lKey) && mChoosedItems[lKey].itemId != lSlotButton.itemId)
-                continue;       
+            if (PlayerInventory.GetInstance().IsItemOccupied(lSlotButton.slotId, lInventoryItems[lKey].id))
+                continue;
             AddItem(lInventoryItems[lKey]);
         }
     }
@@ -163,24 +176,22 @@ public class InventoryEquipmentTab : InventoryTab
         {           
             if (lEqButton.equipped)
             {
-                mChoosedItems.Remove(lSlotButton.itemId);
                 lSlotButton.DeselectItem();
                 lEqButton.equipped = false;
             }
             else
             {
                 ClearEquipped();
-                mChoosedItems.Remove(lSlotButton.itemId);
                 lSlotButton.SelectItem(lEqButton.itemId);
                 lEqButton.equipped = true;
-                mChoosedItems.Add(lEqButton.itemId, lSlotButton.slotData);
+                PlayerInventory.GetInstance().UpdateSlotData(lSlotButton.slotId, lSlotButton.slotData);
             }
         }
         else
         {
             lEqButton.equipped = true;
             lSlotButton.SelectItem(lEqButton.itemId);
-            mChoosedItems.Add(lEqButton.itemId, lSlotButton.slotData);
+            PlayerInventory.GetInstance().UpdateSlotData(lSlotButton.slotId, lSlotButton.slotData);
         }
     }
 

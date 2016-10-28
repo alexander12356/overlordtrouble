@@ -46,6 +46,18 @@ public class InventorySlotButton : PanelButton
         }
     }
 
+    public string slotId
+    {
+        get
+        {
+            return mSlotData.slotId;
+        }
+        set
+        {
+            mSlotData.slotId = value;
+        }
+    }
+
     public bool IsFull
     {
         get
@@ -59,6 +71,10 @@ public class InventorySlotButton : PanelButton
         get
         {
             return mSlotData;
+        }
+        set
+        {
+            mSlotData = value;
         }
     }
 
