@@ -76,6 +76,9 @@
 	
 	<Text id="GUI:Journey:Inventory:SlotWeapon">Оружие</Text>
 	<Text id="GUI:Journey:Inventory:Slot">Слот</Text>
+	<Text id="GUI:Journey:Inventory:Use">Использовать</Text>
+	<Text id="GUI:Journey:Inventory:Throw">Выбросить</Text>
+	<Text id="GUI:Journey:Inventory:Back">Назад</Text>
 	
 	<Text id="GUI:Profile:Level">Уровень</Text>
 	<Text id="GUI:Profile:NextLevelup">до следующего уровня:</Text>

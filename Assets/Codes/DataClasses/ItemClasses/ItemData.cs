@@ -3,7 +3,8 @@
     SingleUse,
     MultipleUse,
     Equipment,
-    Weapon
+    Weapon,
+    Crucial
 }
 
 public struct ItemData

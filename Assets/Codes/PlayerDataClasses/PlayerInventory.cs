@@ -7,13 +7,13 @@ using System.Linq;
 public class PlayerInventory : Singleton<PlayerInventory>
 {
     #region Variables;
-    private string mItemsPersistentPathFile = Application.persistentDataPath + "/InventoryItems.json";
-    private string mSlotDataPersistentPathFile = Application.persistentDataPath + "/InventorySlotData.json";
-    private string mItemsDefaultPathFile = "Data/InventoryItems";
-    private string mSlotDataDefaultPathFile = "Data/InventorySlotData";
+    private string m_ItemsPersistentPathFile = Application.persistentDataPath + "/InventoryItems.json";
+    private string m_SlotDataPersistentPathFile = Application.persistentDataPath + "/InventorySlotData.json";
+    private string m_ItemsDefaultPathFile = "Data/InventoryItems";
+    private string m_SlotDataDefaultPathFile = "Data/InventorySlotData";
 
-    private Dictionary<string, InventoryItemData> mItems = new Dictionary<string, InventoryItemData>();
-    private Dictionary<string, InventorySlotData> mSlotData = new Dictionary<string, InventorySlotData>();
+    private Dictionary<string, InventoryItemData> m_Items = new Dictionary<string, InventoryItemData>();
+    private Dictionary<string, InventorySlotData> m_SlotData = new Dictionary<string, InventorySlotData>();
     private int m_Coins;
     #endregion
 
@@ -32,36 +32,34 @@ public class PlayerInventory : Singleton<PlayerInventory>
 
     public Dictionary<string, InventoryItemData> GetInventoryItems()
     {
-        return mItems;
+        return m_Items;
     }
 
     public Dictionary<string, InventorySlotData> GetInventorySlotData()
     {
-        return mSlotData;
+        return m_SlotData;
     }
 
     public void UpdateSlotData(string pSlotId, InventorySlotData pSlotData)
     {
-        if(mSlotData.ContainsKey(pSlotId))
+        if(m_SlotData.ContainsKey(pSlotId))
         {
-            mSlotData[pSlotId] = pSlotData;
+            m_SlotData[pSlotId] = pSlotData;
         }
         else
         {
-            mSlotData.Add(pSlotId, pSlotData);
+            m_SlotData.Add(pSlotId, pSlotData);
         }
     }
 
-    // TODO : Ужасное название метода, сменить
-    public bool IsItemOccupied(string pCurrentSlotId, string pTtemId)
+    public bool ItemAlreadyUsed(string pCurrentSlotId, string pTtemId)
     {
-        return mSlotData.Where(obj => obj.Key != pCurrentSlotId).Any(x => x.Value.itemId == pTtemId);
+        return m_SlotData.Where(obj => obj.Key != pCurrentSlotId).Any(x => x.Value.itemId == pTtemId);
     }
 
-    // TODO : Ужасное название метода, сменить
-    public bool SlotsContainsItem(string pItemId)
+    public bool SlotsContainItem(string pItemId)
     {
-        return mSlotData.Values.Any(x => x.itemId == pItemId);
+        return m_SlotData.Values.Any(x => x.itemId == pItemId);
     }
 
     private void ParseSlotData()
@@ -69,15 +67,15 @@ public class PlayerInventory : Singleton<PlayerInventory>
         string lDecodedString = "";
         try
         {
-            if (File.Exists(mItemsPersistentPathFile))
+            if (File.Exists(m_ItemsPersistentPathFile))
             {
-                StreamReader streamReader = File.OpenText(mSlotDataPersistentPathFile);
+                StreamReader streamReader = File.OpenText(m_SlotDataPersistentPathFile);
                 lDecodedString = streamReader.ReadToEnd();
                 streamReader.Close();
             }
             else
             {
-                TextAsset l_TextAsset = (TextAsset)Resources.Load(mSlotDataDefaultPathFile);
+                TextAsset l_TextAsset = (TextAsset)Resources.Load(m_SlotDataDefaultPathFile);
                 lDecodedString = l_TextAsset.ToString();
             }
         }
@@ -94,20 +92,20 @@ public class PlayerInventory : Singleton<PlayerInventory>
             eSlotType l_SlotType = (eSlotType)Enum.Parse(typeof(eSlotType), l_SlotDataList[i]["SlotType"].str);
             string l_ItemId = l_SlotDataList[i]["ItemId"].str;
             InventorySlotData l_SlotData = new InventorySlotData(l_SlotId, l_SlotType, l_ItemId);
-            mSlotData.Add(l_SlotId, l_SlotData);
+            m_SlotData.Add(l_SlotId, l_SlotData);
         }
     }
 
-    private void SaveSlotData()
+    public void SaveSlotData()
     {
         JSONObject jSlotData = new JSONObject(JSONObject.Type.OBJECT);
         JSONObject jList = new JSONObject(JSONObject.Type.ARRAY);
         jSlotData.AddField("SlotData", jList);
-        foreach (var lKey in mSlotData.Keys)
+        foreach (var lKey in m_SlotData.Keys)
         {
             JSONObject jListElement = new JSONObject(JSONObject.Type.OBJECT);
-            jListElement.AddField("SlotId", mSlotData[lKey].slotId);
-            switch(mSlotData[lKey].slotType)
+            jListElement.AddField("SlotId", m_SlotData[lKey].slotId);
+            switch(m_SlotData[lKey].slotType)
             {
                 case eSlotType.normal:
                     jListElement.AddField("SlotType", "normal");
@@ -119,11 +117,11 @@ public class PlayerInventory : Singleton<PlayerInventory>
                     jListElement.AddField("SlotType", "universal");
                     break;
             }
-            jListElement.AddField("ItemId", mSlotData[lKey].itemId);
+            jListElement.AddField("ItemId", m_SlotData[lKey].itemId);
             jList.Add(jListElement);
         }
-        string lEncodedString = jSlotData.Print();
-        File.WriteAllText(mSlotDataPersistentPathFile, lEncodedString);
+        string lEncodedString = jSlotData.Print(true);
+        File.WriteAllText(m_SlotDataPersistentPathFile, lEncodedString);
     }
 
     private void ParseItemList()
@@ -131,15 +129,15 @@ public class PlayerInventory : Singleton<PlayerInventory>
         string lDecodedString = "";
         try
         {
-            if (File.Exists(mItemsPersistentPathFile))
+            if (File.Exists(m_ItemsPersistentPathFile))
             {
-                StreamReader streamReader = File.OpenText(mItemsPersistentPathFile);
+                StreamReader streamReader = File.OpenText(m_ItemsPersistentPathFile);
                 lDecodedString = streamReader.ReadToEnd();
                 streamReader.Close();
             }
             else
             {
-                TextAsset l_TextAsset = (TextAsset)Resources.Load(mItemsDefaultPathFile);
+                TextAsset l_TextAsset = (TextAsset)Resources.Load(m_ItemsDefaultPathFile);
                 lDecodedString = l_TextAsset.ToString();
             }
         }
@@ -159,28 +157,28 @@ public class PlayerInventory : Singleton<PlayerInventory>
             string l_ItemId = l_ItemList[i]["Id"].str;
             int l_ItemCount = (int)l_ItemList[i]["Count"].i;
             InventoryItemData l_ItemData = new InventoryItemData(l_ItemId, l_ItemCount);
-            mItems.Add(l_ItemId, l_ItemData);
+            m_Items.Add(l_ItemId, l_ItemData);
         }
     }
 
-    private void SaveItemList()
+    public void SaveItemList()
     {
         JSONObject jItemList = new JSONObject(JSONObject.Type.OBJECT);
         jItemList.AddField("Coins", m_Coins);
         JSONObject jList = new JSONObject(JSONObject.Type.ARRAY);
         jItemList.AddField("Items", jList);
-        foreach(var lKey in mItems.Keys)
+        foreach(var lKey in m_Items.Keys)
         {
             JSONObject jListElement = new JSONObject(JSONObject.Type.OBJECT);
-            jListElement.AddField("Id", mItems[lKey].id);
-            jListElement.AddField("Count", mItems[lKey].count);
+            jListElement.AddField("Id", m_Items[lKey].id);
+            jListElement.AddField("Count", m_Items[lKey].count);
             jList.Add(jListElement);
         }
-        string lEncodedString = jItemList.Print();
-        File.WriteAllText(mItemsPersistentPathFile, lEncodedString);
+        string lEncodedString = jItemList.Print(true);
+        File.WriteAllText(m_ItemsPersistentPathFile, lEncodedString);
     }
 
-    public void Save()
+    public void SaveAll()
     {
         SaveItemList();
         SaveSlotData();
@@ -188,27 +186,50 @@ public class PlayerInventory : Singleton<PlayerInventory>
 
     public void AddItem(string p_ItemId, int p_Count)
     {
-        if (mItems.ContainsKey(p_ItemId))
+        if (m_Items.ContainsKey(p_ItemId))
         {
             InventoryItemData lInventoryItemData;
             lInventoryItemData.id = p_ItemId;
-            lInventoryItemData.count = mItems[p_ItemId].count + p_Count;
-            mItems[p_ItemId] = lInventoryItemData;
+            lInventoryItemData.count = m_Items[p_ItemId].count + p_Count;
+            m_Items[p_ItemId] = lInventoryItemData;
         }
         else
         {
             InventoryItemData lInventoryItemData;
             lInventoryItemData.id = p_ItemId;
             lInventoryItemData.count = p_Count;
-            mItems.Add(p_ItemId, lInventoryItemData);
+            m_Items.Add(p_ItemId, lInventoryItemData);
+        }
+    }
+
+    public void SetItemCount(string p_ItemId, int p_Count)
+    {
+        if (m_Items.ContainsKey(p_ItemId))
+        {
+            InventoryItemData lInventoryItemData;
+            lInventoryItemData.id = p_ItemId;
+            lInventoryItemData.count = p_Count;
+
+            if (p_Count <= 0)
+                m_Items.Remove(p_ItemId);
+            else
+                m_Items[p_ItemId] = lInventoryItemData;
+        }
+        else
+        {
+            InventoryItemData lInventoryItemData;
+            lInventoryItemData.id = p_ItemId;
+            lInventoryItemData.count = p_Count;
+            if(p_Count > 0)
+                m_Items.Add(p_ItemId, lInventoryItemData);
         }
     }
 
     public int GetItemCount(string p_Id)
     {
-        if (mItems.ContainsKey(p_Id))
+        if (m_Items.ContainsKey(p_Id))
         {
-            return mItems[p_Id].count;
+            return m_Items[p_Id].count;
         }
         else
         {

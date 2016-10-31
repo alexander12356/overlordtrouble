@@ -163,7 +163,7 @@ public class StorePanel : Panel
     private void CloseStore()
     {
         m_TextBox.SetTalking(false);
-        PlayerInventory.GetInstance().Save();
+        PlayerInventory.GetInstance().SaveAll();
         Close();
     }
 

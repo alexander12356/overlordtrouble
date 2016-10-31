@@ -6,11 +6,11 @@ using UnityEngine;
 public class InventoryPanel : Panel
 {
     private static InventoryPanel m_Prefab;
-    private InventoryTab mCurrOpenedTab = null;
+    private InventoryTab m_CurrOpenedTab = null;
     [SerializeField]
-    private ButtonList mTabButtonsList = null;
+    private ButtonList m_TabButtonsList = null;
     [SerializeField]
-    private List<InventoryTab> mInventoryTabs = null;
+    private List<InventoryTab> m_InventoryTabs = null;
 
     public static InventoryPanel prefab
     {
@@ -28,7 +28,7 @@ public class InventoryPanel : Panel
     {
         get
         {
-            return mTabButtonsList;
+            return m_TabButtonsList;
         }
     }
 
@@ -37,63 +37,51 @@ public class InventoryPanel : Panel
         base.Awake();
 
         InitTabs();
-        InitSlots();
-
-        mTabButtonsList.isActive = true;
+        m_TabButtonsList.isActive = true;
     }
 
     public override void UpdatePanel()
     {
         base.UpdatePanel();
 
-        mTabButtonsList.UpdateKey();
-        mCurrOpenedTab.UpdateKey();
+        m_TabButtonsList.UpdateKey();
+        m_CurrOpenedTab.UpdateKey();
     }
 
     private void InitTabs()
     {
-        mTabButtonsList.AddKeyArrowAction(ShowTab);
-        mTabButtonsList[0].AddAction(ConfirmTab);
-        mTabButtonsList[0].title = "Надеть"; // TODO: Add localization
-        mTabButtonsList[1].AddAction(ConfirmTab);
-        mTabButtonsList[1].title = "Предметы";
-        mTabButtonsList[2].AddAction(CloseInventory);
-        mTabButtonsList[2].title = "Назад";
+        m_TabButtonsList.AddKeyArrowAction(ShowTab);
+        m_TabButtonsList[0].AddAction(ConfirmTab);
+        m_TabButtonsList[0].title = "Надеть"; // TODO: Add localization
+        m_TabButtonsList[1].AddAction(ConfirmTab);
+        m_TabButtonsList[1].title = "Предметы";
+        m_TabButtonsList[2].AddAction(CloseInventory);
+        m_TabButtonsList[2].title = "Назад";
 
-        mCurrOpenedTab = mInventoryTabs[0];
-    }
-
-    private void InitSlots()
-    {
-        InventoryEquipmentTab lEquipmentTab = (InventoryEquipmentTab)mInventoryTabs[0];
-        Dictionary<string, InventorySlotData> lSlotData = PlayerInventory.GetInstance().GetInventorySlotData();
-        foreach (var lKey in lSlotData.Keys)
-        {
-            lEquipmentTab.AddSlot(lSlotData[lKey]);
-        }
+        m_CurrOpenedTab = m_InventoryTabs[0];
     }
 
     private void ConfirmTab()
     {
-        mCurrOpenedTab.Confrim();
-        mTabButtonsList.isActive = false;
-        mTabButtonsList.currentButton.selected = true;
+        m_CurrOpenedTab.Confrim();
+        m_TabButtonsList.isActive = false;
+        m_TabButtonsList.currentButton.selected = true;
     }
 
     private void ShowTab()
     {
-        if (mTabButtonsList.currentButtonId < mInventoryTabs.Count)
+        if (m_TabButtonsList.currentButtonId < m_InventoryTabs.Count)
         {
-            mCurrOpenedTab.gameObject.SetActive(false);
-            mInventoryTabs[mTabButtonsList.currentButtonId].gameObject.SetActive(true);
-            mCurrOpenedTab = mInventoryTabs[mTabButtonsList.currentButtonId];
+            m_CurrOpenedTab.gameObject.SetActive(false);
+            m_InventoryTabs[m_TabButtonsList.currentButtonId].gameObject.SetActive(true);
+            m_CurrOpenedTab = m_InventoryTabs[m_TabButtonsList.currentButtonId];
         }
     }
 
     private void CloseInventory()
     {
         JourneySystem.GetInstance().SetControl(ControlType.Player);
-        PlayerInventory.GetInstance().Save();
+        PlayerInventory.GetInstance().SaveAll();
         Close();
     }
 }

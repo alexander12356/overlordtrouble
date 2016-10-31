@@ -10,19 +10,19 @@ public enum eSlotType
 
 public class InventorySlotButton : PanelButton
 {
-    private static InventorySlotButton mPrefab = null;
-    private InventorySlotData mSlotData;
-    private bool mIsFull = false;
+    private static InventorySlotButton m_Prefab = null;
+    private InventorySlotData m_SlotData;
+    private bool m_IsFull;
 
     public static InventorySlotButton prefab
     {
         get
         {
-            if(mPrefab == null)
+            if(m_Prefab == null)
             {
-                mPrefab = Resources.Load<InventorySlotButton>("Prefabs/Button/InventorySlotButton");
+                m_Prefab = Resources.Load<InventorySlotButton>("Prefabs/Button/InventorySlotButton");
             }
-            return mPrefab;
+            return m_Prefab;
         }
     }
 
@@ -30,7 +30,7 @@ public class InventorySlotButton : PanelButton
     {
         get
         {
-            return mSlotData.itemId;
+            return m_SlotData.itemId;
         }
     }
 
@@ -38,11 +38,7 @@ public class InventorySlotButton : PanelButton
     {
         get
         {
-            return mSlotData.slotType;
-        }
-        set
-        {
-            mSlotData.slotType = value;
+            return m_SlotData.slotType;
         }
     }
 
@@ -50,11 +46,7 @@ public class InventorySlotButton : PanelButton
     {
         get
         {
-            return mSlotData.slotId;
-        }
-        set
-        {
-            mSlotData.slotId = value;
+            return m_SlotData.slotId;
         }
     }
 
@@ -62,7 +54,7 @@ public class InventorySlotButton : PanelButton
     {
         get
         {
-            return mIsFull;
+            return m_IsFull;
         }
     }
 
@@ -70,23 +62,31 @@ public class InventorySlotButton : PanelButton
     {
         get
         {
-            return mSlotData;
+            return m_SlotData;
         }
         set
         {
-            mSlotData = value;
+            m_SlotData = value;
+            if(m_SlotData.itemId != string.Empty)
+            {
+                m_IsFull = true;
+            }
+            else
+            {
+                m_IsFull = false;
+            }
         }
     }
 
     public void SelectItem(string pItemId)
     {
-        mIsFull = true;
-        mSlotData.itemId = pItemId;
+        m_IsFull = true;
+        m_SlotData.itemId = pItemId;
     }
 
     public void DeselectItem()
     {
-        mIsFull = false;
-        mSlotData.itemId = string.Empty;
+        m_IsFull = false;
+        m_SlotData.itemId = string.Empty;
     }
 }

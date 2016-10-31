@@ -3,21 +3,21 @@ using UnityEngine.UI;
 
 public class InventoryEquipmentButton : PanelButton
 {
-    private static InventoryEquipmentButton mPrefab = null;
-    private string mItemId = string.Empty;
-    private bool mEquipped = false;
+    private static InventoryEquipmentButton m_Prefab = null;
+    private string m_ItemId = string.Empty;
+    private bool m_Equipped = false;
     [SerializeField]
-    private GameObject mEquipmentText = null;
+    private GameObject m_EquipmentText = null;
 
     public static InventoryEquipmentButton prefab
     {
         get
         {
-            if(mPrefab == null)
+            if(m_Prefab == null)
             {
-                mPrefab = Resources.Load<InventoryEquipmentButton>("Prefabs/Button/InventoryEquipmentButton");
+                m_Prefab = Resources.Load<InventoryEquipmentButton>("Prefabs/Button/InventoryEquipmentButton");
             }
-            return mPrefab;
+            return m_Prefab;
         }
     }
 
@@ -25,11 +25,11 @@ public class InventoryEquipmentButton : PanelButton
     {
         get
         {
-            return mItemId;
+            return m_ItemId;
         }
         set
         {
-            mItemId = value;
+            m_ItemId = value;
         }
     }
 
@@ -37,12 +37,12 @@ public class InventoryEquipmentButton : PanelButton
     {
         get
         {
-            return mEquipped;
+            return m_Equipped;
         }
         set
         {
-            mEquipped = value;
-            mEquipmentText.SetActive(mEquipped);
+            m_Equipped = value;
+            m_EquipmentText.SetActive(m_Equipped);
         }
     }
 }
