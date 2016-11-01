@@ -4,7 +4,7 @@
     MultipleUse,
     Equipment,
     Weapon,
-    Crucial
+    Key
 }
 
 public struct ItemData

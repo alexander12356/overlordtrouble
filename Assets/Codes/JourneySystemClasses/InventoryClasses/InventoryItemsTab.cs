@@ -10,7 +10,7 @@ public enum eItemTab
     TAB_EQUIPMENT,
     TAB_SINGLE,
     TAB_MULTIPLY,
-    TAB_CRUCIAL
+    TAB_KEY
 }
 
 public class InventoryItemsTab : InventoryTab
@@ -80,17 +80,11 @@ public class InventoryItemsTab : InventoryTab
     {
         m_TabButtonsList.AddKeyArrowAction(InitItemList);
         m_TabButtonsList[0].AddAction(SelectItemList);
-        m_TabButtonsList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Tab:All");
         m_TabButtonsList[1].AddAction(SelectItemList);
-        m_TabButtonsList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Tab:Equipments");
         m_TabButtonsList[2].AddAction(SelectItemList);
-        m_TabButtonsList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Tab:SingleUse");
         m_TabButtonsList[3].AddAction(SelectItemList);
-        m_TabButtonsList[3].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Tab:MultipleUse");
         m_TabButtonsList[4].AddAction(SelectItemList);
-        m_TabButtonsList[4].title = "Crucial";
         m_TabButtonsList[5].AddAction(CancelAction);
-        m_TabButtonsList[5].title = "Leave";
         m_TabButtonsList.isActive = false;
     }
 
@@ -112,8 +106,8 @@ public class InventoryItemsTab : InventoryTab
             case eItemTab.TAB_MULTIPLY:
                 l_InventoryItems = PlayerInventory.GetInstance().GetInventoryItems().Where(obj => ItemDataBase.GetInstance().GetItem(obj.Key).itemType == ItemType.MultipleUse).ToDictionary(obj => obj.Key, obj => obj.Value);
                 break;
-            case eItemTab.TAB_CRUCIAL:
-                l_InventoryItems = PlayerInventory.GetInstance().GetInventoryItems().Where(obj => ItemDataBase.GetInstance().GetItem(obj.Key).itemType == ItemType.Crucial).ToDictionary(obj => obj.Key, obj => obj.Value);
+            case eItemTab.TAB_KEY:
+                l_InventoryItems = PlayerInventory.GetInstance().GetInventoryItems().Where(obj => ItemDataBase.GetInstance().GetItem(obj.Key).itemType == ItemType.Key).ToDictionary(obj => obj.Key, obj => obj.Value);
                 break;
         }
         foreach(var lKey in l_InventoryItems.Keys)

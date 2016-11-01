@@ -106,7 +106,7 @@ public class InventoryItemButton : PanelButtonUpdateKey
             string l_BackStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
             AddActionButton(l_BackStr, CancelActionList);
         }
-        else if(ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.Crucial)
+        else if(ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.Key)
         {
             string l_UseStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Use");
             AddActionButton(l_UseStr, UseItem);
