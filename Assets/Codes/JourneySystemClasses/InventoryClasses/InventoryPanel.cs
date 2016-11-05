@@ -52,11 +52,11 @@ public class InventoryPanel : Panel
     {
         m_TabButtonsList.AddKeyArrowAction(ShowTab);
         m_TabButtonsList[0].AddAction(ConfirmTab);
-        m_TabButtonsList[0].title = "Надеть"; // TODO: Add localization
+        m_TabButtonsList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Wear");
         m_TabButtonsList[1].AddAction(ConfirmTab);
-        m_TabButtonsList[1].title = "Предметы";
+        m_TabButtonsList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Items");
         m_TabButtonsList[2].AddAction(CloseInventory);
-        m_TabButtonsList[2].title = "Назад";
+        m_TabButtonsList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
 
         m_CurrOpenedTab = m_InventoryTabs[0];
     }

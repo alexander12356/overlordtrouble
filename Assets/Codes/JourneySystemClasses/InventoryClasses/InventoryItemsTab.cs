@@ -72,7 +72,7 @@ public class InventoryItemsTab : InventoryTab
         m_ItemsButtonsList.isActive = false;
 
         m_DescriptionText = transform.FindChild("Description").GetComponent<Text>();
-        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description"); // TODO: Добавить текст
+        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Description"); 
         m_InventoryPanel = GetComponentInParent<InventoryPanel>();
 
         InitItemList();
@@ -137,7 +137,7 @@ public class InventoryItemsTab : InventoryTab
         if (m_ItemsButtonsList != null && m_ItemsButtonsList.count > 0)
         {
             InventoryItemButton l_InventoryItemButton = (InventoryItemButton)m_ItemsButtonsList.currentButton;
-            string l_DescriptionText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
+            string l_DescriptionText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Description");
             m_DescriptionText.text = l_DescriptionText + l_InventoryItemButton.title;
         }
     }

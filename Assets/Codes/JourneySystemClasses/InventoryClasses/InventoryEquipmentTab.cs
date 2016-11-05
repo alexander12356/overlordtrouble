@@ -60,7 +60,7 @@ public class InventoryEquipmentTab : InventoryTab
         m_ItemButtonList.isActive = false;
         InitItemsList();
         m_DescriptionText = descriptionText;
-        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description"); // TODO : Добавить текст
+        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Description"); 
         m_InventoryPanel = GetComponentInParent<InventoryPanel>();
     }
 
@@ -162,7 +162,7 @@ public class InventoryEquipmentTab : InventoryTab
     {
         itemButtonList.isActive = false;
         slotButtonList.isActive = true;
-        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description"); 
+        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Description"); 
     }
 
     public override void CancelAction()
