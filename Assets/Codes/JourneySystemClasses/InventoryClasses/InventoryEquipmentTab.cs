@@ -219,9 +219,4 @@ public class InventoryEquipmentTab : InventoryTab
         slotButtonList.UpdateKey();
         itemButtonList.UpdateKey();
     }
-
-    public override void DeselectItem()
-    {
-        
-    }
 }

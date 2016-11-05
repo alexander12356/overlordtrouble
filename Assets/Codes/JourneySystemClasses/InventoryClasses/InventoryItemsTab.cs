@@ -19,7 +19,6 @@ public class InventoryItemsTab : InventoryTab
     private ButtonList m_ItemsButtonsList;
     private InventoryPanel m_InventoryPanel;
     private Text m_DescriptionText;
-    private InventoryItemButton m_CurrentSelectedItem = null;
 
     [SerializeField]
     private ButtonList m_TabButtonsList = null;
@@ -43,18 +42,6 @@ public class InventoryItemsTab : InventoryTab
         get
         {
             return m_TabButtonsList;
-        }
-    }
-
-    public InventoryItemButton currentSelectedItem
-    {
-        get
-        {
-            return m_CurrentSelectedItem;
-        }
-        set
-        {
-            m_CurrentSelectedItem = value;
         }
     }
     #endregion
@@ -88,7 +75,7 @@ public class InventoryItemsTab : InventoryTab
         m_TabButtonsList.isActive = false;
     }
 
-    private void InitItemList()
+    public void InitItemList()
     {
         itemsButtonList.Clear();
         Dictionary<string, InventoryItemData> l_InventoryItems = new Dictionary<string, InventoryItemData>();
@@ -123,7 +110,6 @@ public class InventoryItemsTab : InventoryTab
         l_Button.itemId = p_InventoryItemData.id;
         l_Button.itemCount = p_InventoryItemData.count;
         l_Button.AddAction(SelectItem);
-        l_Button.InitActionButtonList();
 
         itemsButtonList.AddButton(l_Button);
     }
@@ -169,38 +155,12 @@ public class InventoryItemsTab : InventoryTab
     public override void SelectItem()
     {
         InventoryItemButton l_ItemButton = (InventoryItemButton)m_ItemsButtonsList.currentButton;
-        l_ItemButton.Activate(true);
-        l_ItemButton.AddCancelAction(DeselectItem);
-        l_ItemButton.AddDestroyButtonAction(DestroyItemButton);
-        currentSelectedItem = l_ItemButton;
-
-        m_ItemsButtonsList.isActive = false;
-    }
-
-    public override void DeselectItem()
-    {
-        InventoryItemButton l_ItemButton = (InventoryItemButton)m_ItemsButtonsList.currentButton;
-        l_ItemButton.Activate(false);
-        l_ItemButton.RemoveCancelAction(DeselectItem);
-        currentSelectedItem = null;
-
-        m_ItemsButtonsList.isActive = true;
-    }
-
-    private void DestroyItemButton()
-    {
-        InventoryItemButton l_ItemButton = (InventoryItemButton)m_ItemsButtonsList.currentButton;
-        l_ItemButton.RemoveCancelAction(DeselectItem);
-        InitItemList();
+        l_ItemButton.CreateItemActionPanel();
     }
 
     public override void UpdateKey()
     {
         m_TabButtonsList.UpdateKey();
         m_ItemsButtonsList.UpdateKey();
-        if(m_CurrentSelectedItem != null)
-        {
-            m_CurrentSelectedItem.UpdateKey();
-        }
     }
 }

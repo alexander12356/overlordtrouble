@@ -6,14 +6,9 @@ public class InventoryItemButton : PanelButtonUpdateKey
 {
     private static InventoryItemButton m_Prefab = null;
     private int m_ItemCount;
-    private string m_ItemId = string.Empty;
-    private ButtonList m_ActionsButtonList;
-    private event PanelActionHandler m_DestroyButtonAction = null;
-    private int m_ThrownItemCount;
+    private string m_ItemId = string.Empty; 
     [SerializeField]
     private Text m_ItemCountText = null;
-    [SerializeField]
-    private GameObject m_ActionList = null;
     
     public static InventoryItemButton prefab
     {
@@ -53,77 +48,14 @@ public class InventoryItemButton : PanelButtonUpdateKey
         }
     }
 
-    public ButtonList actionButtonList
+    public void CreateItemActionPanel()
     {
-        get
-        {
-            if(m_ActionsButtonList == null)
-            {
-                m_ActionsButtonList = transform.FindChild("ActionList").GetComponentInChildren<ButtonList>();
-            }
-            return m_ActionsButtonList;
-        }
+        ItemActionPanel l_ItemActionPanel = Instantiate(ItemActionPanel.prefab);
+        l_ItemActionPanel.InitActionButtonList(itemId);
+        l_ItemActionPanel.AddUseAction(UseItem);
+        l_ItemActionPanel.AddRemovingAction(RemoveItem);
+        JourneySystem.GetInstance().ShowPanel(l_ItemActionPanel, true);
     }
-
-    public override void Awake()
-    {
-        base.Awake();
-
-        m_ActionsButtonList = actionButtonList;
-    }
-
-    public override void UpdateKey()
-    {
-        base.UpdateKey();
-        m_ActionsButtonList.UpdateKey();
-    }
-
-    public override void Activate(bool p_Value)
-    {
-        base.Activate(p_Value);
-        m_ActionList.SetActive(p_Value);
-        m_ActionsButtonList.isActive = p_Value;
-    }
-
-    public void InitActionButtonList()
-    {
-        if(ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.SingleUse)
-        {
-            string l_UseStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Use");
-            AddActionButton(l_UseStr, UseItem);
-
-            string l_ThrowStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Throw");
-            AddActionButton(l_ThrowStr, TryThrowItem);
-
-            string l_BackStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
-            AddActionButton(l_BackStr, CancelActionList);
-        }
-        else if(ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.Equipment || ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.Weapon || ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.MultipleUse)
-        {
-            string l_ThrowStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Throw");
-            AddActionButton(l_ThrowStr, TryThrowItem);
-
-            string l_BackStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
-            AddActionButton(l_BackStr, CancelActionList);
-        }
-        else if(ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.Key)
-        {
-            string l_UseStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Use");
-            AddActionButton(l_UseStr, UseItem);
-
-            string l_BackStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
-            AddActionButton(l_BackStr, CancelActionList);
-        }
-    }
-
-    private void AddActionButton(string p_ButtonTitle, PanelButtonActionHandler p_Action)
-    {
-        ItemActionButton l_ItemActionButton = Instantiate(ItemActionButton.prefab);
-        l_ItemActionButton.title = p_ButtonTitle;
-        l_ItemActionButton.AddAction(p_Action);
-
-        actionButtonList.AddButton(l_ItemActionButton);
-    }   
 
     private void UseItem()
     {
@@ -139,22 +71,11 @@ public class InventoryItemButton : PanelButtonUpdateKey
             itemCount = l_ItemCount;
             PlayerInventory.GetInstance().SetItemCount(itemId, itemCount);
         }
-        CancelAction();
     }
 
-    private void TryThrowItem()
+    private void RemoveItem(int p_CountToRemove)
     {
-        m_ThrownItemCount = 1;
-        YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
-        l_YesNoPanel.SetText("Вы действительно хотите выбросить " + itemId + "?");
-        l_YesNoPanel.AddYesAction(ThrowItem);
-
-        JourneySystem.GetInstance().ShowPanel(l_YesNoPanel, true);
-    }
-
-    private void ThrowItem()
-    {
-        int l_ItemCount = itemCount - m_ThrownItemCount;
+        int l_ItemCount = itemCount - p_CountToRemove;
         if (l_ItemCount <= 0)
         {
             itemCount = 0;
@@ -162,27 +83,12 @@ public class InventoryItemButton : PanelButtonUpdateKey
         }
         itemCount = l_ItemCount;
         PlayerInventory.GetInstance().SetItemCount(itemId, itemCount);
-        CancelAction();
-    }
-
-    private void CancelActionList()
-    {
-        CancelAction();
-    }
-
-    public void AddDestroyButtonAction(PanelActionHandler p_Action)
-    {
-        m_DestroyButtonAction += p_Action;
-    }
-
-    public void RemoveDestroyButtonAction(PanelActionHandler p_Action)
-    {
-        m_DestroyButtonAction -= p_Action;
     }
 
     private IEnumerator DestroyButton()
     {
         yield return new WaitForSeconds(0.1f);
-        m_DestroyButtonAction();
+        InventoryItemsTab l_ItemsTab = GetComponentInParent<InventoryItemsTab>();
+        l_ItemsTab.InitItemList();
     }
 }
