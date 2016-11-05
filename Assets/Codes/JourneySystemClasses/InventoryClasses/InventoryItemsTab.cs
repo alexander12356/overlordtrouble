@@ -22,6 +22,9 @@ public class InventoryItemsTab : InventoryTab
 
     [SerializeField]
     private ButtonList m_TabButtonsList = null;
+
+    [SerializeField]
+    private Text m_PlayerCoinsText = null;
     #endregion
 
     #region Interface
@@ -44,6 +47,19 @@ public class InventoryItemsTab : InventoryTab
             return m_TabButtonsList;
         }
     }
+
+    public int playerCoins
+    {
+        get
+        {
+            return PlayerInventory.GetInstance().coins;
+        }
+        set
+        {
+            PlayerInventory.GetInstance().coins = value;
+            m_PlayerCoinsText.text = PlayerInventory.GetInstance().coins + " " + LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Monet");
+        }
+    }
     #endregion
 
     public void Awake()
@@ -61,6 +77,7 @@ public class InventoryItemsTab : InventoryTab
 
         InitItemList();
         ShowItemDescription();
+        playerCoins = PlayerInventory.GetInstance().coins;
     }
 
     private void InitTabs()
