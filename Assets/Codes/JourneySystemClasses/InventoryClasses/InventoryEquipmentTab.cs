@@ -95,19 +95,7 @@ public class InventoryEquipmentTab : InventoryTab
 
         l_Button.slotData = pSlotData;
         l_Button.AddAction(SelectItemList);
-
-        switch (pSlotData.slotType)
-        {
-            case eSlotType.normal:
-                l_Button.title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Slot") + " " + slotButtonList.count;
-                break;
-            case eSlotType.weapon:
-                l_Button.title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:SlotWeapon");
-                break;
-            case eSlotType.universal:
-                l_Button.title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Slot") + " " + slotButtonList.count + 1;
-                break;
-        }
+        l_Button.title = pSlotData.slotType.GetTitle(slotButtonList.count);
 
         slotButtonList.AddButton(l_Button);
     }
@@ -117,18 +105,7 @@ public class InventoryEquipmentTab : InventoryTab
         itemButtonList.Clear();
         InventorySlotButton l_SlotButton = (InventorySlotButton)m_SlotButtonList.currentButton;
         Dictionary<string, InventoryItemData> l_InventoryItems = new Dictionary<string, InventoryItemData>();
-        switch (l_SlotButton.slotType)
-        {
-            case eSlotType.normal:
-                l_InventoryItems = PlayerInventory.GetInstance().GetInventoryItems().Where(obj => ItemDataBase.GetInstance().GetItem(obj.Key).itemType == ItemType.Equipment).ToDictionary(obj => obj.Key, obj => obj.Value);
-                break;
-            case eSlotType.weapon:
-                l_InventoryItems = PlayerInventory.GetInstance().GetInventoryItems().Where(obj => ItemDataBase.GetInstance().GetItem(obj.Key).itemType == ItemType.Weapon).ToDictionary(obj => obj.Key, obj => obj.Value);
-                break;
-            case eSlotType.universal:
-                l_InventoryItems = PlayerInventory.GetInstance().GetInventoryItems().Where(obj => ItemDataBase.GetInstance().GetItem(obj.Key).itemType == ItemType.Equipment || ItemDataBase.GetInstance().GetItem(obj.Key).itemType == ItemType.Weapon).ToDictionary(obj => obj.Key, obj => obj.Value);
-                break;
-        }
+        l_InventoryItems = l_SlotButton.slotType.GetInventoryItemData();
         foreach (var lKey in l_InventoryItems.Keys)
         {
             if (PlayerInventory.GetInstance().ItemAlreadyUsed(l_SlotButton.slotId, l_InventoryItems[lKey].id))

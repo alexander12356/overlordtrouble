@@ -1,13 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public enum eSlotType
-{
-    normal,
-    weapon,
-    universal
-}
-
 public class InventorySlotButton : PanelButton
 {
     private static InventorySlotButton m_Prefab = null;
@@ -47,7 +40,7 @@ public class InventorySlotButton : PanelButton
         }
     }
 
-    public eSlotType slotType
+    public Slot slotType
     {
         get
         {

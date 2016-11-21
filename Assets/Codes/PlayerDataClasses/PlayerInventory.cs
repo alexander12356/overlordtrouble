@@ -15,6 +15,13 @@ public class PlayerInventory : Singleton<PlayerInventory>
     private Dictionary<string, InventoryItemData> m_Items = new Dictionary<string, InventoryItemData>();
     private Dictionary<string, InventorySlotData> m_SlotData = new Dictionary<string, InventorySlotData>();
     private int m_Coins;
+
+    private enum eSlotType
+    {
+        normal,
+        weapon,
+        universal
+    }
     #endregion
 
     #region Interface
@@ -90,8 +97,21 @@ public class PlayerInventory : Singleton<PlayerInventory>
         {
             string l_SlotId = l_SlotDataList[i]["SlotId"].str;
             eSlotType l_SlotType = (eSlotType)Enum.Parse(typeof(eSlotType), l_SlotDataList[i]["SlotType"].str);
+            Slot lSlot = null;
+            switch (l_SlotType)
+            {
+                case eSlotType.normal:
+                    lSlot = new NormalSlot();
+                    break;
+                case eSlotType.weapon:
+                    lSlot = new WeaponSlot();
+                    break;
+                case eSlotType.universal:
+                    lSlot = new UniversalSlot();
+                    break;
+            }
             string l_ItemId = l_SlotDataList[i]["ItemId"].str;
-            InventorySlotData l_SlotData = new InventorySlotData(l_SlotId, l_SlotType, l_ItemId);
+            InventorySlotData l_SlotData = new InventorySlotData(l_SlotId, lSlot, l_ItemId);
             m_SlotData.Add(l_SlotId, l_SlotData);
         }
     }
@@ -105,18 +125,7 @@ public class PlayerInventory : Singleton<PlayerInventory>
         {
             JSONObject jListElement = new JSONObject(JSONObject.Type.OBJECT);
             jListElement.AddField("SlotId", m_SlotData[lKey].slotId);
-            switch(m_SlotData[lKey].slotType)
-            {
-                case eSlotType.normal:
-                    jListElement.AddField("SlotType", "normal");
-                    break;
-                case eSlotType.weapon:
-                    jListElement.AddField("SlotType", "weapon");
-                    break;
-                case eSlotType.universal:
-                    jListElement.AddField("SlotType", "universal");
-                    break;
-            }
+            jListElement.AddField("SlotType", m_SlotData[lKey].slotType.GetType());
             jListElement.AddField("ItemId", m_SlotData[lKey].itemId);
             jList.Add(jListElement);
         }
