@@ -1,0 +1,24 @@
+{
+   "SlotData":[
+      {
+         "SlotId":"SlotWeapon",
+         "SlotType":"weapon",
+         "ItemId":""
+      },
+      {
+         "SlotId":"Slot1",
+         "SlotType":"normal",
+         "ItemId":""
+      },
+      {
+         "SlotId":"Slot2",
+         "SlotType":"normal",
+         "ItemId":""
+      },
+      {
+         "SlotId":"Slot3",
+         "SlotType":"normal",
+         "ItemId":""
+      }
+   ]
+}

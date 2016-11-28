@@ -143,6 +143,9 @@ public class StorePanel : Panel
                 case ItemType.Equipment:
                     m_StoreTabs[1].AddItem(l_StoreItems[l_Key]);
                     break;
+                case ItemType.Weapon:
+                    m_StoreTabs[1].AddItem(l_StoreItems[l_Key]);
+                    break;
             }
             m_StoreTabs[0].AddItem(l_StoreItems[l_Key]);
         }
@@ -160,6 +163,7 @@ public class StorePanel : Panel
     private void CloseStore()
     {
         m_TextBox.SetTalking(false);
+        PlayerInventory.GetInstance().SaveAll();
         Close();
     }
 
