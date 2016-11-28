@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 public class PauseMenuPanel : Panel
 {
@@ -25,7 +24,6 @@ public class PauseMenuPanel : Panel
 
         m_ButtonList = GetComponentInChildren<ButtonList>();
         m_ButtonList[0].AddAction(OpenProfilePanel);
-        m_ButtonList[1].AddAction(OpenInventoryPanel);
         m_ButtonList[2].AddAction(OpenEncyclopedia);
         m_ButtonList[3].AddAction(OpenQuitQuestionPanel);
         m_ButtonList.AddCancelAction(ReturnToJourney);
@@ -60,13 +58,6 @@ public class PauseMenuPanel : Panel
     private void OpenProfilePanel()
     {
         JourneySystem.GetInstance().AddScene("Profile");
-    }
-
-    private void OpenInventoryPanel()
-    {
-        JourneySystem.GetInstance().SetControl(ControlType.Panel);
-        InventoryPanel lInventoryPanel = Instantiate(InventoryPanel.prefab);
-        JourneySystem.GetInstance().ShowPanel(lInventoryPanel);
     }
 
     private void OpenEncyclopedia()

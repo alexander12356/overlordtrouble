@@ -3,7 +3,6 @@
 using System.Collections;
 
 public delegate void PanelActionHandler();
-public delegate void PanelActionHandlerWithParameter(int p_Value);
 public class Panel : MonoBehaviour
 {
     #region Variables

@@ -80,15 +80,6 @@
 	<Text id="GUI:Journey:Store:Tab:SingleUse">Разовые</Text>
 	<Text id="GUI:Journey:Store:Tab:MultipleUse">Многоразовые</Text>
 	
-	<Text id="GUI:Journey:Inventory:Back">Назад</Text>
-	<Text id="GUI:Journey:Inventory:Description">Описание\n</Text>
-    <Text id="GUI:Journey:Inventory:Use">Использовать</Text>
-	<Text id="GUI:Journey:Inventory:Slot">Слот</Text>
-	<Text id="GUI:Journey:Inventory:SlotWeapon">Оружие</Text>	
-	<Text id="GUI:Journey:Inventory:Throw">Выбросить</Text>
-	<Text id="GUI:Journey:Inventory:Wear">Надеть</Text>
-	<Text id="GUI:Journey:Inventory:Items">Предметы</Text>
-	
 	<Text id="GUI:Profile:Level">Уровень</Text>
 	<Text id="GUI:Profile:NextLevelup">до следующего уровня:</Text>
 	<Text id="GUI:Profile:StatsPoints">Осталось очков: %d</Text>

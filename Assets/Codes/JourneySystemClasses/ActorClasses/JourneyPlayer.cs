@@ -51,10 +51,6 @@ public class JourneyPlayer : JourneyActor
         {
             RunPauseMenu();
         }
-        if (Input.GetKeyUp(KeyCode.I))
-        {
-            OpenInventory();
-        }
 
         if (enabled != false)
         {
@@ -146,13 +142,6 @@ public class JourneyPlayer : JourneyActor
 
         PauseMenuPanel l_PauseMenuPanel = Instantiate(PauseMenuPanel.prefab);
         JourneySystem.GetInstance().ShowPanel(l_PauseMenuPanel);
-    }
-
-    private void OpenInventory()
-    {
-        JourneySystem.GetInstance().SetControl(ControlType.Panel);
-        InventoryPanel lInventoryPanel = Instantiate(InventoryPanel.prefab);
-        JourneySystem.GetInstance().ShowPanel(lInventoryPanel);
     }
 
     private void PressActiveButtonAction()
