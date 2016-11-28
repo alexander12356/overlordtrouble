@@ -33,23 +33,25 @@ namespace BattleSystemClasses.Bosses.Leshii
                 if (m_Leshii.IsAllHandsDied())
                 {
                     health -= p_DamageValue;
+                    DamageSystem.GetInstance().AttackSuccess();
                 }
                 else
                 {
-                    //m_Leshii.Block();
+                    m_Leshii.Block();
                 }
-
             }
             else
             {
                 health -= p_DamageValue;
+                DamageSystem.GetInstance().AttackSuccess();
             }
+
+            DamageSystem.GetInstance().ShowResult();
         }
 
         public override void Die()
         {
             isDead = true;
-            m_Leshii.DeadHand();
         }
     }
 }

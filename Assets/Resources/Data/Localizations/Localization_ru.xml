@@ -93,9 +93,9 @@
 	<Text id="GUI:BattleSystem:Classup">достиг достаточного уровня для повышение класса!</Text>
 	<Text id="GUI:BattleSystem:SelectMonstyle:Damage">Урон</Text>
 	<Text id="GUI:BattleSystem:EnemyAttack">%d использовал %d и нанес %d урона</Text>
-	<Text id="GUI:BattleSystem:PlayerAttack">Игрок нанес %d урона врагу</Text>
+	<Text id="GUI:BattleSystem:PlayerAttack">%d атаковал "%d" и нанес %d урона</Text>
 	<Text id="GUI:BattleSystem:BadAttack">Плод твоих напрасных усилий был равен %d очкам урона по %d</Text>
-	<Text id="GUI:BattleSystem:SpecialAttack">Кеша использовал на "%d" %d он нанес %d урона</Text>
+	<Text id="GUI:BattleSystem:SpecialAttack">%d использовал на "%d" %d он нанес %d урона</Text>
 	<Text id="GUI:BattleSystem:MainPanelAttack">Атака</Text>
 	<Text id="GUI:BattleSystem:MainPanelMonstyle">Монстайл</Text>
 	<Text id="GUI:BattleSystem:MainPanelItems">Предметы</Text>
@@ -106,6 +106,7 @@
 	<Text id="GUI:BattleSystem:Win">Враги убиты.\nВы победили.\nГГ получает %d exp</Text>
 	<Text id="GUI:BattleSystem:Lose">Кеша больше не может сражаться дальше, Кеша потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли.</Text>
 	<Text id="GUI:BattleSystem:And">и</Text>
+	<Text id="GUI:BattleSystem:AttackFail">Атака не прошла</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Побуду собой</Text>
 	<Text id="GUI:Improve:AreYouShure">Вы уверены что хотите выбрать этот\nкласс?\nВернуть обратно уже не выйдет.</Text>

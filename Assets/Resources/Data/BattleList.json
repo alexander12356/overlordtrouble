@@ -55,5 +55,17 @@
 			"HP" : 20,
 			"MP" : 20
 		}
+	},
+	"TestBattleBossLeshii":
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+		],
+		"Player":
+		{
+			"HP" : 20,
+			"MP" : 20
+		}
 	}
 }

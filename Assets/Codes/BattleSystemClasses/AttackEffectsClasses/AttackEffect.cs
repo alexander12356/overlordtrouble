@@ -52,6 +52,7 @@ public class AttackEffect : MonoBehaviour
         m_AudioSource = audioSource;
     }
 
+    // Called from animation
     public void EndAnimation()
     {
         AttackEffectsSystem.GetInstance().EndAnimation();
@@ -68,6 +69,7 @@ public class AttackEffect : MonoBehaviour
         m_BattleActor = p_Target;
     }
 
+    // Called from animation
     public void PlaySound()
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_Id));

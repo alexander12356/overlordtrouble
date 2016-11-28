@@ -16,6 +16,7 @@ public class TextBox : MonoBehaviour
     private bool m_Active = true;
     private Animator m_ActiveButtonAnimator = null;
     private Animator m_TalkingAnimator = null;
+    private string m_TalkingAnimationId = string.Empty;
 
     [SerializeField]
     private float m_ShowingTextSpeed = 0.5f;
@@ -37,9 +38,10 @@ public class TextBox : MonoBehaviour
         m_CurrentWord   = 0;
     }
 
-    public void SetTalkingAnimator(Animator p_TalkingAnimator)
+    public void SetTalkingAnimator(Animator p_TalkingAnimator, string p_TalkingAnimationId)
     {
         m_TalkingAnimator = p_TalkingAnimator;
+        m_TalkingAnimationId = p_TalkingAnimationId;
     }
 
     public void UpdateTextBox()
@@ -85,7 +87,7 @@ public class TextBox : MonoBehaviour
     {
         if (m_TalkingAnimator)
         {
-            m_TalkingAnimator.SetBool("Talking", p_Value);
+            m_TalkingAnimator.SetBool(m_TalkingAnimationId, p_Value);
         }
     }
     #endregion

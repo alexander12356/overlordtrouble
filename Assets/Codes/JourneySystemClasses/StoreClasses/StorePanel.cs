@@ -97,7 +97,7 @@ public class StorePanel : Panel
 
     public void AddTalkingAnimator(Animator p_TalkingAnimator)
     {
-        m_TextBox.SetTalkingAnimator(p_TalkingAnimator);
+        m_TextBox.SetTalkingAnimator(p_TalkingAnimator, "Talking");
     }
     #endregion
 

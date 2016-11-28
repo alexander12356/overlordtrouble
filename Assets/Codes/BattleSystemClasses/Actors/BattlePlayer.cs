@@ -30,17 +30,10 @@ public class BattlePlayer : BattleActor
 
         int l_Damage = Random.Range(m_AttackValue[0], m_AttackValue[1]);
 
-        m_AttackTarget = p_Actor;
-        p_Actor.Damage(l_Damage);
+        DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
+
         AttackEffectsSystem.GetInstance().AddEffect(p_Actor, p_Actor, "Prefabs/BattleEffects/Player/Player_BaseAttack");
         AttackEffectsSystem.GetInstance().PlayEffects();
-
-        string l_AttackText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:PlayerAttack", new string[] { l_Damage.ToString() });
-        m_TextPanel = Instantiate(TextPanel.prefab);
-        m_TextPanel.SetText(new List<string>() { l_AttackText });
-        m_TextPanel.AddButtonAction(CloseTextPanel);
-        BattleSystem.GetInstance().ShowPanel(m_TextPanel);
-        BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 
     public override void Damage(float p_DamageValue)
@@ -158,6 +151,8 @@ public class BattlePlayer : BattleActor
         mana = PlayerData.GetInstance().monstylePoints;
 
         m_AttackValue = PlayerData.GetInstance().attackValue;
+
+        actorName = PlayerData.GetInstance().GetPlayerName();
     }
 
     public override void Awake()

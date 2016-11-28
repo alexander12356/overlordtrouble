@@ -15,12 +15,25 @@ public class BattleSystemBoss : BattleSystem
         InitBattle();
     }
 
+    public override void Start()
+    {
+        base.Start();
+
+        RunBossIntro();
+    }
+
     public override void InitBattle()
     {
         base.InitBattle();
 
+        m_BattleData = BattleStarter.GetInstance().GetBattle();
+        if (m_BattleData.id == null)
+        {
+            BattleStarter.GetInstance().InitBattle(null, "TestBattleBossLeshii");
+            m_BattleData = BattleStarter.GetInstance().GetBattle();
+        }
+
         // Инициализация фона
-        
         m_Leshii.Init();
 
         List<LeshiiOrgan> l_LeshiiOrgan = m_Leshii.GetOrgans();
@@ -29,8 +42,6 @@ public class BattleSystemBoss : BattleSystem
         {
             m_EnemyList.Add(l_LeshiiOrgan[i]);
         }
-
-
     }
 
     public override void EndTurn()
@@ -52,8 +63,15 @@ public class BattleSystemBoss : BattleSystem
         BattlePlayer.GetInstance().RunTurn();
     }
 
-    private void RunBossDialog()
+    private void RunBossIntro()
     {
-        
+        TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { "Тебе меня не победить!" });
+        l_TextPanel.SetTalkingAnimator(m_Leshii.animator, "Talking");
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+        l_TextPanel.AddButtonAction(EndTurn);
+        ShowPanel(l_TextPanel);
+
+        SetVisibleAvatarPanel(false);
     }
 }

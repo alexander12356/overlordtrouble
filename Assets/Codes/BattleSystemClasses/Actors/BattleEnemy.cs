@@ -73,6 +73,8 @@ public class BattleEnemy : BattleActor
         base.Damage(p_DamageValue);
 
         health -= p_DamageValue;
+        DamageSystem.GetInstance().AttackSuccess();
+        DamageSystem.GetInstance().ShowResult();
     }
     
     public override void Attack(BattleActor p_Actor)
