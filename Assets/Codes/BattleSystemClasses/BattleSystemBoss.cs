@@ -5,6 +5,8 @@ using BattleSystemClasses.Bosses.Leshii;
 
 public class BattleSystemBoss : BattleSystem
 {
+    private bool m_IsPlayerTurn = true;
+
     [SerializeField]
     private Leshii m_Leshii = null;
 
@@ -48,6 +50,19 @@ public class BattleSystemBoss : BattleSystem
     {
         base.EndTurn();
 
+        //if (m_IsPlayerTurn)
+        //{
+            SetVisibleAvatarPanel(true);
+            BattlePlayer.GetInstance().RunTurn();
+            m_IsPlayerTurn = false;
+        //}
+        //else
+        //{
+        //    SetVisibleAvatarPanel(false);
+        //    m_Leshii.Run();
+        //    m_IsPlayerTurn = true;
+        //}
+
         //if (m_EnemyList.Count == 0)
         //{
         //    Win();
@@ -58,9 +73,22 @@ public class BattleSystemBoss : BattleSystem
         //{
         //    return;
         //}
+    }
 
-        SetVisibleAvatarPanel(true);
-        BattlePlayer.GetInstance().RunTurn();
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            m_Leshii.bodyAnimator.SetTrigger("Attack");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            m_Leshii.bodyAnimator.SetTrigger("StartCharge");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            m_Leshii.bodyAnimator.SetTrigger("AttackCharge");
+        }
     }
 
     private void RunBossIntro()

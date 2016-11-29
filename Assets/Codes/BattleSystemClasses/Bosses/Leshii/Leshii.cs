@@ -56,7 +56,23 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public void Run()
         {
+            if (IsAllHandsDied())
+            {
+                return;
+            }
 
+            if (m_LeftHand.isDead)
+            {
+                m_BodyAnimator.SetTrigger("AttackNoLeft");
+            }
+            else if (m_RightHand.isDead)
+            {
+                m_BodyAnimator.SetTrigger("AttackNoRight");
+            }
+            else
+            {
+                m_BodyAnimator.SetTrigger("Attack");
+            }
         }
         
         public bool IsAllHandsDied()
