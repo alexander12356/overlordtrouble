@@ -18,6 +18,7 @@ public class DemoMainScene : MonoBehaviour
         m_ButtonList[4].AddAction(StartImprove);
         m_ButtonList[5].AddAction(StartDualent);
         m_ButtonList[6].AddAction(StartThirdsort);
+        m_ButtonList[7].AddAction(StartBoss);
     }
 
     private void Update()
@@ -66,5 +67,10 @@ public class DemoMainScene : MonoBehaviour
     private void StartImprove()
     {
         SceneManager.LoadScene("Improve");
+    }
+
+    private void StartBoss()
+    {
+        SceneManager.LoadScene("BossBattleSystem");
     }
 }
