@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BattleSystemClasses.Bosses.Leshii
 {
-    public enum LeshiiOrganIds
+    public enum OrganIds
     {
         NONE = -1,
         RightHand,
@@ -19,6 +19,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         private LeshiiOrgan m_Body      = null;
         private Animator m_BodyAnimator = null;
         private Animator m_HeadAnimator = null;
+        private Vector2 m_HandsLive = Vector2.zero;
 
         public Animator bodyAnimator
         {
@@ -33,16 +34,18 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             int l_ChildCount = transform.childCount;
 
-            m_RightHand = transform.FindChild(LeshiiOrganIds.RightHand.ToString()).GetComponent<LeshiiOrgan>();
-            m_LeftHand  = transform.FindChild(LeshiiOrganIds.LeftHand.ToString()).GetComponent<LeshiiOrgan>();
-            m_Body      = transform.FindChild(LeshiiOrganIds.Body.ToString()).GetComponent<LeshiiOrgan>();
+            m_RightHand = transform.FindChild(OrganIds.RightHand.ToString()).GetComponent<LeshiiOrgan>();
+            m_LeftHand  = transform.FindChild(OrganIds.LeftHand.ToString()).GetComponent<LeshiiOrgan>();
+            m_Body      = transform.FindChild(OrganIds.Body.ToString()).GetComponent<LeshiiOrgan>();
 
-            m_RightHand.Init(LeshiiOrganIds.RightHand, this);
-            m_LeftHand.Init(LeshiiOrganIds.LeftHand, this);
-            m_Body.Init(LeshiiOrganIds.Body, this);
+            m_RightHand.Init(OrganIds.RightHand, this);
+            m_LeftHand.Init(OrganIds.LeftHand, this);
+            m_Body.Init(OrganIds.Body, this);
 
             m_BodyAnimator = GetComponent<Animator>();
-            m_HeadAnimator = transform.FindChild(LeshiiOrganIds.head.ToString()).GetComponent<Animator>();
+            m_HeadAnimator = transform.FindChild(OrganIds.head.ToString()).GetComponent<Animator>();
+
+            CalculateIdle(m_HandsLive);
         }
         
         public List<LeshiiOrgan> GetOrgans()
@@ -75,7 +78,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
 
             l_TextPanel.SetText(new List<string>() { "Лол блок" });
-            l_TextPanel.SetTalkingAnimator(bodyAnimator, "BlockTalking");
+            l_TextPanel.SetTalkingAnimator(headAnimator, "Talking");
             l_TextPanel.AddButtonAction(CloseDialogBlock);
 
             DamageSystem.GetInstance().AttackFail();
@@ -85,6 +88,31 @@ namespace BattleSystemClasses.Bosses.Leshii
         public void CloseDialogBlock()
         {
             bodyAnimator.SetTrigger("BlockStop");
+        }
+
+        public void OrganDie(OrganIds p_OrganIds)
+        {
+            switch (p_OrganIds)
+            {
+                case OrganIds.LeftHand:
+                    m_BodyAnimator.SetTrigger("LeftHandDestroy");
+                    m_HandsLive.x = 1.0f;
+                    break;
+                case OrganIds.RightHand:
+                    m_BodyAnimator.SetTrigger("RightHandDestroy");
+                    m_HandsLive.y = 1.0f;
+                    break;
+                case OrganIds.Body:
+                    break;
+            }
+
+            CalculateIdle(m_HandsLive);
+        }
+
+        private void CalculateIdle(Vector2 p_HandsLive)
+        {
+            m_BodyAnimator.SetFloat("LeftHand", p_HandsLive.x);
+            m_BodyAnimator.SetFloat("RightHand", p_HandsLive.y);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace BattleSystemClasses.Bosses.Leshii
 {
     public class LeshiiOrgan : BattleEnemy
     {
-        private LeshiiOrganIds m_Id = LeshiiOrganIds.NONE;
+        private OrganIds m_Id = OrganIds.NONE;
         private Leshii m_Leshii = null;
 
         public override void Awake()
@@ -13,7 +13,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             base.Awake();
         }
         
-        public void Init(LeshiiOrganIds p_Id, Leshii p_Leshii)
+        public void Init(OrganIds p_Id, Leshii p_Leshii)
         {
             m_Id = p_Id;
             m_Leshii = p_Leshii;
@@ -28,7 +28,7 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public override void Damage(float p_DamageValue)
         {
-            if (m_Id == LeshiiOrganIds.Body)
+            if (m_Id == OrganIds.Body)
             {
                 if (m_Leshii.IsAllHandsDied())
                 {
@@ -52,6 +52,8 @@ namespace BattleSystemClasses.Bosses.Leshii
         public override void Die()
         {
             isDead = true;
+
+            m_Leshii.OrganDie(m_Id);
         }
     }
 }
