@@ -67,7 +67,8 @@ public class BattleSystemBoss : BattleSystem
     {
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "Тебе меня не победить!" });
-        l_TextPanel.SetTalkingAnimator(m_Leshii.animator, "Talking");
+        l_TextPanel.SetTalkingAnimator(m_Leshii.headAnimator, "Talking");
+        
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
         l_TextPanel.AddButtonAction(EndTurn);
         ShowPanel(l_TextPanel);

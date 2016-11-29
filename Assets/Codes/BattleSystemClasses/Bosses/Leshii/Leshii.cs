@@ -8,7 +8,8 @@ namespace BattleSystemClasses.Bosses.Leshii
         NONE = -1,
         RightHand,
         LeftHand,
-        Body
+        Body,
+        head
     }
 
     public class Leshii : MonoBehaviour
@@ -16,11 +17,16 @@ namespace BattleSystemClasses.Bosses.Leshii
         private LeshiiOrgan m_RightHand = null;
         private LeshiiOrgan m_LeftHand  = null;
         private LeshiiOrgan m_Body      = null;
-        private Animator m_Animator = null;
+        private Animator m_BodyAnimator = null;
+        private Animator m_HeadAnimator = null;
 
-        public Animator animator
+        public Animator bodyAnimator
         {
-            get { return m_Animator; }
+            get { return m_BodyAnimator; }
+        }
+        public Animator headAnimator
+        {
+            get { return m_HeadAnimator; }
         }
 
         public void Init()
@@ -35,7 +41,8 @@ namespace BattleSystemClasses.Bosses.Leshii
             m_LeftHand.Init(LeshiiOrganIds.LeftHand, this);
             m_Body.Init(LeshiiOrganIds.Body, this);
 
-            m_Animator = GetComponent<Animator>();
+            m_BodyAnimator = GetComponent<Animator>();
+            m_HeadAnimator = transform.FindChild(LeshiiOrganIds.head.ToString()).GetComponent<Animator>();
         }
         
         public List<LeshiiOrgan> GetOrgans()
@@ -63,12 +70,12 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public void Block()
         {
-            animator.SetTrigger("BlockStart");
+            bodyAnimator.SetTrigger("BlockStart");
 
             TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
 
             l_TextPanel.SetText(new List<string>() { "Лол блок" });
-            l_TextPanel.SetTalkingAnimator(animator, "BlockTalking");
+            l_TextPanel.SetTalkingAnimator(bodyAnimator, "BlockTalking");
             l_TextPanel.AddButtonAction(CloseDialogBlock);
 
             DamageSystem.GetInstance().AttackFail();
@@ -77,7 +84,7 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public void CloseDialogBlock()
         {
-            animator.SetTrigger("BlockStop");
+            bodyAnimator.SetTrigger("BlockStop");
         }
     }
 }
