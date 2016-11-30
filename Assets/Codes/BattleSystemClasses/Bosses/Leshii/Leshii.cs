@@ -14,12 +14,18 @@ namespace BattleSystemClasses.Bosses.Leshii
 
     public class Leshii : MonoBehaviour
     {
-        private LeshiiOrgan m_RightHand = null;
-        private LeshiiOrgan m_LeftHand  = null;
-        private LeshiiOrgan m_Body      = null;
         private Animator m_BodyAnimator = null;
         private Animator m_HeadAnimator = null;
         private Vector2 m_HandsLive = Vector2.zero;
+
+        [SerializeField]
+        private LeshiiOrgan m_RightHand = null;
+
+        [SerializeField]
+        private LeshiiOrgan m_LeftHand = null;
+
+        [SerializeField]
+        private LeshiiOrgan m_Body = null;
 
         public Animator bodyAnimator
         {
@@ -34,9 +40,9 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             int l_ChildCount = transform.childCount;
 
-            m_RightHand = transform.FindChild(OrganIds.RightHand.ToString()).GetComponent<LeshiiOrgan>();
-            m_LeftHand  = transform.FindChild(OrganIds.LeftHand.ToString()).GetComponent<LeshiiOrgan>();
-            m_Body      = transform.FindChild(OrganIds.Body.ToString()).GetComponent<LeshiiOrgan>();
+            //m_RightHand = transform.FindChild(OrganIds.RightHand.ToString()).GetComponent<LeshiiOrgan>();
+            //m_LeftHand  = transform.FindChild(OrganIds.LeftHand.ToString()).GetComponent<LeshiiOrgan>();
+            //m_Body      = transform.FindChild(OrganIds.Body.ToString()).GetComponent<LeshiiOrgan>();
 
             m_RightHand.Init(OrganIds.RightHand, this);
             m_LeftHand.Init(OrganIds.LeftHand, this);
