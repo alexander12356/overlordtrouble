@@ -9,7 +9,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         RightHand,
         LeftHand,
         Body,
-        head
+        Headmain
     }
 
     public class Leshii : MonoBehaviour
@@ -49,7 +49,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             m_Body.Init(OrganIds.Body, this);
 
             m_BodyAnimator = GetComponent<Animator>();
-            m_HeadAnimator = transform.FindChild(OrganIds.head.ToString()).GetComponent<Animator>();
+            m_HeadAnimator = transform.FindChild(OrganIds.Headmain.ToString()).GetComponent<Animator>();
 
             CalculateIdle(m_HandsLive);
         }

@@ -50,18 +50,18 @@ public class BattleSystemBoss : BattleSystem
     {
         base.EndTurn();
 
-        //if (m_IsPlayerTurn)
-        //{
+        if (m_IsPlayerTurn)
+        {
             SetVisibleAvatarPanel(true);
             BattlePlayer.GetInstance().RunTurn();
             m_IsPlayerTurn = false;
-        //}
-        //else
-        //{
-        //    SetVisibleAvatarPanel(false);
-        //    m_Leshii.Run();
-        //    m_IsPlayerTurn = true;
-        //}
+        }
+        else
+        {
+            SetVisibleAvatarPanel(false);
+            m_Leshii.Run();
+            m_IsPlayerTurn = true;
+        }
 
         //if (m_EnemyList.Count == 0)
         //{
