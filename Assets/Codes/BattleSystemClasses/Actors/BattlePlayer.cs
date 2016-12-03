@@ -30,10 +30,11 @@ public class BattlePlayer : BattleActor
 
         int l_Damage = Random.Range(m_AttackValue[0], m_AttackValue[1]);
 
-        DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
-
         AttackEffectsSystem.GetInstance().AddEffect(p_Actor, p_Actor, "Prefabs/BattleEffects/Player/Player_BaseAttack");
         AttackEffectsSystem.GetInstance().PlayEffects();
+        DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
+        ResultSystem.GetInstance().ShowResult();
+        BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 
     public override void Damage(float p_DamageValue)
@@ -42,10 +43,7 @@ public class BattlePlayer : BattleActor
 
         health -= p_DamageValue;
 
-        if (health <= 0)
-        {
-            Die();
-        }
+        DamageSystem.GetInstance().AttackSuccess();
     }
 
     //TODO отрефакторить
@@ -78,10 +76,15 @@ public class BattlePlayer : BattleActor
                 l_BuffedSkills.Add(l_SkillData);
             }
         }
+
+        string l_UsedSpecialsName = "";
+        bool l_IsBadAttack = false;
+
         if (l_BrokenSpecialCount == p_SpecialUpgradeIconList.Count)
         {
             l_DamageValue = 1.0f;
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
+            l_IsBadAttack = true;
 
             AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, p_Enemy, "Prefabs/BattleEffects/Player/Player_BaseAttack");
         }
@@ -91,13 +94,12 @@ public class BattlePlayer : BattleActor
 
             l_DamageValue = p_SkillData.damage - p_SkillData.damage * 0.25f;
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
+            l_IsBadAttack = true;
 
             AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, p_Enemy, "Prefabs/BattleEffects/Player/Player_BaseAttack");
         }
         else
         {
-            string l_UsedSpecialsName = "";
-
             for (int i = 0; i < l_BuffedSkills.Count; i++)
             {
                 string l_SkillName = LocalizationDataBase.GetInstance().GetText("Skill:" + l_BuffedSkills[i].id);
@@ -121,15 +123,9 @@ public class BattlePlayer : BattleActor
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:SpecialAttack", new string[] { p_Enemy.actorName, l_UsedSpecialsName, l_DamageValue.ToString() });
         }
 
-        p_Enemy.Damage(l_DamageValue);
-
-        m_TextPanel = Instantiate(TextPanel.prefab);
-        m_TextPanel.SetText(new List<string>() { l_Text });
-        m_TextPanel.AddButtonAction(CloseTextPanel);
-        BattleSystem.GetInstance().ShowPanel(m_TextPanel);
-
+        DamageSystem.GetInstance().SpecialAttack(this, p_Enemy, l_DamageValue, l_IsBadAttack, l_UsedSpecialsName);
+        ResultSystem.GetInstance().ShowResult();
         AttackEffectsSystem.GetInstance().PlayEffects();
-
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 

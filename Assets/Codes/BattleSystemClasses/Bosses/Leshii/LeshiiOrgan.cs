@@ -45,8 +45,6 @@ namespace BattleSystemClasses.Bosses.Leshii
                 health -= p_DamageValue;
                 DamageSystem.GetInstance().AttackSuccess();
             }
-
-            DamageSystem.GetInstance().ShowResult();
         }
 
         public override void Die()

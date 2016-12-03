@@ -102,9 +102,11 @@ namespace BattleSystemClasses.Bosses.Leshii
             l_TextPanel.SetText(new List<string>() { "Лол блок" });
             l_TextPanel.SetTalkingAnimator(headAnimator, "Talking");
             l_TextPanel.AddButtonAction(CloseDialogBlock);
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
+            BattleSystem.GetInstance().ShowPanel(l_TextPanel);
             DamageSystem.GetInstance().AttackFail();
-            DamageSystem.GetInstance().AddTextPanel(l_TextPanel);
+            //DamageSystem.GetInstance().AddTextPanel(l_TextPanel);
         }
 
         public void CloseDialogBlock()
