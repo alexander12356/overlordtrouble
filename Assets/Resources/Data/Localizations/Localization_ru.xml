@@ -62,6 +62,7 @@
 	
 	<!-- Bosses -->
 	<!-- Leshii -->
+	<Text id="Boss:Leshii">Леший</Text>
 	<Text id="Boss:Leshii:RightHand">Правая рука</Text>
 	<Text id="Boss:Leshii:Body">Тело</Text>
 	<Text id="Boss:Leshii:LeftHand">Левая рука</Text>

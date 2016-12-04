@@ -14,18 +14,32 @@ public class ResultSystem : Singleton<ResultSystem>
 
         m_ResultTextPanel = Object.Instantiate(TextPanel.prefab);
         m_ResultTextPanel.SetText(m_DamageStatistic.resultText);
-        m_ResultTextPanel.AddButtonAction(CloseResult);
+        m_ResultTextPanel.AddButtonAction(EndResult);
+        m_TextPanelsQueue.Enqueue(m_ResultTextPanel);
 
-        BattleSystem.GetInstance().ShowPanel(m_ResultTextPanel);
+        BattleSystem.GetInstance().ShowPanel(m_TextPanelsQueue.Dequeue());
     }
 
-    private void CloseResult()
+    public void AddTextPanel(TextPanel p_TextPanel)
+    {
+        p_TextPanel.AddButtonAction(p_TextPanel.Close);
+        p_TextPanel.AddPopAction(ShowNextPanel);
+
+        m_TextPanelsQueue.Enqueue(p_TextPanel);
+    }
+
+    private void ShowNextPanel()
+    {
+        BattleSystem.GetInstance().ShowPanel(m_TextPanelsQueue.Dequeue());
+    }
+
+    private void EndResult()
     {
         if (AttackEffectsSystem.GetInstance().IsAllAnimationEnd())
         {
             DamageSystem.GetInstance().Reset();
-            m_ResultTextPanel.Close();
             m_DamageStatistic.target.CheckDeath();
+            m_ResultTextPanel.Close();
             BattleSystem.GetInstance().EndTurn();
         }
     }

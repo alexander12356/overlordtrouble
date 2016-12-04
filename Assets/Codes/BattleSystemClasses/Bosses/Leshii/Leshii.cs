@@ -12,7 +12,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         Headmain
     }
 
-    public class Leshii : MonoBehaviour
+    public class Leshii : BattleEnemy
     {
         private Animator m_BodyAnimator = null;
         private Animator m_HeadAnimator = null;
@@ -36,8 +36,10 @@ namespace BattleSystemClasses.Bosses.Leshii
             get { return m_HeadAnimator; }
         }
 
-        public void Init()
+        public override void InitStats()
         {
+            actorName = LocalizationDataBase.GetInstance().GetText("Boss:Leshii");
+
             int l_ChildCount = transform.childCount;
 
             //m_RightHand = transform.FindChild(OrganIds.RightHand.ToString()).GetComponent<LeshiiOrgan>();
@@ -60,7 +62,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             return l_LeshiiOrgans;
         }
 
-        public void Run()
+        public override void RunTurn()
         {
             if (IsAllHandsDied())
             {
@@ -79,6 +81,9 @@ namespace BattleSystemClasses.Bosses.Leshii
             {
                 m_BodyAnimator.SetTrigger("Attack");
             }
+
+            DamageSystem.GetInstance().Attack(this, BattlePlayer.GetInstance(), 1.0f);
+            ResultSystem.GetInstance().ShowResult();
         }
         
         public bool IsAllHandsDied()
@@ -98,15 +103,12 @@ namespace BattleSystemClasses.Bosses.Leshii
             bodyAnimator.SetTrigger("BlockStart");
 
             TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-
             l_TextPanel.SetText(new List<string>() { "Лол блок" });
             l_TextPanel.SetTalkingAnimator(headAnimator, "Talking");
             l_TextPanel.AddButtonAction(CloseDialogBlock);
-            l_TextPanel.AddButtonAction(l_TextPanel.Close);
+            ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
 
-            BattleSystem.GetInstance().ShowPanel(l_TextPanel);
             DamageSystem.GetInstance().AttackFail();
-            //DamageSystem.GetInstance().AddTextPanel(l_TextPanel);
         }
 
         public void CloseDialogBlock()

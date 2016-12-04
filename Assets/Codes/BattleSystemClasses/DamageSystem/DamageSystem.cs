@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 
-using UnityEngine;
-
 public class DamageSystem : Singleton<DamageSystem>
 {
     private enum AttackType
@@ -15,8 +13,6 @@ public class DamageSystem : Singleton<DamageSystem>
     private string m_AttackNames = string.Empty;
     private List<string> m_ResultText = new List<string>();
     private float m_DamageValue = 0.0f;
-    private Queue<TextPanel> m_TextPanelsQueue = new Queue<TextPanel>();
-    private TextPanel m_LastAddedPanel = null;
     private AttackType m_AttackType = AttackType.BaseAttack;
     private bool m_IsBadAttack = false;
 
@@ -67,21 +63,11 @@ public class DamageSystem : Singleton<DamageSystem>
         }
 
         m_ResultText.Add(l_StatisticText);
-
-        //TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
-        //l_TextPanel.SetText(m_ResultText);
-        //m_TextPanelsQueue.Enqueue(l_TextPanel);
-        //m_LastAddedPanel = l_TextPanel;
     }
 
     public void AttackFail()
     {
         m_ResultText.Add(LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:AttackFail"));
-
-        //TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
-        //l_TextPanel.SetText(new List<string>() { l_FailText });
-        //m_TextPanelsQueue.Enqueue(l_TextPanel);
-        //m_LastAddedPanel = l_TextPanel;
     }
 
     public DamageStatistic GetStatistics()
@@ -90,42 +76,8 @@ public class DamageSystem : Singleton<DamageSystem>
         return l_DamageStatistic;
     }
 
-    //public void AddTextPanel(TextPanel p_TextPanel)
-    //{
-    //    m_TextPanelsQueue.Peek().AddButtonAction(m_TextPanelsQueue.Peek().Close);
-    //    m_TextPanelsQueue.Peek().AddPopAction(ShowNextPanel);
-
-    //    m_LastAddedPanel = p_TextPanel;
-    //    m_TextPanelsQueue.Enqueue(m_LastAddedPanel);
-    //}
-
-    //public void ShowResult()
-    //{
-    //    m_LastAddedPanel.AddButtonAction(CloseTextPanel);
-    //    BattleSystem.GetInstance().ShowPanel(m_TextPanelsQueue.Dequeue());
-    //    BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
-    //}
-
-    //private void ShowNextPanel()
-    //{
-    //    BattleSystem.GetInstance().ShowPanel(m_TextPanelsQueue.Dequeue());
-    //}
-
-    //private void CloseTextPanel()
-    //{
-    //    if (AttackEffectsSystem.GetInstance().IsAllAnimationEnd())
-    //    {
-    //        m_Target.CheckDeath();
-    //        m_LastAddedPanel.Close();
-    //        BattleSystem.GetInstance().EndTurn();
-    //        Reset();
-    //    }
-    //}
-
     public void Reset()
     {
-        m_TextPanelsQueue.Clear();
-        m_LastAddedPanel = null;
         m_ResultText.Clear();
         m_AttackNames = "";
     }

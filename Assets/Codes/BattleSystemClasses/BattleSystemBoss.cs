@@ -36,7 +36,7 @@ public class BattleSystemBoss : BattleSystem
         }
 
         // Инициализация фона
-        m_Leshii.Init();
+        m_Leshii.InitStats();
 
         List<LeshiiOrgan> l_LeshiiOrgan = m_Leshii.GetOrgans();
         m_EnemyList = new List<BattleEnemy>();
@@ -59,7 +59,7 @@ public class BattleSystemBoss : BattleSystem
         else
         {
             SetVisibleAvatarPanel(false);
-            m_Leshii.Run();
+            m_Leshii.RunTurn();
             m_IsPlayerTurn = true;
         }
 
