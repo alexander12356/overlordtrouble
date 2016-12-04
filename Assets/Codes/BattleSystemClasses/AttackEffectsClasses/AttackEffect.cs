@@ -7,6 +7,7 @@ public class AttackEffect : MonoBehaviour
     private Transform m_Renderer = null;
     private AudioSource m_AudioSource = null;
     private BattleActor m_BattleActor = null;
+    private AttackEffectType m_Type = AttackEffectType.Instance;
 
     [SerializeField]
     private string m_Id = string.Empty;
@@ -44,6 +45,11 @@ public class AttackEffect : MonoBehaviour
             return m_AudioSource;
         }
     }
+    public AttackEffectType type
+    {
+        get { return m_Type;  }
+        set { m_Type = value; }
+    }
 
     public void Awake()
     {
@@ -53,13 +59,13 @@ public class AttackEffect : MonoBehaviour
     }
 
     // Called from animation
-    public void EndAnimation()
+    public virtual void EndAnimation()
     {
         AttackEffectsSystem.GetInstance().EndAnimation();
         Destroy(gameObject);
     }
 
-    public void PlayEffect()
+    public virtual void PlayEffect()
     {
         myAnimator.SetTrigger("Start");
     }

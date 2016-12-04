@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using UnityEngine;
+
 public class DamageSystem : Singleton<DamageSystem>
 {
     private enum AttackType
@@ -63,17 +65,22 @@ public class DamageSystem : Singleton<DamageSystem>
         }
 
         m_ResultText.Add(l_StatisticText);
+
+        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(m_ResultText);
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+        l_TextPanel.AddPopAction(m_Target.CheckDeath);
+        ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
     }
 
     public void AttackFail()
     {
         m_ResultText.Add(LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:AttackFail"));
-    }
 
-    public DamageStatistic GetStatistics()
-    {
-        DamageStatistic l_DamageStatistic = new DamageStatistic(m_Target, m_ResultText);
-        return l_DamageStatistic;
+        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(m_ResultText);
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+        ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
     }
 
     public void Reset()

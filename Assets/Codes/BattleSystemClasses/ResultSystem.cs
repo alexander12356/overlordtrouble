@@ -5,42 +5,40 @@ using UnityEngine;
 public class ResultSystem : Singleton<ResultSystem>
 {
     private Queue<TextPanel> m_TextPanelsQueue = new Queue<TextPanel>();
-    private DamageStatistic m_DamageStatistic;
-    private TextPanel m_ResultTextPanel = null;
+    private TextPanel l_LastAddedTextPanel = null;
 
     public void ShowResult()
     {
-        m_DamageStatistic = DamageSystem.GetInstance().GetStatistics();
+        l_LastAddedTextPanel.RemovePopAction(ShowNextPanel);
+        l_LastAddedTextPanel.AddButtonAction(EndResult);
+        l_LastAddedTextPanel.RemoveButtonAction(l_LastAddedTextPanel.Close);
 
-        m_ResultTextPanel = Object.Instantiate(TextPanel.prefab);
-        m_ResultTextPanel.SetText(m_DamageStatistic.resultText);
-        m_ResultTextPanel.AddButtonAction(EndResult);
-        m_TextPanelsQueue.Enqueue(m_ResultTextPanel);
-
-        BattleSystem.GetInstance().ShowPanel(m_TextPanelsQueue.Dequeue());
+        ShowNextPanel();
     }
 
     public void AddTextPanel(TextPanel p_TextPanel)
     {
-        p_TextPanel.AddButtonAction(p_TextPanel.Close);
-        p_TextPanel.AddPopAction(ShowNextPanel);
+        l_LastAddedTextPanel = p_TextPanel;
+        l_LastAddedTextPanel.AddPopAction(ShowNextPanel);
 
-        m_TextPanelsQueue.Enqueue(p_TextPanel);
+        m_TextPanelsQueue.Enqueue(l_LastAddedTextPanel);
     }
 
     private void ShowNextPanel()
     {
-        BattleSystem.GetInstance().ShowPanel(m_TextPanelsQueue.Dequeue());
+        TextPanel l_TextPanel = m_TextPanelsQueue.Dequeue();
+        BattleSystem.GetInstance().ShowPanel(l_TextPanel);
     }
 
     private void EndResult()
     {
-        if (AttackEffectsSystem.GetInstance().IsAllAnimationEnd())
+        if (!AttackEffectsSystem.GetInstance().IsAllAnimationEnd())
         {
-            DamageSystem.GetInstance().Reset();
-            m_DamageStatistic.target.CheckDeath();
-            m_ResultTextPanel.Close();
-            BattleSystem.GetInstance().EndTurn();
+            return;
         }
+
+        l_LastAddedTextPanel.Close();
+        DamageSystem.GetInstance().Reset();
+        BattleSystem.GetInstance().EndTurn();
     }
 }

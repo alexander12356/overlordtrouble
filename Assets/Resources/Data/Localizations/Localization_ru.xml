@@ -66,6 +66,7 @@
 	<Text id="Boss:Leshii:RightHand">Правая рука</Text>
 	<Text id="Boss:Leshii:Body">Тело</Text>
 	<Text id="Boss:Leshii:LeftHand">Левая рука</Text>
+	<Text id="Boss:Leshii:SummonHands">До воскрешения рук осталось %d ходов</Text>
 	
 	<!-- UI -->
 	<Text id="GUI:Journey:ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>

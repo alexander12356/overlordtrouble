@@ -53,5 +53,11 @@ namespace BattleSystemClasses.Bosses.Leshii
 
             m_Leshii.OrganDie(m_Id);
         }
+
+        public void Recovery()
+        {
+            isDead = false;
+            InitStats();
+        }
     }
 }
