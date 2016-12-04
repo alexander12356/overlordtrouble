@@ -40,18 +40,12 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             actorName = LocalizationDataBase.GetInstance().GetText("Boss:Leshii");
 
-            int l_ChildCount = transform.childCount;
-
-            //m_RightHand = transform.FindChild(OrganIds.RightHand.ToString()).GetComponent<LeshiiOrgan>();
-            //m_LeftHand  = transform.FindChild(OrganIds.LeftHand.ToString()).GetComponent<LeshiiOrgan>();
-            //m_Body      = transform.FindChild(OrganIds.Body.ToString()).GetComponent<LeshiiOrgan>();
-
             m_RightHand.Init(OrganIds.RightHand, this);
             m_LeftHand.Init(OrganIds.LeftHand, this);
             m_Body.Init(OrganIds.Body, this);
 
             m_BodyAnimator = GetComponent<Animator>();
-            m_HeadAnimator = transform.FindChild(OrganIds.Headmain.ToString()).GetComponent<Animator>();
+            m_HeadAnimator = transform.FindChild(OrganIds.Headmain.ToString()).GetComponentInChildren<Animator>();
 
             CalculateIdle(m_HandsLive);
         }
@@ -111,11 +105,6 @@ namespace BattleSystemClasses.Bosses.Leshii
             DamageSystem.GetInstance().AttackFail();
         }
 
-        public void CloseDialogBlock()
-        {
-            bodyAnimator.SetTrigger("BlockStop");
-        }
-
         public void OrganDie(OrganIds p_OrganIds)
         {
             switch (p_OrganIds)
@@ -139,6 +128,11 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             m_BodyAnimator.SetFloat("LeftHand", p_HandsLive.x);
             m_BodyAnimator.SetFloat("RightHand", p_HandsLive.y);
+        }
+
+        private void CloseDialogBlock()
+        {
+            bodyAnimator.SetTrigger("BlockStop");
         }
     }
 }
