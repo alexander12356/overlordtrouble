@@ -205,15 +205,5 @@ public class BattlePlayer : BattleActor
         m_SpecialText     = transform.FindChild("SpecialText").GetComponent<Text>();
         m_SpecialPointBar = transform.FindChild("SpecialBar").GetComponent<Image>();
     }
-
-    private void CloseTextPanel()
-    {
-        if (AttackEffectsSystem.GetInstance().IsAllAnimationEnd())
-        {
-            m_AttackTarget.CheckDeath();
-            m_TextPanel.Close();
-            EndTurn();
-        }
-    }
     #endregion
 }

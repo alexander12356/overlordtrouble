@@ -38,41 +38,19 @@ public class BattleSystemBoss : BattleSystem
         // Инициализация фона
         m_Leshii.InitStats();
 
-        List<LeshiiOrgan> l_LeshiiOrgan = m_Leshii.GetOrgans();
+        InitLeshiiOrgans();
+
+        TurnSystem.GetInstance().AddEnemy(m_Leshii);
+    }
+
+    public void InitLeshiiOrgans()
+    {
         m_EnemyList = new List<BattleEnemy>();
+        List<LeshiiOrgan> l_LeshiiOrgan = m_Leshii.GetOrgans();
         for (int i = 0; i < l_LeshiiOrgan.Count; i++)
         {
             m_EnemyList.Add(l_LeshiiOrgan[i]);
         }
-    }
-
-    public override void EndTurn()
-    {
-        base.EndTurn();
-
-        if (m_IsPlayerTurn)
-        {
-            SetVisibleAvatarPanel(true);
-            BattlePlayer.GetInstance().RunTurn();
-            m_IsPlayerTurn = false;
-        }
-        else
-        {
-            SetVisibleAvatarPanel(false);
-            m_Leshii.RunTurn();
-            m_IsPlayerTurn = true;
-        }
-
-        //if (m_EnemyList.Count == 0)
-        //{
-        //    Win();
-        //    return;
-        //}
-
-        //if (m_IsLose)
-        //{
-        //    return;
-        //}
     }
 
     private void Update()
@@ -98,9 +76,14 @@ public class BattleSystemBoss : BattleSystem
         l_TextPanel.SetTalkingAnimator(m_Leshii.headAnimator, "Talking");
         
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
-        l_TextPanel.AddButtonAction(EndTurn);
+        l_TextPanel.AddButtonAction(StartGame);
         ShowPanel(l_TextPanel);
 
         SetVisibleAvatarPanel(false);
+    }
+
+    private void StartGame()
+    {
+        TurnSystem.GetInstance().RunGame();
     }
 }

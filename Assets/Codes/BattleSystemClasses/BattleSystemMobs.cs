@@ -12,6 +12,13 @@ public class BattleSystemMobs : BattleSystem
         InitBattle();
     }
 
+    public override void Start()
+    {
+        base.Start();
+
+        TurnSystem.GetInstance().RunGame();
+    }
+
     public override void InitBattle()
     {
         base.InitBattle();
@@ -38,6 +45,7 @@ public class BattleSystemMobs : BattleSystem
             l_NewEnemy.transform.localPosition = l_LocalPosition;
 
             m_EnemyList.Add(l_NewEnemy);
+            TurnSystem.GetInstance().AddEnemy(l_NewEnemy);
         }
 
         if (m_BattleData.playerSettings != null)
@@ -54,39 +62,6 @@ public class BattleSystemMobs : BattleSystem
                         break;
                 }
             }
-        }
-    }
-
-    public override void EndTurn()
-    {
-        base.EndTurn();
-
-        if (m_EnemyList.Count == 0)
-        {
-            Win();
-            return;
-        }
-
-        if (m_IsLose)
-        {
-            return;
-        }
-
-        m_CurrentTurn++;
-        if (m_CurrentTurn >= m_EnemyList.Count)
-        {
-            m_CurrentTurn = -1;
-        }
-
-        if (m_CurrentTurn == -1)
-        {
-            SetVisibleAvatarPanel(true);
-            BattlePlayer.GetInstance().RunTurn();
-        }
-        else
-        {
-            SetVisibleAvatarPanel(false);
-            m_EnemyList[m_CurrentTurn].RunTurn();
         }
     }
 }

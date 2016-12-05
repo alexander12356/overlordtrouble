@@ -5,23 +5,28 @@ using UnityEngine;
 public class ResultSystem : Singleton<ResultSystem>
 {
     private Queue<TextPanel> m_TextPanelsQueue = new Queue<TextPanel>();
-    private TextPanel l_LastAddedTextPanel = null;
+    private TextPanel m_LastAddedTextPanel = null;
 
     public void ShowResult()
     {
-        l_LastAddedTextPanel.RemovePopAction(ShowNextPanel);
-        l_LastAddedTextPanel.AddButtonAction(EndResult);
-        l_LastAddedTextPanel.RemoveButtonAction(l_LastAddedTextPanel.Close);
+        if (m_TextPanelsQueue.Count == 0)
+        {
+            return;
+        }
+
+        m_LastAddedTextPanel.RemovePopAction(ShowNextPanel);
+        m_LastAddedTextPanel.AddButtonAction(EndResult);
+        m_LastAddedTextPanel.RemoveButtonAction(m_LastAddedTextPanel.Close);
 
         ShowNextPanel();
     }
 
     public void AddTextPanel(TextPanel p_TextPanel)
     {
-        l_LastAddedTextPanel = p_TextPanel;
-        l_LastAddedTextPanel.AddPopAction(ShowNextPanel);
+        m_LastAddedTextPanel = p_TextPanel;
+        m_LastAddedTextPanel.AddPopAction(ShowNextPanel);
 
-        m_TextPanelsQueue.Enqueue(l_LastAddedTextPanel);
+        m_TextPanelsQueue.Enqueue(m_LastAddedTextPanel);
     }
 
     private void ShowNextPanel()
@@ -37,8 +42,13 @@ public class ResultSystem : Singleton<ResultSystem>
             return;
         }
 
-        l_LastAddedTextPanel.Close();
+        if (m_LastAddedTextPanel != null)
+        {
+            m_LastAddedTextPanel.Close();
+        }
+        m_LastAddedTextPanel = null;
+        m_TextPanelsQueue.Clear();
         DamageSystem.GetInstance().Reset();
-        BattleSystem.GetInstance().EndTurn();
+        TurnSystem.GetInstance().EndTurn();
     }
 }

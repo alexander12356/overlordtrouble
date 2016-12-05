@@ -69,10 +69,6 @@ public class BattleSystem : MonoBehaviour
         InitStartPanel();
     }
 
-    public virtual void EndTurn()
-    {
-    }
-
     public void SetVisibleAvatarPanel(bool p_Value)
     {
         m_AvatarPanel.SetActive(p_Value);
@@ -153,6 +149,21 @@ public class BattleSystem : MonoBehaviour
     public void InitLocationBackground(string p_LocationId)
     {
         m_LocationBackground.sprite = Resources.Load<Sprite>("Sprites/BattleSystem/Background/" + p_LocationId);
+    }
+
+    public bool CheckWin()
+    {
+        if (m_EnemyList.Count == 0)
+        {
+            Win();
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsLose()
+    {
+        return m_IsLose;
     }
     #endregion
 
