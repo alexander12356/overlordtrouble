@@ -234,13 +234,36 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         private void AttackRightHand()
         {
+            int l_Healcastchance = Random.Range(0, 100);
+            bool l_IsHealcast = false;
+            if (l_Healcastchance > 50)
+            {
+                l_IsHealcast = true;
+
+                m_Body.health += 5;
+            }
+
             if (m_LeftHand.isDead)
             {
-                bodyAnimator.SetTrigger("AttackNoLeft");
+                if (!l_IsHealcast)
+                {
+                    bodyAnimator.SetTrigger("AttackNoLeft");
+                }
+                else
+                {
+                    bodyAnimator.SetTrigger("HealcastNoLeft");
+                }
             }
             else
             {
-                bodyAnimator.SetTrigger("AttackRight");
+                if (!l_IsHealcast)
+                {
+                    bodyAnimator.SetTrigger("AttackRight");
+                }
+                else
+                {
+                    bodyAnimator.SetTrigger("Healcast");
+                }
             }            
         }
 
