@@ -69,7 +69,9 @@ public class AttackEffectsSystem : MonoBehaviour
 
     private void PlayNextEffect()
     {
-        m_AttackEffectQueue.Dequeue();
+        AttackEffect l_AttackEffect = m_AttackEffectQueue.Dequeue();
+        Destroy(l_AttackEffect.gameObject);
+
         if (m_AttackEffectQueue.Count == 0)
         {
             Reset();

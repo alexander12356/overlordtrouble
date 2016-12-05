@@ -62,7 +62,6 @@ public class AttackEffect : MonoBehaviour
     public virtual void EndAnimation()
     {
         AttackEffectsSystem.GetInstance().EndAnimation();
-        Destroy(gameObject);
     }
 
     public virtual void PlayEffect()
