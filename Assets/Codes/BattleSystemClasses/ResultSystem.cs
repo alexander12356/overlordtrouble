@@ -11,6 +11,7 @@ public class ResultSystem : Singleton<ResultSystem>
     {
         if (m_TextPanelsQueue.Count == 0)
         {
+            EndResult();
             return;
         }
 

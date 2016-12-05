@@ -29,7 +29,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             if (m_Id == OrganIds.Body)
             {
-                if (m_Leshii.IsAllHandsDied())
+                if (m_Leshii.IsAllHandsDied() || m_Leshii.isChargeMode)
                 {
                     health -= p_DamageValue;
                     DamageSystem.GetInstance().AttackSuccess();
@@ -52,10 +52,16 @@ namespace BattleSystemClasses.Bosses.Leshii
 
             m_Leshii.OrganDie(m_Id);
 
-            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-            l_TextPanel.SetText(new List<string>() { actorName + " потеряла силу" });
-            l_TextPanel.AddButtonAction(l_TextPanel.Close);
-            ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+            if (m_Id == OrganIds.Body)
+            {
+            }
+            else
+            {
+                TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+                l_TextPanel.SetText(new List<string>() { actorName + " потеряла силу" });
+                l_TextPanel.AddButtonAction(l_TextPanel.Close);
+                ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+            }
         }
 
         public void Recovery()

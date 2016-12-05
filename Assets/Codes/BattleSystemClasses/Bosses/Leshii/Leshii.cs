@@ -19,6 +19,9 @@ namespace BattleSystemClasses.Bosses.Leshii
         private Vector2 m_HandsLive = Vector2.zero;
         private int m_SummonHandsCounter = 0;
         private int m_SummonHandsCount = 2;
+        private int m_ChargeCounter = 0;
+        private int m_ChargeCount = 3;
+        private bool m_ChargeMode = false;
 
         [SerializeField]
         private LeshiiOrgan m_RightHand = null;
@@ -37,6 +40,10 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             get { return m_HeadAnimator; }
         }
+        public bool isChargeMode
+        {
+            get { return m_ChargeMode; }
+        }
 
         public override void InitStats()
         {
@@ -45,6 +52,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             m_RightHand.Init(OrganIds.RightHand, this);
             m_LeftHand.Init(OrganIds.LeftHand, this);
             m_Body.Init(OrganIds.Body, this);
+            m_Body.baseHealth = m_Body.health = 50;
 
             m_BodyAnimator = GetComponent<Animator>();
             m_HeadAnimator = transform.FindChild(OrganIds.Headmain.ToString()).GetComponentInChildren<Animator>();
@@ -95,14 +103,53 @@ namespace BattleSystemClasses.Bosses.Leshii
                     l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
                     ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+                    ((BattleSystemBoss)(BattleSystem.GetInstance())).InitLeshiiOrgans();
                 }
 
                 ResultSystem.GetInstance().ShowResult();
                 return;
             }
 
-            AttackWithHands();
-            DamageSystem.GetInstance().Attack(this, BattlePlayer.GetInstance(), 1.0f);
+            if (m_Body.health > 40)
+            {
+                m_ChargeMode = false;
+
+                AttackWithHands();
+                DamageSystem.GetInstance().Attack(this, BattlePlayer.GetInstance(), 1.0f);
+            }
+            else
+            {
+                if (m_ChargeMode == false)
+                {
+                    m_ChargeMode = true;
+                    m_BodyAnimator.SetTrigger("StartCharge");
+                    
+                    BattleSystem.GetInstance().EnemyDied(m_LeftHand);
+                    BattleSystem.GetInstance().EnemyDied(m_RightHand);
+
+                    List<string> l_Text = new List<string>();
+                    l_Text.Add("Ну все!");
+
+                    TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+                    l_TextPanel.SetTalkingAnimator(m_HeadAnimator, "Talking");
+                    l_TextPanel.SetText(l_Text);
+                    l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+                    ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+                }
+                else
+                {
+                    m_ChargeCounter++;
+                    if (m_ChargeCounter >= m_ChargeCount)
+                    {
+                        m_ChargeCounter = 0;
+                        m_BodyAnimator.SetTrigger("AttackCharge");
+                        m_BodyAnimator.SetTrigger("StartCharge");
+                        DamageSystem.GetInstance().Attack(this, BattlePlayer.GetInstance(), 10.0f);
+                    }
+                }
+            }
+
             ResultSystem.GetInstance().ShowResult();
         }
         
@@ -139,12 +186,16 @@ namespace BattleSystemClasses.Bosses.Leshii
                 case OrganIds.LeftHand:
                     m_BodyAnimator.SetTrigger("LeftHandDestroy");
                     m_HandsLive.x = 1.0f;
+                    BattleSystem.GetInstance().EnemyDied(m_LeftHand);
                     break;
                 case OrganIds.RightHand:
                     m_BodyAnimator.SetTrigger("RightHandDestroy");
                     m_HandsLive.y = 1.0f;
+                    BattleSystem.GetInstance().EnemyDied(m_RightHand);
                     break;
                 case OrganIds.Body:
+                    m_BodyAnimator.SetTrigger("Die");
+                    BattleSystem.GetInstance().EnemyDied(m_Body);
                     break;
             }
 
