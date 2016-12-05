@@ -82,6 +82,7 @@ public class BattleSystem : MonoBehaviour
     public void EnemyDied(BattleEnemy p_BattleEnemy)
     {
         m_EnemyList.Remove(p_BattleEnemy);
+        TurnSystem.GetInstance().RemoveEnemy(p_BattleEnemy);
     }
 
     public void PlayerDied()

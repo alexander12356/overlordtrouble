@@ -50,16 +50,20 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             isDead = true;
 
-            m_Leshii.OrganDie(m_Id);
-
             if (m_Id == OrganIds.Body)
             {
+                TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+                l_TextPanel.SetText(new List<string>() { "Ой! Я побежден" });
+                l_TextPanel.AddButtonAction(l_TextPanel.Close);
+                l_TextPanel.AddPushAction(PlayDestroyEffect);
+                ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
             }
             else
             {
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
                 l_TextPanel.SetText(new List<string>() { actorName + " потеряла силу" });
                 l_TextPanel.AddButtonAction(l_TextPanel.Close);
+                l_TextPanel.AddPushAction(PlayDestroyEffect);
                 ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
             }
         }
@@ -68,6 +72,11 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             isDead = false;
             InitStats();
+        }
+
+        private void PlayDestroyEffect()
+        {
+            m_Leshii.OrganDie(m_Id);
         }
     }
 }

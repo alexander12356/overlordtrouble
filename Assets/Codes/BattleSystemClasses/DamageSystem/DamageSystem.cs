@@ -69,8 +69,9 @@ public class DamageSystem : Singleton<DamageSystem>
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(m_ResultText);
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
-        l_TextPanel.AddPopAction(m_Target.CheckDeath);
         ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+
+        m_Target.CheckDeath();
     }
 
     public void AttackFail()

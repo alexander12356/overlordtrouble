@@ -25,6 +25,11 @@ public class TurnSystem : MonoBehaviour
         m_EnemyList.Add(p_Enemy);
     }
 
+    public void RemoveEnemy(BattleEnemy p_Enemy)
+    {
+        m_EnemyList.Remove(p_Enemy);
+    }
+
     public void RunGame()
     {
         StartCoroutine(Running());

@@ -14,7 +14,6 @@ public class BattlePlayer : BattleActor
     private Text m_SpecialText = null;
     private Image m_HealthPointBar = null;
     private Image m_SpecialPointBar = null;
-    private TextPanel m_TextPanel = null;
     private BattleActor m_AttackTarget = null;
     #endregion
 
