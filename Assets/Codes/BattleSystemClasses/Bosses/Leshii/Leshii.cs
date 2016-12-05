@@ -18,7 +18,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         private Animator m_HeadAnimator = null;
         private Vector2 m_HandsLive = Vector2.zero;
         private int m_SummonHandsCounter = 0;
-        private int m_SummonHandsCount = 3;
+        private int m_SummonHandsCount = 2;
 
         [SerializeField]
         private LeshiiOrgan m_RightHand = null;

@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections.Generic;
 
 namespace BattleSystemClasses.Bosses.Leshii
 {
@@ -52,6 +51,11 @@ namespace BattleSystemClasses.Bosses.Leshii
             isDead = true;
 
             m_Leshii.OrganDie(m_Id);
+
+            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+            l_TextPanel.SetText(new List<string>() { actorName + " потеряла силу" });
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
+            ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
         }
 
         public void Recovery()
