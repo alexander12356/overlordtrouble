@@ -11,7 +11,6 @@ public class BattleEnemy : BattleActor
     private bool m_Selected = false;
     private SpriteRenderer m_SelectedArrow = null;
     private List<EnemyAttackData> m_AttackList = null;
-    private TextPanel m_TextPanel = null;
     #endregion
 
     #region Interface
@@ -66,6 +65,7 @@ public class BattleEnemy : BattleActor
         base.RunTurn();
 
         Attack(BattlePlayer.GetInstance());
+        ResultSystem.GetInstance().ShowResult();
     }
 
     public override void Damage(float p_DamageValue)
@@ -73,6 +73,7 @@ public class BattleEnemy : BattleActor
         base.Damage(p_DamageValue);
 
         health -= p_DamageValue;
+        DamageSystem.GetInstance().AttackSuccess();
     }
     
     public override void Attack(BattleActor p_Actor)
@@ -81,18 +82,11 @@ public class BattleEnemy : BattleActor
 
         EnemyAttackData l_AttackData = m_EnemyData.attackList[Random.Range(0, m_EnemyData.attackList.Count)];
         float l_Damage = Random.Range(l_AttackData.damageValue[0], l_AttackData.damageValue[1]);
-        string l_EnemyName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id);
-        string l_AttackName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id + ":" + l_AttackData.id);
-        string l_AttackText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EnemyAttack", new string[] { l_EnemyName, l_AttackName, l_Damage.ToString() });
-
-        p_Actor.Damage(l_Damage);
+        
         AttackEffectsSystem.GetInstance().AddEffect(p_Actor, this, "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id);
         AttackEffectsSystem.GetInstance().PlayEffects();
 
-        m_TextPanel = Instantiate(TextPanel.prefab);
-        m_TextPanel.SetText(new List<string>() { l_AttackText });
-        m_TextPanel.AddButtonAction(CloseTextPanel);
-        BattleSystem.GetInstance().ShowPanel(m_TextPanel);
+        DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
     }
 
     public override void Die()
@@ -123,16 +117,17 @@ public class BattleEnemy : BattleActor
     {
         m_Animator = GetComponent<Animator>();
         m_AudioSource = GetComponent<AudioSource>();
-        m_SpriteRenderer = transform.FindChild("Renderer").GetComponent<SpriteRenderer>();
-        m_SelectedArrow = transform.FindChild("Selected").GetComponent<SpriteRenderer>();
-    }
 
-    private void CloseTextPanel()
-    {
-        if (AttackEffectsSystem.GetInstance().IsAllAnimationEnd())
+        Transform l_RendererTransform = transform.FindChild("Renderer");
+        if (l_RendererTransform != null)
         {
-            m_TextPanel.Close();
-            EndTurn();
+            m_SpriteRenderer = l_RendererTransform.GetComponent<SpriteRenderer>();
+        }
+
+        Transform l_SelectedTransform = transform.FindChild("Selected");
+        if (l_SelectedTransform != null)
+        {
+            m_SelectedArrow = l_SelectedTransform.GetComponent<SpriteRenderer>();
         }
     }
     #endregion

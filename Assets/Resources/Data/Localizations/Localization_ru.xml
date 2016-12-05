@@ -60,6 +60,14 @@
 	<Text id="Enemy:Dualent:Description">Один из низших представителей иерархии лесных монстров. Нечто среднее между кустом и небольшим деревцем, но больше похожее на гнилое полено. Немного туповаты. Благодаря наличию двух голов имеют прекрасный обзор.</Text>
 	<Text id="Enemy:ThirdsortRobber:Description">Не представляет из себя ничего особенного. Его удел и его судьба - получить тумаков от героя на ранных уровнях. Обычно ошивается в тавернах с сомнительной репутацией.</Text>
 	
+	<!-- Bosses -->
+	<!-- Leshii -->
+	<Text id="Boss:Leshii">Леший</Text>
+	<Text id="Boss:Leshii:RightHand">Правая рука</Text>
+	<Text id="Boss:Leshii:Body">Тело</Text>
+	<Text id="Boss:Leshii:LeftHand">Левая рука</Text>
+	<Text id="Boss:Leshii:SummonHands">До воскрешения рук осталось %d ходов</Text>
+	
 	<!-- UI -->
 	<Text id="GUI:Journey:ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>
 	<Text id="GUI:Journey:Store:Buy">Купить</Text>
@@ -96,9 +104,9 @@
 	<Text id="GUI:BattleSystem:Classup">достиг достаточного уровня для повышение класса!</Text>
 	<Text id="GUI:BattleSystem:SelectMonstyle:Damage">Урон</Text>
 	<Text id="GUI:BattleSystem:EnemyAttack">%d использовал %d и нанес %d урона</Text>
-	<Text id="GUI:BattleSystem:PlayerAttack">Игрок нанес %d урона врагу</Text>
+	<Text id="GUI:BattleSystem:PlayerAttack">%d атаковал "%d" и нанес %d урона</Text>
 	<Text id="GUI:BattleSystem:BadAttack">Плод твоих напрасных усилий был равен %d очкам урона по %d</Text>
-	<Text id="GUI:BattleSystem:SpecialAttack">Кеша использовал на "%d" %d он нанес %d урона</Text>
+	<Text id="GUI:BattleSystem:SpecialAttack">%d использовал на "%d" %d он нанес %d урона</Text>
 	<Text id="GUI:BattleSystem:MainPanelAttack">Атака</Text>
 	<Text id="GUI:BattleSystem:MainPanelMonstyle">Монстайл</Text>
 	<Text id="GUI:BattleSystem:MainPanelItems">Предметы</Text>
@@ -109,6 +117,7 @@
 	<Text id="GUI:BattleSystem:Win">Враги убиты.\nВы победили.\nГГ получает %d exp</Text>
 	<Text id="GUI:BattleSystem:Lose">Кеша больше не может сражаться дальше, Кеша потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли.</Text>
 	<Text id="GUI:BattleSystem:And">и</Text>
+	<Text id="GUI:BattleSystem:AttackFail">Атака не прошла</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Побуду собой</Text>
 	<Text id="GUI:Improve:AreYouShure">Вы уверены что хотите выбрать этот\nкласс?\nВернуть обратно уже не выйдет.</Text>

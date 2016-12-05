@@ -89,11 +89,6 @@ public class BattleActor : MonoBehaviour
     {
     }
 
-    public virtual void EndTurn()
-    {
-        BattleSystem.GetInstance().EndTurn();
-    }
-
     public virtual void InitStats()
     {
     }
