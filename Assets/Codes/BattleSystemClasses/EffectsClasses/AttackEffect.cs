@@ -1,13 +1,12 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AttackEffect : MonoBehaviour
 {
     private Animator m_Animator = null;
     private Transform m_Renderer = null;
     private AudioSource m_AudioSource = null;
-    private BattleActor m_BattleActor = null;
-    private AttackEffectType m_Type = AttackEffectType.Instance;
+    private BattleActor m_Target = null;
+    private Transform m_TargetRenderer = null;
 
     [SerializeField]
     private string m_Id = string.Empty;
@@ -23,17 +22,6 @@ public class AttackEffect : MonoBehaviour
             return m_Animator;
         }
     }
-    public Transform enemyRendererTransform
-    {
-        get
-        {
-            if (m_Renderer == null)
-            {
-                m_Renderer = transform.FindChild("Renderer");
-            }
-            return m_Renderer;
-        }
-    }
     public AudioSource audioSource
     {
         get
@@ -45,39 +33,45 @@ public class AttackEffect : MonoBehaviour
             return m_AudioSource;
         }
     }
-    public AttackEffectType type
-    {
-        get { return m_Type;  }
-        set { m_Type = value; }
-    }
 
     public void Awake()
     {
         m_Animator = myAnimator;
-        m_Renderer = enemyRendererTransform;
+        m_Renderer = transform.FindChild("Renderer");
         m_AudioSource = audioSource;
+    }
+
+    public void Init(BattleActor p_Target, Transform p_TargetRenderer)
+    {
+        m_Target = p_Target;
+        m_TargetRenderer = p_TargetRenderer;
     }
 
     // Called from animation
     public virtual void EndAnimation()
     {
-        AttackEffectsSystem.GetInstance().EndAnimation();
+        m_TargetRenderer.SetParent(transform.parent);
+        Destroy(gameObject);
+        ResultSystem.GetInstance().NextStep();
     }
 
     public virtual void PlayEffect()
     {
+        transform.SetParent(m_TargetRenderer.parent);
+        transform.localPosition = Vector3.zero;
+        m_TargetRenderer.SetParent(m_Renderer);
         myAnimator.SetTrigger("Start");
     }
 
     public void SetTarget(BattleActor p_Target)
     {
-        m_BattleActor = p_Target;
+        m_Target = p_Target;
     }
 
     // Called from animation
     public void PlaySound()
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_Id));
-        m_BattleActor.PlayHitSound();
+        m_Target.PlayHitSound();
     }
 }

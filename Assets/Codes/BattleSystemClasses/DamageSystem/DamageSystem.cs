@@ -13,7 +13,6 @@ public class DamageSystem : Singleton<DamageSystem>
     private BattleActor m_Target = null;
     private BattleActor m_Sender = null;
     private string m_AttackNames = string.Empty;
-    private List<string> m_ResultText = new List<string>();
     private float m_DamageValue = 0.0f;
     private AttackType m_AttackType = AttackType.BaseAttack;
     private bool m_IsBadAttack = false;
@@ -64,29 +63,30 @@ public class DamageSystem : Singleton<DamageSystem>
                 break;
         }
 
-        m_ResultText.Add(l_StatisticText);
-
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(m_ResultText);
+        l_TextPanel.SetText(new List<string>() { l_StatisticText });
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
-        ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+
+        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+        ResultSystem.GetInstance().AddStep(l_Step);
 
         m_Target.CheckDeath();
     }
 
     public void AttackFail()
     {
-        m_ResultText.Add(LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:AttackFail"));
+        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:AttackFail");
 
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(m_ResultText);
+        l_TextPanel.SetText(new List<string>() { l_Text });
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
-        ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+
+        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+        ResultSystem.GetInstance().AddStep(l_Step);
     }
 
     public void Reset()
     {
-        m_ResultText.Clear();
         m_AttackNames = "";
     }
 }

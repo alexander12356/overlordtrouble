@@ -7,6 +7,6 @@ public class EndEffectChecker : MonoBehaviour
     // Called from Animation
     public void EndAnimation()
     {
-        AttackEffectsSystem.GetInstance().EndAnimation();
+        ResultSystem.GetInstance().NextStep();
     }
 }

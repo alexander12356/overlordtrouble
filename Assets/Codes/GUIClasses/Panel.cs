@@ -14,6 +14,7 @@ public class Panel : MonoBehaviour
     private bool m_IsShowed = false;
     private BaseTransition m_BaseTransition = null;
     private PanelManager m_PanelManager = null;
+    private string m_Id = "";
     #endregion
 
     #region Interface
@@ -47,6 +48,10 @@ public class Panel : MonoBehaviour
         {
             m_Transform = value;
         }
+    }
+    public string id
+    {
+        set { m_Id = value; }
     }
 
     public virtual void Awake()

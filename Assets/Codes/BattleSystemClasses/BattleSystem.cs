@@ -17,6 +17,7 @@ public class BattleSystem : MonoBehaviour
     private int m_Experience = 0;
     private bool m_IsClassup = false;
     private bool m_IsLevelup = false;
+    private MainPanel m_MainPanel = null;
 
     protected List<BattleEnemy> m_EnemyList = new List<BattleEnemy>();
     protected int m_CurrentTurn = -1;
@@ -66,7 +67,6 @@ public class BattleSystem : MonoBehaviour
 
     public virtual void Start()
     {
-        InitStartPanel();
     }
 
     public void SetVisibleAvatarPanel(bool p_Value)
@@ -166,6 +166,19 @@ public class BattleSystem : MonoBehaviour
     {
         return m_IsLose;
     }
+
+    public void ShowMainPanel()
+    {
+        InitStartPanel();
+    }
+
+    public void CloseMainPanel()
+    {
+        if (m_MainPanel)
+        {
+            m_MainPanel.Close();
+        }
+    }
     #endregion
 
     #region Private
@@ -212,8 +225,8 @@ public class BattleSystem : MonoBehaviour
 
     private void InitStartPanel()
     {
-        MainPanel l_MainPanel = Instantiate(MainPanel.prefab);
-        ShowPanel(l_MainPanel);
+        m_MainPanel = Instantiate(MainPanel.prefab);
+        ShowPanel(m_MainPanel);
     }
 
     private void LevelupNotification()

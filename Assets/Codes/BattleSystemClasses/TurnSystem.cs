@@ -49,6 +49,7 @@ public class TurnSystem : MonoBehaviour
             {
                 BattlePlayer.GetInstance().RunTurn();
                 BattleSystem.GetInstance().SetVisibleAvatarPanel(true);
+                BattleSystem.GetInstance().ShowMainPanel();
             }
             else
             {

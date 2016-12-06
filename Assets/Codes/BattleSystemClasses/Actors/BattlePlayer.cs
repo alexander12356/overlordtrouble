@@ -29,10 +29,15 @@ public class BattlePlayer : BattleActor
 
         int l_Damage = Random.Range(m_AttackValue[0], m_AttackValue[1]);
 
-        AttackEffectsSystem.GetInstance().AddEffect(p_Actor, p_Actor, "Prefabs/BattleEffects/Player/Player_BaseAttack");
-        AttackEffectsSystem.GetInstance().PlayEffects();
+        AttackEffect l_AttackEffect = Instantiate(Resources.Load<AttackEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
+        l_AttackEffect.Init(p_Actor, p_Actor.spriteRenderer.transform);
+
+        BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
+        ResultSystem.GetInstance().AddStep(l_Step);
+
         DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
         ResultSystem.GetInstance().ShowResult();
+
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 
@@ -85,7 +90,11 @@ public class BattlePlayer : BattleActor
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
             l_IsBadAttack = true;
 
-            AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, p_Enemy, "Prefabs/BattleEffects/Player/Player_BaseAttack");
+            AttackEffect l_AttackEffect = Instantiate(Resources.Load<AttackEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
+            l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
+            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
+
+            ResultSystem.GetInstance().AddStep(l_Step);
         }
         else if (l_UnbuffedSpecialCount == p_SpecialUpgradeIconList.Count)
         {
@@ -95,7 +104,11 @@ public class BattlePlayer : BattleActor
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
             l_IsBadAttack = true;
 
-            AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, p_Enemy, "Prefabs/BattleEffects/Player/Player_BaseAttack");
+            AttackEffect l_AttackEffect = Instantiate(Resources.Load<AttackEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
+            l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
+            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
+
+            ResultSystem.GetInstance().AddStep(l_Step);
         }
         else
         {
@@ -116,15 +129,21 @@ public class BattlePlayer : BattleActor
                 }
                 l_DamageValue += l_BuffedSkills[i].damage;
 
-                AttackEffectsSystem.GetInstance().AddEffect(p_Enemy, p_Enemy, "Prefabs/BattleEffects/Monstyle/" + l_BuffedSkills[i].id + "Monstyle");
+                string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + l_BuffedSkills[i].id + "Monstyle";
+
+                AttackEffect l_AttackEffect = Instantiate(Resources.Load<AttackEffect>(l_PrefabPath));
+                l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
+                BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
+
+                ResultSystem.GetInstance().AddStep(l_Step);
             }
 
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:SpecialAttack", new string[] { p_Enemy.actorName, l_UsedSpecialsName, l_DamageValue.ToString() });
         }
 
         DamageSystem.GetInstance().SpecialAttack(this, p_Enemy, l_DamageValue, l_IsBadAttack, l_UsedSpecialsName);
+
         ResultSystem.GetInstance().ShowResult();
-        AttackEffectsSystem.GetInstance().PlayEffects();
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 

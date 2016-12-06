@@ -22,6 +22,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         private int m_ChargeCounter = 0;
         private int m_ChargeCount = 3;
         private bool m_ChargeMode = false;
+        private bool m_IsHealCast = false;
 
         [SerializeField]
         private LeshiiOrgan m_RightHand = null;
@@ -81,7 +82,7 @@ namespace BattleSystemClasses.Bosses.Leshii
                     l_TextPanel.SetText(l_Text);
                     l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
-                    ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+                    //ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
 
                     m_SummonHandsCounter++;
                 }
@@ -102,7 +103,7 @@ namespace BattleSystemClasses.Bosses.Leshii
                     l_TextPanel.SetText(l_Text);
                     l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
-                    ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+                    //ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
                     ((BattleSystemBoss)(BattleSystem.GetInstance())).InitLeshiiOrgans();
                 }
 
@@ -114,8 +115,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             {
                 m_ChargeMode = false;
 
-                AttackWithHands();
-                DamageSystem.GetInstance().Attack(this, BattlePlayer.GetInstance(), 1.0f);
+                Attack(BattlePlayer.GetInstance());
             }
             else
             {
@@ -135,7 +135,7 @@ namespace BattleSystemClasses.Bosses.Leshii
                     l_TextPanel.SetText(l_Text);
                     l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
-                    ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+                    //ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
                 }
                 else
                 {
@@ -176,7 +176,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             l_TextPanel.SetTalkingAnimator(headAnimator, "Talking");
             l_TextPanel.AddButtonAction(CloseDialogBlock);
             l_TextPanel.AddButtonAction(l_TextPanel.Close);
-            ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+            //ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
         }
 
         public void OrganDie(OrganIds p_OrganIds)
@@ -213,70 +213,68 @@ namespace BattleSystemClasses.Bosses.Leshii
             bodyAnimator.SetTrigger("BlockStop");
         }
 
-        private void AttackWithHands()
+        public override void Attack(BattleActor p_Target)
         {
             if (!m_LeftHand.isDead)
             {
-                LeshiiAttackEffect l_LeftAttackEffect = Instantiate(Resources.Load<LeshiiAttackEffect>("Prefabs/Bosses/Leshii/LeshiiAttackEffect"));
-                l_LeftAttackEffect.AddPlayAction(AttackLeftHand);
-                AttackEffectsSystem.GetInstance().AddEffect(l_LeftAttackEffect);
+                AttackLeftHand();
             }
 
             if (!m_RightHand.isDead)
             {
-                LeshiiAttackEffect l_RightAttackEffect = Instantiate(Resources.Load<LeshiiAttackEffect>("Prefabs/Bosses/Leshii/LeshiiAttackEffect"));
-                l_RightAttackEffect.AddPlayAction(AttackRightHand);
-                AttackEffectsSystem.GetInstance().AddEffect(l_RightAttackEffect);
+                AttackRightHand();
             }
-            
-            AttackEffectsSystem.GetInstance().PlayEffects();
         }
 
         private void AttackRightHand()
         {
-            int l_Healcastchance = Random.Range(0, 100);
-            bool l_IsHealcast = false;
-            if (l_Healcastchance > 50)
-            {
-                l_IsHealcast = true;
+            LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(Resources.Load<LeshiiAttackEffect>("Prefabs/Bosses/Leshii/LeshiiAttackEffect"));
+            l_LeshiiAttackEffect.AddPlayAction(PlayAttackRightHand);
+            BattlePlayEffectStep l_AnimationStep = new BattlePlayEffectStep(l_LeshiiAttackEffect);
+            ResultSystem.GetInstance().AddStep(l_AnimationStep);
 
+            if (Random.Range(0, 100) > 50)
+            {
+                m_IsHealCast = true;
                 m_Body.health += 5;
-            }
 
-            if (m_LeftHand.isDead)
-            {
-                if (!l_IsHealcast)
-                {
-                    bodyAnimator.SetTrigger("AttackNoLeft");
-                }
-                else
-                {
-                    bodyAnimator.SetTrigger("HealcastNoLeft");
-                }
+                TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+                l_TextPanel.SetText(new List<string>() { m_RightHand.actorName + " восстановил 5 очков здоровья" });
+
+                BattleShowPanelStep l_ShowPanelStep = new BattleShowPanelStep(l_TextPanel);
+
+                ResultSystem.GetInstance().AddStep(l_ShowPanelStep);
             }
             else
             {
-                if (!l_IsHealcast)
-                {
-                    bodyAnimator.SetTrigger("AttackRight");
-                }
-                else
-                {
-                    bodyAnimator.SetTrigger("Healcast");
-                }
-            }            
+                DamageSystem.GetInstance().Attack(m_RightHand, BattlePlayer.GetInstance(), 1.0f);
+            }
+        }
+
+        private void PlayAttackRightHand()
+        {
+            if (m_IsHealCast)
+            {
+                m_BodyAnimator.SetTrigger("Healcast");
+                return;
+            }
+            m_BodyAnimator.SetTrigger("AttackRight");
         }
 
         private void AttackLeftHand()
         {
-            if (m_RightHand.isDead)
-            {
-                bodyAnimator.SetTrigger("AttackNoRight");
-            }
-            else
-            {
-                bodyAnimator.SetTrigger("AttackLeft");
-            }
+            LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(Resources.Load<LeshiiAttackEffect>("Prefabs/Bosses/Leshii/LeshiiAttackEffect"));
+            l_LeshiiAttackEffect.AddPlayAction(PlayAttackLeftHand);
+            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
+
+            ResultSystem.GetInstance().AddStep(l_Step);
+
+            DamageSystem.GetInstance().Attack(m_LeftHand, BattlePlayer.GetInstance(), 1.0f);
+        }
+
+        private void PlayAttackLeftHand()
+        {
+            m_BodyAnimator.SetTrigger("AttackLeft");
         }
     }
 }

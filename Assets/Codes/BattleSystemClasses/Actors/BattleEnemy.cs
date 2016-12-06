@@ -82,9 +82,13 @@ public class BattleEnemy : BattleActor
 
         EnemyAttackData l_AttackData = m_EnemyData.attackList[Random.Range(0, m_EnemyData.attackList.Count)];
         float l_Damage = Random.Range(l_AttackData.damageValue[0], l_AttackData.damageValue[1]);
-        
-        AttackEffectsSystem.GetInstance().AddEffect(p_Actor, this, "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id);
-        AttackEffectsSystem.GetInstance().PlayEffects();
+
+        string l_AttackEffectPrefabPath = "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id;
+        AttackEffect l_AttackEffect = Instantiate(Resources.Load<AttackEffect>(l_AttackEffectPrefabPath));
+        l_AttackEffect.Init(p_Actor, spriteRenderer.transform);
+
+        BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
+        ResultSystem.GetInstance().AddStep(l_Step);
 
         DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
     }
