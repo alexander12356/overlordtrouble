@@ -23,6 +23,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         private int m_ChargeCount = 3;
         private bool m_ChargeMode = false;
         private bool m_IsHealCast = false;
+        private EndEffectChecker l_EndEffectChecker = null;
 
         [SerializeField]
         private LeshiiOrgan m_RightHand = null;
@@ -44,6 +45,13 @@ namespace BattleSystemClasses.Bosses.Leshii
         public bool isChargeMode
         {
             get { return m_ChargeMode; }
+        }
+
+        public override void Awake()
+        {
+            base.Awake();
+
+            l_EndEffectChecker = GetComponent<EndEffectChecker>();
         }
 
         public override void InitStats()
@@ -230,6 +238,8 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(Resources.Load<LeshiiAttackEffect>("Prefabs/Bosses/Leshii/LeshiiAttackEffect"));
             l_LeshiiAttackEffect.AddPlayAction(PlayAttackRightHand);
+            l_EndEffectChecker.AddAttackEffect(l_LeshiiAttackEffect);
+
             BattlePlayEffectStep l_AnimationStep = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_AnimationStep);
 
@@ -240,6 +250,7 @@ namespace BattleSystemClasses.Bosses.Leshii
 
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
                 l_TextPanel.SetText(new List<string>() { m_RightHand.actorName + " восстановил 5 очков здоровья" });
+                l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
                 BattleShowPanelStep l_ShowPanelStep = new BattleShowPanelStep(l_TextPanel);
 
@@ -265,8 +276,9 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(Resources.Load<LeshiiAttackEffect>("Prefabs/Bosses/Leshii/LeshiiAttackEffect"));
             l_LeshiiAttackEffect.AddPlayAction(PlayAttackLeftHand);
-            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
+            l_EndEffectChecker.AddAttackEffect(l_LeshiiAttackEffect);
 
+            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
 
             DamageSystem.GetInstance().Attack(m_LeftHand, BattlePlayer.GetInstance(), 1.0f);
