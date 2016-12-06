@@ -54,6 +54,7 @@ public class BattlePlayer : BattleActor
     public void SpecialAttack(BattleActor p_Enemy, List<SpecialUpgradeIcon> p_SpecialUpgradeIconList)
     {
         m_AttackTarget = p_Enemy;
+        m_AttackTarget.CheckPrevAttack();
 
         int l_BrokenSpecialCount = 0;
         int l_UnbuffedSpecialCount = 0;

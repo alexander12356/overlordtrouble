@@ -62,6 +62,7 @@ public class BattleActor : MonoBehaviour
 
     public virtual void Attack(BattleActor p_Actor)
     {
+        p_Actor.CheckPrevAttack();
     }
 
     public virtual void Damage(float p_DamageValue)
@@ -102,6 +103,10 @@ public class BattleActor : MonoBehaviour
     }
 
     public virtual void PlayHitSound()
+    {
+    }
+
+    public virtual void CheckPrevAttack()
     {
     }
     #endregion

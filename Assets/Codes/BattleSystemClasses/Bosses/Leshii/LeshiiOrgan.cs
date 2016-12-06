@@ -53,10 +53,14 @@ namespace BattleSystemClasses.Bosses.Leshii
             if (m_Id == OrganIds.Body)
             {
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-                l_TextPanel.SetText(new List<string>() { "Ой! Я побежден" });
+                l_TextPanel.SetText(new List<string>() { "Ой ой…" });
+                l_TextPanel.SetTalkingAnimator(m_Leshii.headAnimator, "Talking");
                 l_TextPanel.AddButtonAction(l_TextPanel.Close);
-                l_TextPanel.AddPushAction(PlayDestroyEffect);
-                //ResultSystem.GetInstance().AddTextPanel(l_TextPanel);
+
+                BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+                ResultSystem.GetInstance().AddStep(l_Step);
+
+                m_Leshii.OrganDie(m_Id);
             }
             else
             {
@@ -67,7 +71,6 @@ namespace BattleSystemClasses.Bosses.Leshii
                 l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
                 BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
-
                 ResultSystem.GetInstance().AddStep(l_Step);
             }
         }
@@ -78,9 +81,15 @@ namespace BattleSystemClasses.Bosses.Leshii
             InitStats();
         }
 
-        private void PlayDestroyEffect()
+        public override void CheckPrevAttack()
         {
-            m_Leshii.OrganDie(m_Id);
+            if (m_Id == OrganIds.Body)
+            {
+                if (!m_Leshii.IsAllHandsDied() && !m_Leshii.isChargeMode)
+                {
+                    m_Leshii.StartBlock();
+                }
+            }
         }
     }
 }
