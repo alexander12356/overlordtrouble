@@ -12,6 +12,13 @@ namespace BattleSystemClasses.Bosses.Leshii
         Headmain
     }
 
+    public enum Mode
+    {
+        HandsDied,
+        Idle,
+        Charge
+    }
+
     public class Leshii : BattleEnemy
     {
         private Animator m_BodyAnimator = null;
@@ -24,6 +31,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         private bool m_ChargeMode = false;
         private bool m_IsHealCast = false;
         private EndEffectChecker m_EndEffectChecker = null;
+        private Mode m_Mode = Mode.Idle;
 
         [SerializeField]
         private LeshiiOrgan m_RightHand = null;
@@ -77,82 +85,103 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public override void RunTurn()
         {
-            if (IsAllHandsDied())
+            switch (m_Mode)
             {
-                if (m_SummonHandsCounter < m_SummonHandsCount)
-                {
-                    List<string> l_Text = new List<string>();
-                    string l_SummonHandsText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:SummonHands", new string[] { (m_SummonHandsCount - m_SummonHandsCounter).ToString() });
-                    l_Text.Add(l_SummonHandsText);
-
-                    TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-                    l_TextPanel.SetTalkingAnimator(m_HeadAnimator, "Talking");
-                    l_TextPanel.SetText(l_Text);
-                    l_TextPanel.AddButtonAction(l_TextPanel.Close);
-
-                    BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
-                    ResultSystem.GetInstance().AddStep(l_Step);
-
-                    m_SummonHandsCounter++;
-                }
-                else
-                {
-                    SummonHands();
-                }
-
-                ResultSystem.GetInstance().ShowResult();
-                return;
-            }
-
-            if (m_Body.health > 40)
-            {
-                m_ChargeMode = false;
-
-                Attack(BattlePlayer.GetInstance());
-            }
-            else
-            {
-                if (m_ChargeMode == false)
-                {
-                    m_ChargeMode = true;
-                    
-                    BattleSystem.GetInstance().EnemyDied(m_LeftHand);
-                    BattleSystem.GetInstance().EnemyDied(m_RightHand);
-
-                    List<string> l_Text = new List<string>();
-                    l_Text.Add("Ну всеее… с меня ДОСТАТОЧНО!");
-
-                    TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-                    l_TextPanel.SetTalkingAnimator(m_HeadAnimator, "Talking");
-                    l_TextPanel.SetText(l_Text);
-                    l_TextPanel.AddButtonAction(l_TextPanel.Close);
-
-                    BattleShowPanelStep l_ShowStep = new BattleShowPanelStep(l_TextPanel);
-                    ResultSystem.GetInstance().AddStep(l_ShowStep);
-
-                    LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(LeshiiAttackEffect.prefab);
-                    l_LeshiiAttackEffect.AddPlayAction(PlayStartCharge);
-                    m_EndEffectChecker.AddAttackEffect(l_LeshiiAttackEffect);
-
-                    BattlePlayEffectStep l_PlayStep = new BattlePlayEffectStep(l_LeshiiAttackEffect);
-                    ResultSystem.GetInstance().AddStep(l_PlayStep);
-                }
-                else
-                {
+                case Mode.Idle:
+                    if (IsAllHandsDied())
+                    {
+                        CheckSummonHands();
+                        m_Mode = Mode.HandsDied;
+                    }
+                    else
+                    {
+                        Attack(BattlePlayer.GetInstance());
+                    }
+                    ResultSystem.GetInstance().ShowResult();
+                    break;
+                case Mode.Charge:
                     m_ChargeCounter++;
                     if (m_ChargeCounter >= m_ChargeCount)
                     {
                         SpecialAttack();
                     }
-                }
+                    ResultSystem.GetInstance().ShowResult();
+                    break;
+                case Mode.HandsDied:
+                    if (m_Body.health < 35)
+                    {
+                        SummonHands();
+                        StartCharge();
+                        m_Mode = Mode.Charge;
+                    }
+                    else
+                    {
+                        CheckSummonHands();
+                    }
+                    ResultSystem.GetInstance().ShowResult();
+                    break;
             }
+        }
 
-            ResultSystem.GetInstance().ShowResult();
+        private void CheckSummonHands()
+        {
+            if (m_SummonHandsCounter < m_SummonHandsCount)
+            {
+                List<string> l_Text = new List<string>();
+                string l_SummonHandsText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:SummonHands", new string[] { (m_SummonHandsCount - m_SummonHandsCounter).ToString() });
+                l_Text.Add(l_SummonHandsText);
+
+                TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+                l_TextPanel.SetTalkingAnimator(m_HeadAnimator, "Talking");
+                l_TextPanel.SetText(l_Text);
+                l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+                BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+                ResultSystem.GetInstance().AddStep(l_Step);
+
+                m_SummonHandsCounter++;
+            }
+            else
+            {
+                SummonHands();
+                m_Mode = Mode.Idle;
+            }
+        }
+
+        private void StartCharge()
+        {
+            m_ChargeMode = true;
+
+            BattleSystem.GetInstance().EnemyDied(m_LeftHand);
+            BattleSystem.GetInstance().EnemyDied(m_RightHand);
+
+            List<string> l_Text = new List<string>();
+            l_Text.Add("Ну всеее… с меня ДОСТАТОЧНО!");
+
+            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+            l_TextPanel.SetTalkingAnimator(m_HeadAnimator, "Talking");
+            l_TextPanel.SetText(l_Text);
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+            BattleShowPanelStep l_ShowStep = new BattleShowPanelStep(l_TextPanel);
+            ResultSystem.GetInstance().AddStep(l_ShowStep);
+
+            LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(LeshiiAttackEffect.prefab);
+            l_LeshiiAttackEffect.AddPlayAction(PlayStartCharge);
+            m_EndEffectChecker.AddAttackEffect(l_LeshiiAttackEffect);
+
+            BattlePlayEffectStep l_PlayStep = new BattlePlayEffectStep(l_LeshiiAttackEffect);
+            ResultSystem.GetInstance().AddStep(l_PlayStep);
         }
 
         private void SummonHands()
         {
             m_SummonHandsCounter = 0;
+
+            m_HandsLive = Vector2.zero;
+            m_LeftHand.Recovery();
+            m_RightHand.Recovery();
+            ((BattleSystemBoss)(BattleSystem.GetInstance())).InitLeshiiOrgans();
 
             List<string> l_Text = new List<string>();
             l_Text.Add("Хрммфф!");
@@ -176,12 +205,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         private void PlaySummonHands()
         {
             m_BodyAnimator.SetTrigger("SummonHands");
-
-            m_HandsLive = Vector2.zero;
-            m_LeftHand.Recovery();
-            m_RightHand.Recovery();
             CalculateIdle(m_HandsLive);
-            ((BattleSystemBoss)(BattleSystem.GetInstance())).InitLeshiiOrgans();
         }
 
         private void SpecialAttack()
