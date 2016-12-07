@@ -100,10 +100,13 @@ namespace BattleSystemClasses.Bosses.Leshii
                     ResultSystem.GetInstance().ShowResult();
                     break;
                 case Mode.Charge:
-                    m_ChargeCounter++;
                     if (m_ChargeCounter >= m_ChargeCount)
                     {
                         SpecialAttack();
+                    }
+                    else
+                    {
+                        CheckSpecialAttack();
                     }
                     ResultSystem.GetInstance().ShowResult();
                     break;
@@ -123,12 +126,54 @@ namespace BattleSystemClasses.Bosses.Leshii
             }
         }
 
+        private void CheckSpecialAttack()
+        {
+            string l_StepText = string.Empty;
+            int l_Step = m_ChargeCount - m_ChargeCounter;
+
+            if (l_Step > 1)
+            {
+                l_StepText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Steps");
+            }
+            else
+            {
+                l_StepText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Step");
+            }
+
+            string l_ChargeAttackText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:CheckSpecialAttack", new string[] { l_Step.ToString(), l_StepText });
+
+            List<string> l_Text = new List<string>();
+            l_Text.Add(l_ChargeAttackText);
+
+            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+            l_TextPanel.SetText(l_Text);
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+            BattleShowPanelStep l_ResultStep = new BattleShowPanelStep(l_TextPanel);
+            ResultSystem.GetInstance().AddStep(l_ResultStep);
+
+            m_ChargeCounter++;
+        }
+
         private void CheckSummonHands()
         {
             if (m_SummonHandsCounter < m_SummonHandsCount)
             {
+                string l_StepText = string.Empty;
+                int l_Step = m_SummonHandsCount - m_SummonHandsCounter;
+
+                if (l_Step > 1)
+                {
+                    l_StepText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Steps");
+                }
+                else
+                {
+                    l_StepText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Step");
+                }
+
+                string l_SummonHandsText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:SummonHands", new string[] { l_Step.ToString(), l_StepText });
+
                 List<string> l_Text = new List<string>();
-                string l_SummonHandsText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:SummonHands", new string[] { (m_SummonHandsCount - m_SummonHandsCounter).ToString() });
                 l_Text.Add(l_SummonHandsText);
 
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
@@ -136,8 +181,8 @@ namespace BattleSystemClasses.Bosses.Leshii
                 l_TextPanel.SetText(l_Text);
                 l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
-                BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
-                ResultSystem.GetInstance().AddStep(l_Step);
+                BattleShowPanelStep l_ResultStep = new BattleShowPanelStep(l_TextPanel);
+                ResultSystem.GetInstance().AddStep(l_ResultStep);
 
                 m_SummonHandsCounter++;
             }
