@@ -177,7 +177,6 @@ namespace BattleSystemClasses.Bosses.Leshii
                 l_Text.Add(l_SummonHandsText);
 
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-                l_TextPanel.SetTalkingAnimator(m_HeadAnimator, "Talking");
                 l_TextPanel.SetText(l_Text);
                 l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
