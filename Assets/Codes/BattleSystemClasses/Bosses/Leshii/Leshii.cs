@@ -256,7 +256,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             DamageSystem.GetInstance().AttackFail();
 
             TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-            l_TextPanel.SetText(new List<string>() { "Лол блок" });
+            l_TextPanel.SetText(new List<string>() { "Эти руки висят на мне не для красоты." });
             l_TextPanel.SetTalkingAnimator(headAnimator, "Talking");
             l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
