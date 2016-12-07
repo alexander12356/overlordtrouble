@@ -22,6 +22,8 @@ public class MainMenuPanel : Panel
     {
         base.Awake();
 
+        Cursor.visible = false;
+
         m_ButtonList = GetComponentInChildren<ButtonList>();
         m_ButtonList[0].AddAction(RunNewGame);
         m_ButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:NewGame");
