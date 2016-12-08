@@ -2,17 +2,17 @@
 
 using System.Collections.Generic;
 
-public class SkillDataBase : Singleton<SkillDataBase>
+public class MonstyleDataBase : Singleton<MonstyleDataBase>
 {
-    private string m_PathFile = "Data/SkillList";
-    private Dictionary<string, SkillData> m_SkillDictionary = new Dictionary<string, SkillData>();
+    private string m_PathFile = "Data/MonstyleList";
+    private Dictionary<string, MonstyleData> m_SkillDictionary = new Dictionary<string, MonstyleData>();
 
-    public SkillDataBase()
+    public MonstyleDataBase()
     {
         Parse();
     }
 
-    public SkillData GetSkillData(string p_Id)
+    public MonstyleData GetSkillData(string p_Id)
     {
         try
         {
@@ -21,7 +21,7 @@ public class SkillDataBase : Singleton<SkillDataBase>
         catch
         {
             Debug.LogError("Cannot find Skill for id: " + p_Id);
-            return new SkillData();
+            return new MonstyleData();
         }
     }
 
@@ -44,11 +44,11 @@ public class SkillDataBase : Singleton<SkillDataBase>
         {
             string l_SkillId = l_JSONObject.keys[i];
             float l_Attack = l_JSONObject[i]["Attack"].f;
-            float l_Mana = l_JSONObject[i]["Mana"].f;
+            float l_Mana = l_JSONObject[i]["Sp"].f;
             string l_Element = l_JSONObject[i]["Element"].str;
             string l_DescriptionId = l_JSONObject[i]["DescriptionId"].str;
 
-            SkillData l_SkillData = new SkillData(l_SkillId, l_Attack, l_Mana, l_Element, l_DescriptionId);
+            MonstyleData l_SkillData = new MonstyleData(l_SkillId, l_Attack, l_Mana, l_Element, l_DescriptionId);
             m_SkillDictionary.Add(l_SkillId, l_SkillData);
         }
     }

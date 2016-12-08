@@ -2,35 +2,35 @@
 	"WaterDrops" :
 	{
 		"Attack" : 1,
-		"Mana" : 2.0,
+		"Sp" : 2.0,
 		"Element" : "Water",
 		"DescriptionId" : ""
 	},
 	"Slap" :
 	{
 		"Attack" : 3,
-		"Mana" : 2.0,
+		"Sp" : 2.0,
 		"Element" : "Water",
 		"DescriptionId" : ""
 	},
 	"TailWhap" :
 	{
 		"Attack" : 4.0,
-		"Mana" : 4.0,
+		"Sp" : 4.0,
 		"Element" : "Earth",
 		"DescriptionId" : ""
 	},
 	"Slash" :
 	{
 		"Attack" : 6,
-		"Mana" : 6.0,
+		"Sp" : 6.0,
 		"Element" : "Earth",
 		"DescriptionId" : ""
 	},
 	"StonePress" :
 	{
 		"Attack" : 10,
-		"Mana" : 5.0,
+		"Sp" : 5.0,
 		"Element" : "Earth",
 		"DescriptionId" : ""
 	}

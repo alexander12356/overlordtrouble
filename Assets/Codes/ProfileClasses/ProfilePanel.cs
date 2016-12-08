@@ -148,7 +148,7 @@ public class ProfilePanel : Panel
 
     private void InitMonstyles()
     {
-        List<SkillData> m_MonstyleList = PlayerData.GetInstance().GetSkills();
+        List<MonstyleData> m_MonstyleList = PlayerData.GetInstance().GetSkills();
         for (int i = 0; i < m_MonstyleList.Count; i++)
         {
             PanelButtonProfileSpecial l_PanelButton = Instantiate(PanelButtonProfileSpecial.prefab);

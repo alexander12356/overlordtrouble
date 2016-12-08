@@ -52,11 +52,11 @@ public class ImproveDataBase : Singleton<ImproveDataBase>
             string l_ElementalId = l_JSONObject[i]["Elemental"].str;
             string l_ProfileImagePath = l_JSONObject[i]["Profile"].str;
 
-            List<SkillData> l_Skills = new List<SkillData>();
+            List<MonstyleData> l_Skills = new List<MonstyleData>();
             for (int j = 0; j < l_JSONObject[i]["Skills"].Count; j++)
             {
                 string l_SkillId = l_JSONObject[i]["Skills"][j].str;
-                SkillData l_SkillData = SkillDataBase.GetInstance().GetSkillData(l_SkillId);
+                MonstyleData l_SkillData = MonstyleDataBase.GetInstance().GetSkillData(l_SkillId);
                 l_Skills.Add(l_SkillData);
             }
 

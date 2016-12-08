@@ -62,7 +62,7 @@ public class BattlePlayer : BattleActor
         float l_DamageValue = 0;
         string l_Text = string.Empty;
 
-        List<SkillData> l_BuffedSkills = new List<SkillData>();
+        List<MonstyleData> l_BuffedSkills = new List<MonstyleData>();
         for (int i = 0; i < p_SpecialUpgradeIconList.Count; i++)
         {
             if (p_SpecialUpgradeIconList[i].GetBuffCount() == -1)
@@ -75,7 +75,7 @@ public class BattlePlayer : BattleActor
             }
             else
             {
-                SkillData l_SkillData = SkillDataBase.GetInstance().GetSkillData(p_SpecialUpgradeIconList[i].skillId);
+                MonstyleData l_SkillData = MonstyleDataBase.GetInstance().GetSkillData(p_SpecialUpgradeIconList[i].skillId);
                 l_SkillData.damage = l_SkillData.damage + (l_SkillData.damage * 0.1f) * p_SpecialUpgradeIconList[i].GetBuffCount();
 
                 l_BuffedSkills.Add(l_SkillData);
@@ -99,7 +99,7 @@ public class BattlePlayer : BattleActor
         }
         else if (l_UnbuffedSpecialCount == p_SpecialUpgradeIconList.Count)
         {
-            SkillData p_SkillData = SkillDataBase.GetInstance().GetSkillData(p_SpecialUpgradeIconList[0].skillId);
+            MonstyleData p_SkillData = MonstyleDataBase.GetInstance().GetSkillData(p_SpecialUpgradeIconList[0].skillId);
 
             l_DamageValue = p_SkillData.damage - p_SkillData.damage * 0.25f;
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });

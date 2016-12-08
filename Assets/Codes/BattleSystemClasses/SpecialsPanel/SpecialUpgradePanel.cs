@@ -67,7 +67,7 @@ public class SpecialUpgradePanel : Panel
     {
         for (int i = 0; i < p_AddedSkills.Count; i++)
         {
-            SkillData l_SkillData = SkillDataBase.GetInstance().GetSkillData(p_AddedSkills[i]);
+            MonstyleData l_SkillData = MonstyleDataBase.GetInstance().GetSkillData(p_AddedSkills[i]);
 
             SpecialUpgradeIcon l_SpecialUpgradeIcon = Instantiate(SpecialUpgradeIcon.prefab);
             l_SpecialUpgradeIcon.SetTitle(LocalizationDataBase.GetInstance().GetText("Skill:" + l_SkillData.id));

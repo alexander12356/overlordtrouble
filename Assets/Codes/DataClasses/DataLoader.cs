@@ -16,7 +16,7 @@ public class DataLoader : Singleton<DataLoader>
         DialogDataBase.GetInstance();
         ImproveDataBase.GetInstance();
         LocalizationDataBase.GetInstance();
-        SkillDataBase.GetInstance();
+        MonstyleDataBase.GetInstance();
         StoreDataBase.GetInstance();
         BattleDataBase.GetInstance();
     }

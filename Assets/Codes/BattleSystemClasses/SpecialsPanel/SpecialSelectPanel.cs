@@ -110,20 +110,20 @@ public class SpecialSelectPanel : Panel
         {
             l_PanelButton.Choose(false);
             m_ChoosedSkills.Remove(l_PanelButton.skillId);
-            BattlePlayer.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;
+            BattlePlayer.GetInstance().mana += MonstyleDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).sp;
 
             m_AddedSpecialButtonList.RemoveButton(LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButton.skillId));
         }
         else
         {
-            if (m_ChoosedSkills.Count >= 4 || BattlePlayer.GetInstance().mana < SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana)
+            if (m_ChoosedSkills.Count >= 4 || BattlePlayer.GetInstance().mana < MonstyleDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).sp)
             {
                 return;
             }
 
             l_PanelButton.Choose(true);
             m_ChoosedSkills.Add(l_PanelButton.skillId);
-            BattlePlayer.GetInstance().mana -= SkillDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).mana;
+            BattlePlayer.GetInstance().mana -= MonstyleDataBase.GetInstance().GetSkillData(l_PanelButton.skillId).sp;
 
             PanelButtonChosenSpecial l_PanelButtonChosenSpecial = Instantiate(PanelButtonChosenSpecial.prefab);
             l_PanelButtonChosenSpecial.title = LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButton.skillId);
@@ -175,7 +175,7 @@ public class SpecialSelectPanel : Panel
     {
         for (int i = 0; i < m_ChoosedSkills.Count; i++)
         {
-            BattlePlayer.GetInstance().mana += SkillDataBase.GetInstance().GetSkillData(m_ChoosedSkills[i]).mana;
+            BattlePlayer.GetInstance().mana += MonstyleDataBase.GetInstance().GetSkillData(m_ChoosedSkills[i]).sp;
         }
         m_ChoosedSkills.Clear();
     }
@@ -214,7 +214,7 @@ public class SpecialSelectPanel : Panel
 
     private void InitSpecials()
     {
-        List<SkillData> l_PlayerSkills = PlayerData.GetInstance().GetSkills();
+        List<MonstyleData> l_PlayerSkills = PlayerData.GetInstance().GetSkills();
         for (int i = 0; i < l_PlayerSkills.Count; i++)
         {
             PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);

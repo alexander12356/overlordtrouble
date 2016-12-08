@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class PlayerSkills
 {
-    private List<SkillData> m_SkillList = new List<SkillData>();
-    private Dictionary<string, SkillData> m_SelectedSkills = new Dictionary<string, SkillData>();
+    private List<MonstyleData> m_SkillList = new List<MonstyleData>();
+    private Dictionary<string, MonstyleData> m_SelectedSkills = new Dictionary<string, MonstyleData>();
 
     public PlayerSkills()
     {
@@ -13,7 +13,7 @@ public class PlayerSkills
 
     public void SelectSkill(string p_Id)
     {
-        m_SelectedSkills.Add(p_Id, SkillDataBase.GetInstance().GetSkillData(p_Id));
+        m_SelectedSkills.Add(p_Id, MonstyleDataBase.GetInstance().GetSkillData(p_Id));
     }
 
     public void UnselectSkill(string p_Id)
@@ -21,12 +21,12 @@ public class PlayerSkills
         m_SelectedSkills.Remove(p_Id);
     }
 
-    public Dictionary<string, SkillData> GetSelectedSkills()
+    public Dictionary<string, MonstyleData> GetSelectedSkills()
     {
         return m_SelectedSkills;
     }
 
-    public void AddSkills(List<SkillData> p_SkillList)
+    public void AddSkills(List<MonstyleData> p_SkillList)
     {
         for (int i = 0; i < p_SkillList.Count; i++)
         {
@@ -34,13 +34,13 @@ public class PlayerSkills
         }        
     }
 
-    public List<SkillData> GetSkills()
+    public List<MonstyleData> GetSkills()
     {
         return m_SkillList;
     }
 
     public void ResetData()
     {
-        m_SkillList = new List<SkillData>();
+        m_SkillList = new List<MonstyleData>();
     }
 }
