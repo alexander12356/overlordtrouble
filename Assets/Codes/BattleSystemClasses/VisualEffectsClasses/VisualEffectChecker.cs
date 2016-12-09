@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EndEffectChecker : MonoBehaviour
+public class VisualEffectChecker : MonoBehaviour
 {
-    private Queue<AttackEffect> l_AttackEffectQueue = new Queue<AttackEffect>();
+    private Queue<VisualEffect> l_AttackEffectQueue = new Queue<VisualEffect>();
 
-    public void AddAttackEffect(AttackEffect p_AttackEffect)
+    public void AddAttackEffect(VisualEffect p_AttackEffect)
     {
         l_AttackEffectQueue.Enqueue(p_AttackEffect);
     }

@@ -30,7 +30,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         private int m_ChargeCount = 3;
         private bool m_ChargeMode = false;
         private bool m_IsHealCast = false;
-        private EndEffectChecker m_EndEffectChecker = null;
+        private VisualEffectChecker m_EndEffectChecker = null;
         private Mode m_Mode = Mode.Idle;
 
         [SerializeField]
@@ -59,7 +59,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             base.Awake();
 
-            m_EndEffectChecker = GetComponent<EndEffectChecker>();
+            m_EndEffectChecker = GetComponent<VisualEffectChecker>();
         }
 
         public override void InitStats()

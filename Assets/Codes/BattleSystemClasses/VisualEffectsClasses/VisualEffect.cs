@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AttackEffect : MonoBehaviour
+public class VisualEffect : MonoBehaviour
 {
     private Animator m_Animator = null;
     private Transform m_Renderer = null;

@@ -1,8 +1,8 @@
 ﻿public class BattlePlayEffectStep : BattleBaseStep
 {
-    private AttackEffect m_AttackEffect = null;
+    private VisualEffect m_AttackEffect = null;
 
-    public BattlePlayEffectStep(AttackEffect p_Effect)
+    public BattlePlayEffectStep(VisualEffect p_Effect)
     {
         m_AttackEffect = p_Effect;
     }

@@ -29,7 +29,7 @@ public class BattlePlayer : BattleActor
 
         int l_Damage = Random.Range(m_AttackValue[0], m_AttackValue[1]);
 
-        AttackEffect l_AttackEffect = Instantiate(Resources.Load<AttackEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
+        VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
         l_AttackEffect.Init(p_Actor, p_Actor.spriteRenderer.transform);
 
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
@@ -91,7 +91,7 @@ public class BattlePlayer : BattleActor
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
             l_IsBadAttack = true;
 
-            AttackEffect l_AttackEffect = Instantiate(Resources.Load<AttackEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
+            VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
             l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
 
@@ -105,7 +105,7 @@ public class BattlePlayer : BattleActor
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
             l_IsBadAttack = true;
 
-            AttackEffect l_AttackEffect = Instantiate(Resources.Load<AttackEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
+            VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
             l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
 
@@ -132,7 +132,7 @@ public class BattlePlayer : BattleActor
 
                 string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + l_BuffedMonstyle[i].id + "Monstyle";
 
-                AttackEffect l_AttackEffect = Instantiate(Resources.Load<AttackEffect>(l_PrefabPath));
+                VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>(l_PrefabPath));
                 l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
                 BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
 

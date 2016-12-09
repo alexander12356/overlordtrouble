@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class LeshiiAttackEffect : AttackEffect
+public class LeshiiAttackEffect : VisualEffect
 {
     private static LeshiiAttackEffect m_Prefab = null;
     private PanelActionHandler m_PlayAction = null;
