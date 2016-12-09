@@ -56,7 +56,7 @@ public class ImproveDataBase : Singleton<ImproveDataBase>
             for (int j = 0; j < l_JSONObject[i]["Skills"].Count; j++)
             {
                 string l_SkillId = l_JSONObject[i]["Skills"][j].str;
-                MonstyleData l_SkillData = MonstyleDataBase.GetInstance().GetSkillData(l_SkillId);
+                MonstyleData l_SkillData = MonstyleDataBase.GetInstance().GetMonstyleData(l_SkillId);
                 l_Skills.Add(l_SkillData);
             }
 

@@ -13,7 +13,7 @@ public class PlayerSkills
 
     public void SelectSkill(string p_Id)
     {
-        m_SelectedSkills.Add(p_Id, MonstyleDataBase.GetInstance().GetSkillData(p_Id));
+        m_SelectedSkills.Add(p_Id, MonstyleDataBase.GetInstance().GetMonstyleData(p_Id));
     }
 
     public void UnselectSkill(string p_Id)

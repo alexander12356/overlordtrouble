@@ -2,10 +2,10 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class SpecialUpgradePanel : Panel
+public class MonstyleUpgradePanel : Panel
 {
     #region Variables
-    private static SpecialUpgradePanel m_Prefab = null;
+    private static MonstyleUpgradePanel m_Prefab = null;
 
     [SerializeField]
     private Transform m_SpecialIconsConteiner = null;
@@ -13,8 +13,8 @@ public class SpecialUpgradePanel : Panel
     [SerializeField]
     private Image m_BarImage = null;
     
-    private List<string> m_AddedSkills;
-    private List<SpecialUpgradeIcon> m_SpecialUpgradeIconList = new List<SpecialUpgradeIcon>();
+    private List<string> m_AddedMonstyles;
+    private List<MonstyleUpgradeIcon> m_SpecialUpgradeIconList = new List<MonstyleUpgradeIcon>();
     private int   m_CurrentKeyCounter = 0;
     private float m_Timer = 0.0f;
     private float m_UpgradeTime = 5.0f;
@@ -24,22 +24,22 @@ public class SpecialUpgradePanel : Panel
     #endregion
 
     #region Interface
-    public static SpecialUpgradePanel prefab
+    public static MonstyleUpgradePanel prefab
     {
         get
         {
             if (m_Prefab == null)
             {
-                m_Prefab = Resources.Load<SpecialUpgradePanel>("Prefabs/Panels/SpecialUpgradePanel");
+                m_Prefab = Resources.Load<MonstyleUpgradePanel>("Prefabs/Panels/MonstyleUpgradePanel");
             }
             return m_Prefab;
         }
     }
 
-    public void SetSkills(List<string> p_AddedSkills)
+    public void SetSkills(List<string> p_AddedMonstyle)
     {
-        m_AddedSkills = p_AddedSkills;
-        CreateIcons(m_AddedSkills);
+        m_AddedMonstyles = p_AddedMonstyle;
+        CreateIcons(m_AddedMonstyles);
         RandomizeSpecialKeys();
     }
 
@@ -67,17 +67,17 @@ public class SpecialUpgradePanel : Panel
     {
         for (int i = 0; i < p_AddedSkills.Count; i++)
         {
-            MonstyleData l_SkillData = MonstyleDataBase.GetInstance().GetSkillData(p_AddedSkills[i]);
+            MonstyleData l_MonstyleData = MonstyleDataBase.GetInstance().GetMonstyleData(p_AddedSkills[i]);
 
-            SpecialUpgradeIcon l_SpecialUpgradeIcon = Instantiate(SpecialUpgradeIcon.prefab);
-            l_SpecialUpgradeIcon.SetTitle(LocalizationDataBase.GetInstance().GetText("Skill:" + l_SkillData.id));
-            l_SpecialUpgradeIcon.skillId = p_AddedSkills[i];
-            l_SpecialUpgradeIcon.transform.SetParent(m_SpecialIconsConteiner);
+            MonstyleUpgradeIcon l_MonstyleUpgradeIcon = Instantiate(MonstyleUpgradeIcon.prefab);
+            l_MonstyleUpgradeIcon.SetTitle(LocalizationDataBase.GetInstance().GetText("Skill:" + l_MonstyleData.id));
+            l_MonstyleUpgradeIcon.monstyleId = p_AddedSkills[i];
+            l_MonstyleUpgradeIcon.transform.SetParent(m_SpecialIconsConteiner);
 
-            l_SpecialUpgradeIcon.transform.localPosition = Vector3.zero;
-            l_SpecialUpgradeIcon.transform.localScale    = Vector3.one;
+            l_MonstyleUpgradeIcon.transform.localPosition = Vector3.zero;
+            l_MonstyleUpgradeIcon.transform.localScale    = Vector3.one;
 
-            m_SpecialUpgradeIconList.Add(l_SpecialUpgradeIcon);
+            m_SpecialUpgradeIconList.Add(l_MonstyleUpgradeIcon);
         }
         m_SpecialUpgradeIconList[0].select = true;
     }

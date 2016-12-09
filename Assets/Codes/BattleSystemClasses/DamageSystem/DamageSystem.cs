@@ -27,7 +27,7 @@ public class DamageSystem : Singleton<DamageSystem>
         p_Target.Damage(p_DamageValue);
     }
 
-    public void SpecialAttack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue, bool p_IsBadAttack, string p_AttackNames = "")
+    public void MonstyleAttack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue, bool p_IsBadAttack, string p_AttackNames = "")
     {
         m_Sender = p_Sender;
         m_Target = p_Target;

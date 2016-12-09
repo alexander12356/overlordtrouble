@@ -12,7 +12,7 @@ public class MonstyleDataBase : Singleton<MonstyleDataBase>
         Parse();
     }
 
-    public MonstyleData GetSkillData(string p_Id)
+    public MonstyleData GetMonstyleData(string p_Id)
     {
         try
         {

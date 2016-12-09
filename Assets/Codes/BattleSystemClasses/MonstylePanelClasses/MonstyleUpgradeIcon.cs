@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class SpecialUpgradeIcon : MonoBehaviour
+public class MonstyleUpgradeIcon : MonoBehaviour
 {
     #region Variables
-    private static SpecialUpgradeIcon m_Prefab = null;
+    private static MonstyleUpgradeIcon m_Prefab = null;
     private KeyCode m_Key= KeyCode.UpArrow;
     private Image m_WrongImage     = null;
     private Image m_ArrowImage     = null;
@@ -13,20 +13,20 @@ public class SpecialUpgradeIcon : MonoBehaviour
     private Text  m_Text        = null;
     private bool  m_Wrong       = false;
     private bool  m_Selected    = false;
-    private int   m_SkillBuffCount = 0;
-    private string m_SkillId = string.Empty;
+    private int   m_MonstyleBuffCount = 0;
+    private string m_MonstyleId = string.Empty;
     private Animator m_Animator = null;
     private event PanelActionHandler m_IncrementCurrentIcon = null;
     #endregion
 
     #region Interface
-    public static SpecialUpgradeIcon prefab
+    public static MonstyleUpgradeIcon prefab
     {
         get
         {
             if (m_Prefab == null)
             {
-                m_Prefab = Resources.Load<SpecialUpgradeIcon>("Prefabs/SpecialUpgradeIcon");
+                m_Prefab = Resources.Load<MonstyleUpgradeIcon>("Prefabs/SpecialUpgradeIcon");
             }
             return m_Prefab;
         }
@@ -53,10 +53,10 @@ public class SpecialUpgradeIcon : MonoBehaviour
             m_SelectImage.gameObject.SetActive(m_Selected);
         }
     }
-    public string skillId
+    public string monstyleId
     {
-        get { return m_SkillId;  }
-        set { m_SkillId = value; }
+        get { return m_MonstyleId;  }
+        set { m_MonstyleId = value; }
     }
 
     public void SetTitle(string p_Title)
@@ -69,7 +69,7 @@ public class SpecialUpgradeIcon : MonoBehaviour
         Color l_Color;
         ColorUtility.TryParseHtmlString("#004E0DFF", out l_Color);
 
-        if (m_SkillBuffCount > 0)
+        if (m_MonstyleBuffCount > 0)
         {
             PopUpText l_PopUpText = Instantiate(PopUpText.prefab);
             l_PopUpText.transform.SetParent(transform);
@@ -81,14 +81,14 @@ public class SpecialUpgradeIcon : MonoBehaviour
             m_TextBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/UpgradedSpecialIcon");
         }
 
-        m_SkillBuffCount++;
+        m_MonstyleBuffCount++;
         m_Animator.SetTrigger("Upgrade");
     }
 
     public void Wrong()
     {
         m_Wrong = true;
-        m_SkillBuffCount = -1;
+        m_MonstyleBuffCount = -1;
         
         m_ArrowImage.gameObject.SetActive(false);
         m_SelectImage.gameObject.SetActive(false);
@@ -100,7 +100,7 @@ public class SpecialUpgradeIcon : MonoBehaviour
 
     public int GetBuffCount()
     {
-        return m_SkillBuffCount;
+        return m_MonstyleBuffCount;
     }
     #endregion
 

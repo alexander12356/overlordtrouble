@@ -51,41 +51,41 @@ public class BattlePlayer : BattleActor
     }
 
     //TODO отрефакторить
-    public void SpecialAttack(BattleActor p_Enemy, List<SpecialUpgradeIcon> p_SpecialUpgradeIconList)
+    public void SpecialAttack(BattleActor p_Enemy, List<MonstyleUpgradeIcon> p_MonstyleUpgradeIconList)
     {
         m_AttackTarget = p_Enemy;
         m_AttackTarget.CheckPrevAttack();
 
-        int l_BrokenSpecialCount = 0;
-        int l_UnbuffedSpecialCount = 0;
+        int l_BrokenMonstyleCount = 0;
+        int l_UnbuffedMonstyleCount = 0;
 
         float l_DamageValue = 0;
         string l_Text = string.Empty;
 
-        List<MonstyleData> l_BuffedSkills = new List<MonstyleData>();
-        for (int i = 0; i < p_SpecialUpgradeIconList.Count; i++)
+        List<MonstyleData> l_BuffedMonstyle = new List<MonstyleData>();
+        for (int i = 0; i < p_MonstyleUpgradeIconList.Count; i++)
         {
-            if (p_SpecialUpgradeIconList[i].GetBuffCount() == -1)
+            if (p_MonstyleUpgradeIconList[i].GetBuffCount() == -1)
             {
-                l_BrokenSpecialCount++;
+                l_BrokenMonstyleCount++;
             }
-            else if (p_SpecialUpgradeIconList[i].GetBuffCount() == 0)
+            else if (p_MonstyleUpgradeIconList[i].GetBuffCount() == 0)
             {
-                l_UnbuffedSpecialCount++;
+                l_UnbuffedMonstyleCount++;
             }
             else
             {
-                MonstyleData l_SkillData = MonstyleDataBase.GetInstance().GetSkillData(p_SpecialUpgradeIconList[i].skillId);
-                l_SkillData.damage = l_SkillData.damage + (l_SkillData.damage * 0.1f) * p_SpecialUpgradeIconList[i].GetBuffCount();
+                MonstyleData l_MonstyleDataData = MonstyleDataBase.GetInstance().GetMonstyleData(p_MonstyleUpgradeIconList[i].monstyleId);
+                l_MonstyleDataData.damage = l_MonstyleDataData.damage + (l_MonstyleDataData.damage * 0.1f) * p_MonstyleUpgradeIconList[i].GetBuffCount();
 
-                l_BuffedSkills.Add(l_SkillData);
+                l_BuffedMonstyle.Add(l_MonstyleDataData);
             }
         }
 
-        string l_UsedSpecialsName = "";
+        string l_UsedMonstylesName = "";
         bool l_IsBadAttack = false;
 
-        if (l_BrokenSpecialCount == p_SpecialUpgradeIconList.Count)
+        if (l_BrokenMonstyleCount == p_MonstyleUpgradeIconList.Count)
         {
             l_DamageValue = 1.0f;
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
@@ -97,11 +97,11 @@ public class BattlePlayer : BattleActor
 
             ResultSystem.GetInstance().AddStep(l_Step);
         }
-        else if (l_UnbuffedSpecialCount == p_SpecialUpgradeIconList.Count)
+        else if (l_UnbuffedMonstyleCount == p_MonstyleUpgradeIconList.Count)
         {
-            MonstyleData p_SkillData = MonstyleDataBase.GetInstance().GetSkillData(p_SpecialUpgradeIconList[0].skillId);
+            MonstyleData p_MonstyleData = MonstyleDataBase.GetInstance().GetMonstyleData(p_MonstyleUpgradeIconList[0].monstyleId);
 
-            l_DamageValue = p_SkillData.damage - p_SkillData.damage * 0.25f;
+            l_DamageValue = p_MonstyleData.damage - p_MonstyleData.damage * 0.25f;
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
             l_IsBadAttack = true;
 
@@ -113,24 +113,24 @@ public class BattlePlayer : BattleActor
         }
         else
         {
-            for (int i = 0; i < l_BuffedSkills.Count; i++)
+            for (int i = 0; i < l_BuffedMonstyle.Count; i++)
             {
-                string l_SkillName = LocalizationDataBase.GetInstance().GetText("Skill:" + l_BuffedSkills[i].id);
-                if (i == l_BuffedSkills.Count - 2)
+                string l_MonstyleName = LocalizationDataBase.GetInstance().GetText("Skill:" + l_BuffedMonstyle[i].id);
+                if (i == l_BuffedMonstyle.Count - 2)
                 {
-                    l_UsedSpecialsName += l_SkillName + " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
+                    l_UsedMonstylesName += l_MonstyleName + " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
                 }
-                else if (i == l_BuffedSkills.Count - 1)
+                else if (i == l_BuffedMonstyle.Count - 1)
                 {
-                    l_UsedSpecialsName += l_SkillName;
+                    l_UsedMonstylesName += l_MonstyleName;
                 }
                 else
                 {
-                    l_UsedSpecialsName += l_SkillName + ", ";
+                    l_UsedMonstylesName += l_MonstyleName + ", ";
                 }
-                l_DamageValue += l_BuffedSkills[i].damage;
+                l_DamageValue += l_BuffedMonstyle[i].damage;
 
-                string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + l_BuffedSkills[i].id + "Monstyle";
+                string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + l_BuffedMonstyle[i].id + "Monstyle";
 
                 AttackEffect l_AttackEffect = Instantiate(Resources.Load<AttackEffect>(l_PrefabPath));
                 l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
@@ -139,10 +139,10 @@ public class BattlePlayer : BattleActor
                 ResultSystem.GetInstance().AddStep(l_Step);
             }
 
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:SpecialAttack", new string[] { p_Enemy.actorName, l_UsedSpecialsName, l_DamageValue.ToString() });
+            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:SpecialAttack", new string[] { p_Enemy.actorName, l_UsedMonstylesName, l_DamageValue.ToString() });
         }
 
-        DamageSystem.GetInstance().SpecialAttack(this, p_Enemy, l_DamageValue, l_IsBadAttack, l_UsedSpecialsName);
+        DamageSystem.GetInstance().MonstyleAttack(this, p_Enemy, l_DamageValue, l_IsBadAttack, l_UsedMonstylesName);
 
         ResultSystem.GetInstance().ShowResult();
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
