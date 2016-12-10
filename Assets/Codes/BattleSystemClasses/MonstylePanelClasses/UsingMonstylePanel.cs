@@ -70,7 +70,7 @@ public class UsingMonstylePanel : Panel
             SpecialData l_MonstyleData = SpecialDataBase.GetInstance().GetSpecialData(p_AddedSkills[i]);
 
             SpecialUpgradeIcon l_MonstyleUpgradeIcon = Instantiate(SpecialUpgradeIcon.prefab);
-            l_MonstyleUpgradeIcon.SetTitle(LocalizationDataBase.GetInstance().GetText("Skill:" + l_MonstyleData.id));
+            l_MonstyleUpgradeIcon.SetTitle(LocalizationDataBase.GetInstance().GetText("Special:" + l_MonstyleData.id));
             l_MonstyleUpgradeIcon.specialId = p_AddedSkills[i];
             l_MonstyleUpgradeIcon.transform.SetParent(m_SpecialIconsConteiner);
 
@@ -182,7 +182,17 @@ public class UsingMonstylePanel : Panel
 
     private void SpecialAttack()
     {
-        BattlePlayer.GetInstance().SpecialAttack(m_Enemy, m_SpecialUpgradeIconList);
+        List<Special> l_SpecialList = new List<Special>();
+
+        for (int i = 0; i < m_SpecialUpgradeIconList.Count; i++)
+        {
+            if (!m_SpecialUpgradeIconList[i].isWrong && m_SpecialUpgradeIconList[i].isBuffed)
+            {
+                l_SpecialList.Add(m_SpecialUpgradeIconList[i].GetSpecial());
+            }
+        }
+
+        BattlePlayer.GetInstance().SpecialAttack(m_Enemy, l_SpecialList);
     }
 
     private bool IsArrowDown()

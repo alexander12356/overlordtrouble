@@ -1,17 +1,20 @@
 ﻿<Localization>
-	<!-- Monstyle	-->
-	<Text id="Skill:WaterDrops">Капли</Text>
-	<Text id="Skill:WaterDrops:Description">Прием атаки: 2сп\n\nУрон 2 очка по всем врагам\n\nЭлемент: Вода\n\nЭти капли бьют чуток больнее чем тычки пальцами</Text>
-	<Text id="Skill:Slap">Шлепок</Text>
-	<Text id="Skill:ProtectiveCoat">Защитная оболочка</Text>
-	<Text id="Skill:Strike">Удар</Text>
-	<Text id="Skill:Defense">Защита</Text>
-	<Text id="Skill:TailWhap">Удар хвостом</Text>
-	<Text id="Skill:Slash">Разрез</Text>
-	<Text id="Skill:ShellDefense">Панцирная защита</Text>
-	<Text id="Skill:BlobeStrike">Водяной удар</Text>
-	<Text id="Skill:HealingWater">Целебная вода</Text>
-	<Text id="Skill:StonePress">Каменный пресс</Text>
+	<!-- Specials	-->
+	<Text id="Special:WaterDrops">Капли</Text>
+	<Text id="Special:WaterDrops:Description">Прием атаки: 2сп\n\nУрон 2 очка по всем врагам\n\nЭлемент: Вода\n\nЭти капли бьют чуток больнее чем тычки пальцами</Text>
+	<Text id="Special:Slap">Шлепок</Text>
+	<Text id="Special:ProtectiveCoat">Защитная оболочка</Text>
+	<Text id="Special:Strike">Удар</Text>
+	<Text id="Special:Defense">Защита</Text>
+	<Text id="Special:TailWhap">Удар хвостом</Text>
+	<Text id="Special:Slash">Разрез</Text>
+	<Text id="Special:ShellDefense">Панцирная защита</Text>
+	<Text id="Special:BlobeStrike">Водяной удар</Text>
+	<Text id="Special:HealingWater">Целебная вода</Text>
+	<Text id="Special:StonePress">Каменный пресс</Text>
+	
+	<!-- effect's description -->
+	<Text id="Effects:Attack">Урон: %d</Text>
 	
 	<!-- stats -->
 	<Text id="Stat:HealthPoints">ХП</Text>
@@ -110,7 +113,7 @@
 	<Text id="GUI:BattleSystem:PlayerAttack">%d атаковал "%d" и нанес %d урона</Text>
 	<Text id="GUI:BattleSystem:BadAttack">Плод твоих напрасных усилий был равен %d очкам урона по %d</Text>
 	<Text id="GUI:BattleSystem:MonstyleUsing">%d использовал на "%d" %d</Text>
-	<Text id="GIO:BattleSystem:MonstyleDamage">, и нанес %d урона</Text>
+	<Text id="GUI:BattleSystem:MonstyleDamage">и нанес %d урона</Text>
 	<Text id="GUI:BattleSystem:MainPanelAttack">Атака</Text>
 	<Text id="GUI:BattleSystem:MainPanelMonstyle">Монстайл</Text>
 	<Text id="GUI:BattleSystem:MainPanelItems">Предметы</Text>

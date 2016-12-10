@@ -12,7 +12,7 @@ public enum EffectType
 public class SpecialDataBase : Singleton<SpecialDataBase>
 {
     private string m_PathFile = "Data/SpecialList";
-    private Dictionary<string, SpecialList> m_SpecialDictionary = new Dictionary<string, SpecialList>();
+    private Dictionary<string, SpecialData> m_SpecialDictionary = new Dictionary<string, SpecialData>();
 
     public SpecialDataBase()
     {
@@ -23,7 +23,7 @@ public class SpecialDataBase : Singleton<SpecialDataBase>
     {
         try
         {
-            return m_SpecialDictionary[p_Id].monstyleData;
+            return m_SpecialDictionary[p_Id];
         }
         catch
         {
@@ -49,16 +49,16 @@ public class SpecialDataBase : Singleton<SpecialDataBase>
 
         for (int i = 0; i < l_JSONObject.Count; i++)
         {
+            List<EffectData> l_EffectList = ParseEffect(l_JSONObject[i]["Effect"]);
+
             string l_SpecialId = l_JSONObject.keys[i];
             float  l_Sp        = l_JSONObject[i]["Sp"].f;
             string l_Element   = l_JSONObject[i]["Element"].str;
             bool   l_IsAoe     = l_JSONObject[i]["Aoe"].b;
-
-            SpecialData l_SpecialData = new SpecialData(l_SpecialId, l_Sp, l_Element, l_IsAoe);
-            List<EffectData> l_EffectList = ParseEffect(l_JSONObject[i]["Effect"]);
-
-            SpecialList l_SpecialList = new SpecialList(l_SpecialData, l_EffectList);
-            m_SpecialDictionary.Add(l_SpecialId, l_SpecialList);
+            
+            SpecialData l_SpecialData = new SpecialData(l_SpecialId, l_Sp, l_Element, l_IsAoe, l_EffectList);
+            
+            m_SpecialDictionary.Add(l_SpecialId, l_SpecialData);
         }
     }
 

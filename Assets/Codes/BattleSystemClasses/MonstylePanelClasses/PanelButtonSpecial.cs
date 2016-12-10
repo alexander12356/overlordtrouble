@@ -29,11 +29,11 @@ public class PanelButtonSpecial : PanelButton
 
             SpecialData l_SpecialData = SpecialDataBase.GetInstance().GetSpecialData(m_SpecialId);
 
-            string l_MonstyleName = LocalizationDataBase.GetInstance().GetText("Skill:" + m_SpecialId);
+            string l_MonstyleName = LocalizationDataBase.GetInstance().GetText("Special:" + m_SpecialId);
             string l_Element = LocalizationDataBase.GetInstance().GetText("Elemental:" + l_SpecialData.element);
-            //float l_Damage = l_MonstyleData.damage;
+            //string l_EffectDescription = l_MonstyleData.damage;
             float l_SpecialPoints = l_SpecialData.sp;
-            //description   = l_MonstyleName + "\n" + LocalizationDataBase.GetInstance().GetText("Element") + ": " + l_Element + "\n" + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:SelectMonstyle:Damage") + ": "+ l_Damage;
+            description   = l_MonstyleName + "\n" + LocalizationDataBase.GetInstance().GetText("Element") + ": " + l_Element;
             specialPoints = l_SpecialPoints + "sp";
         }
     }

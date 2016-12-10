@@ -13,9 +13,10 @@ public class SpecialUpgradeIcon : MonoBehaviour
     private Text  m_Text        = null;
     private bool  m_Wrong       = false;
     private bool  m_Selected    = false;
-    private int   m_BuffCount = 0;
+    private bool m_IsBuffed = false;
     private string m_SpecialId = string.Empty;
     private Animator m_Animator = null;
+    private Special m_Special = null;
     #endregion
 
     #region Interface
@@ -43,6 +44,10 @@ public class SpecialUpgradeIcon : MonoBehaviour
     {
         get { return m_Wrong; }
     }
+    public bool isBuffed
+    {
+        get { return m_IsBuffed; }
+    }
     public bool select
     {
         get { return m_Selected; }
@@ -68,7 +73,7 @@ public class SpecialUpgradeIcon : MonoBehaviour
         Color l_Color;
         ColorUtility.TryParseHtmlString("#004E0DFF", out l_Color);
 
-        if (m_BuffCount > 0)
+        if (m_IsBuffed)
         {
             PopUpText l_PopUpText = Instantiate(PopUpText.prefab);
             l_PopUpText.transform.SetParent(transform);
@@ -78,16 +83,18 @@ public class SpecialUpgradeIcon : MonoBehaviour
         else
         {
             m_TextBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/UpgradedSpecialIcon");
+            m_IsBuffed = true;
         }
+        
+        m_Special.Upgrade();
 
-        m_BuffCount++;
         m_Animator.SetTrigger("Upgrade");
     }
 
     public void Wrong()
     {
         m_Wrong = true;
-        m_BuffCount = -1;
+        m_IsBuffed = false;
         
         m_ArrowImage.gameObject.SetActive(false);
         m_SelectImage.gameObject.SetActive(false);
@@ -97,9 +104,9 @@ public class SpecialUpgradeIcon : MonoBehaviour
         m_Animator.SetTrigger("Wrong");
     }
 
-    public int GetBuffCount()
+    public Special GetSpecial()
     {
-        return m_BuffCount;
+        return m_Special;
     }
     #endregion
 
@@ -107,6 +114,11 @@ public class SpecialUpgradeIcon : MonoBehaviour
     private void Awake()
     {
         InitComponents();
+    }
+
+    private void Start()
+    {
+        m_Special = SpecialDataBase.GetInstance().GetSpecialData(m_SpecialId).CreateSpecial();
     }
 
     private void InitComponents()

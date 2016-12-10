@@ -123,7 +123,7 @@ public class CreatingMonstylePanel : Panel
             BattlePlayer.GetInstance().mana -= SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.specialId).sp;
 
             PanelButtonChosenSpecial l_PanelButtonChosenSpecial = Instantiate(PanelButtonChosenSpecial.prefab);
-            l_PanelButtonChosenSpecial.title = LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButton.specialId);
+            l_PanelButtonChosenSpecial.title = LocalizationDataBase.GetInstance().GetText("Special:" + l_PanelButton.specialId);
             m_AddedSpecialButtonList.AddButton(l_PanelButtonChosenSpecial);
         }
     }

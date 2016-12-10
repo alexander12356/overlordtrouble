@@ -14,7 +14,6 @@ public class BattlePlayer : BattleActor
     private Text m_SpecialText = null;
     private Image m_HealthPointBar = null;
     private Image m_SpecialPointBar = null;
-    private BattleActor m_AttackTarget = null;
     #endregion
 
     #region Interface
@@ -49,100 +48,33 @@ public class BattlePlayer : BattleActor
 
         DamageSystem.GetInstance().AttackSuccess();
     }
-
-    //TODO отрефакторить
-    public void SpecialAttack(BattleActor p_Enemy, List<SpecialUpgradeIcon> p_MonstyleUpgradeIconList)
+    
+    public void SpecialAttack(BattleActor p_Target, List<Special> p_SpecialList)
     {
-        m_AttackTarget = p_Enemy;
-        m_AttackTarget.CheckPrevAttack();
+        p_Target.CheckPrevAttack();
 
-        int l_BrokenMonstyleCount = 0;
-        int l_UnbuffedMonstyleCount = 0;
-
-        float l_DamageValue = 0;
-        string l_Text = string.Empty;
-
-        List<SpecialData> l_BuffedMonstyle = new List<SpecialData>();
-        for (int i = 0; i < p_MonstyleUpgradeIconList.Count; i++)
+        if (p_SpecialList.Count == 0)
         {
-            if (p_MonstyleUpgradeIconList[i].GetBuffCount() == -1)
-            {
-                l_BrokenMonstyleCount++;
-            }
-            else if (p_MonstyleUpgradeIconList[i].GetBuffCount() == 0)
-            {
-                l_UnbuffedMonstyleCount++;
-            }
-            else
-            {
-                SpecialData l_MonstyleDataData = SpecialDataBase.GetInstance().GetSpecialData(p_MonstyleUpgradeIconList[i].specialId);
-                //l_MonstyleDataData.damage = l_MonstyleDataData.damage + (l_MonstyleDataData.damage * 0.1f) * p_MonstyleUpgradeIconList[i].GetBuffCount();
-
-                l_BuffedMonstyle.Add(l_MonstyleDataData);
-            }
-        }
-
-        string l_UsedMonstylesName = "";
-        bool l_IsBadAttack = false;
-
-        if (l_BrokenMonstyleCount == p_MonstyleUpgradeIconList.Count)
-        {
-            l_DamageValue = 1.0f;
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
-            l_IsBadAttack = true;
-
             VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
-            l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
-            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
+            l_AttackEffect.Init(p_Target, p_Target.spriteRenderer.transform);
+            BattlePlayEffectStep l_PlayStep = new BattlePlayEffectStep(l_AttackEffect);
+            ResultSystem.GetInstance().AddStep(l_PlayStep);
 
-            ResultSystem.GetInstance().AddStep(l_Step);
-        }
-        else if (l_UnbuffedMonstyleCount == p_MonstyleUpgradeIconList.Count)
-        {
-            SpecialData p_MonstyleData = SpecialDataBase.GetInstance().GetSpecialData(p_MonstyleUpgradeIconList[0].specialId);
+            string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { "1", p_Target.actorName });
 
-            //l_DamageValue = p_MonstyleData.damage - p_MonstyleData.damage * 0.25f;
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
-            l_IsBadAttack = true;
+            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+            l_TextPanel.SetText(new List<string>() { l_Text });
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
-            VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
-            l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
-            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
+            BattleShowPanelStep l_ShowStep = new BattleShowPanelStep(l_TextPanel);
+            ResultSystem.GetInstance().AddStep(l_ShowStep);
 
-            ResultSystem.GetInstance().AddStep(l_Step);
+            p_Target.Damage(1.0f);
         }
         else
         {
-            for (int i = 0; i < l_BuffedMonstyle.Count; i++)
-            {
-                string l_MonstyleName = LocalizationDataBase.GetInstance().GetText("Skill:" + l_BuffedMonstyle[i].id);
-                if (i == l_BuffedMonstyle.Count - 2)
-                {
-                    l_UsedMonstylesName += l_MonstyleName + " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
-                }
-                else if (i == l_BuffedMonstyle.Count - 1)
-                {
-                    l_UsedMonstylesName += l_MonstyleName;
-                }
-                else
-                {
-                    l_UsedMonstylesName += l_MonstyleName + ", ";
-                }
-                //l_DamageValue += l_BuffedMonstyle[i].damage;
-
-                string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + l_BuffedMonstyle[i].id + "Monstyle";
-
-                VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>(l_PrefabPath));
-                l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
-                BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-
-                ResultSystem.GetInstance().AddStep(l_Step);
-            }
-
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:SpecialAttack", new string[] { p_Enemy.actorName, l_UsedMonstylesName, l_DamageValue.ToString() });
+            DamageSystem.GetInstance().MonstyleAttack(this, p_Target, p_SpecialList);
         }
-
-        DamageSystem.GetInstance().MonstyleAttack(this, p_Enemy, l_DamageValue, l_IsBadAttack, l_UsedMonstylesName);
 
         ResultSystem.GetInstance().ShowResult();
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);

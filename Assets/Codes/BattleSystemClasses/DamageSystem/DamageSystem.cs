@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+using UnityEngine;
 
 public enum Element
 {
+    NONE = -1,
     Physical,
     Water,
     Fire,
@@ -47,51 +49,43 @@ public class DamageSystem : Singleton<DamageSystem>
         p_Target.Damage(p_DamageValue);
     }
 
-    public void MonstyleAttack(BattleActor p_Sender, BattleActor p_Target, List<SpecialList> p_MonstyleList)
+    public void MonstyleAttack(BattleActor p_Sender, BattleActor p_Target, List<Special> p_MonstyleList)
     {
         m_Sender = p_Sender;
         m_Target = p_Target;
         string l_SenderName = m_Sender.actorName;
         string l_TargetName = m_Target.actorName;
         string l_MonstyleNames = string.Empty;
+        string l_DamageText = string.Empty;
 
-        List<AttackEffect> l_AttackEffectList = new List<AttackEffect>();
         for (int i = 0; i < p_MonstyleList.Count; i++)
         {
-            for (int j = 0; j < p_MonstyleList[i].count; j++)
-            {
-                if (p_MonstyleList[i][j].type == EffectType.Attack)
-                {
-                    float l_AttackValue = Convert.ToSingle(p_MonstyleList[i][j].parameters[0]);
-                    Element l_Element = (Element)Enum.Parse(typeof(Element), p_MonstyleList[i][j].parameters[1]);
+            l_MonstyleNames += LocalizationDataBase.GetInstance().GetText("Special:" + p_MonstyleList[i].id) + ", ";
+            p_MonstyleList[i].Run(m_Sender, m_Target);
 
-                    AttackEffect l_AttackEffect = new AttackEffect(l_AttackValue, l_Element);
+            string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + p_MonstyleList[i].id + "Monstyle";
 
-                    l_AttackEffectList.Add(l_AttackEffect);
-                }
-                l_MonstyleNames += LocalizationDataBase.GetInstance().GetText("" + p_MonstyleList[i].monstyleData.id);
-            }
+            VisualEffect l_AttackEffect = Object.Instantiate(Resources.Load<VisualEffect>(l_PrefabPath));
+            l_AttackEffect.Init(p_Target, p_Target.spriteRenderer.transform);
+            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
+
+            ResultSystem.GetInstance().AddStep(l_Step);
         }
 
-        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:UsingMonstyle", new string[] { l_SenderName, l_TargetName, l_MonstyleNames, m_DamageValue.ToString() });
-        p_Target.Damage(l_AttackEffectList);
+        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleUsing", new string[] { l_SenderName, l_TargetName, l_MonstyleNames });
+
+        if (m_DamageValue >= 0.001f)
+        {
+            l_DamageText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleDamage", new string[] { m_DamageValue.ToString() });
+            m_StatisticText += l_DamageText;
+
+            p_Target.Damage(m_DamageValue);
+        }
     }
 
     public void AttackSuccess()
     {
-        TextPanel l_TextPanel = UnityEngine.Object.Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { m_StatisticText });
-        l_TextPanel.AddButtonAction(l_TextPanel.Close);
-
-        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
-        ResultSystem.GetInstance().AddStep(l_Step);
-
-        m_Target.CheckDeath();
-    }
-
-    public void AttackSuccess(float p_Damage)
-    {
-        TextPanel l_TextPanel = UnityEngine.Object.Instantiate(TextPanel.prefab);
+        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { m_StatisticText });
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
@@ -105,7 +99,7 @@ public class DamageSystem : Singleton<DamageSystem>
     {
         string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:AttackFail");
 
-        TextPanel l_TextPanel = UnityEngine.Object.Instantiate(TextPanel.prefab);
+        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { l_Text });
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
@@ -113,7 +107,14 @@ public class DamageSystem : Singleton<DamageSystem>
         ResultSystem.GetInstance().AddStep(l_Step);
     }
 
+    public void AddDamageValue(float l_Damage)
+    {
+        m_DamageValue += l_Damage;
+    }
+
     public void Reset()
     {
+        m_StatisticText = string.Empty;
+        m_DamageValue = 0.0f;
     }
 }
