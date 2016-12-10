@@ -1,0 +1,57 @@
+{
+	"WaterDrops" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"AttackValue" : 1.0f,
+			"Element" : "Physical"
+		}
+	},
+	"Slap" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"AttackValue" : 3.0f,
+			"Element" : "Physical"
+		}
+	},
+	"TailWhap" :
+	{
+		"Sp" : 4.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"AttackValue" : 4.0f,
+			"Element" : "Physical"
+		}
+	},
+	"Slash" :
+	{
+		"Sp" : 6.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"AttackValue" : 6.0f,
+			"Element" : "Physical"
+		}
+	},
+	"StonePress" :
+	{
+		"Sp" : 5.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"AttackValue" : 10.0f,
+			"Element" : "Physical"
+		}
+	}
+}

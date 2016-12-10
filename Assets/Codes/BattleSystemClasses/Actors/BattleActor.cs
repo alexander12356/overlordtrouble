@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+using System.Collections.Generic;
+
 public class BattleActor : MonoBehaviour
 {
     #region Variables
@@ -66,6 +68,10 @@ public class BattleActor : MonoBehaviour
     }
 
     public virtual void Damage(float p_DamageValue)
+    {
+    }
+
+    public virtual void Damage(List<AttackEffect> p_AttackEffectList)
     {
     }
 

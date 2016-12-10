@@ -51,7 +51,7 @@ public class BattlePlayer : BattleActor
     }
 
     //TODO отрефакторить
-    public void SpecialAttack(BattleActor p_Enemy, List<MonstyleUpgradeIcon> p_MonstyleUpgradeIconList)
+    public void SpecialAttack(BattleActor p_Enemy, List<SpecialUpgradeIcon> p_MonstyleUpgradeIconList)
     {
         m_AttackTarget = p_Enemy;
         m_AttackTarget.CheckPrevAttack();
@@ -62,7 +62,7 @@ public class BattlePlayer : BattleActor
         float l_DamageValue = 0;
         string l_Text = string.Empty;
 
-        List<MonstyleData> l_BuffedMonstyle = new List<MonstyleData>();
+        List<SpecialData> l_BuffedMonstyle = new List<SpecialData>();
         for (int i = 0; i < p_MonstyleUpgradeIconList.Count; i++)
         {
             if (p_MonstyleUpgradeIconList[i].GetBuffCount() == -1)
@@ -75,8 +75,8 @@ public class BattlePlayer : BattleActor
             }
             else
             {
-                MonstyleData l_MonstyleDataData = MonstyleDataBase.GetInstance().GetMonstyleData(p_MonstyleUpgradeIconList[i].monstyleId);
-                l_MonstyleDataData.damage = l_MonstyleDataData.damage + (l_MonstyleDataData.damage * 0.1f) * p_MonstyleUpgradeIconList[i].GetBuffCount();
+                SpecialData l_MonstyleDataData = SpecialDataBase.GetInstance().GetSpecialData(p_MonstyleUpgradeIconList[i].specialId);
+                //l_MonstyleDataData.damage = l_MonstyleDataData.damage + (l_MonstyleDataData.damage * 0.1f) * p_MonstyleUpgradeIconList[i].GetBuffCount();
 
                 l_BuffedMonstyle.Add(l_MonstyleDataData);
             }
@@ -99,9 +99,9 @@ public class BattlePlayer : BattleActor
         }
         else if (l_UnbuffedMonstyleCount == p_MonstyleUpgradeIconList.Count)
         {
-            MonstyleData p_MonstyleData = MonstyleDataBase.GetInstance().GetMonstyleData(p_MonstyleUpgradeIconList[0].monstyleId);
+            SpecialData p_MonstyleData = SpecialDataBase.GetInstance().GetSpecialData(p_MonstyleUpgradeIconList[0].specialId);
 
-            l_DamageValue = p_MonstyleData.damage - p_MonstyleData.damage * 0.25f;
+            //l_DamageValue = p_MonstyleData.damage - p_MonstyleData.damage * 0.25f;
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
             l_IsBadAttack = true;
 
@@ -128,7 +128,7 @@ public class BattlePlayer : BattleActor
                 {
                     l_UsedMonstylesName += l_MonstyleName + ", ";
                 }
-                l_DamageValue += l_BuffedMonstyle[i].damage;
+                //l_DamageValue += l_BuffedMonstyle[i].damage;
 
                 string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + l_BuffedMonstyle[i].id + "Monstyle";
 

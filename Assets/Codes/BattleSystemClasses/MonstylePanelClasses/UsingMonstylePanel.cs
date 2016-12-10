@@ -2,10 +2,10 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class MonstyleUpgradePanel : Panel
+public class UsingMonstylePanel : Panel
 {
     #region Variables
-    private static MonstyleUpgradePanel m_Prefab = null;
+    private static UsingMonstylePanel m_Prefab = null;
 
     [SerializeField]
     private Transform m_SpecialIconsConteiner = null;
@@ -14,7 +14,7 @@ public class MonstyleUpgradePanel : Panel
     private Image m_BarImage = null;
     
     private List<string> m_AddedMonstyles;
-    private List<MonstyleUpgradeIcon> m_SpecialUpgradeIconList = new List<MonstyleUpgradeIcon>();
+    private List<SpecialUpgradeIcon> m_SpecialUpgradeIconList = new List<SpecialUpgradeIcon>();
     private int   m_CurrentKeyCounter = 0;
     private float m_Timer = 0.0f;
     private float m_UpgradeTime = 5.0f;
@@ -24,13 +24,13 @@ public class MonstyleUpgradePanel : Panel
     #endregion
 
     #region Interface
-    public static MonstyleUpgradePanel prefab
+    public static UsingMonstylePanel prefab
     {
         get
         {
             if (m_Prefab == null)
             {
-                m_Prefab = Resources.Load<MonstyleUpgradePanel>("Prefabs/Panels/MonstyleUpgradePanel");
+                m_Prefab = Resources.Load<UsingMonstylePanel>("Prefabs/Panels/UsingMonstylePanel");
             }
             return m_Prefab;
         }
@@ -67,11 +67,11 @@ public class MonstyleUpgradePanel : Panel
     {
         for (int i = 0; i < p_AddedSkills.Count; i++)
         {
-            MonstyleData l_MonstyleData = MonstyleDataBase.GetInstance().GetMonstyleData(p_AddedSkills[i]);
+            SpecialData l_MonstyleData = SpecialDataBase.GetInstance().GetSpecialData(p_AddedSkills[i]);
 
-            MonstyleUpgradeIcon l_MonstyleUpgradeIcon = Instantiate(MonstyleUpgradeIcon.prefab);
+            SpecialUpgradeIcon l_MonstyleUpgradeIcon = Instantiate(SpecialUpgradeIcon.prefab);
             l_MonstyleUpgradeIcon.SetTitle(LocalizationDataBase.GetInstance().GetText("Skill:" + l_MonstyleData.id));
-            l_MonstyleUpgradeIcon.monstyleId = p_AddedSkills[i];
+            l_MonstyleUpgradeIcon.specialId = p_AddedSkills[i];
             l_MonstyleUpgradeIcon.transform.SetParent(m_SpecialIconsConteiner);
 
             l_MonstyleUpgradeIcon.transform.localPosition = Vector3.zero;

@@ -75,7 +75,20 @@ public class BattleEnemy : BattleActor
         health -= p_DamageValue;
         DamageSystem.GetInstance().AttackSuccess();
     }
-    
+
+    public override void Damage(List<AttackEffect> p_AttackEffectList)
+    {
+        base.Damage(p_AttackEffectList);
+
+        float l_DamageValue = 0.0f;
+        for (int i = 0; i < p_AttackEffectList.Count; i++)
+        {
+            l_DamageValue += p_AttackEffectList[i].attackValue;
+        }
+
+        Damage(l_DamageValue);
+    }
+
     public override void Attack(BattleActor p_Actor)
     {
         base.Attack(p_Actor);
