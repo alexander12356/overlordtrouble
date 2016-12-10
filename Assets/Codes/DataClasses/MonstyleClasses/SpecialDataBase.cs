@@ -11,7 +11,7 @@ public enum EffectType
 
 public class SpecialDataBase : Singleton<SpecialDataBase>
 {
-    private string m_PathFile = "Data/MonstyleList";
+    private string m_PathFile = "Data/SpecialList";
     private Dictionary<string, SpecialList> m_SpecialDictionary = new Dictionary<string, SpecialList>();
 
     public SpecialDataBase()
@@ -68,7 +68,7 @@ public class SpecialDataBase : Singleton<SpecialDataBase>
 
         for (int i = 0; i < p_JsonObject.Count; i++)
         {
-            EffectType l_EffectType = (EffectType)Enum.Parse(typeof(EffectType), p_JsonObject.str);
+            EffectType l_EffectType = (EffectType)Enum.Parse(typeof(EffectType), p_JsonObject.keys[0]);
 
             switch (l_EffectType)
             {

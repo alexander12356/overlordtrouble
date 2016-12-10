@@ -6,8 +6,11 @@
 		"Aoe" : false,
 		"Effect" :
 		{
-			"AttackValue" : 1.0f,
-			"Element" : "Physical"
+			"Attack" :
+			{
+				"AttackValue" : 1.0,
+				"Element" : "Physical"
+			}
 		}
 	},
 	"Slap" :
@@ -17,8 +20,11 @@
 		"Aoe" : false,
 		"Effect" :
 		{
-			"AttackValue" : 3.0f,
-			"Element" : "Physical"
+			"Attack" :
+			{
+				"AttackValue" : 3.0,
+				"Element" : "Physical"
+			}
 		}
 	},
 	"TailWhap" :
@@ -28,8 +34,11 @@
 		"Aoe" : false,
 		"Effect" :
 		{
-			"AttackValue" : 4.0f,
-			"Element" : "Physical"
+			"Attack" : 
+			{
+				"AttackValue" : 4.0,
+				"Element" : "Physical"
+			}
 		}
 	},
 	"Slash" :
@@ -39,8 +48,11 @@
 		"Aoe" : false,
 		"Effect" :
 		{
-			"AttackValue" : 6.0f,
-			"Element" : "Physical"
+			"Attack" :
+			{
+				"AttackValue" : 6.0,
+				"Element" : "Physical"
+			}
 		}
 	},
 	"StonePress" :
@@ -50,8 +62,11 @@
 		"Aoe" : false,
 		"Effect" :
 		{
-			"AttackValue" : 10.0f,
-			"Element" : "Physical"
+			"Attack" :
+			{
+				"AttackValue" : 10.0,
+				"Element" : "Physical"
+			}
 		}
 	}
 }
