@@ -16,17 +16,28 @@ public class MainMenuSystem : MonoBehaviour
     public void Awake()
     {
         m_Instance = this;
-
-        MainMenuPanel m_MainMenuPanel = Instantiate(MainMenuPanel.prefab);
-        m_PanelManager.ShowPanel(m_MainMenuPanel);
-
         PlayerData.GetInstance();
+    }
+
+    public void ShowPanel(Panel p_Panel, bool p_WithOverlay = false)
+    {
+        m_PanelManager.ShowPanel(p_Panel, p_WithOverlay);
     }
 
     public void StartLocation(string p_LocationId)
     {
         m_PanelManager.StartLocation(p_LocationId);
         LoadDataBases();
+    }
+
+    public void AddScene(string p_SceneId)
+    {
+        m_PanelManager.AddScene(p_SceneId);
+    }
+
+    public void UnloadScene()
+    {
+        m_PanelManager.UnloadScene();
     }
 
     private void LoadDataBases()

@@ -127,7 +127,14 @@
 	<Text id="GUI:Improve:СlassChoosed">Вы выбрали класс %d, вы получили следующие приемы:\n%d</Text>
 	<Text id="GUI:YesNoPanel:Confirm">Да</Text>
 	<Text id="GUI:YesNoPanel:Cancel">Нет</Text>
+	
+	<!-- Main Menu -->
 	<Text id="GUI:MainMenuPanel:NewGame">Новая игра</Text>
+	<Text id="GUI:MainMenuPanel:NewGamePlus">Новая игра+</Text>
+	<Text id="GUI:MainMenuPanel:NewGameAfterSecretEnding">Новая игра?</Text>
+	<Text id="GUI:MainMenuPanel:Continue">Продолжить</Text>
+	<Text id="GUI:MainMenuPanel:Load">Загрузить</Text>
+	<Text id="GUI:MainMenuPanel:Settings">Опции</Text>
 	<Text id="GUI:MainMenuPanel:Exit">Выход</Text>
 	
 	<!-- Dialogs -->

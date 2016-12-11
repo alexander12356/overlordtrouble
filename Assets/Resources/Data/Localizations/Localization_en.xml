@@ -109,7 +109,14 @@
 	<Text id="GUI:Improve:СlassChoosed">You choose %d, you got next techniques:\n%d</Text>
 	<Text id="GUI:YesNoPanel:Confirm">Yes</Text>
 	<Text id="GUI:YesNoPanel:Cancel">No</Text>
-	<Text id="GUI:MainMenuPanel:NewGame">New game</Text>
+	
+	<!-- Main Menu -->
+	<Text id="GUI:MainMenuPanel:NewGame">New Game</Text>
+	<Text id="GUI:MainMenuPanel:NewGamePlus">New Game+</Text>
+	<Text id="GUI:MainMenuPanel:NewGameAfterSecretEnding">NewGame?</Text>
+	<Text id="GUI:MainMenuPanel:Continue">Continue</Text>
+	<Text id="GUI:MainMenuPanel:Load">Load</Text>
+	<Text id="GUI:MainMenuPanel:Settings">Settings</Text>
 	<Text id="GUI:MainMenuPanel:Exit">Exit</Text>
 	
 	<!-- Dialogs -->
