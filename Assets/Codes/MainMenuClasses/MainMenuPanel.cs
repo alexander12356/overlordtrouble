@@ -5,6 +5,19 @@ using UnityEngine.SceneManagement;
 public class MainMenuPanel : Panel
 {
     private ButtonList m_MainMenuButtonList = null;
+    private Animator m_MainMenuTransitionAnimator = null;
+
+    public Animator mainMenuTransitionAnimator
+    {
+        get
+        {
+            if(m_MainMenuTransitionAnimator == null)
+            {
+                m_MainMenuTransitionAnimator = GetComponentInChildren<Animator>();
+            }
+            return m_MainMenuTransitionAnimator;
+        }
+    }
 
     public override void Awake()
     {
@@ -19,7 +32,7 @@ public class MainMenuPanel : Panel
 
     private void InitButtonList()
     {
-        m_MainMenuButtonList = transform.FindChild("MainMenu").FindChild("MainMenuBorderMainPart").GetComponent<ButtonList>();
+        m_MainMenuButtonList = transform.FindChild("Transitor").FindChild("MainMenu").GetComponentInChildren<ButtonList>();
         m_MainMenuButtonList.isActive = true;
 
         if(IsSaveExist())
@@ -64,6 +77,8 @@ public class MainMenuPanel : Panel
         l_ButtonQuit.AddAction(QuitGame);
         l_ButtonQuit.title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:Exit");
         m_MainMenuButtonList.AddButton(l_ButtonQuit);
+
+        mainMenuTransitionAnimator.SetTrigger("StartTransition");
     }
 
     private void OpenSettings()
