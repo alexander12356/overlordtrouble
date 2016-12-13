@@ -23,6 +23,11 @@ public class BattleCheckDeathStep : BattleBaseStep
 
         ShowDeathActors();
 
+        if (BattlePlayer.GetInstance().CheckDeath())
+        {
+            BattlePlayer.GetInstance().Die();
+        }
+
         ResultSystem.GetInstance().NextStep();
     }
 
