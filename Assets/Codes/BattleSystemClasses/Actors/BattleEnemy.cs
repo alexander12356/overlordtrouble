@@ -95,12 +95,20 @@ public class BattleEnemy : BattleActor
     public override void Die()
     {
         base.Die();
-
+        
         LeshiiAttackEffect l_DieVisualEffect = Instantiate(LeshiiAttackEffect.prefab);
         l_DieVisualEffect.AddPlayAction(PlayDieAnimation);
 
-        BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_DieVisualEffect);
-        ResultSystem.GetInstance().AddStep(l_Step);
+        BattlePlayEffectStep l_PlayEffectStep = new BattlePlayEffectStep(l_DieVisualEffect);
+        ResultSystem.GetInstance().AddStep(l_PlayEffectStep);
+
+        string l_TextAboutDeath = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EnemyDied", new string[] { actorName });
+        TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { l_TextAboutDeath });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+        BattleShowPanelStep l_ShowPanelStep = new BattleShowPanelStep(l_TextPanel);
+        ResultSystem.GetInstance().AddStep(l_ShowPanelStep);
     }
 
     // Called from Animation

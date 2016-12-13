@@ -45,8 +45,6 @@ public class BattlePlayer : BattleActor
         base.Damage(p_DamageValue);
 
         health -= p_DamageValue;
-
-        DamageSystem.GetInstance().AttackSuccess();
     }
     
     public void SpecialAttack(BattleActor p_Target, List<Special> p_SpecialList)

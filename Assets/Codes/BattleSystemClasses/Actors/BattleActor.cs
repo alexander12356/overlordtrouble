@@ -11,6 +11,7 @@ public class BattleActor : MonoBehaviour
     private float m_BaseMana;
     private bool m_IsDead;
     private string m_ActorName = "Actor";
+    private bool m_IsAoeAttack;
     protected SpriteRenderer m_SpriteRenderer = null;
     #endregion
 
@@ -56,6 +57,11 @@ public class BattleActor : MonoBehaviour
     public SpriteRenderer spriteRenderer
     {
         get { return m_SpriteRenderer; }
+    }
+    public bool isAoeAttack
+    {
+        get { return m_IsAoeAttack; }
+        set { m_IsAoeAttack = value; }
     }
 
     public virtual void Awake()

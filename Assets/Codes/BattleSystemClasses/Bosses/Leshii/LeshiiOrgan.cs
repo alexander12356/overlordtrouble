@@ -27,23 +27,29 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public override void Damage(float p_DamageValue)
         {
+            health -= p_DamageValue;
+        }
+
+        public override bool IsCanDamage(float p_Damage)
+        {
             if (m_Id == OrganIds.Body)
             {
                 if (m_Leshii.IsAllHandsDied() || m_Leshii.isChargeMode)
                 {
-                    health -= p_DamageValue;
-                    DamageSystem.GetInstance().AttackSuccess();
+                    return true;
                 }
-                else
+                if (!isAoeAttack)
                 {
                     m_Leshii.Block();
                 }
+                else
+                {
+                    isAoeAttack = false;
+                }
+                return false;
             }
-            else
-            {
-                health -= p_DamageValue;
-                DamageSystem.GetInstance().AttackSuccess();
-            }
+
+            return true;
         }
 
         public override void Die()

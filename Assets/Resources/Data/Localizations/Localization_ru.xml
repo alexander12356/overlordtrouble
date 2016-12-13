@@ -73,6 +73,8 @@
 	<Text id="Boss:Leshii:CheckSpecialAttack">Осталось %d %d до атаки.</Text>
 	<Text id="Boss:Leshii:Step">ход</Text>
 	<Text id="Boss:Leshii:Steps">хода</Text>
+	<Text id="Boss:Leshii:HandsDie">%d потеряла силу</Text>
+	<Text id="Boss:Leshii:Die">Ой ой…</Text> 
 	
 	<!-- UI -->
 	<Text id="GUI:Journey:ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>
@@ -118,6 +120,8 @@
 	<Text id="GUI:BattleSystem:AoeDamage">, он получил %d урона</Text>
 	<Text id="GUI:BattleSystem:EnemyDied">%d выбыл из боя</Text>
 	<Text id="GUI:BattleSystem:AllEnemyDied">Все враги повержены</Text>
+	<Text id="GUI:BattleSystem:Immunity">"%d" невосприимчив к приему %d</Text>
+	<Text id="GUI:BattleSystem:Immunites">"%d" невосприимчив к приемам %d</Text>
 	<Text id="GUI:BattleSystem:MainPanelAttack">Атака</Text>
 	<Text id="GUI:BattleSystem:MainPanelMonstyle">Монстайл</Text>
 	<Text id="GUI:BattleSystem:MainPanelItems">Предметы</Text>

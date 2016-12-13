@@ -24,21 +24,23 @@ public class DamageSystem : Singleton<DamageSystem>
     private string m_StatisticText = string.Empty;
     private Dictionary<BattleActor, float> m_DamageValues = new Dictionary<BattleActor, float>();
     private Dictionary<BattleActor, List<Special>> m_AoeSpecials = new Dictionary<BattleActor, List<Special>>();
+    private Dictionary<BattleActor, List<Special>> m_ImmunitySpecials = new Dictionary<BattleActor, List<Special>>();
     private List<BattleActor> m_DeathActorList = new List<BattleActor>();
 
     public void Attack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue)
     {
         m_Sender = p_Sender;
         m_Target = p_Target;
-        AddDamageValue(p_Target, p_DamageValue);
 
         string l_SenderName = m_Sender.actorName;
         string l_TargetName = m_Target.actorName;
-        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:PlayerAttack", new string[] { l_SenderName, l_TargetName, m_DamageValues[p_Target].ToString() });
 
-        if (p_Target.IsCanDamage(m_DamageValues[p_Target]))
+        if (p_Target.IsCanDamage(p_DamageValue))
         {
+            AddDamageValue(p_Target, p_DamageValue);
             p_Target.Damage(m_DamageValues[p_Target]);
+
+            m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:PlayerAttack", new string[] { l_SenderName, l_TargetName, m_DamageValues[p_Target].ToString() });
         }
 
         ShowResult();
@@ -58,7 +60,7 @@ public class DamageSystem : Singleton<DamageSystem>
         
         if (m_DamageValues.ContainsKey(p_Target))
         {
-            if (m_DamageValues[p_Target] > 0.01f)
+            if (p_Target.IsCanDamage(m_DamageValues[p_Target]))
             {
                 m_StatisticText += LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleDamage", new string[] { m_DamageValues[p_Target].ToString() });
 
@@ -67,14 +69,6 @@ public class DamageSystem : Singleton<DamageSystem>
         }
 
         ShowResult();
-    }
-
-    public void AttackSuccess()
-    {
-    }
-
-    public void AttackFail()
-    {
     }
     
     public void AddDamageValue(BattleActor p_Target, float p_Value)
@@ -96,6 +90,7 @@ public class DamageSystem : Singleton<DamageSystem>
             m_AoeSpecials.Add(p_Target, new List<Special>());
         }
         m_AoeSpecials[p_Target].Add(p_Special);
+        p_Target.isAoeAttack = true;
     }
 
     //  Добавление бафф/дебаффа
@@ -107,11 +102,15 @@ public class DamageSystem : Singleton<DamageSystem>
     //      Если врага нет в словаре используемых хилок
     //          добавить врага к словарю
     //      добавить в словарь по врагу спешл
-
-    //  Добавление иммунитета
-    //      Если врага нет в словаре имунных к спешлам врага
-    //          добавить врага к словарю
-    //      добавить в словарь по врагу спешл
+    
+    public void AddImmunity(BattleActor p_Target, Special p_Special)
+    {
+        if (!m_ImmunitySpecials.ContainsKey(p_Target))
+        {
+            m_ImmunitySpecials.Add(p_Target, new List<Special>());
+        }
+        m_ImmunitySpecials[p_Target].Add(p_Special);
+    }
 
     public void AddDeathActor(BattleActor p_Target)
     {
@@ -120,12 +119,15 @@ public class DamageSystem : Singleton<DamageSystem>
 
     private void ShowResult()
     {
-        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { m_StatisticText });
-        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+        if (m_StatisticText != string.Empty)
+        {
+            TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+            l_TextPanel.SetText(new List<string>() { m_StatisticText });
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
-        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
-        ResultSystem.GetInstance().AddStep(l_Step);
+            BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+            ResultSystem.GetInstance().AddStep(l_Step);
+        }
         
         if (m_AoeSpecials.Count > 0)
         {
@@ -135,7 +137,13 @@ public class DamageSystem : Singleton<DamageSystem>
             }
         }
 
-        //  Если словарь иммунитетов не пуст
+        if (m_ImmunitySpecials.Count > 0)
+        {
+            foreach(BattleActor l_Actor in m_ImmunitySpecials.Keys)
+            {
+                ShowImmunityText(l_Actor, m_ImmunitySpecials[l_Actor]);
+            }
+        }
         //      Вывести текст(айди текста, словарь)
         //  Если словарь Баффов/дебаффов не пуст
         //      Вывести текст(айди текста, словарь)
@@ -159,9 +167,33 @@ public class DamageSystem : Singleton<DamageSystem>
 
         if (m_DamageValues.ContainsKey(p_Target))
         {
-            l_Text += LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:AoeDamage", new string[] { m_DamageValues[p_Target].ToString() });
+            if (p_Target.IsCanDamage(m_DamageValues[p_Target]))
+            {
+                p_Target.Damage(m_DamageValues[p_Target]);
+                l_Text += LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:AoeDamage", new string[] { m_DamageValues[p_Target].ToString() });
+            }
+        }
 
-            p_Target.Damage(m_DamageValues[p_Target]);
+        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { l_Text });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+        ResultSystem.GetInstance().AddStep(l_Step);
+    }
+
+    private void ShowImmunityText(BattleActor p_Target, List<Special> p_SpecialList)
+    {
+        string l_SpecialList = GetSpecialNames(p_SpecialList);
+        string l_Text = string.Empty;
+
+        if (p_SpecialList.Count > 1)
+        {
+            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Immunites", new string[] { p_Target.actorName, l_SpecialList });
+        }
+        else
+        {
+            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Immunity", new string[] { p_Target.actorName, l_SpecialList });
         }
 
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
@@ -202,6 +234,7 @@ public class DamageSystem : Singleton<DamageSystem>
         m_DamageValues.Clear();
         m_AoeSpecials.Clear();
         m_DeathActorList.Clear();
+        m_ImmunitySpecials.Clear();
         m_StatisticText = string.Empty;
     }
 }

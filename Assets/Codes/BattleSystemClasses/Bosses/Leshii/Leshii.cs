@@ -297,8 +297,6 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public void Block()
         {
-            DamageSystem.GetInstance().AttackFail();
-
             TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
             l_TextPanel.SetText(new List<string>() { "Эти руки висят на мне не для красоты." });
             l_TextPanel.SetTalkingAnimator(headAnimator, "Talking");
@@ -339,6 +337,12 @@ namespace BattleSystemClasses.Bosses.Leshii
                     LeshiiDie();
                     break;
             }
+        }
+
+        public override void Die()
+        {
+            m_BodyAnimator.SetTrigger("Die");
+            BattleSystem.GetInstance().EnemyDied(m_Body);
         }
 
         private void PlayStartBlock()
@@ -392,18 +396,11 @@ namespace BattleSystemClasses.Bosses.Leshii
         private void LeshiiDie()
         {
             LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(LeshiiAttackEffect.prefab);
-            l_LeshiiAttackEffect.AddPlayAction(PlayLeshiiDie);
+            l_LeshiiAttackEffect.AddPlayAction(Die);
             m_EndEffectChecker.AddAttackEffect(l_LeshiiAttackEffect);
 
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
-        }
-
-        private void PlayLeshiiDie()
-        {
-            m_BodyAnimator.SetTrigger("Die");
-            BattleSystem.GetInstance().EnemyDied(m_Body);
-            Die();
         }
 
         private void CalculateIdle(Vector2 p_HandsLive)
