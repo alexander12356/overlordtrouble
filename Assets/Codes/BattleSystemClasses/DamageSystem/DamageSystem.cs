@@ -21,69 +21,104 @@ public class DamageSystem : Singleton<DamageSystem>
 
     private BattleActor m_Target = null;
     private BattleActor m_Sender = null;
-    private float m_DamageValue = 0.0f;
-    private bool m_IsBadAttack = false;
     private string m_StatisticText = string.Empty;
+    private Dictionary<BattleActor, float> m_DamageValues = new Dictionary<BattleActor, float>();
+    private Dictionary<BattleActor, List<Special>> m_AoeSpecials = new Dictionary<BattleActor, List<Special>>();
+    private List<BattleActor> m_DeathActorList = new List<BattleActor>();
 
     public void Attack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue)
     {
         m_Sender = p_Sender;
         m_Target = p_Target;
-        m_DamageValue = p_DamageValue;
+        AddDamageValue(p_Target, p_DamageValue);
 
         string l_SenderName = m_Sender.actorName;
         string l_TargetName = m_Target.actorName;
+        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:PlayerAttack", new string[] { l_SenderName, l_TargetName, m_DamageValues[p_Target].ToString() });
 
-        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:PlayerAttack", new string[] { l_SenderName, l_TargetName, m_DamageValue.ToString() });
-
-        p_Target.Damage(p_DamageValue);
-    }
-
-    public void MonstyleAttack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue, bool p_IsBadAttack, string p_AttackNames = "")
-    {
-        m_Sender = p_Sender;
-        m_Target = p_Target;
-        m_DamageValue = p_DamageValue;
-        m_IsBadAttack = p_IsBadAttack;
-
-        p_Target.Damage(p_DamageValue);
-    }
-
-    public void MonstyleAttack(BattleActor p_Sender, BattleActor p_Target, List<Special> p_MonstyleList)
-    {
-        m_Sender = p_Sender;
-        m_Target = p_Target;
-        string l_SenderName = m_Sender.actorName;
-        string l_TargetName = m_Target.actorName;
-        string l_MonstyleNames = string.Empty;
-        string l_DamageText = string.Empty;
-
-        for (int i = 0; i < p_MonstyleList.Count; i++)
+        if (p_Target.IsCanDamage(m_DamageValues[p_Target]))
         {
-            l_MonstyleNames += LocalizationDataBase.GetInstance().GetText("Special:" + p_MonstyleList[i].id) + ", ";
-            p_MonstyleList[i].Run(m_Sender, m_Target);
-
-            string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + p_MonstyleList[i].id + "Monstyle";
-
-            VisualEffect l_AttackEffect = Object.Instantiate(Resources.Load<VisualEffect>(l_PrefabPath));
-            l_AttackEffect.Init(p_Target, p_Target.spriteRenderer.transform);
-            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-
-            ResultSystem.GetInstance().AddStep(l_Step);
+            p_Target.Damage(m_DamageValues[p_Target]);
         }
 
-        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleUsing", new string[] { l_SenderName, l_TargetName, l_MonstyleNames });
+        ShowResult();
+    }
 
-        if (m_DamageValue >= 0.001f)
+    public void MonstyleAttack(BattleActor p_Sender, BattleActor p_Target, List<Special> p_SpecialList)
+    {
+        m_Target = p_Target;
+        
+        MonstyleSystem.GetInstance().UsingMonstyle(p_Sender, p_Target, p_SpecialList);
+        
+        string l_UsesSpecialNames = MonstyleSystem.GetInstance().usesSpecialNames;
+        string l_SenderName = p_Sender.actorName;
+        string l_TargetName = p_Target.actorName;
+
+        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleUsing", new string[] { l_SenderName, l_TargetName, l_UsesSpecialNames });
+        
+        if (m_DamageValues.ContainsKey(p_Target))
         {
-            l_DamageText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleDamage", new string[] { m_DamageValue.ToString() });
-            m_StatisticText += l_DamageText;
+            if (m_DamageValues[p_Target] > 0.01f)
+            {
+                m_StatisticText += LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleDamage", new string[] { m_DamageValues[p_Target].ToString() });
 
-            p_Target.Damage(m_DamageValue);
+                p_Target.Damage(m_DamageValues[p_Target]);
+            }
         }
+
+        ShowResult();
     }
 
     public void AttackSuccess()
+    {
+    }
+
+    public void AttackFail()
+    {
+    }
+    
+    public void AddDamageValue(BattleActor p_Target, float p_Value)
+    {
+        if (!m_DamageValues.ContainsKey(p_Target))
+        {
+            m_DamageValues.Add(p_Target, p_Value);
+        }
+        else
+        {
+            m_DamageValues[p_Target] += p_Value;
+        }
+    }
+    
+    public void AddAoeSpecial(BattleActor p_Target, Special p_Special)
+    {
+        if (!m_AoeSpecials.ContainsKey(p_Target))
+        {
+            m_AoeSpecials.Add(p_Target, new List<Special>());
+        }
+        m_AoeSpecials[p_Target].Add(p_Special);
+    }
+
+    //  Добавление бафф/дебаффа
+    //      Если врага нет в словаре используемых баффов
+    //          добавить врага к словарю
+    //      добавить в словарь по врагу спешл
+
+    //  Добавление хиллки
+    //      Если врага нет в словаре используемых хилок
+    //          добавить врага к словарю
+    //      добавить в словарь по врагу спешл
+
+    //  Добавление иммунитета
+    //      Если врага нет в словаре имунных к спешлам врага
+    //          добавить врага к словарю
+    //      добавить в словарь по врагу спешл
+
+    public void AddDeathActor(BattleActor p_Target)
+    {
+        m_DeathActorList.Add(p_Target);
+    }
+
+    private void ShowResult()
     {
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { m_StatisticText });
@@ -91,13 +126,43 @@ public class DamageSystem : Singleton<DamageSystem>
 
         BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
         ResultSystem.GetInstance().AddStep(l_Step);
+        
+        if (m_AoeSpecials.Count > 0)
+        {
+            foreach(BattleActor l_Actor in m_AoeSpecials.Keys)
+            {
+                ShowAoeText(l_Actor, m_AoeSpecials[l_Actor]);
+            }
+        }
 
-        m_Target.CheckDeath();
+        //  Если словарь иммунитетов не пуст
+        //      Вывести текст(айди текста, словарь)
+        //  Если словарь Баффов/дебаффов не пуст
+        //      Вывести текст(айди текста, словарь)
+        //  Если словарь Хилок не пуст
+        //      Вывести текст(айди текста, словарь)
+        //  Если словарь Бонусов не пуст
+        //      Вывести текст(айди текста, словарь)
+        //  Если словарь Результатов не пуст
+        //      Вывести текст(айди текста, словарь)
+
+        BattleCheckDeathStep l_CheckDeathStep = new BattleCheckDeathStep();
+        ResultSystem.GetInstance().AddStep(l_CheckDeathStep);
+
+        Reset();
     }
 
-    public void AttackFail()
+    private void ShowAoeText(BattleActor p_Target, List<Special> p_SpecialList)
     {
-        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:AttackFail");
+        string l_SpecialList = GetSpecialNames(p_SpecialList);
+        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:AoeUsing", new string[] { p_Target.actorName, l_SpecialList });
+
+        if (m_DamageValues.ContainsKey(p_Target))
+        {
+            l_Text += LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:AoeDamage", new string[] { m_DamageValues[p_Target].ToString() });
+
+            p_Target.Damage(m_DamageValues[p_Target]);
+        }
 
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { l_Text });
@@ -107,14 +172,36 @@ public class DamageSystem : Singleton<DamageSystem>
         ResultSystem.GetInstance().AddStep(l_Step);
     }
 
-    public void AddDamageValue(float l_Damage)
+    private string GetSpecialNames(List<Special> p_SpecialList)
     {
-        m_DamageValue += l_Damage;
+        string l_Text = string.Empty;
+
+        for (int i = 0; i < p_SpecialList.Count; i++)
+        {
+            string l_SpecialName = LocalizationDataBase.GetInstance().GetText("Special:" + p_SpecialList[i].id);
+            l_Text += l_SpecialName;
+            if (i == p_SpecialList.Count - 2)
+            {
+                l_Text += " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
+            }
+            else if (i == p_SpecialList.Count - 1)
+            {
+                l_Text += "";
+            }
+            else
+            {
+                l_Text += ", ";
+            }
+        }
+
+        return l_Text;
     }
 
-    public void Reset()
+    private void Reset()
     {
+        m_DamageValues.Clear();
+        m_AoeSpecials.Clear();
+        m_DeathActorList.Clear();
         m_StatisticText = string.Empty;
-        m_DamageValue = 0.0f;
     }
 }

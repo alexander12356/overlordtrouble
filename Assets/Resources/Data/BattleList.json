@@ -19,10 +19,12 @@
 	},
 	"TestBattleSkwatwolf":
 	{
-		"Location" : "RoadThugs",
+		"Location" : "ChickenFight",
 		"Enemy": 
 		[
-			"Skwatwolf"
+			"Bokalisk",
+			"Bokalisk",
+			"Bokalisk"
 		],
 		"Player":
 		{

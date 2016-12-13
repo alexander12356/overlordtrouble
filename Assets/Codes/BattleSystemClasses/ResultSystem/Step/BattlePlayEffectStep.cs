@@ -12,5 +12,6 @@
         base.RunStep();
 
         m_AttackEffect.PlayEffect();
+        m_AttackEffect.AddEndAnimationAction(ResultSystem.GetInstance().NextStep);
     }
 }

@@ -16,6 +16,10 @@ public class Special
     {
         get { return m_Id; }
     }
+    public bool isAoe
+    {
+        get { return m_IsAoe; }
+    }
 
     public Special(string p_Id, float p_Sp, string p_Element, bool p_IsAoe)
     {
@@ -38,11 +42,12 @@ public class Special
         }
     }
 
-    public void Run(BattleActor p_Sender, BattleActor p_Actor)
+    public void Run(BattleActor p_Sender, BattleActor p_Target)
     {
         for (int i = 0; i < m_EffectsList.Count; i++)
         {
-            m_EffectsList[i].Run(p_Sender, p_Actor);
+            m_EffectsList[i].Run(p_Sender, p_Target);
         }
+        return;
     }
 }

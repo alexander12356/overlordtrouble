@@ -71,16 +71,18 @@ public class BattleActor : MonoBehaviour
     {
     }
 
-    public virtual void Damage(List<AttackEffect> p_AttackEffectList)
+    public virtual bool IsCanDamage(float p_Damage)
     {
+        return true;
     }
 
-    public virtual void CheckDeath()
+    public virtual bool CheckDeath()
     {
         if (health <= 0)
         {
-            Die();
+            return true;
         }
+        return false;
     }
 
     public virtual void Die()

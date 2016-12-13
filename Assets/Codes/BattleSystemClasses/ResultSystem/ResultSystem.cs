@@ -28,7 +28,6 @@ public class ResultSystem : Singleton<ResultSystem>
     private void EndResult()
     {
         m_StepQueue.Clear();
-        DamageSystem.GetInstance().Reset();
         TurnSystem.GetInstance().EndTurn();
     }
 }

@@ -113,7 +113,11 @@
 	<Text id="GUI:BattleSystem:PlayerAttack">%d атаковал "%d" и нанес %d урона</Text>
 	<Text id="GUI:BattleSystem:BadAttack">Плод твоих напрасных усилий был равен %d очкам урона по %d</Text>
 	<Text id="GUI:BattleSystem:MonstyleUsing">%d использовал на "%d" %d</Text>
-	<Text id="GUI:BattleSystem:MonstyleDamage">и нанес %d урона</Text>
+	<Text id="GUI:BattleSystem:MonstyleDamage">, он нанес %d урона</Text>
+	<Text id="GUI:BattleSystem:AoeUsing">%d попал под %d</Text>
+	<Text id="GUI:BattleSystem:AoeDamage">, он получил %d урона</Text>
+	<Text id="GUI:BattleSystem:EnemyDied">%d выбыл из боя</Text>
+	<Text id="GUI:BattleSystem:AllEnemyDied">Все враги повержены</Text>
 	<Text id="GUI:BattleSystem:MainPanelAttack">Атака</Text>
 	<Text id="GUI:BattleSystem:MainPanelMonstyle">Монстайл</Text>
 	<Text id="GUI:BattleSystem:MainPanelItems">Предметы</Text>

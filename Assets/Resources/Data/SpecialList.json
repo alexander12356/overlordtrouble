@@ -3,7 +3,7 @@
 	{
 		"Sp" : 2.0,
 		"Element" : "Water",
-		"Aoe" : false,
+		"Aoe" : true,
 		"Effect" :
 		{
 			"Attack" :

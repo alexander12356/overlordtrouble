@@ -73,20 +73,6 @@ public class BattleEnemy : BattleActor
         base.Damage(p_DamageValue);
 
         health -= p_DamageValue;
-        DamageSystem.GetInstance().AttackSuccess();
-    }
-
-    public override void Damage(List<AttackEffect> p_AttackEffectList)
-    {
-        base.Damage(p_AttackEffectList);
-
-        float l_DamageValue = 0.0f;
-        for (int i = 0; i < p_AttackEffectList.Count; i++)
-        {
-            l_DamageValue += p_AttackEffectList[i].attackValue;
-        }
-
-        Damage(l_DamageValue);
     }
 
     public override void Attack(BattleActor p_Actor)
@@ -110,9 +96,11 @@ public class BattleEnemy : BattleActor
     {
         base.Die();
 
-        BattleSystem.GetInstance().AddExperience(m_EnemyData.experience);
-        BattleSystem.GetInstance().EnemyDied(this);
-        m_Animator.SetTrigger("Die");
+        LeshiiAttackEffect l_DieVisualEffect = Instantiate(LeshiiAttackEffect.prefab);
+        l_DieVisualEffect.AddPlayAction(PlayDieAnimation);
+
+        BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_DieVisualEffect);
+        ResultSystem.GetInstance().AddStep(l_Step);
     }
 
     // Called from Animation
@@ -120,7 +108,12 @@ public class BattleEnemy : BattleActor
     {
         base.Died();
 
+        BattleSystem.GetInstance().AddExperience(m_EnemyData.experience);
+        BattleSystem.GetInstance().EnemyDied(this);
+
         Destroy(gameObject);
+
+        ResultSystem.GetInstance().NextStep();
     }
 
     public override void PlayHitSound()
@@ -146,6 +139,11 @@ public class BattleEnemy : BattleActor
         {
             m_SelectedArrow = l_SelectedTransform.GetComponent<SpriteRenderer>();
         }
+    }
+
+    private void PlayDieAnimation()
+    {
+        m_Animator.SetTrigger("Die");
     }
     #endregion
 }
