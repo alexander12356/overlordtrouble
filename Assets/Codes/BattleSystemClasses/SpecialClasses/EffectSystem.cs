@@ -2,7 +2,7 @@
 
 public class EffectSystem : Singleton<EffectSystem>
 {
-    public BaseEffect CreateEffect(EffectData p_EffectData)
+    public BaseEffect CreateEffect(Special p_Special, EffectData p_EffectData)
     {
         BaseEffect l_Effect = null;
 
@@ -10,9 +10,15 @@ public class EffectSystem : Singleton<EffectSystem>
         {
             case EffectType.Attack:
                 float l_AttackValue = Convert.ToSingle(p_EffectData.parameters[0]);
-                Element l_Element = (Element)Enum.Parse(typeof(Element), p_EffectData.parameters[1]);
 
-                l_Effect = new AttackEffect(l_AttackValue, l_Element);
+                l_Effect = new AttackEffect(p_Special, l_AttackValue);
+                break;
+            case EffectType.Defense:
+
+                float l_DefenseValue = Convert.ToSingle(p_EffectData.parameters[0]);
+                int l_Duration = Convert.ToInt32(p_EffectData.parameters[1]);
+
+                l_Effect = new DefenseEffect(p_Special, l_DefenseValue, l_Duration);
                 break;
         }
 

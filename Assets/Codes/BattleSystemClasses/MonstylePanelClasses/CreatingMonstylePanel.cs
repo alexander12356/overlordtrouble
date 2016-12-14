@@ -109,11 +109,11 @@ public class CreatingMonstylePanel : Panel
             m_ChoosedSkills.Remove(l_PanelButton.specialId);
             BattlePlayer.GetInstance().mana += SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.specialId).sp;
 
-            m_AddedSpecialButtonList.RemoveButton(LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButton.specialId));
+            m_AddedSpecialButtonList.RemoveButton(LocalizationDataBase.GetInstance().GetText("Special:" + l_PanelButton.specialId));
         }
         else
         {
-            if (m_ChoosedSkills.Count >= 4 || BattlePlayer.GetInstance().mana < SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.specialId).sp)
+            if (m_ChoosedSkills.Count >= BattlePlayer.GetInstance().monstyleCapacity || BattlePlayer.GetInstance().mana < SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.specialId).sp)
             {
                 return;
             }
@@ -189,6 +189,13 @@ public class CreatingMonstylePanel : Panel
         {
             PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
             l_MonstyleButton.specialId = "Slap";
+            l_MonstyleButton.AddAction(ChooseSpecial);
+            m_SpecialButtonList.AddButton(l_MonstyleButton);
+        }
+        for (int i = 0; i < 1; i++)
+        {
+            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
+            l_MonstyleButton.specialId = "ProtectiveShell";
             l_MonstyleButton.AddAction(ChooseSpecial);
             m_SpecialButtonList.AddButton(l_MonstyleButton);
         }

@@ -3,7 +3,7 @@
 	<Text id="Special:WaterDrops">Капли</Text>
 	<Text id="Special:WaterDrops:Description">Прием атаки: 2сп\n\nУрон 2 очка по всем врагам\n\nЭлемент: Вода\n\nЭти капли бьют чуток больнее чем тычки пальцами</Text>
 	<Text id="Special:Slap">Шлепок</Text>
-	<Text id="Special:ProtectiveCoat">Защитная оболочка</Text>
+	<Text id="Special:ProtectiveShell">Защитная оболочка</Text>
 	<Text id="Special:Strike">Удар</Text>
 	<Text id="Special:Defense">Защита</Text>
 	<Text id="Special:TailWhap">Удар хвостом</Text>
@@ -12,6 +12,7 @@
 	<Text id="Special:BlobeStrike">Водяной удар</Text>
 	<Text id="Special:HealingWater">Целебная вода</Text>
 	<Text id="Special:StonePress">Каменный пресс</Text>
+	<Text id="Special:Stun">Оглушение</Text>
 	
 	<!-- effect's description -->
 	<Text id="Effects:Attack">Урон: %d</Text>
@@ -118,6 +119,9 @@
 	<Text id="GUI:BattleSystem:MonstyleDamage">, он нанес %d урона</Text>
 	<Text id="GUI:BattleSystem:AoeUsing">%d попал под %d</Text>
 	<Text id="GUI:BattleSystem:AoeDamage">, он получил %d урона</Text>
+	<Text id="GUI:BattleSystem:EffectUsing">На %d наносится %d</Text>
+	<Text id="GUI:BattleSystem:RemoveEffect">%d перестало действовать на %d</Text>
+	<Text id="GUI:BattleSystem:RemoveManyEffect">%d перестали действовать на %d</Text>
 	<Text id="GUI:BattleSystem:EnemyDied">%d выбыл из боя</Text>
 	<Text id="GUI:BattleSystem:AllEnemyDied">Все враги повержены</Text>
 	<Text id="GUI:BattleSystem:Immunity">"%d" невосприимчив к приему %d</Text>
@@ -133,6 +137,9 @@
 	<Text id="GUI:BattleSystem:Lose">Кеша больше не может сражаться дальше, Кеша потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли.</Text>
 	<Text id="GUI:BattleSystem:And">и</Text>
 	<Text id="GUI:BattleSystem:AttackFail">Атака не прошла</Text>
+	<Text id="GUI:BattleSystem:Bonus">%d восстановил %d в качестве бонуса</Text>
+	<Text id="GUI:BattleSystem:HpBonus">%d HP</Text>
+	<Text id="GUI:BattleSystem:SpBonus">%d SP</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Побуду собой</Text>
 	<Text id="GUI:Improve:AreYouShure">Вы уверены что хотите выбрать этот\nкласс?\nВернуть обратно уже не выйдет.</Text>

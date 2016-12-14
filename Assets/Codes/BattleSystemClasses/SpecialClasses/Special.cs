@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using UnityEngine;
+public enum SpecialType
+{
+    Attack,
+    Effect,
+    Healing
+}
 
 public class Special
 {

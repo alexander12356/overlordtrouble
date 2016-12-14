@@ -30,6 +30,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         private int m_ChargeCount = 3;
         private bool m_ChargeMode = false;
         private bool m_IsHealCast = false;
+        private bool m_IsStun = false;
         private VisualEffectChecker m_EndEffectChecker = null;
         private Mode m_Mode = Mode.Idle;
 
@@ -431,7 +432,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             BattlePlayEffectStep l_AnimationStep = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_AnimationStep);
 
-            if (Random.Range(0, 100) > 50)
+            if (Random.Range(0, 100) < 50)
             {
                 m_IsHealCast = true;
                 m_Body.health += 5;
@@ -470,11 +471,37 @@ namespace BattleSystemClasses.Bosses.Leshii
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
 
-            DamageSystem.GetInstance().Attack(m_LeftHand, BattlePlayer.GetInstance(), 1.0f);
+            if (Random.Range(0, 100) < 25)
+            {
+                m_IsStun = true;
+
+                Special l_StunSpecial = new Special("Stun", 0, "Physical", false);
+
+                StunEffect l_StunEffect = new StunEffect(l_StunSpecial);
+                AttackEffect l_AttackEffect = new AttackEffect(l_StunSpecial, 1.0f);
+
+                List<BaseEffect> l_EffectList = new List<BaseEffect>();
+                l_EffectList.Add(l_AttackEffect);
+                l_EffectList.Add(l_StunEffect);
+                
+                l_StunSpecial.SetEffects(l_EffectList);
+
+                DamageSystem.GetInstance().MonstyleAttack(this, BattlePlayer.GetInstance(), new List<Special>() { l_StunSpecial });
+            }
+            else
+            {
+                DamageSystem.GetInstance().Attack(m_LeftHand, BattlePlayer.GetInstance(), 1.0f);
+            }
         }
 
         private void PlayAttackLeftHand()
         {
+            if (m_IsStun)
+            {
+                m_IsStun = false;
+                m_BodyAnimator.SetTrigger("Stun");
+                return;
+            }
             m_BodyAnimator.SetTrigger("AttackLeft");
         }
     }

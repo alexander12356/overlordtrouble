@@ -3,14 +3,15 @@
     "Profile": "Sprites/Creations/DewWaterElemental/Profile",
 	"Elemental":"Water",
     "Skills": [
-      "WaterDrops"
+      "WaterDrops",
+	  "Slap",
+	  "ProtectiveShell"
     ]
   },
   "LesserWaterElemental": {
     "Profile": "Sprites/Creations/LesserWaterElemental/Profile",
 	"Elemental": "Water",
     "Skills": [
-      "Slap"
     ]
   },
   "ShellLizard": {

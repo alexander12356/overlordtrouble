@@ -14,12 +14,18 @@ public class BattlePlayer : BattleActor
     private Text m_SpecialText = null;
     private Image m_HealthPointBar = null;
     private Image m_SpecialPointBar = null;
+    private int   m_MonstyleCapacity = 4;
     #endregion
 
     #region Interface
     static public BattlePlayer GetInstance()
     {
         return m_Instance;
+    }
+    public int monstyleCapacity
+    {
+        get { return m_MonstyleCapacity;  }
+        set { m_MonstyleCapacity = value; }
     }
 
     public override void Attack(BattleActor p_Actor)
@@ -38,13 +44,6 @@ public class BattlePlayer : BattleActor
         ResultSystem.GetInstance().ShowResult();
 
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
-    }
-
-    public override void Damage(float p_DamageValue)
-    {
-        base.Damage(p_DamageValue);
-
-        health -= p_DamageValue;
     }
     
     public void SpecialAttack(BattleActor p_Target, List<Special> p_SpecialList)
@@ -140,6 +139,11 @@ public class BattlePlayer : BattleActor
     public override void PlayHitSound()
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip("Player_Hit"));
+    }
+
+    public override void CheckEffects()
+    {
+        base.CheckEffects();
     }
     #endregion
 

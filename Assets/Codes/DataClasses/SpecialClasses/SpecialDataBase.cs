@@ -6,7 +6,8 @@ using System.Collections.Generic;
 public enum EffectType
 {
     NONE = -1,
-    Attack
+    Attack,
+    Defense
 }
 
 public class SpecialDataBase : Singleton<SpecialDataBase>
@@ -74,10 +75,16 @@ public class SpecialDataBase : Singleton<SpecialDataBase>
             {
                 case EffectType.Attack:
                     float  l_AttackValue = p_JsonObject[i]["AttackValue"].f;
-                    string l_Element     = p_JsonObject[i]["Element"].str;
 
-                    EffectData l_AttackEffect = new EffectData(l_EffectType, new string[] { l_AttackValue.ToString(), l_Element }  );
+                    EffectData l_AttackEffect = new EffectData(l_EffectType, new string[] { l_AttackValue.ToString() }  );
                     p_EffectList.Add(l_AttackEffect);
+                    break;
+                case EffectType.Defense:
+                    float l_DefenseValue = p_JsonObject[i]["Value"].f;
+                    float l_Duration = p_JsonObject[i]["Duration"].f;
+
+                    EffectData l_DefenseEffect = new EffectData(l_EffectType, new string[] { l_DefenseValue.ToString(), l_Duration.ToString() });
+                    p_EffectList.Add(l_DefenseEffect);
                     break;
             }
         }

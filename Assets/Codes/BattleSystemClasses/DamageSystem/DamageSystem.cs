@@ -11,6 +11,12 @@ public enum Element
     Earth
 }
 
+public enum BonusType
+{
+    Health,
+    SpecialPoints
+}
+
 public class DamageSystem : Singleton<DamageSystem>
 {
     private enum AttackType
@@ -25,6 +31,9 @@ public class DamageSystem : Singleton<DamageSystem>
     private Dictionary<BattleActor, float> m_DamageValues = new Dictionary<BattleActor, float>();
     private Dictionary<BattleActor, List<Special>> m_AoeSpecials = new Dictionary<BattleActor, List<Special>>();
     private Dictionary<BattleActor, List<Special>> m_ImmunitySpecials = new Dictionary<BattleActor, List<Special>>();
+    private Dictionary<BattleActor, List<Special>> m_EffectSpecials = new Dictionary<BattleActor, List<Special>>();
+    private Dictionary<BattleActor, List<Special>> m_RemoveSpecials = new Dictionary<BattleActor, List<Special>>();
+    private Dictionary<BonusType, float> m_Bonuses = new Dictionary<BonusType, float>();
     private List<BattleActor> m_DeathActorList = new List<BattleActor>();
 
     public void Attack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue)
@@ -94,15 +103,38 @@ public class DamageSystem : Singleton<DamageSystem>
     }
 
     //  Добавление бафф/дебаффа
-    //      Если врага нет в словаре используемых баффов
-    //          добавить врага к словарю
-    //      добавить в словарь по врагу спешл
+    public void AddEffectSpecial(BattleActor p_Target, Special p_Special)
+    {
+        if (!m_EffectSpecials.ContainsKey(p_Target))
+        {
+            m_EffectSpecials.Add(p_Target, new List<Special>());
+        }
+        m_EffectSpecials[p_Target].Add(p_Special);
+    }
+
+    public void AddRemoveEffectSpecial(BattleActor p_Target, Special p_Special)
+    {
+        if (!m_RemoveSpecials.ContainsKey(p_Target))
+        {
+            m_RemoveSpecials.Add(p_Target, new List<Special>());
+        }
+        m_RemoveSpecials[p_Target].Add(p_Special);
+    }
 
     //  Добавление хиллки
     //      Если врага нет в словаре используемых хилок
     //          добавить врага к словарю
     //      добавить в словарь по врагу спешл
-    
+
+    public void AddBonuses(BonusType p_Type, float p_Value)
+    {
+        if (!m_Bonuses.ContainsKey(p_Type))
+        {
+            m_Bonuses.Add(p_Type, 0.0f);
+        }
+        m_Bonuses[p_Type] += p_Value;
+    }
+
     public void AddImmunity(BattleActor p_Target, Special p_Special)
     {
         if (!m_ImmunitySpecials.ContainsKey(p_Target))
@@ -144,15 +176,27 @@ public class DamageSystem : Singleton<DamageSystem>
                 ShowImmunityText(l_Actor, m_ImmunitySpecials[l_Actor]);
             }
         }
-        //      Вывести текст(айди текста, словарь)
-        //  Если словарь Баффов/дебаффов не пуст
-        //      Вывести текст(айди текста, словарь)
+        
+        if (m_EffectSpecials.Count > 0)
+        {
+            foreach(BattleActor l_Actor in m_EffectSpecials.Keys)
+            {
+                ShowEffectSpecial(l_Actor, m_EffectSpecials[l_Actor]);
+            }
+        }
+
         //  Если словарь Хилок не пуст
         //      Вывести текст(айди текста, словарь)
         //  Если словарь Бонусов не пуст
         //      Вывести текст(айди текста, словарь)
-        //  Если словарь Результатов не пуст
-        //      Вывести текст(айди текста, словарь)
+
+        if (m_RemoveSpecials.Count > 0)
+        {
+            foreach (BattleActor l_Actor in m_RemoveSpecials.Keys)
+            {
+                ShowRemoveEffectSpecial(l_Actor, m_RemoveSpecials[l_Actor]);
+            }
+        }
 
         BattleCheckDeathStep l_CheckDeathStep = new BattleCheckDeathStep();
         ResultSystem.GetInstance().AddStep(l_CheckDeathStep);
@@ -204,6 +248,61 @@ public class DamageSystem : Singleton<DamageSystem>
         ResultSystem.GetInstance().AddStep(l_Step);
     }
 
+    private void ShowBonuses()
+    {
+        string l_Bonuses = string.Empty;
+
+        if (m_Bonuses.ContainsKey(BonusType.Health))
+        {
+            l_Bonuses += LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:HpBonus", new string[] { m_Bonuses[BonusType.Health].ToString() });
+        }
+        if (m_Bonuses.ContainsKey(BonusType.SpecialPoints))
+        {
+            if (l_Bonuses != string.Empty)
+            {
+                l_Bonuses += " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
+            }
+            l_Bonuses += LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:SpBonus", new string[] { m_Bonuses[BonusType.SpecialPoints].ToString() });
+        }
+
+        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Bonus", new string[] { BattlePlayer.GetInstance().actorName, l_Bonuses });
+    }
+
+    private void ShowEffectSpecial(BattleActor p_Target, List<Special> p_SpecialList)
+    {
+        string l_SpecialList = GetSpecialNames(p_SpecialList);
+        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EffectUsing", new string[] { p_Target.actorName, l_SpecialList });
+
+        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { l_Text });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+        ResultSystem.GetInstance().AddStep(l_Step);
+    }
+
+    private void ShowRemoveEffectSpecial(BattleActor p_Target, List<Special> p_SpecialList)
+    {
+        string l_SpecialList = GetSpecialNames(p_SpecialList);
+        string l_Text = string.Empty;
+
+        if (p_SpecialList.Count > 0)
+        {
+            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:RemoveManyEffect", new string[] { l_SpecialList, p_Target.actorName });
+        }
+        else
+        {
+            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:RemoveEffect", new string[] { l_SpecialList, p_Target.actorName });
+        }
+
+        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { l_Text });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+        ResultSystem.GetInstance().AddStep(l_Step);
+    }
+
     private string GetSpecialNames(List<Special> p_SpecialList)
     {
         string l_Text = string.Empty;
@@ -235,6 +334,8 @@ public class DamageSystem : Singleton<DamageSystem>
         m_AoeSpecials.Clear();
         m_DeathActorList.Clear();
         m_ImmunitySpecials.Clear();
+        m_EffectSpecials.Clear();
+        m_RemoveSpecials.Clear();
         m_StatisticText = string.Empty;
     }
 }

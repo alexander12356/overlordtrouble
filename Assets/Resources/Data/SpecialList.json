@@ -8,8 +8,7 @@
 		{
 			"Attack" :
 			{
-				"AttackValue" : 1.0,
-				"Element" : "Physical"
+				"AttackValue" : 1.0
 			}
 		}
 	},
@@ -22,8 +21,21 @@
 		{
 			"Attack" :
 			{
-				"AttackValue" : 3.0,
-				"Element" : "Physical"
+				"AttackValue" : 3.0
+			}
+		}
+	},
+	"ProtectiveShell" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Defense" :
+			{
+				"Value" : 2.0,
+				"Duration" : 2.0
 			}
 		}
 	},
@@ -36,8 +48,7 @@
 		{
 			"Attack" : 
 			{
-				"AttackValue" : 4.0,
-				"Element" : "Physical"
+				"AttackValue" : 4.0
 			}
 		}
 	},
@@ -50,8 +61,7 @@
 		{
 			"Attack" :
 			{
-				"AttackValue" : 6.0,
-				"Element" : "Physical"
+				"AttackValue" : 6.0
 			}
 		}
 	},
@@ -64,8 +74,7 @@
 		{
 			"Attack" :
 			{
-				"AttackValue" : 10.0,
-				"Element" : "Physical"
+				"AttackValue" : 10.0
 			}
 		}
 	}

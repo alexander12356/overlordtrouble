@@ -68,13 +68,6 @@ public class BattleEnemy : BattleActor
         ResultSystem.GetInstance().ShowResult();
     }
 
-    public override void Damage(float p_DamageValue)
-    {
-        base.Damage(p_DamageValue);
-
-        health -= p_DamageValue;
-    }
-
     public override void Attack(BattleActor p_Actor)
     {
         base.Attack(p_Actor);

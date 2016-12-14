@@ -56,11 +56,16 @@ public class MonstyleSystem : Singleton<MonstyleSystem>
     {
         string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + p_Special.id + "Monstyle";
 
-        VisualEffect l_AttackEffect = Object.Instantiate(Resources.Load<VisualEffect>(l_PrefabPath));
-        l_AttackEffect.Init(p_Target, p_Target.spriteRenderer.transform);
-        
-        BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-        ResultSystem.GetInstance().AddStep(l_Step);
+        VisualEffect l_Prefab = Resources.Load<VisualEffect>(l_PrefabPath);
+
+        if (l_Prefab != null)
+        {
+            VisualEffect l_AttackEffect = Object.Instantiate(l_Prefab);
+            l_AttackEffect.Init(p_Target, p_Target.spriteRenderer.transform);
+
+            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
+            ResultSystem.GetInstance().AddStep(l_Step);
+        }
         
         p_Special.Run(p_Sender, p_Target);
     }

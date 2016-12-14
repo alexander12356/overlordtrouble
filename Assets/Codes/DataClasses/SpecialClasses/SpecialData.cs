@@ -20,13 +20,13 @@ public struct SpecialData
 
     public Special CreateSpecial()
     {
+        Special l_Special = new Special(id, sp, element, isAoe);
+
         List<BaseEffect> l_EffectList = new List<BaseEffect>();
         for (int i = 0; i < effectsData.Count; i++)
         {
-            l_EffectList.Add(EffectSystem.GetInstance().CreateEffect(effectsData[i]));
+            l_EffectList.Add(EffectSystem.GetInstance().CreateEffect(l_Special, effectsData[i]));
         }
-
-        Special l_Special = new Special(id, sp, element, isAoe);
         l_Special.SetEffects(l_EffectList);
 
         return l_Special;
