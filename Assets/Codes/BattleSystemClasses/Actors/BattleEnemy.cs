@@ -80,7 +80,7 @@ public class BattleEnemy : BattleActor
         l_AttackEffect.Init(p_Actor, spriteRenderer.transform);
 
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-        ResultSystem.GetInstance().AddStep(l_Step);
+        DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
         DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
     }

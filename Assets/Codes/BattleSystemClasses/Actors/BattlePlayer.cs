@@ -15,6 +15,10 @@ public class BattlePlayer : BattleActor
     private Image m_HealthPointBar = null;
     private Image m_SpecialPointBar = null;
     private int   m_MonstyleCapacity = 4;
+    private Dictionary<string, EffectIcon> m_EffectIcons = new Dictionary<string, EffectIcon>();
+    private Transform m_EffectsBar = null;
+    private int m_BuffCount   = 0;
+    private int m_DebuffCount = 0;
     #endregion
 
     #region Interface
@@ -38,7 +42,7 @@ public class BattlePlayer : BattleActor
         l_AttackEffect.Init(p_Actor, p_Actor.spriteRenderer.transform);
 
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-        ResultSystem.GetInstance().AddStep(l_Step);
+        DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
         DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
         ResultSystem.GetInstance().ShowResult();
@@ -48,8 +52,6 @@ public class BattlePlayer : BattleActor
     
     public void SpecialAttack(BattleActor p_Target, List<Special> p_SpecialList)
     {
-        p_Target.CheckPrevAttack();
-
         if (p_SpecialList.Count == 0)
         {
             VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
@@ -145,6 +147,7 @@ public class BattlePlayer : BattleActor
     {
         base.CheckEffects();
     }
+
     #endregion
 
     #region Private
@@ -157,6 +160,61 @@ public class BattlePlayer : BattleActor
         m_HealthPointBar  = transform.FindChild("HealthBar").GetComponent<Image>();
         m_SpecialText     = transform.FindChild("SpecialText").GetComponent<Text>();
         m_SpecialPointBar = transform.FindChild("SpecialBar").GetComponent<Image>();
+        m_EffectsBar      = transform.FindChild("EffectsBar");
+    }
+    
+    public override void AddBuff()
+    {
+        m_BuffCount++;
+
+        if (m_BuffCount > 1)
+        {
+            return;
+        }
+
+        EffectIcon l_EffectIcon = Instantiate(EffectIcon.prefab);
+        l_EffectIcon.SetIconId("Buff");
+        l_EffectIcon.transform.SetParent(m_EffectsBar);
+        l_EffectIcon.transform.localScale = Vector3.one;
+        l_EffectIcon.transform.SetSiblingIndex(0);
+
+        m_EffectIcons.Add("Buff", l_EffectIcon);
+    }
+
+    public override void RemoveBuff()
+    {
+        m_BuffCount--;
+
+        if (m_BuffCount == 0)
+        {
+            Destroy(m_EffectIcons["Buff"].gameObject);
+            m_EffectIcons.Remove("Buff");
+        }
+    }
+    
+    public override void AddStatusEffect(string p_EffectId)
+    {
+        base.AddStatusEffect(p_EffectId);
+
+        if (m_EffectIcons.ContainsKey(p_EffectId))
+        {
+            return;
+        }
+
+        EffectIcon l_EffectIcon = Instantiate(EffectIcon.prefab);
+        l_EffectIcon.SetIconId(p_EffectId);
+        l_EffectIcon.transform.SetParent(m_EffectsBar);
+        l_EffectIcon.transform.localScale = Vector3.one;
+
+        m_EffectIcons.Add(p_EffectId, l_EffectIcon);
+    }
+
+    public override void RemoveStatusEffect(string p_EffectId)
+    {
+        base.RemoveStatusEffect(p_EffectId);
+
+        Destroy(m_EffectIcons[p_EffectId].gameObject);
+        m_EffectIcons.Remove(p_EffectId);
     }
     #endregion
 }

@@ -35,6 +35,9 @@ public class DamageSystem : Singleton<DamageSystem>
     private Dictionary<BattleActor, List<Special>> m_RemoveSpecials = new Dictionary<BattleActor, List<Special>>();
     private Dictionary<BonusType, float> m_Bonuses = new Dictionary<BonusType, float>();
     private List<BattleActor> m_DeathActorList = new List<BattleActor>();
+    private List<BattleBaseStep> m_VisualEffectSteps = new List<BattleBaseStep>();
+    private List<BattleBaseStep> m_BeforeAttackSteps = new List<BattleBaseStep>();
+    private List<BattleBaseStep> m_AfterAttackSteps  = new List<BattleBaseStep>();
 
     public void Attack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue)
     {
@@ -44,6 +47,7 @@ public class DamageSystem : Singleton<DamageSystem>
         string l_SenderName = m_Sender.actorName;
         string l_TargetName = m_Target.actorName;
 
+        p_Target.CheckPrevAttack();
         if (p_Target.IsCanDamage(p_DamageValue))
         {
             AddDamageValue(p_Target, p_DamageValue);
@@ -65,19 +69,35 @@ public class DamageSystem : Singleton<DamageSystem>
         string l_SenderName = p_Sender.actorName;
         string l_TargetName = p_Target.actorName;
 
-        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleUsing", new string[] { l_SenderName, l_TargetName, l_UsesSpecialNames });
+        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleUsing", new string[] { l_SenderName, l_UsesSpecialNames });
         
         if (m_DamageValues.ContainsKey(p_Target))
         {
+            p_Target.CheckPrevAttack();
+
             if (p_Target.IsCanDamage(m_DamageValues[p_Target]))
             {
-                m_StatisticText += LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleDamage", new string[] { m_DamageValues[p_Target].ToString() });
+                m_StatisticText += LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleDamage", new string[] { m_DamageValues[p_Target].ToString(), l_TargetName });
 
                 p_Target.Damage(m_DamageValues[p_Target]);
+            }
+            else
+            {
+                m_StatisticText += LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleDamage", new string[] { "0", l_TargetName });
             }
         }
 
         ShowResult();
+    }
+
+    public void AddBeforeAttackSteps(BattleBaseStep l_Step)
+    {
+        m_BeforeAttackSteps.Add(l_Step);
+    }
+
+    public void AddVisualEffectStep(BattleBaseStep l_Step)
+    {
+        m_VisualEffectSteps.Add(l_Step);
     }
     
     public void AddDamageValue(BattleActor p_Target, float p_Value)
@@ -101,8 +121,7 @@ public class DamageSystem : Singleton<DamageSystem>
         m_AoeSpecials[p_Target].Add(p_Special);
         p_Target.isAoeAttack = true;
     }
-
-    //  Добавление бафф/дебаффа
+    
     public void AddEffectSpecial(BattleActor p_Target, Special p_Special)
     {
         if (!m_EffectSpecials.ContainsKey(p_Target))
@@ -135,6 +154,11 @@ public class DamageSystem : Singleton<DamageSystem>
         m_Bonuses[p_Type] += p_Value;
     }
 
+    public void AddAfterAttackStep(BattleBaseStep l_Step)
+    {
+        m_AfterAttackSteps.Add(l_Step);
+    }
+
     public void AddImmunity(BattleActor p_Target, Special p_Special)
     {
         if (!m_ImmunitySpecials.ContainsKey(p_Target))
@@ -151,6 +175,12 @@ public class DamageSystem : Singleton<DamageSystem>
 
     private void ShowResult()
     {
+        // шаги перед атакой сендера
+        RunBeforeAttackSteps();
+
+        // Запуск анимаций
+        PlayVisualEffects();
+
         if (m_StatisticText != string.Empty)
         {
             TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
@@ -201,7 +231,26 @@ public class DamageSystem : Singleton<DamageSystem>
         BattleCheckDeathStep l_CheckDeathStep = new BattleCheckDeathStep();
         ResultSystem.GetInstance().AddStep(l_CheckDeathStep);
 
+        // Шаги после атаки сендера
+        RunAfterAttackSteps();
+
         Reset();
+    }
+
+    private void RunBeforeAttackSteps()
+    {
+        for (int i = 0; i < m_BeforeAttackSteps.Count; i++)
+        {
+            ResultSystem.GetInstance().AddStep(m_BeforeAttackSteps[i]);
+        }
+    }
+
+    private void PlayVisualEffects()
+    {
+        for (int i = 0; i < m_VisualEffectSteps.Count; i++)
+        {
+            ResultSystem.GetInstance().AddStep(m_VisualEffectSteps[i]);
+        }
     }
 
     private void ShowAoeText(BattleActor p_Target, List<Special> p_SpecialList)
@@ -328,14 +377,25 @@ public class DamageSystem : Singleton<DamageSystem>
         return l_Text;
     }
 
+    private void RunAfterAttackSteps()
+    {
+        for (int i = 0; i < m_AfterAttackSteps.Count; i++)
+        {
+            ResultSystem.GetInstance().AddStep(m_AfterAttackSteps[i]);
+        }
+    }
+
     private void Reset()
     {
+        m_BeforeAttackSteps.Clear();
+        m_VisualEffectSteps.Clear();
         m_DamageValues.Clear();
         m_AoeSpecials.Clear();
         m_DeathActorList.Clear();
         m_ImmunitySpecials.Clear();
         m_EffectSpecials.Clear();
         m_RemoveSpecials.Clear();
+        m_AfterAttackSteps.Clear();
         m_StatisticText = string.Empty;
     }
 }

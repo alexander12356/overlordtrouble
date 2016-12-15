@@ -20,6 +20,7 @@
         m_Sender = p_Sender;
         m_Sender.defense += m_DefenseValue;
         m_Sender.AddEffect(m_Special.id, this);
+        m_Sender.AddBuff();
 
         DamageSystem.GetInstance().AddEffectSpecial(p_Sender, m_Special);
     }
@@ -46,6 +47,7 @@
             return false;
         }
         m_Sender.defense -= m_DefenseValue;
+        m_Sender.RemoveBuff();
 
         DamageSystem.GetInstance().AddRemoveEffectSpecial(m_Sender, m_Special);
 

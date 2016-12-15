@@ -304,14 +304,14 @@ namespace BattleSystemClasses.Bosses.Leshii
             l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
             BattleShowPanelStep l_DialogStep = new BattleShowPanelStep(l_TextPanel);
-            ResultSystem.GetInstance().AddStep(l_DialogStep);
+            DamageSystem.GetInstance().AddAfterAttackStep(l_DialogStep);
 
             LeshiiAttackEffect l_BlockStopEffect = Instantiate(LeshiiAttackEffect.prefab);
             l_BlockStopEffect.AddPlayAction(PlayStopBlock);
             m_EndEffectChecker.AddAttackEffect(l_BlockStopEffect);
 
             BattlePlayEffectStep l_BlockStopStep = new BattlePlayEffectStep(l_BlockStopEffect);
-            ResultSystem.GetInstance().AddStep(l_BlockStopStep);
+            DamageSystem.GetInstance().AddAfterAttackStep(l_BlockStopStep);
         }
 
         public void StartBlock()
@@ -321,7 +321,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             m_EndEffectChecker.AddAttackEffect(l_BlockStartEffect);
 
             BattlePlayEffectStep l_BlockStartStep = new BattlePlayEffectStep(l_BlockStartEffect);
-            ResultSystem.GetInstance().AddStep(l_BlockStartStep);
+            DamageSystem.GetInstance().AddBeforeAttackSteps(l_BlockStartStep);
         }
 
         public void OrganDie(OrganIds p_OrganIds)

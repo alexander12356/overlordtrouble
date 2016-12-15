@@ -21,6 +21,7 @@ public class StunEffect : BaseEffect
 
         m_Player.monstyleCapacity = 3;
         m_Player.AddEffect(m_Special.id, this);
+        m_Player.AddStatusEffect(id);
 
         DamageSystem.GetInstance().AddEffectSpecial(p_Target, m_Special);
     }
@@ -40,6 +41,7 @@ public class StunEffect : BaseEffect
         }
 
         m_Player.monstyleCapacity = 4;
+        m_Player.RemoveStatusEffect(id);
         DamageSystem.GetInstance().AddRemoveEffectSpecial(m_Player, m_Special);
 
         return true;

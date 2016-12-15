@@ -80,7 +80,6 @@ public class BattleActor : MonoBehaviour
 
     public virtual void Attack(BattleActor p_Actor)
     {
-        p_Actor.CheckPrevAttack();
     }
 
     public virtual void Damage(float p_DamageValue)
@@ -145,7 +144,7 @@ public class BattleActor : MonoBehaviour
     {
     }
 
-    public void AddEffect(string p_SpecialId, BaseEffect l_Effect)
+    public virtual void AddEffect(string p_SpecialId, BaseEffect l_Effect)
     {
         if (!m_EffectList.ContainsKey(p_SpecialId))
         {
@@ -187,6 +186,30 @@ public class BattleActor : MonoBehaviour
             m_EffectList.Remove(m_DeleteSpecials[i]);
         }
         m_DeleteSpecials.Clear();
+    }
+
+    public virtual void AddBuff()
+    {
+    }
+
+    public virtual void RemoveBuff()
+    {
+    }
+
+    public virtual void AddDebuff()
+    {
+    }
+
+    public virtual void RemoveDebuff()
+    {
+    }
+
+    public virtual void AddStatusEffect(string p_EffectId)
+    {
+    }
+
+    public virtual void RemoveStatusEffect(string p_EffectId)
+    {
     }
     #endregion
 }

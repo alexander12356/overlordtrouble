@@ -49,7 +49,7 @@ public class MonstyleSystem : Singleton<MonstyleSystem>
         }
 
         BattlePlayManyEffectStep l_Step = new BattlePlayManyEffectStep(l_VisualEffectList);
-        ResultSystem.GetInstance().AddStep(l_Step);
+        DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
     }
     
     private void RunSpecial(BattleActor p_Sender, BattleActor p_Target, Special p_Special)
@@ -64,7 +64,7 @@ public class MonstyleSystem : Singleton<MonstyleSystem>
             l_AttackEffect.Init(p_Target, p_Target.spriteRenderer.transform);
 
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-            ResultSystem.GetInstance().AddStep(l_Step);
+            DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
         }
         
         p_Special.Run(p_Sender, p_Target);
