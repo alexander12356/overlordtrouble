@@ -24,9 +24,7 @@ public class DamageSystem : Singleton<DamageSystem>
         BaseAttack,
         SpecialAttack
     }
-
-    private BattleActor m_Target = null;
-    private BattleActor m_Sender = null;
+    
     private string m_StatisticText = string.Empty;
     private Dictionary<BattleActor, float> m_DamageValues = new Dictionary<BattleActor, float>();
     private Dictionary<BattleActor, List<Special>> m_AoeSpecials = new Dictionary<BattleActor, List<Special>>();
@@ -34,18 +32,14 @@ public class DamageSystem : Singleton<DamageSystem>
     private Dictionary<BattleActor, List<Special>> m_EffectSpecials = new Dictionary<BattleActor, List<Special>>();
     private Dictionary<BattleActor, List<Special>> m_RemoveSpecials = new Dictionary<BattleActor, List<Special>>();
     private Dictionary<BonusType, float> m_Bonuses = new Dictionary<BonusType, float>();
-    private List<BattleActor> m_DeathActorList = new List<BattleActor>();
     private List<BattleBaseStep> m_VisualEffectSteps = new List<BattleBaseStep>();
     private List<BattleBaseStep> m_BeforeAttackSteps = new List<BattleBaseStep>();
     private List<BattleBaseStep> m_AfterAttackSteps  = new List<BattleBaseStep>();
 
     public void Attack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue)
     {
-        m_Sender = p_Sender;
-        m_Target = p_Target;
-
-        string l_SenderName = m_Sender.actorName;
-        string l_TargetName = m_Target.actorName;
+        string l_SenderName = p_Sender.actorName;
+        string l_TargetName = p_Target.actorName;
 
         p_Target.CheckPrevAttack();
         if (p_Target.IsCanDamage(p_DamageValue))
@@ -60,9 +54,7 @@ public class DamageSystem : Singleton<DamageSystem>
     }
 
     public void MonstyleAttack(BattleActor p_Sender, BattleActor p_Target, List<Special> p_SpecialList)
-    {
-        m_Target = p_Target;
-        
+    {        
         MonstyleSystem.GetInstance().UsingMonstyle(p_Sender, p_Target, p_SpecialList);
         
         string l_UsesSpecialNames = MonstyleSystem.GetInstance().usesSpecialNames;
@@ -168,17 +160,10 @@ public class DamageSystem : Singleton<DamageSystem>
         m_ImmunitySpecials[p_Target].Add(p_Special);
     }
 
-    public void AddDeathActor(BattleActor p_Target)
-    {
-        m_DeathActorList.Add(p_Target);
-    }
-
     private void ShowResult()
     {
-        // шаги перед атакой сендера
         RunBeforeAttackSteps();
-
-        // Запуск анимаций
+        
         PlayVisualEffects();
 
         if (m_StatisticText != string.Empty)
@@ -231,7 +216,6 @@ public class DamageSystem : Singleton<DamageSystem>
         BattleCheckDeathStep l_CheckDeathStep = new BattleCheckDeathStep();
         ResultSystem.GetInstance().AddStep(l_CheckDeathStep);
 
-        // Шаги после атаки сендера
         RunAfterAttackSteps();
 
         Reset();
@@ -391,7 +375,6 @@ public class DamageSystem : Singleton<DamageSystem>
         m_VisualEffectSteps.Clear();
         m_DamageValues.Clear();
         m_AoeSpecials.Clear();
-        m_DeathActorList.Clear();
         m_ImmunitySpecials.Clear();
         m_EffectSpecials.Clear();
         m_RemoveSpecials.Clear();

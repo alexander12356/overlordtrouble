@@ -143,11 +143,6 @@ public class BattlePlayer : BattleActor
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip("Player_Hit"));
     }
 
-    public override void CheckEffects()
-    {
-        base.CheckEffects();
-    }
-
     #endregion
 
     #region Private

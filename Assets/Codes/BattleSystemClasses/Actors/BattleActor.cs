@@ -116,7 +116,6 @@ public class BattleActor : MonoBehaviour
 
     public virtual void RunTurn()
     {
-        CheckEffects();
         RunningEffect();
     }
 
@@ -137,10 +136,6 @@ public class BattleActor : MonoBehaviour
     }
 
     public virtual void CheckPrevAttack()
-    {
-    }
-
-    public virtual void CheckEffects()
     {
     }
 
@@ -173,7 +168,7 @@ public class BattleActor : MonoBehaviour
         }
     }
 
-    private void RunningEffect()
+    public virtual void RunningEffect()
     {
         foreach (string l_Id in m_EffectList.Keys)
         {

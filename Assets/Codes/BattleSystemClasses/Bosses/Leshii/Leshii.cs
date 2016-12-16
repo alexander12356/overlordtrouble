@@ -98,7 +98,6 @@ namespace BattleSystemClasses.Bosses.Leshii
                     {
                         Attack(BattlePlayer.GetInstance());
                     }
-                    ResultSystem.GetInstance().ShowResult();
                     break;
                 case Mode.Charge:
                     if (m_ChargeCounter >= m_ChargeCount)
@@ -109,7 +108,6 @@ namespace BattleSystemClasses.Bosses.Leshii
                     {
                         CheckSpecialAttack();
                     }
-                    ResultSystem.GetInstance().ShowResult();
                     break;
                 case Mode.HandsDied:
                     if (m_Body.health < 35)
@@ -122,9 +120,9 @@ namespace BattleSystemClasses.Bosses.Leshii
                     {
                         CheckSummonHands();
                     }
-                    ResultSystem.GetInstance().ShowResult();
                     break;
             }
+            ResultSystem.GetInstance().ShowResult();
         }
 
         private void CheckSpecialAttack()
