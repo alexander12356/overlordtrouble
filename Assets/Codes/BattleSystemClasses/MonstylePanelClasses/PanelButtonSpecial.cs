@@ -78,13 +78,13 @@ public class PanelButtonSpecial : PanelButton
         m_Chosen = p_Value;
         if (p_Value)
         {
-            m_SelectedImage.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/SpecialSelectAndChoosenBackground");
-            m_Background.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/SpecialChoosenBackground");
+            m_SelectedImage.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/CreateMonstyle/SpecialSelectAndChoosenBackground");
+            m_Background.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/CreateMonstyle/SpecialChoosenBackground");
         }
         else
         {
-            m_SelectedImage.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/SpecialSelectBackground");
-            m_Background.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/SpecialBackground");
+            m_SelectedImage.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/CreateMonstyle/SpecialSelectBackground");
+            m_Background.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/CreateMonstyle/SpecialBackground");
         }
     }
 }

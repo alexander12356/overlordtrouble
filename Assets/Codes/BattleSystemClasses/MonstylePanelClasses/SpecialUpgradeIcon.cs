@@ -82,7 +82,7 @@ public class SpecialUpgradeIcon : MonoBehaviour
         }
         else
         {
-            m_TextBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/UpgradedSpecialIcon");
+            m_TextBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/UsingMonstyle/SpecialIcon/UpgradedSpecialIcon");
             m_IsBuffed = true;
         }
         
@@ -100,7 +100,7 @@ public class SpecialUpgradeIcon : MonoBehaviour
         m_SelectImage.gameObject.SetActive(false);
         m_WrongImage.gameObject.SetActive(true);
 
-        m_TextBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/MissedSpecialIcon");
+        m_TextBackground.sprite = Resources.Load<Sprite>("Sprites/GUI/BattleSystem/UsingMonstyle/SpecialIcon/MissedSpecialIcon");
         m_Animator.SetTrigger("Wrong");
     }
 

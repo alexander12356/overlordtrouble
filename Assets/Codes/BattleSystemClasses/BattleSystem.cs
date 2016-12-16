@@ -71,7 +71,7 @@ public class BattleSystem : MonoBehaviour
 
     public void SetVisibleAvatarPanel(bool p_Value)
     {
-        m_AvatarPanel.SetActive(p_Value);
+        //m_AvatarPanel.SetActive(p_Value);
     }
 
     public List<BattleEnemy> GetEnemyList()
