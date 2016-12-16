@@ -18,9 +18,17 @@
         base.Run(p_Sender, m_Target);
 
         m_Sender = p_Sender;
-        m_Sender.defense += m_DefenseValue;
-        m_Sender.AddEffect(m_Special.id, this);
-        m_Sender.AddBuff();
+
+        if (m_Sender.HasSpecial(m_Special.id))
+        {
+            m_Sender.StackEffect(m_Special.id, this);
+        }
+        else
+        {
+            m_Sender.defense += m_DefenseValue;
+            m_Sender.AddEffect(m_Special.id, this);
+            m_Sender.AddBuff();
+        }
 
         DamageSystem.GetInstance().AddEffectSpecial(p_Sender, m_Special);
     }

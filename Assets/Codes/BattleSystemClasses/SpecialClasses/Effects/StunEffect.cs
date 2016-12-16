@@ -19,9 +19,16 @@ public class StunEffect : BaseEffect
         
         m_Player = (BattlePlayer)p_Target;
 
-        m_Player.monstyleCapacity = 3;
-        m_Player.AddEffect(m_Special.id, this);
-        m_Player.AddStatusEffect(id);
+        if (p_Sender.HasSpecial(m_Special.id))
+        {
+            p_Sender.StackEffect(m_Special.id, this);
+        }
+        else
+        {
+            m_Player.monstyleCapacity = 3;
+            m_Player.AddEffect(m_Special.id, this);
+            m_Player.AddStatusEffect(id);
+        }
 
         DamageSystem.GetInstance().AddEffectSpecial(p_Target, m_Special);
     }

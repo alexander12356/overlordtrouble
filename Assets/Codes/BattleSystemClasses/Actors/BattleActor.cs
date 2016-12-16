@@ -144,20 +144,31 @@ public class BattleActor : MonoBehaviour
     {
     }
 
-    public virtual void AddEffect(string p_SpecialId, BaseEffect l_Effect)
+    public virtual void AddEffect(string p_SpecialId, BaseEffect p_Effect)
     {
         if (!m_EffectList.ContainsKey(p_SpecialId))
         {
             m_EffectList.Add(p_SpecialId, new List<BaseEffect>());
-            m_EffectList[p_SpecialId].Add(l_Effect);
-            return;
+            m_EffectList[p_SpecialId].Add(p_Effect);
         }
+    }
 
+    public virtual bool HasSpecial(string p_SpecialId)
+    {
+        if (m_EffectList.ContainsKey(p_SpecialId))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public virtual void StackEffect(string p_SpecialId, BaseEffect p_Effect)
+    {
         for (int i = 0; i < m_EffectList[p_SpecialId].Count; i++)
         {
-            if (m_EffectList[p_SpecialId][i].id == l_Effect.id)
+            if (m_EffectList[p_SpecialId][i].id == p_Effect.id)
             {
-                m_EffectList[p_SpecialId][i].Stack(l_Effect);
+                m_EffectList[p_SpecialId][i].Stack(p_Effect);
             }
         }
     }
