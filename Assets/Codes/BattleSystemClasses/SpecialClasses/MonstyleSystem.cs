@@ -61,7 +61,15 @@ public class MonstyleSystem : Singleton<MonstyleSystem>
         if (l_Prefab != null)
         {
             VisualEffect l_AttackEffect = Object.Instantiate(l_Prefab);
-            l_AttackEffect.Init(p_Target, p_Target.rendererTransform);
+
+            if (p_Special.myself)
+            {
+                l_AttackEffect.Init(p_Sender, p_Sender.rendererTransform);
+            }
+            else
+            {
+                l_AttackEffect.Init(p_Target, p_Target.rendererTransform);
+            }
 
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
             DamageSystem.GetInstance().AddVisualEffectStep(l_Step);

@@ -100,7 +100,7 @@ public class BattlePlayer : BattleActor
 
         m_Instance = this;
 
-        Image l_AvatarImage = transform.FindChild("AvatarImage").GetComponent<Image>();
+        Image l_AvatarImage = transform.FindChild("Renderer").GetComponent<Image>();
         l_AvatarImage.sprite = PlayerData.GetInstance().GetBattleAvatar();
 
         InitComponents();
@@ -149,6 +149,8 @@ public class BattlePlayer : BattleActor
         m_SpecialText     = transform.FindChild("SpecialText").GetComponent<Text>();
         m_SpecialPointBar = transform.FindChild("SpecialBar").GetComponent<Image>();
         m_EffectsBar      = transform.FindChild("EffectsBar");
+
+        rendererTransform = transform.FindChild("Renderer");
     }
     
     public override void AddBuff()

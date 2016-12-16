@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public enum SpecialType
-{
-    Attack,
-    Effect,
-    Healing
-}
-
 public class Special
 {
     private List<BaseEffect> m_EffectsList = new List<BaseEffect>();
@@ -16,6 +9,7 @@ public class Special
     private float m_Sp = 0.0f;
     private Element m_Element = Element.NONE;
     private bool m_IsAoe = false;
+    private bool m_Myself = false;
     
     public string id
     {
@@ -25,13 +19,18 @@ public class Special
     {
         get { return m_IsAoe; }
     }
+    public bool myself
+    {
+        get { return m_Myself; }
+    }
 
-    public Special(string p_Id, float p_Sp, string p_Element, bool p_IsAoe)
+    public Special(string p_Id, float p_Sp, string p_Element, bool p_IsAoe, bool p_Myself)
     {
         m_Id = p_Id;
         m_Sp = p_Sp;
         m_Element = (Element)Enum.Parse(typeof(Element), p_Element);
         m_IsAoe = p_IsAoe;
+        m_Myself = p_Myself;
     }
 
     public void SetEffects(List<BaseEffect> p_Effects)

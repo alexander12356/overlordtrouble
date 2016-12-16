@@ -56,8 +56,13 @@ public class SpecialDataBase : Singleton<SpecialDataBase>
             float  l_Sp        = l_JSONObject[i]["Sp"].f;
             string l_Element   = l_JSONObject[i]["Element"].str;
             bool   l_IsAoe     = l_JSONObject[i]["Aoe"].b;
+            bool   l_MySelf    = false;
+            if (l_JSONObject[i].HasField("Myself"))
+            {
+                l_MySelf = l_JSONObject[i]["Myself"].b;
+            }
             
-            SpecialData l_SpecialData = new SpecialData(l_SpecialId, l_Sp, l_Element, l_IsAoe, l_EffectList);
+            SpecialData l_SpecialData = new SpecialData(l_SpecialId, l_Sp, l_Element, l_IsAoe, l_MySelf, l_EffectList);
             
             m_SpecialDictionary.Add(l_SpecialId, l_SpecialData);
         }

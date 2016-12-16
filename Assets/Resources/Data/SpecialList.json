@@ -30,6 +30,7 @@
 		"Sp" : 2.0,
 		"Element" : "Water",
 		"Aoe" : false,
+		"Myself" : true,
 		"Effect" :
 		{
 			"Defense" :

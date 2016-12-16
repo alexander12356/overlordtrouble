@@ -59,6 +59,7 @@ public class VisualEffect : MonoBehaviour
     public virtual void PlayEffect()
     {
         transform.SetParent(m_TargetRenderer.parent);
+        transform.localScale = Vector3.one;
         transform.localPosition = Vector3.zero;
         m_TargetRenderer.SetParent(m_Renderer);
         myAnimator.SetTrigger("Start");
