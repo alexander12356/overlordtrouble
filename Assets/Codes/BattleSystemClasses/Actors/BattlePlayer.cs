@@ -57,18 +57,11 @@ public class BattlePlayer : BattleActor
             VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
             l_AttackEffect.Init(p_Target, p_Target.spriteRenderer.transform);
             BattlePlayEffectStep l_PlayStep = new BattlePlayEffectStep(l_AttackEffect);
-            ResultSystem.GetInstance().AddStep(l_PlayStep);
+            DamageSystem.GetInstance().AddVisualEffectStep(l_PlayStep);
 
             string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { "1", p_Target.actorName });
 
-            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-            l_TextPanel.SetText(new List<string>() { l_Text });
-            l_TextPanel.AddButtonAction(l_TextPanel.Close);
-
-            BattleShowPanelStep l_ShowStep = new BattleShowPanelStep(l_TextPanel);
-            ResultSystem.GetInstance().AddStep(l_ShowStep);
-
-            p_Target.Damage(1.0f);
+            DamageSystem.GetInstance().Attack(this, p_Target, 1.0f, l_Text);
         }
         else
         {

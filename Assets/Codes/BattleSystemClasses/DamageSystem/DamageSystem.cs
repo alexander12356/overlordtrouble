@@ -36,7 +36,7 @@ public class DamageSystem : Singleton<DamageSystem>
     private List<BattleBaseStep> m_BeforeAttackSteps = new List<BattleBaseStep>();
     private List<BattleBaseStep> m_AfterAttackSteps  = new List<BattleBaseStep>();
 
-    public void Attack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue)
+    public void Attack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue, string p_Text = "")
     {
         string l_SenderName = p_Sender.actorName;
         string l_TargetName = p_Target.actorName;
@@ -47,7 +47,14 @@ public class DamageSystem : Singleton<DamageSystem>
             AddDamageValue(p_Target, p_DamageValue);
             p_Target.Damage(m_DamageValues[p_Target]);
 
-            m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:PlayerAttack", new string[] { l_SenderName, l_TargetName, m_DamageValues[p_Target].ToString() });
+            if (p_Text != "")
+            {
+                m_StatisticText = p_Text;
+            }
+            else
+            {
+                m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:PlayerAttack", new string[] { l_SenderName, l_TargetName, m_DamageValues[p_Target].ToString() });
+            }
         }
 
         ShowResult();
