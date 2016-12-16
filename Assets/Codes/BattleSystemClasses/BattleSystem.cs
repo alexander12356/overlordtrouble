@@ -50,6 +50,10 @@ public class BattleSystem : MonoBehaviour
     {
         get { return m_BattleData; }
     }
+    public MainPanel mainPanel
+    {
+        get { return m_MainPanel; }
+    }
 
     public virtual void Awake()
     {

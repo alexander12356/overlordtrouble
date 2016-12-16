@@ -15,8 +15,7 @@ public class BattleActor : MonoBehaviour
     private bool m_IsAoeAttack;
     private Dictionary<string, List<BaseEffect>> m_EffectList = new Dictionary<string, List<BaseEffect>>();
     private List<string> m_DeleteSpecials = new List<string>();
-
-    protected SpriteRenderer m_SpriteRenderer = null;
+    private Transform m_RendererTransform = null;
 
     #endregion
 
@@ -64,9 +63,10 @@ public class BattleActor : MonoBehaviour
         get { return m_ActorName;  }
         set { m_ActorName = value; }
     }
-    public SpriteRenderer spriteRenderer
+    public Transform rendererTransform
     {
-        get { return m_SpriteRenderer; }
+        get { return m_RendererTransform;  }
+        set { m_RendererTransform = value; }
     }
     public bool isAoeAttack
     {

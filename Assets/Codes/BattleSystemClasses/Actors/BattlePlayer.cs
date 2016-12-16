@@ -39,7 +39,7 @@ public class BattlePlayer : BattleActor
         int l_Damage = Random.Range(m_AttackValue[0], m_AttackValue[1]);
 
         VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
-        l_AttackEffect.Init(p_Actor, p_Actor.spriteRenderer.transform);
+        l_AttackEffect.Init(p_Actor, p_Actor.rendererTransform);
 
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
@@ -55,7 +55,7 @@ public class BattlePlayer : BattleActor
         if (p_SpecialList.Count == 0)
         {
             VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
-            l_AttackEffect.Init(p_Target, p_Target.spriteRenderer.transform);
+            l_AttackEffect.Init(p_Target, p_Target.rendererTransform);
             BattlePlayEffectStep l_PlayStep = new BattlePlayEffectStep(l_AttackEffect);
             DamageSystem.GetInstance().AddVisualEffectStep(l_PlayStep);
 

@@ -11,6 +11,7 @@ public class BattleEnemy : BattleActor
     private bool m_Selected = false;
     private SpriteRenderer m_SelectedArrow = null;
     private List<EnemyAttackData> m_AttackList = null;
+    private SpriteRenderer m_Renderer = null;
     #endregion
 
     #region Interface
@@ -56,7 +57,7 @@ public class BattleEnemy : BattleActor
         health = baseHealth = m_EnemyData.health;
         mana = baseMana = 0;
         m_AttackList = m_EnemyData.attackList;
-        m_SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_EnemyData.id + "/BattleProfile");
+        m_Renderer.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_EnemyData.id + "/BattleProfile");
         m_Animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Sprites/Creations/" + m_EnemyData.id + "/" + m_EnemyData.id + "BattleAnimator");
     }
 
@@ -77,7 +78,7 @@ public class BattleEnemy : BattleActor
 
         string l_AttackEffectPrefabPath = "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id;
         VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>(l_AttackEffectPrefabPath));
-        l_AttackEffect.Init(p_Actor, spriteRenderer.transform);
+        l_AttackEffect.Init(p_Actor, rendererTransform);
 
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
@@ -129,10 +130,10 @@ public class BattleEnemy : BattleActor
         m_Animator = GetComponent<Animator>();
         m_AudioSource = GetComponent<AudioSource>();
 
-        Transform l_RendererTransform = transform.FindChild("Renderer");
-        if (l_RendererTransform != null)
+        rendererTransform = transform.FindChild("Renderer");
+        if (rendererTransform != null)
         {
-            m_SpriteRenderer = l_RendererTransform.GetComponent<SpriteRenderer>();
+            m_Renderer = rendererTransform.GetComponent<SpriteRenderer>();
         }
 
         Transform l_SelectedTransform = transform.FindChild("Selected");

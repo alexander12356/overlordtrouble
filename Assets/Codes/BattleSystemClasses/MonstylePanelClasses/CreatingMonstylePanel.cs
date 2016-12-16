@@ -156,7 +156,8 @@ public class CreatingMonstylePanel : Panel
 
     private void Attack()
     {
-        ShowUpgradePanel();
+        BattleSystem.GetInstance().CloseMainPanel();
+        BattleSystem.GetInstance().mainPanel.AddPopAction(ShowUpgradePanel);
     }
 
     private void CancelChooseEnemy()

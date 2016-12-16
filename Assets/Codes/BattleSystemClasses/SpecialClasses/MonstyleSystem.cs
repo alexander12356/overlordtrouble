@@ -37,7 +37,7 @@ public class MonstyleSystem : Singleton<MonstyleSystem>
             string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + p_Special.id + "Monstyle";
 
             VisualEffect l_AttackEffect = Object.Instantiate(Resources.Load<VisualEffect>(l_PrefabPath));
-            l_AttackEffect.Init(l_EnemyList[i], l_EnemyList[i].spriteRenderer.transform);
+            l_AttackEffect.Init(l_EnemyList[i], l_EnemyList[i].rendererTransform);
             l_VisualEffectList.Add(l_AttackEffect);
             
             p_Special.Run(p_Sender, l_EnemyList[i]);
@@ -61,7 +61,7 @@ public class MonstyleSystem : Singleton<MonstyleSystem>
         if (l_Prefab != null)
         {
             VisualEffect l_AttackEffect = Object.Instantiate(l_Prefab);
-            l_AttackEffect.Init(p_Target, p_Target.spriteRenderer.transform);
+            l_AttackEffect.Init(p_Target, p_Target.rendererTransform);
 
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
             DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
