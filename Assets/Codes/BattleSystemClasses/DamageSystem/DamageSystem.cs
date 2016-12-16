@@ -29,8 +29,7 @@ public class DamageSystem : Singleton<DamageSystem>
     private Dictionary<BattleActor, float> m_DamageValues = new Dictionary<BattleActor, float>();
     private Dictionary<BattleActor, List<Special>> m_AoeSpecials = new Dictionary<BattleActor, List<Special>>();
     private Dictionary<BattleActor, List<Special>> m_ImmunitySpecials = new Dictionary<BattleActor, List<Special>>();
-    private Dictionary<BattleActor, List<Special>> m_EffectSpecials = new Dictionary<BattleActor, List<Special>>();
-    private Dictionary<BattleActor, List<Special>> m_RemoveSpecials = new Dictionary<BattleActor, List<Special>>();
+    private Dictionary<BattleActor, List<Special>> m_AddedSpecials = new Dictionary<BattleActor, List<Special>>();
     private Dictionary<BonusType, float> m_Bonuses = new Dictionary<BonusType, float>();
     private List<BattleBaseStep> m_VisualEffectSteps = new List<BattleBaseStep>();
     private List<BattleBaseStep> m_BeforeAttackSteps = new List<BattleBaseStep>();
@@ -123,20 +122,11 @@ public class DamageSystem : Singleton<DamageSystem>
     
     public void AddEffectSpecial(BattleActor p_Target, Special p_Special)
     {
-        if (!m_EffectSpecials.ContainsKey(p_Target))
+        if (!m_AddedSpecials.ContainsKey(p_Target))
         {
-            m_EffectSpecials.Add(p_Target, new List<Special>());
+            m_AddedSpecials.Add(p_Target, new List<Special>());
         }
-        m_EffectSpecials[p_Target].Add(p_Special);
-    }
-
-    public void AddRemoveEffectSpecial(BattleActor p_Target, Special p_Special)
-    {
-        if (!m_RemoveSpecials.ContainsKey(p_Target))
-        {
-            m_RemoveSpecials.Add(p_Target, new List<Special>());
-        }
-        m_RemoveSpecials[p_Target].Add(p_Special);
+        m_AddedSpecials[p_Target].Add(p_Special);
     }
 
     //  Добавление хиллки
@@ -199,11 +189,11 @@ public class DamageSystem : Singleton<DamageSystem>
             }
         }
         
-        if (m_EffectSpecials.Count > 0)
+        if (m_AddedSpecials.Count > 0)
         {
-            foreach(BattleActor l_Actor in m_EffectSpecials.Keys)
+            foreach(BattleActor l_Actor in m_AddedSpecials.Keys)
             {
-                ShowEffectSpecial(l_Actor, m_EffectSpecials[l_Actor]);
+                ShowAddedSpecials(l_Actor, m_AddedSpecials[l_Actor]);
             }
         }
 
@@ -211,14 +201,6 @@ public class DamageSystem : Singleton<DamageSystem>
         //      Вывести текст(айди текста, словарь)
         //  Если словарь Бонусов не пуст
         //      Вывести текст(айди текста, словарь)
-
-        if (m_RemoveSpecials.Count > 0)
-        {
-            foreach (BattleActor l_Actor in m_RemoveSpecials.Keys)
-            {
-                ShowRemoveEffectSpecial(l_Actor, m_RemoveSpecials[l_Actor]);
-            }
-        }
 
         BattleCheckDeathStep l_CheckDeathStep = new BattleCheckDeathStep();
         ResultSystem.GetInstance().AddStep(l_CheckDeathStep);
@@ -308,32 +290,10 @@ public class DamageSystem : Singleton<DamageSystem>
         string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Bonus", new string[] { BattlePlayer.GetInstance().actorName, l_Bonuses });
     }
 
-    private void ShowEffectSpecial(BattleActor p_Target, List<Special> p_SpecialList)
+    private void ShowAddedSpecials(BattleActor p_Target, List<Special> p_SpecialList)
     {
         string l_SpecialList = GetSpecialNames(p_SpecialList);
         string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EffectUsing", new string[] { p_Target.actorName, l_SpecialList });
-
-        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { l_Text });
-        l_TextPanel.AddButtonAction(l_TextPanel.Close);
-
-        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
-        ResultSystem.GetInstance().AddStep(l_Step);
-    }
-
-    private void ShowRemoveEffectSpecial(BattleActor p_Target, List<Special> p_SpecialList)
-    {
-        string l_SpecialList = GetSpecialNames(p_SpecialList);
-        string l_Text = string.Empty;
-
-        if (p_SpecialList.Count > 0)
-        {
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:RemoveManyEffect", new string[] { l_SpecialList, p_Target.actorName });
-        }
-        else
-        {
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:RemoveEffect", new string[] { l_SpecialList, p_Target.actorName });
-        }
 
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { l_Text });
@@ -383,8 +343,7 @@ public class DamageSystem : Singleton<DamageSystem>
         m_DamageValues.Clear();
         m_AoeSpecials.Clear();
         m_ImmunitySpecials.Clear();
-        m_EffectSpecials.Clear();
-        m_RemoveSpecials.Clear();
+        m_AddedSpecials.Clear();
         m_AfterAttackSteps.Clear();
         m_StatisticText = string.Empty;
     }

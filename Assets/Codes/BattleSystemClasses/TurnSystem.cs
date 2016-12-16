@@ -6,9 +6,15 @@ using UnityEngine;
 public class TurnSystem : MonoBehaviour
 {
     private static TurnSystem m_Instance = null;
-    private List<BattleEnemy> m_EnemyList = new List<BattleEnemy>();
-    private int m_CurrentTurn = -2;
+    private List<BattleActor> m_ActorList = new List<BattleActor>();
+    private int m_CurrentTurn = 0;
+    private int m_CurrentActor = 0;
     private bool m_EndTurn = false;
+
+    public int currentTurn
+    {
+        get { return m_CurrentTurn; }
+    }
 
     public void Awake()
     {
@@ -22,16 +28,17 @@ public class TurnSystem : MonoBehaviour
 
     public void AddEnemy(BattleEnemy p_Enemy)
     {
-        m_EnemyList.Add(p_Enemy);
+        m_ActorList.Add(p_Enemy);
     }
 
     public void RemoveEnemy(BattleEnemy p_Enemy)
     {
-        m_EnemyList.Remove(p_Enemy);
+        m_ActorList.Remove(p_Enemy);
     }
 
     public void RunGame()
     {
+        m_ActorList.Insert(0, BattlePlayer.GetInstance());
         StartCoroutine(Running());
     }
 
@@ -39,22 +46,26 @@ public class TurnSystem : MonoBehaviour
     {
         while (true)
         {
-            m_CurrentTurn++;
-            if (m_CurrentTurn >= m_EnemyList.Count)
+            if (m_CurrentActor >= m_ActorList.Count)
             {
-                m_CurrentTurn = -1;
-            }
-
-            if (m_CurrentTurn == -1)
-            {
-                BattlePlayer.GetInstance().RunTurn();
-                BattleSystem.GetInstance().SetVisibleAvatarPanel(true);
-                BattleSystem.GetInstance().ShowMainPanel();
+                m_CurrentActor = 0;
+                NextTurn();
             }
             else
             {
-                m_EnemyList[m_CurrentTurn].RunTurn();
-                BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
+                m_ActorList[m_CurrentActor].RunTurn();
+
+                if (m_CurrentActor == 0)
+                {
+                    BattleSystem.GetInstance().SetVisibleAvatarPanel(true);
+                    BattleSystem.GetInstance().ShowMainPanel();
+                }
+                else
+                {
+                    BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
+                }
+
+                m_CurrentActor++;
             }
 
             while (!m_EndTurn)
@@ -65,12 +76,19 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
-    public void EndTurn()
+    public void NextActorRun()
     {
         if (BattleSystem.GetInstance().CheckWin() || BattleSystem.GetInstance().IsLose())
         {
             return;
         }
         m_EndTurn = true;
+    }
+
+    private void NextTurn()
+    {
+        m_CurrentTurn++;
+        EffectSystem.GetInstance().CheckEffects();
+        ResultSystem.GetInstance().ShowResult();
     }
 }

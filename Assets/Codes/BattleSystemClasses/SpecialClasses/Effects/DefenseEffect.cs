@@ -57,7 +57,7 @@
         m_Sender.defense -= m_DefenseValue;
         m_Sender.RemoveBuff();
 
-        DamageSystem.GetInstance().AddRemoveEffectSpecial(m_Sender, m_Special);
+        EffectSystem.GetInstance().AddRemoveEffectSpecial(m_Sender, m_Special);
 
         return true;
     }

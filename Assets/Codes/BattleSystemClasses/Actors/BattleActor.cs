@@ -116,7 +116,6 @@ public class BattleActor : MonoBehaviour
 
     public virtual void RunTurn()
     {
-        RunningEffect();
     }
 
     public virtual void InitStats()
