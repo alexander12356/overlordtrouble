@@ -12,6 +12,7 @@
     "Profile": "Sprites/Creations/LesserWaterElemental/Profile",
 	"Elemental": "Water",
     "Skills": [
+		"WaterDash"
     ]
   },
   "ShellLizard": {

@@ -40,6 +40,19 @@
 			}
 		}
 	},
+	"WaterDash" :
+	{
+		"Sp" : 9.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 8.0
+			}
+		}
+	},
 	"TailWhap" :
 	{
 		"Sp" : 4.0,

@@ -4,7 +4,7 @@
 	<Text id="Special:WaterDrops:Description">Прием атаки: 2сп\n\nУрон 2 очка по всем врагам\n\nЭлемент: Вода\n\nЭти капли бьют чуток больнее чем тычки пальцами</Text>
 	<Text id="Special:Slap">Шлепок</Text>
 	<Text id="Special:ProtectiveShell">Защитная оболочка</Text>
-	<Text id="Special:Strike">Удар</Text>
+	<Text id="Special:WaterDash">Ударный рывок</Text>
 	<Text id="Special:Defense">Защита</Text>
 	<Text id="Special:TailWhap">Удар хвостом</Text>
 	<Text id="Special:Slash">Разрез</Text>
