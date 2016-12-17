@@ -23,8 +23,8 @@
 		"Enemy": 
 		[
 			"Bokalisk",
-			"Skwatwolf",
-			"Dualent"
+			"Bokalisk",
+			"Bokalisk"
 		],
 		"Player":
 		{

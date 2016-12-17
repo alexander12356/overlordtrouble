@@ -1,0 +1,41 @@
+{
+	"Id" : "Bokalisk",
+	"Attack" : 1,
+	"Defense" : 1,
+	"Level" : 1,
+	"Health" : 8,
+	"Element": "Live",
+	"Attacks" :
+	[
+		{
+			"Id" : "PeckerAttack",
+			"Element" : "Physical",
+			"DamageValue" :
+			[
+				2,
+				4
+			]
+		},
+		{
+			"Id" : "HollowLook",
+			"Element" : "Dark",
+			"DamageValue" :
+			[
+				0,
+				0
+			]
+		}
+	],
+	"Experience" : 15,
+	"Loot" :
+	[
+		{
+			"Id" : "BokaliskMeat",
+			"Count" : 1
+		}
+	],
+	"Property" :
+	{
+		"LeaveChance" : 10
+	}
+}

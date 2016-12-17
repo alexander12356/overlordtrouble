@@ -25,7 +25,7 @@
         }
         else
         {
-            m_Sender.defense += m_DefenseValue;
+            m_Sender.defenseStat += m_DefenseValue;
             m_Sender.AddEffect(m_Special.id, this);
             m_Sender.AddBuff();
         }
@@ -54,7 +54,7 @@
         {
             return false;
         }
-        m_Sender.defense -= m_DefenseValue;
+        m_Sender.defenseStat -= m_DefenseValue;
         m_Sender.RemoveBuff();
 
         EffectSystem.GetInstance().AddRemoveEffectSpecial(m_Sender, m_Special);
@@ -69,7 +69,7 @@
         m_DurationCounter = 0;
         DefenseEffect l_Effect = (DefenseEffect)p_Effect;
 
-        m_Sender.defense += l_Effect.m_DefenseValue;
+        m_Sender.defenseStat += l_Effect.m_DefenseValue;
         m_DefenseValue += l_Effect.m_DefenseValue;
     }
 }

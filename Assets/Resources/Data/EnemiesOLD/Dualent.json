@@ -1,9 +1,10 @@
 {
 	"Skwatwolf":
 	{
+		"Level" : 1,
 		"Health" : 30,
 		"Experience" : 50,
-		"Elemental": "Water",
+		"Elemental": "Dark",
 		"Attacks" :
 		[
 			{
@@ -26,9 +27,10 @@
 	},
 	"Bokalisk":
 	{
+		"Level" : 1,
 		"Health" : 8,
 		"Experience" : 15,
-		"Elemental": "Water",
+		"Elemental": "Live",
 		"Attacks" :
 		[
 			{

@@ -2,15 +2,6 @@
 
 using UnityEngine;
 
-public enum Element
-{
-    NONE = -1,
-    Physical,
-    Water,
-    Fire,
-    Earth
-}
-
 public enum BonusType
 {
     Health,
@@ -35,7 +26,7 @@ public class DamageSystem : Singleton<DamageSystem>
     private List<BattleBaseStep> m_BeforeAttackSteps = new List<BattleBaseStep>();
     private List<BattleBaseStep> m_AfterAttackSteps  = new List<BattleBaseStep>();
 
-    public void Attack(BattleActor p_Sender, BattleActor p_Target, float p_DamageValue, string p_Text = "")
+    public void Attack(BattleActor p_Sender, BattleActor p_Target, Element l_AttackElement, float p_DamageValue, string p_Text = "")
     {
         string l_SenderName = p_Sender.actorName;
         string l_TargetName = p_Target.actorName;
@@ -43,7 +34,7 @@ public class DamageSystem : Singleton<DamageSystem>
         p_Target.CheckPrevAttack();
         if (p_Target.IsCanDamage(p_DamageValue))
         {
-            AddDamageValue(p_Target, p_DamageValue);
+            AddDamageValue(p_Sender, p_Target, p_DamageValue, l_AttackElement);
             p_Target.Damage(m_DamageValues[p_Target]);
 
             if (p_Text != "")
@@ -98,15 +89,17 @@ public class DamageSystem : Singleton<DamageSystem>
         m_VisualEffectSteps.Add(l_Step);
     }
     
-    public void AddDamageValue(BattleActor p_Target, float p_Value)
+    public void AddDamageValue(BattleActor p_Sender, BattleActor p_Target, float p_Value, Element p_AttackElement)
     {
+        float l_DamageValue = CalculateDamage(p_Sender, p_Target, p_Value, p_AttackElement);
+
         if (!m_DamageValues.ContainsKey(p_Target))
         {
-            m_DamageValues.Add(p_Target, p_Value);
+            m_DamageValues.Add(p_Target, l_DamageValue);
         }
         else
         {
-            m_DamageValues[p_Target] += p_Value;
+            m_DamageValues[p_Target] += l_DamageValue;
         }
     }
     
@@ -346,5 +339,18 @@ public class DamageSystem : Singleton<DamageSystem>
         m_AddedSpecials.Clear();
         m_AfterAttackSteps.Clear();
         m_StatisticText = string.Empty;
+    }
+
+    private float CalculateDamage(BattleActor p_SenderActor, BattleActor p_TargetActor, float l_AttackDamage, Element l_AttackElement)
+    {
+        float l_SenderLevel = p_SenderActor.level;
+        float l_TargetLevel = p_TargetActor.level;
+        float l_SenderAttackStat = p_SenderActor.attackStat;
+        float l_TargetDefenseStat = p_SenderActor.defenseStat;
+        float l_Modif = ElementSystem.GetInstance().GetModif(l_AttackElement, p_TargetActor.element);
+
+        float l_Damage = (l_SenderAttackStat / l_TargetDefenseStat) * (l_SenderLevel / l_TargetLevel) * l_AttackDamage * l_Modif;
+        
+        return l_Damage;
     }
 }

@@ -32,9 +32,16 @@ public class BattleSystemMobs : BattleSystem
 
         InitLocationBackground(m_BattleData.locationBackground);
 
+        InitEnemies();
+
+        InitPlayerStats();
+    }
+
+    private void InitEnemies()
+    {
         for (int i = 0; i < m_BattleData.enemyList.Count; i++)
         {
-            BattleEnemy l_NewEnemy = Instantiate(BattleEnemy.prefab);
+            BattleEnemy l_NewEnemy = GetEnemyPrefab(m_BattleData.enemyList[i]);
             l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy(m_BattleData.enemyList[i]));
             l_NewEnemy.transform.SetParent(m_EnemyTransform);
 
@@ -47,7 +54,27 @@ public class BattleSystemMobs : BattleSystem
             m_EnemyList.Add(l_NewEnemy);
             TurnSystem.GetInstance().AddEnemy(l_NewEnemy);
         }
+    }
 
+    private BattleEnemy GetEnemyPrefab(string p_EnemyId)
+    {
+        BattleEnemy l_BattleEnemy = null;
+
+        switch (p_EnemyId)
+        {
+            case "Bokalisk":
+                l_BattleEnemy = Instantiate(Bokalisk.prefab);
+                break;
+            default:
+                l_BattleEnemy = Instantiate(BattleEnemy.prefab);
+                break;
+        }
+
+        return l_BattleEnemy;
+    }
+
+    private void InitPlayerStats()
+    {
         if (m_BattleData.playerSettings != null)
         {
             foreach (string l_Key in m_BattleData.playerSettings.Keys)

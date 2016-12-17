@@ -49,7 +49,7 @@ public class EncyclodepiaPanel: Panel {
     {
         PanelButtonEncyclopediaEnemy l_PanelButtonEncyclopediaEnemy = (PanelButtonEncyclopediaEnemy)m_EnemyList.currentButton;
         string l_EnemyDescriptionStr = LocalizationDataBase.GetInstance().GetText("Enemy:" + l_PanelButtonEncyclopediaEnemy.enemyId + ":Description");
-        string l_EnemyElementalStr = LocalizationDataBase.GetInstance().GetText("Element") + ": " + LocalizationDataBase.GetInstance().GetText("Elemental:" + EnemyDataBase.GetInstance().GetEnemy(l_PanelButtonEncyclopediaEnemy.enemyId).elemental);
+        string l_EnemyElementalStr = LocalizationDataBase.GetInstance().GetText("Element") + ": " + LocalizationDataBase.GetInstance().GetText("Elemental:" + EnemyDataBase.GetInstance().GetEnemy(l_PanelButtonEncyclopediaEnemy.enemyId).element);
         m_EnemyDescriptionText.text = l_EnemyDescriptionStr + "\n\n" + l_EnemyElementalStr;
         m_AvatarImage.sprite = Resources.Load<Sprite>("Sprites/Creations/" + l_PanelButtonEncyclopediaEnemy.enemyId + "/BattleProfile");
     }

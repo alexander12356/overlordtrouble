@@ -44,7 +44,7 @@ public class BattlePlayer : BattleActor
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
-        DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
+        DamageSystem.GetInstance().Attack(this, p_Actor, p_Actor.element, l_Damage);
         ResultSystem.GetInstance().ShowResult();
 
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
@@ -61,7 +61,7 @@ public class BattlePlayer : BattleActor
 
             string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { "1", p_Target.actorName });
 
-            DamageSystem.GetInstance().Attack(this, p_Target, 1.0f, l_Text);
+            DamageSystem.GetInstance().Attack(this, p_Target, Element.Physical, 1.0f, l_Text);
         }
         else
         {
@@ -88,6 +88,10 @@ public class BattlePlayer : BattleActor
 
         baseMana = PlayerData.GetInstance().GetStatValue("MonstylePoints");
         mana = PlayerData.GetInstance().monstylePoints;
+
+        attackStat = PlayerData.GetInstance().GetStatValue("Attack");
+        defenseStat = PlayerData.GetInstance().GetStatValue("Defense");
+        level = PlayerData.GetInstance().GetLevel() + 1;
 
         m_AttackValue = PlayerData.GetInstance().attackValue;
 

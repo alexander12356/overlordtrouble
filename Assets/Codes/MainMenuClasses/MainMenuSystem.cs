@@ -21,12 +21,12 @@ public class MainMenuSystem : MonoBehaviour
         m_PanelManager.ShowPanel(m_MainMenuPanel);
 
         PlayerData.GetInstance();
+        LoadDataBases();
     }
 
     public void StartLocation(string p_LocationId)
     {
         m_PanelManager.StartLocation(p_LocationId);
-        LoadDataBases();
     }
 
     private void LoadDataBases()

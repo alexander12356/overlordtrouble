@@ -262,7 +262,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
 
-            DamageSystem.GetInstance().Attack(this, BattlePlayer.GetInstance(), 10.0f);
+            DamageSystem.GetInstance().Attack(this, BattlePlayer.GetInstance(), Element.Physical, 10.0f);
         }
 
         private void PlayStartCharge()
@@ -445,7 +445,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             }
             else
             {
-                DamageSystem.GetInstance().Attack(m_RightHand, BattlePlayer.GetInstance(), 1.0f);
+                DamageSystem.GetInstance().Attack(m_RightHand, BattlePlayer.GetInstance(), Element.Physical, 1.0f);
             }
         }
 
@@ -488,7 +488,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             }
             else
             {
-                DamageSystem.GetInstance().Attack(m_LeftHand, BattlePlayer.GetInstance(), 1.0f);
+                DamageSystem.GetInstance().Attack(m_LeftHand, BattlePlayer.GetInstance(), Element.Physical, 1.0f);
             }
         }
 

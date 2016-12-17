@@ -13,8 +13,8 @@
 		"HealthPoints" : 20,
 		"MonstylePoints" : 20,
 		"Attack" : 1,
-        "Defense" : 0,
+        "Defense" : 1,
         "Speed" : 1,
-        "Fortune" : 0
+        "Fortune" : 1
 	}
 }

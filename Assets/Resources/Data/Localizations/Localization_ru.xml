@@ -57,6 +57,7 @@
 	<!-- enemy's -->
 	<Text id="Enemy:Bokalisk">Кокотрикс</Text>
 	<Text id="Enemy:Bokalisk:PeckerAttack">Удар клювом</Text>
+	<Text id="Enemy:Bokalisk:MissTurn">Кокотрикс начал непрерывно кудахтать… кокотрикс пропустил ход</Text>
 	<Text id="Enemy:Skwatwolf">Гополак</Text>
 	<Text id="Enemy:Skwatwolf:Fisting">Удар</Text>
 	<Text id="Enemy:Skwatwolf:Racket">Рэкет</Text>

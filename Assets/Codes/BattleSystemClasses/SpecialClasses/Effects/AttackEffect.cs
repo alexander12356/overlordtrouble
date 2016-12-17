@@ -18,7 +18,7 @@
     {
         base.Run(p_Sender, m_Target);
 
-        DamageSystem.GetInstance().AddDamageValue(m_Target, m_AttackValue);
+        DamageSystem.GetInstance().AddDamageValue(p_Sender, m_Target, m_AttackValue, m_Special.element);
     }
 
     public override void Upgrade()

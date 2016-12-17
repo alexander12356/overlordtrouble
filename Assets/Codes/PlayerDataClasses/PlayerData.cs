@@ -165,7 +165,7 @@ public class PlayerData : Singleton<PlayerData>
     public void InitTestStats()
     {
         ResetData();
-        AddExperience(999);
+        //AddExperience(999);
     }
 
     public void AddLevelupNotification(PanelActionHandler p_Action)

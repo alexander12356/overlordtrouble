@@ -9,10 +9,13 @@ public class BattleActor : MonoBehaviour
     private float m_BaseHealth;
     private float m_Mana;
     private float m_BaseMana;
-    private float m_Defense;
-    private bool m_IsDead;
+    private float m_AttackStat;
+    private float m_DefenseStat;
+    private int   m_Level;
+    private bool  m_IsDead;
     private string m_ActorName = "Actor";
     private bool m_IsAoeAttack;
+    private Element m_Element = Element.NONE;
     private Dictionary<string, List<BaseEffect>> m_EffectList = new Dictionary<string, List<BaseEffect>>();
     private List<string> m_DeleteSpecials = new List<string>();
     private Transform m_RendererTransform = null;
@@ -20,6 +23,11 @@ public class BattleActor : MonoBehaviour
     #endregion
 
     #region Interface
+    public Element element
+    {
+        get { return m_Element;  }
+        set { m_Element = value; }
+    }
     public float health
     {
         get { return m_Health;  }
@@ -38,10 +46,20 @@ public class BattleActor : MonoBehaviour
             ChangeManaValue();
         }
     }
-    public float defense
+    public float attackStat
     {
-        get { return m_Defense;  }
-        set { m_Defense = value; }
+        get { return m_AttackStat; }
+        set { m_AttackStat = value; }
+    }
+    public float defenseStat
+    {
+        get { return m_DefenseStat;  }
+        set { m_DefenseStat = value; }
+    }
+    public int level
+    {
+        get { return m_Level;  }
+        set { m_Level = value; }
     }
     public float baseHealth
     {
@@ -84,11 +102,11 @@ public class BattleActor : MonoBehaviour
 
     public virtual void Damage(float p_DamageValue)
     {
-        if (p_DamageValue < defense)
+        if (p_DamageValue < defenseStat)
         {
             return;
         }
-        health -= (p_DamageValue - defense);
+        health -= (p_DamageValue - defenseStat);
     }
 
     public virtual bool IsCanDamage(float p_Damage)

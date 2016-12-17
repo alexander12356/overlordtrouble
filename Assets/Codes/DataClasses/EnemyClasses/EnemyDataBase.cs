@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
+
+using UnityEngine;
 
 public class EnemyDataBase : Singleton<EnemyDataBase>
 {
     #region Variables
     private Dictionary<string, EnemyData> m_EnemyBase = new Dictionary<string, EnemyData>();
-    private string m_PathFile = "Data/EnemyList";
+    private string m_PathFile = "Data/Enemies/";
     #endregion
 
     #region Interface
@@ -36,40 +38,87 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
     #region Private
     private void Parse()
     {
+        TextAsset[] l_TextAssets = Resources.LoadAll<TextAsset>(m_PathFile);
+
+        for (int i = 0; i < l_TextAssets.Length; i++)
+        {
+            ParseEnemy(l_TextAssets[i]);
+        }
+    }
+
+    private void ParseEnemy(TextAsset p_TextAsset)
+    {
         string l_DecodedString = "";
-        try
-        {
-            TextAsset l_TextAsset = (TextAsset)Resources.Load(m_PathFile);
-            l_DecodedString = l_TextAsset.ToString();
-        }
-        catch
-        {
-            Debug.LogError("CANNOT READ FOR " + GetType());
-        }
+
+        l_DecodedString = p_TextAsset.ToString();
 
         JSONObject l_JSONObject = new JSONObject(l_DecodedString);
 
-        for (int i = 0; i < l_JSONObject.Count; i++)
+        string  l_Id          = l_JSONObject["Id"].str;
+        float   l_AttackStat  = l_JSONObject["Attack"].f;
+        float   l_DefenseStat = l_JSONObject["Defense"].f;
+        int     l_Level       = (int)l_JSONObject["Level"].i;
+        float   l_Health      = l_JSONObject["Health"].f;
+        Element l_Element     = (Element)Enum.Parse(typeof(Element), l_JSONObject["Element"].str);
+        int     l_Experience  = (int)l_JSONObject["Experience"].i;
+
+        List<EnemyAttackData> l_AttackDataList = ParseAttack(l_JSONObject["Attacks"]);
+        List<EnemyLootData>   l_LootList       = ParseLoots(l_JSONObject["Loot"]);
+
+        string[] l_Property = ParseProperty(l_JSONObject["Property"]);
+        
+        EnemyData l_ImproveData = new EnemyData(l_Id, l_AttackStat, l_DefenseStat, l_Level, l_Health, l_Element, l_AttackDataList, l_Experience, l_LootList, l_Property);
+
+        m_EnemyBase.Add(l_Id, l_ImproveData);
+    }
+
+    private List<EnemyAttackData> ParseAttack(JSONObject p_JSONObject)
+    {
+        List<EnemyAttackData> l_AttackList = new List<EnemyAttackData>();
+        for (int i = 0; i < p_JSONObject.Count; i++)
         {
-            string l_ImproveId = l_JSONObject.keys[i];
-            float  l_Health = l_JSONObject[i]["Health"].f;
-            int l_Experience = (int)l_JSONObject[i]["Experience"].i;
-            string l_Elemental = l_JSONObject[i]["Elemental"].str;
+            string l_AttackId = p_JSONObject[i]["Id"].str;
+            Element l_Element = (Element)Enum.Parse(typeof(Element), p_JSONObject[i]["Element"].str);
+            List<int> l_AttackValue = new List<int>() { (int)p_JSONObject[i]["DamageValue"][0].i, (int)p_JSONObject[i]["DamageValue"][1].i };
 
-            List<EnemyAttackData> l_AttackList = new List<EnemyAttackData>();
-            for (int j = 0; j < l_JSONObject[i]["Attacks"].Count; j++)
-            {
-                string l_AttackId = l_JSONObject[i]["Attacks"][j]["Id"].str;
-                int l_Temp1 = (int)l_JSONObject[i]["Attacks"][j]["DamageValue"][0].i;
-                List<int> l_AttackValue = new List<int>() { (int)l_JSONObject[i]["Attacks"][j]["DamageValue"][0].i, (int)l_JSONObject[i]["Attacks"][j]["DamageValue"][1].i };
-
-                EnemyAttackData l_EnemyAttack = new EnemyAttackData(l_AttackId, l_AttackValue);
-                l_AttackList.Add(l_EnemyAttack);
-            }
-
-            EnemyData l_ImproveData = new EnemyData(l_ImproveId, l_Health, l_Elemental, l_Experience, l_AttackList);
-            m_EnemyBase.Add(l_ImproveId, l_ImproveData);
+            EnemyAttackData l_EnemyAttack = new EnemyAttackData(l_AttackId, l_Element, l_AttackValue);
+            l_AttackList.Add(l_EnemyAttack);
         }
+
+        return l_AttackList;
+    }
+
+    private List<EnemyLootData> ParseLoots(JSONObject p_JSONObject)
+    {
+        List<EnemyLootData> l_LootList = new List<EnemyLootData>();
+        for (int i = 0; i < p_JSONObject.Count; i++)
+        {
+            string l_Id = p_JSONObject[i]["Id"].str;
+            int l_Count = (int)p_JSONObject[i]["Count"].i;
+            float l_Chance = 100;
+            if (p_JSONObject[i].HasField("Chance"))
+            {
+                l_Chance = p_JSONObject[i]["Chance"].f;
+            }
+            EnemyLootData l_Data = new EnemyLootData(l_Id, l_Count, l_Chance);
+
+            l_LootList.Add(l_Data);
+        }
+        return l_LootList;
+    }
+
+    private string[] ParseProperty(JSONObject p_JSONObject)
+    {
+        int l_PropertyCount = p_JSONObject.Count;
+
+        string[] l_Property = new string[l_PropertyCount];
+
+        for (int i = 0; i < p_JSONObject.Count; i++)
+        {
+            l_Property[i] = p_JSONObject.list[i].f.ToString();
+        }
+
+        return l_Property;
     }
     #endregion
 }

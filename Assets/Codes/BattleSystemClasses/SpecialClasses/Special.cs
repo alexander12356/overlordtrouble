@@ -23,6 +23,10 @@ public class Special
     {
         get { return m_Myself; }
     }
+    public Element element
+    {
+        get { return m_Element; }
+    }
 
     public Special(string p_Id, float p_Sp, string p_Element, bool p_IsAoe, bool p_Myself)
     {
