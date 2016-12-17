@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+using System.Collections.Generic;
+
 public class BattleActor : MonoBehaviour
 {
     #region Variables
@@ -7,9 +9,14 @@ public class BattleActor : MonoBehaviour
     private float m_BaseHealth;
     private float m_Mana;
     private float m_BaseMana;
+    private float m_Defense;
     private bool m_IsDead;
     private string m_ActorName = "Actor";
-    protected SpriteRenderer m_SpriteRenderer = null;
+    private bool m_IsAoeAttack;
+    private Dictionary<string, List<BaseEffect>> m_EffectList = new Dictionary<string, List<BaseEffect>>();
+    private List<string> m_DeleteSpecials = new List<string>();
+    private Transform m_RendererTransform = null;
+
     #endregion
 
     #region Interface
@@ -31,6 +38,11 @@ public class BattleActor : MonoBehaviour
             ChangeManaValue();
         }
     }
+    public float defense
+    {
+        get { return m_Defense;  }
+        set { m_Defense = value; }
+    }
     public float baseHealth
     {
         get { return m_BaseHealth;  }
@@ -51,9 +63,15 @@ public class BattleActor : MonoBehaviour
         get { return m_ActorName;  }
         set { m_ActorName = value; }
     }
-    public SpriteRenderer spriteRenderer
+    public Transform rendererTransform
     {
-        get { return m_SpriteRenderer; }
+        get { return m_RendererTransform;  }
+        set { m_RendererTransform = value; }
+    }
+    public bool isAoeAttack
+    {
+        get { return m_IsAoeAttack; }
+        set { m_IsAoeAttack = value; }
     }
 
     public virtual void Awake()
@@ -62,19 +80,29 @@ public class BattleActor : MonoBehaviour
 
     public virtual void Attack(BattleActor p_Actor)
     {
-        p_Actor.CheckPrevAttack();
     }
 
     public virtual void Damage(float p_DamageValue)
     {
+        if (p_DamageValue < defense)
+        {
+            return;
+        }
+        health -= (p_DamageValue - defense);
     }
 
-    public virtual void CheckDeath()
+    public virtual bool IsCanDamage(float p_Damage)
+    {
+        return true;
+    }
+
+    public virtual bool CheckDeath()
     {
         if (health <= 0)
         {
-            Die();
+            return true;
         }
+        return false;
     }
 
     public virtual void Die()
@@ -107,6 +135,85 @@ public class BattleActor : MonoBehaviour
     }
 
     public virtual void CheckPrevAttack()
+    {
+    }
+
+    public virtual void AddEffect(string p_SpecialId, BaseEffect p_Effect)
+    {
+        if (!m_EffectList.ContainsKey(p_SpecialId))
+        {
+            m_EffectList.Add(p_SpecialId, new List<BaseEffect>());
+            m_EffectList[p_SpecialId].Add(p_Effect);
+        }
+    }
+
+    public virtual bool HasSpecial(string p_SpecialId)
+    {
+        if (m_EffectList.ContainsKey(p_SpecialId))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public virtual void StackEffect(string p_SpecialId, BaseEffect p_Effect)
+    {
+        for (int i = 0; i < m_EffectList[p_SpecialId].Count; i++)
+        {
+            if (m_EffectList[p_SpecialId][i].id == p_Effect.id)
+            {
+                m_EffectList[p_SpecialId][i].Stack(p_Effect);
+            }
+        }
+    }
+
+    public virtual void RunningEffect()
+    {
+        foreach (string l_Id in m_EffectList.Keys)
+        {
+            for (int i = 0; i < m_EffectList[l_Id].Count; i++)
+            {
+                m_EffectList[l_Id][i].Effective();
+                if (m_EffectList[l_Id][i].CheckEnd())
+                {
+                    m_EffectList[l_Id].RemoveAt(i);
+                    i--;
+                }
+            }
+            if (m_EffectList[l_Id].Count == 0)
+            {
+                m_DeleteSpecials.Add(l_Id);
+            }
+        }
+
+        for (int i = 0; i < m_DeleteSpecials.Count; i++)
+        {
+            m_EffectList.Remove(m_DeleteSpecials[i]);
+        }
+        m_DeleteSpecials.Clear();
+    }
+
+    public virtual void AddBuff()
+    {
+    }
+
+    public virtual void RemoveBuff()
+    {
+    }
+
+    public virtual void AddDebuff()
+    {
+    }
+
+    public virtual void RemoveDebuff()
+    {
+    }
+
+    public virtual void AddStatusEffect(string p_EffectId)
+    {
+    }
+
+    public virtual void RemoveStatusEffect(string p_EffectId)
     {
     }
     #endregion

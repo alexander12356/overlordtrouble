@@ -11,6 +11,7 @@ public class BattleEnemy : BattleActor
     private bool m_Selected = false;
     private SpriteRenderer m_SelectedArrow = null;
     private List<EnemyAttackData> m_AttackList = null;
+    private SpriteRenderer m_Renderer = null;
     #endregion
 
     #region Interface
@@ -56,7 +57,7 @@ public class BattleEnemy : BattleActor
         health = baseHealth = m_EnemyData.health;
         mana = baseMana = 0;
         m_AttackList = m_EnemyData.attackList;
-        m_SpriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_EnemyData.id + "/BattleProfile");
+        m_Renderer.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_EnemyData.id + "/BattleProfile");
         m_Animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Sprites/Creations/" + m_EnemyData.id + "/" + m_EnemyData.id + "BattleAnimator");
     }
 
@@ -68,14 +69,6 @@ public class BattleEnemy : BattleActor
         ResultSystem.GetInstance().ShowResult();
     }
 
-    public override void Damage(float p_DamageValue)
-    {
-        base.Damage(p_DamageValue);
-
-        health -= p_DamageValue;
-        DamageSystem.GetInstance().AttackSuccess();
-    }
-    
     public override void Attack(BattleActor p_Actor)
     {
         base.Attack(p_Actor);
@@ -85,10 +78,10 @@ public class BattleEnemy : BattleActor
 
         string l_AttackEffectPrefabPath = "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id;
         VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>(l_AttackEffectPrefabPath));
-        l_AttackEffect.Init(p_Actor, spriteRenderer.transform);
+        l_AttackEffect.Init(p_Actor, rendererTransform);
 
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-        ResultSystem.GetInstance().AddStep(l_Step);
+        DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
         DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
     }
@@ -96,10 +89,20 @@ public class BattleEnemy : BattleActor
     public override void Die()
     {
         base.Die();
+        
+        LeshiiAttackEffect l_DieVisualEffect = Instantiate(LeshiiAttackEffect.prefab);
+        l_DieVisualEffect.AddPlayAction(PlayDieAnimation);
 
-        BattleSystem.GetInstance().AddExperience(m_EnemyData.experience);
-        BattleSystem.GetInstance().EnemyDied(this);
-        m_Animator.SetTrigger("Die");
+        BattlePlayEffectStep l_PlayEffectStep = new BattlePlayEffectStep(l_DieVisualEffect);
+        ResultSystem.GetInstance().AddStep(l_PlayEffectStep);
+
+        string l_TextAboutDeath = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EnemyDied", new string[] { actorName });
+        TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { l_TextAboutDeath });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+        BattleShowPanelStep l_ShowPanelStep = new BattleShowPanelStep(l_TextPanel);
+        ResultSystem.GetInstance().AddStep(l_ShowPanelStep);
     }
 
     // Called from Animation
@@ -107,7 +110,12 @@ public class BattleEnemy : BattleActor
     {
         base.Died();
 
+        BattleSystem.GetInstance().AddExperience(m_EnemyData.experience);
+        BattleSystem.GetInstance().EnemyDied(this);
+
         Destroy(gameObject);
+
+        ResultSystem.GetInstance().NextStep();
     }
 
     public override void PlayHitSound()
@@ -122,10 +130,10 @@ public class BattleEnemy : BattleActor
         m_Animator = GetComponent<Animator>();
         m_AudioSource = GetComponent<AudioSource>();
 
-        Transform l_RendererTransform = transform.FindChild("Renderer");
-        if (l_RendererTransform != null)
+        rendererTransform = transform.FindChild("Renderer");
+        if (rendererTransform != null)
         {
-            m_SpriteRenderer = l_RendererTransform.GetComponent<SpriteRenderer>();
+            m_Renderer = rendererTransform.GetComponent<SpriteRenderer>();
         }
 
         Transform l_SelectedTransform = transform.FindChild("Selected");
@@ -133,6 +141,11 @@ public class BattleEnemy : BattleActor
         {
             m_SelectedArrow = l_SelectedTransform.GetComponent<SpriteRenderer>();
         }
+    }
+
+    private void PlayDieAnimation()
+    {
+        m_Animator.SetTrigger("Die");
     }
     #endregion
 }

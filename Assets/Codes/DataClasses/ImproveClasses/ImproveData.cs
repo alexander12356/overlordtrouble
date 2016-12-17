@@ -6,9 +6,9 @@ public struct ImproveData
     public string id;
     public string profileImagePath;
     public string elementalId;
-    public List<MonstyleData> skills;
+    public List<SpecialData> skills;
 
-    public ImproveData(string p_Id, string p_ProfileImagePath, string p_ElementalId, List<MonstyleData> p_SkillList)
+    public ImproveData(string p_Id, string p_ProfileImagePath, string p_ElementalId, List<SpecialData> p_SkillList)
     {
         id = p_Id;
         profileImagePath = p_ProfileImagePath;

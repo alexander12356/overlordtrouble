@@ -7,6 +7,7 @@ public class VisualEffect : MonoBehaviour
     private AudioSource m_AudioSource = null;
     private BattleActor m_Target = null;
     private Transform m_TargetRenderer = null;
+    private event PanelActionHandler m_EndAction;
 
     [SerializeField]
     private string m_Id = string.Empty;
@@ -52,20 +53,16 @@ public class VisualEffect : MonoBehaviour
     {
         m_TargetRenderer.SetParent(transform.parent);
         Destroy(gameObject);
-        ResultSystem.GetInstance().NextStep();
+        EndAction();
     }
 
     public virtual void PlayEffect()
     {
         transform.SetParent(m_TargetRenderer.parent);
+        transform.localScale = Vector3.one;
         transform.localPosition = Vector3.zero;
         m_TargetRenderer.SetParent(m_Renderer);
         myAnimator.SetTrigger("Start");
-    }
-
-    public void SetTarget(BattleActor p_Target)
-    {
-        m_Target = p_Target;
     }
 
     // Called from animation
@@ -73,5 +70,18 @@ public class VisualEffect : MonoBehaviour
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_Id));
         m_Target.PlayHitSound();
+    }
+
+    public void AddEndAnimationAction(PanelActionHandler p_Action)
+    {
+        m_EndAction += p_Action;
+    }
+
+    private void EndAction()
+    {
+        if (m_EndAction != null)
+        {
+            m_EndAction();
+        }
     }
 }

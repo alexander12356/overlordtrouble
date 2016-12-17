@@ -72,7 +72,7 @@ public class MainPanel : Panel
 
     private void Special()
     {
-        MonstyleSelectPanel l_SpecialSelectPanel = Instantiate(MonstyleSelectPanel.prefab);
+        CreatingMonstylePanel l_SpecialSelectPanel = Instantiate(CreatingMonstylePanel.prefab);
         BattleSystem.GetInstance().ShowPanel(l_SpecialSelectPanel, true, BattleSystem.GetInstance().mainPanelTransform);
     }
 

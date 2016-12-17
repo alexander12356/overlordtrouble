@@ -14,13 +14,22 @@ public class BattlePlayer : BattleActor
     private Text m_SpecialText = null;
     private Image m_HealthPointBar = null;
     private Image m_SpecialPointBar = null;
-    private BattleActor m_AttackTarget = null;
+    private int   m_MonstyleCapacity = 4;
+    private Dictionary<string, EffectIcon> m_EffectIcons = new Dictionary<string, EffectIcon>();
+    private Transform m_EffectsBar = null;
+    private int m_BuffCount   = 0;
+    private int m_DebuffCount = 0;
     #endregion
 
     #region Interface
     static public BattlePlayer GetInstance()
     {
         return m_Instance;
+    }
+    public int monstyleCapacity
+    {
+        get { return m_MonstyleCapacity;  }
+        set { m_MonstyleCapacity = value; }
     }
 
     public override void Attack(BattleActor p_Actor)
@@ -30,119 +39,34 @@ public class BattlePlayer : BattleActor
         int l_Damage = Random.Range(m_AttackValue[0], m_AttackValue[1]);
 
         VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
-        l_AttackEffect.Init(p_Actor, p_Actor.spriteRenderer.transform);
+        l_AttackEffect.Init(p_Actor, p_Actor.rendererTransform);
 
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-        ResultSystem.GetInstance().AddStep(l_Step);
+        DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
         DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
         ResultSystem.GetInstance().ShowResult();
 
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
-
-    public override void Damage(float p_DamageValue)
+    
+    public void SpecialAttack(BattleActor p_Target, List<Special> p_SpecialList)
     {
-        base.Damage(p_DamageValue);
-
-        health -= p_DamageValue;
-
-        DamageSystem.GetInstance().AttackSuccess();
-    }
-
-    //TODO отрефакторить
-    public void SpecialAttack(BattleActor p_Enemy, List<MonstyleUpgradeIcon> p_MonstyleUpgradeIconList)
-    {
-        m_AttackTarget = p_Enemy;
-        m_AttackTarget.CheckPrevAttack();
-
-        int l_BrokenMonstyleCount = 0;
-        int l_UnbuffedMonstyleCount = 0;
-
-        float l_DamageValue = 0;
-        string l_Text = string.Empty;
-
-        List<MonstyleData> l_BuffedMonstyle = new List<MonstyleData>();
-        for (int i = 0; i < p_MonstyleUpgradeIconList.Count; i++)
+        if (p_SpecialList.Count == 0)
         {
-            if (p_MonstyleUpgradeIconList[i].GetBuffCount() == -1)
-            {
-                l_BrokenMonstyleCount++;
-            }
-            else if (p_MonstyleUpgradeIconList[i].GetBuffCount() == 0)
-            {
-                l_UnbuffedMonstyleCount++;
-            }
-            else
-            {
-                MonstyleData l_MonstyleDataData = MonstyleDataBase.GetInstance().GetMonstyleData(p_MonstyleUpgradeIconList[i].monstyleId);
-                l_MonstyleDataData.damage = l_MonstyleDataData.damage + (l_MonstyleDataData.damage * 0.1f) * p_MonstyleUpgradeIconList[i].GetBuffCount();
-
-                l_BuffedMonstyle.Add(l_MonstyleDataData);
-            }
-        }
-
-        string l_UsedMonstylesName = "";
-        bool l_IsBadAttack = false;
-
-        if (l_BrokenMonstyleCount == p_MonstyleUpgradeIconList.Count)
-        {
-            l_DamageValue = 1.0f;
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
-            l_IsBadAttack = true;
-
             VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
-            l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
-            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
+            l_AttackEffect.Init(p_Target, p_Target.rendererTransform);
+            BattlePlayEffectStep l_PlayStep = new BattlePlayEffectStep(l_AttackEffect);
+            DamageSystem.GetInstance().AddVisualEffectStep(l_PlayStep);
 
-            ResultSystem.GetInstance().AddStep(l_Step);
-        }
-        else if (l_UnbuffedMonstyleCount == p_MonstyleUpgradeIconList.Count)
-        {
-            MonstyleData p_MonstyleData = MonstyleDataBase.GetInstance().GetMonstyleData(p_MonstyleUpgradeIconList[0].monstyleId);
+            string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { "1", p_Target.actorName });
 
-            l_DamageValue = p_MonstyleData.damage - p_MonstyleData.damage * 0.25f;
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { l_DamageValue.ToString(), p_Enemy.actorName });
-            l_IsBadAttack = true;
-
-            VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>("Prefabs/BattleEffects/Player/Player_BaseAttack"));
-            l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
-            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-
-            ResultSystem.GetInstance().AddStep(l_Step);
+            DamageSystem.GetInstance().Attack(this, p_Target, 1.0f, l_Text);
         }
         else
         {
-            for (int i = 0; i < l_BuffedMonstyle.Count; i++)
-            {
-                string l_MonstyleName = LocalizationDataBase.GetInstance().GetText("Skill:" + l_BuffedMonstyle[i].id);
-                if (i == l_BuffedMonstyle.Count - 2)
-                {
-                    l_UsedMonstylesName += l_MonstyleName + " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
-                }
-                else if (i == l_BuffedMonstyle.Count - 1)
-                {
-                    l_UsedMonstylesName += l_MonstyleName;
-                }
-                else
-                {
-                    l_UsedMonstylesName += l_MonstyleName + ", ";
-                }
-                l_DamageValue += l_BuffedMonstyle[i].damage;
-
-                string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + l_BuffedMonstyle[i].id + "Monstyle";
-
-                VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>(l_PrefabPath));
-                l_AttackEffect.Init(p_Enemy, p_Enemy.spriteRenderer.transform);
-                BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-
-                ResultSystem.GetInstance().AddStep(l_Step);
-            }
-
-            l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:SpecialAttack", new string[] { p_Enemy.actorName, l_UsedMonstylesName, l_DamageValue.ToString() });
+            DamageSystem.GetInstance().MonstyleAttack(this, p_Target, p_SpecialList);
         }
-
-        DamageSystem.GetInstance().MonstyleAttack(this, p_Enemy, l_DamageValue, l_IsBadAttack, l_UsedMonstylesName);
 
         ResultSystem.GetInstance().ShowResult();
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
@@ -176,7 +100,7 @@ public class BattlePlayer : BattleActor
 
         m_Instance = this;
 
-        Image l_AvatarImage = transform.FindChild("AvatarImage").GetComponent<Image>();
+        Image l_AvatarImage = transform.FindChild("Renderer").GetComponent<Image>();
         l_AvatarImage.sprite = PlayerData.GetInstance().GetBattleAvatar();
 
         InitComponents();
@@ -211,6 +135,7 @@ public class BattlePlayer : BattleActor
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip("Player_Hit"));
     }
+
     #endregion
 
     #region Private
@@ -223,6 +148,63 @@ public class BattlePlayer : BattleActor
         m_HealthPointBar  = transform.FindChild("HealthBar").GetComponent<Image>();
         m_SpecialText     = transform.FindChild("SpecialText").GetComponent<Text>();
         m_SpecialPointBar = transform.FindChild("SpecialBar").GetComponent<Image>();
+        m_EffectsBar      = transform.FindChild("EffectsBar");
+
+        rendererTransform = transform.FindChild("Renderer");
+    }
+    
+    public override void AddBuff()
+    {
+        m_BuffCount++;
+
+        if (m_BuffCount > 1)
+        {
+            return;
+        }
+
+        EffectIcon l_EffectIcon = Instantiate(EffectIcon.prefab);
+        l_EffectIcon.SetIconId("Buff");
+        l_EffectIcon.transform.SetParent(m_EffectsBar);
+        l_EffectIcon.transform.localScale = Vector3.one;
+        l_EffectIcon.transform.SetSiblingIndex(0);
+
+        m_EffectIcons.Add("Buff", l_EffectIcon);
+    }
+
+    public override void RemoveBuff()
+    {
+        m_BuffCount--;
+
+        if (m_BuffCount == 0)
+        {
+            Destroy(m_EffectIcons["Buff"].gameObject);
+            m_EffectIcons.Remove("Buff");
+        }
+    }
+    
+    public override void AddStatusEffect(string p_EffectId)
+    {
+        base.AddStatusEffect(p_EffectId);
+
+        if (m_EffectIcons.ContainsKey(p_EffectId))
+        {
+            return;
+        }
+
+        EffectIcon l_EffectIcon = Instantiate(EffectIcon.prefab);
+        l_EffectIcon.SetIconId(p_EffectId);
+        l_EffectIcon.transform.SetParent(m_EffectsBar);
+        l_EffectIcon.transform.localScale = Vector3.one;
+
+        m_EffectIcons.Add(p_EffectId, l_EffectIcon);
+    }
+
+    public override void RemoveStatusEffect(string p_EffectId)
+    {
+        base.RemoveStatusEffect(p_EffectId);
+
+        Destroy(m_EffectIcons[p_EffectId].gameObject);
+        m_EffectIcons.Remove(p_EffectId);
     }
     #endregion
 }

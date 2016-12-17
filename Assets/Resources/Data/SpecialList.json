@@ -1,0 +1,108 @@
+{
+	"WaterDrops" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : true,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 1.0
+			}
+		}
+	},
+	"Slap" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 3.0
+			}
+		}
+	},
+	"ProtectiveShell" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"Defense" :
+			{
+				"Value" : 2.0,
+				"Duration" : 3.0
+			}
+		}
+	},
+	"WaterBullet" :
+	{
+		"Sp" : 4.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 4.0
+			}
+		}
+	},
+	"WaterDash" :
+	{
+		"Sp" : 9.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 8.0
+			}
+		}
+	},
+	"TailWhap" :
+	{
+		"Sp" : 4.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" : 
+			{
+				"AttackValue" : 4.0
+			}
+		}
+	},
+	"Slash" :
+	{
+		"Sp" : 6.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 6.0
+			}
+		}
+	},
+	"StonePress" :
+	{
+		"Sp" : 5.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 10.0
+			}
+		}
+	}
+}

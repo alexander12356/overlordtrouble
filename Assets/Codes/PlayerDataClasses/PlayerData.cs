@@ -95,12 +95,12 @@ public class PlayerData : Singleton<PlayerData>
         return m_PlayerName;
     }
 
-    public void AddSkills(List<MonstyleData> p_SkillList)
+    public void AddSkills(List<SpecialData> p_SkillList)
     {
         m_PlayerSkills.AddSkills(p_SkillList);
     }
 
-    public List<MonstyleData> GetSkills()
+    public List<SpecialData> GetSkills()
     {
         return m_PlayerSkills.GetSkills();
     }
@@ -115,7 +115,7 @@ public class PlayerData : Singleton<PlayerData>
         m_PlayerSkills.UnselectSkill(p_Id);
     }
 
-    public Dictionary<string, MonstyleData> GetSelectedSkills()
+    public Dictionary<string, SpecialData> GetSelectedSkills()
     {
         return m_PlayerSkills.GetSelectedSkills();
     }

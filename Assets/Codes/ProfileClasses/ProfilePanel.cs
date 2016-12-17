@@ -148,7 +148,7 @@ public class ProfilePanel : Panel
 
     private void InitMonstyles()
     {
-        List<MonstyleData> m_MonstyleList = PlayerData.GetInstance().GetSkills();
+        List<SpecialData> m_MonstyleList = PlayerData.GetInstance().GetSkills();
         for (int i = 0; i < m_MonstyleList.Count; i++)
         {
             PanelButtonProfileSpecial l_PanelButton = Instantiate(PanelButtonProfileSpecial.prefab);
@@ -186,7 +186,7 @@ public class ProfilePanel : Panel
     private void ShowSpecialDescription()
     {
         PanelButtonProfileSpecial l_PanelButtonProfileSpecial = (PanelButtonProfileSpecial)m_SpecialsButtonList.currentButton;
-        m_SpecialDescriptionText.text = LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButtonProfileSpecial.monstyleId + ":Description");
+        m_SpecialDescriptionText.text = LocalizationDataBase.GetInstance().GetText("Special:" + l_PanelButtonProfileSpecial.monstyleId + ":Description");
 
         if (l_PanelButtonProfileSpecial.chosen)
         {
