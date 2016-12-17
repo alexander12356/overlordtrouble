@@ -40,6 +40,19 @@
 			}
 		}
 	},
+	"WaterBullet" :
+	{
+		"Sp" : 4.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 4.0
+			}
+		}
+	},
 	"WaterDash" :
 	{
 		"Sp" : 9.0,

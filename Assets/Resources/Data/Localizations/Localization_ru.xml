@@ -1,14 +1,21 @@
 ﻿<Localization>
 	<!-- Specials	-->
+	<!-- DewElemental -->
 	<Text id="Special:WaterDrops">Капли</Text>
 	<Text id="Special:WaterDrops:Description">Прием атаки: 2сп\n\nУрон 2 очка по всем врагам\n\nЭлемент: Вода\n\nЭти капли бьют чуток больнее чем тычки пальцами</Text>
 	<Text id="Special:Slap">Шлепок</Text>
 	<Text id="Special:ProtectiveShell">Защитная оболочка</Text>
+	
+	<!-- LesserWaterElemental -->
+	<Text id="Special:WaterBullet">Водяная пуля</Text>
 	<Text id="Special:WaterDash">Ударный рывок</Text>
-	<Text id="Special:Defense">Защита</Text>
+	
+	<!-- DewElemental -->
 	<Text id="Special:TailWhap">Удар хвостом</Text>
 	<Text id="Special:Slash">Разрез</Text>
 	<Text id="Special:ShellDefense">Панцирная защита</Text>
+	
+	<!-- DewElemental -->
 	<Text id="Special:BlobeStrike">Водяной удар</Text>
 	<Text id="Special:HealingWater">Целебная вода</Text>
 	<Text id="Special:StonePress">Каменный пресс</Text>
