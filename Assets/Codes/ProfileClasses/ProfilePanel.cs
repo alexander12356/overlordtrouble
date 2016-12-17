@@ -186,7 +186,7 @@ public class ProfilePanel : Panel
     private void ShowSpecialDescription()
     {
         PanelButtonProfileSpecial l_PanelButtonProfileSpecial = (PanelButtonProfileSpecial)m_SpecialsButtonList.currentButton;
-        m_SpecialDescriptionText.text = LocalizationDataBase.GetInstance().GetText("Skill:" + l_PanelButtonProfileSpecial.monstyleId + ":Description");
+        m_SpecialDescriptionText.text = LocalizationDataBase.GetInstance().GetText("Special:" + l_PanelButtonProfileSpecial.monstyleId + ":Description");
 
         if (l_PanelButtonProfileSpecial.chosen)
         {

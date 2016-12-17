@@ -40,7 +40,7 @@ public class PanelButtonProfileSpecial : PanelButton
         set
         {
             m_MonstyleId = value;
-            title = LocalizationDataBase.GetInstance().GetText("Skill:" + m_MonstyleId);
+            title = LocalizationDataBase.GetInstance().GetText("Special:" + m_MonstyleId);
         }
     }
 

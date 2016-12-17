@@ -51,7 +51,7 @@ public class ImprovePanel : Panel
         ImproveData l_ImproveData = ImproveDataBase.GetInstance().GetImprove(l_ImproveId);
         for (int i = 0; i < l_ImproveData.skills.Count; i++)
         {
-            l_SkillsText += LocalizationDataBase.GetInstance().GetText("Skill:" + l_ImproveData.skills[i].id);
+            l_SkillsText += LocalizationDataBase.GetInstance().GetText("Special:" + l_ImproveData.skills[i].id);
             if (i < l_ImproveData.skills.Count - 1)
             {
                 l_SkillsText += ", ";
