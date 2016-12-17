@@ -136,6 +136,14 @@
 	<Text id="GUI:MainMenuPanel:Load">Загрузить</Text>
 	<Text id="GUI:MainMenuPanel:Settings">Опции</Text>
 	<Text id="GUI:MainMenuPanel:Exit">Выход</Text>
+	<!-- Settings Panel -->
+	<Text id="GUI:SettingsPanel:Volume">Громкость</Text>
+	<Text id="GUI:SettingsPanel:Language">Язык</Text>
+	<Text id="GUI:SettingsPanel:Subtitles">Субтитры</Text>
+	<Text id="GUI:SettingsPanel:Resolution">Разрешение</Text>
+	<Text id="GUI:SettingsPanel:WindowedMode">Оконный режим</Text>
+	<Text id="GUI:SettingsPanel:Accept">Принять</Text>
+	<Text id="GUI:SettingsPanel:Cancel">Отмена</Text>
 	
 	<!-- Dialogs -->
 	<Text id="Dialog:SkeletonChild:1">Привет!</Text>

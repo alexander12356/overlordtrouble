@@ -4,10 +4,28 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuPanel : Panel
 {
+    #region Variables
+
     private ButtonList m_MainMenuButtonList = null;
     private Animator m_MainMenuTransitionAnimator = null;
 
-    public Animator mainMenuTransitionAnimator
+    #endregion
+
+    #region Properties
+
+    private ButtonList mainMenuButtonList
+    {
+        get
+        {
+            if(m_MainMenuButtonList == null)
+            {
+                m_MainMenuButtonList = transform.FindChild("Transitor").FindChild("MainMenu").GetComponentInChildren<ButtonList>();
+            }
+            return m_MainMenuButtonList;
+        }
+    }
+
+    private Animator mainMenuTransitionAnimator
     {
         get
         {
@@ -18,6 +36,10 @@ public class MainMenuPanel : Panel
             return m_MainMenuTransitionAnimator;
         }
     }
+
+    #endregion
+
+    #region Methods
 
     public override void Awake()
     {
@@ -32,58 +54,65 @@ public class MainMenuPanel : Panel
 
     private void InitButtonList()
     {
-        m_MainMenuButtonList = transform.FindChild("Transitor").FindChild("MainMenu").GetComponentInChildren<ButtonList>();
-        m_MainMenuButtonList.isActive = true;
+        mainMenuButtonList.isActive = true;
 
         if(IsSaveExist())
         {
             MainMenuButton l_ButtonContinue = Instantiate(MainMenuButton.prefab);
             l_ButtonContinue.AddAction(ContinueGame);
             l_ButtonContinue.title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:Continue");
-            m_MainMenuButtonList.AddButton(l_ButtonContinue);
+            mainMenuButtonList.AddButton(l_ButtonContinue);
         }
 
         MainMenuButton l_ButtonNewGame = Instantiate(MainMenuButton.prefab);
         l_ButtonNewGame.AddAction(RunNewGame);
         l_ButtonNewGame.title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:NewGame");
-        m_MainMenuButtonList.AddButton(l_ButtonNewGame);
+        mainMenuButtonList.AddButton(l_ButtonNewGame);
 
         if(IsGameCompleted())
         {
             MainMenuButton l_ButtonNewGamePlus = Instantiate(MainMenuButton.prefab);
             l_ButtonNewGamePlus.AddAction(RunNewGamePlus);
             l_ButtonNewGamePlus.title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:NewGamePlus");
-            m_MainMenuButtonList.AddButton(l_ButtonNewGamePlus);
+            mainMenuButtonList.AddButton(l_ButtonNewGamePlus);
         }
         if(IsSecretEndingUnlocked())
         {
             MainMenuButton l_ButtonNewGameAfterSecretEnding = Instantiate(MainMenuButton.prefab);
             l_ButtonNewGameAfterSecretEnding.AddAction(RunNewGameAfterSecretEnding);
             l_ButtonNewGameAfterSecretEnding.title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:NewGameAfterSecretEnding");
-            m_MainMenuButtonList.AddButton(l_ButtonNewGameAfterSecretEnding);
+            mainMenuButtonList.AddButton(l_ButtonNewGameAfterSecretEnding);
         }
 
         MainMenuButton l_ButtonLoadGame = Instantiate(MainMenuButton.prefab);
         l_ButtonLoadGame.AddAction(LoadGame);
         l_ButtonLoadGame.title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:Load");
-        m_MainMenuButtonList.AddButton(l_ButtonLoadGame);
+        mainMenuButtonList.AddButton(l_ButtonLoadGame);
 
         MainMenuButton l_ButtonSettings = Instantiate(MainMenuButton.prefab);
         l_ButtonSettings.AddAction(OpenSettings);
         l_ButtonSettings.title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:Settings");
-        m_MainMenuButtonList.AddButton(l_ButtonSettings);
+        mainMenuButtonList.AddButton(l_ButtonSettings);
 
         MainMenuButton l_ButtonQuit = Instantiate(MainMenuButton.prefab);
         l_ButtonQuit.AddAction(QuitGame);
         l_ButtonQuit.title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:Exit");
-        m_MainMenuButtonList.AddButton(l_ButtonQuit);
+        mainMenuButtonList.AddButton(l_ButtonQuit);
 
         mainMenuTransitionAnimator.SetTrigger("StartTransition");
     }
 
+    private void SelectMainMenu()
+    {
+        mainMenuButtonList.isActive = true;
+    }
+
     private void OpenSettings()
     {
-        throw new NotImplementedException();
+        mainMenuButtonList.isActive = false;
+        SettingsPanel l_SettingsPanel = Instantiate(SettingsPanel.prefab);
+        MainMenuSystem.GetInstance().ShowPanel(l_SettingsPanel);
+        l_SettingsPanel.AddCancelAction(SelectMainMenu);
     }
 
     private void LoadGame()
@@ -103,7 +132,10 @@ public class MainMenuPanel : Panel
 
     private void RunNewGamePlus()
     {
-        throw new NotImplementedException();
+        mainMenuButtonList.isActive = false;
+        LoadingPanel l_LoadingPanel = Instantiate(LoadingPanel.prefab);
+        l_LoadingPanel.AddCancelAction(SelectMainMenu);
+        MainMenuSystem.GetInstance().ShowPanel(l_LoadingPanel);
     }
 
     private bool IsGameCompleted()
@@ -164,4 +196,6 @@ public class MainMenuPanel : Panel
             ChangeLaguage("en");
         }
     }
+
+    #endregion
 }

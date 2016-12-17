@@ -118,6 +118,14 @@
 	<Text id="GUI:MainMenuPanel:Load">Load</Text>
 	<Text id="GUI:MainMenuPanel:Settings">Settings</Text>
 	<Text id="GUI:MainMenuPanel:Exit">Exit</Text>
+	<!-- Settings Panel -->
+	<Text id="GUI:SettingsPanel:Volume">Volume</Text>
+	<Text id="GUI:SettingsPanel:Language">Language</Text>
+	<Text id="GUI:SettingsPanel:Subtitles">Subtitles</Text>
+	<Text id="GUI:SettingsPanel:Resolution">Resolution</Text>
+	<Text id="GUI:SettingsPanel:WindowedMode">Windowed mode</Text>
+	<Text id="GUI:SettingsPanel:Accept">Accept</Text>
+	<Text id="GUI:SettingsPanel:Cancel">Cancel</Text>
 	
 	<!-- Dialogs -->
 	<Text id="Dialog:SkeletonChild:1">Hi!</Text>
