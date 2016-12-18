@@ -29,7 +29,7 @@ public class SettingsPanel : Panel {
         }
     }
 
-    public ButtonList controlButtonList
+    private ButtonList controlButtonList
     {
         get
         {
@@ -41,7 +41,7 @@ public class SettingsPanel : Panel {
         }
     }
 
-    public PanelSlider volumeSlider
+    private PanelSlider volumeSlider
     {
         get
         {
@@ -53,7 +53,7 @@ public class SettingsPanel : Panel {
         }
     }
 
-    public PanelDropdown languageDropDown
+    private PanelDropdown languageDropDown
     {
         get
         {
@@ -65,7 +65,7 @@ public class SettingsPanel : Panel {
         }
     }
 
-    public PanelCheckbox subtitlesCheckbox
+    private PanelCheckbox subtitlesCheckbox
     {
         get
         {
@@ -77,7 +77,7 @@ public class SettingsPanel : Panel {
         }
     }
 
-    public PanelValueSelector resolutionSelector
+    private PanelValueSelector resolutionSelector
     {
         get
         {
@@ -89,7 +89,7 @@ public class SettingsPanel : Panel {
         }
     }
 
-    public PanelCheckbox windowedModeCheckbox
+    private PanelCheckbox windowedModeCheckbox
     {
         get
         {

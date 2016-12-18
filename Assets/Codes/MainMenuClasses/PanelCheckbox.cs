@@ -29,7 +29,7 @@ public class PanelCheckbox : Toggle
         }
     }
 
-    public void Toggle()
+    private void Toggle()
     {
         m_CurrentValue = !currentValue;
         isOn = m_CurrentValue;

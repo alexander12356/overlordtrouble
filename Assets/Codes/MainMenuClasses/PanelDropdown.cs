@@ -25,13 +25,13 @@ public class PanelDropdown : Dropdown
         }
     }
 
-    public void SelectMoveUp()
+    private void SelectMoveUp()
     {
         m_CurrentValue--;
         CheckSelectPosition();
     }
 
-    public void SelectMoveDown()
+    private void SelectMoveDown()
     {
         m_CurrentValue++;
         CheckSelectPosition();
