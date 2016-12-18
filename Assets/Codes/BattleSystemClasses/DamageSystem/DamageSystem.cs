@@ -83,6 +83,30 @@ public class DamageSystem : Singleton<DamageSystem>
         ShowResult();
     }
 
+    public void EnemyAttack(BattleActor p_Sender, BattleActor p_Target, Special p_Special)
+    {
+        string l_SenderName = p_Sender.actorName;
+        string l_SpecialName = LocalizationDataBase.GetInstance().GetText("Enemy:" + p_Sender.id + ":" + p_Special.id);
+
+        MonstyleSystem.GetInstance().RunSpecial(p_Sender, p_Target, p_Special);
+
+        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EnemyUsing", new string[] { l_SenderName, l_SpecialName });
+
+        if (m_DamageValues.ContainsKey(p_Target))
+        {
+            p_Target.CheckPrevAttack();
+
+            if (p_Target.IsCanDamage(m_DamageValues[p_Target]))
+            {
+                m_StatisticText += " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Damage", new string[] { m_DamageValues[p_Target].ToString() });
+
+                p_Target.Damage(m_DamageValues[p_Target]);
+            }
+        }
+
+        ShowResult();
+    }
+
     public void AddBeforeAttackSteps(BattleBaseStep l_Step)
     {
         m_BeforeAttackSteps.Add(l_Step);
@@ -350,7 +374,7 @@ public class DamageSystem : Singleton<DamageSystem>
         float l_SenderLevel = p_SenderActor.level;
         float l_TargetLevel = p_TargetActor.level;
         float l_SenderAttackStat = p_SenderActor.attackStat;
-        float l_TargetDefenseStat = p_SenderActor.defenseStat;
+        float l_TargetDefenseStat = p_TargetActor.defenseStat;
         float l_Modif = ElementSystem.GetInstance().GetModif(l_AttackElement, p_TargetActor.element);
 
         float l_Damage = (l_SenderAttackStat / l_TargetDefenseStat) * (l_SenderLevel / l_TargetLevel) * l_AttackDamage * l_Modif;

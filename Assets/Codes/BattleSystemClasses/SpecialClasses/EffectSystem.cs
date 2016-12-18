@@ -16,12 +16,21 @@ public class EffectSystem : Singleton<EffectSystem>
 
                 l_Effect = new AttackEffect(p_Special, l_AttackValue);
                 break;
+            case EffectType.AttackRange:
+                float[] l_AttackRangeValue = new float[2];
+                l_AttackRangeValue[0] = Convert.ToSingle(p_EffectData.parameters[0]);
+                l_AttackRangeValue[1] = Convert.ToSingle(p_EffectData.parameters[1]);
+
+                l_Effect = new AttackRangeEffect(p_Special, l_AttackRangeValue);
+                break;
             case EffectType.Defense:
 
                 float l_DefenseValue = Convert.ToSingle(p_EffectData.parameters[0]);
                 int l_Duration = Convert.ToInt32(p_EffectData.parameters[1]);
 
                 l_Effect = new DefenseEffect(p_Special, l_DefenseValue, l_Duration);
+                break;
+            case EffectType.DefenseDebuff:
                 break;
         }
 
@@ -54,6 +63,49 @@ public class EffectSystem : Singleton<EffectSystem>
             m_RemovedSpecials.Add(p_Target, new List<Special>());
         }
         m_RemovedSpecials[p_Target].Add(p_Special);
+    }
+
+    public List<EffectData> ParseEffect(JSONObject p_JsonObject)
+    {
+        List<EffectData> p_EffectList = new List<EffectData>();
+
+        for (int i = 0; i < p_JsonObject.Count; i++)
+        {
+            EffectType l_EffectType = (EffectType)Enum.Parse(typeof(EffectType), p_JsonObject.keys[0]);
+
+            switch (l_EffectType)
+            {
+                case EffectType.Attack:
+                    float l_AttackValue = p_JsonObject[i]["AttackValue"].f;
+
+                    EffectData l_AttackEffect = new EffectData(l_EffectType, new string[] { l_AttackValue.ToString() });
+                    p_EffectList.Add(l_AttackEffect);
+                    break;
+                case EffectType.AttackRange:
+                    float l_AttackValue1 = p_JsonObject[i]["Value1"].f;
+                    float l_AttackValue2 = p_JsonObject[i]["Value2"].f;
+
+                    EffectData l_AttackRangeEffect = new EffectData(l_EffectType, new string[] { l_AttackValue1.ToString(), l_AttackValue2.ToString() });
+                    p_EffectList.Add(l_AttackRangeEffect);
+                    break;
+                case EffectType.Defense:
+                    float l_DefenseValue = p_JsonObject[i]["Value"].f;
+                    float l_Duration = p_JsonObject[i]["Duration"].f;
+
+                    EffectData l_DefenseEffect = new EffectData(l_EffectType, new string[] { l_DefenseValue.ToString(), l_Duration.ToString() });
+                    p_EffectList.Add(l_DefenseEffect);
+                    break;
+                case EffectType.DefenseDebuff:
+                    float l_DefenseDebuffValue = p_JsonObject[i]["Value"].f;
+                    float l_DefenseDebuffDuration = p_JsonObject[i]["Duration"].f;
+
+                    EffectData l_DefenseDebuffEffect = new EffectData(l_EffectType, new string[] { l_DefenseDebuffValue.ToString(), l_DefenseDebuffDuration.ToString() });
+                    p_EffectList.Add(l_DefenseDebuffEffect);
+                    break;
+            }
+        }
+
+        return p_EffectList;
     }
 
     private void ShowRemovedSpecials(BattleActor p_Target, List<Special> p_SpecialList)

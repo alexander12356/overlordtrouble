@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class BattleActor : MonoBehaviour
 {
     #region Variables
+    private string m_Id;
     private float m_Health;
     private float m_BaseHealth;
     private float m_Mana;
@@ -23,6 +24,11 @@ public class BattleActor : MonoBehaviour
     #endregion
 
     #region Interface
+    public string id
+    {
+        get { return m_Id;  }
+        set { m_Id = value; }
+    }
     public Element element
     {
         get { return m_Element;  }
@@ -102,11 +108,8 @@ public class BattleActor : MonoBehaviour
 
     public virtual void Damage(float p_DamageValue)
     {
-        if (p_DamageValue < defenseStat)
-        {
-            return;
-        }
-        health -= (p_DamageValue - defenseStat);
+        health -= p_DamageValue;
+        health = health < 0 ? 0 : health;
     }
 
     public virtual bool IsCanDamage(float p_Damage)

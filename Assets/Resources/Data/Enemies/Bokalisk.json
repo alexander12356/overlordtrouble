@@ -9,21 +9,29 @@
 	[
 		{
 			"Id" : "PeckerAttack",
+			"Type" : "Attack",
 			"Element" : "Physical",
-			"DamageValue" :
-			[
-				2,
-				4
-			]
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 2,
+					"Value2" : 4
+				}
+			}
 		},
 		{
 			"Id" : "HollowLook",
+			"Type" : "Attack",
 			"Element" : "Dark",
-			"DamageValue" :
-			[
-				0,
-				0
-			]
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 0,
+					"Value2" : 0
+				}
+			}
 		}
 	],
 	"Experience" : 15,

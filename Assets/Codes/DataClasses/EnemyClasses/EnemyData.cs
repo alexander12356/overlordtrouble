@@ -4,13 +4,13 @@ public struct EnemyAttackData
 {
     public string id;
     public Element element;
-    public List<int> damageValue;
+    public List<EffectData> effectList;
 
-    public EnemyAttackData(string p_Id, Element p_Element, List<int> p_DamageValue)
+    public EnemyAttackData(string p_Id, Element p_Element, List<EffectData> p_EffectList)
     {
         id = p_Id;
         element = p_Element;
-        damageValue = p_DamageValue;
+        effectList = p_EffectList;
     }
 }
 

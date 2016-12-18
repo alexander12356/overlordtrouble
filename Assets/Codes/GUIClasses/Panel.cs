@@ -112,6 +112,7 @@ public class Panel : MonoBehaviour
 
     public virtual void Close()
     {
+        m_PanelManager.ClosePanel();
         m_Close = true;
         Hide();
     }
@@ -140,7 +141,7 @@ public class Panel : MonoBehaviour
         gameObject.SetActive(false);
         if (m_Close)
         {
-            m_PanelManager.ClosePanel();
+            
             PopAction();
             Destroy(gameObject);
         }

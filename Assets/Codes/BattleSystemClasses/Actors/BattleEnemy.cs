@@ -54,6 +54,7 @@ public class BattleEnemy : BattleActor
     {
         base.InitStats();
 
+        id = m_EnemyData.id;
         actorName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id);
         health = baseHealth = m_EnemyData.health;
         mana = baseMana = 0;
@@ -79,8 +80,7 @@ public class BattleEnemy : BattleActor
         base.Attack(p_Actor);
 
         EnemyAttackData l_AttackData = m_EnemyData.attackList[Random.Range(0, m_EnemyData.attackList.Count)];
-        float l_Damage = Random.Range(l_AttackData.damageValue[0], l_AttackData.damageValue[1]);
-
+        
         string l_AttackEffectPrefabPath = "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id;
         VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>(l_AttackEffectPrefabPath));
         l_AttackEffect.Init(p_Actor, rendererTransform);
@@ -88,10 +88,17 @@ public class BattleEnemy : BattleActor
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
-        string l_AttackName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id + ":" + l_AttackData.id);
-        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EnemyUsing", new string[] { actorName, l_AttackName });
+        Special l_Special = new Special(l_AttackData.id, l_AttackData.element, false, false);
 
-        DamageSystem.GetInstance().Attack(this, p_Actor, l_AttackData.element, l_Damage, l_Text);
+        List<BaseEffect> l_EffectList = new List<BaseEffect>();
+        for (int i = 0; i < l_AttackData.effectList.Count; i++)
+        {
+            l_EffectList.Add(EffectSystem.GetInstance().CreateEffect(l_Special, l_AttackData.effectList[i]));
+        }
+
+        l_Special.SetEffects(l_EffectList);
+
+        DamageSystem.GetInstance().EnemyAttack(this, p_Actor, l_Special);
     }
 
     public override void Die()

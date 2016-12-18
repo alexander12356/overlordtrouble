@@ -100,6 +100,12 @@ public class PanelManager : MonoBehaviour
 
         Panel m_Panel = m_PanelStack.Peek();
 
+        if (m_Panel == null)
+        {
+            m_PanelStack.Pop();
+            return;
+        }
+
         if (!m_Panel.isShowed && !m_Panel.moving)
         {
             m_Panel.Show();

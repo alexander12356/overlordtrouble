@@ -14,11 +14,11 @@
         m_BaseAttackValue = m_AttackValue = p_AttackValue;
     }
 
-    public override void Run(BattleActor p_Sender, BattleActor m_Target)
+    public override void Run(BattleActor p_Sender, BattleActor p_Target)
     {
-        base.Run(p_Sender, m_Target);
+        base.Run(p_Sender, p_Target);
 
-        DamageSystem.GetInstance().AddDamageValue(p_Sender, m_Target, m_AttackValue, m_Special.element);
+        DamageSystem.GetInstance().AddDamageValue(p_Sender, p_Target, m_AttackValue, m_Special.element);
     }
 
     public override void Upgrade()

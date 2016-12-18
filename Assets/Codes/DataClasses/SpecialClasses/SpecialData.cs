@@ -5,12 +5,12 @@ public struct SpecialData
 {
     public string id;
     public float  sp;
-    public string element;
+    public Element element;
     public bool isAoe;
     public bool myself;
     public List<EffectData> effectsData;
 
-    public SpecialData(string p_Id, float p_Sp, string p_Element, bool p_isAoe, bool p_Myelf, List<EffectData> p_EffectsData)
+    public SpecialData(string p_Id, float p_Sp, Element p_Element, bool p_isAoe, bool p_Myelf, List<EffectData> p_EffectsData)
     {
         id = p_Id;
         sp = p_Sp;
@@ -22,7 +22,7 @@ public struct SpecialData
 
     public Special CreateSpecial()
     {
-        Special l_Special = new Special(id, sp, element, isAoe, myself);
+        Special l_Special = new Special(id, element, isAoe, myself);
 
         List<BaseEffect> l_EffectList = new List<BaseEffect>();
         for (int i = 0; i < effectsData.Count; i++)

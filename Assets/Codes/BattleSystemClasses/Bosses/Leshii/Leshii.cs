@@ -473,7 +473,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             {
                 m_IsStun = true;
 
-                Special l_StunSpecial = new Special("Stun", 0, "Physical", false, false);
+                Special l_StunSpecial = new Special("Stun", Element.Physical, false, false);
 
                 StunEffect l_StunEffect = new StunEffect(l_StunSpecial);
                 AttackEffect l_AttackEffect = new AttackEffect(l_StunSpecial, 1.0f);
