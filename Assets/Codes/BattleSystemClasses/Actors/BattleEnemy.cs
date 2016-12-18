@@ -89,6 +89,7 @@ public class BattleEnemy : BattleActor
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
         Special l_Special = new Special(l_AttackData.id, l_AttackData.element, false, false);
+        l_Special.specialName = LocalizationDataBase.GetInstance().GetText("Enemy:" + id + ":" + l_Special.id);
 
         List<BaseEffect> l_EffectList = new List<BaseEffect>();
         for (int i = 0; i < l_AttackData.effectList.Count; i++)

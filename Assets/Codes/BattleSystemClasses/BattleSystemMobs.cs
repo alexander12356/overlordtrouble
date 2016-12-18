@@ -65,6 +65,9 @@ public class BattleSystemMobs : BattleSystem
             case "Bokalisk":
                 l_BattleEnemy = Instantiate(Bokalisk.prefab);
                 break;
+            case "Skwatwolf":
+                l_BattleEnemy = Instantiate(Skwatwolf.prefab);
+                break;
             default:
                 l_BattleEnemy = Instantiate(BattleEnemy.prefab);
                 break;

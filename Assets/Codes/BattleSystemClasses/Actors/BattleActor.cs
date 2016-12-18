@@ -20,7 +20,7 @@ public class BattleActor : MonoBehaviour
     private Dictionary<string, List<BaseEffect>> m_EffectList = new Dictionary<string, List<BaseEffect>>();
     private List<string> m_DeleteSpecials = new List<string>();
     private Transform m_RendererTransform = null;
-
+    private Dictionary<Element, float> m_ElementBalance = new Dictionary<Element, float>();
     #endregion
 
     #region Interface
@@ -40,6 +40,7 @@ public class BattleActor : MonoBehaviour
         set
         {
             m_Health = value;
+            m_Health = m_Health < 0 ? 0 : m_Health;
             ChangeHealthValue();
         }
     }
@@ -60,7 +61,11 @@ public class BattleActor : MonoBehaviour
     public float defenseStat
     {
         get { return m_DefenseStat;  }
-        set { m_DefenseStat = value; }
+        set
+        {
+            m_DefenseStat = value;
+            m_DefenseStat = m_DefenseStat <= 0 ? 1 : m_DefenseStat;
+        }
     }
     public int level
     {
@@ -109,7 +114,6 @@ public class BattleActor : MonoBehaviour
     public virtual void Damage(float p_DamageValue)
     {
         health -= p_DamageValue;
-        health = health < 0 ? 0 : health;
     }
 
     public virtual bool IsCanDamage(float p_Damage)
@@ -236,6 +240,24 @@ public class BattleActor : MonoBehaviour
 
     public virtual void RemoveStatusEffect(string p_EffectId)
     {
+    }
+
+    public void SetModif(Element p_Element, float p_Value)
+    {
+        if (!m_ElementBalance.ContainsKey(p_Element))
+        {
+            m_ElementBalance.Add(p_Element, 1.0f);
+        }
+        m_ElementBalance[p_Element] = p_Value;
+    }
+
+    public float GetModif(Element p_Element)
+    {
+        if (!m_ElementBalance.ContainsKey(p_Element))
+        {
+            return 1.0f;
+        }
+        return m_ElementBalance[p_Element];
     }
     #endregion
 }

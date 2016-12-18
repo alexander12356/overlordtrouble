@@ -22,9 +22,7 @@
 		"Location" : "ChickenFight",
 		"Enemy": 
 		[
-			"Bokalisk",
-			"Bokalisk",
-			"Bokalisk"
+			"Skwatwolf"
 		],
 		"Player":
 		{

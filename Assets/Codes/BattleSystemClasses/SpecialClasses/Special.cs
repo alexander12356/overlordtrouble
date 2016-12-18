@@ -9,6 +9,7 @@ public class Special
     private Element m_Element = Element.NONE;
     private bool m_IsAoe = false;
     private bool m_Myself = false;
+    private string m_SpecialName = string.Empty;
     
     public string id
     {
@@ -25,6 +26,11 @@ public class Special
     public Element element
     {
         get { return m_Element; }
+    }
+    public string specialName
+    {
+        get { return m_SpecialName;  }
+        set { m_SpecialName = value; }
     }
 
     public Special(string p_Id, Element p_Element, bool p_IsAoe, bool p_Myself)

@@ -1,7 +1,7 @@
 {
 	"Id" : "Skwatwolf",
-	"Attack" : 4,
-	"Defense" : 4,
+	"Attack" : 1,
+	"Defense" : 1,
 	"Level" : 1,
 	"Health" : 20,
 	"Element": "Dark",
@@ -38,6 +38,6 @@
 	],
 	"Property" :
 	{
-		"Value" : 30
+		"Value" : 0.8
 	}	
 }

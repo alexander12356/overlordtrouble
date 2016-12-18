@@ -30,6 +30,7 @@ public struct SpecialData
             l_EffectList.Add(EffectSystem.GetInstance().CreateEffect(l_Special, effectsData[i]));
         }
         l_Special.SetEffects(l_EffectList);
+        l_Special.specialName = LocalizationDataBase.GetInstance().GetText("Special:" + id);
 
         return l_Special;
     }

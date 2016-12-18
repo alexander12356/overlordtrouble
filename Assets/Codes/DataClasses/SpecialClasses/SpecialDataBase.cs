@@ -3,15 +3,6 @@
 using System;
 using System.Collections.Generic;
 
-public enum EffectType
-{
-    NONE = -1,
-    Attack,
-    AttackRange,
-    Defense,
-    DefenseDebuff
-}
-
 public class SpecialDataBase : Singleton<SpecialDataBase>
 {
     private string m_PathFile = "Data/SpecialList";

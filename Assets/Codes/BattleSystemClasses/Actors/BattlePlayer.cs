@@ -44,7 +44,7 @@ public class BattlePlayer : BattleActor
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
-        DamageSystem.GetInstance().Attack(this, p_Actor, p_Actor.element, l_Damage);
+        DamageSystem.GetInstance().Attack(this, p_Actor, Element.Physical, l_Damage);
         ResultSystem.GetInstance().ShowResult();
 
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
@@ -185,7 +185,48 @@ public class BattlePlayer : BattleActor
             m_EffectIcons.Remove("Buff");
         }
     }
-    
+
+    public override void AddDebuff()
+    {
+        base.AddDebuff();
+
+        m_DebuffCount++;
+
+        if (m_DebuffCount > 1)
+        {
+            return;
+        }
+
+        EffectIcon l_EffectIcon = Instantiate(EffectIcon.prefab);
+        l_EffectIcon.SetIconId("Debuff");
+        l_EffectIcon.transform.SetParent(m_EffectsBar);
+        l_EffectIcon.transform.localScale = Vector3.one;
+
+        if (m_BuffCount > 0)
+        {
+            l_EffectIcon.transform.SetSiblingIndex(1);
+        }
+        else
+        {
+            l_EffectIcon.transform.SetSiblingIndex(0);
+        }
+
+        m_EffectIcons.Add("Debuff", l_EffectIcon);
+    }
+
+    public override void RemoveDebuff()
+    {
+        base.RemoveDebuff();
+
+        m_DebuffCount--;
+
+        if (m_DebuffCount == 0)
+        {
+            Destroy(m_EffectIcons["Debuff"].gameObject);
+            m_EffectIcons.Remove("Debuff");
+        }
+    }
+
     public override void AddStatusEffect(string p_EffectId)
     {
         base.AddStatusEffect(p_EffectId);

@@ -13,9 +13,9 @@
         m_Duration = p_Duration;
     }
 
-    public override void Run(BattleActor p_Sender, BattleActor m_Target)
+    public override void Run(BattleActor p_Sender, BattleActor p_Target)
     {
-        base.Run(p_Sender, m_Target);
+        base.Run(p_Sender, p_Target);
 
         m_Sender = p_Sender;
 

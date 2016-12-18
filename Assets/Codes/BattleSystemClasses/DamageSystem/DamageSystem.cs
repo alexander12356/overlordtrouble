@@ -330,8 +330,7 @@ public class DamageSystem : Singleton<DamageSystem>
 
         for (int i = 0; i < p_SpecialList.Count; i++)
         {
-            string l_SpecialName = LocalizationDataBase.GetInstance().GetText("Special:" + p_SpecialList[i].id);
-            l_Text += l_SpecialName;
+            l_Text += p_SpecialList[i].specialName;
             if (i == p_SpecialList.Count - 2)
             {
                 l_Text += " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
@@ -376,6 +375,7 @@ public class DamageSystem : Singleton<DamageSystem>
         float l_SenderAttackStat = p_SenderActor.attackStat;
         float l_TargetDefenseStat = p_TargetActor.defenseStat;
         float l_Modif = ElementSystem.GetInstance().GetModif(l_AttackElement, p_TargetActor.element);
+        l_Modif *= p_TargetActor.GetModif(l_AttackElement);
 
         float l_Damage = (l_SenderAttackStat / l_TargetDefenseStat) * (l_SenderLevel / l_TargetLevel) * l_AttackDamage * l_Modif;
         

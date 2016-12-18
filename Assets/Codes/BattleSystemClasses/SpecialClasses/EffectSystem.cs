@@ -1,6 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+public enum EffectType
+{
+    NONE = -1,
+    Attack,
+    AttackRange,
+    Defense,
+    DefenseDebuff
+}
+
 public class EffectSystem : Singleton<EffectSystem>
 {
     private Dictionary<BattleActor, List<Special>> m_RemovedSpecials = new Dictionary<BattleActor, List<Special>>();
@@ -31,6 +40,10 @@ public class EffectSystem : Singleton<EffectSystem>
                 l_Effect = new DefenseEffect(p_Special, l_DefenseValue, l_Duration);
                 break;
             case EffectType.DefenseDebuff:
+                float l_DefenseDebuffValue = Convert.ToSingle(p_EffectData.parameters[0]);
+                int l_DefenseDebuffDuration = Convert.ToInt32(p_EffectData.parameters[1]);
+
+                l_Effect = new DefenseDebuffEffect(p_Special, l_DefenseDebuffValue, l_DefenseDebuffDuration);
                 break;
         }
 
@@ -136,8 +149,7 @@ public class EffectSystem : Singleton<EffectSystem>
 
         for (int i = 0; i < p_SpecialList.Count; i++)
         {
-            string l_SpecialName = LocalizationDataBase.GetInstance().GetText("Special:" + p_SpecialList[i].id);
-            l_Text += l_SpecialName;
+            l_Text += p_SpecialList[i].specialName;
             if (i == p_SpecialList.Count - 2)
             {
                 l_Text += " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
