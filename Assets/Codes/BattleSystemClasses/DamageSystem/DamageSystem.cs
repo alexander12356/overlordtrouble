@@ -37,14 +37,18 @@ public class DamageSystem : Singleton<DamageSystem>
             AddDamageValue(p_Sender, p_Target, p_DamageValue, l_AttackElement);
             p_Target.Damage(m_DamageValues[p_Target]);
 
+            string l_DamageText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Damage", new string[] { m_DamageValues[p_Target].ToString() });
+
             if (p_Text != "")
             {
                 m_StatisticText = p_Text;
             }
             else
             {
-                m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:PlayerAttack", new string[] { l_SenderName, l_TargetName, m_DamageValues[p_Target].ToString() });
+                m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:PlayerAttack", new string[] { l_SenderName, l_TargetName });
             }
+
+            m_StatisticText += " " + l_DamageText;
         }
 
         ShowResult();

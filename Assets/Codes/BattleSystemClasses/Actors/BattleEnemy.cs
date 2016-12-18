@@ -88,7 +88,10 @@ public class BattleEnemy : BattleActor
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
-        DamageSystem.GetInstance().Attack(this, p_Actor, l_AttackData.element, l_Damage);
+        string l_AttackName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id + ":" + l_AttackData.id);
+        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EnemyUsing", new string[] { actorName, l_AttackName });
+
+        DamageSystem.GetInstance().Attack(this, p_Actor, l_AttackData.element, l_Damage, l_Text);
     }
 
     public override void Die()

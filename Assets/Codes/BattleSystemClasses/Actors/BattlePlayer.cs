@@ -59,7 +59,7 @@ public class BattlePlayer : BattleActor
             BattlePlayEffectStep l_PlayStep = new BattlePlayEffectStep(l_AttackEffect);
             DamageSystem.GetInstance().AddVisualEffectStep(l_PlayStep);
 
-            string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { "1", p_Target.actorName });
+            string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { actorName });
 
             DamageSystem.GetInstance().Attack(this, p_Target, Element.Physical, 1.0f, l_Text);
         }

@@ -56,7 +56,8 @@
 	
 	<!-- enemy's -->
 	<Text id="Enemy:Bokalisk">Кокотрикс</Text>
-	<Text id="Enemy:Bokalisk:PeckerAttack">Удар клювом</Text>
+	<Text id="Enemy:Bokalisk:PeckerAttack">Клевок</Text>
+	<Text id="Enemy:Bokalisk:HollowLook">Пустой взгляд</Text>
 	<Text id="Enemy:Bokalisk:MissTurn">Кокотрикс начал непрерывно кудахтать… кокотрикс пропустил ход</Text>
 	<Text id="Enemy:Skwatwolf">Гополак</Text>
 	<Text id="Enemy:Skwatwolf:Fisting">Удар</Text>
@@ -120,9 +121,10 @@
 	<Text id="GUI:BattleSystem:Levelup">Игрок повысился до %dго уровня</Text>
 	<Text id="GUI:BattleSystem:Classup">достиг достаточного уровня для повышение класса!</Text>
 	<Text id="GUI:BattleSystem:SelectMonstyle:Damage">Урон</Text>
-	<Text id="GUI:BattleSystem:EnemyAttack">%d использовал %d и нанес %d урона</Text>
-	<Text id="GUI:BattleSystem:PlayerAttack">%d атаковал "%d" и нанес %d урона</Text>
-	<Text id="GUI:BattleSystem:BadAttack">Плод твоих напрасных усилий был равен %d очкам урона по %d</Text>
+	<Text id="GUI:BattleSystem:PlayerAttack">%d атаковал "%d"</Text>
+	<Text id="GUI:BattleSystem:EnemyUsing">%d использовал %d</Text>
+	<Text id="GUI:BattleSystem:Damage">и нанес %d урона</Text>
+	<Text id="GUI:BattleSystem:BadAttack">%d старался напрасно</Text>
 	<Text id="GUI:BattleSystem:MonstyleUsing">%d использовал %d</Text>
 	<Text id="GUI:BattleSystem:MonstyleDamage">, он нанес %d урона по %d</Text>
 	<Text id="GUI:BattleSystem:AoeUsing">%d попал под %d</Text>
