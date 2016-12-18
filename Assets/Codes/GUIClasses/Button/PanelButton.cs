@@ -7,7 +7,7 @@ public class PanelButton : MonoBehaviour
 {
     #region Variables
     protected event PanelButtonActionHandler m_ConfirmAction;
-    private bool    m_Selected;
+    protected bool    m_Selected;
     protected Image m_SelectedImage;
     protected Text  m_TitleText;
 	private RectTransform m_RectTransform = null;

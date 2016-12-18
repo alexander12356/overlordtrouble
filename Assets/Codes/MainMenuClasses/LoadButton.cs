@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class LoadButton : PanelButton {
 
     private static LoadButton m_Prefab = null;
+    private string m_Id;
 
     public static LoadButton prefab
     {
@@ -19,7 +20,7 @@ public class LoadButton : PanelButton {
         }
     }
 
-    public new Image selectedImage
+    private new Image selectedImage
     {
         get
         {
@@ -29,5 +30,26 @@ public class LoadButton : PanelButton {
             }
             return m_SelectedImage;
         }
+    }
+
+    public string id
+    {
+        get { return m_Id; }
+        set { m_Id = value; }
+    }
+
+    public override void Awake()
+    {
+        m_SelectedImage = selectedImage;
+        selectedImage.gameObject.SetActive(false);
+
+        m_TitleText = GetComponentInChildren<Text>();
+        m_TitleText.text = m_Title;
+    }
+
+    public override void Select(bool p_Value)
+    {
+        m_Selected = p_Value;
+        selectedImage.gameObject.SetActive(m_Selected);
     }
 }
