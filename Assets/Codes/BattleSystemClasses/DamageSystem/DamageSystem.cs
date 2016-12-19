@@ -8,19 +8,52 @@ public enum BonusType
     SpecialPoints
 }
 
-public class DamageSystem : Singleton<DamageSystem>
+public enum RestorationType
 {
-    private enum AttackType
+    NONE = -1,
+    Healing,
+    DebuffClear,
+    MegaHealing
+}
+
+public struct RestorationData
+{
+    public RestorationType type;
+    public float value;
+
+    public RestorationData(RestorationType p_Type, float p_Value)
     {
-        BaseAttack,
-        SpecialAttack
+        type = p_Type;
+        value = p_Value;
     }
-    
+
+    public void Upgrade(RestorationType p_Type, float p_Value)
+    {
+        if (type == RestorationType.Healing && p_Type == RestorationType.DebuffClear)
+        {
+            type = RestorationType.MegaHealing;
+        }
+        else if (type == RestorationType.DebuffClear && p_Type == RestorationType.Healing)
+        {
+            type = RestorationType.MegaHealing;
+        }
+        else if (type != RestorationType.MegaHealing)
+        {
+            type = p_Type;
+        }
+
+        value += p_Value;
+    }
+}
+
+public class DamageSystem : Singleton<DamageSystem>
+{    
     private string m_StatisticText = string.Empty;
     private Dictionary<BattleActor, float> m_DamageValues = new Dictionary<BattleActor, float>();
     private Dictionary<BattleActor, List<Special>> m_AoeSpecials = new Dictionary<BattleActor, List<Special>>();
     private Dictionary<BattleActor, List<Special>> m_ImmunitySpecials = new Dictionary<BattleActor, List<Special>>();
     private Dictionary<BattleActor, List<Special>> m_AddedSpecials = new Dictionary<BattleActor, List<Special>>();
+    private Dictionary<BattleActor, RestorationData> m_RestorationValues = new Dictionary<BattleActor, RestorationData>();
     private Dictionary<BonusType, float> m_Bonuses = new Dictionary<BonusType, float>();
     private List<BattleBaseStep> m_VisualEffectSteps = new List<BattleBaseStep>();
     private List<BattleBaseStep> m_BeforeAttackSteps = new List<BattleBaseStep>();
@@ -148,11 +181,20 @@ public class DamageSystem : Singleton<DamageSystem>
         }
         m_AddedSpecials[p_Target].Add(p_Special);
     }
+    
+    public void AddRestoration(BattleActor p_Target, RestorationType l_RestorationType, float l_Value)
+    {
+        RestorationData l_RestorationData;
 
-    //  Добавление хиллки
-    //      Если врага нет в словаре используемых хилок
-    //          добавить врага к словарю
-    //      добавить в словарь по врагу спешл
+        if (!m_RestorationValues.ContainsKey(p_Target))
+        {
+            l_RestorationData = new RestorationData(l_RestorationType, l_Value);
+
+            m_RestorationValues.Add(p_Target, l_RestorationData);
+            return;
+        }
+        m_RestorationValues[p_Target].Upgrade(l_RestorationType, l_Value);
+    }
 
     public void AddBonuses(BonusType p_Type, float p_Value)
     {
@@ -217,7 +259,13 @@ public class DamageSystem : Singleton<DamageSystem>
             }
         }
 
-        //  Если словарь Хилок не пуст
+        if (m_RestorationValues.Count > 0)
+        {
+            foreach (BattleActor l_Actor in m_RestorationValues.Keys)
+            {
+                ShowRestoration(l_Actor, m_RestorationValues[l_Actor]);
+            }
+        }
         //      Вывести текст(айди текста, словарь)
         //  Если словарь Бонусов не пуст
         //      Вывести текст(айди текста, словарь)
@@ -229,7 +277,7 @@ public class DamageSystem : Singleton<DamageSystem>
 
         Reset();
     }
-
+    
     private void RunBeforeAttackSteps()
     {
         for (int i = 0; i < m_BeforeAttackSteps.Count; i++)
@@ -280,6 +328,28 @@ public class DamageSystem : Singleton<DamageSystem>
         else
         {
             l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Immunity", new string[] { p_Target.actorName, l_SpecialList });
+        }
+
+        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { l_Text });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+        ResultSystem.GetInstance().AddStep(l_Step);
+    }
+
+    private void ShowRestoration(BattleActor l_BattleActor, RestorationData l_RestorationData)
+    {
+        string l_Text = string.Empty;
+
+        switch (l_RestorationData.type)
+        {
+            case RestorationType.DebuffClear:
+                l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:DebuffClear", new string[] { l_BattleActor.actorName });
+                break;
+            default:
+                l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:" + l_RestorationData.type, new string[] { l_BattleActor.actorName, l_RestorationData.value.ToString() });
+                break;
         }
 
         TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
@@ -363,6 +433,7 @@ public class DamageSystem : Singleton<DamageSystem>
         m_AoeSpecials.Clear();
         m_ImmunitySpecials.Clear();
         m_AddedSpecials.Clear();
+        m_RestorationValues.Clear();
         m_AfterAttackSteps.Clear();
         m_StatisticText = string.Empty;
     }

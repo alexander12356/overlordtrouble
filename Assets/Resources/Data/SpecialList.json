@@ -66,6 +66,20 @@
 			}
 		}
 	},
+	"HealingSplash" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"Healing" :
+			{
+				"Value" : 5.0
+			}
+		}
+	},
 	"TailWhap" :
 	{
 		"Sp" : 4.0,

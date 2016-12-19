@@ -9,6 +9,7 @@
 	<!-- LesserWaterElemental -->
 	<Text id="Special:WaterBullet">Водяная пуля</Text>
 	<Text id="Special:WaterDash">Ударный рывок</Text>
+	<Text id="Special:HealingSplash">Целебная струя</Text>
 	
 	<!-- DewElemental -->
 	<Text id="Special:TailWhap">Удар хвостом</Text>
@@ -155,6 +156,9 @@
 	<Text id="GUI:BattleSystem:Bonus">%d восстановил %d в качестве бонуса</Text>
 	<Text id="GUI:BattleSystem:HpBonus">%d HP</Text>
 	<Text id="GUI:BattleSystem:SpBonus">%d SP</Text>
+	<Text id="GUI:BattleSystem:Healing">%d восстановил %d очков HP</Text>
+	<Text id="GUI:BattleSystem:DebuffClear">%d исцелился от вредных эффектов</Text>
+	<Text id="GUI:BattleSystem:MegaHealing">%d восстановил %d очков хп и исцелился от вредных эффектов</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Побуду собой</Text>
 	<Text id="GUI:Improve:AreYouShure">Вы уверены что хотите выбрать этот\nкласс?\nВернуть обратно уже не выйдет.</Text>

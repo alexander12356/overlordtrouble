@@ -41,6 +41,7 @@ public class BattleActor : MonoBehaviour
         {
             m_Health = value;
             m_Health = m_Health < 0 ? 0 : m_Health;
+            m_Health = m_Health > m_BaseHealth ? m_BaseHealth : m_Health;
             ChangeHealthValue();
         }
     }

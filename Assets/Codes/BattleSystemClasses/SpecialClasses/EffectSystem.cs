@@ -7,7 +7,8 @@ public enum EffectType
     Attack,
     AttackRange,
     Defense,
-    DefenseDebuff
+    DefenseDebuff,
+    Healing
 }
 
 public class EffectSystem : Singleton<EffectSystem>
@@ -44,6 +45,11 @@ public class EffectSystem : Singleton<EffectSystem>
                 int l_DefenseDebuffDuration = Convert.ToInt32(p_EffectData.parameters[1]);
 
                 l_Effect = new DefenseDebuffEffect(p_Special, l_DefenseDebuffValue, l_DefenseDebuffDuration);
+                break;
+            case EffectType.Healing:
+                float l_HealingValue = Convert.ToSingle(p_EffectData.parameters[0]);
+
+                l_Effect = new HealingEffect(p_Special, l_HealingValue);
                 break;
         }
 
@@ -114,6 +120,12 @@ public class EffectSystem : Singleton<EffectSystem>
 
                     EffectData l_DefenseDebuffEffect = new EffectData(l_EffectType, new string[] { l_DefenseDebuffValue.ToString(), l_DefenseDebuffDuration.ToString() });
                     p_EffectList.Add(l_DefenseDebuffEffect);
+                    break;
+                case EffectType.Healing:
+                    float l_HealingValue = p_JsonObject[i]["Value"].f;
+
+                    EffectData l_HealingEffect = new EffectData(l_EffectType, new string[] { l_HealingValue.ToString() });
+                    p_EffectList.Add(l_HealingEffect);
                     break;
             }
         }

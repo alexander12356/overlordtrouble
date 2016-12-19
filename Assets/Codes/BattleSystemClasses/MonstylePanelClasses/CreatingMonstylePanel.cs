@@ -217,6 +217,13 @@ public class CreatingMonstylePanel : Panel
         for (int i = 0; i < 1; i++)
         {
             PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
+            l_MonstyleButton.specialId = "HealingSplash";
+            l_MonstyleButton.AddAction(ChooseSpecial);
+            m_SpecialButtonList.AddButton(l_MonstyleButton);
+        }
+        for (int i = 0; i < 1; i++)
+        {
+            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
             l_MonstyleButton.specialId = "TailWhap";
             l_MonstyleButton.AddAction(ChooseSpecial);
             m_SpecialButtonList.AddButton(l_MonstyleButton);

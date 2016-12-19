@@ -13,7 +13,8 @@
 	"Elemental": "Water",
     "Skills": [
 		"WaterDash",
-		"WaterBullet"
+		"WaterBullet",
+		"HealingSplash"
     ]
   },
   "ShellLizard": {
