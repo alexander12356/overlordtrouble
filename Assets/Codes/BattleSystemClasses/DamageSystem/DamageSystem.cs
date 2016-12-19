@@ -86,11 +86,10 @@ public class DamageSystem : Singleton<DamageSystem>
     public void EnemyAttack(BattleActor p_Sender, BattleActor p_Target, Special p_Special)
     {
         string l_SenderName = p_Sender.actorName;
-        string l_SpecialName = LocalizationDataBase.GetInstance().GetText("Enemy:" + p_Sender.id + ":" + p_Special.id);
 
         MonstyleSystem.GetInstance().RunSpecial(p_Sender, p_Target, p_Special);
 
-        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EnemyUsing", new string[] { l_SenderName, l_SpecialName });
+        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:EnemyUsing", new string[] { l_SenderName, p_Special.specialName });
 
         if (m_DamageValues.ContainsKey(p_Target))
         {

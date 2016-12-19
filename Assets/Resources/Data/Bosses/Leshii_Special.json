@@ -1,0 +1,18 @@
+{
+	"LeftHand" : 
+	{
+		"Level" : 1,
+		"Attack" : 1,
+		"Defense" : 1
+		"EffectChanse" : 
+	},
+	"RightHand" :
+	{
+		"Attack" : 1,
+		"Defense" : 1
+	},
+	"Body" :
+	{
+		"Defense" : 1
+	}
+}

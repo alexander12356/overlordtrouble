@@ -20,5 +20,6 @@ public class DataLoader : Singleton<DataLoader>
         StoreDataBase.GetInstance();
         BattleDataBase.GetInstance();
         ElementSystem.GetInstance();
+        LeshiiDataBase.GetInstance();
     }
 }
