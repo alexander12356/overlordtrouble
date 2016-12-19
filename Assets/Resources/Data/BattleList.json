@@ -22,7 +22,9 @@
 		"Location" : "ChickenFight",
 		"Enemy": 
 		[
-			"Skwatwolf"
+			"Dualent",
+			"Dualent",
+			"Dualent"
 		],
 		"Player":
 		{

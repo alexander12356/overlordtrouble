@@ -68,6 +68,9 @@ public class BattleSystemMobs : BattleSystem
             case "Skwatwolf":
                 l_BattleEnemy = Instantiate(Skwatwolf.prefab);
                 break;
+            case "Dualent":
+                l_BattleEnemy = Instantiate(Dualent.prefab);
+                break;
             default:
                 l_BattleEnemy = Instantiate(BattleEnemy.prefab);
                 break;
