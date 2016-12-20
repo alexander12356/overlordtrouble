@@ -28,13 +28,6 @@ public class BattleSystemBoss : BattleSystem
     {
         base.InitBattle();
 
-        m_BattleData = BattleStarter.GetInstance().GetBattle();
-        if (m_BattleData.id == null)
-        {
-            BattleStarter.GetInstance().InitBattle(null, "TestBattleBossLeshii");
-            m_BattleData = BattleStarter.GetInstance().GetBattle();
-        }
-
         // Инициализация фона
         m_Leshii.InitStats();
 

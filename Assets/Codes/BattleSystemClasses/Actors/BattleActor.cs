@@ -8,8 +8,6 @@ public class BattleActor : MonoBehaviour
     private string m_Id;
     private float m_Health;
     private float m_BaseHealth;
-    private float m_Mana;
-    private float m_BaseMana;
     private float m_AttackStat;
     private float m_DefenseStat;
     private int   m_Level;
@@ -45,15 +43,7 @@ public class BattleActor : MonoBehaviour
             ChangeHealthValue();
         }
     }
-    public float mana
-    {
-        get { return m_Mana;  }
-        set
-        {
-            m_Mana = value;
-            ChangeManaValue();
-        }
-    }
+    
     public float attackStat
     {
         get { return m_AttackStat; }
@@ -77,11 +67,6 @@ public class BattleActor : MonoBehaviour
     {
         get { return m_BaseHealth;  }
         set { m_BaseHealth = value; }
-    }
-    public float baseMana
-    {
-        get { return m_BaseMana;  }
-        set { m_BaseMana = value; }
     }
     public bool isDead
     {

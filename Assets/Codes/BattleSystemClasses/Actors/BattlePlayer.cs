@@ -7,6 +7,8 @@ public class BattlePlayer : BattleActor
 {
     #region Variables
     private static BattlePlayer m_Instance = null;
+    private float m_Mana;
+    private float m_BaseMana;
     private int[] m_AttackValue;
     private Animator m_Animator = null;
     private AudioSource m_AudioSource = null;
@@ -30,6 +32,22 @@ public class BattlePlayer : BattleActor
     {
         get { return m_MonstyleCapacity;  }
         set { m_MonstyleCapacity = value; }
+    }
+    public float mana
+    {
+        get { return m_Mana; }
+        set
+        {
+            m_Mana = value;
+            m_Mana = m_Mana < 0 ? 0 : m_Mana;
+            m_Mana = m_Mana > m_BaseMana ? m_BaseMana : m_Mana;
+            ChangeManaValue();
+        }
+    }
+    public float baseMana
+    {
+        get { return m_BaseMana; }
+        set { m_BaseMana = value; }
     }
 
     public override void Attack(BattleActor p_Actor)
@@ -138,6 +156,21 @@ public class BattlePlayer : BattleActor
     public override void PlayHitSound()
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip("Player_Hit"));
+    }
+
+    public void RestoreSpecialPoints()
+    {
+        float l_RestoreSpecialPoints = 0.0f;
+
+        if (baseMana < 100)
+        {
+            l_RestoreSpecialPoints = baseMana / 10.0f;
+        }
+        else
+        {
+            l_RestoreSpecialPoints = 10 + baseMana / 10.0f;
+        }
+        mana += l_RestoreSpecialPoints;
     }
 
     #endregion

@@ -57,7 +57,6 @@ public class BattleEnemy : BattleActor
         id = m_EnemyData.id;
         actorName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id);
         health = baseHealth = m_EnemyData.health;
-        mana = baseMana = 0;
         attackStat = m_EnemyData.attackStat;
         defenseStat = m_EnemyData.defenseStat;
         level = m_EnemyData.level;

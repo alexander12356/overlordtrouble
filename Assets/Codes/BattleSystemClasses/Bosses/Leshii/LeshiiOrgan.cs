@@ -22,7 +22,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         public override void InitStats()
         {
             actorName = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:" + m_OrganType);
-            baseHealth = health = LeshiiDataBase.GetInstance().GetHealth(m_OrganType);
+            health = baseHealth = LeshiiDataBase.GetInstance().GetHealth(m_OrganType);
             level = LeshiiDataBase.GetInstance().GetLevel();
             attackStat = LeshiiDataBase.GetInstance().GetAttackStat();
             defenseStat = LeshiiDataBase.GetInstance().GetDefenseStat();
