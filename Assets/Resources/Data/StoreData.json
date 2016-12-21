@@ -2,44 +2,12 @@
 	"Items" :
 	{
 		{
-			"Id" : "HealthPotion",
-			"Cost" : 5
+			"Id" : "SmallHealthPotion",
+			"Cost" : 20
 		},
 		{
-			"Id" : "ManaPotion",
-			"Cost" : 5
-		},
-		{
-			"Id" : "FireBallScroll",
-			"Cost" : 30
-		},
-		{
-			"Id" : "AirDefenseScroll",
-			"Cost" : 15
-		},
-		{
-			"Id" : "AncientArmor",
-			"Cost" : 100
-		},
-		{
-			"Id" : "TestItem1",
-			"Cost" : 1
-		},
-		{
-			"Id" : "TestItem2",
-			"Cost" : 2
-		},
-		{
-			"Id" : "TestItem3",
-			"Cost" : 3
-		},
-		{
-			"Id" : "TestItemWeapon1",
-			"Cost" : 1
-		},
-		{
-			"Id" : "TestItemWeapon2",
-			"Cost" : 2
+			"Id" : "SmallSpecialPotion",
+			"Cost" : 20
 		}
 	]
 }

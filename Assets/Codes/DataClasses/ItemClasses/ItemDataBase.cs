@@ -56,10 +56,9 @@ public class ItemDataBase : Singleton<ItemDataBase>
             string l_ItemId    = p_ItemListObject[i]["Id"].str;
             string l_ImagePath = p_ItemListObject[i]["Image"].str;
             ItemType l_ItemType = (ItemType)Enum.Parse(typeof(ItemType), p_ItemListObject[i]["Type"].str);
-            //TODO ParseActions
-            string l_Action    = p_ItemListObject[i]["Actions"][0]["Id"].str;
+            List<EffectData> l_EffectList = EffectSystem.GetInstance().ParseEffect(p_ItemListObject[i]["Effect"]);
 
-            ItemData l_ItemData = new ItemData(l_ItemId, l_ImagePath, l_Action, l_ItemType);
+            ItemData l_ItemData = new ItemData(l_ItemId, l_ImagePath, l_ItemType, l_EffectList);
             l_ItemList.Add(l_ItemId, l_ItemData);
         }
 

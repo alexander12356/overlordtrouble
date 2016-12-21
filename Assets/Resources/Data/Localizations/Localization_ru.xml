@@ -42,11 +42,8 @@
 	<Text id="Improvement:Brownie">Брауни</Text>
 	
 	<!-- items -->
-	<Text id="Item:HealthPotion">Целебное зелье</Text>
-	<Text id="Item:ManaPotion">Зелье магии</Text>
-	<Text id="Item:FireBallScroll">Свиток Огненного Шара</Text>
-	<Text id="Item:AirDefenseScroll">Свиток Воздушной защиты</Text>
-	<Text id="Item:AncientArmor">Древний доспех</Text>
+	<Text id="Item:SmallHealthPotion">Малое зелье жизни</Text>
+	<Text id="Item:SmallSpecialPotion">Малое зелье энергии</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>

@@ -1,4 +1,6 @@
-﻿public enum ItemType
+﻿using System.Collections.Generic;
+
+public enum ItemType
 {
     SingleUse,
     MultipleUse,
@@ -11,14 +13,14 @@ public struct ItemData
 {
     public string id;
     public string imagePath;
-    public string action;
     public ItemType itemType;
+    public List<EffectData> effectData;
 
-    public ItemData(string p_Id, string p_ImagePath, string p_Action, ItemType p_ItemType)
+    public ItemData(string p_Id, string p_ImagePath, ItemType p_ItemType, List<EffectData> p_EffectData)
     {
         id        = p_Id;
         imagePath = p_ImagePath;
-        action    = p_Action;
         itemType = p_ItemType;
+        effectData = p_EffectData;
     }
 }

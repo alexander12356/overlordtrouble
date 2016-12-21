@@ -10,6 +10,7 @@ public enum EffectIds
     Defense,
     DefenseDebuff,
     Healing,
+    Restoring,
     ClearSpecialStatus
 }
 
