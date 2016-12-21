@@ -19,6 +19,7 @@
 	<!-- Brownie -->
 	<Text id="Special:StaffStrike">Удар тростью</Text>
 	<Text id="Special:Ember">Искра</Text>
+	<Text id="Special:Concentration">Концентрация</Text>
 	
 	<!-- effect's description -->
 	<Text id="Effects:Attack">Урон: %d</Text>

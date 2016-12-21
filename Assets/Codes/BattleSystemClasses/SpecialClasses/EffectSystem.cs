@@ -5,6 +5,7 @@ public enum EffectIds
 {
     NONE = -1,
     Attack,
+    AttackBuff,
     AttackRange,
     Defense,
     DefenseDebuff,
@@ -54,6 +55,12 @@ public class EffectSystem : Singleton<EffectSystem>
                 break;
             case EffectIds.ClearSpecialStatus:
                 l_Effect = new ClearSpecialStatus(p_Special);
+                break;
+            case EffectIds.AttackBuff:
+                float l_AttackBuffValue = Convert.ToSingle(p_EffectData.parameters[0]);
+                float l_AttackBuffDuration = Convert.ToSingle(p_EffectData.parameters[1]);
+
+                l_Effect = new AttackBuffEffect(p_Special, l_AttackBuffValue, l_AttackBuffDuration);
                 break;
         }
 
@@ -134,6 +141,13 @@ public class EffectSystem : Singleton<EffectSystem>
                 case EffectIds.ClearSpecialStatus:
                     EffectData l_ClearSpecialStatusEffect = new EffectData(l_EffectType, new string[] { });
                     p_EffectList.Add(l_ClearSpecialStatusEffect);
+                    break;
+                case EffectIds.AttackBuff:
+                    float l_AttackBuffStat = p_JsonObject[i]["Value"].f;
+                    float l_AttackBuffDuration = p_JsonObject[i]["Duration"].f;
+
+                    EffectData l_AttackBuffEffect = new EffectData(l_EffectType, new string[] { l_AttackBuffStat.ToString(), l_AttackBuffDuration.ToString() });
+                    p_EffectList.Add(l_AttackBuffEffect);
                     break;
             }
         }

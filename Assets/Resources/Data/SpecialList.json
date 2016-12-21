@@ -145,6 +145,21 @@
 			}
 		}
 	},
+	"Concentration" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Fire",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"AttackBuff" :
+			{
+				"Value" : 5,
+				"Duration" : 5
+			}
+		}
+	},
 	"StonePress" :
 	{
 		"Sp" : 5.0,

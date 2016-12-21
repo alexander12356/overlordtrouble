@@ -256,6 +256,13 @@ public class CreatingMonstylePanel : Panel
             l_MonstyleButton.AddAction(ChooseSpecial);
             m_SpecialButtonList.AddButton(l_MonstyleButton);
         }
+        for (int i = 0; i < 1; i++)
+        {
+            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
+            l_MonstyleButton.specialId = "Concentration";
+            l_MonstyleButton.AddAction(ChooseSpecial);
+            m_SpecialButtonList.AddButton(l_MonstyleButton);
+        }
     }
 
     private void InitSpecials()
