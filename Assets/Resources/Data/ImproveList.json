@@ -31,7 +31,8 @@
 	"Elemental": "Mana",
     "Skills": [
 		"StaffStrike",
-		"Ember"
+		"Ember",
+		"Concentration"
     ]
   }
 }

@@ -53,6 +53,11 @@
 	<Text id="Elemental:Water">Вода</Text>
 	<Text id="Elemental:Earth">Земля</Text>
 	<Text id="Elemental:Mana">Мана</Text>
+	<Text id="Elemental:Live">Жизнь</Text>
+	<Text id="Elemental:Fire">Огонь</Text>
+	<Text id="Elemental:Nature">Природа</Text>
+	<Text id="Elemental:Dark">Тьма</Text>
+	<Text id="Elemental:Physical">Физический</Text>
 	
 	<!-- enemy's -->
 	<Text id="Enemy:Bokalisk">Кокотрикс</Text>
