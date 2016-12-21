@@ -11,16 +11,15 @@
 	<Text id="Special:WaterDash">Ударный рывок</Text>
 	<Text id="Special:HealingSplash">Целебная струя</Text>
 	
-	<!-- DewElemental -->
+	<!-- Salamanti -->
 	<Text id="Special:TailWhap">Удар хвостом</Text>
 	<Text id="Special:Slash">Разрез</Text>
-	<Text id="Special:ShellDefense">Панцирная защита</Text>
+	<Text id="Special:Molting">Сброс кожи</Text>
 	
-	<!-- DewElemental -->
+	<!-- Brownie -->
 	<Text id="Special:BlobeStrike">Водяной удар</Text>
 	<Text id="Special:HealingWater">Целебная вода</Text>
 	<Text id="Special:StonePress">Каменный пресс</Text>
-	<Text id="Special:Stun">Оглушение</Text>
 	
 	<!-- effect's description -->
 	<Text id="Effects:Attack">Урон: %d</Text>
@@ -158,6 +157,7 @@
 	<Text id="GUI:BattleSystem:SpBonus">%d SP</Text>
 	<Text id="GUI:BattleSystem:Healing">%d восстановил %d очков HP</Text>
 	<Text id="GUI:BattleSystem:DebuffClear">%d исцелился от вредных эффектов</Text>
+	<Text id="GUI:BattleSystem:BadDebuffClear">%d не имеет никаких статусных эффектов. Очищающий прием ничего не сделал</Text>
 	<Text id="GUI:BattleSystem:MegaHealing">%d восстановил %d очков хп и исцелился от вредных эффектов</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Побуду собой</Text>

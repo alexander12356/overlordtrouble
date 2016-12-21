@@ -15,6 +15,7 @@ public class DefenseDebuffEffect : BaseEffect
         id = "DefenseDebuff";
         m_DefenseValue = m_BaseDefenseValue = p_DefenseValue;
         m_Duration = p_Duration;
+        m_EffectType = EffectType.Debuff;
     }
 
     public override void Run(BattleActor p_Sender, BattleActor p_Target)
@@ -31,7 +32,7 @@ public class DefenseDebuffEffect : BaseEffect
         {
             m_Target.defenseStat -= m_DefenseValue;
             m_Target.AddEffect(m_Special.id, this);
-            m_Target.AddDebuff();
+            m_Target.AddDebuffIcon();
         }
 
         DamageSystem.GetInstance().AddEffectSpecial(p_Target, m_Special);
@@ -58,7 +59,7 @@ public class DefenseDebuffEffect : BaseEffect
             return false;
         }
         m_Target.defenseStat += m_DefenseValue;
-        m_Target.RemoveDebuff();
+        m_Target.RemoveDebuffIcon();
 
         EffectSystem.GetInstance().AddRemoveEffectSpecial(m_Target, m_Special);
 
@@ -70,5 +71,12 @@ public class DefenseDebuffEffect : BaseEffect
         base.Stack(p_Effect);
 
         m_DurationCounter = 0;
+    }
+
+    public override void EndImmediately()
+    {
+        base.EndImmediately();
+
+        m_Duration = m_DurationCounter;
     }
 }

@@ -11,6 +11,7 @@ public class StunEffect : BaseEffect
     public StunEffect(Special p_Special) : base(p_Special)
     {
         id = "Stun";
+        m_EffectType = EffectType.StatusEffect;
     }
 
     public override void Run(BattleActor p_Sender, BattleActor p_Target)
@@ -27,7 +28,7 @@ public class StunEffect : BaseEffect
         {
             m_Player.monstyleCapacity = 3;
             m_Player.AddEffect(m_Special.id, this);
-            m_Player.AddStatusEffect(id);
+            m_Player.AddStatusEffectIcon(id);
         }
 
         DamageSystem.GetInstance().AddEffectSpecial(p_Target, m_Special);
@@ -48,7 +49,7 @@ public class StunEffect : BaseEffect
         }
 
         m_Player.monstyleCapacity = 4;
-        m_Player.RemoveStatusEffect(id);
+        m_Player.RemoveStatusEffectIcon(id);
         EffectSystem.GetInstance().AddRemoveEffectSpecial(m_Player, m_Special);
 
         return true;
@@ -59,5 +60,13 @@ public class StunEffect : BaseEffect
         base.Stack(p_Effect);
 
         m_DurationCounter = 0;
+    }
+
+    public override void EndImmediately()
+    {
+        base.EndImmediately();
+
+        m_Player.monstyleCapacity = 4;
+        m_Player.RemoveStatusEffectIcon(id);
     }
 }

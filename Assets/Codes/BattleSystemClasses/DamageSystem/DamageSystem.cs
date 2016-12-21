@@ -266,9 +266,11 @@ public class DamageSystem : Singleton<DamageSystem>
                 ShowRestoration(l_Actor, m_RestorationValues[l_Actor]);
             }
         }
-        //      Вывести текст(айди текста, словарь)
-        //  Если словарь Бонусов не пуст
-        //      Вывести текст(айди текста, словарь)
+
+        if (m_Bonuses.Count > 0)
+        {
+            ShowBonuses();
+        }
 
         BattleCheckDeathStep l_CheckDeathStep = new BattleCheckDeathStep();
         ResultSystem.GetInstance().AddStep(l_CheckDeathStep);
@@ -345,7 +347,14 @@ public class DamageSystem : Singleton<DamageSystem>
         switch (l_RestorationData.type)
         {
             case RestorationType.DebuffClear:
-                l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:DebuffClear", new string[] { l_BattleActor.actorName });
+                if (l_RestorationData.value > 0.9f)
+                {
+                    l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:DebuffClear", new string[] { l_BattleActor.actorName });
+                }
+                else
+                {
+                    l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadDebuffClear", new string[] { l_BattleActor.actorName });
+                }
                 break;
             default:
                 l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:" + l_RestorationData.type, new string[] { l_BattleActor.actorName, l_RestorationData.value.ToString() });
@@ -378,6 +387,13 @@ public class DamageSystem : Singleton<DamageSystem>
         }
 
         string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Bonus", new string[] { BattlePlayer.GetInstance().actorName, l_Bonuses });
+
+        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { l_Text });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+        ResultSystem.GetInstance().AddStep(l_Step);
     }
 
     private void ShowAddedSpecials(BattleActor p_Target, List<Special> p_SpecialList)
@@ -435,6 +451,7 @@ public class DamageSystem : Singleton<DamageSystem>
         m_AddedSpecials.Clear();
         m_RestorationValues.Clear();
         m_AfterAttackSteps.Clear();
+        m_Bonuses.Clear();
         m_StatisticText = string.Empty;
     }
 

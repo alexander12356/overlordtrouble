@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public enum EffectType
+public enum EffectIds
 {
     NONE = -1,
     Attack,
     AttackRange,
     Defense,
     DefenseDebuff,
-    Healing
+    Healing,
+    ClearSpecialStatus
 }
 
 public class EffectSystem : Singleton<EffectSystem>
@@ -21,35 +22,38 @@ public class EffectSystem : Singleton<EffectSystem>
 
         switch (p_EffectData.type)
         {
-            case EffectType.Attack:
+            case EffectIds.Attack:
                 float l_AttackValue = Convert.ToSingle(p_EffectData.parameters[0]);
 
                 l_Effect = new AttackEffect(p_Special, l_AttackValue);
                 break;
-            case EffectType.AttackRange:
+            case EffectIds.AttackRange:
                 float[] l_AttackRangeValue = new float[2];
                 l_AttackRangeValue[0] = Convert.ToSingle(p_EffectData.parameters[0]);
                 l_AttackRangeValue[1] = Convert.ToSingle(p_EffectData.parameters[1]);
 
                 l_Effect = new AttackRangeEffect(p_Special, l_AttackRangeValue);
                 break;
-            case EffectType.Defense:
+            case EffectIds.Defense:
 
                 float l_DefenseValue = Convert.ToSingle(p_EffectData.parameters[0]);
                 int l_Duration = Convert.ToInt32(p_EffectData.parameters[1]);
 
                 l_Effect = new DefenseEffect(p_Special, l_DefenseValue, l_Duration);
                 break;
-            case EffectType.DefenseDebuff:
+            case EffectIds.DefenseDebuff:
                 float l_DefenseDebuffValue = Convert.ToSingle(p_EffectData.parameters[0]);
                 int l_DefenseDebuffDuration = Convert.ToInt32(p_EffectData.parameters[1]);
 
                 l_Effect = new DefenseDebuffEffect(p_Special, l_DefenseDebuffValue, l_DefenseDebuffDuration);
                 break;
-            case EffectType.Healing:
+            case EffectIds.Healing:
                 float l_HealingValue = Convert.ToSingle(p_EffectData.parameters[0]);
 
                 l_Effect = new HealingEffect(p_Special, l_HealingValue);
+                break;
+            case EffectIds.ClearSpecialStatus:
+                l_Effect = new ClearSpecialStatus(p_Special);
                 break;
         }
 
@@ -90,42 +94,46 @@ public class EffectSystem : Singleton<EffectSystem>
 
         for (int i = 0; i < p_JsonObject.Count; i++)
         {
-            EffectType l_EffectType = (EffectType)Enum.Parse(typeof(EffectType), p_JsonObject.keys[0]);
+            EffectIds l_EffectType = (EffectIds)Enum.Parse(typeof(EffectIds), p_JsonObject.keys[0]);
 
             switch (l_EffectType)
             {
-                case EffectType.Attack:
+                case EffectIds.Attack:
                     float l_AttackValue = p_JsonObject[i]["AttackValue"].f;
 
                     EffectData l_AttackEffect = new EffectData(l_EffectType, new string[] { l_AttackValue.ToString() });
                     p_EffectList.Add(l_AttackEffect);
                     break;
-                case EffectType.AttackRange:
+                case EffectIds.AttackRange:
                     float l_AttackValue1 = p_JsonObject[i]["Value1"].f;
                     float l_AttackValue2 = p_JsonObject[i]["Value2"].f;
 
                     EffectData l_AttackRangeEffect = new EffectData(l_EffectType, new string[] { l_AttackValue1.ToString(), l_AttackValue2.ToString() });
                     p_EffectList.Add(l_AttackRangeEffect);
                     break;
-                case EffectType.Defense:
+                case EffectIds.Defense:
                     float l_DefenseValue = p_JsonObject[i]["Value"].f;
                     float l_Duration = p_JsonObject[i]["Duration"].f;
 
                     EffectData l_DefenseEffect = new EffectData(l_EffectType, new string[] { l_DefenseValue.ToString(), l_Duration.ToString() });
                     p_EffectList.Add(l_DefenseEffect);
                     break;
-                case EffectType.DefenseDebuff:
+                case EffectIds.DefenseDebuff:
                     float l_DefenseDebuffValue = p_JsonObject[i]["Value"].f;
                     float l_DefenseDebuffDuration = p_JsonObject[i]["Duration"].f;
 
                     EffectData l_DefenseDebuffEffect = new EffectData(l_EffectType, new string[] { l_DefenseDebuffValue.ToString(), l_DefenseDebuffDuration.ToString() });
                     p_EffectList.Add(l_DefenseDebuffEffect);
                     break;
-                case EffectType.Healing:
+                case EffectIds.Healing:
                     float l_HealingValue = p_JsonObject[i]["Value"].f;
 
                     EffectData l_HealingEffect = new EffectData(l_EffectType, new string[] { l_HealingValue.ToString() });
                     p_EffectList.Add(l_HealingEffect);
+                    break;
+                case EffectIds.ClearSpecialStatus:
+                    EffectData l_ClearSpecialStatusEffect = new EffectData(l_EffectType, new string[] { });
+                    p_EffectList.Add(l_ClearSpecialStatusEffect);
                     break;
             }
         }

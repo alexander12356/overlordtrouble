@@ -11,6 +11,7 @@
         id = "Defense";
         m_DefenseValue = m_BaseDefenseValue = p_DefenseValue;
         m_Duration = p_Duration;
+        m_EffectType = EffectType.Buff;
     }
 
     public override void Run(BattleActor p_Sender, BattleActor p_Target)
@@ -27,7 +28,7 @@
         {
             m_Sender.defenseStat += m_DefenseValue;
             m_Sender.AddEffect(m_Special.id, this);
-            m_Sender.AddBuff();
+            m_Sender.AddBuffIcon();
         }
 
         DamageSystem.GetInstance().AddEffectSpecial(p_Sender, m_Special);
@@ -55,7 +56,7 @@
             return false;
         }
         m_Sender.defenseStat -= m_DefenseValue;
-        m_Sender.RemoveBuff();
+        m_Sender.RemoveBuffIcon();
 
         EffectSystem.GetInstance().AddRemoveEffectSpecial(m_Sender, m_Special);
 

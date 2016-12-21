@@ -204,27 +204,27 @@ public class BattleActor : MonoBehaviour
         m_DeleteSpecials.Clear();
     }
 
-    public virtual void AddBuff()
+    public virtual void AddBuffIcon()
     {
     }
 
-    public virtual void RemoveBuff()
+    public virtual void RemoveBuffIcon()
     {
     }
 
-    public virtual void AddDebuff()
+    public virtual void AddDebuffIcon()
     {
     }
 
-    public virtual void RemoveDebuff()
+    public virtual void RemoveDebuffIcon()
     {
     }
 
-    public virtual void AddStatusEffect(string p_EffectId)
+    public virtual void AddStatusEffectIcon(string p_EffectId)
     {
     }
 
-    public virtual void RemoveStatusEffect(string p_EffectId)
+    public virtual void RemoveStatusEffectIcon(string p_EffectId)
     {
     }
 
@@ -244,6 +244,48 @@ public class BattleActor : MonoBehaviour
             return 1.0f;
         }
         return m_ElementBalance[p_Element];
+    }
+
+    public void EffectEndImmediately(string p_EffectId)
+    {
+        foreach (string l_Id in m_EffectList.Keys)
+        {
+            for (int i = 0; i < m_EffectList[l_Id].Count; i++)
+            {
+                string l_EffectId = m_EffectList[l_Id][i].id;
+                if (l_EffectId == p_EffectId)
+                {
+                    m_EffectList[l_Id][i].EndImmediately();
+                    m_EffectList[l_Id].RemoveAt(i);
+                    i--;
+                }
+            }
+            if (m_EffectList[l_Id].Count == 0)
+            {
+                m_DeleteSpecials.Add(l_Id);
+            }
+        }
+        for (int i = 0; i < m_DeleteSpecials.Count; i++)
+        {
+            m_EffectList.Remove(m_DeleteSpecials[i]);
+        }
+        m_DeleteSpecials.Clear();
+    }
+
+    public bool HasEffect(string p_EffectId)
+    {
+        foreach (string l_Id in m_EffectList.Keys)
+        {
+            for (int i = 0; i < m_EffectList[l_Id].Count; i++)
+            {
+                string l_EffectId = m_EffectList[l_Id][i].id;
+                if (l_EffectId == p_EffectId)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     #endregion
 }

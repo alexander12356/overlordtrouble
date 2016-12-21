@@ -190,7 +190,7 @@ public class BattlePlayer : BattleActor
         rendererTransform = transform.FindChild("Renderer");
     }
     
-    public override void AddBuff()
+    public override void AddBuffIcon()
     {
         m_BuffCount++;
 
@@ -208,7 +208,7 @@ public class BattlePlayer : BattleActor
         m_EffectIcons.Add("Buff", l_EffectIcon);
     }
 
-    public override void RemoveBuff()
+    public override void RemoveBuffIcon()
     {
         m_BuffCount--;
 
@@ -219,9 +219,9 @@ public class BattlePlayer : BattleActor
         }
     }
 
-    public override void AddDebuff()
+    public override void AddDebuffIcon()
     {
-        base.AddDebuff();
+        base.AddDebuffIcon();
 
         m_DebuffCount++;
 
@@ -247,9 +247,9 @@ public class BattlePlayer : BattleActor
         m_EffectIcons.Add("Debuff", l_EffectIcon);
     }
 
-    public override void RemoveDebuff()
+    public override void RemoveDebuffIcon()
     {
-        base.RemoveDebuff();
+        base.RemoveDebuffIcon();
 
         m_DebuffCount--;
 
@@ -260,9 +260,9 @@ public class BattlePlayer : BattleActor
         }
     }
 
-    public override void AddStatusEffect(string p_EffectId)
+    public override void AddStatusEffectIcon(string p_EffectId)
     {
-        base.AddStatusEffect(p_EffectId);
+        base.AddStatusEffectIcon(p_EffectId);
 
         if (m_EffectIcons.ContainsKey(p_EffectId))
         {
@@ -277,9 +277,9 @@ public class BattlePlayer : BattleActor
         m_EffectIcons.Add(p_EffectId, l_EffectIcon);
     }
 
-    public override void RemoveStatusEffect(string p_EffectId)
+    public override void RemoveStatusEffectIcon(string p_EffectId)
     {
-        base.RemoveStatusEffect(p_EffectId);
+        base.RemoveStatusEffectIcon(p_EffectId);
 
         Destroy(m_EffectIcons[p_EffectId].gameObject);
         m_EffectIcons.Remove(p_EffectId);
