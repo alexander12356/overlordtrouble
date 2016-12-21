@@ -17,9 +17,8 @@
 	<Text id="Special:Molting">Сброс кожи</Text>
 	
 	<!-- Brownie -->
-	<Text id="Special:BlobeStrike">Водяной удар</Text>
-	<Text id="Special:HealingWater">Целебная вода</Text>
-	<Text id="Special:StonePress">Каменный пресс</Text>
+	<Text id="Special:StaffStrike">Удар тростью</Text>
+	<Text id="Special:Ember">Искра</Text>
 	
 	<!-- effect's description -->
 	<Text id="Effects:Attack">Урон: %d</Text>

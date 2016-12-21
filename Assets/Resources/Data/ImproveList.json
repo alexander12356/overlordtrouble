@@ -30,6 +30,8 @@
     "Profile": "Sprites/Creations/Brownie/Profile",
 	"Elemental": "Mana",
     "Skills": [
+		"StaffStrike",
+		"Ember"
     ]
   }
 }

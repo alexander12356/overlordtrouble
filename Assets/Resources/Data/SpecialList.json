@@ -119,6 +119,32 @@
 			}
 		}
 	},
+	"StaffStrike" :
+	{
+		"Sp" : 4.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 4.0
+			}
+		}
+	},
+	"Ember" :
+	{
+		"Sp" : 8.0,
+		"Element" : "Fire",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 7.0
+			}
+		}
+	},
 	"StonePress" :
 	{
 		"Sp" : 5.0,
