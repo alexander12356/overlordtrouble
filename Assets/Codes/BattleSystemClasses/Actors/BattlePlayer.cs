@@ -7,8 +7,6 @@ public class BattlePlayer : BattleActor
 {
     #region Variables
     private static BattlePlayer m_Instance = null;
-    private float m_Mana;
-    private float m_BaseMana;
     private int[] m_AttackValue;
     private Animator m_Animator = null;
     private AudioSource m_AudioSource = null;
@@ -32,22 +30,6 @@ public class BattlePlayer : BattleActor
     {
         get { return m_MonstyleCapacity;  }
         set { m_MonstyleCapacity = value; }
-    }
-    public float mana
-    {
-        get { return m_Mana; }
-        set
-        {
-            m_Mana = value;
-            m_Mana = m_Mana < 0 ? 0 : m_Mana;
-            m_Mana = m_Mana > m_BaseMana ? m_BaseMana : m_Mana;
-            ChangeManaValue();
-        }
-    }
-    public float baseMana
-    {
-        get { return m_BaseMana; }
-        set { m_BaseMana = value; }
     }
 
     public override void Attack(BattleActor p_Actor)
@@ -104,8 +86,8 @@ public class BattlePlayer : BattleActor
         baseHealth = PlayerData.GetInstance().GetStatValue("HealthPoints");
         health = PlayerData.GetInstance().health;
 
-        baseMana = PlayerData.GetInstance().GetStatValue("MonstylePoints");
-        mana = PlayerData.GetInstance().monstylePoints;
+        baseSpecialPoints = PlayerData.GetInstance().GetStatValue("MonstylePoints");
+        specialPoints = PlayerData.GetInstance().monstylePoints;
 
         attackStat = PlayerData.GetInstance().GetStatValue("Attack");
         defenseStat = PlayerData.GetInstance().GetStatValue("Defense");
@@ -133,11 +115,11 @@ public class BattlePlayer : BattleActor
     {
         base.ChangeManaValue();
 
-        m_SpecialText.text = "MP: " + mana + "/" + baseMana;
-        PlayerData.GetInstance().monstylePoints = (int)mana;
+        m_SpecialText.text = "MP: " + specialPoints + "/" + baseSpecialPoints;
+        PlayerData.GetInstance().monstylePoints = (int)specialPoints;
 
         Vector3 l_BarScale = m_SpecialPointBar.transform.localScale;
-        l_BarScale.x = mana / baseMana;
+        l_BarScale.x = specialPoints / baseSpecialPoints;
         m_SpecialPointBar.transform.localScale = l_BarScale;
     }
 
@@ -162,15 +144,15 @@ public class BattlePlayer : BattleActor
     {
         float l_RestoreSpecialPoints = 0.0f;
 
-        if (baseMana < 100)
+        if (baseSpecialPoints < 100)
         {
-            l_RestoreSpecialPoints = baseMana / 10.0f;
+            l_RestoreSpecialPoints = baseSpecialPoints / 10.0f;
         }
         else
         {
-            l_RestoreSpecialPoints = 10 + baseMana / 10.0f;
+            l_RestoreSpecialPoints = 10 + baseSpecialPoints / 10.0f;
         }
-        mana += l_RestoreSpecialPoints;
+        specialPoints += l_RestoreSpecialPoints;
     }
 
     #endregion

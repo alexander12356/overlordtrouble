@@ -2,12 +2,14 @@
 
 using System.Collections.Generic;
 
-public class BattleActor : MonoBehaviour
+public class BattleActor : MonoBehaviour, IEffectInfluenced
 {
     #region Variables
     private string m_Id;
     private float m_Health;
     private float m_BaseHealth;
+    private float m_SpecialPoints;
+    private float m_BaseSpecialPoints;
     private float m_AttackStat;
     private float m_DefenseStat;
     private int   m_Level;
@@ -43,7 +45,27 @@ public class BattleActor : MonoBehaviour
             ChangeHealthValue();
         }
     }
-    
+    public float baseHealth
+    {
+        get { return m_BaseHealth; }
+        set { m_BaseHealth = value; }
+    }
+    public float specialPoints
+    {
+        get { return m_SpecialPoints; }
+        set
+        {
+            m_SpecialPoints = value;
+            m_SpecialPoints = m_SpecialPoints < 0 ? 0 : m_SpecialPoints;
+            m_SpecialPoints = m_SpecialPoints > m_BaseSpecialPoints ? m_BaseSpecialPoints : m_SpecialPoints;
+            ChangeManaValue();
+        }
+    }
+    public float baseSpecialPoints
+    {
+        get { return m_BaseSpecialPoints; }
+        set { m_BaseSpecialPoints = value; }
+    }
     public float attackStat
     {
         get { return m_AttackStat; }
@@ -62,11 +84,6 @@ public class BattleActor : MonoBehaviour
     {
         get { return m_Level;  }
         set { m_Level = value; }
-    }
-    public float baseHealth
-    {
-        get { return m_BaseHealth;  }
-        set { m_BaseHealth = value; }
     }
     public bool isDead
     {

@@ -11,18 +11,17 @@ public class StunEffect : BaseEffect
     public StunEffect(Special p_Special) : base(p_Special)
     {
         id = "Stun";
-        m_EffectType = EffectType.StatusEffect;
     }
 
-    public override void Run(BattleActor p_Sender, BattleActor p_Target)
+    public override void Run(IEffectInfluenced p_Sender, IEffectInfluenced p_Target)
     {
         base.Run(p_Sender, p_Target);
         
         m_Player = (BattlePlayer)p_Target;
 
-        if (p_Sender.HasSpecial(m_Special.id))
+        if (m_Player.HasSpecial(m_Special.id))
         {
-            p_Sender.StackEffect(m_Special.id, this);
+            m_Player.StackEffect(m_Special.id, this);
         }
         else
         {
@@ -31,7 +30,7 @@ public class StunEffect : BaseEffect
             m_Player.AddStatusEffectIcon(id);
         }
 
-        DamageSystem.GetInstance().AddEffectSpecial(p_Target, m_Special);
+        DamageSystem.GetInstance().AddEffectSpecial(m_Player, m_Special);
     }
 
     public override void Effective()

@@ -1,14 +1,14 @@
-﻿public class ClearSpecialStatus : BaseEffect
+﻿public class ClearSpecialStatusEffect : BaseEffect
 {
     private float m_BonusCount = 1.0f;
     private float m_BaseSpecialPoints = 0.0f;
 
-	public ClearSpecialStatus(Special p_Special) : base(p_Special)
+	public ClearSpecialStatusEffect(Special p_Special) : base(p_Special)
     {
         m_BaseSpecialPoints = SpecialDataBase.GetInstance().GetSpecialData(m_Special.id).sp;
     }
 
-    public override void Run(BattleActor p_Sender, BattleActor p_Target)
+    public override void Run(IEffectInfluenced p_Sender, IEffectInfluenced p_Target)
     {
         base.Run(p_Sender, p_Target);
 
@@ -19,15 +19,17 @@
             DamageSystem.GetInstance().AddBonuses(BonusType.Health, l_BonusHP);
         }
 
-        if (p_Sender.HasEffect("Stun"))
-        {
-            p_Sender.EffectEndImmediately("Stun");
+        BattleActor l_Sender = p_Sender as BattleActor;
 
-            DamageSystem.GetInstance().AddRestoration(p_Sender, RestorationType.DebuffClear, 1.0f);
+        if (l_Sender.HasEffect("Stun"))
+        {
+            l_Sender.EffectEndImmediately("Stun");
+
+            DamageSystem.GetInstance().AddRestoration(l_Sender, RestorationType.DebuffClear, 1.0f);
         }
         else
         {
-            DamageSystem.GetInstance().AddRestoration(p_Sender, RestorationType.DebuffClear, 0.0f);
+            DamageSystem.GetInstance().AddRestoration(l_Sender, RestorationType.DebuffClear, 0.0f);
         }
     }
 

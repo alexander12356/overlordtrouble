@@ -15,14 +15,13 @@ public class DefenseDebuffEffect : BaseEffect
         id = "DefenseDebuff";
         m_DefenseValue = m_BaseDefenseValue = p_DefenseValue;
         m_Duration = p_Duration;
-        m_EffectType = EffectType.Debuff;
     }
 
-    public override void Run(BattleActor p_Sender, BattleActor p_Target)
+    public override void Run(IEffectInfluenced p_Sender, IEffectInfluenced p_Target)
     {
         base.Run(p_Sender, p_Target);
 
-        m_Target = p_Target;
+        m_Target = p_Target as BattleActor;
 
         if (m_Target.HasSpecial(m_Special.id))
         {
@@ -35,7 +34,7 @@ public class DefenseDebuffEffect : BaseEffect
             m_Target.AddDebuffIcon();
         }
 
-        DamageSystem.GetInstance().AddEffectSpecial(p_Target, m_Special);
+        DamageSystem.GetInstance().AddEffectSpecial(m_Target, m_Special);
     }
 
     public override void Upgrade()

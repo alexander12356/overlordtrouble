@@ -107,20 +107,20 @@ public class CreatingMonstylePanel : Panel
         {
             l_PanelButton.Choose(false);
             m_ChoosedSkills.Remove(l_PanelButton.specialId);
-            BattlePlayer.GetInstance().mana += SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.specialId).sp;
+            BattlePlayer.GetInstance().specialPoints += SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.specialId).sp;
 
             m_AddedSpecialButtonList.RemoveButton(LocalizationDataBase.GetInstance().GetText("Special:" + l_PanelButton.specialId));
         }
         else
         {
-            if (m_ChoosedSkills.Count >= BattlePlayer.GetInstance().monstyleCapacity || BattlePlayer.GetInstance().mana < SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.specialId).sp)
+            if (m_ChoosedSkills.Count >= BattlePlayer.GetInstance().monstyleCapacity || BattlePlayer.GetInstance().specialPoints < SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.specialId).sp)
             {
                 return;
             }
 
             l_PanelButton.Choose(true);
             m_ChoosedSkills.Add(l_PanelButton.specialId);
-            BattlePlayer.GetInstance().mana -= SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.specialId).sp;
+            BattlePlayer.GetInstance().specialPoints -= SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.specialId).sp;
 
             PanelButtonChosenSpecial l_PanelButtonChosenSpecial = Instantiate(PanelButtonChosenSpecial.prefab);
             l_PanelButtonChosenSpecial.title = LocalizationDataBase.GetInstance().GetText("Special:" + l_PanelButton.specialId);
@@ -172,7 +172,7 @@ public class CreatingMonstylePanel : Panel
     {
         for (int i = 0; i < m_ChoosedSkills.Count; i++)
         {
-            BattlePlayer.GetInstance().mana += SpecialDataBase.GetInstance().GetSpecialData(m_ChoosedSkills[i]).sp;
+            BattlePlayer.GetInstance().specialPoints += SpecialDataBase.GetInstance().GetSpecialData(m_ChoosedSkills[i]).sp;
         }
         m_ChoosedSkills.Clear();
     }

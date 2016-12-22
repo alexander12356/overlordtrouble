@@ -1,16 +1,7 @@
-﻿public enum EffectType
-{
-    Simple,
-    Buff,
-    Debuff,
-    StatusEffect
-}
-
-public class BaseEffect
+﻿public class BaseEffect
 {
     private string m_Id;
 
-    protected EffectType m_EffectType = EffectType.Simple;
     protected Special m_Special = null;
 
     public string id
@@ -18,17 +9,13 @@ public class BaseEffect
         get { return m_Id;  }
         set { m_Id = value; }
     }
-    public EffectType effectType
-    {
-        get { return m_EffectType; }
-    }
 
     public BaseEffect(Special p_Special)
     {
         m_Special = p_Special;
     }
 
-    public virtual void Run(BattleActor p_Sender, BattleActor p_Target)
+    public virtual void Run(IEffectInfluenced p_Sender, IEffectInfluenced p_Target)
     {
     }
 

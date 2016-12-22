@@ -55,7 +55,7 @@ public class EffectSystem : Singleton<EffectSystem>
                 l_Effect = new HealingEffect(p_Special, l_HealingValue);
                 break;
             case EffectIds.ClearSpecialStatus:
-                l_Effect = new ClearSpecialStatus(p_Special);
+                l_Effect = new ClearSpecialStatusEffect(p_Special);
                 break;
             case EffectIds.AttackBuff:
                 float l_AttackBuffValue = Convert.ToSingle(p_EffectData.parameters[0]);

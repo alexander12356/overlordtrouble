@@ -10,12 +10,14 @@ public class AttackRangeEffect : BaseEffect
         m_AttackValue = p_AttackValue;
     }
 
-    public override void Run(BattleActor p_Sender, BattleActor p_Target)
+    public override void Run(IEffectInfluenced p_Sender, IEffectInfluenced p_Target)
     {
         base.Run(p_Sender, p_Target);
 
         float l_DamageValue = Random.Range(m_AttackValue[0], m_AttackValue[1]);
+        BattleActor l_Sender = p_Sender as BattleActor;
+        BattleActor l_Target = p_Target as BattleActor;
 
-        DamageSystem.GetInstance().AddDamageValue(p_Sender, p_Target, l_DamageValue, m_Special.element);
+        DamageSystem.GetInstance().AddDamageValue(l_Sender, l_Target, l_DamageValue, m_Special.element);
     }
 }

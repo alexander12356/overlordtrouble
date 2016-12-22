@@ -12,13 +12,17 @@ public class HealingEffect : BaseEffect
         m_HealingValue = m_HealingValueBase = p_HealingValue;
     }
 
-    public override void Run(BattleActor p_Sender, BattleActor p_Target)
+    public override void Run(IEffectInfluenced p_Sender, IEffectInfluenced p_Target)
     {
         base.Run(p_Sender, p_Target);
 
         p_Sender.health += m_HealingValue;
 
-        DamageSystem.GetInstance().AddRestoration(p_Sender, RestorationType.Healing, m_HealingValue);
+        if (BattleSystem.GetInstance().IsInstance())
+        {
+            BattleActor l_Sender = p_Sender as BattleActor;
+            DamageSystem.GetInstance().AddRestoration(l_Sender, RestorationType.Healing, m_HealingValue);
+        }
     }
 
     public override void Upgrade()

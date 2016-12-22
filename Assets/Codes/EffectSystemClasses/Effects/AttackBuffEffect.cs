@@ -1,24 +1,22 @@
-﻿public class DefenseEffect : BaseEffect
+﻿public class AttackBuffEffect : BaseEffect
 {
-    private float m_BaseDefenseValue = 0.0f;
-    private float m_DefenseValue = 0.0f;
-    private int m_Duration = 0;
-    private int m_DurationCounter = 0;
+    private float m_AttackStatValue = 0.0f;
+    private float m_BaseAttackStatValue = 0.0f;
+    private float m_Duration = 0.0f;
+    private float m_DurationCounter = 0.0f;
     private BattleActor m_Sender = null;
 
-    public DefenseEffect(Special p_Special, float p_DefenseValue, int p_Duration) : base(p_Special)
+    public AttackBuffEffect(Special p_Special, float p_Value, float p_Duration) : base(p_Special)
     {
-        id = "Defense";
-        m_DefenseValue = m_BaseDefenseValue = p_DefenseValue;
+        m_AttackStatValue = m_BaseAttackStatValue = p_Value;
         m_Duration = p_Duration;
-        m_EffectType = EffectType.Buff;
     }
 
-    public override void Run(BattleActor p_Sender, BattleActor p_Target)
+    public override void Run(IEffectInfluenced p_Sender, IEffectInfluenced p_Target)
     {
         base.Run(p_Sender, p_Target);
 
-        m_Sender = p_Sender;
+        m_Sender = p_Sender as BattleActor;
 
         if (m_Sender.HasSpecial(m_Special.id))
         {
@@ -26,26 +24,25 @@
         }
         else
         {
-            m_Sender.defenseStat += m_DefenseValue;
+            m_Sender.attackStat += m_AttackStatValue;
             m_Sender.AddEffect(m_Special.id, this);
             m_Sender.AddBuffIcon();
         }
 
-        DamageSystem.GetInstance().AddEffectSpecial(p_Sender, m_Special);
+        DamageSystem.GetInstance().AddEffectSpecial(m_Sender, m_Special);
     }
 
     public override void Upgrade()
     {
         base.Upgrade();
 
-        m_DefenseValue += m_BaseDefenseValue * 0.1f;
+        m_AttackStatValue += m_BaseAttackStatValue * 0.1f;
     }
 
     public override void Effective()
     {
         base.Effective();
 
-        
         m_DurationCounter++;
     }
 
@@ -55,7 +52,7 @@
         {
             return false;
         }
-        m_Sender.defenseStat -= m_DefenseValue;
+        m_Sender.attackStat -= m_AttackStatValue;
         m_Sender.RemoveBuffIcon();
 
         EffectSystem.GetInstance().AddRemoveEffectSpecial(m_Sender, m_Special);
@@ -68,9 +65,9 @@
         base.Stack(p_Effect);
 
         m_DurationCounter = 0;
-        DefenseEffect l_Effect = (DefenseEffect)p_Effect;
+        AttackBuffEffect l_Effect = (AttackBuffEffect)p_Effect;
 
-        m_Sender.defenseStat += l_Effect.m_DefenseValue;
-        m_DefenseValue += l_Effect.m_DefenseValue;
+        m_Sender.attackStat += l_Effect.m_AttackStatValue;
+        m_AttackStatValue += l_Effect.m_AttackStatValue;
     }
 }
