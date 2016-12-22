@@ -41,7 +41,7 @@ public class PanelButtonStat : PanelButton
             }
             else if (m_StatId == "MonstylePoints")
             {
-                m_StatValueText.text = PlayerData.GetInstance().monstylePoints + "/" + m_StatValue.ToString();
+                m_StatValueText.text = PlayerData.GetInstance().specialPoints + "/" + m_StatValue.ToString();
             }
             else
             {

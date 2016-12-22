@@ -91,7 +91,7 @@ public class BattleSystemMobs : BattleSystem
                         PlayerData.GetInstance().health = m_BattleData.playerSettings[l_Key];
                         break;
                     case "MP":
-                        PlayerData.GetInstance().monstylePoints = m_BattleData.playerSettings[l_Key];
+                        PlayerData.GetInstance().specialPoints = m_BattleData.playerSettings[l_Key];
                         break;
                 }
             }

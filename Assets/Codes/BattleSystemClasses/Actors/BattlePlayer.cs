@@ -87,7 +87,7 @@ public class BattlePlayer : BattleActor
         health = PlayerData.GetInstance().health;
 
         baseSpecialPoints = PlayerData.GetInstance().GetStatValue("MonstylePoints");
-        specialPoints = PlayerData.GetInstance().monstylePoints;
+        specialPoints = PlayerData.GetInstance().specialPoints;
 
         attackStat = PlayerData.GetInstance().GetStatValue("Attack");
         defenseStat = PlayerData.GetInstance().GetStatValue("Defense");
@@ -116,7 +116,7 @@ public class BattlePlayer : BattleActor
         base.ChangeManaValue();
 
         m_SpecialText.text = "MP: " + specialPoints + "/" + baseSpecialPoints;
-        PlayerData.GetInstance().monstylePoints = (int)specialPoints;
+        PlayerData.GetInstance().specialPoints = (int)specialPoints;
 
         Vector3 l_BarScale = m_SpecialPointBar.transform.localScale;
         l_BarScale.x = specialPoints / baseSpecialPoints;

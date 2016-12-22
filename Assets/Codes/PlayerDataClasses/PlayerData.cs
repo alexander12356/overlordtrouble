@@ -35,7 +35,7 @@ public class PlayerData : Singleton<PlayerData>
         get { return m_HealthPoints;  }
         set { m_HealthPoints = value; }
     }
-    public int monstylePoints
+    public int specialPoints
     {
         get { return m_MonstylePoints;  }
         set { m_MonstylePoints = value; }
