@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        SceneManager.UnloadScene(m_SceneIds.Pop());
+        SceneManager.UnloadSceneAsync(m_SceneIds.Pop());
         SetActiveForAllObjects(true);
     }
 
