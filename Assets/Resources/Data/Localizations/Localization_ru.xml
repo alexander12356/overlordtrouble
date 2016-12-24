@@ -167,8 +167,23 @@
 	<Text id="GUI:Improve:СlassChoosed">Вы выбрали класс %d, вы получили следующие приемы:\n%d</Text>
 	<Text id="GUI:YesNoPanel:Confirm">Да</Text>
 	<Text id="GUI:YesNoPanel:Cancel">Нет</Text>
+	
+	<!-- Main Menu -->
 	<Text id="GUI:MainMenuPanel:NewGame">Новая игра</Text>
+	<Text id="GUI:MainMenuPanel:NewGamePlus">Новая игра+</Text>
+	<Text id="GUI:MainMenuPanel:NewGameAfterSecretEnding">Новая игра?</Text>
+	<Text id="GUI:MainMenuPanel:Continue">Продолжить</Text>
+	<Text id="GUI:MainMenuPanel:Load">Загрузить</Text>
+	<Text id="GUI:MainMenuPanel:Settings">Опции</Text>
 	<Text id="GUI:MainMenuPanel:Exit">Выход</Text>
+	<!-- Settings Panel -->
+	<Text id="GUI:SettingsPanel:Volume">Громкость</Text>
+	<Text id="GUI:SettingsPanel:Language">Язык</Text>
+	<Text id="GUI:SettingsPanel:Subtitles">Субтитры</Text>
+	<Text id="GUI:SettingsPanel:Resolution">Разрешение</Text>
+	<Text id="GUI:SettingsPanel:WindowedMode">Оконный режим</Text>
+	<Text id="GUI:SettingsPanel:Accept">Принять</Text>
+	<Text id="GUI:SettingsPanel:Cancel">Отмена</Text>
 	
 	<Text id="GUI:EnterName:EnterName">Перед тем как мы начнем,\nНапишите - как вас называть.</Text>
 	<Text id="GUI:EnterName:Standart">Кеша</Text>
