@@ -59,9 +59,7 @@ public class MainMenuPanel : Panel
 
     private void RunNewGame()
     {
-        PlayerData.GetInstance().ResetData();
-        MainMenuSystem.GetInstance().StartLocation("Town");
-        GameManager.GetInstance().isTesting = false;
+        MainMenuSystem.GetInstance().StartLocation("EnterName");
     }
 
     private void QuitGame()

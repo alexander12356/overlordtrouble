@@ -170,6 +170,10 @@
 	<Text id="GUI:MainMenuPanel:NewGame">Новая игра</Text>
 	<Text id="GUI:MainMenuPanel:Exit">Выход</Text>
 	
+	<Text id="GUI:EnterName:EnterName">Перед тем как мы начнем,\nНапишите - как вас называть.</Text>
+	<Text id="GUI:EnterName:Standart">Кеша</Text>
+	<Text id="GUI:EnterName:AreYouShure">Вы уверены?</Text>
+	
 	<!-- Dialogs -->
 	<Text id="Dialog:SkeletonChild:1">Привет!</Text>
 	<Text id="Dialog:SkeletonChild:2">Посмотри на этот цветочек! Разве он не милый?</Text>

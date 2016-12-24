@@ -95,6 +95,11 @@ public class PlayerData : Singleton<PlayerData>
         return m_PlayerName;
     }
 
+    public void SetPlayerName(string p_Name)
+    {
+        m_PlayerName = p_Name;
+    }
+
     public void AddSkills(List<SpecialData> p_SkillList)
     {
         m_PlayerSkills.AddSkills(p_SkillList);
