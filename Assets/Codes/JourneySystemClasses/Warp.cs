@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class Warp : MonoBehaviour {
+
+    [SerializeField]
+    private string m_TargetRoomId = string.Empty;
     
     [SerializeField]
     private Transform warpTarget = null;
@@ -17,6 +20,7 @@ public class Warp : MonoBehaviour {
 
             yield return StartCoroutine(l_ScreenFader.FadeToBlack());
 
+            RoomSystem.GetInstance().ChangeRoom(m_TargetRoomId);
             collTransform.position = warpTarget.position;
             Camera.main.transform.position = warpTarget.position;
 

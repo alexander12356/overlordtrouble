@@ -51,4 +51,25 @@
 	<Dialog id="Uniceros" avatarPath="Sprites/Creations/Uniceros/Avatar">
 		<Text>Dialog:Uniceros:1</Text>
 	</Dialog>
+	
+	<!-- Hero House -->
+	
+	<Dialog id="HeroBed" avatarPath="">
+		<Text>Dialog:HeroBed</Text>
+	</Dialog>
+	<Dialog id="HeroCupboard" avatarPath="">
+		<Text>Dialog:HeroCupBoard</Text>
+	</Dialog>
+	<Dialog id="HeroCandle" avatarPath="">
+		<Text>Dialog:HeroCandle</Text>
+	</Dialog>
+	<Dialog id="HeroStove" avatarPath="">
+		<Text>Dialog:HeroStove</Text>
+	</Dialog>
+	<Dialog id="HeroPicture" avatarPath="">
+		<Text>Dialog:HeroPicture</Text>
+	</Dialog>
+	<Dialog id="HeroFlower" avatarPath="">
+		<Text>Dialog:HeroFlower</Text>
+	</Dialog>
 </DialogList>
