@@ -150,7 +150,7 @@ public class MainMenuPanel : Panel
 
     private bool IsSaveExist()
     {
-        return true;
+        return false;
     }
 
     private void RunNewGame()
