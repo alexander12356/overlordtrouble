@@ -34,4 +34,11 @@ public class CameraFollow : MonoBehaviour
                 Mathf.Clamp(m_Transform.position.y, borderMin.y + GetComponent<Camera>().orthographicSize, borderMax.y - GetComponent<Camera>().orthographicSize), m_Transform.position.z);
         }
 	}
+
+    public void SetCameraBounds(BoxCollider2D p_Bounds)
+    {
+        Bounds = p_Bounds;
+        borderMin = Bounds.bounds.min;
+        borderMax = Bounds.bounds.max;
+    }
 }
