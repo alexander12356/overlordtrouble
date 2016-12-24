@@ -127,7 +127,7 @@ public class MainMenuPanel : Panel
 
     private bool IsSecretEndingUnlocked()
     {
-        return true;
+        return false;
     }
 
     private void RunNewGamePlus()
@@ -140,7 +140,7 @@ public class MainMenuPanel : Panel
 
     private bool IsGameCompleted()
     {
-        return true;
+        return false;
     }
 
     private void ContinueGame()
