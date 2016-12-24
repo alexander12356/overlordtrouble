@@ -70,6 +70,9 @@ public class InventoryItemButton : PanelButtonUpdateKey
             }
             itemCount = l_ItemCount;
             PlayerInventory.GetInstance().SetItemCount(itemId, itemCount);
+
+            Item l_Item = ItemDataBase.GetInstance().GetItem(itemId).CreateItem();
+            l_Item.Run(JourneySystem.GetInstance().player.statistics);
         }
     }
 

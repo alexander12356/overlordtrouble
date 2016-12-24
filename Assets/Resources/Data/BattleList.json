@@ -19,12 +19,10 @@
 	},
 	"TestBattleSkwatwolf":
 	{
-		"Location" : "ChickenFight",
+		"Location" : "RoadThugs",
 		"Enemy": 
 		[
-			"Bokalisk",
-			"Skwatwolf",
-			"Dualent"
+			"Skwatwolf"
 		],
 		"Player":
 		{
@@ -45,12 +43,14 @@
 			"MP" : 20
 		}
 	},
-	"TestBattleThirdsort":
+	"TestBattleWithTroicya":
 	{
 		"Location" : "ForestCreeps",
 		"Enemy": 
 		[
-			"ThirdsortRobber"
+			"Bokalisk",
+			"Skwatwolf",
+			"Dualent"
 		],
 		"Player":
 		{

@@ -44,7 +44,7 @@ public class BattlePlayer : BattleActor
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
-        DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
+        DamageSystem.GetInstance().Attack(this, p_Actor, Element.Physical, l_Damage);
         ResultSystem.GetInstance().ShowResult();
 
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
@@ -59,9 +59,9 @@ public class BattlePlayer : BattleActor
             BattlePlayEffectStep l_PlayStep = new BattlePlayEffectStep(l_AttackEffect);
             DamageSystem.GetInstance().AddVisualEffectStep(l_PlayStep);
 
-            string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { "1", p_Target.actorName });
+            string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:BadAttack", new string[] { actorName });
 
-            DamageSystem.GetInstance().Attack(this, p_Target, 1.0f, l_Text);
+            DamageSystem.GetInstance().Attack(this, p_Target, Element.Physical, 1.0f, l_Text);
         }
         else
         {
@@ -86,8 +86,12 @@ public class BattlePlayer : BattleActor
         baseHealth = PlayerData.GetInstance().GetStatValue("HealthPoints");
         health = PlayerData.GetInstance().health;
 
-        baseMana = PlayerData.GetInstance().GetStatValue("MonstylePoints");
-        mana = PlayerData.GetInstance().monstylePoints;
+        baseSpecialPoints = PlayerData.GetInstance().GetStatValue("MonstylePoints");
+        specialPoints = PlayerData.GetInstance().specialPoints;
+
+        attackStat = PlayerData.GetInstance().GetStatValue("Attack");
+        defenseStat = PlayerData.GetInstance().GetStatValue("Defense");
+        level = PlayerData.GetInstance().GetLevel() + 1;
 
         m_AttackValue = PlayerData.GetInstance().attackValue;
 
@@ -111,11 +115,11 @@ public class BattlePlayer : BattleActor
     {
         base.ChangeManaValue();
 
-        m_SpecialText.text = "MP: " + mana + "/" + baseMana;
-        PlayerData.GetInstance().monstylePoints = (int)mana;
+        m_SpecialText.text = "MP: " + specialPoints + "/" + baseSpecialPoints;
+        PlayerData.GetInstance().specialPoints = (int)specialPoints;
 
         Vector3 l_BarScale = m_SpecialPointBar.transform.localScale;
-        l_BarScale.x = mana / baseMana;
+        l_BarScale.x = specialPoints / baseSpecialPoints;
         m_SpecialPointBar.transform.localScale = l_BarScale;
     }
 
@@ -136,6 +140,21 @@ public class BattlePlayer : BattleActor
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip("Player_Hit"));
     }
 
+    public void RestoreSpecialPoints()
+    {
+        float l_RestoreSpecialPoints = 0.0f;
+
+        if (baseSpecialPoints < 100)
+        {
+            l_RestoreSpecialPoints = baseSpecialPoints / 10.0f;
+        }
+        else
+        {
+            l_RestoreSpecialPoints = 10 + baseSpecialPoints / 10.0f;
+        }
+        specialPoints += l_RestoreSpecialPoints;
+    }
+
     #endregion
 
     #region Private
@@ -153,7 +172,7 @@ public class BattlePlayer : BattleActor
         rendererTransform = transform.FindChild("Renderer");
     }
     
-    public override void AddBuff()
+    public override void AddBuffIcon()
     {
         m_BuffCount++;
 
@@ -171,7 +190,7 @@ public class BattlePlayer : BattleActor
         m_EffectIcons.Add("Buff", l_EffectIcon);
     }
 
-    public override void RemoveBuff()
+    public override void RemoveBuffIcon()
     {
         m_BuffCount--;
 
@@ -181,10 +200,51 @@ public class BattlePlayer : BattleActor
             m_EffectIcons.Remove("Buff");
         }
     }
-    
-    public override void AddStatusEffect(string p_EffectId)
+
+    public override void AddDebuffIcon()
     {
-        base.AddStatusEffect(p_EffectId);
+        base.AddDebuffIcon();
+
+        m_DebuffCount++;
+
+        if (m_DebuffCount > 1)
+        {
+            return;
+        }
+
+        EffectIcon l_EffectIcon = Instantiate(EffectIcon.prefab);
+        l_EffectIcon.SetIconId("Debuff");
+        l_EffectIcon.transform.SetParent(m_EffectsBar);
+        l_EffectIcon.transform.localScale = Vector3.one;
+
+        if (m_BuffCount > 0)
+        {
+            l_EffectIcon.transform.SetSiblingIndex(1);
+        }
+        else
+        {
+            l_EffectIcon.transform.SetSiblingIndex(0);
+        }
+
+        m_EffectIcons.Add("Debuff", l_EffectIcon);
+    }
+
+    public override void RemoveDebuffIcon()
+    {
+        base.RemoveDebuffIcon();
+
+        m_DebuffCount--;
+
+        if (m_DebuffCount == 0)
+        {
+            Destroy(m_EffectIcons["Debuff"].gameObject);
+            m_EffectIcons.Remove("Debuff");
+        }
+    }
+
+    public override void AddStatusEffectIcon(string p_EffectId)
+    {
+        base.AddStatusEffectIcon(p_EffectId);
 
         if (m_EffectIcons.ContainsKey(p_EffectId))
         {
@@ -199,9 +259,9 @@ public class BattlePlayer : BattleActor
         m_EffectIcons.Add(p_EffectId, l_EffectIcon);
     }
 
-    public override void RemoveStatusEffect(string p_EffectId)
+    public override void RemoveStatusEffectIcon(string p_EffectId)
     {
-        base.RemoveStatusEffect(p_EffectId);
+        base.RemoveStatusEffectIcon(p_EffectId);
 
         Destroy(m_EffectIcons[p_EffectId].gameObject);
         m_EffectIcons.Remove(p_EffectId);

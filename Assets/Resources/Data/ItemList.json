@@ -2,134 +2,28 @@
 	"Items" : 
 	[
 		{
-			"Id" : "HealthPotion",
-			"Image" : "Sprites/Items/SingleUse/HealthPotion",
+			"Id" : "SmallHealthPotion",
+			"Image" : "Sprites/Items/SingleUse/SmallHealthPotion",
 			"Type" : "SingleUse",
-			"Actions":
-			[
+			"Effect":
+			{				
+				"Healing" :
 				{
-					"Id" : "AddStatValue",
-					"StatName" : "Health",
-					"Value" : 10
+					"Value" : 40.0
 				}
-			]
+			}
 		},
 		{
-			"Id" : "ManaPotion",
-			"Image" : "Sprites/Items/SingleUse/ManaPotion",
+			"Id" : "SmallSpecialPotion",
+			"Image" : "Sprites/Items/SingleUse/SmallMagicPotion",
 			"Type" : "SingleUse",
-			"Actions" :
-			[
+			"Effect":
+			{				
+				"Restoring" :
 				{
-					"Id" : "AddStatValue",
-					"StatName" : "Mana",
-					"Value" : 7
-				}				
-			]
-		},
-		{
-			"Id" : "FireBallScroll",
-			"Image" : "Sprites/Items/MultipleUse/FireBallScroll",
-			"Type" : "MultipleUse",
-			"Actions" :
-			[
-				{
-					"Id" : "AttackEnemy",
-					"StatName" : "Health",
-					"Value" : 5
+					"Value" : 40.0
 				}
-			]
-		},
-		{
-			"Id" : "AirDefenseScroll",
-			"Image" : "Sprites/Items/MultipleUse/AirDefenseScroll",
-			"Type" : "MultipleUse",
-			"Actions" :
-			[
-				{
-					"Id" : "StatBuff",
-					"StatName" : "Armor",
-					"Value" : 2
-				}
-			]
-		},
-		{
-			"Id" : "AncientArmor",
-			"Image" : "Sprites/Items/Equipments/AncientArmor",
-			"Type" : "Equipment",
-			"Actions" : 
-			[
-				{
-					"Id" : "StatBuff",
-					"StatName" : "Armor",
-					"Value" : 3
-				}
-			]
-		},
-		{
-			"Id" : "TestItem1",
-			"Image" : "Sprites/Items/Equipments/AncientArmor",
-			"Type" : "Equipment",
-			"Actions" : 
-			[
-				{
-					"Id" : "StatBuff",
-					"StatName" : "Armor",
-					"Value" : 3
-				}
-			]
-		},
-		{
-			"Id" : "TestItem2",
-			"Image" : "Sprites/Items/Equipments/AncientArmor",
-			"Type" : "Equipment",
-			"Actions" : 
-			[
-				{
-					"Id" : "StatBuff",
-					"StatName" : "Armor",
-					"Value" : 3
-				}
-			]
-		},
-		{
-			"Id" : "TestItem3",
-			"Image" : "Sprites/Items/Equipments/AncientArmor",
-			"Type" : "Equipment",
-			"Actions" : 
-			[
-				{
-					"Id" : "StatBuff",
-					"StatName" : "Armor",
-					"Value" : 3
-				}
-			]
-		},
-		{
-			"Id" : "TestItemWeapon1",
-			"Image" : "Sprites/Items/Equipments/AncientArmor",
-			"Type" : "Weapon",
-			"Actions" : 
-			[
-				{
-					"Id" : "StatBuff",
-					"StatName" : "Armor",
-					"Value" : 3
-				}
-			]
-		},	
-		{
-			"Id" : "TestItemWeapon2",
-			"Image" : "Sprites/Items/Equipments/AncientArmor",
-			"Type" : "Weapon",
-			"Actions" : 
-			[
-				{
-					"Id" : "StatBuff",
-					"StatName" : "Armor",
-					"Value" : 3
-				}
-			]
+			}
 		}
 	]
 }

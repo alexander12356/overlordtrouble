@@ -42,6 +42,10 @@ public class BattleSystem : MonoBehaviour
     {
         return m_Instance;
     }
+    public bool IsInstance()
+    {
+        return m_Instance == null ? false : true;
+    }
     public Transform mainPanelTransform
     {
         get { return m_MainPanelTransform; }

@@ -35,7 +35,7 @@ public class PlayerData : Singleton<PlayerData>
         get { return m_HealthPoints;  }
         set { m_HealthPoints = value; }
     }
-    public int monstylePoints
+    public int specialPoints
     {
         get { return m_MonstylePoints;  }
         set { m_MonstylePoints = value; }
@@ -93,6 +93,11 @@ public class PlayerData : Singleton<PlayerData>
     public string GetPlayerName()
     {
         return m_PlayerName;
+    }
+
+    public void SetPlayerName(string p_Name)
+    {
+        m_PlayerName = p_Name;
     }
 
     public void AddSkills(List<SpecialData> p_SkillList)
@@ -165,7 +170,7 @@ public class PlayerData : Singleton<PlayerData>
     public void InitTestStats()
     {
         ResetData();
-        AddExperience(999);
+        //AddExperience(999);
     }
 
     public void AddLevelupNotification(PanelActionHandler p_Action)

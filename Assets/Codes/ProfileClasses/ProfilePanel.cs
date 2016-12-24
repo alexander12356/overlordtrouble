@@ -247,7 +247,7 @@ public class ProfilePanel : Panel
                     PlayerData.GetInstance().health += l_PanelButtonStat.statValue - PlayerData.GetInstance().GetStats()[l_PanelButtonStat.statId];
                     break;
                 case "MonstylePoints":
-                    PlayerData.GetInstance().monstylePoints += l_PanelButtonStat.statValue - PlayerData.GetInstance().GetStats()[l_PanelButtonStat.statId];
+                    PlayerData.GetInstance().specialPoints += l_PanelButtonStat.statValue - PlayerData.GetInstance().GetStats()[l_PanelButtonStat.statId];
                     break;
             }
 

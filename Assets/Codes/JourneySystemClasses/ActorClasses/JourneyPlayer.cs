@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 using System.Collections.Generic;
 
@@ -11,9 +10,15 @@ public class JourneyPlayer : JourneyActor
     private Rigidbody2D m_RigidBody2d = null;
     private List<JourneyActor> m_InteractableActors = new List<JourneyActor>();
     private BaseCollideBehavior m_CurrentCollideBehavior = null;
+    private PlayerStatistics m_Statistics;
     #endregion
 
     #region Interface
+    public PlayerStatistics statistics
+    {
+        get { return m_Statistics; }
+    }
+
     public void SetActive(bool active)
     {
         if (active)
@@ -33,6 +38,7 @@ public class JourneyPlayer : JourneyActor
 
         InitCheckCollider();
         m_RigidBody2d = GetComponent<Rigidbody2D>();
+        m_Statistics = GetComponent<PlayerStatistics>();
     }
 
     public override void Update()

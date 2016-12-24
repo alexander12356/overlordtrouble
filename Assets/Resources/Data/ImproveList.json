@@ -13,7 +13,8 @@
 	"Elemental": "Water",
     "Skills": [
 		"WaterDash",
-		"WaterBullet"
+		"WaterBullet",
+		"HealingSplash"
     ]
   },
   "ShellLizard": {
@@ -21,13 +22,17 @@
 	"Elemental": "Earth",
     "Skills": [
       "TailWhap",
-	  "Slash"
+	  "Slash",
+	  "Molting"
     ]
   },
   "Brownie": {
     "Profile": "Sprites/Creations/Brownie/Profile",
 	"Elemental": "Mana",
     "Skills": [
+		"StaffStrike",
+		"Ember",
+		"Concentration"
     ]
   }
 }

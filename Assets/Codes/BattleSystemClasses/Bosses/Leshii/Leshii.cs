@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BattleSystemClasses.Bosses.Leshii
 {
-    public enum OrganIds
+    public enum OrganType
     {
         NONE = -1,
         RightHand,
@@ -67,13 +67,16 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             actorName = LocalizationDataBase.GetInstance().GetText("Boss:Leshii");
 
-            m_RightHand.Init(OrganIds.RightHand, this);
-            m_LeftHand.Init(OrganIds.LeftHand, this);
-            m_Body.Init(OrganIds.Body, this);
-            m_Body.baseHealth = m_Body.health = 50;
+            level = LeshiiDataBase.GetInstance().GetLevel();
+            attackStat = LeshiiDataBase.GetInstance().GetAttackStat();
+            defenseStat = LeshiiDataBase.GetInstance().GetDefenseStat();
+
+            m_RightHand.Init(OrganType.RightHand, this);
+            m_LeftHand.Init(OrganType.LeftHand, this);
+            m_Body.Init(OrganType.Body, this);
 
             m_BodyAnimator = GetComponent<Animator>();
-            m_HeadAnimator = transform.FindChild(OrganIds.Headmain.ToString()).GetComponentInChildren<Animator>();
+            m_HeadAnimator = transform.FindChild(OrganType.Headmain.ToString()).GetComponentInChildren<Animator>();
 
             CalculateIdle(m_HandsLive);
         }
@@ -262,7 +265,19 @@ namespace BattleSystemClasses.Bosses.Leshii
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
 
-            DamageSystem.GetInstance().Attack(this, BattlePlayer.GetInstance(), 10.0f);
+            float l_DamageValue = LeshiiDataBase.GetInstance().GetSpecialAttackValue();
+            Special l_NatureFury = new Special("NatureFury", Element.Physical, false, false);
+            l_NatureFury.specialName = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:NatureFury");
+
+            AttackEffect l_AttackEffect = new AttackEffect(l_NatureFury, l_DamageValue);
+
+            List<BaseEffect> l_EffectList = new List<BaseEffect>();
+            l_EffectList.Add(l_AttackEffect);
+
+            l_NatureFury.SetEffects(l_EffectList);
+
+
+            DamageSystem.GetInstance().EnemyAttack(this, BattlePlayer.GetInstance(), l_NatureFury);
         }
 
         private void PlayStartCharge()
@@ -322,17 +337,17 @@ namespace BattleSystemClasses.Bosses.Leshii
             DamageSystem.GetInstance().AddBeforeAttackSteps(l_BlockStartStep);
         }
 
-        public void OrganDie(OrganIds p_OrganIds)
+        public void OrganDie(OrganType p_OrganIds)
         {
             switch (p_OrganIds)
             {
-                case OrganIds.LeftHand:
+                case OrganType.LeftHand:
                     RightHandDie();
                     break;
-                case OrganIds.RightHand:
+                case OrganType.RightHand:
                     LeftHandDie();
                     break;
-                case OrganIds.Body:
+                case OrganType.Body:
                     LeshiiDie();
                     break;
             }
@@ -430,13 +445,19 @@ namespace BattleSystemClasses.Bosses.Leshii
             BattlePlayEffectStep l_AnimationStep = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_AnimationStep);
 
-            if (Random.Range(0, 100) < 50)
+            float l_HealthEffect = LeshiiDataBase.GetInstance().GetEffectChanse(OrganType.RightHand);
+            float l_DamageValue = LeshiiDataBase.GetInstance().GetDamageValue(OrganType.RightHand);
+
+            if (m_Body.health < m_Body.baseHealth && Random.Range(0, 100) < l_HealthEffect)
             {
                 m_IsHealCast = true;
-                m_Body.health += 5;
+
+                float l_HealthValue = LeshiiDataBase.GetInstance().GetHealthValue();
+                m_Body.health += l_HealthValue;
 
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-                l_TextPanel.SetText(new List<string>() { m_RightHand.actorName + " восстановил 5 очков здоровья" });
+                string l_Text = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Health", new string[] { m_RightHand.actorName, l_HealthValue.ToString() });
+                l_TextPanel.SetText(new List<string>() { l_Text });
                 l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
                 BattleShowPanelStep l_ShowPanelStep = new BattleShowPanelStep(l_TextPanel);
@@ -445,7 +466,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             }
             else
             {
-                DamageSystem.GetInstance().Attack(m_RightHand, BattlePlayer.GetInstance(), 1.0f);
+                DamageSystem.GetInstance().Attack(m_RightHand, BattlePlayer.GetInstance(), Element.Physical, l_DamageValue);
             }
         }
 
@@ -469,14 +490,18 @@ namespace BattleSystemClasses.Bosses.Leshii
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
 
-            if (Random.Range(0, 100) < 25)
+            float l_StunChance = LeshiiDataBase.GetInstance().GetEffectChanse(OrganType.LeftHand);
+            float l_DamageValue = LeshiiDataBase.GetInstance().GetDamageValue(OrganType.LeftHand);
+
+            if (Random.Range(0, 100) < l_StunChance)
             {
                 m_IsStun = true;
 
-                Special l_StunSpecial = new Special("Stun", 0, "Physical", false, false);
+                Special l_StunSpecial = new Special("Stun", Element.Physical, false, false);
+                l_StunSpecial.specialName = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Stun");
 
                 StunEffect l_StunEffect = new StunEffect(l_StunSpecial);
-                AttackEffect l_AttackEffect = new AttackEffect(l_StunSpecial, 1.0f);
+                AttackEffect l_AttackEffect = new AttackEffect(l_StunSpecial, l_DamageValue * 0.5f);
 
                 List<BaseEffect> l_EffectList = new List<BaseEffect>();
                 l_EffectList.Add(l_AttackEffect);
@@ -484,11 +509,11 @@ namespace BattleSystemClasses.Bosses.Leshii
                 
                 l_StunSpecial.SetEffects(l_EffectList);
 
-                DamageSystem.GetInstance().MonstyleAttack(this, BattlePlayer.GetInstance(), new List<Special>() { l_StunSpecial });
+                DamageSystem.GetInstance().EnemyAttack(this, BattlePlayer.GetInstance(), l_StunSpecial );
             }
             else
             {
-                DamageSystem.GetInstance().Attack(m_LeftHand, BattlePlayer.GetInstance(), 1.0f);
+                DamageSystem.GetInstance().Attack(m_LeftHand, BattlePlayer.GetInstance(), Element.Physical, l_DamageValue);
             }
         }
 

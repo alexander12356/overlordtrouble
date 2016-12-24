@@ -1,0 +1,43 @@
+{
+	"Id" : "Skwatwolf",
+	"Attack" : 1,
+	"Defense" : 1,
+	"Level" : 1,
+	"Health" : 20,
+	"Element": "Dark",
+	"Attacks" :
+	[
+		{
+			"Id" : "Strike",
+			"Element" : "Physical",
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 3,
+					"Value2" : 6
+				}
+			}
+		},
+		{
+			"Id" : "Gopogovor",
+			"Element" : "NONE",
+			"Effect" :
+			{
+				"DefenseDebuff" :
+				{
+					"Value" : 2,
+					"Duration" : 2
+				}
+			}
+		}
+	],
+	"Experience" : 50,
+	"Loot" : 
+	[
+	],
+	"Property" :
+	{
+		"Value" : 0.8
+	}	
+}

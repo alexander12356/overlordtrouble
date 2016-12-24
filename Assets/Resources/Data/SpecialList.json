@@ -66,16 +66,30 @@
 			}
 		}
 	},
+	"HealingSplash" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"Healing" :
+			{
+				"Value" : 5.0
+			}
+		}
+	},
 	"TailWhap" :
 	{
-		"Sp" : 4.0,
+		"Sp" : 5.0,
 		"Element" : "Earth",
 		"Aoe" : false,
 		"Effect" :
 		{
 			"Attack" : 
 			{
-				"AttackValue" : 4.0
+				"AttackValue" : 5.0
 			}
 		}
 	},
@@ -89,6 +103,60 @@
 			"Attack" :
 			{
 				"AttackValue" : 6.0
+			}
+		}
+	},
+	"Molting" :
+	{
+		"Sp" : 5.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"ClearSpecialStatus" :
+			{
+			}
+		}
+	},
+	"StaffStrike" :
+	{
+		"Sp" : 4.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 4.0
+			}
+		}
+	},
+	"Ember" :
+	{
+		"Sp" : 8.0,
+		"Element" : "Fire",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 7.0
+			}
+		}
+	},
+	"Concentration" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Fire",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"AttackBuff" :
+			{
+				"Value" : 5,
+				"Duration" : 5
 			}
 		}
 	},

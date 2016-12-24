@@ -90,5 +90,6 @@ public class TurnSystem : MonoBehaviour
         m_CurrentTurn++;
         EffectSystem.GetInstance().CheckEffects();
         ResultSystem.GetInstance().ShowResult();
+        BattlePlayer.GetInstance().RestoreSpecialPoints();
     }
 }

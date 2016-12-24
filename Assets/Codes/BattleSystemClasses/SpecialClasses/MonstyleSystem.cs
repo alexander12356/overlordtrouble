@@ -52,7 +52,7 @@ public class MonstyleSystem : Singleton<MonstyleSystem>
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
     }
     
-    private void RunSpecial(BattleActor p_Sender, BattleActor p_Target, Special p_Special)
+    public void RunSpecial(BattleActor p_Sender, BattleActor p_Target, Special p_Special)
     {
         string l_PrefabPath = "Prefabs/BattleEffects/Monstyle/" + p_Special.id + "Monstyle";
 

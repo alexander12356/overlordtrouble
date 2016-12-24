@@ -6,10 +6,10 @@ public class Special
     private List<BaseEffect> m_EffectsList = new List<BaseEffect>();
     private string m_SpecialId = string.Empty;
     private string m_Id;
-    private float m_Sp = 0.0f;
     private Element m_Element = Element.NONE;
     private bool m_IsAoe = false;
     private bool m_Myself = false;
+    private string m_SpecialName = string.Empty;
     
     public string id
     {
@@ -23,12 +23,20 @@ public class Special
     {
         get { return m_Myself; }
     }
+    public Element element
+    {
+        get { return m_Element; }
+    }
+    public string specialName
+    {
+        get { return m_SpecialName;  }
+        set { m_SpecialName = value; }
+    }
 
-    public Special(string p_Id, float p_Sp, string p_Element, bool p_IsAoe, bool p_Myself)
+    public Special(string p_Id, Element p_Element, bool p_IsAoe, bool p_Myself)
     {
         m_Id = p_Id;
-        m_Sp = p_Sp;
-        m_Element = (Element)Enum.Parse(typeof(Element), p_Element);
+        m_Element = p_Element;
         m_IsAoe = p_IsAoe;
         m_Myself = p_Myself;
     }

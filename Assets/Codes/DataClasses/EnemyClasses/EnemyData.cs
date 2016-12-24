@@ -3,29 +3,55 @@
 public struct EnemyAttackData
 {
     public string id;
-    public List<int> damageValue;
+    public Element element;
+    public List<EffectData> effectList;
 
-    public EnemyAttackData(string p_Id, List<int> p_DamageValue)
+    public EnemyAttackData(string p_Id, Element p_Element, List<EffectData> p_EffectList)
     {
         id = p_Id;
-        damageValue = p_DamageValue;
+        element = p_Element;
+        effectList = p_EffectList;
+    }
+}
+
+public struct EnemyLootData
+{
+    public string id;
+    public int count;
+    public float chance;
+
+    public EnemyLootData(string p_Id, int p_Count, float p_Chance)
+    {
+        id = p_Id;
+        count = p_Count;
+        chance = p_Chance;
     }
 }
 
 public struct EnemyData
 {
     public string id;
+    public float attackStat;
+    public float defenseStat;
+    public int level;
     public float health;
-    public string elemental;
-    public int experience;
+    public Element element;
     public List<EnemyAttackData> attackList;
+    public int experience;
+    public List<EnemyLootData> lootList;
+    public string[] property;
 
-    public EnemyData(string p_Id, float p_Health, string p_Elemental, int p_Experience, List<EnemyAttackData> p_AttackList)
+    public EnemyData(string p_Id, float p_AttackStat, float p_DefenseStat, int p_Level, float p_Health, Element p_Element, List<EnemyAttackData> p_AttackList, int p_Experience, List<EnemyLootData> p_LootList, string[] p_Property)
     {
         id = p_Id;
+        attackStat = p_AttackStat;
+        defenseStat = p_DefenseStat;
+        level = p_Level;
         health = p_Health;
-        elemental = p_Elemental;
-        experience = p_Experience;
+        element = p_Element;
         attackList = p_AttackList;
+        experience = p_Experience;
+        lootList = p_LootList;
+        property = p_Property;
     }
 }

@@ -4,7 +4,7 @@ namespace BattleSystemClasses.Bosses.Leshii
 {
     public class LeshiiOrgan : BattleEnemy
     {
-        private OrganIds m_Id = OrganIds.NONE;
+        private OrganType m_OrganType = OrganType.NONE;
         private Leshii m_Leshii = null;
 
         public override void Awake()
@@ -12,17 +12,20 @@ namespace BattleSystemClasses.Bosses.Leshii
             base.Awake();
         }
         
-        public void Init(OrganIds p_Id, Leshii p_Leshii)
+        public void Init(OrganType p_Id, Leshii p_Leshii)
         {
-            m_Id = p_Id;
+            m_OrganType = p_Id;
             m_Leshii = p_Leshii;
             InitStats();
         }
 
         public override void InitStats()
         {
-            actorName = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:" + m_Id);
-            baseHealth = health = 10.0f;
+            actorName = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:" + m_OrganType);
+            health = baseHealth = LeshiiDataBase.GetInstance().GetHealth(m_OrganType);
+            level = LeshiiDataBase.GetInstance().GetLevel();
+            attackStat = LeshiiDataBase.GetInstance().GetAttackStat();
+            defenseStat = LeshiiDataBase.GetInstance().GetDefenseStat();
         }
 
         public override void Damage(float p_DamageValue)
@@ -32,7 +35,7 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public override bool IsCanDamage(float p_Damage)
         {
-            if (m_Id == OrganIds.Body)
+            if (m_OrganType == OrganType.Body)
             {
                 if (m_Leshii.IsAllHandsDied() || m_Leshii.isChargeMode)
                 {
@@ -56,7 +59,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             isDead = true;
 
-            if (m_Id == OrganIds.Body)
+            if (m_OrganType == OrganType.Body)
             {
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
                 l_TextPanel.SetText(new List<string>() { "Ой ой…" });
@@ -66,11 +69,11 @@ namespace BattleSystemClasses.Bosses.Leshii
                 BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
                 ResultSystem.GetInstance().AddStep(l_Step);
 
-                m_Leshii.OrganDie(m_Id);
+                m_Leshii.OrganDie(m_OrganType);
             }
             else
             {
-                m_Leshii.OrganDie(m_Id);
+                m_Leshii.OrganDie(m_OrganType);
 
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
                 l_TextPanel.SetText(new List<string>() { actorName + " потеряла силу" });
@@ -89,7 +92,7 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public override void CheckPrevAttack()
         {
-            if (m_Id == OrganIds.Body)
+            if (m_OrganType == OrganType.Body)
             {
                 if (!m_Leshii.IsAllHandsDied() && !m_Leshii.isChargeMode)
                 {

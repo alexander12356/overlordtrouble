@@ -7,11 +7,12 @@ public class BattleEnemy : BattleActor
     private static BattleEnemy m_Prefab = null;
     private Animator m_Animator = null;
     private AudioSource m_AudioSource = null;
-    private EnemyData m_EnemyData;
     private bool m_Selected = false;
     private SpriteRenderer m_SelectedArrow = null;
     private List<EnemyAttackData> m_AttackList = null;
     private SpriteRenderer m_Renderer = null;
+
+    protected EnemyData m_EnemyData;
     #endregion
 
     #region Interface
@@ -53,9 +54,13 @@ public class BattleEnemy : BattleActor
     {
         base.InitStats();
 
+        id = m_EnemyData.id;
         actorName = LocalizationDataBase.GetInstance().GetText("Enemy:" + m_EnemyData.id);
         health = baseHealth = m_EnemyData.health;
-        mana = baseMana = 0;
+        attackStat = m_EnemyData.attackStat;
+        defenseStat = m_EnemyData.defenseStat;
+        level = m_EnemyData.level;
+        element = m_EnemyData.element;
         m_AttackList = m_EnemyData.attackList;
         m_Renderer.sprite = Resources.Load<Sprite>("Sprites/Creations/" + m_EnemyData.id + "/BattleProfile");
         m_Animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Sprites/Creations/" + m_EnemyData.id + "/" + m_EnemyData.id + "BattleAnimator");
@@ -74,8 +79,7 @@ public class BattleEnemy : BattleActor
         base.Attack(p_Actor);
 
         EnemyAttackData l_AttackData = m_EnemyData.attackList[Random.Range(0, m_EnemyData.attackList.Count)];
-        float l_Damage = Random.Range(l_AttackData.damageValue[0], l_AttackData.damageValue[1]);
-
+        
         string l_AttackEffectPrefabPath = "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id;
         VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>(l_AttackEffectPrefabPath));
         l_AttackEffect.Init(p_Actor, rendererTransform);
@@ -83,7 +87,18 @@ public class BattleEnemy : BattleActor
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
 
-        DamageSystem.GetInstance().Attack(this, p_Actor, l_Damage);
+        Special l_Special = new Special(l_AttackData.id, l_AttackData.element, false, false);
+        l_Special.specialName = LocalizationDataBase.GetInstance().GetText("Enemy:" + id + ":" + l_Special.id);
+
+        List<BaseEffect> l_EffectList = new List<BaseEffect>();
+        for (int i = 0; i < l_AttackData.effectList.Count; i++)
+        {
+            l_EffectList.Add(EffectSystem.GetInstance().CreateEffect(l_Special, l_AttackData.effectList[i]));
+        }
+
+        l_Special.SetEffects(l_EffectList);
+
+        DamageSystem.GetInstance().EnemyAttack(this, p_Actor, l_Special);
     }
 
     public override void Die()

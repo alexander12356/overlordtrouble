@@ -17,6 +17,7 @@ public class MainMenuSystem : MonoBehaviour
     {
         m_Instance = this;
         PlayerData.GetInstance();
+        LoadDataBases();
     }
 
     public void ShowPanel(Panel p_Panel, bool p_WithOverlay = false)
@@ -27,7 +28,6 @@ public class MainMenuSystem : MonoBehaviour
     public void StartLocation(string p_LocationId)
     {
         m_PanelManager.StartLocation(p_LocationId);
-        LoadDataBases();
     }
 
     public void AddScene(string p_SceneId)

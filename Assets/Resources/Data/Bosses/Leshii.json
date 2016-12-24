@@ -1,0 +1,26 @@
+{
+	"Level" : 1,
+	"Attack" : 1,
+	"Defense" : 1,
+	"LeftHand" : 
+	{
+		"DamageValue" : 2,
+		"Health" : 10,
+		"EffectChanse" : 25
+	},
+	"RightHand" :
+	{
+		"DamageValue" : 2,
+		"Health" : 10,
+		"EffectChanse" : 50,
+		"HealthValue" : 5
+	},
+	"Body" :
+	{
+		"Health" : 50
+	},
+	"SpecialAttack" :
+	{
+		"DamageValue" : 15
+	}
+}

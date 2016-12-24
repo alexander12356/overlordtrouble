@@ -2,56 +2,88 @@
 
 using System.Collections.Generic;
 
-public class BattleActor : MonoBehaviour
+public class BattleActor : MonoBehaviour, IEffectInfluenced
 {
     #region Variables
+    private string m_Id;
     private float m_Health;
     private float m_BaseHealth;
-    private float m_Mana;
-    private float m_BaseMana;
-    private float m_Defense;
-    private bool m_IsDead;
+    private float m_SpecialPoints;
+    private float m_BaseSpecialPoints;
+    private float m_AttackStat;
+    private float m_DefenseStat;
+    private int   m_Level;
+    private bool  m_IsDead;
     private string m_ActorName = "Actor";
     private bool m_IsAoeAttack;
+    private Element m_Element = Element.NONE;
     private Dictionary<string, List<BaseEffect>> m_EffectList = new Dictionary<string, List<BaseEffect>>();
     private List<string> m_DeleteSpecials = new List<string>();
     private Transform m_RendererTransform = null;
-
+    private Dictionary<Element, float> m_ElementBalance = new Dictionary<Element, float>();
     #endregion
 
     #region Interface
+    public string id
+    {
+        get { return m_Id;  }
+        set { m_Id = value; }
+    }
+    public Element element
+    {
+        get { return m_Element;  }
+        set { m_Element = value; }
+    }
     public float health
     {
         get { return m_Health;  }
         set
         {
             m_Health = value;
+            m_Health = m_Health < 0 ? 0 : m_Health;
+            m_Health = m_Health > m_BaseHealth ? m_BaseHealth : m_Health;
             ChangeHealthValue();
         }
     }
-    public float mana
+    public float baseHealth
     {
-        get { return m_Mana;  }
+        get { return m_BaseHealth; }
+        set { m_BaseHealth = value; }
+    }
+    public float specialPoints
+    {
+        get { return m_SpecialPoints; }
         set
         {
-            m_Mana = value;
+            m_SpecialPoints = value;
+            m_SpecialPoints = m_SpecialPoints < 0 ? 0 : m_SpecialPoints;
+            m_SpecialPoints = m_SpecialPoints > m_BaseSpecialPoints ? m_BaseSpecialPoints : m_SpecialPoints;
             ChangeManaValue();
         }
     }
-    public float defense
+    public float baseSpecialPoints
     {
-        get { return m_Defense;  }
-        set { m_Defense = value; }
+        get { return m_BaseSpecialPoints; }
+        set { m_BaseSpecialPoints = value; }
     }
-    public float baseHealth
+    public float attackStat
     {
-        get { return m_BaseHealth;  }
-        set { m_BaseHealth = value; }
+        get { return m_AttackStat; }
+        set { m_AttackStat = value; }
     }
-    public float baseMana
+    public float defenseStat
     {
-        get { return m_BaseMana;  }
-        set { m_BaseMana = value; }
+        get { return m_DefenseStat;  }
+        set
+        {
+            m_DefenseStat = value;
+            m_DefenseStat = m_DefenseStat <= 0 ? 1 : m_DefenseStat;
+        }
+    }
+    public int level
+    {
+        get { return m_Level;  }
+        set { m_Level = value; }
     }
     public bool isDead
     {
@@ -84,11 +116,7 @@ public class BattleActor : MonoBehaviour
 
     public virtual void Damage(float p_DamageValue)
     {
-        if (p_DamageValue < defense)
-        {
-            return;
-        }
-        health -= (p_DamageValue - defense);
+        health -= p_DamageValue;
     }
 
     public virtual bool IsCanDamage(float p_Damage)
@@ -193,28 +221,88 @@ public class BattleActor : MonoBehaviour
         m_DeleteSpecials.Clear();
     }
 
-    public virtual void AddBuff()
+    public virtual void AddBuffIcon()
     {
     }
 
-    public virtual void RemoveBuff()
+    public virtual void RemoveBuffIcon()
     {
     }
 
-    public virtual void AddDebuff()
+    public virtual void AddDebuffIcon()
     {
     }
 
-    public virtual void RemoveDebuff()
+    public virtual void RemoveDebuffIcon()
     {
     }
 
-    public virtual void AddStatusEffect(string p_EffectId)
+    public virtual void AddStatusEffectIcon(string p_EffectId)
     {
     }
 
-    public virtual void RemoveStatusEffect(string p_EffectId)
+    public virtual void RemoveStatusEffectIcon(string p_EffectId)
     {
+    }
+
+    public void SetModif(Element p_Element, float p_Value)
+    {
+        if (!m_ElementBalance.ContainsKey(p_Element))
+        {
+            m_ElementBalance.Add(p_Element, 1.0f);
+        }
+        m_ElementBalance[p_Element] = p_Value;
+    }
+
+    public float GetModif(Element p_Element)
+    {
+        if (!m_ElementBalance.ContainsKey(p_Element))
+        {
+            return 1.0f;
+        }
+        return m_ElementBalance[p_Element];
+    }
+
+    public void EffectEndImmediately(string p_EffectId)
+    {
+        foreach (string l_Id in m_EffectList.Keys)
+        {
+            for (int i = 0; i < m_EffectList[l_Id].Count; i++)
+            {
+                string l_EffectId = m_EffectList[l_Id][i].id;
+                if (l_EffectId == p_EffectId)
+                {
+                    m_EffectList[l_Id][i].EndImmediately();
+                    m_EffectList[l_Id].RemoveAt(i);
+                    i--;
+                }
+            }
+            if (m_EffectList[l_Id].Count == 0)
+            {
+                m_DeleteSpecials.Add(l_Id);
+            }
+        }
+        for (int i = 0; i < m_DeleteSpecials.Count; i++)
+        {
+            m_EffectList.Remove(m_DeleteSpecials[i]);
+        }
+        m_DeleteSpecials.Clear();
+    }
+
+    public bool HasEffect(string p_EffectId)
+    {
+        foreach (string l_Id in m_EffectList.Keys)
+        {
+            for (int i = 0; i < m_EffectList[l_Id].Count; i++)
+            {
+                string l_EffectId = m_EffectList[l_Id][i].id;
+                if (l_EffectId == p_EffectId)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     #endregion
 }

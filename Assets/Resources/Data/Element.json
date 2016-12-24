@@ -1,0 +1,67 @@
+{
+	"Live" :
+	{
+		"Death" : 1.5,
+		"Dark" : 1.5,
+		"Nature" : 0.5,
+		"Mana" : 0.5
+	},
+    "Death" :
+	{
+		"Live" : 1.5,
+		"Nature" : 1.5,
+		"Dark" : 0.5,
+		"Death" : 0.5
+	},
+    "Dark" :
+	{
+		"Death" : 1.5,
+		"Mana" : 1.5,
+		"Fire" : 0.5,
+		"Water" : 0.5
+	},
+    "Nature" :
+	{
+		"Water" : 1.5,
+		"Earth" : 1.5,
+		"Fire" : 0.5,
+		"Live" : 0.5
+	},
+    "Fire" :
+	{
+		"Dark" : 1.5,
+		"Nature" : 1.5,
+		"Water" : 0.5,
+		"Earth" : 0.5
+	},
+    "Water" :
+	{
+		"Fire" : 1.5,
+		"Earth" : 1.5,
+		"Mana" : 0.5,
+		"Live" : 0.5
+	},
+    "Earth" :
+	{
+		"Fire" : 1.5,
+		"Mana" : 1.5,
+		"Dark" : 0.5,
+		"Death" : 0.5
+	},
+    "Mana" :
+	{
+		"Water" : 1.5,
+		"Live" : 1.5,
+		"Earth" : 0.5,
+		"Nature" : 0.5
+	},
+    "Ancient"
+	{
+	},
+    "Physical" :
+	{
+	},
+	"NONE" :
+	{
+	}
+}

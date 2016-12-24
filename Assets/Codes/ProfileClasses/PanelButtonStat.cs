@@ -34,7 +34,19 @@ public class PanelButtonStat : PanelButton
         set
         {
             m_StatValue = value;
-            m_StatValueText.text = m_StatValue.ToString();
+
+            if (m_StatId == "HealthPoints")
+            {
+                m_StatValueText.text = PlayerData.GetInstance().health + "/" + m_StatValue.ToString();
+            }
+            else if (m_StatId == "MonstylePoints")
+            {
+                m_StatValueText.text = PlayerData.GetInstance().specialPoints + "/" + m_StatValue.ToString();
+            }
+            else
+            {
+                m_StatValueText.text = m_StatValue.ToString();
+            }
         }
     }
     public int addedStatValue

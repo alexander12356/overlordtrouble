@@ -9,17 +9,17 @@
 	<!-- LesserWaterElemental -->
 	<Text id="Special:WaterBullet">Водяная пуля</Text>
 	<Text id="Special:WaterDash">Ударный рывок</Text>
+	<Text id="Special:HealingSplash">Целебная струя</Text>
 	
-	<!-- DewElemental -->
+	<!-- Salamanti -->
 	<Text id="Special:TailWhap">Удар хвостом</Text>
 	<Text id="Special:Slash">Разрез</Text>
-	<Text id="Special:ShellDefense">Панцирная защита</Text>
+	<Text id="Special:Molting">Сброс кожи</Text>
 	
-	<!-- DewElemental -->
-	<Text id="Special:BlobeStrike">Водяной удар</Text>
-	<Text id="Special:HealingWater">Целебная вода</Text>
-	<Text id="Special:StonePress">Каменный пресс</Text>
-	<Text id="Special:Stun">Оглушение</Text>
+	<!-- Brownie -->
+	<Text id="Special:StaffStrike">Удар тростью</Text>
+	<Text id="Special:Ember">Искра</Text>
+	<Text id="Special:Concentration">Концентрация</Text>
 	
 	<!-- effect's description -->
 	<Text id="Effects:Attack">Урон: %d</Text>
@@ -42,26 +42,32 @@
 	<Text id="Improvement:Brownie">Брауни</Text>
 	
 	<!-- items -->
-	<Text id="Item:HealthPotion">Целебное зелье</Text>
-	<Text id="Item:ManaPotion">Зелье магии</Text>
-	<Text id="Item:FireBallScroll">Свиток Огненного Шара</Text>
-	<Text id="Item:AirDefenseScroll">Свиток Воздушной защиты</Text>
-	<Text id="Item:AncientArmor">Древний доспех</Text>
+	<Text id="Item:SmallHealthPotion">Малое зелье жизни</Text>
+	<Text id="Item:SmallSpecialPotion">Малое зелье энергии</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>
 	<Text id="Elemental:Water">Вода</Text>
 	<Text id="Elemental:Earth">Земля</Text>
 	<Text id="Elemental:Mana">Мана</Text>
+	<Text id="Elemental:Live">Жизнь</Text>
+	<Text id="Elemental:Fire">Огонь</Text>
+	<Text id="Elemental:Nature">Природа</Text>
+	<Text id="Elemental:Dark">Тьма</Text>
+	<Text id="Elemental:Physical">Физический</Text>
 	
 	<!-- enemy's -->
 	<Text id="Enemy:Bokalisk">Кокотрикс</Text>
-	<Text id="Enemy:Bokalisk:PeckerAttack">Удар клювом</Text>
+	<Text id="Enemy:Bokalisk:PeckerAttack">Клевок</Text>
+	<Text id="Enemy:Bokalisk:HollowLook">Пустой взгляд</Text>
+	<Text id="Enemy:Bokalisk:MissTurn">Кокотрикс начал непрерывно кудахтать… кокотрикс пропустил ход</Text>
 	<Text id="Enemy:Skwatwolf">Гополак</Text>
-	<Text id="Enemy:Skwatwolf:Fisting">Удар</Text>
-	<Text id="Enemy:Skwatwolf:Racket">Рэкет</Text>
+	<Text id="Enemy:Skwatwolf:Strike">Удар</Text>
+	<Text id="Enemy:Skwatwolf:Gopogovor">Гопоговор</Text>
 	<Text id="Enemy:Dualent">Дуалэнт</Text>
-	<Text id="Enemy:Dualent:Attack">Удар</Text>
+	<Text id="Enemy:Dualent:DriedRoots">Сухие корни</Text>
+	<Text id="Enemy:Dualent:Bite">Укус</Text>
+	<Text id="Enemy:Dualent:DoubleAttack">Вторая голова дуалента решила атаковать</Text>
 	<Text id="Enemy:ThirdsortRobber">Третьесортный разбойник</Text>
 	<Text id="Enemy:ThirdsortRobber:Attack">Пырнуть ножом</Text>
 	
@@ -82,7 +88,10 @@
 	<Text id="Boss:Leshii:Step">ход</Text>
 	<Text id="Boss:Leshii:Steps">хода</Text>
 	<Text id="Boss:Leshii:HandsDie">%d потеряла силу</Text>
-	<Text id="Boss:Leshii:Die">Ой ой…</Text> 
+	<Text id="Boss:Leshii:Die">Ой ой…</Text>
+	<Text id="Boss:Leshii:Stun">Стан</Text>
+	<Text id="Boss:Leshii:Health">%d восстановил %d очков здоровья</Text>
+	<Text id="Boss:Leshii:NatureFury">Ярость леса</Text>
 	
 	<!-- UI -->
 	<Text id="GUI:Journey:ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>
@@ -119,9 +128,10 @@
 	<Text id="GUI:BattleSystem:Levelup">Игрок повысился до %dго уровня</Text>
 	<Text id="GUI:BattleSystem:Classup">достиг достаточного уровня для повышение класса!</Text>
 	<Text id="GUI:BattleSystem:SelectMonstyle:Damage">Урон</Text>
-	<Text id="GUI:BattleSystem:EnemyAttack">%d использовал %d и нанес %d урона</Text>
-	<Text id="GUI:BattleSystem:PlayerAttack">%d атаковал "%d" и нанес %d урона</Text>
-	<Text id="GUI:BattleSystem:BadAttack">Плод твоих напрасных усилий был равен %d очкам урона по %d</Text>
+	<Text id="GUI:BattleSystem:PlayerAttack">%d атаковал "%d"</Text>
+	<Text id="GUI:BattleSystem:EnemyUsing">%d использовал %d</Text>
+	<Text id="GUI:BattleSystem:Damage">и нанес %d урона</Text>
+	<Text id="GUI:BattleSystem:BadAttack">%d старался напрасно</Text>
 	<Text id="GUI:BattleSystem:MonstyleUsing">%d использовал %d</Text>
 	<Text id="GUI:BattleSystem:MonstyleDamage">, он нанес %d урона по %d</Text>
 	<Text id="GUI:BattleSystem:AoeUsing">%d попал под %d</Text>
@@ -147,6 +157,10 @@
 	<Text id="GUI:BattleSystem:Bonus">%d восстановил %d в качестве бонуса</Text>
 	<Text id="GUI:BattleSystem:HpBonus">%d HP</Text>
 	<Text id="GUI:BattleSystem:SpBonus">%d SP</Text>
+	<Text id="GUI:BattleSystem:Healing">%d восстановил %d очков HP</Text>
+	<Text id="GUI:BattleSystem:DebuffClear">%d исцелился от вредных эффектов</Text>
+	<Text id="GUI:BattleSystem:BadDebuffClear">%d не имеет никаких статусных эффектов. Очищающий прием ничего не сделал</Text>
+	<Text id="GUI:BattleSystem:MegaHealing">%d восстановил %d очков хп и исцелился от вредных эффектов</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Побуду собой</Text>
 	<Text id="GUI:Improve:AreYouShure">Вы уверены что хотите выбрать этот\nкласс?\nВернуть обратно уже не выйдет.</Text>
@@ -170,6 +184,10 @@
 	<Text id="GUI:SettingsPanel:WindowedMode">Оконный режим</Text>
 	<Text id="GUI:SettingsPanel:Accept">Принять</Text>
 	<Text id="GUI:SettingsPanel:Cancel">Отмена</Text>
+	
+	<Text id="GUI:EnterName:EnterName">Перед тем как мы начнем,\nНапишите - как вас называть.</Text>
+	<Text id="GUI:EnterName:Standart">Кеша</Text>
+	<Text id="GUI:EnterName:AreYouShure">Вы уверены?</Text>
 	
 	<!-- Dialogs -->
 	<Text id="Dialog:SkeletonChild:1">Привет!</Text>

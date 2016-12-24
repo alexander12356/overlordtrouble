@@ -1,0 +1,49 @@
+{
+	"Id" : "Dualent",
+	"Attack" : 1,
+	"Defense" : 1,
+	"Level" : 1,
+	"Health" : 15,
+	"Element": "Nature",
+	"Attacks" :
+	[
+		{
+			"Id" : "DriedRoots",
+			"Type" : "Attack",
+			"Element" : "Nature",
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 2,
+					"Value2" : 4
+				}
+			}
+		},
+		{
+			"Id" : "Bite",
+			"Type" : "Attack",
+			"Element" : "Physical",
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 4,
+					"Value2" : 4
+				}
+			}
+		}
+	],
+	"Experience" : 15,
+	"Loot" :
+	[
+		{
+			"Id" : "BokaliskMeat",
+			"Count" : 1
+		}
+	],
+	"Property" :
+	{
+		"DoubleAttacChance" : 20
+	}
+}
