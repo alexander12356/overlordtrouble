@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
+using System.Collections.Generic;
 
 public enum ControlType
 {
@@ -60,6 +60,13 @@ public class JourneySystem : MonoBehaviour
         SetControl(ControlType.Panel);
 
         DialogManager.GetInstance().StartDialog(p_DialogId, p_SubDialogId);
+    }
+
+    public DialogQuestionPanel StartQuestionDialog(string p_DialogId, List<ActionStruct> p_ActionList)
+    {
+        SetControl(ControlType.Panel);
+
+        return DialogManager.GetInstance().StartQuestionDialog(p_DialogId, p_ActionList);
     }
 
     public void SetControl(ControlType p_Type)

@@ -7,7 +7,7 @@ public class DialogCollideBehaviors : BaseCollideBehavior
     private int p_SubDialogId = 0;
 
     [SerializeField]
-    private string m_DialogId = string.Empty;
+    protected string m_DialogId = string.Empty;
 
     public override void Awake()
     {
@@ -42,7 +42,7 @@ public class DialogCollideBehaviors : BaseCollideBehavior
         m_JourneyActor.StartLogic();
     }
 
-    private ActorDirection GetMyObjectSide(JourneyActor p_OtherActor)
+    protected ActorDirection GetMyObjectSide(JourneyActor p_OtherActor)
     {
         Vector2 l_Position = p_OtherActor.pivotTransform.position;
         Vector2 l_ThisPosition = m_JourneyActor.pivotTransform.position; 

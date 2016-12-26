@@ -17,16 +17,30 @@ public class TextBox : MonoBehaviour
     private Animator m_ActiveButtonAnimator = null;
     private Animator m_TalkingAnimator = null;
     private string m_TalkingAnimationId = string.Empty;
+    private Image m_ActiveKey = null;
+    private Text m_ActiveKeyText = null;
 
     [SerializeField]
     private float m_ShowingTextSpeed = 0.5f;
     #endregion
 
     #region Interface
+    public bool isActiveButton
+    {
+        set
+        {
+            m_ActiveKey.enabled = value;
+            m_ActiveKeyText.enabled = value;
+            m_ActiveButtonAnimator.enabled = value; 
+        }
+    }
+
     public void Awake()
     {
         m_Text = GetComponentInChildren<Text>();
         m_ActiveButtonAnimator = GetComponent<Animator>();
+        m_ActiveKey = GetComponentInChildren<Image>();
+        m_ActiveKeyText = transform.FindChild("ActiveKeyText").GetComponent<Text>();
     }
 
     public void SetText(List<string> p_Text)

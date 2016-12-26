@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+
 using UnityEngine;
 
 public class DialogManager : MonoBehaviour
@@ -27,6 +28,20 @@ public class DialogManager : MonoBehaviour
         l_DialogWindow.SetAvatar(l_Dialog.avatarImagePath);
         l_DialogWindow.SetDialog(l_SubDialog.phrases);
         JourneySystem.GetInstance().ShowPanel(l_DialogWindow, true);
+    }
+
+    public DialogQuestionPanel StartQuestionDialog(string p_DialogId, List<ActionStruct> p_ActionList)
+    {
+        Dialog l_Dialog = DialogDataBase.GetInstance().GetDialog(p_DialogId);
+        SubDialog l_SubDialog = l_Dialog.subDialogs[0];
+
+        DialogQuestionPanel l_DialogWindow = Instantiate(DialogQuestionPanel.prefab);
+        l_DialogWindow.SetAvatar(l_Dialog.avatarImagePath);
+        l_DialogWindow.SetDialog(l_SubDialog.phrases);
+        l_DialogWindow.AddAnswers(p_ActionList);
+        JourneySystem.GetInstance().ShowPanel(l_DialogWindow, true);
+
+        return l_DialogWindow;
     }
 
     public void EndDialog()

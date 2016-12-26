@@ -116,6 +116,8 @@
 	<Text id="GUI:Journey:Inventory:Wear">Надеть</Text>
 	<Text id="GUI:Journey:Inventory:Items">Предметы</Text>
 	
+	<Text id="GUI:Journey:Sleep">Вся усталость сошла на нет</Text>
+	
 	<Text id="GUI:Profile:Level">Уровень</Text>
 	<Text id="GUI:Profile:NextLevelup">до следующего уровня:</Text>
 	<Text id="GUI:Profile:StatsPoints">Осталось очков: %d</Text>
@@ -214,6 +216,8 @@
 	<Text id="Dialog:Uniceros:1">Пьинь?</Text>
 	
 	<Text id="Dialog:HeroBed">Может поспать?</Text>
+	<Text id="Dialog:HeroBed:YesSleep">Да</Text>
+	<Text id="Dialog:HeroBed:NoSleep">Нет</Text>
 	<Text id="Dialog:HeroCupBoard">Здесь хранятся всякие безделушки</Text>
 	<Text id="Dialog:HeroCandle">Ей еще светить и светить</Text>
 	<Text id="Dialog:HeroStove">Печка как печка, но пока без огня.</Text>

@@ -8,7 +8,7 @@ public class DialogPanel : Panel
     private static DialogPanel m_Prefab;
 
     #region Variables
-    private TextBox m_TextBox;
+    protected TextBox m_TextBox;
     private Image m_BackgroundImage = null;
 
     [SerializeField]
@@ -63,14 +63,15 @@ public class DialogPanel : Panel
 
         m_TextBox.UpdateTextBox();
     }
-    #endregion
 
-    #region Private
-    private void Start()
+    public virtual void Start()
     {
         AddPushAction(m_TextBox.ShowText);
         m_TextBox.AddEndAction(DialogClose);
     }
+    #endregion
+
+    #region Private
 
     private void DialogClose()
     {
