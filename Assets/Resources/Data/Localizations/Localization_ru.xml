@@ -239,5 +239,16 @@
 	<Text id="Dialog:SunPriestG:4">Я не умею хорошо ими пользоваться, но я могу их создавать.</Text>
 	<Text id="Dialog:SunPriestG:5">Запомни, знак солнца <b>сохраняет</b> тех, кто им пользуется.</Text>
 	
+	<Text id="Dialog:SunPriest:1">Добро пожаловать в храм солнца! А также в мой дом.</Text>
+	<Text id="Dialog:SunPriest:2">Алтарь солнца может подключаться к другим подобным алтарям, то есть это очень удобное средство передвижения. Но сейчас он не работает.</Text>
+	<Text id="Dialog:SunPriest:3">На самом деле он перестал работать неделю назад, но я думал, что это пройдет со временем.</Text>
+	<Text id="Dialog:SunPriest:4">Он все еще не работает.</Text>
+	<Text id="Dialog:SunPriest:5">Я жалею что не взял инструкцию к нему.</Text>
+	
+	<Text id="Dialog:SunPriest:Stove">Одна печка и четыре трубы, непрактично но выглядит неплохо.</Text>
+	<Text id="Dialog:SunPriest:Bucket">Пусто.</Text>
+	<Text id="Dialog:SunPriest:Box">Его наполняют повседневным мусором.</Text>
+	<Text id="Dialog:SunPriest:Cactus">Самое обычное комнатное растение, делает воздух чище. Это кактус.</Text>
+	
 	<Text id="Dialog:OtherBed">Ты же не собираешься спать на чужой кровати?</Text>
 </Localization>

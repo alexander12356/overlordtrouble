@@ -62,6 +62,36 @@
 		</SubDialog>
 	</Dialog>
 	
+	<Dialog id="SunPriest" avatarPath="Sprites/Creations/SunPriest/Avatar">
+		<SubDialog>
+			<Text>Dialog:SunPriest:1</Text>
+		</SubDialog>
+		<SubDialog>
+			<Text>Dialog:SunPriest:2</Text>
+			<Text>Dialog:SunPriest:3</Text>
+			<Text>Dialog:SunPriest:4</Text>
+		</SubDialog>
+		<SubDialog>
+			<Text>Dialog:SunPriest:5</Text>
+		</SubDialog>
+	</Dialog>
+	
+	<Dialog id="SunPriest:Stove" avatarPath="">
+		<Text>Dialog:SunPriest:Stove</Text>
+	</Dialog>
+	
+	<Dialog id="SunPriest:Bucket" avatarPath="">
+		<Text>Dialog:SunPriest:Bucket</Text>
+	</Dialog>
+	
+	<Dialog id="SunPriest:Box" avatarPath="">
+		<Text>Dialog:SunPriest:Box</Text>
+	</Dialog>
+	
+	<Dialog id="SunPriest:Cactus" avatarPath="">
+		<Text>Dialog:SunPriest:Cactus</Text>
+	</Dialog>
+	
 	<Dialog id="GoatPerson" avatarPath="Sprites/Creations/GoatPerson/Avatar">
 		<SubDialog>
 			<Text>Dialog:GoatPerson:1</Text>
@@ -106,8 +136,6 @@
 	<Dialog id="HeroFlower" avatarPath="">
 		<Text>Dialog:HeroFlower</Text>
 	</Dialog>
-	
-	
 	
 	<Dialog id="OtherBed" avatarPath="">
 		<Text>Dialog:OtherBed</Text>
