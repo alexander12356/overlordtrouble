@@ -12,6 +12,7 @@ public class GameEventTrigger : MonoBehaviour
         if (p_Collision.tag == "Player")
         {
             m_Action.actionEvent.Invoke();
+            Destroy(gameObject);
         }
     }
 }

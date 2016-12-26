@@ -94,7 +94,7 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
 				}
 			}
 
-            m_Texts.Add(textID, curText.InnerText.Replace("\\n", Environment.NewLine));
+            m_Texts.Add(textID, curText.InnerXml.Replace("\\n", Environment.NewLine));
 		}
 	}
     #endregion
