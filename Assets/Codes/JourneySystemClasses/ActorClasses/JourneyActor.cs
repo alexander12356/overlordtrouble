@@ -114,5 +114,10 @@ public class JourneyActor : MonoBehaviour
     {
         m_SpriteRenderer.sortingOrder = RoomSystem.GetInstance().GetSortingOrderBound(m_PivotTransform);
     }
+
+    public virtual void GoTo(Vector3 p_Target, float p_Delay)
+    {
+
+    }
     #endregion
 }

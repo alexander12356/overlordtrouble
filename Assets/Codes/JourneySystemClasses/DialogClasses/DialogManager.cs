@@ -19,15 +19,18 @@ public class DialogManager : MonoBehaviour
         return m_Instance;
     }
 
-    public void StartDialog(string p_DialogId, int p_SubDialogId)
+    public DialogPanel StartDialog(string p_DialogId, int p_SubDialogId)
     {
         Dialog l_Dialog = DialogDataBase.GetInstance().GetDialog(p_DialogId);
         SubDialog l_SubDialog = l_Dialog.subDialogs[p_SubDialogId];
+        l_SubDialog.Init();
 
         DialogPanel l_DialogWindow = Instantiate(DialogPanel.prefab);
         l_DialogWindow.SetAvatar(l_Dialog.avatarImagePath);
         l_DialogWindow.SetDialog(l_SubDialog.phrases);
         JourneySystem.GetInstance().ShowPanel(l_DialogWindow, true);
+
+        return l_DialogWindow;
     }
 
     public DialogQuestionPanel StartQuestionDialog(string p_DialogId, List<ActionStruct> p_ActionList)
@@ -46,7 +49,10 @@ public class DialogManager : MonoBehaviour
 
     public void EndDialog()
     {
-        JourneySystem.GetInstance().SetControl(ControlType.Player);
-        m_JourneyPlayer.PressDisactiveButtonAction();
+        if (JourneySystem.GetInstance().currentControlType != ControlType.Cutscene)
+        {
+            JourneySystem.GetInstance().SetControl(ControlType.Player);
+            m_JourneyPlayer.PressDisactiveButtonAction();
+        }
     }
 }

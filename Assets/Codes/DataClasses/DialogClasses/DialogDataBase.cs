@@ -16,6 +16,17 @@ public struct SubDialog
     {
         phrases = p_Phrases;
     }
+
+    public void Init()
+    {
+        for (int i = 0; i < phrases.Count; i++)
+        {
+            if (phrases[i].Contains("%PlayerName"))
+            {
+                phrases[i] = phrases[i].Replace("%PlayerName", PlayerData.GetInstance().GetPlayerName());
+            }
+        }
+    }
 }
 
 public class DialogDataBase : Singleton<DialogDataBase>

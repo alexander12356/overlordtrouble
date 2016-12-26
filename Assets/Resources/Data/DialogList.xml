@@ -24,9 +24,19 @@
 		<Text>Dialog:Store:2</Text>
 	</Dialog>
 	<Dialog id="VillageElder" avatarPath="Sprites/Creations/VillageElder/Avatar">
-		<Text>Dialog:VillageElder:1</Text>
-		<Text>Dialog:VillageElder:2</Text>
-		<Text>Dialog:VillageElder:3</Text>
+		<SubDialog>
+			<Text>Dialog:VillageElder:1</Text>
+			<Text>Dialog:VillageElder:2</Text>
+		</SubDialog>
+		<SubDialog>
+			<Text>Dialog:VillageElder:3</Text>
+		</SubDialog>
+		<SubDialog>
+			<Text>Dialog:VillageElder:4</Text>
+		</SubDialog>
+		<SubDialog>
+			<Text>Dialog:VillageElder:5</Text>
+		</SubDialog>
 	</Dialog>
 	<Dialog id="GoatPerson" avatarPath="Sprites/Creations/GoatPerson/Avatar">
 		<SubDialog>
@@ -71,5 +81,16 @@
 	</Dialog>
 	<Dialog id="HeroFlower" avatarPath="">
 		<Text>Dialog:HeroFlower</Text>
+	</Dialog>
+	
+	<Dialog id="VillageElder:Hey" avatarPath="">
+		<Text>Dialog:VillageElder:Hey:1</Text>
+		<Text>Dialog:VillageElder:Hey:2</Text>
+	</Dialog>
+	<Dialog id="VillageElder:FirstTask" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<Text>Dialog:VillageElder:FirstTask:1</Text>
+		<Text>Dialog:VillageElder:FirstTask:2</Text>
+		<Text>Dialog:VillageElder:FirstTask:3</Text>
+		<Text>Dialog:VillageElder:FirstTask:4</Text>
 	</Dialog>
 </DialogList>

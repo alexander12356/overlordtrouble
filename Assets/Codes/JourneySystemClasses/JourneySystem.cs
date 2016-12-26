@@ -13,6 +13,7 @@ public enum ControlType
 public class JourneySystem : MonoBehaviour
 {
     private static JourneySystem m_Instance;
+    private ControlType m_CurrentControlType = ControlType.Player;
 
     [SerializeField]
     private JourneyPlayer m_Player = null;
@@ -40,6 +41,10 @@ public class JourneySystem : MonoBehaviour
         }
         return true;
     }
+    public ControlType currentControlType
+    {
+        get { return m_CurrentControlType; }
+    }
 
     public void Awake()
     {
@@ -55,11 +60,14 @@ public class JourneySystem : MonoBehaviour
         m_Player.LoadImprove();
     }
 
-    public void StartDialog(string p_DialogId, int p_SubDialogId)
+    public DialogPanel StartDialog(string p_DialogId, int p_SubDialogId)
     {
-        SetControl(ControlType.Panel);
+        if (m_CurrentControlType != ControlType.Cutscene)
+        {
+            SetControl(ControlType.Panel);
+        }
 
-        DialogManager.GetInstance().StartDialog(p_DialogId, p_SubDialogId);
+        return DialogManager.GetInstance().StartDialog(p_DialogId, p_SubDialogId);
     }
 
     public DialogQuestionPanel StartQuestionDialog(string p_DialogId, List<ActionStruct> p_ActionList)
@@ -71,6 +79,7 @@ public class JourneySystem : MonoBehaviour
 
     public void SetControl(ControlType p_Type)
     {
+        m_CurrentControlType = p_Type;
         switch (p_Type)
         {
             case ControlType.Panel:
@@ -84,7 +93,7 @@ public class JourneySystem : MonoBehaviour
                 CutsceneSystem.GetInstance().enabled = false;
                 break;
             case ControlType.Cutscene:
-                m_PanelManager.enabled = false;
+                m_PanelManager.enabled = true;
                 m_Player.StopLogic();
                 CutsceneSystem.GetInstance().enabled = true;
                 break;

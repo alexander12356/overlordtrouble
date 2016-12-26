@@ -203,9 +203,11 @@
 	<Text id="Dialog:Store:Welcome">Добро пожаловать в мой скромный магазинчик. Хотите ли произвести покупку?</Text>
 	<Text id="Dialog:Store:1">Все мои товары отличаются большой прочностью и принадлежали храбрым воинам, которые вызвали на бой дракона</Text>
 	<Text id="Dialog:Store:2">Никто из них не выжил, в отличии от их экипировки</Text>
-	<Text id="Dialog:VillageElder:1">Вижу, ты проснулся.</Text>
-	<Text id="Dialog:VillageElder:2">Я все еще сонный.</Text>
-	<Text id="Dialog:VillageElder:3">На этом пока все.</Text>
+	<Text id="Dialog:VillageElder:1">Хмм? Тренировочная площадка?</Text>
+	<Text id="Dialog:VillageElder:2">Хехехе, это наш загон с курицами.</Text>
+	<Text id="Dialog:VillageElder:3">Да, загон с курицами также является тренировочной площадкой.</Text>
+	<Text id="Dialog:VillageElder:4">Ты поймешь почему, когда поговоришь с Тернером.</Text>
+	<Text id="Dialog:VillageElder:5">Чего стоим? Кого ждем?</Text>
 	<Text id="Dialog:GoatPerson:1">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
 	<Text id="Dialog:GoatPerson:2">Но сегодня до меня дошла мысль, что если наполнить ведра ровно до половины я смогу нести два ведра одновременно.</Text>
 	<Text id="Dialog:GoatPerson:3">Разве я не гений?</Text>
@@ -223,4 +225,12 @@
 	<Text id="Dialog:HeroStove">Печка как печка, но пока без огня.</Text>
 	<Text id="Dialog:HeroPicture">Хорошие воспоминания всегда нужно помнить</Text>
 	<Text id="Dialog:HeroFlower">Самое обычное комнатное растение, делает воздух чище.</Text>
+	
+	<Text id="Dialog:VillageElder:Hey:1">Эй!</Text>
+	<Text id="Dialog:VillageElder:Hey:2">%PlayerName, подойди сюда.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:1">Вижу, ты проснулся.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:2">У меня для тебя хорошие новости.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:3">Ты достиг достаточного возраста для более серьезной работы, чем кормежка единорога.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:4">В общем так, для начала нужно проверить насколько хорошо ты сможешь себя защитить, поэтому пойди к тренировочной площадке, там должен быть Тернер скажи что тебе нужно проверить свои силы, он поймет</Text>
+	
 </Localization>

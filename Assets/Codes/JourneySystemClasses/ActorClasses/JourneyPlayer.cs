@@ -135,6 +135,19 @@ public class JourneyPlayer : JourneyActor
     {
         m_CurrentCollideBehavior.StopAction();
     }
+
+    public override void GoTo(Vector3 p_Target, float p_Delay)
+    {
+        base.GoTo(p_Target, p_Delay);
+
+        UpdateSortingLayer();
+        myTransform.localPosition = Vector3.MoveTowards(myTransform.localPosition, p_Target, p_Delay);
+        if (myTransform.localPosition.x < p_Target.x)
+        {
+            myAnimator.SetFloat("Input_X", 1);
+            myAnimator.SetFloat("Input_Y", 0);
+        }
+    }
     #endregion
 
     #region Private

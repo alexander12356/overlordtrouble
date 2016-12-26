@@ -17,9 +17,9 @@ public class MovingActorStep : BaseStep
     public override void UpdateStep()
     {
         base.UpdateStep();
-
-        m_JourneyActor.myTransform.localPosition = Vector3.MoveTowards(m_JourneyActor.myTransform.localPosition, m_DestPosition, m_Speed * Time.deltaTime);
+        
         m_JourneyActor.myAnimator.SetBool(m_AnimationName, true);
+        m_JourneyActor.GoTo(m_DestPosition, m_Speed * Time.deltaTime);
 
         if ((m_JourneyActor.myTransform.localPosition - m_DestPosition).sqrMagnitude < 0.25f)
         {
