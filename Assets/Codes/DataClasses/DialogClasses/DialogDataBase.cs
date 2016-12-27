@@ -2,44 +2,19 @@
 using System.Xml;
 using UnityEngine;
 
-public struct Dialog
-{
-    public string avatarImagePath;
-    public List<SubDialog> subDialogs;
-}
 
-public struct SubDialog
-{
-    public List<string> phrases;
-
-    public SubDialog(List<string> p_Phrases)
-    {
-        phrases = p_Phrases;
-    }
-
-    public void Init()
-    {
-        for (int i = 0; i < phrases.Count; i++)
-        {
-            if (phrases[i].Contains("%PlayerName"))
-            {
-                phrases[i] = phrases[i].Replace("%PlayerName", PlayerData.GetInstance().GetPlayerName());
-            }
-        }
-    }
-}
 
 public class DialogDataBase : Singleton<DialogDataBase>
 {
     private string m_PathFile = "Data/DialogList";
-    private Dictionary<string, Dialog> m_DialogList = new Dictionary<string, Dialog>();
+    private Dictionary<string, DialogData> m_DialogList = new Dictionary<string, DialogData>();
 
     public DialogDataBase ()
     {
         Parse();
     }
 
-    public Dialog GetDialog(string p_Id)
+    public DialogData GetDialog(string p_Id)
     {
         return m_DialogList[p_Id];
     }
@@ -50,47 +25,57 @@ public class DialogDataBase : Singleton<DialogDataBase>
         XmlDocument l_XmlDocument = new XmlDocument();
         l_XmlDocument.InnerXml = l_TextAsset.text;
         XmlNodeList l_DialogListNode = l_XmlDocument.GetElementsByTagName("Dialog");
-        
-        foreach (XmlNode l_DialogNode in l_DialogListNode)
+
+        foreach (XmlNode l_DialogXml in l_DialogListNode)
         {
-            List<string> l_TextList = new List<string>();
+            string l_DialogId = l_DialogXml.Attributes[0].Value;
+            string l_StartDialogNode = l_DialogXml.Attributes[1].Value;
+            string l_AvatarImagePath = l_DialogXml.Attributes[2].Value;
+            DialogData l_DialogData = new DialogData(l_DialogId, l_StartDialogNode, l_AvatarImagePath);
 
-            string l_DialogId = l_DialogNode.Attributes[0].Value;
-            string l_AvatarImage = l_DialogNode.Attributes[1].Value;
-            Dialog l_Dialog;
-            l_Dialog.avatarImagePath = l_AvatarImage;
-            l_Dialog.subDialogs = new List<SubDialog>();
-
-            if (l_DialogNode.ChildNodes[0].Name.ToLower() == "subdialog")
+            foreach (XmlNode l_DialogNodeXml in l_DialogXml)
             {
-                foreach (XmlNode l_Node in l_DialogNode.ChildNodes)
-                {
-                    l_TextList = ParsePhrases(l_Node);
+                DialogNode l_DialogNode = ParseDialogNode(l_DialogNodeXml);
+                l_DialogNode.Init();
 
-                    SubDialog l_Subdialog = new SubDialog(l_TextList);
-                    l_Dialog.subDialogs.Add(l_Subdialog);
-                }
-            }
-            else
-            {
-                l_TextList = ParsePhrases(l_DialogNode);
-
-                SubDialog l_Subdialog = new SubDialog(l_TextList);
-                l_Dialog.subDialogs.Add(l_Subdialog);
+                l_DialogData.AddDialogNode(l_DialogNode.id, l_DialogNode);
             }
 
-            m_DialogList.Add(l_DialogId, l_Dialog);
+            m_DialogList.Add(l_DialogData.id, l_DialogData);
         }
     }
 
-    private List<string> ParsePhrases(XmlNode p_SubdialogNode)
+    private DialogNode ParseDialogNode(XmlNode p_DialogNodeXml)
     {
+        string l_Id = p_DialogNodeXml.Attributes[0].Value;
         List<string> l_TextList = new List<string>();
+        List<string> l_QuestionList = new List<string>();
 
-        foreach (XmlNode l_TextNode in p_SubdialogNode.ChildNodes)
+        foreach (XmlNode l_Xml in p_DialogNodeXml)
         {
-            l_TextList.Add(LocalizationDataBase.GetInstance().GetText(l_TextNode.InnerText));
+            switch (l_Xml.Name)
+            {
+                case "Question":
+                    l_QuestionList = ParseQuestion(l_Xml);
+                    break;
+                default:
+                    l_TextList.Add(l_Xml.InnerText);
+                    break;
+            }
         }
-        return l_TextList;
+
+        return new DialogNode(l_Id, l_TextList, l_QuestionList);
+    }
+
+    private List<string> ParseQuestion(XmlNode p_DialogNodeXml)
+    {
+        List<string> l_QuestionList = new List<string>();
+
+        foreach (XmlNode l_Xml in p_DialogNodeXml)
+        {
+            l_QuestionList.Add(l_Xml.Attributes[0].Value);
+        }
+
+        return l_QuestionList;
     }
 }

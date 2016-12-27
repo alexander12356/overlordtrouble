@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 using System;
+using System.Collections.Generic;
 
 public class DialogCollideBehaviors : BaseCollideBehavior
 {
@@ -8,6 +9,9 @@ public class DialogCollideBehaviors : BaseCollideBehavior
 
     [SerializeField]
     protected string m_DialogId = string.Empty;
+
+    [SerializeField]
+    private List<ActionStruct> m_AnswerActionList = null;
 
     public override void Awake()
     {
@@ -23,13 +27,7 @@ public class DialogCollideBehaviors : BaseCollideBehavior
             return;
         }
 
-        JourneySystem.GetInstance().StartDialog(m_DialogId, p_SubDialogId);
-
-        Dialog l_Dialog = DialogDataBase.GetInstance().GetDialog(m_DialogId);
-        if (l_Dialog.subDialogs.Count > p_SubDialogId + 1)
-        {
-            p_SubDialogId++;
-        }
+        JourneySystem.GetInstance().StartDialog(m_DialogId, m_AnswerActionList);
 
         m_JourneyActor.ApplyTo(p_Sender.myTransform.position);
         m_JourneyActor.StopLogic();

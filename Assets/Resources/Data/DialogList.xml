@@ -1,143 +1,47 @@
 ﻿<?xml version="1.0"?>
 <DialogList>
-	<Dialog id="SkeletonChild" avatarPath="Sprites/Creations/SkeletonChild/Avatar">
-		<Text>Dialog:SkeletonChild:1</Text>
-		<Text>Dialog:SkeletonChild:2</Text>
+	<!-- Hero Home -->
+	<Dialog id="HeroHouse:Bed" startNode="WantSleep" avatarPath="">
+		<DialogNode id="WantSleep">
+			<Text>Dialog:HeroHouse:Bed</Text>
+			<Question>
+				<Answer id="YesSleep"/>
+				<Answer id="NoSleep"/>
+			</Question>
+		</DialogNode>
 	</Dialog>
-	<Dialog id="SnailKid" avatarPath="Sprites/Creations/SnailKid/Avatar">
-		<Text>Dialog:SnailKid:1</Text>
-		<Text>Dialog:SnailKid:2</Text>
-	</Dialog>
-	<Dialog id="Bokalisk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
-		<Text>Dialog:Bokalisk:1</Text>
-		<Text>Dialog:Bokalisk:2</Text>
-	</Dialog>
-	<Dialog id="Bokalisk1" avatarPath="Sprites/Creations/Bokalisk/Avatar">
-		<Text>Dialog:Bokalisk1:1</Text>
-		<Text>Dialog:Bokalisk1:2</Text>
-	</Dialog>
-	<Dialog id="StoreWelcome" avatarPath="Sprites/Creations/Store/Avatar">
-		<Text>Dialog:Store:Welcome</Text>
-	</Dialog>
-	<Dialog id="StoreDialog" avatarPath="Sprites/Creations/Store/Avatar">
-		<Text>Dialog:Store:1</Text>
-		<Text>Dialog:Store:2</Text>
-	</Dialog>
-	
-	<Dialog id="VillageElder" avatarPath="Sprites/Creations/VillageElder/Avatar">
-		<SubDialog>
-			<Text>Dialog:VillageElder:1</Text>
-			<Text>Dialog:VillageElder:2</Text>
-		</SubDialog>
-		<SubDialog>
-			<Text>Dialog:VillageElder:3</Text>
-		</SubDialog>
-		<SubDialog>
-			<Text>Dialog:VillageElder:4</Text>
-		</SubDialog>
-		<SubDialog>
-			<Text>Dialog:VillageElder:5</Text>
-		</SubDialog>
-	</Dialog>
-	<Dialog id="VillageElder:Hey" avatarPath="">
-		<Text>Dialog:VillageElder:Hey:1</Text>
-		<Text>Dialog:VillageElder:Hey:2</Text>
-	</Dialog>
-	<Dialog id="VillageElder:FirstTask" avatarPath="Sprites/Creations/VillageElder/Avatar">
-		<Text>Dialog:VillageElder:FirstTask:1</Text>
-		<Text>Dialog:VillageElder:FirstTask:2</Text>
-		<Text>Dialog:VillageElder:FirstTask:3</Text>
-		<Text>Dialog:VillageElder:FirstTask:4</Text>
-	</Dialog>
-	
-	<Dialog id="SunPriestG" avatarPath="Sprites/Creations/SunPriestG/Avatar">
-		<SubDialog>
-			<Text>Dialog:SunPriestG:1</Text>
-			<Text>Dialog:SunPriestG:2</Text>
-			<Text>Dialog:SunPriestG:3</Text>
-			<Text>Dialog:SunPriestG:4</Text>
-		</SubDialog>
-		<SubDialog>
-			<Text>Dialog:SunPriestG:5</Text>
-		</SubDialog>
-	</Dialog>
-	
-	<Dialog id="SunPriest" avatarPath="Sprites/Creations/SunPriest/Avatar">
-		<SubDialog>
-			<Text>Dialog:SunPriest:1</Text>
-		</SubDialog>
-		<SubDialog>
-			<Text>Dialog:SunPriest:2</Text>
-			<Text>Dialog:SunPriest:3</Text>
-			<Text>Dialog:SunPriest:4</Text>
-		</SubDialog>
-		<SubDialog>
-			<Text>Dialog:SunPriest:5</Text>
-		</SubDialog>
-	</Dialog>
-	
-	<Dialog id="SunPriest:Stove" avatarPath="">
-		<Text>Dialog:SunPriest:Stove</Text>
-	</Dialog>
-	
-	<Dialog id="SunPriest:Bucket" avatarPath="">
-		<Text>Dialog:SunPriest:Bucket</Text>
-	</Dialog>
-	
-	<Dialog id="SunPriest:Box" avatarPath="">
-		<Text>Dialog:SunPriest:Box</Text>
-	</Dialog>
-	
-	<Dialog id="SunPriest:Cactus" avatarPath="">
-		<Text>Dialog:SunPriest:Cactus</Text>
-	</Dialog>
-	
-	<Dialog id="GoatPerson" avatarPath="Sprites/Creations/GoatPerson/Avatar">
-		<SubDialog>
-			<Text>Dialog:GoatPerson:1</Text>
-			<Text>Dialog:GoatPerson:2</Text>
-			<Text>Dialog:GoatPerson:3</Text>
-		</SubDialog>
-		<SubDialog>
-			<Text>Dialog:GoatPerson:3</Text>
-		</SubDialog>
-	</Dialog>
-	<Dialog id="Terner" avatarPath="Sprites/Creations/Terner/Avatar">
-		<Text>Dialog:Terner:1</Text>
-	</Dialog>
-	<Dialog id="VillageFountain" avatarPath="">
-		<Text>Dialog:OldWell</Text>
-	</Dialog>
-	<Dialog id="GiantCock" avatarPath="Sprites/Creations/GiantCock/Avatar">
-		<Text>Dialog:GiantCock:1</Text>
-		<Text>Dialog:GiantCock:2</Text>
-	</Dialog>
-	<Dialog id="Uniceros" avatarPath="Sprites/Creations/Uniceros/Avatar">
-		<Text>Dialog:Uniceros:1</Text>
-	</Dialog>
-	
-	<!-- Hero House -->
-	
-	<Dialog id="HeroBed" avatarPath="">
-		<Text>Dialog:HeroBed</Text>
-	</Dialog>
-	<Dialog id="HeroCupboard" avatarPath="">
-		<Text>Dialog:HeroCupBoard</Text>
-	</Dialog>
-	<Dialog id="HeroCandle" avatarPath="">
-		<Text>Dialog:HeroCandle</Text>
-	</Dialog>
-	<Dialog id="HeroStove" avatarPath="">
-		<Text>Dialog:HeroStove</Text>
-	</Dialog>
-	<Dialog id="HeroPicture" avatarPath="">
-		<Text>Dialog:HeroPicture</Text>
-	</Dialog>
-	<Dialog id="HeroFlower" avatarPath="">
-		<Text>Dialog:HeroFlower</Text>
-	</Dialog>
-	
-	<Dialog id="OtherBed" avatarPath="">
-		<Text>Dialog:OtherBed</Text>
+
+	<!-- Terner Dialogs -->
+	<Dialog id="Terner:BokaliskBattle" startNode="FromWho" avatarPath="Sprites/Creations/Terner/Avatar">
+		<DialogNode id="FromWho">
+			<Text>Dialog:Terner:Ask</Text>
+			<Question>
+				<Answer id="FromElder"/>
+				<Answer id="NotFromElder"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="FromElder">
+			<Text>Dialog:Terner:FromElder:1</Text>
+			<Text>Dialog:Terner:FromElder:2</Text>
+			<Text>Dialog:Terner:FromElder:3</Text>
+			<Text>Dialog:Terner:FromElder:4</Text>
+			<Text>Dialog:Terner:FromElder:5</Text>
+			<Text>Dialog:Terner:FromElder:6</Text>
+			<Question>
+				<Answer id="WantLearnMonstyle"/>
+				<Answer id="NotWantLearnMonstyle"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="NotFromElder">
+			<Text>Dialog:Terner:NotFromElder</Text>
+		</DialogNode>
+		<DialogNode id="WantLearnMonstyle">
+			<Text>Dialog:Terner:WantLearnMonstyle:1</Text>
+			<Text>Dialog:Terner:WantLearnMonstyle:2</Text>
+			<Text>Dialog:Terner:WantLearnMonstyle:3</Text>
+		</DialogNode>
+		<DialogNode id="NotWantLearnMonstyle">
+			<Text>Dialog:Terner:NotWantLearnMonstyle</Text>
+		</DialogNode>
 	</Dialog>
 </DialogList>

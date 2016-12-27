@@ -211,15 +211,32 @@
 	<Text id="Dialog:GoatPerson:1">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
 	<Text id="Dialog:GoatPerson:2">Но сегодня до меня дошла мысль, что если наполнить ведра ровно до половины я смогу нести два ведра одновременно.</Text>
 	<Text id="Dialog:GoatPerson:3">Разве я не гений?</Text>
-	<Text id="Dialog:Terner:1">Привет</Text>
+	
+	<Text id="Dialog:Terner:Ask">Хахах! Привет малой! Тебя послал старик?</Text>
+	<Text id="Dialog:Terner:FromElder:1">Кхм-кхм! Вот и наступил этот день когда ты уже готов пойти в мир.</Text>
+	<Text id="Dialog:Terner:FromElder:2">Я бы сейчас заплакал от радости…</Text>
+	<Text id="Dialog:Terner:FromElder:3">НО!</Text>
+	<Text id="Dialog:Terner:FromElder:4">Я должен тебя подготовить к жестокости мира снаружи… и куриц.</Text>
+	<Text id="Dialog:Terner:FromElder:5">Поэтому ты должен будешь сразиться с одной из них. Знай - эти курицы гораздо сильнее любой мелкой сошки которая сейчас ходит по дорогам, поэтому не недооценивай их.</Text>
+	<Text id="Dialog:Terner:FromElder:6">Иии... перед тем как начнешь, хочешь я расскажу тебе, что я понял о монстайлах которые ты используешь?</Text>
+	<Text id="Dialog:Terner:NotFromElder">О...</Text>
+	<Text id="Dialog:Terner:WantLearnMonstyle:1">Монстайлы используются только во время боя, для их использования нажми на надпись монстайл и выбери от одного до четырех специальных приемов. Потом, выбери оппонента на котором они будут использованы, после чего ты должен нажать правильные кнопки, и запомни - если ты ошибешься хотя бы один раз то прием не будет произведен и даже не возвратит свою стоимость.</Text>
+	<Text id="Dialog:Terner:WantLearnMonstyle:2">Надо же сколько разных терминов. Я даже не знаю где ты найдешь кнопки во время боя… у меня такое чувство что я что-то разрушил.</Text>
+	<Text id="Dialog:Terner:WantLearnMonstyle:3">ВОоо всяком случае! Удачи с тренировкой!</Text>
+	<Text id="Dialog:Terner:NotWantLearnMonstyle">Хохо! Тогда удачи с тренировкой!</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:FromElder">Да</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:NotFromElder">Нет</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:WantLearnMonstyle">Да</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:NotWantLearnMonstyle">Нет</Text>
+	
 	<Text id="Dialog:OldWell">Колодец... полон воды… ее можно пить.</Text>
 	<Text id="Dialog:GiantCock:1">...</Text>
 	<Text id="Dialog:GiantCock:2">*Он спит*</Text>
 	<Text id="Dialog:Uniceros:1">Пьинь?</Text>
 	
-	<Text id="Dialog:HeroBed">Может поспать?</Text>
-	<Text id="Dialog:HeroBed:YesSleep">Да</Text>
-	<Text id="Dialog:HeroBed:NoSleep">Нет</Text>
+	<Text id="Dialog:HeroHouse:Bed">Может поспать?</Text>
+	<Text id="Dialog:HeroHouse:Bed:YesSleep">Да</Text>
+	<Text id="Dialog:HeroHouse:Bed:NoSleep">Нет</Text>
 	<Text id="Dialog:HeroCupBoard">Здесь хранятся всякие безделушки</Text>
 	<Text id="Dialog:HeroCandle">Ей еще светить и светить</Text>
 	<Text id="Dialog:HeroStove">Печка как печка, но пока без огня.</Text>

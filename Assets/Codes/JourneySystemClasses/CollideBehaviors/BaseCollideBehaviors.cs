@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
+using UnityEngine.Events;
+
+[System.Serializable]
+public struct ActionStruct
+{
+    public string id;
+    public UnityEvent actionEvent;
+}
 
 public class BaseCollideBehavior : MonoBehaviour
 {

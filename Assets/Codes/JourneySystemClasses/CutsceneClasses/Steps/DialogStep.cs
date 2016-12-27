@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class DialogStep : BaseStep
 {
@@ -16,7 +16,7 @@ public class DialogStep : BaseStep
     {
         base.StartStep();
 
-        DialogPanel l_DialogPanel = JourneySystem.GetInstance().StartDialog(m_DialogId, 0);
+        DialogPanel l_DialogPanel = JourneySystem.GetInstance().StartDialog(m_DialogId, new List<ActionStruct>());
 
         l_DialogPanel.AddPopAction(EndStep);
 

@@ -60,21 +60,14 @@ public class JourneySystem : MonoBehaviour
         m_Player.LoadImprove();
     }
 
-    public DialogPanel StartDialog(string p_DialogId, int p_SubDialogId)
+    public DialogPanel StartDialog(string p_DialogId, List<ActionStruct> p_AnswerActionList)
     {
         if (m_CurrentControlType != ControlType.Cutscene)
         {
             SetControl(ControlType.Panel);
         }
 
-        return DialogManager.GetInstance().StartDialog(p_DialogId, p_SubDialogId);
-    }
-
-    public DialogQuestionPanel StartQuestionDialog(string p_DialogId, List<ActionStruct> p_ActionList)
-    {
-        SetControl(ControlType.Panel);
-
-        return DialogManager.GetInstance().StartQuestionDialog(p_DialogId, p_ActionList);
+        return DialogManager.GetInstance().StartDialog(p_DialogId, p_AnswerActionList);
     }
 
     public void SetControl(ControlType p_Type)
