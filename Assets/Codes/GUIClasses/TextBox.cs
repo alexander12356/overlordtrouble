@@ -40,7 +40,12 @@ public class TextBox : MonoBehaviour
         m_Text = GetComponentInChildren<Text>();
         m_ActiveButtonAnimator = GetComponent<Animator>();
         m_ActiveKey = GetComponentInChildren<Image>();
-        m_ActiveKeyText = transform.FindChild("ActiveKeyText").GetComponent<Text>();
+
+        Transform l_ActiveKeyTransform = transform.FindChild("ActiveKeyText");
+        if (l_ActiveKeyTransform != null)
+        {
+            m_ActiveKeyText = l_ActiveKeyTransform.GetComponent<Text>();
+        }
     }
 
     public void SetText(List<string> p_Text)
