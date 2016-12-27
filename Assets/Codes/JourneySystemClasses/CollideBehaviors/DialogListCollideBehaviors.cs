@@ -1,20 +1,13 @@
-﻿using UnityEngine;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class DialogCollideBehaviors : BaseCollideBehavior
+public class DialogListCollideBehaviors : BaseCollideBehavior
 {
-    [SerializeField]
-    protected string m_DialogId = string.Empty;
+    private int m_CurrentDialogId = 0;
 
     [SerializeField]
-    private List<ActionStruct> m_AnswerActionList = null;
-
-    public override void Awake()
-    {
-        base.Awake();
-    }
+    private List<string> m_DialogList = null;
 
     public override void RunAction(JourneyActor p_Sender)
     {
@@ -25,10 +18,15 @@ public class DialogCollideBehaviors : BaseCollideBehavior
             return;
         }
 
-        JourneySystem.GetInstance().StartDialog(m_DialogId, m_AnswerActionList);
+        JourneySystem.GetInstance().StartDialog(m_DialogList[m_CurrentDialogId], new List<ActionStruct>());
 
         m_JourneyActor.ApplyTo(p_Sender.myTransform.position);
         m_JourneyActor.StopLogic();
+
+        if (m_DialogList.Count > m_CurrentDialogId + 1)
+        {
+            m_CurrentDialogId++;
+        }
     }
 
     public override void StopAction()
@@ -41,7 +39,7 @@ public class DialogCollideBehaviors : BaseCollideBehavior
     protected ActorDirection GetMyObjectSide(JourneyActor p_OtherActor)
     {
         Vector2 l_Position = p_OtherActor.pivotTransform.position;
-        Vector2 l_ThisPosition = m_JourneyActor.pivotTransform.position; 
+        Vector2 l_ThisPosition = m_JourneyActor.pivotTransform.position;
         double l_Angle = Math.Atan2(l_Position.y - l_ThisPosition.y, l_Position.x - l_ThisPosition.x) / Math.PI * 180;
         l_Angle = (l_Angle < 0) ? l_Angle + 360 : l_Angle;
 

@@ -192,26 +192,31 @@
 	<Text id="GUI:EnterName:AreYouShure">Вы уверены?</Text>
 	
 	<!-- Dialogs -->
-	<Text id="Dialog:SkeletonChild:1">Привет!</Text>
-	<Text id="Dialog:SkeletonChild:2">Посмотри на этот цветочек! Разве он не милый?</Text>
-	<Text id="Dialog:SnailKid:1">Привет.</Text>
-	<Text id="Dialog:SnailKid:2">Этот цветок внезапно возник сегодня. Мы делаем счастливый танец, чтобы помочь ему вырасти.</Text>
-	<Text id="Dialog:Bokalisk:1">Куд-кудах! Куд-кудах!</Text>
-	<Text id="Dialog:Bokalisk:2">КОООООООООКОКОКОКОК!</Text>
-	<Text id="Dialog:Bokalisk1:1">Куд-кудахи! Куд-кудахи!</Text>
-	<Text id="Dialog:Bokalisk1:2">КОКОКОКОКОККООООКХХ!!!</Text>
+	<!-- Skeleton child Dialogs -->
+	<Text id="Dialog:SkeletonChild:AboutFlower:1">Привет!</Text>
+	<Text id="Dialog:SkeletonChild:AboutFlower:2">Посмотри на этот цветочек! Разве он не милый?</Text>
+	
+	<!-- Snail kid Dialogs -->
+	<Text id="Dialog:SnailKid:AboutFlower:1">Привет.</Text>
+	<Text id="Dialog:SnailKid:AboutFlower:2">Этот цветок внезапно возник сегодня. Мы делаем счастливый танец, чтобы помочь ему вырасти.</Text>
+	
+	<!-- Bokalisk Dialogs -->
+	<Text id="Dialog:Bokalisk:StartBattle:1">Куд-кудах! Куд-кудах!</Text>
+	<Text id="Dialog:Bokalisk:StartBattle:2">КОООООООООКОКОКОКОК!</Text>
+	<Text id="Dialog:BokaliskOrda:StartBattle:1">Куд-кудахи! Куд-кудахи!</Text>
+	<Text id="Dialog:BokaliskOrda:StartBattle:2">КОКОКОКОКОККООООКХХ!!!</Text>
+	
+	<!-- Store Dialogs -->
 	<Text id="Dialog:Store:Welcome">Добро пожаловать в мой скромный магазинчик. Хотите ли произвести покупку?</Text>
 	<Text id="Dialog:Store:1">Все мои товары отличаются большой прочностью и принадлежали храбрым воинам, которые вызвали на бой дракона</Text>
 	<Text id="Dialog:Store:2">Никто из них не выжил, в отличии от их экипировки</Text>
-	<Text id="Dialog:VillageElder:1">Хмм? Тренировочная площадка?</Text>
-	<Text id="Dialog:VillageElder:2">Хехехе, это наш загон с курицами.</Text>
-	<Text id="Dialog:VillageElder:3">Да, загон с курицами также является тренировочной площадкой.</Text>
-	<Text id="Dialog:VillageElder:4">Ты поймешь почему, когда поговоришь с Тернером.</Text>
-	<Text id="Dialog:VillageElder:5">Чего стоим? Кого ждем?</Text>
-	<Text id="Dialog:GoatPerson:1">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
-	<Text id="Dialog:GoatPerson:2">Но сегодня до меня дошла мысль, что если наполнить ведра ровно до половины я смогу нести два ведра одновременно.</Text>
-	<Text id="Dialog:GoatPerson:3">Разве я не гений?</Text>
 	
+	<!-- Goat person Dialogs-->
+	<Text id="Dialog:GoatPerson:AboutWater:1">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
+	<Text id="Dialog:GoatPerson:AboutWater:2">Но сегодня до меня дошла мысль, что если наполнить ведра ровно до половины я смогу нести два ведра одновременно.</Text>
+	<Text id="Dialog:GoatPerson:AboutWater:3">Разве я не гений?</Text>
+	
+	<!-- Terner Dialogs -->
 	<Text id="Dialog:Terner:Ask">Хахах! Привет малой! Тебя послал старик?</Text>
 	<Text id="Dialog:Terner:FromElder:1">Кхм-кхм! Вот и наступил этот день когда ты уже готов пойти в мир.</Text>
 	<Text id="Dialog:Terner:FromElder:2">Я бы сейчас заплакал от радости…</Text>
@@ -229,43 +234,53 @@
 	<Text id="Dialog:Terner:BokaliskBattle:WantLearnMonstyle">Да</Text>
 	<Text id="Dialog:Terner:BokaliskBattle:NotWantLearnMonstyle">Нет</Text>
 	
-	<Text id="Dialog:OldWell">Колодец... полон воды… ее можно пить.</Text>
-	<Text id="Dialog:GiantCock:1">...</Text>
-	<Text id="Dialog:GiantCock:2">*Он спит*</Text>
-	<Text id="Dialog:Uniceros:1">Пьинь?</Text>
-	
+	<!-- Hero House Dialogs -->
 	<Text id="Dialog:HeroHouse:Bed">Может поспать?</Text>
 	<Text id="Dialog:HeroHouse:Bed:YesSleep">Да</Text>
 	<Text id="Dialog:HeroHouse:Bed:NoSleep">Нет</Text>
-	<Text id="Dialog:HeroCupBoard">Здесь хранятся всякие безделушки</Text>
-	<Text id="Dialog:HeroCandle">Ей еще светить и светить</Text>
-	<Text id="Dialog:HeroStove">Печка как печка, но пока без огня.</Text>
-	<Text id="Dialog:HeroPicture">Хорошие воспоминания всегда нужно помнить</Text>
-	<Text id="Dialog:HeroFlower">Самое обычное комнатное растение, делает воздух чище.</Text>
+	<Text id="Dialog:HeroHouse:Cupboard">Здесь хранятся всякие безделушки</Text>
+	<Text id="Dialog:HeroHouse:Candle">Ей еще светить и светить</Text>
+	<Text id="Dialog:HeroHouse:Stove">Печка как печка, но пока без огня.</Text>
+	<Text id="Dialog:HeroHouse:Picture">Хорошие воспоминания всегда нужно помнить</Text>
+	<Text id="Dialog:HeroHouse:Flower">Самое обычное комнатное растение, делает воздух чище.</Text>
 	
+	<!-- Village Elder Dialogs -->
 	<Text id="Dialog:VillageElder:Hey:1">Эй!</Text>
 	<Text id="Dialog:VillageElder:Hey:2">%PlayerName, подойди сюда.</Text>
 	<Text id="Dialog:VillageElder:FirstTask:1">Вижу, ты проснулся.</Text>
 	<Text id="Dialog:VillageElder:FirstTask:2">У меня для тебя хорошие новости.</Text>
 	<Text id="Dialog:VillageElder:FirstTask:3">Ты достиг достаточного возраста для более серьезной работы, чем кормежка единорога.</Text>
 	<Text id="Dialog:VillageElder:FirstTask:4">В общем так, для начала нужно проверить насколько хорошо ты сможешь себя защитить, поэтому пойди к тренировочной площадке, там должен быть Тернер скажи что тебе нужно проверить свои силы, он поймет</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:1">Хмм? Тренировочная площадка?</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:2">Хехехе, это наш загон с курицами.</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:3">Да, загон с курицами также является тренировочной площадкой.</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:4">Ты поймешь почему, когда поговоришь с Тернером.</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:5">Чего стоим? Кого ждем?</Text>
 	
-	<Text id="Dialog:SunPriestG:1">Видишь этот знак на полу? Это знак солнца, он позволяет чуток взглянуть в свое будущее, в зависимости от того кто на него ступает четкость видения может разниться. Также он исцеляет все повреждения на теле.</Text>
-	<Text id="Dialog:SunPriestG:2">Можно даже сказать, что знак солнца <b>сохраняет</b>  того кто им воспользовался.</Text>
-	<Text id="Dialog:SunPriestG:3">Знаки солнца очень распространены, и их можно найти в самых неожиданных местах.</Text>
-	<Text id="Dialog:SunPriestG:4">Я не умею хорошо ими пользоваться, но я могу их создавать.</Text>
-	<Text id="Dialog:SunPriestG:5">Запомни, знак солнца <b>сохраняет</b> тех, кто им пользуется.</Text>
+	<!-- SunPriestG Dialogs -->
+	<Text id="Dialog:SunPriestG:AboutSave:1">Видишь этот знак на полу? Это знак солнца, он позволяет чуток взглянуть в свое будущее, в зависимости от того кто на него ступает четкость видения может разниться. Также он исцеляет все повреждения на теле.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:2">Можно даже сказать, что знак солнца <b>сохраняет</b>  того кто им воспользовался.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:3">Знаки солнца очень распространены, и их можно найти в самых неожиданных местах.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:4">Я не умею хорошо ими пользоваться, но я могу их создавать.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:5">Запомни, знак солнца <b>сохраняет</b> тех, кто им пользуется.</Text>
 	
-	<Text id="Dialog:SunPriest:1">Добро пожаловать в храм солнца! А также в мой дом.</Text>
-	<Text id="Dialog:SunPriest:2">Алтарь солнца может подключаться к другим подобным алтарям, то есть это очень удобное средство передвижения. Но сейчас он не работает.</Text>
-	<Text id="Dialog:SunPriest:3">На самом деле он перестал работать неделю назад, но я думал, что это пройдет со временем.</Text>
-	<Text id="Dialog:SunPriest:4">Он все еще не работает.</Text>
-	<Text id="Dialog:SunPriest:5">Я жалею что не взял инструкцию к нему.</Text>
+	<!-- SunPriest Dialogs -->
+	<Text id="Dialog:SunPriest:Welcome">Добро пожаловать в храм солнца! А также в мой дом.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:1">Алтарь солнца может подключаться к другим подобным алтарям, то есть это очень удобное средство передвижения. Но сейчас он не работает.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:2">На самом деле он перестал работать неделю назад, но я думал, что это пройдет со временем.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:3">Он все еще не работает.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:4">Я жалею что не взял инструкцию к нему.</Text>
 	
-	<Text id="Dialog:SunPriest:Stove">Одна печка и четыре трубы, непрактично но выглядит неплохо.</Text>
-	<Text id="Dialog:SunPriest:Bucket">Пусто.</Text>
-	<Text id="Dialog:SunPriest:Box">Его наполняют повседневным мусором.</Text>
-	<Text id="Dialog:SunPriest:Cactus">Самое обычное комнатное растение, делает воздух чище. Это кактус.</Text>
+	<!-- SunPriest Home -->
+	<Text id="Dialog:SunHome:Stove">Одна печка и четыре трубы, непрактично но выглядит неплохо.</Text>
+	<Text id="Dialog:SunHome:Bucket">Пусто.</Text>
+	<Text id="Dialog:SunHome:Box">Его наполняют повседневным мусором.</Text>
+	<Text id="Dialog:SunHome:Cactus">Самое обычное комнатное растение, делает воздух чище. Это кактус.</Text>
 	
+	<!-- Others -->
 	<Text id="Dialog:OtherBed">Ты же не собираешься спать на чужой кровати?</Text>
+	<Text id="Dialog:OldWell">Колодец... полон воды… ее можно пить.</Text>
+	<Text id="Dialog:GiantCock:1">...</Text>
+	<Text id="Dialog:GiantCock:2">*Он спит*</Text>
+	<Text id="Dialog:Uniceros:1">Пьинь?</Text>
 </Localization>
