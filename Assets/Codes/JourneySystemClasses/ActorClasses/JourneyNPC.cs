@@ -15,6 +15,12 @@ public class JourneyNPC : JourneyActor
     {
         get { return m_NpcId; }
     }
+    public BaseMovement baseMovement
+    {
+        get { return m_BaseMovement; }
+        set { m_BaseMovement = value; }
+    }
+
 
     public override void Awake()
     {
@@ -49,6 +55,43 @@ public class JourneyNPC : JourneyActor
         base.StopLogic();
 
         m_BaseMovement.LogicStop();
+    }
+
+    public override void GoTo(Vector3 p_Target, float p_Delay)
+    {
+        base.GoTo(p_Target, p_Delay);
+
+        UpdateSortingLayer();
+        myTransform.localPosition = Vector3.MoveTowards(myTransform.localPosition, p_Target, p_Delay);
+
+        float l_DeltaX = myTransform.localPosition.x - p_Target.x;
+        float l_DeltaY = myTransform.localPosition.y - p_Target.y;
+        if (Mathf.Abs(l_DeltaX) > Mathf.Abs(l_DeltaY))
+        {
+            if (l_DeltaX > 0)
+            {
+                myAnimator.SetFloat("Input_X", -1);
+                myAnimator.SetFloat("Input_Y", 0);
+            }
+            else
+            {
+                myAnimator.SetFloat("Input_X", 1);
+                myAnimator.SetFloat("Input_Y", 0);
+            }
+        }
+        else
+        {
+            if (l_DeltaY > 0)
+            {
+                myAnimator.SetFloat("Input_X", 0);
+                myAnimator.SetFloat("Input_Y", -1);
+            }
+            else
+            {
+                myAnimator.SetFloat("Input_X", 0);
+                myAnimator.SetFloat("Input_Y", 1);
+            }
+        }
     }
 
 #if UNITY_EDITOR

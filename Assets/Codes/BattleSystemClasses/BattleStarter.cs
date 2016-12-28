@@ -4,9 +4,9 @@ using System.Collections.Generic;
 public class BattleStarter : Singleton<BattleStarter>
 {
     private BattleData m_BattleData;
-    private JourneyActor m_Enemy;
+    private JourneyEnemy m_Enemy;
 
-    public void InitBattle(JourneyActor p_Enemy, string p_BattleId)
+    public void InitBattle(JourneyEnemy p_Enemy, string p_BattleId)
     {
         m_BattleData = BattleDataBase.GetInstance().GetBattle(p_BattleId);
         m_Enemy = p_Enemy;
@@ -22,8 +22,8 @@ public class BattleStarter : Singleton<BattleStarter>
         if (!m_BattleData.id.Contains("TestBattle"))
         {
             JourneySystem.GetInstance().player.RemoveCollideActor(m_Enemy);
-            Object.Destroy(m_Enemy.gameObject);
             JourneySystem.GetInstance().SetControl(ControlType.Player);
+            m_Enemy.Lose();
         }
     }
 
@@ -33,6 +33,7 @@ public class BattleStarter : Singleton<BattleStarter>
         {
             m_Enemy.StartLogic();
             JourneySystem.GetInstance().SetControl(ControlType.Player);
+            m_Enemy.Win();
         }
     }
 }

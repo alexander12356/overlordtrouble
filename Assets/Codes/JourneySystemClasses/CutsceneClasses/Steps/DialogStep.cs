@@ -12,15 +12,19 @@ public class DialogStep : BaseStep
     [SerializeField]
     private JourneyActor m_TargetActor = null;
 
+    [SerializeField]
+    private List<ActionStruct> m_ActionStruct = null;
+
     public override void StartStep()
     {
         base.StartStep();
 
-        DialogPanel l_DialogPanel = JourneySystem.GetInstance().StartDialog(m_DialogId, new List<ActionStruct>());
+        DialogPanel l_DialogPanel = JourneySystem.GetInstance().StartDialog(m_DialogId, m_ActionStruct);
 
         l_DialogPanel.AddPopAction(EndStep);
 
         m_TargetActor.ApplyTo(m_SenderActor.myTransform.position);
+        m_SenderActor.ApplyTo(m_TargetActor.myTransform.position);
         m_TargetActor.StopLogic();
     }
 

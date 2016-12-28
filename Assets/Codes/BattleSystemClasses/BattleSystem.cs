@@ -187,10 +187,8 @@ public class BattleSystem : MonoBehaviour
             m_MainPanel.Close();
         }
     }
-    #endregion
 
-    #region Private
-    private void Lose()
+    public virtual void Lose()
     {
         m_IsLose = true;
         SetVisibleAvatarPanel(false);
@@ -201,7 +199,9 @@ public class BattleSystem : MonoBehaviour
 
         ShowPanel(l_TextPanel);
     }
+    #endregion
 
+    #region Private
     private void ReturnToJourney()
     {
         if (m_BattleData.id.Contains("TestBattle"))

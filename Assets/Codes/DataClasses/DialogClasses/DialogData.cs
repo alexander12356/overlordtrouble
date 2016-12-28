@@ -2,6 +2,8 @@
 
 public struct DialogNode
 {
+    public static DialogNode zero = new DialogNode("", new List<string>(), new List<string>());
+
     public string id;
     public List<string> textList;
     public List<string> questionList;

@@ -21,7 +21,7 @@ public class MovingActorStep : BaseStep
         m_JourneyActor.myAnimator.SetBool(m_AnimationName, true);
         m_JourneyActor.GoTo(m_DestPosition, m_Speed * Time.deltaTime);
 
-        if ((m_JourneyActor.myTransform.localPosition - m_DestPosition).sqrMagnitude < 0.25f)
+        if ((m_JourneyActor.myTransform.localPosition - m_DestPosition).sqrMagnitude < 0.05f)
         {
             EndStep();
             m_JourneyActor.myAnimator.SetBool(m_AnimationName, false);

@@ -142,10 +142,34 @@ public class JourneyPlayer : JourneyActor
 
         UpdateSortingLayer();
         myTransform.localPosition = Vector3.MoveTowards(myTransform.localPosition, p_Target, p_Delay);
-        if (myTransform.localPosition.x < p_Target.x)
+
+        float l_DeltaX = myTransform.localPosition.x - p_Target.x;
+        float l_DeltaY = myTransform.localPosition.y - p_Target.y;
+        if (Mathf.Abs(l_DeltaX) > Mathf.Abs(l_DeltaY))
         {
-            myAnimator.SetFloat("Input_X", 1);
-            myAnimator.SetFloat("Input_Y", 0);
+            if (l_DeltaX > 0)
+            {
+                myAnimator.SetFloat("Input_X", -1);
+                myAnimator.SetFloat("Input_Y", 0);
+            }
+            else
+            {
+                myAnimator.SetFloat("Input_X", 1);
+                myAnimator.SetFloat("Input_Y", 0);
+            }
+        }
+        else
+        {
+            if (l_DeltaY > 0)
+            {
+                myAnimator.SetFloat("Input_X", 0);
+                myAnimator.SetFloat("Input_Y", -1);
+            }
+            else
+            {
+                myAnimator.SetFloat("Input_X", 0);
+                myAnimator.SetFloat("Input_Y", 1);
+            }
         }
     }
     #endregion

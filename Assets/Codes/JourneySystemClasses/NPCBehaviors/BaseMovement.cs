@@ -11,7 +11,7 @@ public class BaseMovement : MonoBehaviour
     {
         get
         {
-            if (m_JourneyActor)
+            if (m_JourneyActor == null)
             {
                 m_JourneyActor = GetComponent<JourneyActor>();
             }

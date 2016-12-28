@@ -114,6 +114,30 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="Terner:TutorialWin" startNode="Talk" avatarPath="Sprites/Creations/Terner/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Terner:TutorialWin</Text>
+			<Text>Dialog:Terner:SaveLive</Text>
+			<Text>Dialog:Terner:GoScamper</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Terner:TutorialLose" startNode="Talk" avatarPath="Sprites/Creations/Terner/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Terner:TutorialLose:1</Text>
+			<Text>Dialog:Terner:TutorialLose:2</Text>
+			<Text>Dialog:Terner:SaveLive</Text>
+			<Text>Dialog:Terner:GoScamper</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Terner:Scamper" startNode="Talk" avatarPath="Sprites/Creations/Terner/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Terner:Scamper:1</Text>
+			<Text>Dialog:Terner:Scamper:2</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Skeleton child Dialogs -->
 	<Dialog id="SkeletonChild:AboutFlower" startNode="AboutFlower" avatarPath="Sprites/Creations/SkeletonChild/Avatar">
 		<DialogNode id="AboutFlower">
@@ -160,19 +184,19 @@
 	</Dialog>
 	
 	<!-- SunPriest -->
-	<Dialog id="SunPriest:Welcome" startNode="Welcome" avatarPath="Sprites/Creations/SunPriestG/Avatar">
+	<Dialog id="SunPriest:Welcome" startNode="Welcome" avatarPath="Sprites/Creations/SunPriest/Avatar">
 		<DialogNode id="Welcome">
 			<Text>Dialog:SunPriest:Welcome</Text>
 		</DialogNode>
 	</Dialog>
-	<Dialog id="SunPriest:AboutTeleport:1" startNode="AboutTeleport" avatarPath="Sprites/Creations/SunPriestG/Avatar">
+	<Dialog id="SunPriest:AboutTeleport:1" startNode="AboutTeleport" avatarPath="Sprites/Creations/SunPriest/Avatar">
 		<DialogNode id="AboutTeleport">
 			<Text>Dialog:SunPriest:AboutTeleport:1</Text>
 			<Text>Dialog:SunPriest:AboutTeleport:2</Text>
 			<Text>Dialog:SunPriest:AboutTeleport:3</Text>
 		</DialogNode>
 	</Dialog>
-	<Dialog id="SunPriest:AboutTeleport:2" startNode="AboutTeleport" avatarPath="Sprites/Creations/SunPriestG/Avatar">
+	<Dialog id="SunPriest:AboutTeleport:2" startNode="AboutTeleport" avatarPath="Sprites/Creations/SunPriest/Avatar">
 		<DialogNode id="AboutTeleport">
 			<Text>Dialog:SunPriest:AboutTeleport:4</Text>
 		</DialogNode>

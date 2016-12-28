@@ -17,6 +17,7 @@ public class DialogPanel : Panel
     private bool m_IsShowAnswers = false;
     private Dictionary<string, UnityEvent> m_AnswerActions = new Dictionary<string, UnityEvent>();
     private float m_ButtonVerticalSize;
+    private UnityEvent m_CurrentAction = null;
 
     [SerializeField]
     private Image m_AvatarImage = null;
@@ -96,10 +97,12 @@ public class DialogPanel : Panel
         if (m_CurrentDialogNode.questionList.Count == 0)
         {
             DialogClose();
-            return;
         }
-
-        ShowAnswerList();
+        else
+        {
+            ShowAnswerList();
+        }
+        CheckActions(m_CurrentDialogNode.id);
     }
 
     private void DialogClose()
@@ -121,10 +124,6 @@ public class DialogPanel : Panel
 
     private void ShowAnswerList()
     {
-        m_ButtonList.gameObject.SetActive(true);
-        m_ButtonList.isActive = true;
-        m_IsShowAnswers = true;
-
         for (int i = 0; i < m_CurrentDialogNode.questionList.Count; i++)
         {
             string l_AnswerId = m_CurrentDialogNode.questionList[i];
@@ -133,17 +132,15 @@ public class DialogPanel : Panel
             l_Button.answerId = l_AnswerId;
             l_Button.AddAction(ChooseAnswer);
             m_ButtonList.AddButton(l_Button);
-
-            if (!m_AnswerActions.ContainsKey(l_AnswerId))
-            {
-                continue;
-            }
-            l_Button.AddAction(m_AnswerActions[l_AnswerId]);
         }
 
         Vector2 l_SizeDelta = m_ButtonList.rectTransform.sizeDelta;
         l_SizeDelta.y = m_ButtonVerticalSize * m_CurrentDialogNode.questionList.Count;
         m_ButtonList.rectTransform.sizeDelta = l_SizeDelta;
+
+        m_ButtonList.gameObject.SetActive(true);
+        m_ButtonList.isActive = true;
+        m_IsShowAnswers = true;
     }
 
     private void ChooseAnswer()
@@ -157,12 +154,21 @@ public class DialogPanel : Panel
         if (!m_DialogData.HasDialogNode(l_AnswerId))
         {
             DialogClose();
+            CheckActions(l_AnswerId);
             return;
         }
 
         m_CurrentDialogNode = m_DialogData.GetDialogNode(l_AnswerId);
         m_TextBox.SetText(m_CurrentDialogNode.textList);
         m_TextBox.ShowText();
+    }
+
+    private void CheckActions(string p_ActionId)
+    {
+        if (m_AnswerActions.ContainsKey(p_ActionId))
+        {
+            m_AnswerActions[p_ActionId].Invoke();
+        }
     }
     #endregion
 }

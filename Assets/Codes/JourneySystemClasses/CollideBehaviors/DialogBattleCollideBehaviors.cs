@@ -8,7 +8,7 @@ public class DialogBattleCollideBehaviors : DialogCollideBehaviors
 
     public override void StopAction()
     {
-        BattleStarter.GetInstance().InitBattle(m_JourneyActor, m_BattleId);
+        BattleStarter.GetInstance().InitBattle(m_JourneyActor as JourneyEnemy, m_BattleId);
         JourneySystem.GetInstance().AddScene("BattleSystem");
     }
 }

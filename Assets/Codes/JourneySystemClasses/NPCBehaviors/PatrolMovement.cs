@@ -8,13 +8,13 @@ public class PatrolMovement : BaseMovement
     private struct PatrolPosition
     {
         public Vector2 position;
-        public string  animationName;
         public float   speed;
+        public bool    isDelay;
 
-        public PatrolPosition(Vector2 p_Position, string p_AnimationName, float p_Speed)
+        public PatrolPosition(Vector2 p_Position, bool p_IsDelay, float p_Speed)
         {
             position = p_Position;
-            animationName = p_AnimationName;
+            isDelay = p_IsDelay;
             speed = p_Speed;
         }
     }
@@ -34,8 +34,6 @@ public class PatrolMovement : BaseMovement
     public override void LogicStart()
     {
         base.LogicStart();
-
-        journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, true);
     }
 
     public override void LogicUpdate()
@@ -47,10 +45,10 @@ public class PatrolMovement : BaseMovement
             return;
         }
 
-        if (m_Patrol[m_CurrentPoint].animationName.Contains("Delay"))
+        if (m_Patrol[m_CurrentPoint].isDelay)
         {
             m_ElapsedTime += Time.deltaTime;
-            journeyActor.myAnimator.SetTrigger(m_Patrol[m_CurrentPoint].animationName.Remove(0, 5));
+            journeyActor.myAnimator.SetBool("IsWalking", false);
             if (m_Patrol[m_CurrentPoint].speed <= m_ElapsedTime)
             {
                 m_ElapsedTime = 0.0f;
@@ -59,12 +57,11 @@ public class PatrolMovement : BaseMovement
         }
         else
         {
-            journeyActor.myTransform.localPosition = Vector2.MoveTowards(journeyActor.myTransform.localPosition, m_Patrol[m_CurrentPoint].position, m_Patrol[m_CurrentPoint].speed * Time.deltaTime);
-            journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, true);
+            journeyActor.GoTo(m_Patrol[m_CurrentPoint].position, m_Patrol[m_CurrentPoint].speed * Time.deltaTime);
+            journeyActor.myAnimator.SetBool("IsWalking", true);
 
             if ((Vector2)journeyActor.myTransform.localPosition == m_Patrol[m_CurrentPoint].position)
             {
-                journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, false);
                 m_CurrentPoint++;
 
                 if (m_CurrentPoint >= m_Patrol.Count)
@@ -81,7 +78,7 @@ public class PatrolMovement : BaseMovement
     {
         base.LogicStop();
 
-        journeyActor.myAnimator.SetBool(m_Patrol[m_CurrentPoint].animationName, false);
+        journeyActor.myAnimator.SetBool("IsWalking", false);
     }
     #endregion
 

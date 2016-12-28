@@ -233,6 +233,13 @@
 	<Text id="Dialog:Terner:BokaliskBattle:NotFromElder">Нет</Text>
 	<Text id="Dialog:Terner:BokaliskBattle:WantLearnMonstyle">Да</Text>
 	<Text id="Dialog:Terner:BokaliskBattle:NotWantLearnMonstyle">Нет</Text>
+	<Text id="Dialog:Terner:TutorialWin">Молодцом малой! Мало кто может похвастаться тем что победил Кокотрикса с первого раза! Думаю ты готов! Так что иди к старику и скажи, что прошел тренировку.</Text>
+	<Text id="Dialog:Terner:TutorialLose:1">Ну, всяко случается. Эти куры далеко не так слабы как кажутся. Но думаю что основную часть ты понял. Так что можешь идти к старику и скажи что ты готов.</Text>
+	<Text id="Dialog:Terner:TutorialLose:2">Не боись, снаружи деревни опасности будут гораздо слабее наших кур.</Text>
+	<Text id="Dialog:Terner:SaveLive">Если хочешь, то можешь попытаться сразиться с курами еще раз, но советую перед этим посетить палатку солнца. Это может помочь тебе сохранить свою жизнь.</Text>
+	<Text id="Dialog:Terner:GoScamper">Ну а я пошел на пробежку.</Text>
+	<Text id="Dialog:Terner:Scamper:1">Может со стороны и не похоже, что я бегаю, но я бегаю</Text>
+	<Text id="Dialog:Terner:Scamper:2">Надеюсь я ничего не разбил?</Text>
 	
 	<!-- Hero House Dialogs -->
 	<Text id="Dialog:HeroHouse:Bed">Может поспать?</Text>
