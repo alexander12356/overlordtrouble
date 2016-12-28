@@ -199,6 +199,8 @@
 	<!-- Snail kid Dialogs -->
 	<Text id="Dialog:SnailKid:AboutFlower:1">Привет.</Text>
 	<Text id="Dialog:SnailKid:AboutFlower:2">Этот цветок внезапно возник сегодня. Мы делаем счастливый танец, чтобы помочь ему вырасти.</Text>
+	<Text id="Dialog:SnailKid:Quest:FoodForSnailKid:1">Мама послала мне еду?</Text>
+	<Text id="Dialog:SnailKid:Quest:FoodForSnailKid:2">Мммм. Обожаю соленые огурчики~♥</Text>
 	
 	<!-- Bokalisk Dialogs -->
 	<Text id="Dialog:Bokalisk:StartBattle:1">Куд-кудах! Куд-кудах!</Text>

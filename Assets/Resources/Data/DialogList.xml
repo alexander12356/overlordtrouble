@@ -153,6 +153,12 @@
 			<Text>Dialog:SnailKid:AboutFlower:2</Text>
 		</DialogNode>
 	</Dialog>
+	<Dialog id="SnailKid:Quest:FoodForSnailKid" startNode="Talk" avatarPath="Sprites/Creations/SnailKid/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:SnailKid:Quest:FoodForSnailKid:1</Text>
+			<Text>Dialog:SnailKid:Quest:FoodForSnailKid:2</Text>
+		</DialogNode>
+	</Dialog>
 	
 	<!-- GoatPerson Dialogs -->
 	<Dialog id="GoatPerson:AboutWater:1" startNode="AboutWater" avatarPath="Sprites/Creations/GoatPerson/Avatar">
