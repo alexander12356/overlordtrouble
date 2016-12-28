@@ -284,6 +284,20 @@
 	<Text id="Dialog:SunHome:Box">Его наполняют повседневным мусором.</Text>
 	<Text id="Dialog:SunHome:Cactus">Самое обычное комнатное растение, делает воздух чище. Это кактус.</Text>
 	
+	<!-- Mama Snail Dialogs -->
+	<Text id="Dialog:MamaSnail:Task:Ask">%PlayerName, можно попросить твоей помощи? Сынок забыл свою еду, можешь ему это передать за нас?</Text>
+	<Text id="Dialog:MamaSnail:Task:Help">Да</Text>
+	<Text id="Dialog:MamaSnail:Task:NotHelp">Нет</Text>
+	<Text id="Dialog:MamaSnail:Task:Thank">Ох! Спасибо тебе большое, мы бы сами доставили но как видишь мы очень медленные.</Text>
+	<Text id="Dialog:MamaSnail:Task:Sorry">Ох жаль. Наверное ты торопишься.</Text>
+	
+	<!-- Papa Snail Dialogs -->
+	<Text id="Dialog:PapaSnail:Congratulation:1">Охохо %PlayerName! Я слышал ты уже достаточно взрослый чтобы выйти за пределы деревни. Поздравляю!</Text>
+	<Text id="Dialog:PapaSnail:Congratulation:2">Жду не дождусь того как сынок тоже достигнет этого возраста.</Text>
+	
+	<!-- Snail House -->
+	<Text id="Dialog:SnailHouse:Cupboard">Тут стоит большое число банок… все помечены как соль.</Text>
+	
 	<!-- Others -->
 	<Text id="Dialog:OtherBed">Ты же не собираешься спать на чужой кровати?</Text>
 	<Text id="Dialog:OldWell">Колодец... полон воды… ее можно пить.</Text>

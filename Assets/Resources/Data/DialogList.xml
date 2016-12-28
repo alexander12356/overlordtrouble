@@ -264,6 +264,42 @@
 		</DialogNode>
 	</Dialog>
 	
+	<!-- Mama Snail Dialog -->
+	<Dialog id="MamaSnail:Task" startNode="Ask" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+		<DialogNode id="Ask">
+			<Text>Dialog:MamaSnail:Task:Ask</Text>
+			<Question>
+				<Answer id="Help"/>
+				<Answer id="NotHelp"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="Help">
+			<Text>Dialog:MamaSnail:Task:Thank</Text>
+		</DialogNode>
+		<DialogNode id="NotHelp">
+			<Text>Dialog:MamaSnail:Task:Sorry</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Papa Snail Dialog -->
+	<Dialog id="PapaSnail:Congratulation:1" startNode="Talk" avatarPath="Sprites/Creations/PapaSnail/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:PapaSnail:Congratulation:1</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="PapaSnail:Congratulation:2" startNode="Talk" avatarPath="Sprites/Creations/PapaSnail/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:PapaSnail:Congratulation:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Snail House -->
+	<Dialog id="SnailHouse:Cupboard" startNode="AboutCupboard" avatarPath="">
+		<DialogNode id="AboutCupboard">
+			<Text>Dialog:SnailHouse:Cupboard</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Others -->
 	<Dialog id="OtherBed" startNode="AboutBed" avatarPath="">
 		<DialogNode id="AboutBed">
