@@ -306,6 +306,109 @@
 		</DialogNode>
 	</Dialog>
 	
+	<!-- Not A Cat -->
+	<Dialog id="NotACat:Murr:1" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:1</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="NotACat:Murr:2" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:2</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="NotACat:Murr:3" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:3</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="NotACat:Murr:4" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:4</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="NotACat:Murr:5" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:5</Text>
+			<Text>Dialog:NotACat:Murr:6</Text>
+			<Text>Dialog:NotACat:Murr:7</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="NotACat:Murr:6" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:8</Text>
+			<Text>Dialog:NotACat:Murr:9</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Snowoman -->
+	<Dialog id="Snowoman:AboutBookshelf:1" startNode="Talk" avatarPath="Sprites/Creations/Snowoman/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Snowoman:AboutBookshelf:1</Text>
+			<Text>Dialog:Snowoman:AboutBookshelf:2</Text>
+			<Text>Dialog:Snowoman:AboutBookshelf:3</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Snowoman:AboutBookshelf:2" startNode="Talk" avatarPath="Sprites/Creations/Snowoman/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Snowoman:AboutBookshelf:4</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Library -->
+	<Dialog id="Library:Bookshelf:1" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:1</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:2" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:2</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:3" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:3</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:4" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:4</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:5" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:5</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:6" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:6</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:7" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:7</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:8" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:8</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Library:Coathanger" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Coathanger</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Library:Iceout" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Iceout</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Others -->
 	<Dialog id="OtherBed" startNode="AboutBed" avatarPath="">
 		<DialogNode id="AboutBed">
