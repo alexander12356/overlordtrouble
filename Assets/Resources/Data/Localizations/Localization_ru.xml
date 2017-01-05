@@ -292,6 +292,13 @@
 	<Text id="Dialog:MamaSnail:Task:NotHelp">Нет</Text>
 	<Text id="Dialog:MamaSnail:Task:Thank">Ох! Спасибо тебе большое, мы бы сами доставили но как видишь мы очень медленные.</Text>
 	<Text id="Dialog:MamaSnail:Task:Sorry">Ох жаль. Наверное ты торопишься.</Text>
+	<Text id="Dialog:MamaSnail:QuestAccepted">Думаю он сейчас играет с Костеллой, у дерева.</Text>
+	<Text id="Dialog:MamaSnail:QuestDenied">Все таки решился помочь?</Text>
+	<Text id="Dialog:MamaSnail:QuestDenied:Help">Да</Text>
+	<Text id="Dialog:MamaSnail:QuestDenied:NotHelp">Нет</Text>
+	<Text id="Dialog:MamaSnail:QuestCompleted">Ты их доставил? Ох даже не знаю что бы мы без тебя делали. Вот прими это в качестве благодарности.</Text>
+	<Text id="Dialog:MamaSnail:AboutSnail:1">Мы выглядим как улитки и двигаемся очень медленно, но на этом сходства кончаются. Многие удивляются тому, что мы любим соленую еду.</Text>
+	<Text id="Dialog:MamaSnail:AboutSnail:2">Но ты ведь об этом знал?</Text>
 	
 	<!-- Papa Snail Dialogs -->
 	<Text id="Dialog:PapaSnail:Congratulation:1">Охохо %PlayerName! Я слышал ты уже достаточно взрослый чтобы выйти за пределы деревни. Поздравляю!</Text>

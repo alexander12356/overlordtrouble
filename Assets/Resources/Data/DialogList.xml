@@ -287,6 +287,40 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="MamaSnail:QuestAccepted" startNode="Talk" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSnail:QuestAccepted</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSnail:QuestDenied" startNode="Ask" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+		<DialogNode id="Ask">
+			<Text>Dialog:MamaSnail:QuestDenied</Text>
+			<Question>
+				<Answer id="Help"/>
+				<Answer id="NotHelp"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="Help">
+			<Text>Dialog:MamaSnail:Task:Thank</Text>
+		</DialogNode>
+		<DialogNode id="NotHelp">
+			<Text>Dialog:MamaSnail:Task:Sorry</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSnail:QuestCompleted" startNode="Thanks" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+		<DialogNode id="Thanks">
+			<Text>Dialog:MamaSnail:QuestCompleted</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSnail:AboutSnail:1" startNode="Talk" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSnail:AboutSnail:1</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Papa Snail Dialog -->
 	<Dialog id="PapaSnail:Congratulation:1" startNode="Talk" avatarPath="Sprites/Creations/PapaSnail/Avatar">
 		<DialogNode id="Talk">
