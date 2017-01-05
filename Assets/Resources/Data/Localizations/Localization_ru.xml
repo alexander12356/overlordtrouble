@@ -44,6 +44,8 @@
 	<!-- items -->
 	<Text id="Item:SmallHealthPotion">Малое зелье жизни</Text>
 	<Text id="Item:SmallSpecialPotion">Малое зелье энергии</Text>
+	<Text id="Item:SmallExperiencePotion">Малая сфера опыта</Text>
+	<Text id="Item:SaltCucumber">Соленые огурчики</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>
@@ -117,6 +119,9 @@
 	<Text id="GUI:Journey:Inventory:Items">Предметы</Text>
 	
 	<Text id="GUI:Journey:Sleep">Вся усталость сошла на нет</Text>
+	
+	<Text id="GUI:Journey:ItemCatched">Вы получили %d</Text>
+	<Text id="GUI:Journey:AddMonett">Вы нашли %d монетт.</Text>
 	
 	<Text id="GUI:Profile:Level">Уровень</Text>
 	<Text id="GUI:Profile:NextLevelup">до следующего уровня:</Text>

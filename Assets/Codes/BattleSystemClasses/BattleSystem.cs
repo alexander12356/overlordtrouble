@@ -42,7 +42,7 @@ public class BattleSystem : MonoBehaviour
     {
         return m_Instance;
     }
-    public bool IsInstance()
+    public static bool IsInstance()
     {
         return m_Instance == null ? false : true;
     }

@@ -24,6 +24,26 @@
 					"Value" : 40.0
 				}
 			}
+		},
+		{
+			"Id" : "SaltCucumber",
+			"Image" : "Sprites/Items/Key/SaltCucumber",
+			"Type" : "Key",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "SmallExperiencePotion",
+			"Image" : "Sprites/Items/SingleUse/SmallExperiencePotion",
+			"Type" : "SingleUse",
+			"Effect":
+			{				
+				"Training" :
+				{
+					"Value" : 40.0
+				}
+			}
 		}
 	]
 }
