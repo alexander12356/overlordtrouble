@@ -15,18 +15,21 @@ public class AddItemAction : MonoBehaviour
 	
     public void Run()
     {
-        string l_ItemsName = string.Empty;
-        for (int i = 0; i < m_ItemList.Count; i++)
-        {
-            l_ItemsName += LocalizationDataBase.GetInstance().GetText("Item:" + m_ItemList[i].id) + " ";
+        string l_ItemsName = CalculateItemList(m_ItemList);
+        string l_PanelText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:ItemCatched", new string[] { l_ItemsName });
 
-            PlayerInventory.GetInstance().AddItem(m_ItemList[i].id, m_ItemList[i].count);
-        }
+        ShowTextPanel(new List<string>() { l_PanelText });
+    }
 
-        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:ItemCatched", new string[] { l_ItemsName });
+    private void SetControlPlayer()
+    {
+        JourneySystem.GetInstance().SetControl(ControlType.Player);
+    }
 
+    private void ShowTextPanel(List<string> p_TextList)
+    {
         JourneyTextPanel l_TextPanel = Instantiate(JourneyTextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { l_Text });
+        l_TextPanel.SetText(p_TextList);
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
         l_TextPanel.AddPopAction(SetControlPlayer);
 
@@ -34,8 +37,35 @@ public class AddItemAction : MonoBehaviour
         JourneySystem.GetInstance().SetControl(ControlType.Panel);
     }
 
-    private void SetControlPlayer()
+    private string CalculateItemList(List<AddedItem> p_ItemIds)
     {
-        JourneySystem.GetInstance().SetControl(ControlType.Player);
+        string l_ItemsName = string.Empty;
+        for (int i = 0; i < p_ItemIds.Count; i++)
+        {
+            l_ItemsName += LocalizationDataBase.GetInstance().GetText("Item:" + p_ItemIds[i].id);
+
+            if (p_ItemIds[i].count > 1)
+            {
+                l_ItemsName += " x" + p_ItemIds[i].count;
+            }
+
+            if (i == p_ItemIds.Count - 1)
+            {
+                l_ItemsName += ".";
+            }
+            else if (i == p_ItemIds.Count - 2)
+            {
+                l_ItemsName += " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
+            }
+            else
+            {
+                l_ItemsName += ", ";
+
+            }
+
+            PlayerInventory.GetInstance().AddItem(p_ItemIds[i].id, p_ItemIds[i].count);
+        }
+
+        return l_ItemsName;
     }
 }

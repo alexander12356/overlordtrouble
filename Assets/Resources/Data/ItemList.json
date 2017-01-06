@@ -47,10 +47,22 @@
 		},
 		{
 			"Id" : "Scoop",
-			"Image" : "Sprites/Items/SingleUse/Scoop",
+			"Image" : "Sprites/Items/Key/Scoop",
 			"Type" : "Key",
 			"Effect":
 			{
+			}
+		},
+		{
+			"Id" : "Apple",
+			"Image" : "Sprites/Items/SingleUse/Apple",
+			"Type" : "SingleUse",
+			"Effect":
+			{
+				"Healing" :
+				{
+					"Value" : 4.0
+				}
 			}
 		}
 	]

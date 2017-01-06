@@ -249,9 +249,16 @@
 	</Dialog>
 	
 	<!-- Village Fountain Dialog -->
-	<Dialog id="VillageFountain" startNode="AboutWell" avatarPath="">
+	<Dialog id="VillageFountain:AboutWell" startNode="AboutWell" avatarPath="">
 		<DialogNode id="AboutWell">
-			<Text>Dialog:OldWell</Text>
+			<Text>Dialog:OldWell:AboutWell</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageFountain:Coop" startNode="Catchup" avatarPath="">
+		<DialogNode id="Catchup">
+			<Text>Dialog:OldWell:Coop:1</Text>
+			<Text>Dialog:OldWell:Coop:2</Text>
 		</DialogNode>
 	</Dialog>
 	
@@ -458,8 +465,8 @@
 		</DialogNode>
 	</Dialog>
 	
-	<Dialog id="MamaSkeleton:Task:Complete" startNode="Talk" avatarPath="Sprites/Creations/MamaSkeleton/Avatar">
-		<DialogNode id="Talk">
+	<Dialog id="MamaSkeleton:Task:Complete" startNode="TaskComplete" avatarPath="Sprites/Creations/MamaSkeleton/Avatar">
+		<DialogNode id="TaskComplete">
 			<Text>Dialog:MamaSkeleton:Task:Complete:1</Text>
 			<Text>Dialog:MamaSkeleton:Task:Complete:2</Text>
 		</DialogNode>

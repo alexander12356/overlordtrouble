@@ -46,6 +46,8 @@
 	<Text id="Item:SmallSpecialPotion">Малое зелье энергии</Text>
 	<Text id="Item:SmallExperiencePotion">Малая сфера опыта</Text>
 	<Text id="Item:SaltCucumber">Соленые огурчики</Text>
+	<Text id="Item:Scoop">Ковшик</Text>
+	<Text id="Item:Apple">Яблоко</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>
@@ -356,9 +358,13 @@
 	<Text id="Dialog:SkeletonHouse:KostellaBed">В ней спит маленькая Костелла, под кроватью лежит большое количество цветных карандашей в форме маленьких косточек.</Text>
 	<Text id="Dialog:SkeletonHouse:KostellaShelf">Тетрадка полна рисунков, на тетрадке полно следов от жидкости. Судя по цвету, это молоко.</Text>
 	
+	<!-- Old Well -->
+	<Text id="Dialog:OldWell:AboutWell">Колодец... полон воды… ее можно пить.</Text>
+	<Text id="Dialog:OldWell:Coop:1">Колодец, кто-то забыл вытащить ведро.</Text>
+	<Text id="Dialog:OldWell:Coop:2">Там что-то есть. Вы вытащили ведро и взглянули внутрь.</Text>
+	
 	<!-- Others -->
 	<Text id="Dialog:OtherBed">Ты же не собираешься спать на чужой кровати?</Text>
-	<Text id="Dialog:OldWell">Колодец... полон воды… ее можно пить.</Text>
 	<Text id="Dialog:GiantCock:1">...</Text>
 	<Text id="Dialog:GiantCock:2">*Он спит*</Text>
 	<Text id="Dialog:Uniceros:1">Пьинь?</Text>

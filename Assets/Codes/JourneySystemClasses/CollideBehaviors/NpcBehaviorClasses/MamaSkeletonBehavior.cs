@@ -14,6 +14,9 @@ public class MamaSkeletonBehavior : BaseCollideBehavior
     private string m_CompleteDialog = null;
 
     [SerializeField]
+    private ActionStruct m_CompleteDialogAction;
+
+    [SerializeField]
     private string m_CommonDialog = null;
 
     public override void RunAction(JourneyActor p_Sender)
@@ -39,7 +42,7 @@ public class MamaSkeletonBehavior : BaseCollideBehavior
         {
             m_TaskComplete = true;
 
-            JourneySystem.GetInstance().StartDialog(m_CompleteDialog, new List<ActionStruct>());
+            JourneySystem.GetInstance().StartDialog(m_CompleteDialog, new List<ActionStruct>() { m_CompleteDialogAction });
 
             return;
         }
