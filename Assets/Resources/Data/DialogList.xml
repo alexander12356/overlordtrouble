@@ -478,6 +478,18 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="SkeletonHouse:KostellaBed" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SkeletonHouse:KostellaBed</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SkeletonHouse:KostellaShelf" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SkeletonHouse:KostellaShelf</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Others -->
 	<Dialog id="OtherBed" startNode="AboutBed" avatarPath="">
 		<DialogNode id="AboutBed">

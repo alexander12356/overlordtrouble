@@ -353,6 +353,8 @@
 	
 	<!-- Skeleton House -->
 	<Text id="Dialog:SkeletonHouse:Picture">Тут изображены Папа, мама и дочка, и все улыбаются во весь череп.</Text>
+	<Text id="Dialog:SkeletonHouse:KostellaBed">В ней спит маленькая Костелла, под кроватью лежит большое количество цветных карандашей в форме маленьких косточек.</Text>
+	<Text id="Dialog:SkeletonHouse:KostellaShelf">Тетрадка полна рисунков, на тетрадке полно следов от жидкости. Судя по цвету, это молоко.</Text>
 	
 	<!-- Others -->
 	<Text id="Dialog:OtherBed">Ты же не собираешься спать на чужой кровати?</Text>
