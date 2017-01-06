@@ -44,6 +44,14 @@
 					"Value" : 40.0
 				}
 			}
+		},
+		{
+			"Id" : "Scoop",
+			"Image" : "Sprites/Items/SingleUse/Scoop",
+			"Type" : "Key",
+			"Effect":
+			{
+			}
 		}
 	]
 }

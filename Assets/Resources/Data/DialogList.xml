@@ -443,6 +443,41 @@
 		</DialogNode>
 	</Dialog>
 	
+	<!-- Mama Skeleton -->
+	<Dialog id="MamaSkeleton:Task:1" startNode="Talk" avatarPath="Sprites/Creations/MamaSkeleton/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSkeleton:Task:1</Text>
+			<Text>Dialog:MamaSkeleton:Task:2</Text>
+			<Text>Dialog:MamaSkeleton:Task:3</Text>
+			<Text>Dialog:MamaSkeleton:Task:4</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="MamaSkeleton:Task:2" startNode="Talk" avatarPath="Sprites/Creations/MamaSkeleton/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSkeleton:Task:5</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSkeleton:Task:Complete" startNode="Talk" avatarPath="Sprites/Creations/MamaSkeleton/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSkeleton:Task:Complete:1</Text>
+			<Text>Dialog:MamaSkeleton:Task:Complete:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSkeleton:AboutFamily" startNode="Talk" avatarPath="Sprites/Creations/MamaSkeleton/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSkeleton:AboutFamily</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Skeleton House -->
+	<Dialog id="SkeletonHouse:Picture" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SkeletonHouse:Picture</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Others -->
 	<Dialog id="OtherBed" startNode="AboutBed" avatarPath="">
 		<DialogNode id="AboutBed">
