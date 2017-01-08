@@ -117,7 +117,7 @@ public class ItemActionPanel : Panel
             string l_BackStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
             AddActionButton(l_BackStr, CancelAction);
         }
-        else if (ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.Equipment || ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.Weapon || ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.MultipleUse)
+        else if (ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.Bling || ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.Weapon || ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.MultipleUse)
         {
             string l_ThrowStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Throw");
             AddActionButton(l_ThrowStr, ActivateArrows);

@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public enum eItemTab
 {
     TAB_ALL,
-    TAB_EQUIPMENT,
+    TAB_WEPS,
+    TAB_BLING,
     TAB_SINGLE,
     TAB_MULTIPLY,
     TAB_KEY
@@ -101,8 +102,8 @@ public class InventoryItemsTab : InventoryTab
             case eItemTab.TAB_ALL:
                 l_InventoryItems = PlayerInventory.GetInstance().GetInventoryItems();
                 break;
-            case eItemTab.TAB_EQUIPMENT:
-                l_InventoryItems = PlayerInventory.GetInstance().GetInventoryItems().Where(obj => ItemDataBase.GetInstance().GetItem(obj.Key).itemType == ItemType.Equipment).ToDictionary(obj => obj.Key, obj => obj.Value);
+            case eItemTab.TAB_WEPS:
+                l_InventoryItems = PlayerInventory.GetInstance().GetInventoryItems().Where(obj => ItemDataBase.GetInstance().GetItem(obj.Key).itemType == ItemType.Bling).ToDictionary(obj => obj.Key, obj => obj.Value);
                 break;
             case eItemTab.TAB_SINGLE:
                 l_InventoryItems = PlayerInventory.GetInstance().GetInventoryItems().Where(obj => ItemDataBase.GetInstance().GetItem(obj.Key).itemType == ItemType.SingleUse).ToDictionary(obj => obj.Key, obj => obj.Value);

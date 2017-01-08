@@ -140,7 +140,7 @@ public class StorePanel : Panel
                 case ItemType.MultipleUse:
                     m_StoreTabs[3].AddItem(l_StoreItems[l_Key]);
                     break;
-                case ItemType.Equipment:
+                case ItemType.Bling:
                     m_StoreTabs[1].AddItem(l_StoreItems[l_Key]);
                     break;
                 case ItemType.Weapon:
