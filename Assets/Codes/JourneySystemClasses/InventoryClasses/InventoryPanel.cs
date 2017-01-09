@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class InventoryPanel : Panel
 {
+    #region Variables
+
     private static InventoryPanel m_Prefab;
-    //private InventoryTab m_CurrOpenedTab = null;
     [SerializeField]
     private ButtonList m_TabButtonsList = null;
-    //[SerializeField]
-    //private List<InventoryTab> m_InventoryTabs = null;
+    [SerializeField]
+    private Text m_PlayerCoinsText = null;
 
+    private ButtonList m_ItemsButtonsList = null;
+    private Text m_DescriptionText = null;
+
+    #endregion
+
+    #region Properties
     public static InventoryPanel prefab
     {
         get
@@ -32,20 +39,43 @@ public class InventoryPanel : Panel
         }
     }
 
+    public ButtonList itemsButtonList
+    {
+        get
+        {
+            if (m_ItemsButtonsList == null)
+            {
+                m_ItemsButtonsList = transform.FindChild("ItemList").GetComponentInChildren<ButtonList>();
+            }
+            return m_ItemsButtonsList;
+        }
+    }
+
+    public int playerCoins
+    {
+        get
+        {
+            return PlayerInventory.GetInstance().coins;
+        }
+        set
+        {
+            PlayerInventory.GetInstance().coins = value;
+            m_PlayerCoinsText.text = PlayerInventory.GetInstance().coins + " " + LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Monet");
+        }
+    }
+
+    #endregion
+
+    #region Methods
+
     public override void Awake()
     {
         base.Awake();
 
         InitTabs();
-        m_TabButtonsList.isActive = true;
-    }
-
-    public override void UpdatePanel()
-    {
-        base.UpdatePanel();
-
-        m_TabButtonsList.UpdateKey();
-        //m_CurrOpenedTab.UpdateKey();
+        InitItemList();
+        InitDescriptionText();
+        InitPlayerCoinsText();
     }
 
     private void InitTabs()
@@ -59,6 +89,43 @@ public class InventoryPanel : Panel
         //m_TabButtonsList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
 
         //m_CurrOpenedTab = m_InventoryTabs[0];
+        m_TabButtonsList.isActive = true;
+    }
+
+    private void InitItemList()
+    {
+        m_ItemsButtonsList = itemsButtonList;
+        m_ItemsButtonsList.AddCancelAction(ItemListCancelAction);
+        m_ItemsButtonsList.AddKeyArrowAction(ShowItemDescription);
+        m_ItemsButtonsList.isActive = false;
+    }
+
+    private void InitDescriptionText()
+    {
+        m_DescriptionText = transform.FindChild("Description").GetComponent<Text>();
+        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Description");
+        ShowItemDescription();
+    }
+
+    private void InitPlayerCoinsText()
+    {
+        playerCoins = PlayerInventory.GetInstance().coins;
+    }
+
+    private void ShowItemDescription()
+    {
+        if (m_ItemsButtonsList != null && m_ItemsButtonsList.count > 0)
+        {
+            InventoryItemButton l_InventoryItemButton = (InventoryItemButton)m_ItemsButtonsList.currentButton;
+            string l_DescriptionText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Description");
+            m_DescriptionText.text = l_DescriptionText + l_InventoryItemButton.title;
+        }
+    }
+
+    private void ItemListCancelAction()
+    {
+        tabButtonList.isActive = true;
+        itemsButtonList.isActive = false;
     }
 
     //private void ConfirmTab()
@@ -84,4 +151,14 @@ public class InventoryPanel : Panel
         PlayerInventory.GetInstance().SaveAll();
         Close();
     }
+
+    public override void UpdatePanel()
+    {
+        base.UpdatePanel();
+
+        m_TabButtonsList.UpdateKey();
+        m_ItemsButtonsList.UpdateKey();
+    }
+
+    #endregion
 }
