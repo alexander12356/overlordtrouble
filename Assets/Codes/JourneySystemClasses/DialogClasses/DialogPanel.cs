@@ -65,6 +65,11 @@ public class DialogPanel : Panel
 
     public void SetAnswersActions(List<ActionStruct> p_AnswerList)
     {
+        if (p_AnswerList == null)
+        {
+            return;
+        }
+
         for (int i = 0; i < p_AnswerList.Count; i++)
         {
             m_AnswerActions.Add(p_AnswerList[i].id, p_AnswerList[i].actionEvent);

@@ -19,7 +19,7 @@ public class DialogManager : MonoBehaviour
         return m_Instance;
     }
 
-    public DialogPanel StartDialog(string p_DialogId, List<ActionStruct> m_AnswerActionList)
+    public DialogPanel StartDialog(string p_DialogId, List<ActionStruct> m_AnswerActionList = null)
     {
         DialogData l_DialogData = DialogDataBase.GetInstance().GetDialog(p_DialogId);
 

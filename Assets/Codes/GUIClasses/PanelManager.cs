@@ -26,6 +26,10 @@ public class PanelManager : MonoBehaviour
     {
         get { return m_ScreenFader; }
     }
+    public int panelCount
+    {
+        get { return m_PanelStack.Count; }
+    }
 
     public void ShowPanel(Panel p_NewPanel, bool p_WithOverlay = false, Transform m_Parent = null)
     {

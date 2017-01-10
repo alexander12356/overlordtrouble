@@ -60,7 +60,7 @@ public class JourneySystem : MonoBehaviour
         m_Player.LoadImprove();
     }
 
-    public DialogPanel StartDialog(string p_DialogId, List<ActionStruct> p_AnswerActionList)
+    public DialogPanel StartDialog(string p_DialogId, List<ActionStruct> p_AnswerActionList = null)
     {
         if (m_CurrentControlType != ControlType.Cutscene)
         {
@@ -81,11 +81,19 @@ public class JourneySystem : MonoBehaviour
                 CutsceneSystem.GetInstance().enabled = false;
                 break;
             case ControlType.Player:
+                if (m_PanelManager.panelCount > 0)
+                {
+                    break;
+                }
                 m_PanelManager.enabled = false;
                 m_Player.StartLogic();
                 CutsceneSystem.GetInstance().enabled = false;
                 break;
             case ControlType.Cutscene:
+                if (m_PanelManager.panelCount > 0)
+                {
+                    break;
+                }
                 m_PanelManager.enabled = true;
                 m_Player.StopLogic();
                 CutsceneSystem.GetInstance().enabled = true;

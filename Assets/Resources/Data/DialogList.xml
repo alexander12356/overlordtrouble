@@ -396,6 +396,29 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="Snowoman:Complete" startNode="Talk" avatarPath="Sprites/Creations/Snowoman/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Snowoman:Complete:1</Text>
+			<Text>Dialog:Snowoman:Complete:2</Text>
+			<Text>Dialog:Snowoman:Complete:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Snowoman:PreComplete" startNode="Talk" avatarPath="Sprites/Creations/Snowoman/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Snowoman:PreComplete:1</Text>
+			<Text>Dialog:Snowoman:PreComplete:2</Text>
+			<Text>Dialog:Snowoman:PreComplete:3</Text>
+			<Text>Dialog:Snowoman:PreComplete:4</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Snowoman:Common" startNode="Talk" avatarPath="Sprites/Creations/Snowoman/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Snowoman:Common</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Library -->
 	<Dialog id="Library:Bookshelf:1" startNode="Talk" avatarPath="">
 		<DialogNode id="Talk">

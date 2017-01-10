@@ -330,6 +330,14 @@
 	<Text id="Dialog:Snowoman:AboutBookshelf:2">Я решила немного освежить здешнюю атмосферу, и припрятала в некоторых книжках монетты.</Text>
 	<Text id="Dialog:Snowoman:AboutBookshelf:3">Если будешь внимательным то, возможно, найдешь их.</Text>
 	<Text id="Dialog:Snowoman:AboutBookshelf:4">Ну как? Нашел что нибудь?</Text>
+	<Text id="Dialog:Snowoman:Complete:1">Ах! %PlayerName. Ты нашел 80 монетт! Великолепно! За твою тягу к знаниям</Text>
+	<Text id="Dialog:Snowoman:Complete:2">или возможно к деньгам.</Text>
+	<Text id="Dialog:Snowoman:Complete:3">Позволь тебя вознаградить 20 монеттами! И возьми эту сферу опыта.</Text>
+	<Text id="Dialog:Snowoman:PreComplete:1">А... надо же ты зашел и уже прочитал все нужные книги.</Text>
+	<Text id="Dialog:Snowoman:PreComplete:2">Твоя тяга к знаниям не может меня не радовать!</Text>
+	<Text id="Dialog:Snowoman:PreComplete:3">И ты нашел все монетты, что я там спрятала! Поздравляю!</Text>
+	<Text id="Dialog:Snowoman:PreComplete:4">Позволь тебя вознаградить 20 монеттами! И возьми эту сферу опыта.</Text>
+	<Text id="Dialog:Snowoman:Common">Думаю прятать по 10 монетт почти в каждую книгу была не лучшей моей затеей...</Text>
 	
 	<!-- Library -->
 	<Text id="Dialog:Library:Coathanger">Такая вешалка всего лишь одна на всю деревню, ею не пользуется даже ее обладательница</Text>
