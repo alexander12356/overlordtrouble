@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class MamaSnailBehavior : BaseCollideBehavior
+public class MamaSnailBehavior : BaseNpcBehavior
 {
-    private bool m_QuestAccepted = false;
-    private bool m_QuestDeny = false;
-    private bool m_QuestCompleted = false;
-
     [SerializeField]
     private string m_QuestId = string.Empty;
 
@@ -51,17 +47,17 @@ public class MamaSnailBehavior : BaseCollideBehavior
         m_JourneyActor.ApplyTo(p_Sender.myTransform.position);
         m_JourneyActor.StopLogic();
 
-        if (m_QuestCompleted)
+        if (state == "QuestCompleted")
         {
             JourneySystem.GetInstance().StartDialog(m_CommonDialogId, new List<ActionStruct>() { });
             return;
         }
         
-        if (m_QuestDeny)
+        if (state == "QuestDeny")
         {
             JourneySystem.GetInstance().StartDialog(m_DenyDialogId, new List<ActionStruct>() { m_AddingQuestAction });
         }
-        else if (m_QuestAccepted && !QuestSystem.GetInstance().HasCompleted(m_QuestId))
+        else if (state == "QuestAccepted" && !QuestSystem.GetInstance().HasCompleted(m_QuestId))
         {
             JourneySystem.GetInstance().StartDialog(m_AcceptedDialogId, new List<ActionStruct>());
         }
@@ -72,7 +68,8 @@ public class MamaSnailBehavior : BaseCollideBehavior
         else if (QuestSystem.GetInstance().HasCompleted(m_QuestId))
         {
             JourneySystem.GetInstance().StartDialog(m_CompletedDialogId, new List<ActionStruct>() { m_CompletedQuestAction });
-            m_QuestCompleted = true;
+
+            state = "QuestCompleted";
         }
     }
 
@@ -85,13 +82,11 @@ public class MamaSnailBehavior : BaseCollideBehavior
 
     public void QuestAccept()
     {
-        m_QuestAccepted = true;
-        m_QuestDeny = false;
+        state = "QuestAccepted";
     }
 
     public void QuestDeny()
     {
-        m_QuestDeny = true;
-        m_QuestAccepted = false;
+        state = "QuestDeny";
     }
 }

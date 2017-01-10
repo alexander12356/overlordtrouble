@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MamaSkeletonBehavior : BaseCollideBehavior
+public class MamaSkeletonBehavior : BaseNpcBehavior
 {
     private int m_CurrentTaskDialogId = 0;
-    private bool m_TaskComplete = false;
 
     [SerializeField]
     private List<string> m_TaskDialogs = null;
@@ -31,7 +30,7 @@ public class MamaSkeletonBehavior : BaseCollideBehavior
         m_JourneyActor.ApplyTo(p_Sender.myTransform.position);
         m_JourneyActor.StopLogic();
 
-        if (m_TaskComplete)
+        if (state == "TaskComplete")
         {
             JourneySystem.GetInstance().StartDialog(m_CommonDialog, new List<ActionStruct>());
 
@@ -40,7 +39,7 @@ public class MamaSkeletonBehavior : BaseCollideBehavior
 
         if (PlayerInventory.GetInstance().GetItemCount("Scoop") > 0)
         {
-            m_TaskComplete = true;
+            state = "TaskComplete";
 
             JourneySystem.GetInstance().StartDialog(m_CompleteDialog, new List<ActionStruct>() { m_CompleteDialogAction });
 

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OldWellBehavior : BaseCollideBehavior
+public class OldWellBehavior : BaseNpcBehavior
 {
     private int m_CurrentDialogId = 0;
-    private bool m_CoopCatched = false;
-
     [SerializeField]
     public string m_CoopDialogId = string.Empty;
 
@@ -28,9 +26,10 @@ public class OldWellBehavior : BaseCollideBehavior
         m_JourneyActor.ApplyTo(p_Sender.myTransform.position);
         m_JourneyActor.StopLogic();
 
-        if (!m_CoopCatched)
+        if (state != "CoopCatched")// !m_CoopCatched)
         {
             JourneySystem.GetInstance().StartDialog(m_CoopDialogId, new List<ActionStruct>() { m_CoopAction });
+            state = "CoopCatched";
 
             return;
         }
