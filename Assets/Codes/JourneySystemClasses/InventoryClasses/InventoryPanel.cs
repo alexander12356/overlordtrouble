@@ -15,6 +15,7 @@ public class InventoryPanel : Panel
 
     private ButtonList m_ItemsButtonsList = null;
     private Text m_DescriptionText = null;
+    private List<InventoryTabNew> m_InventoryTabList = null;
 
     #endregion
 
@@ -80,16 +81,84 @@ public class InventoryPanel : Panel
 
     private void InitTabs()
     {
-        //m_TabButtonsList.AddKeyArrowAction(ShowTab);
-        //m_TabButtonsList[0].AddAction(ConfirmTab);
-        //m_TabButtonsList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Wear");
-        //m_TabButtonsList[1].AddAction(ConfirmTab);
-        //m_TabButtonsList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Items");
-        //m_TabButtonsList[2].AddAction(CloseInventory);
-        //m_TabButtonsList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
+        m_TabButtonsList.AddKeyArrowAction(InitTabView);
+        m_TabButtonsList[0].AddAction(SelectEquipmentTab);
+        m_TabButtonsList[1].AddAction(SelectItemList);
+        m_TabButtonsList[2].AddAction(SelectItemList);
+        m_TabButtonsList[3].AddAction(SelectItemList);
+        m_TabButtonsList[4].AddAction(SelectItemList);
+        m_TabButtonsList[5].AddAction(SelectItemList);
+        m_TabButtonsList[6].AddAction(SelectItemList);
+        m_TabButtonsList[7].AddAction(CloseInventory);
 
-        //m_CurrOpenedTab = m_InventoryTabs[0];
+        InventoryTabButton l_TabButton;
+
+        l_TabButton = m_TabButtonsList[1] as InventoryTabButton;
+        l_TabButton.inventoryTab = new AllTab();
+
+        l_TabButton = m_TabButtonsList[2] as InventoryTabButton;
+        l_TabButton.inventoryTab = new WepsTab();
+
+        l_TabButton = m_TabButtonsList[3] as InventoryTabButton;
+        l_TabButton.inventoryTab = new BlingTab();
+
+        l_TabButton = m_TabButtonsList[4] as InventoryTabButton;
+        l_TabButton.inventoryTab = new SingleUseTab();
+
+        l_TabButton = m_TabButtonsList[5] as InventoryTabButton;
+        l_TabButton.inventoryTab = new MultiUseTab();
+
+        l_TabButton = m_TabButtonsList[6] as InventoryTabButton;
+        l_TabButton.inventoryTab = new KeyItemTab();
+
+        m_TabButtonsList.SelectMoveDown();
         m_TabButtonsList.isActive = true;
+    }
+
+    private void SelectItemList()
+    {
+        if (m_ItemsButtonsList != null && m_ItemsButtonsList.count > 0)
+        {
+            m_TabButtonsList.isActive = false;
+            m_TabButtonsList.currentButton.selected = true;
+            m_ItemsButtonsList.isActive = true;
+        }
+    }
+
+    private void SelectEquipmentTab()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void InitTabView()
+    {
+        InventoryTabButton l_TabButton = m_TabButtonsList[m_TabButtonsList.currentButtonId] as InventoryTabButton;
+        itemsButtonList.Clear();
+        if (l_TabButton.inventoryTab != null)
+        {
+            Dictionary<string, InventoryItemData> l_InventoryItems = l_TabButton.inventoryTab.GetItems();
+            foreach (var lKey in l_InventoryItems.Keys)
+            {
+                AddItem(l_InventoryItems[lKey]);
+            }
+        }
+    }
+
+    private void AddItem(InventoryItemData p_InventoryItemData)
+    {
+        InventoryItemButton l_Button = Instantiate(InventoryItemButton.prefab);
+        l_Button.title = LocalizationDataBase.GetInstance().GetText("Item:" + p_InventoryItemData.id);
+        l_Button.itemId = p_InventoryItemData.id;
+        l_Button.itemCount = p_InventoryItemData.count;
+        l_Button.AddAction(SelectItem);
+
+        itemsButtonList.AddButton(l_Button);
+    }
+
+    private void SelectItem()
+    {
+        InventoryItemButton l_ItemButton = (InventoryItemButton)m_ItemsButtonsList.currentButton;
+        l_ItemButton.CreateItemActionPanel();
     }
 
     private void InitItemList()

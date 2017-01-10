@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
-public abstract class InventoryTabNew : MonoBehaviour
+public abstract class InventoryTabNew 
 {
     public abstract Dictionary<string, InventoryItemData> GetItems();
 }
