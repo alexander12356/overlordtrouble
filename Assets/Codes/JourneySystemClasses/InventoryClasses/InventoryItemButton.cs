@@ -91,7 +91,7 @@ public class InventoryItemButton : PanelButtonUpdateKey
     private IEnumerator DestroyButton()
     {
         yield return new WaitForSeconds(0.1f);
-        InventoryItemsTab l_ItemsTab = GetComponentInParent<InventoryItemsTab>();
-        l_ItemsTab.InitItemList();
+        InventoryPanel l_InventoryPanel = GetComponentInParent<InventoryPanel>();
+        l_InventoryPanel.InitTabView();
     }
 }

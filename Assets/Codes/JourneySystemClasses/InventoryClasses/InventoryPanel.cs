@@ -131,7 +131,7 @@ public class InventoryPanel : Panel
         throw new NotImplementedException();
     }
 
-    private void InitTabView()
+    public void InitTabView()
     {
         InventoryTabButton l_TabButton = m_TabButtonsList[m_TabButtonsList.currentButtonId] as InventoryTabButton;
         itemsButtonList.Clear();
