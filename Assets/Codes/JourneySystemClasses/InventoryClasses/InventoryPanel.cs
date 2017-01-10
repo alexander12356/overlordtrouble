@@ -76,6 +76,7 @@ public class InventoryPanel : Panel
         InitItemList();
         InitDescriptionText();
         InitPlayerCoinsText();
+        InitTabView();
     }
 
     private void InitTabs()
@@ -121,6 +122,7 @@ public class InventoryPanel : Panel
             m_TabButtonsList.isActive = false;
             m_TabButtonsList.currentButton.selected = true;
             m_ItemsButtonsList.isActive = true;
+            ShowItemDescription();
         }
     }
 
@@ -133,6 +135,7 @@ public class InventoryPanel : Panel
     {
         InventoryTabButton l_TabButton = m_TabButtonsList[m_TabButtonsList.currentButtonId] as InventoryTabButton;
         itemsButtonList.Clear();
+        ClearItemDescription();
         if (l_TabButton.inventoryTab != null)
         {
             Dictionary<string, InventoryItemData> l_InventoryItems = l_TabButton.inventoryTab.GetItems();
@@ -171,8 +174,6 @@ public class InventoryPanel : Panel
     private void InitDescriptionText()
     {
         m_DescriptionText = transform.FindChild("Description").GetComponent<Text>();
-        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Description");
-        ShowItemDescription();
     }
 
     private void InitPlayerCoinsText()
@@ -188,6 +189,11 @@ public class InventoryPanel : Panel
             string l_DescriptionText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Description");
             m_DescriptionText.text = l_DescriptionText + l_InventoryItemButton.title;
         }
+    }
+
+    private void ClearItemDescription()
+    {
+        m_DescriptionText.text = String.Empty;
     }
 
     private void ItemListCancelAction()
