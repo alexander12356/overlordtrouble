@@ -15,7 +15,6 @@ public class InventoryPanel : Panel
 
     private ButtonList m_ItemsButtonsList = null;
     private Text m_DescriptionText = null;
-    private List<InventoryTabNew> m_InventoryTabList = null;
 
     #endregion
 
