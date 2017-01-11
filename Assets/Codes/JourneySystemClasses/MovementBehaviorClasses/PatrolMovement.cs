@@ -87,5 +87,16 @@ public class PatrolMovement : BaseMovement
     {
         return Random.Range(1.0f, 2.5f);
     }
+
+    [ContextMenu("GeneratePoints")]
+    public void GeneratePointPositions()
+    {
+        for (int i = 0; i < m_Patrol.Count; i++)
+        {
+            GameObject l_GameObject = new GameObject();
+            l_GameObject.transform.SetParent(transform);
+            l_GameObject.transform.position = m_Patrol[i].position;
+        }
+    }
     #endregion
 }
