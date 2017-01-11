@@ -13,10 +13,14 @@ public struct ActionStruct
 public class BaseCollideBehavior : MonoBehaviour
 {
     protected JourneyActor m_JourneyActor = null;
+    public JourneyActor journeyActor
+    {
+        get { return m_JourneyActor; }
+        set { m_JourneyActor = value; }
+    }
 
 	public virtual void Awake()
     {
-        m_JourneyActor = GetComponent<JourneyActor>();
     }
 
     public virtual void RunAction(JourneyActor p_Sender)

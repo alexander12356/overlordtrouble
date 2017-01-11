@@ -3,25 +3,22 @@
 public class BaseMovement : MonoBehaviour
 {
     #region Variables
-    private JourneyActor m_JourneyActor = null;
+    private JourneyActor m_JournetActor = null;
     #endregion
 
     #region Interface
     public JourneyActor journeyActor
     {
-        get
-        {
-            if (m_JourneyActor == null)
-            {
-                m_JourneyActor = GetComponent<JourneyActor>();
-            }
-            return m_JourneyActor;
-        }
+        get { return m_JournetActor; }
+        set { m_JournetActor = value; }
     }
 
     public virtual void Awake()
     {
-        m_JourneyActor = GetComponent<JourneyActor>();
+    }
+
+    public virtual void Start()
+    {
     }
 
     public virtual void LogicStart()

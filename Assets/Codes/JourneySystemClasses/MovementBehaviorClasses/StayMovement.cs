@@ -22,9 +22,13 @@ public class StayMovement : BaseMovement
     public override void Awake()
     {
         base.Awake();
-        m_WaitTime = GetNewWaitTime();
+        
+    }
 
+    public override void Start()
+    {
         ChangeDirection(m_PrevDirection);
+        m_WaitTime = GetNewWaitTime();
     }
 
     public override void LogicUpdate()

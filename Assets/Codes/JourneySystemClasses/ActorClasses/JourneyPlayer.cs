@@ -9,8 +9,11 @@ public class JourneyPlayer : JourneyActor
     private Vector2 m_InputDirection = Vector2.zero;
     private Rigidbody2D m_RigidBody2d = null;
     private List<JourneyActor> m_InteractableActors = new List<JourneyActor>();
-    private BaseCollideBehavior m_CurrentCollideBehavior = null;
+    private JourneyActor m_InteractJourneyActor = null;
     private PlayerStatistics m_Statistics;
+
+    [SerializeField]
+    private float m_Speed = 5.0f;
     #endregion
 
     #region Interface
@@ -133,7 +136,7 @@ public class JourneyPlayer : JourneyActor
 
     public void PressDisactiveButtonAction()
     {
-        m_CurrentCollideBehavior.StopAction();
+        m_InteractJourneyActor.EndInteract();
     }
 
     public override void GoTo(Vector3 p_Target, float p_Delay)
@@ -141,10 +144,10 @@ public class JourneyPlayer : JourneyActor
         base.GoTo(p_Target, p_Delay);
 
         UpdateSortingLayer();
-        myTransform.localPosition = Vector3.MoveTowards(myTransform.localPosition, p_Target, p_Delay);
+        myTransform.position = Vector3.MoveTowards(myTransform.position, p_Target, p_Delay);
 
-        float l_DeltaX = myTransform.localPosition.x - p_Target.x;
-        float l_DeltaY = myTransform.localPosition.y - p_Target.y;
+        float l_DeltaX = myTransform.position.x - p_Target.x;
+        float l_DeltaY = myTransform.position.y - p_Target.y;
         if (Mathf.Abs(l_DeltaX) > Mathf.Abs(l_DeltaY))
         {
             if (l_DeltaX > 0)
@@ -222,8 +225,8 @@ public class JourneyPlayer : JourneyActor
             }
         }
 
-        m_CurrentCollideBehavior = m_InteractableActors[l_MinId].GetComponent<BaseCollideBehavior>();
-        m_CurrentCollideBehavior.RunAction(this);
+        m_InteractJourneyActor = m_InteractableActors[l_MinId];
+        m_InteractJourneyActor.Interact(this);
     }
     #endregion
 }

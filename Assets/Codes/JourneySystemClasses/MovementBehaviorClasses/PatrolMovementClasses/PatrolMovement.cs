@@ -4,31 +4,23 @@ using System.Collections.Generic;
 public class PatrolMovement : BaseMovement
 {
     #region Variables
-    [System.Serializable]
-    private struct PatrolPosition
-    {
-        public Vector2 position;
-        public float   speed;
-        public bool    isDelay;
-
-        public PatrolPosition(Vector2 p_Position, bool p_IsDelay, float p_Speed)
-        {
-            position = p_Position;
-            isDelay = p_IsDelay;
-            speed = p_Speed;
-        }
-    }
-    [SerializeField]
-    private List<PatrolPosition> m_Patrol = null;
-
+    private List<PatrolPosition> m_Patrol = new List<PatrolPosition>();
     private int   m_CurrentPoint = 0;
     private float m_ElapsedTime = 0.0f;
+
+    [SerializeField]
+    private Transform m_PatrolPointsTransform;
     #endregion
 
     #region Interface
     public override void Awake()
     {
         base.Awake();
+
+        for (int i = 0; i < m_PatrolPointsTransform.childCount; i++)
+        {
+            m_Patrol.Add(m_PatrolPointsTransform.GetChild(i).GetComponent<PatrolPosition>());
+        }
     }
 
     public override void LogicStart()
@@ -52,26 +44,19 @@ public class PatrolMovement : BaseMovement
             if (m_Patrol[m_CurrentPoint].speed <= m_ElapsedTime)
             {
                 m_ElapsedTime = 0.0f;
-                m_CurrentPoint++;
+                PointIncrement();
             }
         }
         else
         {
-            journeyActor.GoTo(m_Patrol[m_CurrentPoint].position, m_Patrol[m_CurrentPoint].speed * Time.deltaTime);
+            journeyActor.GoTo(m_Patrol[m_CurrentPoint].myPosition, m_Patrol[m_CurrentPoint].speed * Time.deltaTime);
             journeyActor.myAnimator.SetBool("IsWalking", true);
 
-            if ((Vector2)journeyActor.myTransform.localPosition == m_Patrol[m_CurrentPoint].position)
+            if (journeyActor.myTransform.position == m_Patrol[m_CurrentPoint].myPosition)
             {
-                m_CurrentPoint++;
-
-                if (m_CurrentPoint >= m_Patrol.Count)
-                {
-                    m_CurrentPoint = 0;
-                }
+                PointIncrement();
             }
         }
-
-        journeyActor.UpdateSortingLayer();
     }
 
     public override void LogicStop()
@@ -88,6 +73,16 @@ public class PatrolMovement : BaseMovement
         return Random.Range(1.0f, 2.5f);
     }
 
+    private void PointIncrement()
+    {
+        m_CurrentPoint++;
+
+        if (m_CurrentPoint >= m_Patrol.Count)
+        {
+            m_CurrentPoint = 0;
+        }
+    }
+
     [ContextMenu("GeneratePoints")]
     public void GeneratePointPositions()
     {
@@ -95,7 +90,7 @@ public class PatrolMovement : BaseMovement
         {
             GameObject l_GameObject = new GameObject();
             l_GameObject.transform.SetParent(transform);
-            l_GameObject.transform.position = m_Patrol[i].position;
+            l_GameObject.transform.position = m_Patrol[i].myPosition;
         }
     }
     #endregion

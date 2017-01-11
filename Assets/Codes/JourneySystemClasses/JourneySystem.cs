@@ -49,14 +49,17 @@ public class JourneySystem : MonoBehaviour
     public void Awake()
     {
         m_Instance = this;
-        //CutsceneSystem.GetInstance().StartCutscene("Intro");
-        SetControl(ControlType.Player);
 
         if (GameManager.IsInstance() == false)
         {
             GameManager.GetInstance();
             PlayerData.GetInstance().ResetData();
         }
+    }
+
+    public void Start()
+    {
+        SetControl(ControlType.Player);
         m_Player.LoadImprove();
     }
 
