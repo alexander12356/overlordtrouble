@@ -371,6 +371,11 @@
 	<Text id="Dialog:OldWell:Coop:1">Колодец, кто-то забыл вытащить ведро.</Text>
 	<Text id="Dialog:OldWell:Coop:2">Там что-то есть. Вы вытащили ведро и взглянули внутрь.</Text>
 	
+	<!-- Joshua -->
+	<Text id="Dialog:Joshua:AboutDay:1">Какой хороший однако денек!</Text>
+	<Text id="Dialog:Joshua:AboutDay:2">Ммм? Я ни от кого не прячусь, я же сейчас стою прямо перед тобой, в удобненькой тени этого дерева.</Text>
+	<Text id="Dialog:Joshua:AboutDay:3">Иногда хорошо вот так вот отдыхать от работы, хохохо!</Text>
+	
 	<!-- Others -->
 	<Text id="Dialog:OtherBed">Ты же не собираешься спать на чужой кровати?</Text>
 	<Text id="Dialog:GiantCock:1">...</Text>

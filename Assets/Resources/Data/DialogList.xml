@@ -520,6 +520,19 @@
 		</DialogNode>
 	</Dialog>
 	
+	<!-- Joshua -->
+	<Dialog id="Joshua:AboutDay:1" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:AboutDay:1</Text>
+			<Text>Dialog:Joshua:AboutDay:2</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Joshua:AboutDay:2" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:AboutDay:3</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Others -->
 	<Dialog id="OtherBed" startNode="AboutBed" avatarPath="">
 		<DialogNode id="AboutBed">
