@@ -79,6 +79,19 @@
 			<Text>Dialog:VillageElder:AboutTraining:5</Text>
 		</DialogNode>
 	</Dialog>
+	
+	<Dialog id="VillageElder:GoToForest" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:GoToForest:1</Text>
+			<Text>Dialog:VillageElder:GoToForest:2</Text>
+			<Text>Dialog:VillageElder:GoToForest:3</Text>
+			<Text>Dialog:VillageElder:GoToForest:4</Text>
+			<Text avatarPath="Sprites/Creations/Joshua/Avatar">Dialog:Joshua:GoToForest</Text>
+			<Text>Dialog:VillageElder:GoToForest:5</Text>
+			<Text>Dialog:VillageElder:GoToForest:6</Text>
+			<Text>Dialog:VillageElder:GoToForest:7</Text>
+		</DialogNode>
+	</Dialog>
 
 	<!-- Terner Dialogs -->
 	<Dialog id="Terner:BokaliskBattle" startNode="FromWho" avatarPath="Sprites/Creations/Terner/Avatar">
@@ -530,6 +543,24 @@
 	<Dialog id="Joshua:AboutDay:2" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:Joshua:AboutDay:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:TalkWithVillageElder" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:TalkWithVillageElder</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:AboutTask" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:AboutTask</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:AboutYoungTime" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:AboutYoungTime</Text>
 		</DialogNode>
 	</Dialog>
 	
