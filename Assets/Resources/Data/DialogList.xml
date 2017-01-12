@@ -95,6 +95,24 @@
 			<Text>Dialog:VillageElder:GoToForest:7</Text>
 		</DialogNode>
 	</Dialog>
+	
+	<Dialog id="VillageElder:Gift:1" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:Gift:1</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElder:Gift:2" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:Gift:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElder:GoodLuck" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:GoodLuck</Text>
+		</DialogNode>
+	</Dialog>
 
 	<!-- Terner Dialogs -->
 	<Dialog id="Terner:BokaliskBattle" startNode="FromWho" avatarPath="Sprites/Creations/Terner/Avatar">
@@ -602,6 +620,19 @@
 	<Dialog id="Joshua:GoToForest" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:Joshua:GoToForest</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Village Elder House -->
+	<Dialog id="VillageElderHouse:BigOven" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:VillageElderHouse:BigOven</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElderHouse:Boxes" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:VillageElderHouse:Boxes</Text>
 		</DialogNode>
 	</Dialog>
 	

@@ -49,6 +49,7 @@
 	<Text id="Item:Scoop">Ковшик</Text>
 	<Text id="Item:Apple">Яблоко</Text>
 	<Text id="Item:BookAboutSpoon">Книжка про ложки</Text>
+	<Text id="Item:OldHelmet">Старый шлем</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>
@@ -280,6 +281,9 @@
 	<Text id="Dialog:VillageElder:GoToForest:5">На самом деле - алтарь ни к чему сейчас не может подключиться. Как ты знаешь, алтари служат порталами, которые можно использовать для перемещения из одной точки в другую.</Text>
 	<Text id="Dialog:VillageElder:GoToForest:6">И вот мы решили попытаться восстановить связь нашей деревни с его деревней, для этого ты должен пойти к его деревне и использовать тамошний алтарь для перехода к нашему.</Text>
 	<Text id="Dialog:VillageElder:GoToForest:7">Но чтобы дойти до туда ты должен пройти через лес… будь осторожен у меня чувство будто что-то назревает.</Text>
+	<Text id="Dialog:VillageElder:Gift:1">Раз уж так вышло, что ты зашел в мой дом, думаю я дам тебе подарок в честь твоего взросления.</Text>
+	<Text id="Dialog:VillageElder:Gift:2">Не знаю насколько долго ты это будешь носить, но уверен, что этот шлем тебе неплохо поможет.</Text>
+	<Text id="Dialog:VillageElder:GoodLuck">Удачи в твоем пути.</Text>
 	
 	<!-- SunPriestG Dialogs -->
 	<Text id="Dialog:SunPriestG:AboutSave:1">Видишь этот знак на полу? Это знак солнца, он позволяет чуток взглянуть в свое будущее, в зависимости от того кто на него ступает четкость видения может разниться. Также он исцеляет все повреждения на теле.</Text>
@@ -395,6 +399,10 @@
 	<Text id="Dialog:Joshua:SaleBook:WhyNot">Неужели тебе не нужна способность заделывать себе ложки?</Text>
 	<Text id="Dialog:Joshua:Common">Ну, все что я тебе сейчас могу предложить, так это пустоту в моем мешке. Х-Хах!</Text>
 	<Text id="Dialog:Joshua:TalkWithVillageElder">Сперва поговори с этим старым орком</Text>
+	
+	<!-- Village Elder House -->
+	<Text id="Dialog:VillageElderHouse:BigOven">Печка как печка, но пока без огня.</Text>
+	<Text id="Dialog:VillageElderHouse:Boxes">Он наверное просто любит сами ящики, так как все они пустые.</Text>
 	
 	<!-- Others -->
 	<Text id="Dialog:OtherBed">Ты же не собираешься спать на чужой кровати?</Text>

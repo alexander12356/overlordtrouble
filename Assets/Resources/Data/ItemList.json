@@ -72,6 +72,14 @@
 			"Effect":
 			{
 			}
+		},
+		{
+			"Id" : "OldHelmet",
+			"Image" : "Sprites/Items/Key/OldHelmet",
+			"Type" : "Equipment",
+			"Effect":
+			{
+			}
 		}
 	]
 }
