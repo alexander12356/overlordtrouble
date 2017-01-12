@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-public interface IInventoryTab
+public interface IInventoryItemsGetter
 {
     Dictionary<string, InventoryItemData> GetItems();
 }
 
-public class AllTab : IInventoryTab
+public class AllGetter : IInventoryItemsGetter
 {
     public Dictionary<string, InventoryItemData> GetItems()
     {
@@ -14,7 +14,7 @@ public class AllTab : IInventoryTab
     }
 }
 
-public class WepsTab : IInventoryTab
+public class WepsGetter : IInventoryItemsGetter
 {
     public Dictionary<string, InventoryItemData> GetItems()
     {
@@ -22,7 +22,7 @@ public class WepsTab : IInventoryTab
     }
 }
 
-public class BlingTab : IInventoryTab
+public class BlingGetter : IInventoryItemsGetter
 {
     public Dictionary<string, InventoryItemData> GetItems()
     {
@@ -30,7 +30,7 @@ public class BlingTab : IInventoryTab
     }
 }
 
-public class SingleUseTab : IInventoryTab
+public class SingleUseGetter : IInventoryItemsGetter
 {
     public Dictionary<string, InventoryItemData> GetItems()
     {
@@ -38,7 +38,7 @@ public class SingleUseTab : IInventoryTab
     }
 }
 
-public class MultiUseTab : IInventoryTab
+public class MultiUseGetter : IInventoryItemsGetter
 {
     public Dictionary<string, InventoryItemData> GetItems()
     {
@@ -46,7 +46,7 @@ public class MultiUseTab : IInventoryTab
     }
 }
 
-public class KeyItemTab : IInventoryTab
+public class KeyItemGetter : IInventoryItemsGetter
 {
     public Dictionary<string, InventoryItemData> GetItems()
     {

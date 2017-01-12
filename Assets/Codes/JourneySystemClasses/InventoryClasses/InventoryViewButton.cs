@@ -1,9 +1,9 @@
 ﻿using UnityEngine.UI;
 
-public class InventoryTabButton : PanelButton {
+public class InventoryViewButton : PanelButton {
 
     protected Image m_BackgroundImage = null;
-    private IInventoryTab m_InventoryTab = null;
+    private InventoryView m_InventoryView = null;
 
     public new bool selected
     {
@@ -41,15 +41,15 @@ public class InventoryTabButton : PanelButton {
         }
     }
 
-    public IInventoryTab inventoryTab
+    public InventoryView inventoryView
     {
         get
         {
-            return m_InventoryTab;
+            return m_InventoryView;
         }
         set
         {
-            m_InventoryTab = value;
+            m_InventoryView = value;
         }
     }
 
