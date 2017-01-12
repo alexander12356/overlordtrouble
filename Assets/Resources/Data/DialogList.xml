@@ -80,13 +80,16 @@
 		</DialogNode>
 	</Dialog>
 	
-	<Dialog id="VillageElder:GoToForest" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+	<Dialog id="VillageElder:GoToForest:1" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
 		<DialogNode id="Talking">
 			<Text>Dialog:VillageElder:GoToForest:1</Text>
 			<Text>Dialog:VillageElder:GoToForest:2</Text>
 			<Text>Dialog:VillageElder:GoToForest:3</Text>
 			<Text>Dialog:VillageElder:GoToForest:4</Text>
-			<Text avatarPath="Sprites/Creations/Joshua/Avatar">Dialog:Joshua:GoToForest</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="VillageElder:GoToForest:2" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
 			<Text>Dialog:VillageElder:GoToForest:5</Text>
 			<Text>Dialog:VillageElder:GoToForest:6</Text>
 			<Text>Dialog:VillageElder:GoToForest:7</Text>
@@ -593,6 +596,12 @@
 	<Dialog id="Joshua:SaleBook:Fail" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:Joshua:SaleBook:Fail</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:GoToForest" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:GoToForest</Text>
 		</DialogNode>
 	</Dialog>
 	

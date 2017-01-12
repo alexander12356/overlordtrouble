@@ -48,6 +48,7 @@
 	<Text id="Item:SaltCucumber">Соленые огурчики</Text>
 	<Text id="Item:Scoop">Ковшик</Text>
 	<Text id="Item:Apple">Яблоко</Text>
+	<Text id="Item:BookAboutSpoon">Книжка про ложки</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>
