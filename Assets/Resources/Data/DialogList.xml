@@ -564,6 +564,38 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="Joshua:Common" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:Common</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:SaleBook" startNode="Sale" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Sale">
+			<Text>Dialog:Joshua:SaleBook</Text>
+			<Question>
+				<Answer id="Yes"/>
+				<Answer id="No"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="No">
+			<Text>Dialog:Joshua:SaleBook:WhyNot</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:SaleBook:Success" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:SaleBook:Success:1</Text>
+			<Text>Dialog:Joshua:SaleBook:Success:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:SaleBook:Fail" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:SaleBook:Fail</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Others -->
 	<Dialog id="OtherBed" startNode="AboutBed" avatarPath="">
 		<DialogNode id="AboutBed">

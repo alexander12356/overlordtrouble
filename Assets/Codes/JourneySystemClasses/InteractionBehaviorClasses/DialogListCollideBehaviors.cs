@@ -9,6 +9,9 @@ public class DialogListCollideBehaviors : BaseCollideBehavior
     [SerializeField]
     private List<string> m_DialogList = null;
 
+    [SerializeField]
+    private ActionStruct m_Action;
+
     public override void RunAction(JourneyActor p_Sender)
     {
         base.RunAction(p_Sender);
@@ -18,14 +21,17 @@ public class DialogListCollideBehaviors : BaseCollideBehavior
             return;
         }
 
-        JourneySystem.GetInstance().StartDialog(m_DialogList[m_CurrentDialogId], new List<ActionStruct>());
-
         m_JourneyActor.ApplyTo(p_Sender.myTransform.position);
         m_JourneyActor.StopLogic();
 
+        JourneySystem.GetInstance().StartDialog(m_DialogList[m_CurrentDialogId], new List<ActionStruct>());
         if (m_DialogList.Count > m_CurrentDialogId + 1)
         {
             m_CurrentDialogId++;
+        }
+        else
+        {
+            m_Action.actionEvent.Invoke();
         }
     }
 

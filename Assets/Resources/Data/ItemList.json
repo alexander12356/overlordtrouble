@@ -64,6 +64,14 @@
 					"Value" : 4.0
 				}
 			}
+		},
+		{
+			"Id" : "BookAboutSpoon",
+			"Image" : "Sprites/Items/Key/BookAboutSpoon",
+			"Type" : "Key",
+			"Effect":
+			{
+			}
 		}
 	]
 }
