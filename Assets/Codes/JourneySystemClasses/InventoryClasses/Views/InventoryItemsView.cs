@@ -59,6 +59,7 @@ public class InventoryItemsView : InventoryView
     {
         m_ItemsButtonsList.RemoveCancelAction(CancelAction);
         m_ItemsButtonsList.RemoveKeyArrowAction(ShowDescription);
+        itemsButtonList.Clear();
     }
 
     public void InitItemList()
