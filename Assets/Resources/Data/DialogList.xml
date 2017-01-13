@@ -356,9 +356,10 @@
 		</DialogNode>
 	</Dialog>
 	
-	<Dialog id="MamaSnail:AboutSnail:1" startNode="Talk" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+	<Dialog id="MamaSnail:AboutSnail" startNode="Talk" avatarPath="Sprites/Creations/MamaSnail/Avatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:MamaSnail:AboutSnail:1</Text>
+			<Text>Dialog:MamaSnail:AboutSnail:2</Text>
 		</DialogNode>
 	</Dialog>
 	
