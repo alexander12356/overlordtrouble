@@ -103,6 +103,8 @@ public class InventoryEquipmentView : InventoryView
         InitEmptySlots();
     }
 
+    #region Inits
+
     public override void Init()
     {
         InitSlotButtonList();
@@ -133,20 +135,6 @@ public class InventoryEquipmentView : InventoryView
         }
     }
 
-    private void AddGroupMember(TestGroupMemberData groupMemberData)
-    {
-        InventoryGroupMemberButton l_Button = UnityEngine.Object.Instantiate(InventoryGroupMemberButton.prefab);
-        l_Button.testMemberData = groupMemberData;
-        l_Button.AddAction(SelectSlotList);
-        m_GroupButtonList.AddButton(l_Button);
-    }
-
-    private void SelectSlotList()
-    {
-        m_GroupButtonList.isActive = false;
-        m_SlotButtonList.isActive = true;
-    }
-
     private void InitItemButtonList()
     {
         m_ItemButtonList = itemButtonList;
@@ -161,54 +149,6 @@ public class InventoryEquipmentView : InventoryView
         m_SlotButtonList.AddCancelAction(DeselectSlotList);
         m_SlotButtonList.AddKeyArrowAction(InitItemsList);
         m_SlotButtonList.isActive = false;
-    }
-
-    private void DeselectSlotList()
-    {
-        m_GroupButtonList.isActive = true;
-        m_SlotButtonList.isActive = false;
-    }
-
-    public override void Disable()
-    {
-        m_SlotButtonList.RemoveCancelAction(DeselectSlotList);
-        m_SlotButtonList.RemoveKeyArrowAction(InitItemsList);
-        m_ItemButtonList.RemoveCancelAction(DeselectItemList);
-        m_ItemButtonList.RemoveKeyArrowAction(ShowDescription);
-    }
-
-    private void ShowGroupMemberInfo()
-    {
-        InitSlots(PlayerInventory.GetInstance().GetInventorySlotData());
-        InventoryGroupMemberButton l_GroupMemberButton = (InventoryGroupMemberButton) m_GroupButtonList[m_GroupButtonList.currentButtonId];
-        playerStat.gameObject.SetActive(true);
-        m_HealthStatText.text = "HP : " + l_GroupMemberButton.testMemberData.m_Health;
-        m_SpecialPointStatText.text = "SP : " + l_GroupMemberButton.testMemberData.m_SpecialPoints;
-        m_AttackStatText.text = "Atk : " + l_GroupMemberButton.testMemberData.m_AttackStat;
-        m_DefenseStatText.text = "Def : " + l_GroupMemberButton.testMemberData.m_DefenseStat;
-        m_SpeedStatText.text = "Speed : " + l_GroupMemberButton.testMemberData.m_SpeedStat; 
-    }
-
-    private void ClearGroupMemberInfo()
-    {
-        playerStat.gameObject.SetActive(false);
-    }
-
-    // TODO : Сделать нормальное описание предметов
-    public override void ShowDescription()
-    {
-        if (m_ItemButtonList != null && m_ItemButtonList.count > 0)
-        {
-            InventoryEquipmentButton lEqButton = (InventoryEquipmentButton)m_ItemButtonList.currentButton;
-            int lCountInInventory = PlayerInventory.GetInstance().GetItemCount(lEqButton.itemId);
-            string lInInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
-            m_DescriptionText.text = lEqButton.title + "_Description" + lInInventoryText + lCountInInventory;
-        }
-    }
-
-    public override void ClearDescription()
-    {
-        m_DescriptionText.text = "";
     }
 
     /// <summary>
@@ -235,20 +175,6 @@ public class InventoryEquipmentView : InventoryView
         }
     }
 
-    public void AddSlot(InventorySlotData pSlotData)
-    {
-        InventorySlotButton l_Button = UnityEngine.Object.Instantiate(InventorySlotButton.prefab);
-
-        if (PlayerInventory.GetInstance().GetItemCount(pSlotData.itemId) == 0)
-            pSlotData.itemId = string.Empty;
-
-        l_Button.slotData = pSlotData;
-        l_Button.AddAction(SelectItemList);
-        l_Button.title = pSlotData.slotType.GetTitle(slotButtonList.count);
-
-        slotButtonList.AddButton(l_Button);
-    }
-
     private void InitItemsList()
     {
         itemButtonList.Clear();
@@ -261,6 +187,84 @@ public class InventoryEquipmentView : InventoryView
                 continue;
             AddItem(l_InventoryItems[lKey]);
         }
+    }
+
+    #endregion
+
+    private void AddGroupMember(TestGroupMemberData groupMemberData)
+    {
+        InventoryGroupMemberButton l_Button = UnityEngine.Object.Instantiate(InventoryGroupMemberButton.prefab);
+        l_Button.testMemberData = groupMemberData;
+        l_Button.AddAction(SelectSlotList);
+        m_GroupButtonList.AddButton(l_Button);
+    }
+
+    private void SelectSlotList()
+    {
+        m_GroupButtonList.isActive = false;
+        m_SlotButtonList.isActive = true;
+    }
+
+    private void DeselectSlotList()
+    {
+        m_GroupButtonList.isActive = true;
+        m_SlotButtonList.isActive = false;
+    }
+
+    public override void Disable()
+    {
+        m_SlotButtonList.RemoveCancelAction(DeselectSlotList);
+        m_SlotButtonList.RemoveKeyArrowAction(InitItemsList);
+        m_ItemButtonList.RemoveCancelAction(DeselectItemList);
+        m_ItemButtonList.RemoveKeyArrowAction(ShowDescription);
+    }
+
+    private void ShowGroupMemberInfo()
+    {
+        InitSlots(PlayerInventory.GetInstance().GetInventorySlotData());
+        InventoryGroupMemberButton l_GroupMemberButton = (InventoryGroupMemberButton) m_GroupButtonList[m_GroupButtonList.currentButtonId];
+        playerStat.gameObject.SetActive(true);
+        m_HealthStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:HealthPoints") + " : " + l_GroupMemberButton.testMemberData.m_Health;
+        m_SpecialPointStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:MonstylePoints") + " : " + l_GroupMemberButton.testMemberData.m_SpecialPoints;
+        m_AttackStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Attack") + " : " + l_GroupMemberButton.testMemberData.m_AttackStat;
+        m_DefenseStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Defense") + " : " + l_GroupMemberButton.testMemberData.m_DefenseStat;
+        m_SpeedStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Speed") + " : " + l_GroupMemberButton.testMemberData.m_SpeedStat; 
+    }
+
+    private void ClearGroupMemberInfo()
+    {
+        playerStat.gameObject.SetActive(false);
+    }
+
+    // TODO : Сделать нормальное описание предметов
+    public override void ShowDescription()
+    {
+        if (m_ItemButtonList != null && m_ItemButtonList.count > 0)
+        {
+            InventoryEquipmentButton lEqButton = (InventoryEquipmentButton)m_ItemButtonList.currentButton;
+            int lCountInInventory = PlayerInventory.GetInstance().GetItemCount(lEqButton.itemId);
+            string lInInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
+            m_DescriptionText.text = lEqButton.title + "_Description" + lInInventoryText + lCountInInventory;
+        }
+    }
+
+    public override void ClearDescription()
+    {
+        m_DescriptionText.text = "";
+    }
+
+    public void AddSlot(InventorySlotData pSlotData)
+    {
+        InventorySlotButton l_Button = UnityEngine.Object.Instantiate(InventorySlotButton.prefab);
+
+        if (PlayerInventory.GetInstance().GetItemCount(pSlotData.itemId) == 0)
+            pSlotData.itemId = string.Empty;
+
+        l_Button.slotData = pSlotData;
+        l_Button.AddAction(SelectItemList);
+        l_Button.title = pSlotData.slotType.GetTitle(slotButtonList.count);
+
+        slotButtonList.AddButton(l_Button);
     }
 
     public override void AddItem(InventoryItemData pInventoryItemData)
