@@ -403,6 +403,8 @@
 	<!-- Village Elder House -->
 	<Text id="Dialog:VillageElderHouse:BigOven">Печка как печка, но пока без огня.</Text>
 	<Text id="Dialog:VillageElderHouse:Boxes">Он наверное просто любит сами ящики, так как все они пустые.</Text>
+	<Text id="Dialog:VillageElderHouse:Pipe">Труба.</Text>
+	<Text id="Dialog:VillageElderHouse:Chest">Интересно, что он тут хранит.</Text>
 	
 	<!-- Others -->
 	<Text id="Dialog:OtherBed">Ты же не собираешься спать на чужой кровати?</Text>

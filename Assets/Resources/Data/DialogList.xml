@@ -636,6 +636,18 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="VillageElderHouse:Pipe" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:VillageElderHouse:Pipe</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElderHouse:Chest" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:VillageElderHouse:Chest</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Others -->
 	<Dialog id="OtherBed" startNode="AboutBed" avatarPath="">
 		<DialogNode id="AboutBed">
