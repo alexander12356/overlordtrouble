@@ -107,12 +107,14 @@ public class InventoryItemsView : InventoryView
         parent.tabButtonList.isActive = true;
     }
 
-    public override void Confrim()
+    public override bool Confrim()
     {
         if (m_ItemsButtonsList != null && m_ItemsButtonsList.count > 0)
         {
             m_ItemsButtonsList.isActive = true;
+            return true;
         }
+        return false;
     }
 
     public override void SelectItem()

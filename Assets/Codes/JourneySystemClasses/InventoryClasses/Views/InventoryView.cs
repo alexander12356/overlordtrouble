@@ -9,7 +9,7 @@ public abstract class InventoryView
     public abstract void ShowDescription();
     public abstract void ClearDescription();
     public abstract void AddItem(InventoryItemData pInventoryItemData);
-    public abstract void Confrim();
+    public abstract bool Confrim();
     public abstract void CancelAction();
     public abstract void SelectItem();
     public abstract void UpdateKey();

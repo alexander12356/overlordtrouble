@@ -299,10 +299,11 @@ public class InventoryEquipmentView : InventoryView
         ClearGroupMemberInfo();
     }
 
-    public override void Confrim()
+    public override bool Confrim()
     {
         m_GroupButtonList.isActive = true;
         ShowGroupMemberInfo();
+        return true;
     }
 
     public override void SelectItem()
