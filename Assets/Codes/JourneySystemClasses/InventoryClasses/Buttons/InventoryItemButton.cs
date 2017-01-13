@@ -31,7 +31,7 @@ public class InventoryItemButton : PanelButtonUpdateKey
         set
         {
             m_ItemCount = value;
-            m_ItemCountText.text = "x" + m_ItemCount.ToString();
+            m_ItemCountText.text = "x" + m_ItemCount;
         }
     }
 

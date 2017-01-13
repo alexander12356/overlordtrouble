@@ -241,10 +241,10 @@ public class InventoryEquipmentView : InventoryView
     {
         if (m_ItemButtonList != null && m_ItemButtonList.count > 0)
         {
-            InventoryEquipmentButton lEqButton = (InventoryEquipmentButton)m_ItemButtonList.currentButton;
-            int lCountInInventory = PlayerInventory.GetInstance().GetItemCount(lEqButton.itemId);
+            InventoryItemButton lItemButton = (InventoryItemButton)m_ItemButtonList.currentButton;
+            int lCountInInventory = PlayerInventory.GetInstance().GetItemCount(lItemButton.itemId);
             string lInInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
-            m_DescriptionText.text = lEqButton.title + "_Description" + lInInventoryText + lCountInInventory;
+            m_DescriptionText.text = lItemButton.title + "_Description" + lInInventoryText + lCountInInventory;
         }
     }
 
@@ -269,15 +269,12 @@ public class InventoryEquipmentView : InventoryView
 
     public override void AddItem(InventoryItemData pInventoryItemData)
     {
-        InventoryEquipmentButton l_Button = UnityEngine.Object.Instantiate(InventoryEquipmentButton.prefab);
-        l_Button.title = LocalizationDataBase.GetInstance().GetText("Item:" + pInventoryItemData.id);
-        l_Button.itemId = pInventoryItemData.id;
-        l_Button.AddAction(SelectItem);
+        InventoryItemButton l_ItemButton = UnityEngine.Object.Instantiate(InventoryItemButton.prefab);
+        l_ItemButton.title = LocalizationDataBase.GetInstance().GetText("Item:" + pInventoryItemData.id);
+        l_ItemButton.itemId = pInventoryItemData.id;
+        l_ItemButton.AddAction(SelectItem);
 
-        if (PlayerInventory.GetInstance().SlotsContainItem(l_Button.itemId))
-            l_Button.equipped = true;
-
-        itemButtonList.AddButton(l_Button);
+        itemButtonList.AddButton(l_ItemButton);
     }
 
     private void SelectItemList()
@@ -313,39 +310,9 @@ public class InventoryEquipmentView : InventoryView
     public override void SelectItem()
     {
         // TODO : Экипировать игрока выбранным предметом
-        InventoryEquipmentButton l_EqButton = (InventoryEquipmentButton)m_ItemButtonList.currentButton;
+        InventoryItemButton l_ItemButton = (InventoryItemButton)m_ItemButtonList.currentButton;
         InventorySlotButton l_SlotButton = (InventorySlotButton)m_SlotButtonList.currentButton;
-
-        if (l_SlotButton.IsFull)
-        {
-            if (l_EqButton.equipped)
-            {
-                l_SlotButton.DeselectItem();
-                l_EqButton.equipped = false;
-                PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
-            }
-            else
-            {
-                ClearEquipped();
-                l_SlotButton.SelectItem(l_EqButton.itemId);
-                l_EqButton.equipped = true;
-                PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
-            }
-        }
-        else
-        {
-            l_EqButton.equipped = true;
-            l_SlotButton.SelectItem(l_EqButton.itemId);
-            PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
-        }
-    }
-
-    private void ClearEquipped()
-    {
-        for (int i = 0; i < m_ItemButtonList.count; i++)
-        {
-            (m_ItemButtonList[i] as InventoryEquipmentButton).equipped = false;
-        }
+        l_SlotButton.SelectItem(l_ItemButton.itemId);
     }
 
     public override void UpdateKey()
