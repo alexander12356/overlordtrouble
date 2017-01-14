@@ -298,6 +298,7 @@
 	<Text id="Dialog:SunPriest:AboutTeleport:2">На самом деле он перестал работать неделю назад, но я думал, что это пройдет со временем.</Text>
 	<Text id="Dialog:SunPriest:AboutTeleport:3">Он все еще не работает.</Text>
 	<Text id="Dialog:SunPriest:AboutTeleport:4">Я жалею что не взял инструкцию к нему.</Text>
+	<Text id="Dialog:SunPriest:TryTeleport">Все еще не работает хммм.</Text>
 	
 	<!-- SunPriest Home -->
 	<Text id="Dialog:SunHome:Stove">Одна печка и четыре трубы, непрактично но выглядит неплохо.</Text>

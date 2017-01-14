@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameEventTrigger : MonoBehaviour
 {
     [SerializeField]
+    private bool m_Only = true;
+
+    [SerializeField]
     public ActionStruct m_Action;
 
     public void OnTriggerEnter2D(Collider2D p_Collision)
@@ -12,7 +15,11 @@ public class GameEventTrigger : MonoBehaviour
         if (p_Collision.tag == "Player")
         {
             m_Action.actionEvent.Invoke();
-            Destroy(gameObject);
+
+            if (m_Only)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

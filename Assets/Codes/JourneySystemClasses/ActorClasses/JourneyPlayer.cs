@@ -111,6 +111,7 @@ public class JourneyPlayer : JourneyActor
     {
         base.StopLogic();
 
+        myAnimator.SetBool("IsWalking", false);
         m_InputDirection = Vector2.zero;
         FixedUpdate();
     }

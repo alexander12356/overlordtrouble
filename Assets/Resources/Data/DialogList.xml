@@ -242,6 +242,12 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="SunPriest:TryTeleport" startNode="Talk" avatarPath="Sprites/Creations/SunPriest/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:SunPriest:TryTeleport</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- Sun Home -->
 	<Dialog id="SunHome:Stove" startNode="AboutStove" avatarPath="">
 		<DialogNode id="AboutStove">
