@@ -36,7 +36,7 @@ public class DialogDataBase : Singleton<DialogDataBase>
             foreach (XmlNode l_DialogNodeXml in l_DialogXml)
             {
                 DialogNode l_DialogNode = ParseDialogNode(l_DialogNodeXml);
-                l_DialogNode.Init();
+                //l_DialogNode.Init();
 
                 l_DialogData.AddDialogNode(l_DialogNode.id, l_DialogNode);
             }
