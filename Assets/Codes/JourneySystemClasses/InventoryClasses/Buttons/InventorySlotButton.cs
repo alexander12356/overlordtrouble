@@ -6,6 +6,7 @@ public class InventorySlotButton : PanelButton
     private static InventorySlotButton m_Prefab = null;
     private InventorySlotData m_SlotData;
     private bool m_IsFull;
+    private string m_DefaultTitle;
 
     public static InventorySlotButton prefab
     {
@@ -51,6 +52,26 @@ public class InventorySlotButton : PanelButton
         }
     }
 
+    public string defaultTitle
+    {
+        get
+        {
+            return m_DefaultTitle;
+        }
+        set
+        {
+            m_DefaultTitle = value;
+            if (m_IsFull)
+            {
+                title = LocalizationDataBase.GetInstance().GetText("Item:" + m_SlotData.itemId);
+            }
+            else
+            {
+                title = m_DefaultTitle;
+            }
+        }
+    }
+
     public InventorySlotData slotData
     {
         get
@@ -75,11 +96,13 @@ public class InventorySlotButton : PanelButton
     {
         m_IsFull = true;
         m_SlotData.itemId = pItemId;
+        title = LocalizationDataBase.GetInstance().GetText("Item:" + pItemId);
     }
 
     public void DeselectItem()
     {
         m_IsFull = false;
         m_SlotData.itemId = string.Empty;
+        title = defaultTitle;
     }
 }

@@ -54,7 +54,7 @@ public class InventoryEquipmentView : InventoryView
     {
         get
         {
-            if(m_GroupButtonList == null)
+            if (m_GroupButtonList == null)
             {
                 m_GroupButtonList = parent.transform.FindChild("GroupList").GetComponent<ButtonList>();
             }
@@ -78,7 +78,7 @@ public class InventoryEquipmentView : InventoryView
     {
         get
         {
-            if(m_PlayerStat == null)
+            if (m_PlayerStat == null)
             {
                 m_PlayerStat = parent.transform.FindChild("PlayerStat").gameObject;
                 m_HealthStatText = m_PlayerStat.transform.FindChild("HealthStat").GetComponent<Text>();
@@ -129,7 +129,7 @@ public class InventoryEquipmentView : InventoryView
         m_GroupButtonList.AddKeyArrowAction(ShowGroupMemberInfo);
         m_GroupButtonList.isActive = false;
 
-        foreach(var groupMemberData in m_TestGroupMemberDataList)
+        foreach (var groupMemberData in m_TestGroupMemberDataList)
         {
             AddGroupMember(groupMemberData);
         }
@@ -187,6 +187,8 @@ public class InventoryEquipmentView : InventoryView
                 continue;
             AddItem(l_InventoryItems[lKey]);
         }
+        // Add deselect button
+        AddItem(DeselectItem, "----------");
     }
 
     #endregion
@@ -222,13 +224,13 @@ public class InventoryEquipmentView : InventoryView
     private void ShowGroupMemberInfo()
     {
         InitSlots(PlayerInventory.GetInstance().GetInventorySlotData());
-        InventoryGroupMemberButton l_GroupMemberButton = (InventoryGroupMemberButton) m_GroupButtonList[m_GroupButtonList.currentButtonId];
+        InventoryGroupMemberButton l_GroupMemberButton = (InventoryGroupMemberButton)m_GroupButtonList[m_GroupButtonList.currentButtonId];
         playerStat.gameObject.SetActive(true);
         m_HealthStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:HealthPoints") + " : " + l_GroupMemberButton.testMemberData.m_Health;
         m_SpecialPointStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:MonstylePoints") + " : " + l_GroupMemberButton.testMemberData.m_SpecialPoints;
         m_AttackStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Attack") + " : " + l_GroupMemberButton.testMemberData.m_AttackStat;
         m_DefenseStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Defense") + " : " + l_GroupMemberButton.testMemberData.m_DefenseStat;
-        m_SpeedStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Speed") + " : " + l_GroupMemberButton.testMemberData.m_SpeedStat; 
+        m_SpeedStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Speed") + " : " + l_GroupMemberButton.testMemberData.m_SpeedStat;
     }
 
     private void ClearGroupMemberInfo()
@@ -262,7 +264,7 @@ public class InventoryEquipmentView : InventoryView
 
         l_Button.slotData = pSlotData;
         l_Button.AddAction(SelectItemList);
-        l_Button.title = pSlotData.slotType.GetTitle(slotButtonList.count);
+        l_Button.defaultTitle = pSlotData.slotType.GetTitle(slotButtonList.count);
 
         slotButtonList.AddButton(l_Button);
     }
@@ -274,6 +276,14 @@ public class InventoryEquipmentView : InventoryView
         l_ItemButton.itemId = pInventoryItemData.id;
         l_ItemButton.AddAction(SelectItem);
 
+        itemButtonList.AddButton(l_ItemButton);
+    }
+
+    public void AddItem(PanelButtonActionHandler p_Action, string p_Title)
+    {
+        InventoryItemButton l_ItemButton = UnityEngine.Object.Instantiate(InventoryItemButton.prefab);
+        l_ItemButton.title = p_Title;
+        l_ItemButton.AddAction(p_Action);
         itemButtonList.AddButton(l_ItemButton);
     }
 
@@ -313,6 +323,16 @@ public class InventoryEquipmentView : InventoryView
         InventoryItemButton l_ItemButton = (InventoryItemButton)m_ItemButtonList.currentButton;
         InventorySlotButton l_SlotButton = (InventorySlotButton)m_SlotButtonList.currentButton;
         l_SlotButton.SelectItem(l_ItemButton.itemId);
+        // TODO: Переделать под группу
+        PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
+    }
+
+    public void DeselectItem()
+    {
+        InventoryItemButton l_ItemButton = (InventoryItemButton)m_ItemButtonList.currentButton;
+        InventorySlotButton l_SlotButton = (InventorySlotButton)m_SlotButtonList.currentButton;
+        l_SlotButton.DeselectItem();
+        PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
     }
 
     public override void UpdateKey()
