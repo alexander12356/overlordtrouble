@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -22,6 +23,9 @@ public class TextBox : MonoBehaviour
 
     [SerializeField]
     private float m_ShowingTextSpeed = 0.5f;
+
+    [SerializeField]
+    private int m_PageMaxSymbolCount = 255;
     #endregion
 
     #region Interface
@@ -50,7 +54,7 @@ public class TextBox : MonoBehaviour
 
     public void SetText(List<string> p_Text)
     {
-        m_FullText = p_Text;
+        m_FullText = ResizeText(p_Text);
 
         m_Text.text     = "";
         m_CurrentPhrase = 0;
@@ -161,6 +165,35 @@ public class TextBox : MonoBehaviour
         {
             m_EndAction();
         }
+    }
+
+    private List<string> ResizeText(List<string> p_FullText)
+    {
+        List<string> l_NewFullText = new List<string>();
+
+        for (int i = 0; i < p_FullText.Count; i++)
+        {
+            string[] l_Words = p_FullText[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+            string l_Text = "";
+            for (int j = 0; j < l_Words.Length; j++)
+            {
+                if (l_Text.Length + l_Words[j].Length + 4 < m_PageMaxSymbolCount)
+                {
+                    l_Text += l_Words[j] + " ";
+                }
+                else
+                {
+                    l_Text += " ...";
+                    l_NewFullText.Add(l_Text);
+                    l_Text = l_Words[j] + " ";
+                }
+            }
+
+            l_NewFullText.Add(l_Text);
+        }
+
+        return l_NewFullText;
     }
     #endregion
 }
