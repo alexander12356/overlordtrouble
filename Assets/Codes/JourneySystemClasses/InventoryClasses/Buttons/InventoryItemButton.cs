@@ -30,7 +30,12 @@ public class InventoryItemButton : PanelButtonUpdateKey
         }
         set
         {
-            m_ItemCount = value;
+            m_ItemCount = value;            
+            if (m_ItemCount <= 0)
+            {
+                m_ItemCount = 0;
+                StartCoroutine(DestroyButton());
+            }
             m_ItemCountText.text = "x" + m_ItemCount;
         }
     }
@@ -62,13 +67,7 @@ public class InventoryItemButton : PanelButtonUpdateKey
         // TODO: Вызывать окно с выбором персонажа, а затем окно с описанием эффекта
         if (ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.SingleUse)
         {
-            int l_ItemCount = itemCount - 1;
-            if (l_ItemCount <= 0)
-            {
-                itemCount = 0;
-                StartCoroutine(DestroyButton());
-            }
-            itemCount = l_ItemCount;
+            itemCount = itemCount - 1;
             PlayerInventory.GetInstance().SetItemCount(itemId, itemCount);
 
             Item l_Item = ItemDataBase.GetInstance().GetItem(itemId).CreateItem();

@@ -9,6 +9,7 @@ public class ItemActionPanel : Panel
     private PanelActionHandler m_UseAction;
     private PanelActionHandlerWithParameter m_RemovingAction;
     private Animator m_Animator = null;
+    private string m_ItemId;
 
     private int m_CountToRemove = 0;
     private const int m_MinValue = 0;
@@ -53,6 +54,18 @@ public class ItemActionPanel : Panel
         {
             m_CountToRemove = Mathf.Clamp(value, m_MinValue, m_MaxValue);
             m_CountToRemoveText.text = m_CountToRemove.ToString();
+        }
+    }
+
+    public string itemId
+    {
+        get
+        {
+            return m_ItemId;
+        }
+        set
+        {
+            m_ItemId = value;
         }
     }
 
@@ -106,7 +119,8 @@ public class ItemActionPanel : Panel
 
     public void InitActionButtonList(string p_ItemId)
     {
-        if (ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.SingleUse)
+        itemId = p_ItemId;
+        if (ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.SingleUse)
         {
             string l_UseStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Use");
             AddActionButton(l_UseStr, UseAction);
@@ -117,7 +131,7 @@ public class ItemActionPanel : Panel
             string l_BackStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
             AddActionButton(l_BackStr, CancelAction);
         }
-        else if (ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.Bling || ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.Weapon || ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.MultipleUse)
+        else if (ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.Bling || ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.Weapon || ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.MultipleUse)
         {
             string l_ThrowStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Throw");
             AddActionButton(l_ThrowStr, ActivateArrows);
@@ -125,7 +139,7 @@ public class ItemActionPanel : Panel
             string l_BackStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
             AddActionButton(l_BackStr, CancelAction);
         }
-        else if (ItemDataBase.GetInstance().GetItem(p_ItemId).itemType == ItemType.Key)
+        else if (ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.Key)
         {
             string l_UseStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Use");
             AddActionButton(l_UseStr, UseAction);
@@ -172,7 +186,7 @@ public class ItemActionPanel : Panel
     private void TryToRemove()
     {
         YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
-        l_YesNoPanel.SetText("Вы действительно хотите выбросить ?");
+        l_YesNoPanel.SetText(string.Format("Вы действительно хотите выбросить {0} ?", LocalizationDataBase.GetInstance().GetText("Item:" + itemId)));
         l_YesNoPanel.AddYesAction(RemovingAction);
         JourneySystem.GetInstance().ShowPanel(l_YesNoPanel, true);
     }
