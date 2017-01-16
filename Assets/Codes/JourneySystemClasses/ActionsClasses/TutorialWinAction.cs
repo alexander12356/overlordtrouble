@@ -13,5 +13,10 @@ public class TutorialWinAction : MonoBehaviour
         CutsceneSystem.GetInstance().StartCutscene("TutorialWin");
 
         m_JourneyEnemy.loseAction = m_NewLoseAction;
+
+        ActionStruct l_WinAction;
+        l_WinAction.id = "";
+        l_WinAction.actionEvent = null;
+        m_JourneyEnemy.winAction = l_WinAction;
     }
 }

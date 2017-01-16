@@ -10,6 +10,11 @@ public class JourneyEnemy : JourneyNPC
     [SerializeField]
     private ActionStruct m_LoseAction;
 
+    public ActionStruct winAction
+    {
+        get { return m_WinAction; }
+        set { m_WinAction = value; }
+    }
     public ActionStruct loseAction
     {
         get { return m_LoseAction; }
