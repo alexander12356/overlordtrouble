@@ -16,12 +16,7 @@ public class DialogListCollideBehaviors : BaseCollideBehavior
     {
         base.RunAction(p_Sender);
 
-        if (p_Sender.direction != GetMyObjectSide(p_Sender))
-        {
-            return;
-        }
-
-        m_JourneyActor.ApplyTo(p_Sender.myTransform.position);
+        m_JourneyActor.ApplyTo(p_Sender);
         m_JourneyActor.StopLogic();
 
         JourneySystem.GetInstance().StartDialog(m_DialogList[m_CurrentDialogId], new List<ActionStruct>());

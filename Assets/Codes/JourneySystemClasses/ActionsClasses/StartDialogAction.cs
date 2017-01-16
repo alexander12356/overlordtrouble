@@ -20,8 +20,8 @@ public class StartDialogAction : MonoBehaviour
     {
         DialogPanel l_DialogPanel = JourneySystem.GetInstance().StartDialog(m_DialogId, new List<ActionStruct>() { m_Action } );
 
-        m_TargetActor.ApplyTo(m_JourneyPlayer.myTransform.position);
-        m_JourneyPlayer.ApplyTo(m_TargetActor.myTransform.position);
+        m_TargetActor.ApplyTo(m_JourneyPlayer);
+        m_JourneyPlayer.ApplyTo(m_TargetActor);
         m_TargetActor.StopLogic();
     }
 }

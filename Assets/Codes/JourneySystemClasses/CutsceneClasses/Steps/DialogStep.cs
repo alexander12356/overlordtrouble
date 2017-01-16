@@ -23,8 +23,8 @@ public class DialogStep : BaseStep
 
         l_DialogPanel.AddPopAction(EndStep);
 
-        m_TargetActor.ApplyTo(m_SenderActor.myTransform.position);
-        m_SenderActor.ApplyTo(m_TargetActor.myTransform.position);
+        m_TargetActor.ApplyTo(m_SenderActor);
+        m_SenderActor.ApplyTo(m_TargetActor);
         m_TargetActor.StopLogic();
     }
 

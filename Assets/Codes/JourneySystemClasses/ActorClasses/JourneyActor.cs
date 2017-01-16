@@ -155,28 +155,22 @@ public class JourneyActor : MonoBehaviour
     {
     }
 
-    public void ApplyTo(Vector3 p_Target)
+    public void ApplyTo(JourneyActor p_JourneyActor)
     {
-        Vector2 l_Position = myTransform.position;
-        Vector2 l_SpeakerPosition = p_Target;
-        double l_Angle = Math.Atan2(l_Position.y - l_SpeakerPosition.y, l_Position.x - l_SpeakerPosition.x) / Math.PI * 180;
-        l_Angle = (l_Angle < 0) ? l_Angle + 360 : l_Angle;
-
-        if ((l_Angle > 315.0f && l_Angle < 360.0f) || (l_Angle > 0.0f && l_Angle < 45.0f))
+        switch(p_JourneyActor.direction)
         {
-            m_Animator.SetTrigger("Left");
-        }
-        else if (l_Angle > 45.0f && l_Angle < 135.0f)
-        {
-            m_Animator.SetTrigger("Down");
-        }
-        else if (l_Angle > 135.0f && l_Angle < 225.0f)
-        {
-            m_Animator.SetTrigger("Right");
-        }
-        else if (l_Angle > 225.0f && l_Angle < 315.0f)
-        {
-            m_Animator.SetTrigger("Up");
+            case ActorDirection.Down:
+                m_Animator.SetTrigger("Up");
+                break;
+            case ActorDirection.Up:
+                m_Animator.SetTrigger("Down");
+                break;
+            case ActorDirection.Left:
+                m_Animator.SetTrigger("Right");
+                break;
+            case ActorDirection.Right:
+                m_Animator.SetTrigger("Left");
+                break;
         }
     }
 

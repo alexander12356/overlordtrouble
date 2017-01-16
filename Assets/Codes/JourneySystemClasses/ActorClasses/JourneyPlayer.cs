@@ -8,9 +8,9 @@ public class JourneyPlayer : JourneyActor
     #region Variables
     private Vector2 m_InputDirection = Vector2.zero;
     private Rigidbody2D m_RigidBody2d = null;
-    private List<JourneyActor> m_InteractableActors = new List<JourneyActor>();
     private JourneyActor m_InteractJourneyActor = null;
     private PlayerStatistics m_Statistics;
+    private CheckTrigger m_CheckTrigger = null;
 
     [SerializeField]
     private float m_Speed = 5.0f;
@@ -38,10 +38,10 @@ public class JourneyPlayer : JourneyActor
     public override void Awake()
     {
         base.Awake();
-
-        InitCheckCollider();
+        
         m_RigidBody2d = GetComponent<Rigidbody2D>();
         m_Statistics = GetComponent<PlayerStatistics>();
+        m_CheckTrigger = myTransform.FindChild("CheckTrigger").GetComponent<CheckTrigger>();
     }
 
     public override void Update()
@@ -79,19 +79,19 @@ public class JourneyPlayer : JourneyActor
 
             if (m_InputDirection.x > 0)
             {
-                m_ActorDirection = ActorDirection.Right;
+                SetDirection(ActorDirection.Right);
             }
             else if (m_InputDirection.x < 0)
             {
-                m_ActorDirection = ActorDirection.Left;
+                SetDirection(ActorDirection.Left);
             }
             else if (m_InputDirection.y > 0)
             {
-                m_ActorDirection = ActorDirection.Up;
+                SetDirection(ActorDirection.Up);
             }
             else if (m_InputDirection.y < 0)
             {
-                m_ActorDirection = ActorDirection.Down;
+                SetDirection(ActorDirection.Down);
             }
         }
         else
@@ -121,23 +121,25 @@ public class JourneyPlayer : JourneyActor
         m_Animator.runtimeAnimatorController = PlayerData.GetInstance().GetAnimatorController();
     }
 
-    public void AddCollideActor(JourneyActor p_JourneyActor)
-    {
-        if (m_InteractableActors.Contains(p_JourneyActor))
-        {
-            return;
-        }
-        m_InteractableActors.Add(p_JourneyActor);
-    }
-
-    public void RemoveCollideActor(JourneyActor p_JourneyActor)
-    {
-        m_InteractableActors.Remove(p_JourneyActor);
-    }
-
     public void PressDisactiveButtonAction()
     {
-        m_InteractJourneyActor.EndInteract();
+        if (m_InteractJourneyActor != null)
+        {
+            m_InteractJourneyActor.EndInteract();
+        }
+    }
+
+    public void SetInteractActor(JourneyActor p_JourneyActor)
+    {
+        m_InteractJourneyActor = p_JourneyActor;
+    }
+
+    public void RemoveInteractActor(JourneyActor p_JourneyActor)
+    {
+        if (m_InteractJourneyActor == p_JourneyActor)
+        {
+            m_InteractJourneyActor = null;
+        }
     }
 
     public override void GoTo(Vector3 p_Target, float p_Delay)
@@ -155,11 +157,13 @@ public class JourneyPlayer : JourneyActor
             {
                 myAnimator.SetFloat("Input_X", -1);
                 myAnimator.SetFloat("Input_Y", 0);
+                SetDirection(ActorDirection.Left);
             }
             else
             {
                 myAnimator.SetFloat("Input_X", 1);
                 myAnimator.SetFloat("Input_Y", 0);
+                SetDirection(ActorDirection.Right);
             }
         }
         else
@@ -168,25 +172,19 @@ public class JourneyPlayer : JourneyActor
             {
                 myAnimator.SetFloat("Input_X", 0);
                 myAnimator.SetFloat("Input_Y", -1);
+                SetDirection(ActorDirection.Down);
             }
             else
             {
                 myAnimator.SetFloat("Input_X", 0);
                 myAnimator.SetFloat("Input_Y", 1);
+                SetDirection(ActorDirection.Up);
             }
         }
     }
     #endregion
 
     #region Private
-    private void InitCheckCollider()
-    {
-        CheckCollide l_CheckCollide = myTransform.FindChild("CheckCollide").GetComponent<CheckCollide>();
-
-        l_CheckCollide.AddCollideEnterAction(AddCollideActor);
-        l_CheckCollide.AddCollideExitAction(RemoveCollideActor);
-    }
-
     private void RunPauseMenu()
     {
         JourneySystem.GetInstance().SetControl(ControlType.Panel);
@@ -204,30 +202,43 @@ public class JourneyPlayer : JourneyActor
 
     private void PressActiveButtonAction()
     {
-        if (m_InteractableActors.Count == 0)
+        if (m_InteractJourneyActor != null)
         {
-            return;
+            m_InteractJourneyActor.Interact(this);
         }
+    }
 
-        float[] l_Distances = new float[m_InteractableActors.Count];
-        for (int i = 0; i < m_InteractableActors.Count; i++)
+    private void SetDirection(ActorDirection p_Direction)
+    {
+        m_ActorDirection = p_Direction;
+        
+        switch (m_ActorDirection)
         {
-            l_Distances[i] = (myTransform.position - m_InteractableActors[i].myTransform.position).sqrMagnitude;
-        }
+            case ActorDirection.Right:
+                m_CheckTrigger.checkCollider.size = new Vector2(0.05f, 0.05f);
+                m_CheckTrigger.checkCollider.offset = new Vector2(0.18f, 0.0f);
 
-        int l_MinId = 0;
-        float l_MinValue = l_Distances[0];
-        for (int i = 0; i < l_Distances.Length; i++)
-        {
-            if (l_MinValue > l_Distances[i])
-            {
-                l_MinValue = l_Distances[i];
-                l_MinId = i;
-            }
-        }
+                m_CheckTrigger.transform.eulerAngles = Vector3.zero;
+                break;
+            case ActorDirection.Left:
+                m_CheckTrigger.checkCollider.size = new Vector2(0.05f, 0.05f);
+                m_CheckTrigger.checkCollider.offset = new Vector2(0.18f, 0.0f);
 
-        m_InteractJourneyActor = m_InteractableActors[l_MinId];
-        m_InteractJourneyActor.Interact(this);
+                m_CheckTrigger.transform.eulerAngles = new Vector3(0.0f, 0.0f, 180.0f);
+                break;
+            case ActorDirection.Down:
+                m_CheckTrigger.checkCollider.size = new Vector2(0.2f, 0.05f);
+                m_CheckTrigger.checkCollider.offset = new Vector2(0.0f, -0.08f);
+
+                m_CheckTrigger.transform.eulerAngles = Vector3.zero;
+                break;
+            case ActorDirection.Up:
+                m_CheckTrigger.checkCollider.size = new Vector2(0.2f, 0.05f);
+                m_CheckTrigger.checkCollider.offset = new Vector2(0.0f, -0.08f);
+
+                m_CheckTrigger.transform.eulerAngles = new Vector3(0.0f, 0.0f, 180.0f);
+                break;
+        }
     }
     #endregion
 }

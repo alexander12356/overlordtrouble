@@ -20,14 +20,9 @@ public class DialogCollideBehaviors : BaseCollideBehavior
     {
         base.RunAction(p_Sender);
 
-        if (p_Sender.direction != GetMyObjectSide(p_Sender))
-        {
-            return;
-        }
-
         JourneySystem.GetInstance().StartDialog(m_DialogId, m_AnswerActionList);
 
-        m_JourneyActor.ApplyTo(p_Sender.myTransform.position);
+        m_JourneyActor.ApplyTo(p_Sender);
         m_JourneyActor.StopLogic();
     }
 
