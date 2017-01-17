@@ -32,8 +32,6 @@ public class RoomSystem : MonoBehaviour
     {
         m_Instance = this;
 
-        //m_BoundSortingOrder.Add("Town", 256);
-
         for (int i = 0; i < m_RoomList.Count; i++)
         {
             m_RoomDictionary.Add(m_RoomList[i].id, m_RoomList[i]);

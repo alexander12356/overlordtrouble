@@ -77,6 +77,10 @@ public class JourneyActor : MonoBehaviour
     {
         get { return m_InteractBehaviorId; }
     }
+    public string movementBehaviorId
+    {
+        get { return m_MovementBehaviorId; }
+    }
 
     public virtual void Awake()
     {

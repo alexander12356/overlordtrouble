@@ -59,6 +59,8 @@ public class JourneySystem : MonoBehaviour
 
     public void Start()
     {
+        LocationWarpSystem.GetInstance().SetPlayerPos();
+
         SetControl(ControlType.Player);
         m_Player.LoadImprove();
     }
@@ -123,6 +125,11 @@ public class JourneySystem : MonoBehaviour
     public void StartLocation(string p_LocationId)
     {
         m_PanelManager.StartLocation(p_LocationId);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        m_PanelManager.StartLocation("MainMenu");
     }
 
     public void OpenProfile()
