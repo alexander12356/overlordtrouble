@@ -128,6 +128,7 @@ public class InventoryEquipmentView : InventoryView
     private void InitGroupButtonList()
     {
         groupButtonList.Clear();
+        groupButtonList.ClearEvents();
         groupButtonList.AddCancelAction(CancelAction);
         groupButtonList.AddKeyArrowAction(ShowGroupMemberInfo);
         groupButtonList.isActive = false;
