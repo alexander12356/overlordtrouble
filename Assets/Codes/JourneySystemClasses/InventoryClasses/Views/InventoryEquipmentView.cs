@@ -95,6 +95,8 @@ public class InventoryEquipmentView : InventoryView
 
     #region Methods
 
+    public InventoryEquipmentView() { }
+
     public InventoryEquipmentView(InventoryPanel p_Parent)
     {
         parent = p_Parent;
@@ -107,6 +109,7 @@ public class InventoryEquipmentView : InventoryView
 
     public override void Init()
     {
+        InitGroupButtonList();
         InitSlotButtonList();
         InitItemButtonList();
         m_DescriptionText = descriptionText;
@@ -124,10 +127,10 @@ public class InventoryEquipmentView : InventoryView
 
     private void InitGroupButtonList()
     {
-        m_GroupButtonList = groupButtonList;
-        m_GroupButtonList.AddCancelAction(CancelAction);
-        m_GroupButtonList.AddKeyArrowAction(ShowGroupMemberInfo);
-        m_GroupButtonList.isActive = false;
+        groupButtonList.Clear();
+        groupButtonList.AddCancelAction(CancelAction);
+        groupButtonList.AddKeyArrowAction(ShowGroupMemberInfo);
+        groupButtonList.isActive = false;
 
         foreach (var groupMemberData in m_TestGroupMemberDataList)
         {
@@ -154,7 +157,7 @@ public class InventoryEquipmentView : InventoryView
     /// <summary>
     /// Создание пустого списка слотов
     /// </summary>
-    private void InitEmptySlots()
+    protected void InitEmptySlots()
     {
         slotButtonList.Clear();
         for (int i = 0; i < m_EmptySlotsCount; i++)
@@ -193,23 +196,23 @@ public class InventoryEquipmentView : InventoryView
 
     #endregion
 
-    private void AddGroupMember(TestGroupMemberData groupMemberData)
+    public virtual void AddGroupMember(TestGroupMemberData groupMemberData)
     {
         InventoryGroupMemberButton l_Button = UnityEngine.Object.Instantiate(InventoryGroupMemberButton.prefab);
         l_Button.testMemberData = groupMemberData;
         l_Button.AddAction(SelectSlotList);
-        m_GroupButtonList.AddButton(l_Button);
+        groupButtonList.AddButton(l_Button);
     }
 
     private void SelectSlotList()
     {
-        m_GroupButtonList.isActive = false;
+        groupButtonList.isActive = false;
         m_SlotButtonList.isActive = true;
     }
 
     private void DeselectSlotList()
     {
-        m_GroupButtonList.isActive = true;
+        groupButtonList.isActive = true;
         m_SlotButtonList.isActive = false;
     }
 
@@ -221,10 +224,10 @@ public class InventoryEquipmentView : InventoryView
         m_ItemButtonList.RemoveKeyArrowAction(ShowDescription);
     }
 
-    private void ShowGroupMemberInfo()
+    public void ShowGroupMemberInfo()
     {
         InitSlots(PlayerInventory.GetInstance().GetInventorySlotData());
-        InventoryGroupMemberButton l_GroupMemberButton = (InventoryGroupMemberButton)m_GroupButtonList[m_GroupButtonList.currentButtonId];
+        InventoryGroupMemberButton l_GroupMemberButton = (InventoryGroupMemberButton)groupButtonList[groupButtonList.currentButtonId];
         playerStat.gameObject.SetActive(true);
         m_HealthStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:HealthPoints") + " : " + l_GroupMemberButton.testMemberData.m_Health;
         m_SpecialPointStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:MonstylePoints") + " : " + l_GroupMemberButton.testMemberData.m_SpecialPoints;
@@ -233,7 +236,7 @@ public class InventoryEquipmentView : InventoryView
         m_SpeedStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Speed") + " : " + l_GroupMemberButton.testMemberData.m_SpeedStat;
     }
 
-    private void ClearGroupMemberInfo()
+    protected void ClearGroupMemberInfo()
     {
         playerStat.gameObject.SetActive(false);
     }
@@ -304,7 +307,7 @@ public class InventoryEquipmentView : InventoryView
 
     public override void CancelAction()
     {
-        m_GroupButtonList.isActive = false;
+        groupButtonList.isActive = false;
         parent.tabButtonList.isActive = true;
         InitEmptySlots();
         ClearGroupMemberInfo();
@@ -312,7 +315,7 @@ public class InventoryEquipmentView : InventoryView
 
     public override bool Confrim()
     {
-        m_GroupButtonList.isActive = true;
+        groupButtonList.isActive = true;
         ShowGroupMemberInfo();
         return true;
     }

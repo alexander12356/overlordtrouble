@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemActionPanel : Panel
@@ -6,7 +7,7 @@ public class ItemActionPanel : Panel
     private static ItemActionPanel m_Prefab = null;
     private ButtonList m_ActionsButtonList;
 
-    private PanelActionHandler m_UseAction;
+    private InventoryUseItemView m_UseView = null;
     private PanelActionHandlerWithParameter m_RemovingAction;
     private Animator m_Animator = null;
     private string m_ItemId;
@@ -111,6 +112,10 @@ public class ItemActionPanel : Panel
                 TryToRemove();
             }
         }
+        else if (m_UseView != null)
+        {
+            m_UseView.UpdateKey();
+        }
         else
         {
             m_ActionsButtonList.UpdateKey();
@@ -123,7 +128,7 @@ public class ItemActionPanel : Panel
         if (ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.SingleUse)
         {
             string l_UseStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Use");
-            AddActionButton(l_UseStr, UseAction);
+            AddActionButton(l_UseStr, TryUseItem);
 
             string l_ThrowStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Throw");
             AddActionButton(l_ThrowStr, ActivateArrows);
@@ -142,7 +147,7 @@ public class ItemActionPanel : Panel
         else if (ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.Key)
         {
             string l_UseStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Use");
-            AddActionButton(l_UseStr, UseAction);
+            AddActionButton(l_UseStr, TryUseItem);
 
             string l_BackStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
             AddActionButton(l_BackStr, CancelAction);
@@ -159,22 +164,35 @@ public class ItemActionPanel : Panel
         actionButtonList.AddButton(l_ItemActionButton);
     }
 
-    public void AddUseAction(PanelActionHandler p_Action)
-    {
-        m_UseAction += p_Action;
-    }
-
     public void AddRemovingAction(PanelActionHandlerWithParameter p_Action)
     {
         m_RemovingAction += p_Action;
     }
 
-    private void UseAction()
+    private void TryUseItem()
     {
-        if (m_UseAction != null)
+        InventoryPanel l_InventoryPanel = FindObjectOfType<InventoryPanel>();
+        m_UseView = new InventoryUseItemView(l_InventoryPanel);
+        m_UseView.Init();
+        m_UseView.Confrim();
+        m_UseView.AddCancelAction(CancelUseAction);
+        m_UseView.AddUseAction(UseItem);
+    }
+
+    private void UseItem()
+    {
+        if (m_RemovingAction != null)
         {
-            m_UseAction();
+            m_RemovingAction(1);
         }
+        // TODO : Использование предмета
+        //Item l_Item = ItemDataBase.GetInstance().GetItem(itemId).CreateItem();
+        //l_Item.Run(JourneySystem.GetInstance().player.statistics);
+    }
+
+    private void CancelUseAction()
+    {
+        m_UseView = null;
         Close();
     }
 

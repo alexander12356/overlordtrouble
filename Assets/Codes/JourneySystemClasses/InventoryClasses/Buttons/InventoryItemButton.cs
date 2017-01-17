@@ -31,11 +31,6 @@ public class InventoryItemButton : PanelButtonUpdateKey
         set
         {
             m_ItemCount = value;            
-            if (m_ItemCount <= 0)
-            {
-                m_ItemCount = 0;
-                StartCoroutine(DestroyButton());
-            }
             m_ItemCountText.text = "x" + m_ItemCount;
         }
     }
@@ -57,22 +52,8 @@ public class InventoryItemButton : PanelButtonUpdateKey
     {
         ItemActionPanel l_ItemActionPanel = Instantiate(ItemActionPanel.prefab);
         l_ItemActionPanel.InitActionButtonList(itemId);
-        l_ItemActionPanel.AddUseAction(UseItem);
         l_ItemActionPanel.AddRemovingAction(RemoveItem);
         JourneySystem.GetInstance().ShowPanel(l_ItemActionPanel, true);
-    }
-
-    private void UseItem()
-    {
-        // TODO: Вызывать окно с выбором персонажа, а затем окно с описанием эффекта
-        if (ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.SingleUse)
-        {
-            itemCount = itemCount - 1;
-            PlayerInventory.GetInstance().SetItemCount(itemId, itemCount);
-
-            Item l_Item = ItemDataBase.GetInstance().GetItem(itemId).CreateItem();
-            l_Item.Run(JourneySystem.GetInstance().player.statistics);
-        }
     }
 
     private void RemoveItem(int p_CountToRemove)
