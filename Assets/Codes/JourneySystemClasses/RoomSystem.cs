@@ -13,6 +13,8 @@ public class RoomSystem : MonoBehaviour
 {
     private static RoomSystem m_Instance;
     private Dictionary<string, Room> m_RoomDictionary = new Dictionary<string, Room>();
+
+    [SerializeField]
     private string m_CurrentRoom = "HeroHome";
 
     [SerializeField]

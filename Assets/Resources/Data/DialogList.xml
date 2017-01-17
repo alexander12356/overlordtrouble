@@ -661,4 +661,10 @@
 			<Text>Dialog:OtherBed</Text>
 		</DialogNode>
 	</Dialog>
+	
+	<Dialog id="NoEntry" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:NoEntry</Text>
+		</DialogNode>
+	</Dialog>
 </DialogList>

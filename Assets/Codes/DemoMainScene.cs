@@ -19,6 +19,7 @@ public class DemoMainScene : MonoBehaviour
         m_ButtonList[5].AddAction(StartDualent);
         m_ButtonList[6].AddAction(StartTroicya);
         m_ButtonList[7].AddAction(StartBoss);
+        m_ButtonList[8].AddAction(StartRoad);
     }
 
     private void Update()
@@ -72,5 +73,10 @@ public class DemoMainScene : MonoBehaviour
     private void StartBoss()
     {
         SceneManager.LoadScene("BossBattleSystem");
+    }
+
+    private void StartRoad()
+    {
+        SceneManager.LoadScene("Road");
     }
 }
