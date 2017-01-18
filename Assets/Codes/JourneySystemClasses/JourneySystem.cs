@@ -59,6 +59,8 @@ public class JourneySystem : MonoBehaviour
 
     public void Start()
     {
+        SaveSystem.GetInstance().LoadFromMemory();
+
         LocationWarpSystem.GetInstance().SetPlayerPos();
 
         SetControl(ControlType.Player);
@@ -124,11 +126,17 @@ public class JourneySystem : MonoBehaviour
 
     public void StartLocation(string p_LocationId)
     {
+        SaveSystem.GetInstance().SaveToMemory();
+        SaveSystem.GetInstance().ClearCache();
+        SaveSystem.GetInstance().Init(p_LocationId);
+
         m_PanelManager.StartLocation(p_LocationId);
     }
 
     public void ReturnToMainMenu()
     {
+        PlayerPrefs.DeleteAll();
+        SaveSystem.ShutDown();
         m_PanelManager.StartLocation("MainMenu");
     }
 
@@ -141,4 +149,11 @@ public class JourneySystem : MonoBehaviour
     {
         m_Player.LoadImprove();
     }
+
+#if UNITY_EDITOR
+    public void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+#endif
 }

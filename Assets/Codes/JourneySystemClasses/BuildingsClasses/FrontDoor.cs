@@ -8,6 +8,9 @@ public class FrontDoor : MonoBehaviour
     private GameObject m_Warp = null;
 
     [SerializeField]
+    private string m_Id = "TestDoor";
+
+    [SerializeField]
     private bool m_Closed = false;
 
     public int sortingOrder
@@ -41,6 +44,10 @@ public class FrontDoor : MonoBehaviour
                 m_Warp.SetActive(!value);
             }
         }
+    }
+    public string id
+    {
+        get { return m_Id; }
     }
 
     public void Awake()

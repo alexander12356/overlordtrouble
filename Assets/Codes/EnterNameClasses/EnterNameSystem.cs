@@ -63,6 +63,7 @@ public class EnterNameSystem : MonoBehaviour
     {
         PlayerPrefs.SetString("SenderLocation", "NewGame");
         PlayerPrefs.SetString("TargetRoomId", "HeroHome");
+        SaveSystem.GetInstance().Init("Town");
         m_PanelManager.StartLocation("Town");
     }
 

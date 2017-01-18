@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum ActorDirection
 {
@@ -23,6 +24,7 @@ public class JourneyActor : MonoBehaviour
     private Dictionary<string, BaseCollideBehavior> m_InteractBehaviorDictionary = new Dictionary<string, BaseCollideBehavior>();
     private Dictionary<string, BaseMovement> m_BaseMovementDictionary = new Dictionary<string, BaseMovement>();
     private Transform m_PivotTransform = null;
+    private UnityEvent m_OnDieEvent;
 
     [SerializeField]
     private string m_ActorId = "TestNPC";
@@ -80,6 +82,10 @@ public class JourneyActor : MonoBehaviour
     public string movementBehaviorId
     {
         get { return m_MovementBehaviorId; }
+    }
+    public UnityEvent onDieEvent
+    {
+        set { m_OnDieEvent = value; }
     }
 
     public virtual void Awake()
@@ -191,6 +197,12 @@ public class JourneyActor : MonoBehaviour
     public void ChangeInteractionBehavior(string p_BehaviorId)
     {
         m_InteractBehaviorId = p_BehaviorId;
+    }
+
+    public void Die()
+    {
+        m_OnDieEvent.Invoke();
+        Destroy(gameObject);
     }
     #endregion
 

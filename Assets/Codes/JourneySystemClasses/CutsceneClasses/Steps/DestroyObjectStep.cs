@@ -2,13 +2,14 @@
 
 public class DestroyObjectStep : BaseStep
 {
-    public GameObject m_TargetObject = null;
+    [SerializeField]
+    private JourneyActor m_TargetObject = null;
 
     public override void StartStep()
     {
         base.StartStep();
 
-        Destroy(m_TargetObject);
+        m_TargetObject.Die();
 
         EndStep();
     }

@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
             gameObject.AddComponent<GameManager>();
 
             m_Instance = gameObject.GetComponent<GameManager>();
+
+#if UNITY_EDITOR
+            
+#endif
         }
         return m_Instance;
     }
