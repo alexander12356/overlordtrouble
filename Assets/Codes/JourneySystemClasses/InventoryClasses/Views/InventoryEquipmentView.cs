@@ -155,10 +155,7 @@ public class InventoryEquipmentView : InventoryView
         m_SlotButtonList.isActive = false;
     }
 
-    /// <summary>
-    /// Создание пустого списка слотов
-    /// </summary>
-    protected void InitEmptySlots()
+    private void InitEmptySlots()
     {
         slotButtonList.Clear();
         for (int i = 0; i < m_EmptySlotsCount; i++)
@@ -197,7 +194,7 @@ public class InventoryEquipmentView : InventoryView
 
     #endregion
 
-    public virtual void AddGroupMember(TestGroupMemberData groupMemberData)
+    private void AddGroupMember(TestGroupMemberData groupMemberData)
     {
         InventoryGroupMemberButton l_Button = UnityEngine.Object.Instantiate(InventoryGroupMemberButton.prefab);
         l_Button.testMemberData = groupMemberData;
@@ -225,7 +222,7 @@ public class InventoryEquipmentView : InventoryView
         m_ItemButtonList.RemoveKeyArrowAction(ShowDescription);
     }
 
-    public void ShowGroupMemberInfo()
+    private void ShowGroupMemberInfo()
     {
         InitSlots(PlayerInventory.GetInstance().GetInventorySlotData());
         InventoryGroupMemberButton l_GroupMemberButton = (InventoryGroupMemberButton)groupButtonList[groupButtonList.currentButtonId];
@@ -237,7 +234,7 @@ public class InventoryEquipmentView : InventoryView
         m_SpeedStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Speed") + " : " + l_GroupMemberButton.testMemberData.m_SpeedStat;
     }
 
-    protected void ClearGroupMemberInfo()
+    private void ClearGroupMemberInfo()
     {
         playerStat.gameObject.SetActive(false);
     }
@@ -259,7 +256,7 @@ public class InventoryEquipmentView : InventoryView
         m_DescriptionText.text = "";
     }
 
-    public void AddSlot(InventorySlotData pSlotData)
+    private void AddSlot(InventorySlotData pSlotData)
     {
         InventorySlotButton l_Button = UnityEngine.Object.Instantiate(InventorySlotButton.prefab);
 

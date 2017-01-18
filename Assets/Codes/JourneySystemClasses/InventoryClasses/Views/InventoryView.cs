@@ -5,12 +5,12 @@ public abstract class InventoryView
 {
     public InventoryPanel parent { get; set; }
     public abstract void Init();
-    public abstract void Disable();
-    public abstract void ShowDescription();
-    public abstract void ClearDescription();
-    public abstract void AddItem(InventoryItemData pInventoryItemData);
     public abstract bool Confrim();
-    public abstract void CancelAction();
-    public abstract void SelectItem();
-    public abstract void UpdateKey();
+    public virtual void Disable() { }
+    public virtual void ShowDescription() { }
+    public virtual void ClearDescription() { }
+    public virtual void AddItem(InventoryItemData pInventoryItemData) { }
+    public virtual void CancelAction() { }
+    public virtual void SelectItem() { }
+    public virtual void UpdateKey() { }
 }
