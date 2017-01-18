@@ -6,22 +6,9 @@ public class InventoryItemsView : InventoryView
 {
     #region Variables
     private IInventoryItemsGetter m_InventoryItemsGetter = null;
-    private ButtonList m_ItemsButtonsList;
-    private Text m_DescriptionText;
     #endregion
 
     #region Interface
-    public ButtonList itemsButtonList
-    {
-        get
-        {
-            if (m_ItemsButtonsList == null)
-            {
-                m_ItemsButtonsList = parent.transform.FindChild("ItemList").GetComponentInChildren<ButtonList>();
-            }
-            return m_ItemsButtonsList;
-        }
-    }
 
     public IInventoryItemsGetter inventoryItemsGetter
     {
@@ -44,27 +31,21 @@ public class InventoryItemsView : InventoryView
 
     public override void Init()
     {
-        m_ItemsButtonsList = itemsButtonList;
-        m_ItemsButtonsList.AddCancelAction(CancelAction);
-        m_ItemsButtonsList.AddKeyArrowAction(ShowDescription);
-        m_ItemsButtonsList.isActive = false;
-
-        m_DescriptionText = parent.transform.FindChild("Description").GetComponent<Text>();
-
+        InitItemButtonList();     
         InitItemList();
         ShowDescription();
     }
 
     public override void Disable()
     {
-        m_ItemsButtonsList.RemoveCancelAction(CancelAction);
-        m_ItemsButtonsList.RemoveKeyArrowAction(ShowDescription);
-        itemsButtonList.Clear();
+        itemButtonList.RemoveCancelAction(ItemButtonListCancelAction);
+        itemButtonList.RemoveKeyArrowAction(ShowDescription);
+        itemButtonList.Clear();
     }
 
-    public void InitItemList()
+    public override void InitItemList()
     {
-        itemsButtonList.Clear();
+        itemButtonList.Clear();
         ClearDescription();
         if (inventoryItemsGetter != null)
         {
@@ -84,35 +65,20 @@ public class InventoryItemsView : InventoryView
         l_Button.itemCount = p_InventoryItemData.count;
         l_Button.AddAction(SelectItem);
 
-        itemsButtonList.AddButton(l_Button);
+        itemButtonList.AddButton(l_Button);
     }
 
-    // TODO : Сделать нормальное описание
-    public override void ShowDescription()
+    public override void ItemButtonListCancelAction()
     {
-        if (m_ItemsButtonsList != null && m_ItemsButtonsList.count > 0)
-        {
-            InventoryItemButton l_InventoryItemButton = (InventoryItemButton)m_ItemsButtonsList.currentButton;
-            m_DescriptionText.text = l_InventoryItemButton.title;
-        }
-    }
-
-    public override void ClearDescription()
-    {
-        m_DescriptionText.text = "";
-    }
-
-    public override void CancelAction()
-    {
-        m_ItemsButtonsList.isActive = false;
+        itemButtonList.isActive = false;
         parent.tabButtonList.isActive = true;
     }
 
     public override bool Confrim()
     {
-        if (m_ItemsButtonsList != null && m_ItemsButtonsList.count > 0)
+        if (itemButtonList != null && itemButtonList.count > 0)
         {
-            m_ItemsButtonsList.isActive = true;
+            itemButtonList.isActive = true;
             return true;
         }
         return false;
@@ -120,12 +86,12 @@ public class InventoryItemsView : InventoryView
 
     public override void SelectItem()
     {
-        InventoryItemButton l_ItemButton = (InventoryItemButton)m_ItemsButtonsList.currentButton;
+        InventoryItemButton l_ItemButton = (InventoryItemButton)itemButtonList.currentButton;
         l_ItemButton.CreateItemActionPanel();
     }
 
     public override void UpdateKey()
     {
-        m_ItemsButtonsList.UpdateKey();
+        itemButtonList.UpdateKey();
     }
 }

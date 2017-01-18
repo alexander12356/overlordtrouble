@@ -35,48 +35,13 @@ public class InventoryStandingView : InventoryView
         parent = p_Parent;
     }
 
-    public override void AddItem(InventoryItemData pInventoryItemData)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void CancelAction()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void ClearDescription()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override bool Confrim()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Disable()
-    {
-        throw new NotImplementedException();
-    }
-
     public override void Init()
     {
         playerCoins = PlayerInventory.GetInstance().coins;
     }
 
-    public override void SelectItem()
+    public override bool Confrim()
     {
-        throw new NotImplementedException();
-    }
-
-    public override void ShowDescription()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void UpdateKey()
-    {
-        throw new NotImplementedException();
+        return false;
     }
 }
