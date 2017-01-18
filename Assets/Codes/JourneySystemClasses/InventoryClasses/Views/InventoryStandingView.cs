@@ -38,6 +38,9 @@ public class InventoryStandingView : InventoryView
     public override void Init()
     {
         playerCoins = PlayerInventory.GetInstance().coins;
+        InitGroupData();
+        InitGroupButtonList();
+        InitEmptySlots();
     }
 
     public override bool Confrim()

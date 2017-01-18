@@ -5,22 +5,14 @@ using UnityEngine.UI;
 
 public class InventoryEquipmentView : InventoryView
 {
-    #region Methods
-
-    public InventoryEquipmentView() { }
-
     public InventoryEquipmentView(InventoryPanel p_Parent)
     {
         parent = p_Parent;
-        InitGroupData();
-        InitGroupButtonList();
-        InitEmptySlots();
     }
-
-    #region Inits
 
     public override void Init()
     {
+        InitGroupData();
         InitGroupButtonList();
         InitSlotButtonList();
         InitItemButtonList();
@@ -30,18 +22,6 @@ public class InventoryEquipmentView : InventoryView
     {
         slotButtonList.AddCancelAction(DeselectSlotList);
         slotButtonList.AddKeyArrowAction(InitItemList);
-        slotButtonList.isActive = false;
-    }
-
-    private void InitEmptySlots()
-    {
-        slotButtonList.Clear();
-        for (int i = 0; i < emptySlotsCount; i++)
-        {
-            InventorySlotButton l_Button = UnityEngine.Object.Instantiate(InventorySlotButton.prefab);
-            l_Button.title = "-------";
-            slotButtonList.AddButton(l_Button);
-        }
         slotButtonList.isActive = false;
     }
 
@@ -60,8 +40,6 @@ public class InventoryEquipmentView : InventoryView
         // Add deselect button
         AddItem(DeselectItem, "----------");
     }
-
-    #endregion
 
     public override void GroupMemberButtonAction()
     {
@@ -166,6 +144,4 @@ public class InventoryEquipmentView : InventoryView
         itemButtonList.UpdateKey();
         groupButtonList.UpdateKey();
     }
-
-    #endregion
 }

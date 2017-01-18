@@ -209,5 +209,17 @@ public abstract class InventoryView
     {
         descriptionText.text = "";
     }
+
+    public void InitEmptySlots()
+    {
+        slotButtonList.Clear();
+        for (int i = 0; i < emptySlotsCount; i++)
+        {
+            InventorySlotButton l_Button = UnityEngine.Object.Instantiate(InventorySlotButton.prefab);
+            l_Button.title = "-------";
+            slotButtonList.AddButton(l_Button);
+        }
+        slotButtonList.isActive = false;
+    }
     #endregion
 }

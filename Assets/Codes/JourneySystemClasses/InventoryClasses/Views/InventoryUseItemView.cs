@@ -50,18 +50,6 @@ public class InventoryUseItemView : InventoryView
         }
     }
 
-    private void InitEmptySlots()
-    {
-        slotButtonList.Clear();
-        for (int i = 0; i < emptySlotsCount; i++)
-        {
-            InventorySlotButton l_Button = UnityEngine.Object.Instantiate(InventorySlotButton.prefab);
-            l_Button.title = "-------";
-            slotButtonList.AddButton(l_Button);
-        }
-        slotButtonList.isActive = false;
-    }
-
     public override void UpdateKey()
     {
         groupButtonList.UpdateKey();
