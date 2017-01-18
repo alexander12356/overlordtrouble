@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -194,6 +195,10 @@ public class ItemActionPanel : Panel
     {
         m_UseView = null;
         Close();
+        InventoryTextPanel l_TextPanel = Instantiate(InventoryTextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { "test test test test test" });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+        JourneySystem.GetInstance().ShowPanel(l_TextPanel, true);
     }
 
     private void ActivateArrows()
