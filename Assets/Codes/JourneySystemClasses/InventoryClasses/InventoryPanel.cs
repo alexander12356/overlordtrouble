@@ -8,8 +8,6 @@ public class InventoryPanel : Panel
     private static InventoryPanel m_Prefab;
     [SerializeField]
     private ButtonList m_ViewButtonsList = null;
-    [SerializeField]
-    private Text m_PlayerCoinsText = null;
 
     private InventoryView m_CurrOpenedTab = null;
 
@@ -36,19 +34,6 @@ public class InventoryPanel : Panel
         }
     }
 
-    public int playerCoins
-    {
-        get
-        {
-            return PlayerInventory.GetInstance().coins;
-        }
-        set
-        {
-            PlayerInventory.GetInstance().coins = value;
-            m_PlayerCoinsText.text = PlayerInventory.GetInstance().coins + " " + LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Monet");
-        }
-    }
-
     #endregion
 
     #region Methods
@@ -59,7 +44,6 @@ public class InventoryPanel : Panel
 
         InitViewButtonList();
         ShowView();
-        playerCoins = PlayerInventory.GetInstance().coins;
     }
 
     private void InitViewButtonList()
@@ -98,6 +82,9 @@ public class InventoryPanel : Panel
 
         l_ViewButton = (InventoryViewButton)m_ViewButtonsList[7];
         l_ViewButton.inventoryView = new InventoryItemsView(this, null);
+
+        InventoryStandingView l_StandingView = new InventoryStandingView(this);
+        l_StandingView.Init();
 
         m_ViewButtonsList.SelectMoveDown();
         m_ViewButtonsList.isActive = true;
