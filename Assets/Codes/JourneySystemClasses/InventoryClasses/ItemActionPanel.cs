@@ -193,10 +193,10 @@ public class ItemActionPanel : Panel
 
     private void CancelUseAction()
     {
-        m_UseView = null;
-        Close();
+        m_UseView = null;       
         InventoryTextPanel l_TextPanel = Instantiate(InventoryTextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { "test test test test test" });
+        l_TextPanel.AddButtonAction(CancelAction);
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
         JourneySystem.GetInstance().ShowPanel(l_TextPanel, true);
     }
@@ -220,7 +220,7 @@ public class ItemActionPanel : Panel
         {
             m_RemovingAction(countToRemove);
         }
-        Close();
+        CancelAction();
     }
 
     private void CancelAction()
