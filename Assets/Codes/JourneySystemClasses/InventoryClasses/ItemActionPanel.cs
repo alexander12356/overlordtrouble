@@ -8,7 +8,7 @@ public class ItemActionPanel : Panel
     private static ItemActionPanel m_Prefab = null;
     private ButtonList m_ActionsButtonList;
 
-    private InventoryUseItemView m_UseView = null;
+    private InventoryUseItemView m_UseItemView = null;
     private PanelActionHandlerWithParameter m_RemovingAction;
     private Animator m_Animator = null;
     private string m_ItemId;
@@ -31,6 +31,19 @@ public class ItemActionPanel : Panel
                 m_Prefab = Resources.Load<ItemActionPanel>("Prefabs/Panels/ItemActionPanel");
             }
             return m_Prefab;
+        }
+    }
+
+    private InventoryUseItemView useItemView
+    {
+        get
+        {
+            if(m_UseItemView == null)
+            {
+                InventoryPanel l_InventoryPanel = FindObjectOfType<InventoryPanel>();
+                m_UseItemView = new InventoryUseItemView(l_InventoryPanel);
+            }
+            return m_UseItemView;
         }
     }
 
@@ -113,9 +126,9 @@ public class ItemActionPanel : Panel
                 TryToRemove();
             }
         }
-        else if (m_UseView != null)
+        else if (useItemView.enabled)
         {
-            m_UseView.UpdateKey();
+            useItemView.UpdateKey();
         }
         else
         {
@@ -172,12 +185,10 @@ public class ItemActionPanel : Panel
 
     private void TryUseItem()
     {
-        InventoryPanel l_InventoryPanel = FindObjectOfType<InventoryPanel>();
-        m_UseView = new InventoryUseItemView(l_InventoryPanel);
-        m_UseView.Init();
-        m_UseView.Confrim();
-        m_UseView.AddCancelAction(CancelUseAction);
-        m_UseView.AddUseAction(UseItem);
+        useItemView.Init();
+        useItemView.Confrim();
+        useItemView.AddCancelAction(CancelAction);
+        useItemView.AddUseAction(UseItem);
     }
 
     private void UseItem()
@@ -190,12 +201,6 @@ public class ItemActionPanel : Panel
         // TODO : Использование предмета
         //Item l_Item = ItemDataBase.GetInstance().GetItem(itemId).CreateItem();
         //l_Item.Run(JourneySystem.GetInstance().player.statistics);
-    }
-
-    private void CancelUseAction()
-    {
-        m_UseView = null;
-        CancelAction();
     }
 
     private void ShowMessage(string p_Message, PanelButtonActionHandler p_CancelAction)

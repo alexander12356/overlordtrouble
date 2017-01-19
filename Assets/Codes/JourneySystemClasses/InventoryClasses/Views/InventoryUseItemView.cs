@@ -17,6 +17,7 @@ public class InventoryUseItemView : InventoryView
     {
         InitGroupData();
         InitGroupButtonList();
+        enabled = true;
     }
 
     public override void AddSlot(InventorySlotData p_SlotData)
@@ -40,6 +41,7 @@ public class InventoryUseItemView : InventoryView
 
     public override void GroupButtonListCancelAction()
     {
+        enabled = false;
         groupButtonList.isActive = false;
         itemButtonList.isActive = true;
         InitEmptySlots();

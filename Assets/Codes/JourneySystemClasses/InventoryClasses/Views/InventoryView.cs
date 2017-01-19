@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public abstract class InventoryView 
 {
     #region Variables
+    private bool m_Enabled;
     private ButtonList m_GroupButtonList = null;
     private ButtonList m_SlotButtonList = null;
     private ButtonList m_ItemButtonsList = null;
@@ -92,6 +93,18 @@ public abstract class InventoryView
                 m_DescriptionText = parent.transform.FindChild("Description").GetComponent<Text>();
             }
             return m_DescriptionText;
+        }
+    }
+
+    public bool enabled
+    {
+        get
+        {
+            return m_Enabled;
+        }
+        set
+        {
+            m_Enabled = value;
         }
     }
     #endregion
