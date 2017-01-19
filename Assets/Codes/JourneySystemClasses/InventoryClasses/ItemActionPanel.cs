@@ -186,6 +186,7 @@ public class ItemActionPanel : Panel
         {
             m_RemovingAction(1);
         }
+        ShowMessage("Test test test test", CancelAction);
         // TODO : Использование предмета
         //Item l_Item = ItemDataBase.GetInstance().GetItem(itemId).CreateItem();
         //l_Item.Run(JourneySystem.GetInstance().player.statistics);
@@ -193,10 +194,15 @@ public class ItemActionPanel : Panel
 
     private void CancelUseAction()
     {
-        m_UseView = null;       
+        m_UseView = null;
+        CancelAction();
+    }
+
+    private void ShowMessage(string p_Message, PanelButtonActionHandler p_CancelAction)
+    {
         InventoryTextPanel l_TextPanel = Instantiate(InventoryTextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { "test test test test test" });
-        l_TextPanel.AddButtonAction(CancelAction);
+        l_TextPanel.SetText(new List<string>() { p_Message });
+        l_TextPanel.AddButtonAction(p_CancelAction);
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
         JourneySystem.GetInstance().ShowPanel(l_TextPanel, true);
     }
