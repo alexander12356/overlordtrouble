@@ -52,8 +52,7 @@ public class DialogPanel : Panel
         m_TextBox.AddEndAction(CheckDialogEnd);
 
         m_CurrentDialogNode = m_DialogData.GetStartDialogNode();
-        m_CurrentDialogNode.Init();
-        m_TextBox.SetText(m_CurrentDialogNode.textList);
+        m_TextBox.SetText(m_CurrentDialogNode.GetTextList());
         m_ButtonVerticalSize = m_ButtonList.rectTransform.sizeDelta.y;
     }
 
@@ -165,8 +164,7 @@ public class DialogPanel : Panel
         }
 
         m_CurrentDialogNode = m_DialogData.GetDialogNode(l_AnswerId);
-        m_CurrentDialogNode.Init();
-        m_TextBox.SetText(m_CurrentDialogNode.textList);
+        m_TextBox.SetText(m_CurrentDialogNode.GetTextList());
         m_TextBox.ShowText();
     }
 

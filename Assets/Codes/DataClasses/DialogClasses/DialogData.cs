@@ -5,26 +5,28 @@ public struct DialogNode
     public static DialogNode zero = new DialogNode("", new List<string>(), new List<string>());
 
     public string id;
-    public List<string> textList;
+    public List<string> textIds;
     public List<string> questionList;
 
     public DialogNode(string p_Id, List<string> p_TextList, List<string> p_QuestionList)
     {
         id = p_Id;
-        textList = p_TextList;
+        textIds = p_TextList;
         questionList = p_QuestionList;
     }
 
-    public void Init()
+    public List<string> GetTextList()
     {
-        for (int i = 0; i < textList.Count; i++)
+        List<string> l_TextList = new List<string>();
+        for (int i = 0; i < textIds.Count; i++)
         {
-            textList[i] = LocalizationDataBase.GetInstance().GetText(textList[i]);
-            if (textList[i].Contains("%PlayerName"))
+            l_TextList.Add(LocalizationDataBase.GetInstance().GetText(textIds[i]));
+            if (l_TextList[i].Contains("%PlayerName"))
             {
-                textList[i] = textList[i].Replace("%PlayerName", PlayerData.GetInstance().GetPlayerName());
+                l_TextList[i] = l_TextList[i].Replace("%PlayerName", PlayerData.GetInstance().GetPlayerName());
             }
         }
+        return l_TextList;
     }
 }
 
