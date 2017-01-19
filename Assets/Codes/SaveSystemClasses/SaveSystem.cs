@@ -44,6 +44,11 @@ public class SaveSystem : Singleton<SaveSystem>
         m_LocationSaves[m_LocationId].AddTrigger(p_GameEventTrigger);
     }
 
+    public void AddCheckCounter(CheckCounterAction p_CheckCounter)
+    {
+        m_LocationSaves[m_LocationId].AddCheckCounter(p_CheckCounter);
+    }
+
     public void ActorDie(string p_Id)
     {
         m_LocationSaves[m_LocationId].ActorDie(p_Id);
@@ -52,6 +57,11 @@ public class SaveSystem : Singleton<SaveSystem>
     public void GameEventDestroy(string p_Id)
     {
         m_LocationSaves[m_LocationId].GameEventDestroy(p_Id);
+    }
+
+    public void SetCheckCounterValue(string p_Id, int p_Value)
+    {
+        m_LocationSaves[m_LocationId].SetCheckCounterValue(p_Id, p_Value);
     }
 
     public void SaveToMemory()

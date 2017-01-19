@@ -21,10 +21,12 @@ public class LocationSave
     private Dictionary<string, JourneyActor> m_Actors = new Dictionary<string, JourneyActor>();
     private Dictionary<string, FrontDoor> m_Doors = new Dictionary<string, FrontDoor>();
     private Dictionary<string, GameEventTrigger> m_GameEventTriggers = new Dictionary<string, GameEventTrigger>();
+    private Dictionary<string, CheckCounterAction> m_CheckCounterActions = new Dictionary<string, CheckCounterAction>();
     private Dictionary<string, ActorState> m_ActorsState = new Dictionary<string, ActorState>();
     private Dictionary<string, bool> m_DoorState = new Dictionary<string, bool>();
     private List<string> m_DieActorsIds = new List<string>();
     private List<string> m_DestroyedTriggers = new List<string>();
+    private Dictionary<string, int> m_CheckCounterValues = new Dictionary<string, int>();
 
     public LocationSave()
     {
@@ -35,6 +37,7 @@ public class LocationSave
         m_Actors.Clear();
         m_Doors.Clear();
         m_GameEventTriggers.Clear();
+        m_CheckCounterActions.Clear();
     }
 
     public void Save()
@@ -49,6 +52,7 @@ public class LocationSave
         LoadDiesActors();
         LoadDoorState();
         LoadDestroyedTriggers();
+        LoadCheckCounterValues();
     }
 
     public void AddActor(JourneyActor p_JourneyActor)
@@ -66,6 +70,11 @@ public class LocationSave
         m_GameEventTriggers.Add(p_GameEventTrigger.id, p_GameEventTrigger);
     }
 
+    public void AddCheckCounter(CheckCounterAction p_CheckCounterAction)
+    {
+        m_CheckCounterActions.Add(p_CheckCounterAction.id, p_CheckCounterAction);
+    }
+
     public void ActorDie(string p_Id)
     {
         m_DieActorsIds.Add(p_Id);
@@ -75,6 +84,18 @@ public class LocationSave
     public void GameEventDestroy(string p_Id)
     {
         m_DestroyedTriggers.Add(p_Id);
+    }
+
+    public void SetCheckCounterValue(string p_Id, int p_Value)
+    {
+        if (m_CheckCounterValues.ContainsKey(p_Id))
+        {
+            m_CheckCounterValues[p_Id] = p_Value;
+        }
+        else
+        {
+            m_CheckCounterValues.Add(p_Id, p_Value);
+        }
     }
 
     private void SaveDoorState()
@@ -144,6 +165,14 @@ public class LocationSave
         {
             Object.Destroy(m_GameEventTriggers[m_DestroyedTriggers[i]].gameObject);
             m_GameEventTriggers.Remove(m_DestroyedTriggers[i]);
+        }
+    }
+
+    private void LoadCheckCounterValues()
+    {
+        foreach (string l_Id in m_CheckCounterValues.Keys)
+        {
+            m_CheckCounterActions[l_Id].counter = m_CheckCounterValues[l_Id];
         }
     }
 }
