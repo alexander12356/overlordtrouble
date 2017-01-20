@@ -5,13 +5,24 @@ using UnityEngine.SceneManagement;
 public class MainMenuPanel : Panel
 {
     #region Variables
-
+    private static MainMenuPanel m_Prefab;
     private ButtonList m_MainMenuButtonList = null;
     private Animator m_MainMenuTransitionAnimator = null;
 
     #endregion
 
     #region Properties
+    public static MainMenuPanel prefab
+    {
+        get
+        {
+            if (m_Prefab == null)
+            {
+                m_Prefab = Resources.Load<MainMenuPanel>("Prefabs/Panels/MainMenuPanel");
+            }
+            return m_Prefab;
+        }
+    }
 
     private ButtonList mainMenuButtonList
     {
@@ -117,7 +128,8 @@ public class MainMenuPanel : Panel
 
     private void LoadGame()
     {
-        throw new NotImplementedException();
+        LoadingPanel l_LoadingPanel = Instantiate(LoadingPanel.prefab);
+        MainMenuSystem.GetInstance().ShowPanel(l_LoadingPanel, true);
     }
 
     private void RunNewGameAfterSecretEnding()

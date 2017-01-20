@@ -179,6 +179,8 @@
 	<Text id="GUI:YesNoPanel:Confirm">Да</Text>
 	<Text id="GUI:YesNoPanel:Cancel">Нет</Text>
 	
+	<Text id="GUI:Ok">Ок</Text>
+	
 	<!-- Main Menu -->
 	<Text id="GUI:MainMenuPanel:NewGame">Новая игра</Text>
 	<Text id="GUI:MainMenuPanel:NewGamePlus">Новая игра+</Text>
@@ -199,6 +201,10 @@
 	<Text id="GUI:EnterName:EnterName">Перед тем как мы начнем,\nНапишите - как вас называть.</Text>
 	<Text id="GUI:EnterName:Standart">Кеша</Text>
 	<Text id="GUI:EnterName:AreYouShure">Вы уверены?</Text>
+	<Text id="GUI:EnterName:Warning">Это имя уже используется.</Text>
+	
+	<Text id="GUI:LoadingPanel:Shure">Вы уверены, что хотите загрузить эту игру?</Text>
+	<Text id="GUI:LoadingPanel:GameDuration">время игры</Text>
 	
 	<!-- Dialogs -->
 	<!-- Skeleton child Dialogs -->
@@ -413,4 +419,11 @@
 	<Text id="Dialog:GiantCock:2">*Он спит*</Text>
 	<Text id="Dialog:Uniceros:1">Пьинь?</Text>
 	<Text id="Dialog:NoEntry">Тут стоит надпись: Чужим вход запрещен.</Text>
+	
+	<!-- Save -->
+	<Text id="Dialog:Save:1">Вы чувствуете, что вам стало гораздо лучше.</Text>
+	<Text id="Dialog:Save:2">Хотите сохраниться?</Text>
+	<Text id="Dialog:Save:Yes">Да</Text>
+	<Text id="Dialog:Save:No">Нет</Text>
+	<Text id="Dialog:SaveComplete">Игра сохранена</Text>
 </Localization>

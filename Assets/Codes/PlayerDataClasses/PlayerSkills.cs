@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class PlayerSkills
 {
@@ -39,8 +38,20 @@ public class PlayerSkills
         return m_SkillList;
     }
 
-    public void ResetData()
+    public void Clear()
     {
         m_SkillList = new List<SpecialData>();
+    }
+
+    public JSONObject GetJson()
+    {
+        JSONObject l_SpecialsJson = new JSONObject();
+
+        for (int i = 0; i < m_SkillList.Count; i++)
+        {
+            l_SpecialsJson.Add(m_SkillList[i].id);
+        }
+
+        return l_SpecialsJson;
     }
 }

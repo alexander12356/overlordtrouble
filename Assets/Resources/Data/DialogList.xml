@@ -667,4 +667,20 @@
 			<Text>Dialog:NoEntry</Text>
 		</DialogNode>
 	</Dialog>
+	
+	<Dialog id="Save" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Save:1</Text>
+			<Text>Dialog:Save:2</Text>
+			<Question>
+				<Answer id="Yes"/>
+				<Answer id="No"/>
+			</Question>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="SaveComplete" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SaveComplete</Text>
+		</DialogNode>
+	</Dialog>
 </DialogList>

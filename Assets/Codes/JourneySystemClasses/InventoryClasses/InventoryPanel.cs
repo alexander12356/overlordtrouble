@@ -82,6 +82,5 @@ public class InventoryPanel : Panel
     {
         Close();
         JourneySystem.GetInstance().SetControl(ControlType.Player);
-        PlayerInventory.GetInstance().SaveAll();
     }
 }

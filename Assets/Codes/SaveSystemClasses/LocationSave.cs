@@ -18,6 +18,7 @@ public struct ActorState
 
 public class LocationSave
 {
+    private string m_Id = string.Empty;
     private Dictionary<string, JourneyActor> m_Actors = new Dictionary<string, JourneyActor>();
     private Dictionary<string, FrontDoor> m_Doors = new Dictionary<string, FrontDoor>();
     private Dictionary<string, GameEventTrigger> m_GameEventTriggers = new Dictionary<string, GameEventTrigger>();
@@ -28,8 +29,9 @@ public class LocationSave
     private List<string> m_DestroyedTriggers = new List<string>();
     private Dictionary<string, int> m_CheckCounterValues = new Dictionary<string, int>();
 
-    public LocationSave()
+    public LocationSave(string p_Id)
     {
+        m_Id = p_Id;
     }
 
     public void ClearCache()
@@ -96,6 +98,46 @@ public class LocationSave
         {
             m_CheckCounterValues.Add(p_Id, p_Value);
         }
+    }
+
+    public void LoadFromFile(JSONObject p_LocationJson)
+    {
+        if (p_LocationJson.HasField("ActorsState"))
+        {
+            LoadFromFileActorStates(p_LocationJson["ActorsState"]);
+        }
+        if (p_LocationJson.HasField("DieActors"))
+        {
+            LoadFromFileDieActors(p_LocationJson["DieActors"]);
+        }
+        if (p_LocationJson.HasField("DoorsState"))
+        {
+            LoadFromFileDoorStates(p_LocationJson["DoorsState"]);
+        }
+        if (p_LocationJson.HasField("DestroyedTriggers"))
+        {
+            LoadFromFileDestroyedTriggers(p_LocationJson["DestroyedTriggers"]);
+        }
+        if (p_LocationJson.HasField("CheckCounterValues"))
+        {
+            LoadFromFileCheckCounterValues(p_LocationJson["CheckCounterValues"]);
+        }
+    }
+
+    public JSONObject GetJson()
+    {
+        Save();
+
+        JSONObject l_LocationSaveJson = new JSONObject();
+
+        l_LocationSaveJson.AddField("Id", m_Id);
+        l_LocationSaveJson.AddField("ActorsState", ActorsStateGetJson());
+        l_LocationSaveJson.AddField("DieActors", DieActorsGetJson());
+        l_LocationSaveJson.AddField("DoorsState", DoorsStateGetJson());
+        l_LocationSaveJson.AddField("DestroyedTriggers", DestroyedTriggersGetJson());
+        l_LocationSaveJson.AddField("CheckCounterValues", CheckCounterValuesGetJson());
+
+        return l_LocationSaveJson;
     }
 
     private void SaveDoorState()
@@ -174,5 +216,131 @@ public class LocationSave
         {
             m_CheckCounterActions[l_Id].counter = m_CheckCounterValues[l_Id];
         }
+    }
+
+    private void LoadFromFileActorStates(JSONObject p_ActorStatesJson)
+    {
+        for (int i = 0; i < p_ActorStatesJson.Count; i++)
+        {
+            string l_InteractBehavior = p_ActorStatesJson[i]["InteractBehavior"].str;
+            string l_MovementBehavior = p_ActorStatesJson[i]["MovementBehavior"].str;
+            float l_X = p_ActorStatesJson[i]["Position"]["X"].f;
+            float l_Y = p_ActorStatesJson[i]["Position"]["Y"].f;
+            Vector3 l_Position = new Vector3(l_X, l_Y);
+            ActorState l_ActorState = new ActorState(l_InteractBehavior, l_MovementBehavior, l_Position);
+            m_ActorsState.Add(p_ActorStatesJson[i]["Id"].str, l_ActorState);
+        }
+    }
+
+    private void LoadFromFileDieActors(JSONObject p_DieActorsJson)
+    {
+        for (int i = 0; i < p_DieActorsJson.Count; i++)
+        {
+            m_DieActorsIds.Add(p_DieActorsJson[i].str);
+        }
+    }
+
+    private void LoadFromFileDoorStates(JSONObject p_DoorStatesJson)
+    {
+        for (int i = 0; i < p_DoorStatesJson.Count; i++)
+        {
+            m_DoorState.Add(p_DoorStatesJson[i]["Id"].str, p_DoorStatesJson[i]["Closed"].b);
+        }
+    }
+
+    private void LoadFromFileDestroyedTriggers(JSONObject p_DestroyedTriggersJson)
+    {
+        for (int i = 0; i < p_DestroyedTriggersJson.Count; i++)
+        {
+            m_DestroyedTriggers.Add(p_DestroyedTriggersJson[i].str);
+        }
+    }
+
+    private void LoadFromFileCheckCounterValues(JSONObject p_CheckCounterValuesJson)
+    {
+        for (int i = 0; i < p_CheckCounterValuesJson.Count; i++)
+        {
+            m_CheckCounterValues.Add(p_CheckCounterValuesJson[i]["Id"].str, (int)p_CheckCounterValuesJson[i]["Value"].i);
+        }
+    }
+
+    private JSONObject ActorsStateGetJson()
+    {
+        JSONObject l_ActorsStates = new JSONObject();
+
+        foreach (string l_ActorId in m_ActorsState.Keys)
+        {
+            JSONObject l_ActoStateJson = new JSONObject();
+            l_ActoStateJson.AddField("Id", l_ActorId);
+            l_ActoStateJson.AddField("InteractBehavior", m_ActorsState[l_ActorId].interactBehavior);
+            l_ActoStateJson.AddField("MovementBehavior", m_ActorsState[l_ActorId].movementBehavior);
+
+            JSONObject l_ActorPositionJson = new JSONObject();
+            l_ActorPositionJson.AddField("X", m_ActorsState[l_ActorId].position.x);
+            l_ActorPositionJson.AddField("Y", m_ActorsState[l_ActorId].position.y);
+            l_ActoStateJson.AddField("Position", l_ActorPositionJson);
+
+            l_ActorsStates.Add(l_ActoStateJson);
+        }
+
+        return l_ActorsStates;
+    }
+
+    private JSONObject DieActorsGetJson()
+    {
+        JSONObject l_DieActorsJson = new JSONObject();
+
+        for (int i = 0; i < m_DieActorsIds.Count; i++)
+        {
+            l_DieActorsJson.Add(m_DieActorsIds[i]);
+        }
+
+        return l_DieActorsJson;
+    }
+
+    private JSONObject DoorsStateGetJson()
+    {
+        JSONObject l_DoorStateListJson = new JSONObject();
+
+        foreach (string l_DoorId in m_DoorState.Keys)
+        {
+            JSONObject l_DoorStateJson = new JSONObject();
+
+            l_DoorStateJson.AddField("Id", l_DoorId);
+            l_DoorStateJson.AddField("Closed", m_DoorState[l_DoorId]);
+
+            l_DoorStateListJson.Add(l_DoorStateJson);
+        }
+
+        return l_DoorStateListJson;
+    }
+
+    private JSONObject DestroyedTriggersGetJson()
+    {
+        JSONObject l_DestroyedTriggers = new JSONObject();
+
+        for (int i = 0; i < m_DestroyedTriggers.Count; i++)
+        {
+            l_DestroyedTriggers.Add(m_DestroyedTriggers[i]);
+        }
+
+        return l_DestroyedTriggers;
+    }
+
+    private JSONObject CheckCounterValuesGetJson()
+    {
+        JSONObject l_CheckCounterListJson = new JSONObject();
+
+        foreach (string l_CheckCounterId in m_CheckCounterValues.Keys)
+        {
+            JSONObject l_CheckCounterJson = new JSONObject();
+
+            l_CheckCounterJson.AddField("Id", l_CheckCounterId);
+            l_CheckCounterJson.AddField("Value", m_CheckCounterValues[l_CheckCounterId]);
+
+            l_CheckCounterListJson.Add(l_CheckCounterJson);
+        }
+
+        return l_CheckCounterListJson;
     }
 }

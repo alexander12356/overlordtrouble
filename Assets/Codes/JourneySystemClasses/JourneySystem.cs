@@ -53,7 +53,7 @@ public class JourneySystem : MonoBehaviour
         if (GameManager.IsInstance() == false)
         {
             GameManager.GetInstance();
-            PlayerData.GetInstance().ResetData();
+            PlayerData.GetInstance().NewGameDataInit();
         }
     }
 

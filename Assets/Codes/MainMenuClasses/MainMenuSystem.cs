@@ -18,6 +18,9 @@ public class MainMenuSystem : MonoBehaviour
         m_Instance = this;
         PlayerData.GetInstance();
         LoadDataBases();
+
+        MainMenuPanel l_MainMenuPanel = Instantiate(MainMenuPanel.prefab);
+        ShowPanel(l_MainMenuPanel);
     }
 
     public void ShowPanel(Panel p_Panel, bool p_WithOverlay = false)

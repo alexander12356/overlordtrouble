@@ -27,6 +27,10 @@ public class RoomSystem : MonoBehaviour
     {
         return m_Instance;
     }
+    public string currentRoomId
+    {
+        get { return m_CurrentRoom; }
+    }
 
     public void Awake()
     {
