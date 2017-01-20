@@ -247,7 +247,10 @@ public class ButtonList : MonoBehaviour
 
     private void ConfirmAction()
     {
-        m_ButtonsList[m_CurrentButtonId].RunAction();
+        if (m_ButtonsList.Count > 0)
+        {
+            m_ButtonsList[m_CurrentButtonId].RunAction();
+        }
     }
 
     private void CancelAction()

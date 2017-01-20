@@ -250,7 +250,7 @@ public class PlayerData : Singleton<PlayerData>
 
     public string GetSavePath()
     {
-        return Application.persistentDataPath + "/Saves/" + m_PlayerName + "/";
+        return Application.persistentDataPath + "/Saves/" + m_PlayerName + Path.DirectorySeparatorChar;
     }
     #endregion
 
