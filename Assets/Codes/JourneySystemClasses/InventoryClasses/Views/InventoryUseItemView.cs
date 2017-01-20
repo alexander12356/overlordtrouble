@@ -36,7 +36,14 @@ public class InventoryUseItemView : InventoryView
         {
             m_UseAction();
         }
+        GroupMemberButtonAnimation();
         Cancel();
+    }
+
+    private void GroupMemberButtonAnimation()
+    {
+        InventoryGroupMemberButton l_GroupMemberButton = (InventoryGroupMemberButton)groupButtonList[groupButtonList.currentButtonId];
+        l_GroupMemberButton.Blink();
     }
 
     public override void GroupButtonListCancelAction()
