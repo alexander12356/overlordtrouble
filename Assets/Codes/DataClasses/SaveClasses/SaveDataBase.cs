@@ -53,18 +53,11 @@ public class SaveDataBase : Singleton<SaveDataBase>
         string l_ItemsString = string.Empty;
         string l_SlotString = string.Empty;
         
-        StreamReader streamReader = File.OpenText(p_SavePath + "/PlayerData.json");
-        l_PlayerDataString = streamReader.ReadToEnd();
-        streamReader = File.OpenText(p_SavePath + "/Location.json");
-        l_LocationString = streamReader.ReadToEnd();
-        streamReader = File.OpenText(p_SavePath + "/WorldState.json");
-        l_WorldStateString = streamReader.ReadToEnd();
-        streamReader = File.OpenText(p_SavePath + "/InventoryItems.json");
-        l_ItemsString = streamReader.ReadToEnd();
-        streamReader = File.OpenText(p_SavePath + "/InventorySlotData.json");
-        l_SlotString = streamReader.ReadToEnd();
-
-        streamReader.Close();
+        l_PlayerDataString = File.ReadAllText(p_SavePath + "/PlayerData.json");
+        l_LocationString = File.ReadAllText(p_SavePath + "/Location.json");
+        l_WorldStateString = File.ReadAllText(p_SavePath + "/WorldState.json");
+        l_ItemsString = File.ReadAllText(p_SavePath + "/InventoryItems.json");
+        l_SlotString = File.ReadAllText(p_SavePath + "/InventorySlotData.json");
 
         JSONObject l_PlayerDataJson = new JSONObject(l_PlayerDataString);
         JSONObject l_LocationJson = new JSONObject(l_LocationString);
