@@ -36,20 +36,25 @@ public class InventoryUseItemView : InventoryView
         {
             m_UseAction();
         }
-        GroupButtonListCancelAction();
+        Cancel();
     }
 
     public override void GroupButtonListCancelAction()
+    {      
+        if (m_CancelAction != null)
+        {
+            m_CancelAction();
+        }
+        Cancel();
+    }
+
+    private void Cancel()
     {
         enabled = false;
         groupButtonList.isActive = false;
         itemButtonList.isActive = true;
         InitEmptySlots();
         ClearGroupMemberInfo();
-        if (m_CancelAction != null)
-        {
-            m_CancelAction();
-        }
     }
 
     public override void UpdateKey()
