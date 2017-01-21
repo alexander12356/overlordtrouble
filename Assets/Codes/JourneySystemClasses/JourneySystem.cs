@@ -54,6 +54,7 @@ public class JourneySystem : MonoBehaviour
         {
             GameManager.GetInstance();
             PlayerData.GetInstance().NewGameDataInit();
+            PlayerInventory.GetInstance().NewGameDataInit();
         }
     }
 

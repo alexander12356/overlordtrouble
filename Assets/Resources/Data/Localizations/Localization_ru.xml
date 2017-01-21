@@ -50,6 +50,7 @@
 	<Text id="Item:Apple">Яблоко</Text>
 	<Text id="Item:BookAboutSpoon">Книжка про ложки</Text>
 	<Text id="Item:OldHelmet">Старый шлем</Text>
+	<Text id="Item:RustyAxe">Ржавый топор</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>
@@ -419,6 +420,7 @@
 	<Text id="Dialog:GiantCock:2">*Он спит*</Text>
 	<Text id="Dialog:Uniceros:1">Пьинь?</Text>
 	<Text id="Dialog:NoEntry">Тут стоит надпись: Чужим вход запрещен.</Text>
+	<Text id="Dialog:EmptyChest">Пусто</Text>
 	
 	<!-- Save -->
 	<Text id="Dialog:Save:1">Вы чувствуете, что вам стало гораздо лучше.</Text>

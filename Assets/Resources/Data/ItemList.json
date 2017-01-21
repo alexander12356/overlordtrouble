@@ -80,6 +80,14 @@
 			"Effect":
 			{
 			}
+		},
+		{
+			"Id" : "RustyAxe",
+			"Image" : "Sprites/Items/Key/RustyAxe",
+			"Type" : "Equipment",
+			"Effect":
+			{
+			}
 		}
 	]
 }

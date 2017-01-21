@@ -189,12 +189,12 @@ public class JourneyActor : MonoBehaviour
         m_SpriteRenderer.sortingOrder = RoomSystem.GetInstance().GetSortingOrderBound(m_PivotTransform);
     }
 
-    public void ChangeMovementBehavior(string p_BehaviorId)
+    public virtual void ChangeMovementBehavior(string p_BehaviorId)
     {
         m_MovementBehaviorId = p_BehaviorId;
     }
 
-    public void ChangeInteractionBehavior(string p_BehaviorId)
+    public virtual void ChangeInteractionBehavior(string p_BehaviorId)
     {
         m_InteractBehaviorId = p_BehaviorId;
     }

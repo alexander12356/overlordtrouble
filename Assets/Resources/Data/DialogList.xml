@@ -683,4 +683,10 @@
 			<Text>Dialog:SaveComplete</Text>
 		</DialogNode>
 	</Dialog>
+	
+	<Dialog id="EmptyChest" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:EmptyChest</Text>
+		</DialogNode>
+	</Dialog>
 </DialogList>
