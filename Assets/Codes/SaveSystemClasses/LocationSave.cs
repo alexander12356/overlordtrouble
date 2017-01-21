@@ -2,20 +2,6 @@
 
 using UnityEngine;
 
-public struct ActorState
-{
-    public string interactBehavior;
-    public string movementBehavior;
-    public Vector3 position;
-
-    public ActorState(string p_InteractBehavior, string p_MovementBehavior, Vector3 p_Position)
-    {
-        interactBehavior = p_InteractBehavior;
-        movementBehavior = p_MovementBehavior;
-        position = p_Position;
-    }
-}
-
 public class LocationSave
 {
     private string m_Id = string.Empty;
@@ -159,7 +145,7 @@ public class LocationSave
     {
         foreach (JourneyActor l_Actor in m_Actors.Values)
         {
-            ActorState l_ActorState = new ActorState(l_Actor.interactBehaviorId, l_Actor.movementBehaviorId, l_Actor.myTransform.position);
+            ActorState l_ActorState = new ActorState(l_Actor.actorId, l_Actor.interactBehaviorId, l_Actor.movementBehaviorId, l_Actor.myTransform.position);
 
             if (m_ActorsState.ContainsKey(l_Actor.actorId))
             {
@@ -168,6 +154,13 @@ public class LocationSave
             else
             {
                 m_ActorsState.Add(l_Actor.actorId, l_ActorState);
+            }
+
+            if (l_Actor is JourneyEnemy)
+            {
+                JourneyEnemy l_JourneyEnemy = l_Actor as JourneyEnemy;
+                EnemyState l_EnemyState = new EnemyState(l_Actor.actorId, l_Actor.interactBehaviorId, l_Actor.movementBehaviorId, l_Actor.myTransform.position, l_JourneyEnemy.winBehaviorId, l_JourneyEnemy.loseBehaviorId);
+                m_ActorsState[l_JourneyEnemy.actorId] = l_EnemyState;
             }
         }
     }
@@ -197,6 +190,16 @@ public class LocationSave
             m_Actors[l_ActorId].ChangeInteractionBehavior(l_ActorState.interactBehavior);
             m_Actors[l_ActorId].ChangeMovementBehavior(l_ActorState.movementBehavior);
             m_Actors[l_ActorId].myTransform.position = l_ActorState.position;
+
+            if (l_ActorState is EnemyState)
+            {
+                EnemyState l_EnemyState = m_ActorsState[l_ActorId] as EnemyState;
+
+                JourneyEnemy l_JourneyEnemy = m_Actors[l_ActorId] as JourneyEnemy;
+                l_JourneyEnemy.ChangeWinBehavior(l_EnemyState.winBehavior);
+                l_JourneyEnemy.ChangeLoseBehavior(l_EnemyState.loseBehavior);
+            }
+
             m_Actors[l_ActorId].UpdateSortingLayer();
         }
     }
@@ -222,13 +225,25 @@ public class LocationSave
     {
         for (int i = 0; i < p_ActorStatesJson.Count; i++)
         {
+            string l_Id = p_ActorStatesJson[i]["Id"].str;
             string l_InteractBehavior = p_ActorStatesJson[i]["InteractBehavior"].str;
             string l_MovementBehavior = p_ActorStatesJson[i]["MovementBehavior"].str;
             float l_X = p_ActorStatesJson[i]["Position"]["X"].f;
             float l_Y = p_ActorStatesJson[i]["Position"]["Y"].f;
             Vector3 l_Position = new Vector3(l_X, l_Y);
-            ActorState l_ActorState = new ActorState(l_InteractBehavior, l_MovementBehavior, l_Position);
-            m_ActorsState.Add(p_ActorStatesJson[i]["Id"].str, l_ActorState);
+
+            ActorState l_ActorState;
+            if (p_ActorStatesJson[i].HasField("WinBehavior"))
+            {
+                string l_WinBehavior = p_ActorStatesJson[i]["WinBehavior"].str;
+                string l_LoseBehavior = p_ActorStatesJson[i]["LoseBehavior"].str;
+                l_ActorState = new EnemyState(l_Id, l_InteractBehavior, l_MovementBehavior, l_Position, l_WinBehavior, l_LoseBehavior);
+            }
+            else
+            {
+                l_ActorState = new ActorState(l_Id, l_InteractBehavior, l_MovementBehavior, l_Position);
+            }
+            m_ActorsState.Add(l_Id, l_ActorState);
         }
     }
 
@@ -270,16 +285,7 @@ public class LocationSave
 
         foreach (string l_ActorId in m_ActorsState.Keys)
         {
-            JSONObject l_ActoStateJson = new JSONObject();
-            l_ActoStateJson.AddField("Id", l_ActorId);
-            l_ActoStateJson.AddField("InteractBehavior", m_ActorsState[l_ActorId].interactBehavior);
-            l_ActoStateJson.AddField("MovementBehavior", m_ActorsState[l_ActorId].movementBehavior);
-
-            JSONObject l_ActorPositionJson = new JSONObject();
-            l_ActorPositionJson.AddField("X", m_ActorsState[l_ActorId].position.x);
-            l_ActorPositionJson.AddField("Y", m_ActorsState[l_ActorId].position.y);
-            l_ActoStateJson.AddField("Position", l_ActorPositionJson);
-
+            JSONObject l_ActoStateJson = m_ActorsState[l_ActorId].GetJson();
             l_ActorsStates.Add(l_ActoStateJson);
         }
 
