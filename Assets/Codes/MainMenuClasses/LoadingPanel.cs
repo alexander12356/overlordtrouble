@@ -138,6 +138,7 @@ public class LoadingPanel : Panel
         string l_TargetRoom = l_SaveData.location["TargetRoom"].str;
         string l_Scene = l_SaveData.location["Scene"].str;
 
+        SaveSystem.GetInstance().Init(l_Scene);
         PlayerPrefs.SetString("SenderLocation", l_SenderLocation);
         PlayerPrefs.SetString("TargetRoomId", l_TargetRoom);
         MainMenuSystem.GetInstance().StartLocation(l_Scene);
