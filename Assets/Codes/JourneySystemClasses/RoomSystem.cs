@@ -51,5 +51,7 @@ public class RoomSystem : MonoBehaviour
     {
         m_CurrentRoom = p_TargetId;
         m_CamerFollow.SetCameraBounds(m_RoomDictionary[m_CurrentRoom].cameraBounds);
+
+        JourneySystem.GetInstance().EnemyGenerate(p_TargetId);
     }
 }

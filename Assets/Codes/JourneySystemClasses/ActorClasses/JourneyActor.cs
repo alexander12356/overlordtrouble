@@ -24,7 +24,7 @@ public class JourneyActor : MonoBehaviour
     private Dictionary<string, BaseCollideBehavior> m_InteractBehaviorDictionary = new Dictionary<string, BaseCollideBehavior>();
     private Dictionary<string, BaseMovement> m_BaseMovementDictionary = new Dictionary<string, BaseMovement>();
     private Transform m_PivotTransform = null;
-    private UnityEvent m_OnDieEvent;
+    private JourneyActorUnityEvent m_OnDieEvent;
 
     [SerializeField]
     private string m_ActorId = "TestNPC";
@@ -40,6 +40,7 @@ public class JourneyActor : MonoBehaviour
     public string actorId
     {
         get { return m_ActorId; }
+        set { m_ActorId = value; }
     }
     public Transform myTransform
     {
@@ -83,7 +84,7 @@ public class JourneyActor : MonoBehaviour
     {
         get { return m_MovementBehaviorId; }
     }
-    public UnityEvent onDieEvent
+    public JourneyActorUnityEvent onDieEvent
     {
         set { m_OnDieEvent = value; }
     }
@@ -201,7 +202,10 @@ public class JourneyActor : MonoBehaviour
 
     public void Die()
     {
-        m_OnDieEvent.Invoke();
+        if (m_OnDieEvent != null)
+        {
+            m_OnDieEvent.Invoke(this);
+        }
         Destroy(gameObject);
     }
     #endregion

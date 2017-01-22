@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+using UnityEngine;
 
 public enum ControlType
 {
@@ -20,6 +20,9 @@ public class JourneySystem : MonoBehaviour
 
     [SerializeField]
     private PanelManager m_PanelManager = null;
+
+    [SerializeField]
+    private EnemyGeneratorSystem m_EnemyGeneratorSystem = null;
 
     public PanelManager panelManager
     {
@@ -50,12 +53,15 @@ public class JourneySystem : MonoBehaviour
     {
         m_Instance = this;
 
+#if UNITY_EDITOR
         if (GameManager.IsInstance() == false)
         {
             GameManager.GetInstance();
             PlayerData.GetInstance().NewGameDataInit();
             PlayerInventory.GetInstance().NewGameDataInit();
+            m_EnemyGeneratorSystem.Generate(RoomSystem.GetInstance().currentRoomId);
         }
+#endif
     }
 
     public void Start()
@@ -149,6 +155,14 @@ public class JourneySystem : MonoBehaviour
     public void OnEnable()
     {
         m_Player.LoadImprove();
+    }
+
+    public void EnemyGenerate(string p_RoomId)
+    {
+        if (m_EnemyGeneratorSystem != null)
+        {
+            m_EnemyGeneratorSystem.Generate(p_RoomId);
+        }
     }
 
 #if UNITY_EDITOR

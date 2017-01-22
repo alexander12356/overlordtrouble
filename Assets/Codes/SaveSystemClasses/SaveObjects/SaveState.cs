@@ -1,23 +1,20 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 public class SaveState : MonoBehaviour
 {
-    private JourneyActor m_JourneyActor;
-
     public void Awake()
     {
-        m_JourneyActor = GetComponent<JourneyActor>();
-        SaveSystem.GetInstance().AddActor(m_JourneyActor);
+        JourneyActor l_JourneyActor = GetComponent<JourneyActor>();
+        SaveSystem.GetInstance().AddActor(l_JourneyActor);
 
-        UnityEvent l_OnDieEvent = new UnityEvent();
+        JourneyActorUnityEvent l_OnDieEvent = new JourneyActorUnityEvent();
         l_OnDieEvent.AddListener(Die);
 
-        m_JourneyActor.onDieEvent = l_OnDieEvent;
+        l_JourneyActor.onDieEvent = l_OnDieEvent;
     }
 
-    public void Die()
+    public void Die(JourneyActor p_JourneyActor)
     {
-        SaveSystem.GetInstance().ActorDie(m_JourneyActor.actorId);
+        SaveSystem.GetInstance().ActorDie(p_JourneyActor.actorId);
     }
 }
