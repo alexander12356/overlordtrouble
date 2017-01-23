@@ -9,7 +9,7 @@ public class InventoryGroupMemberButton : PanelButton
     private Text m_SpecialText = null;
     private Image m_HealthPointBar = null;
     private Image m_SpecialPointBar = null;
-    private TestGroupMemberData m_MemberData = null;
+    private GroupMemberData m_MemberData = null;
     private Animator m_BlinkingAnimator = null;
 
     public static InventoryGroupMemberButton prefab
@@ -52,7 +52,7 @@ public class InventoryGroupMemberButton : PanelButton
         }
     }
 
-    public TestGroupMemberData testMemberData
+    public GroupMemberData groupMemberData
     {
         get
         {

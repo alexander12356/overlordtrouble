@@ -1,4 +1,6 @@
-﻿public class TestGroupMemberData
+﻿using UnityEngine;
+
+public class GroupMemberData
 {
     public float m_Health;
     public float m_BaseHealth;
@@ -7,8 +9,21 @@
     public float m_AttackStat;
     public float m_DefenseStat;
     public float m_SpeedStat;
+    private Sprite m_AvatarSprite = null;
 
-    public TestGroupMemberData(float p_Health, float p_BaseHealth, float p_SpecialPoints, float p_BaseSpecialPoints, float p_AttackStat, float p_DefenseStat, float p_SpeedStat)
+    public Sprite avatatarSprite
+    {
+        get
+        {
+            return m_AvatarSprite;
+        }
+        set
+        {
+            m_AvatarSprite = value;
+        }
+    }
+
+    public GroupMemberData(float p_Health, float p_BaseHealth, float p_SpecialPoints, float p_BaseSpecialPoints, float p_AttackStat, float p_DefenseStat, float p_SpeedStat)
     {
         m_Health = p_Health;
         m_BaseHealth = p_BaseHealth;

@@ -18,8 +18,7 @@ public abstract class InventoryView
     private Text m_SpeedStatText;
     private static int m_EmptySlotsCount = 4;
     private Text m_DescriptionText;
-    // test data
-    List<TestGroupMemberData> m_TestGroupMemberDataList = null;
+    List<GroupMemberData> m_GroupMemberDataList = null;
     #endregion
 
     #region Properties
@@ -121,12 +120,15 @@ public abstract class InventoryView
 
     public void InitGroupData()
     {
-        m_TestGroupMemberDataList = new List<TestGroupMemberData>();
-        TestGroupMemberData l_GroupMemberData = new TestGroupMemberData(10.0f, 10.0f, 5.0f, 20.0f, 5.0f, 5.0f, 1.0f);
-        m_TestGroupMemberDataList.Add(l_GroupMemberData);
-
-        l_GroupMemberData = new TestGroupMemberData(85.0f, 100.0f, 77.0f, 100.0f, 23.0f, 17.0f, 3.3f);
-        m_TestGroupMemberDataList.Add(l_GroupMemberData);
+        m_GroupMemberDataList = new List<GroupMemberData>();
+        float l_Health = PlayerData.GetInstance().GetStatValue("HealthPoints");
+        float l_SpecialPoints = PlayerData.GetInstance().GetStatValue("MonstylePoints");
+        float l_AttackStat = PlayerData.GetInstance().GetStatValue("Attack");
+        float l_DefenseStat = PlayerData.GetInstance().GetStatValue("Defense");
+        float l_SpeedStat = PlayerData.GetInstance().GetStatValue("Speed");
+        GroupMemberData l_GroupMemberData = new GroupMemberData(l_Health, l_Health, l_SpecialPoints, l_SpecialPoints, l_AttackStat, l_DefenseStat, l_SpeedStat);
+        l_GroupMemberData.avatatarSprite = PlayerData.GetInstance().GetBattleAvatar();
+        m_GroupMemberDataList.Add(l_GroupMemberData);
     }
 
     // Шаблонный метод
@@ -138,7 +140,7 @@ public abstract class InventoryView
         groupButtonList.AddKeyArrowAction(ShowGroupMemberInfo);
         groupButtonList.isActive = false;
 
-        foreach (var groupMemberData in m_TestGroupMemberDataList)
+        foreach (var groupMemberData in m_GroupMemberDataList)
         {
             AddGroupMember(groupMemberData);
         }
@@ -148,10 +150,11 @@ public abstract class InventoryView
     public virtual void GroupButtonListCancelAction() { }
 
     // Шаблонный метод
-    public void AddGroupMember(TestGroupMemberData groupMemberData)
+    public void AddGroupMember(GroupMemberData groupMemberData)
     {
         InventoryGroupMemberButton l_Button = UnityEngine.Object.Instantiate(InventoryGroupMemberButton.prefab);
-        l_Button.testMemberData = groupMemberData;
+        l_Button.groupMemberData = groupMemberData;
+        l_Button.playerImage.sprite = groupMemberData.avatatarSprite;
         l_Button.AddAction(GroupMemberButtonAction);
         groupButtonList.AddButton(l_Button);
     }
@@ -164,11 +167,11 @@ public abstract class InventoryView
         InitSlots(PlayerInventory.GetInstance().GetInventorySlotData());
         InventoryGroupMemberButton l_GroupMemberButton = (InventoryGroupMemberButton)groupButtonList[groupButtonList.currentButtonId];
         playerStat.gameObject.SetActive(true);
-        m_HealthStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:HealthPoints") + " : " + l_GroupMemberButton.testMemberData.m_Health;
-        m_SpecialPointStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:MonstylePoints") + " : " + l_GroupMemberButton.testMemberData.m_SpecialPoints;
-        m_AttackStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Attack") + " : " + l_GroupMemberButton.testMemberData.m_AttackStat;
-        m_DefenseStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Defense") + " : " + l_GroupMemberButton.testMemberData.m_DefenseStat;
-        m_SpeedStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Speed") + " : " + l_GroupMemberButton.testMemberData.m_SpeedStat;
+        m_HealthStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:HealthPoints") + " : " + l_GroupMemberButton.groupMemberData.m_Health;
+        m_SpecialPointStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:MonstylePoints") + " : " + l_GroupMemberButton.groupMemberData.m_SpecialPoints;
+        m_AttackStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Attack") + " : " + l_GroupMemberButton.groupMemberData.m_AttackStat;
+        m_DefenseStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Defense") + " : " + l_GroupMemberButton.groupMemberData.m_DefenseStat;
+        m_SpeedStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Speed") + " : " + l_GroupMemberButton.groupMemberData.m_SpeedStat;
     }
 
     // Шаблонный метод
