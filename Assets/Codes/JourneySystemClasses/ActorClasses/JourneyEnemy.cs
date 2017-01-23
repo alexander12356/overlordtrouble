@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 public class JourneyEnemy : JourneyNPC
 {
     private Dictionary<string, ResultBehavior> m_WinActions = new Dictionary<string, ResultBehavior>();
     private Dictionary<string, ResultBehavior> m_LoseActions = new Dictionary<string, ResultBehavior>();
+
+    [SerializeField]
+    private float m_StartLogicCooldown = 2.0f;
 
     [SerializeField]
     private string m_WinBehaviorId = "";
@@ -70,5 +75,17 @@ public class JourneyEnemy : JourneyNPC
         {
             m_LoseActions[m_LoseBehaviorId].actionEvent.Invoke();
         }
+    }
+
+    public void PlayerRetreated()
+    {
+        GameManager.GetInstance().StartCoroutine(WaitingLogicStart(m_StartLogicCooldown));
+    }
+
+    private IEnumerator WaitingLogicStart(float m_Time)
+    {
+        yield return new WaitForSeconds(m_Time);
+
+        StartLogic();
     }
 }

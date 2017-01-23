@@ -30,7 +30,7 @@ public class BattleStarter : Singleton<BattleStarter>
     {
         if (!m_BattleData.id.Contains("TestBattle"))
         {
-            m_Enemy.StartLogic();
+            m_Enemy.PlayerRetreated();
             JourneySystem.GetInstance().SetControl(ControlType.Player);
             m_Enemy.Win();
         }

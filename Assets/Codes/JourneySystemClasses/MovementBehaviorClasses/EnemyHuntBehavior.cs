@@ -42,7 +42,7 @@ public class EnemyHuntBehavior : BaseMovement
     {
         base.LogicUpdate();
 
-        switch(m_HuntState)
+        switch (m_HuntState)
         {
             case HuntState.Wait:
                 journeyActor.myAnimator.SetBool("IsWalking", false);
@@ -67,6 +67,18 @@ public class EnemyHuntBehavior : BaseMovement
                 }
                 break;
         }
+    }
+
+    public override void LogicStart()
+    {
+        m_HuntTrigger.AddCollideEnterAction(StartHunt);
+        m_BattleTrigger.AddCollideEnterAction(StartBattle);
+    }
+
+    public override void LogicStop()
+    {
+        m_HuntTrigger.RemoveCollideEnterAction(StartHunt);
+        m_BattleTrigger.RemoveCollideEnterAction(StartBattle);
     }
 
     private void StartHunt(JourneyActor m_JourneyActor)

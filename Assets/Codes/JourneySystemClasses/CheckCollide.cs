@@ -18,6 +18,11 @@ public class CheckCollide : MonoBehaviour
         m_EnterAction += p_Action;
     }
 
+    public void RemoveCollideEnterAction(CheckCollideHandler p_Action)
+    {
+        m_EnterAction -= p_Action;
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (HasTriggered(collision.gameObject.tag))
