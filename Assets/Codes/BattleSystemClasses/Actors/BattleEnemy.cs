@@ -59,6 +59,7 @@ public class BattleEnemy : BattleActor
         health = baseHealth = m_EnemyData.health;
         attackStat = m_EnemyData.attackStat;
         defenseStat = m_EnemyData.defenseStat;
+        speedStat = m_EnemyData.speedStat;
         level = m_EnemyData.level;
         element = m_EnemyData.element;
         m_AttackList = m_EnemyData.attackList;

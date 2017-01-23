@@ -91,6 +91,7 @@ public class BattlePlayer : BattleActor
 
         attackStat = PlayerData.GetInstance().GetStatValue("Attack");
         defenseStat = PlayerData.GetInstance().GetStatValue("Defense");
+        speedStat = PlayerData.GetInstance().GetStatValue("Speed");
         level = PlayerData.GetInstance().GetLevel() + 1;
 
         m_AttackValue = PlayerData.GetInstance().attackValue;

@@ -2,6 +2,7 @@
 	"Id" : "Skwatwolf",
 	"Attack" : 1,
 	"Defense" : 1,
+	"Speed" : 1,
 	"Level" : 1,
 	"Health" : 20,
 	"Element": "Dark",

@@ -12,6 +12,7 @@ public class BattleActor : MonoBehaviour, IEffectInfluenced
     private float m_BaseSpecialPoints;
     private float m_AttackStat;
     private float m_DefenseStat;
+    private float m_SpeedStat;
     private int   m_Level;
     private bool  m_IsDead;
     private string m_ActorName = "Actor";
@@ -79,6 +80,11 @@ public class BattleActor : MonoBehaviour, IEffectInfluenced
             m_DefenseStat = value;
             m_DefenseStat = m_DefenseStat <= 0 ? 1 : m_DefenseStat;
         }
+    }
+    public float speedStat
+    {
+        get { return m_SpeedStat; }
+        set { m_SpeedStat = value; }
     }
     public int level
     {

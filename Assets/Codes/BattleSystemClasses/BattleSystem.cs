@@ -62,9 +62,6 @@ public class BattleSystem : MonoBehaviour
     public virtual void Awake()
     {
         m_Instance = this;
-        m_Player = BattlePlayer.GetInstance();
-        PlayerData.GetInstance().AddLevelupNotification(LevelupNotification);
-        PlayerData.GetInstance().AddClassupNotification(ClassupNotification);
 
         if (GameManager.IsInstance() == false)
         {
@@ -75,6 +72,9 @@ public class BattleSystem : MonoBehaviour
 
     public virtual void Start()
     {
+        m_Player = BattlePlayer.GetInstance();
+        PlayerData.GetInstance().AddLevelupNotification(LevelupNotification);
+        PlayerData.GetInstance().AddClassupNotification(ClassupNotification);
     }
 
     public void SetVisibleAvatarPanel(bool p_Value)
@@ -98,10 +98,44 @@ public class BattleSystem : MonoBehaviour
         Lose();
     }
 
-    public void Retreat()
+    public virtual void Retreat()
     {
-        BattleStarter.GetInstance().BattleRetreat();
-        ReturnToJourney();
+        int l_RetreatChance = Random.Range(0, 100);
+
+        int l_PlayerSpeed = PlayerData.GetInstance().GetStatValue("Speed");
+        int l_EnemySpeed = GetEnemyMaxSpeed();
+        int l_EnemyLevel = GetEnemyMaxLevel();
+
+        int l_DeltaSpeed = l_PlayerSpeed - l_EnemySpeed;
+
+        if (l_DeltaSpeed > 0)
+        {
+            l_RetreatChance += l_DeltaSpeed * 5;
+        }
+
+        if ((m_Player.level - l_EnemyLevel) >= 10)
+        {
+            l_RetreatChance = 100;
+        }
+
+        if (l_RetreatChance >= 50)
+        {
+            BattleStarter.GetInstance().BattleRetreat();
+            ReturnToJourney();
+        }
+        else
+        {
+            string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:RunFail");
+
+            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
+            l_TextPanel.SetText(new List<string>() { l_Text });
+
+            BattleShowPanelStep l_ShowText = new BattleShowPanelStep(l_TextPanel);
+
+            ResultSystem.GetInstance().AddStep(l_ShowText);
+            ResultSystem.GetInstance().ShowResult();
+        }
     }
 
     public void ShowPanel(Panel p_Panel, bool p_WithOverlay = false, Transform p_Parent = null)
@@ -182,7 +216,7 @@ public class BattleSystem : MonoBehaviour
 
     public void CloseMainPanel()
     {
-        if (m_MainPanel)
+        if (m_MainPanel && !m_MainPanel.moving)
         {
             m_MainPanel.Close();
         }
@@ -245,6 +279,36 @@ public class BattleSystem : MonoBehaviour
     private void ClassupNotification()
     {
         m_IsClassup = true;
+    }
+
+    private int GetEnemyMaxSpeed()
+    {
+        int l_EnemySpeed = (int)m_EnemyList[0].speedStat;
+
+        for (int i = 0; i < m_EnemyList.Count; i++)
+        {
+            if (l_EnemySpeed < m_EnemyList[i].speedStat)
+            {
+                l_EnemySpeed = (int)m_EnemyList[i].speedStat;
+            }
+        }
+
+        return l_EnemySpeed;
+    }
+
+    private int GetEnemyMaxLevel()
+    {
+        int l_EnemyLevel = m_EnemyList[0].level;
+
+        for (int i = 0; i < m_EnemyList.Count; i++)
+        {
+            if (l_EnemyLevel < m_EnemyList[i].level)
+            {
+                l_EnemyLevel = m_EnemyList[i].level;
+            }
+        }
+
+        return l_EnemyLevel;
     }
     #endregion
 }
