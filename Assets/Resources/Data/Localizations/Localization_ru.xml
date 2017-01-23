@@ -77,6 +77,8 @@
 	<Text id="Enemy:Dualent:DoubleAttack">Вторая голова дуалента решила атаковать</Text>
 	<Text id="Enemy:ThirdsortRobber">Третьесортный разбойник</Text>
 	<Text id="Enemy:ThirdsortRobber:Attack">Пырнуть ножом</Text>
+	<Text id="Enemy:FeralSlime">Дикая слизь</Text>
+	<Text id="Enemy:FeralSlime:Tackle">Толчок</Text>
 	
 	<!-- enemy's description -->
 	<Text id="Enemy:Bokalisk:Description">Похож на василиска, но в отличие от своего грозного родственника не умеет замораживать взглядом. К тому же выглядит крупно. Некоторые особи могут достигать значительных размеров.</Text>

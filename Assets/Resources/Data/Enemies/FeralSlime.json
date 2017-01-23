@@ -1,0 +1,37 @@
+{
+	"Id" : "FeralSlime",
+	"Attack" : 1,
+	"Defense" : 1,
+	"Speed" : 1,
+	"Level" : 1,
+	"Health" : 8,
+	"Element": "Water",
+	"Attacks" :
+	[
+		{
+			"Id" : "Tackle",
+			"Type" : "Attack",
+			"Element" : "Physical",
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 2,
+					"Value2" : 4
+				}
+			}
+		}
+	],
+	"Experience" : 15,
+	"Loot" :
+	[
+		{
+			"Id" : "BokaliskMeat",
+			"Count" : 1
+		}
+	],
+	"Property" :
+	{
+		"WaterModif" : 2
+	}
+}

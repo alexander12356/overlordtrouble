@@ -49,7 +49,8 @@
 		"Location" : "RoadThugs",
 		"Enemy": 
 		[
-			"Skwatwolf"
+			"Skwatwolf",
+			"FeralSlime"
 		]
 	},
 	"BattleSkwatwolf_5": 
@@ -57,7 +58,9 @@
 		"Location" : "RoadThugs",
 		"Enemy": 
 		[
-			"Skwatwolf"
+			"Skwatwolf",
+			"Skwatwolf",
+			"FeralSlime"
 		]
 	},
 	"BattleSkwatwolf_6": 
@@ -65,6 +68,64 @@
 		"Location" : "RoadThugs",
 		"Enemy": 
 		[
+			"Skwatwolf",
+			"FeralSlime",
+			"FeralSlime"
+		]
+	},
+	"FeralSlime_1": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime"
+		]
+	},
+	"FeralSlime_2": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime",
+			"FeralSlime"
+		]
+	},
+	"FeralSlime_3": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime",
+			"FeralSlime",
+			"FeralSlime"
+		]
+	},
+	"FeralSlime_4": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime",
+			"Skwatwolf"
+		]
+	},
+	"FeralSlime_5": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime",
+			"FeralSlime",
+			"Skwatwolf"
+		]
+	},
+	"FeralSlime_6": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime",
+			"Skwatwolf",
 			"Skwatwolf"
 		]
 	},

@@ -41,7 +41,7 @@ public class BattleSystemMobs : BattleSystem
     {
         for (int i = 0; i < m_BattleData.enemyList.Count; i++)
         {
-            BattleEnemy l_NewEnemy = GetEnemyPrefab(m_BattleData.enemyList[i]);
+            BattleEnemy l_NewEnemy = GetBattleEnemy(m_BattleData.enemyList[i]);
             l_NewEnemy.SetData(EnemyDataBase.GetInstance().GetEnemy(m_BattleData.enemyList[i]));
             l_NewEnemy.transform.SetParent(m_EnemyTransform);
 
@@ -56,7 +56,7 @@ public class BattleSystemMobs : BattleSystem
         }
     }
 
-    private BattleEnemy GetEnemyPrefab(string p_EnemyId)
+    private BattleEnemy GetBattleEnemy(string p_EnemyId)
     {
         BattleEnemy l_BattleEnemy = null;
 
@@ -70,6 +70,9 @@ public class BattleSystemMobs : BattleSystem
                 break;
             case "Dualent":
                 l_BattleEnemy = Instantiate(Dualent.prefab);
+                break;
+            case "FeralSlime":
+                l_BattleEnemy = Instantiate(FeralSlime.prefab);
                 break;
             default:
                 l_BattleEnemy = Instantiate(BattleEnemy.prefab);
