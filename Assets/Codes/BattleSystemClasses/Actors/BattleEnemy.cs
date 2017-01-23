@@ -80,10 +80,18 @@ public class BattleEnemy : BattleActor
         base.Attack(p_Actor);
 
         EnemyAttackData l_AttackData = m_EnemyData.attackList[Random.Range(0, m_EnemyData.attackList.Count)];
-        
+
         string l_AttackEffectPrefabPath = "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id;
         VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>(l_AttackEffectPrefabPath));
-        l_AttackEffect.Init(p_Actor, rendererTransform);
+
+        if (l_AttackData.playerTarget)
+        {
+            l_AttackEffect.Init(BattlePlayer.GetInstance(), BattlePlayer.GetInstance().rendererTransform);
+        }
+        else
+        {
+            l_AttackEffect.Init(p_Actor, rendererTransform);
+        }
 
         BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
         DamageSystem.GetInstance().AddVisualEffectStep(l_Step);

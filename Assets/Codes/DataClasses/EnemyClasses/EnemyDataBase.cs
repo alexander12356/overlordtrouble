@@ -80,8 +80,9 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
         {
             string l_AttackId = p_JSONObject[i]["Id"].str;
             Element l_Element = (Element)Enum.Parse(typeof(Element), p_JSONObject[i]["Element"].str);
+            bool l_TargetPlayer = p_JSONObject[i].HasField("Target") && p_JSONObject[i]["Target"].str == "Player" ? true : false;
             List<EffectData> l_EffectList = EffectSystem.GetInstance().ParseEffect(p_JSONObject[i]["Effect"]);
-            EnemyAttackData l_EnemyAttack = new EnemyAttackData(l_AttackId, l_Element, l_EffectList);
+            EnemyAttackData l_EnemyAttack = new EnemyAttackData(l_AttackId, l_Element, l_TargetPlayer, l_EffectList);
 
             l_AttackList.Add(l_EnemyAttack);
         }

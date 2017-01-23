@@ -23,6 +23,7 @@
 		{
 			"Id" : "Gopogovor",
 			"Element" : "NONE",
+			"Target" : "Player",
 			"Effect" :
 			{
 				"DefenseDebuff" :
