@@ -76,7 +76,7 @@
 		{
 			"Id" : "OldHelmet",
 			"Image" : "Sprites/Items/Key/OldHelmet",
-			"Type" : "Equipment",
+			"Type" : "Bling",
 			"Effect":
 			{
 			}
@@ -84,7 +84,7 @@
 		{
 			"Id" : "RustyAxe",
 			"Image" : "Sprites/Items/Key/RustyAxe",
-			"Type" : "Equipment",
+			"Type" : "Bling",
 			"Effect":
 			{
 			}
