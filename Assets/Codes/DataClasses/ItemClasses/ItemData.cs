@@ -4,7 +4,7 @@ public enum ItemType
 {
     SingleUse,
     MultipleUse,
-    Equipment,
+    Bling,
     Weapon,
     Key
 }

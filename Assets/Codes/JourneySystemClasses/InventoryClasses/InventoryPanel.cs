@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryPanel : Panel
 {
-    private static InventoryPanel m_Prefab;
-    private InventoryTab m_CurrOpenedTab = null;
-    [SerializeField]
-    private ButtonList m_TabButtonsList = null;
-    [SerializeField]
-    private List<InventoryTab> m_InventoryTabs = null;
+    #region Variables
 
+    private static InventoryPanel m_Prefab;
+    [SerializeField]
+    private ButtonList m_ViewButtonsList = null;
+
+    private InventoryView m_CurrOpenedTab = null;
+
+    #endregion
+
+    #region Properties
     public static InventoryPanel prefab
     {
         get
@@ -28,54 +30,83 @@ public class InventoryPanel : Panel
     {
         get
         {
-            return m_TabButtonsList;
+            return m_ViewButtonsList;
         }
     }
+
+    #endregion
+
+    #region Methods
 
     public override void Awake()
     {
         base.Awake();
 
-        InitTabs();
-        m_TabButtonsList.isActive = true;
+        InitViewButtonList();
+        ShowView();
     }
 
-    public override void UpdatePanel()
+    private void InitViewButtonList()
     {
-        base.UpdatePanel();
+        m_ViewButtonsList.AddKeyArrowAction(ShowView);
+        m_ViewButtonsList[0].AddAction(ConfirmView);
+        m_ViewButtonsList[1].AddAction(ConfirmView);
+        m_ViewButtonsList[2].AddAction(ConfirmView);
+        m_ViewButtonsList[3].AddAction(ConfirmView);
+        m_ViewButtonsList[4].AddAction(ConfirmView);
+        m_ViewButtonsList[5].AddAction(ConfirmView);
+        m_ViewButtonsList[6].AddAction(ConfirmView);
+        m_ViewButtonsList[7].AddAction(CloseInventory);
 
-        m_TabButtonsList.UpdateKey();
-        m_CurrOpenedTab.UpdateKey();
+        InventoryViewButton l_ViewButton;
+        l_ViewButton = (InventoryViewButton) m_ViewButtonsList[0];
+        l_ViewButton.inventoryView = new InventoryEquipmentView(this);
+
+        l_ViewButton = (InventoryViewButton)m_ViewButtonsList[1];
+        l_ViewButton.inventoryView = new InventoryItemsView(this, new AllGetter());
+
+        l_ViewButton = (InventoryViewButton)m_ViewButtonsList[2];
+        l_ViewButton.inventoryView = new InventoryItemsView(this, new WepsGetter());
+
+        l_ViewButton = (InventoryViewButton)m_ViewButtonsList[3];
+        l_ViewButton.inventoryView = new InventoryItemsView(this, new BlingGetter());
+
+        l_ViewButton = (InventoryViewButton)m_ViewButtonsList[4];
+        l_ViewButton.inventoryView = new InventoryItemsView(this, new SingleUseGetter());
+
+        l_ViewButton = (InventoryViewButton)m_ViewButtonsList[5];
+        l_ViewButton.inventoryView = new InventoryItemsView(this, new MultiUseGetter());
+
+        l_ViewButton = (InventoryViewButton)m_ViewButtonsList[6];
+        l_ViewButton.inventoryView = new InventoryItemsView(this, new KeyItemGetter());
+
+        l_ViewButton = (InventoryViewButton)m_ViewButtonsList[7];
+        l_ViewButton.inventoryView = new InventoryItemsView(this, null);
+
+        InventoryStandingView l_StandingView = new InventoryStandingView(this);
+        l_StandingView.Init();
+
+        m_ViewButtonsList.SelectMoveDown();
+        m_ViewButtonsList.isActive = true;
     }
 
-    private void InitTabs()
+    private void ConfirmView()
     {
-        m_TabButtonsList.AddKeyArrowAction(ShowTab);
-        m_TabButtonsList[0].AddAction(ConfirmTab);
-        m_TabButtonsList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Wear");
-        m_TabButtonsList[1].AddAction(ConfirmTab);
-        m_TabButtonsList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Items");
-        m_TabButtonsList[2].AddAction(CloseInventory);
-        m_TabButtonsList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
-
-        m_CurrOpenedTab = m_InventoryTabs[0];
-    }
-
-    private void ConfirmTab()
-    {
-        m_CurrOpenedTab.Confrim();
-        m_TabButtonsList.isActive = false;
-        m_TabButtonsList.currentButton.selected = true;
-    }
-
-    private void ShowTab()
-    {
-        if (m_TabButtonsList.currentButtonId < m_InventoryTabs.Count)
+        if (m_CurrOpenedTab.Confrim())
         {
-            m_CurrOpenedTab.gameObject.SetActive(false);
-            m_InventoryTabs[m_TabButtonsList.currentButtonId].gameObject.SetActive(true);
-            m_CurrOpenedTab = m_InventoryTabs[m_TabButtonsList.currentButtonId];
+            m_ViewButtonsList.isActive = false;
+            m_ViewButtonsList.currentButton.selected = true;
         }
+    }
+
+    public void ShowView()
+    {
+        if(m_CurrOpenedTab != null)
+            m_CurrOpenedTab.Disable();
+        InventoryViewButton l_ViewButton;
+        l_ViewButton = (InventoryViewButton)m_ViewButtonsList[m_ViewButtonsList.currentButtonId];
+        m_CurrOpenedTab = l_ViewButton.inventoryView;
+        m_CurrOpenedTab.Init();
     }
 
     private void CloseInventory()
@@ -83,4 +114,14 @@ public class InventoryPanel : Panel
         Close();
         JourneySystem.GetInstance().SetControl(ControlType.Player);
     }
+
+    public override void UpdatePanel()
+    {
+        base.UpdatePanel();
+
+        m_ViewButtonsList.UpdateKey();
+        m_CurrOpenedTab.UpdateKey();
+    }
+
+    #endregion
 }

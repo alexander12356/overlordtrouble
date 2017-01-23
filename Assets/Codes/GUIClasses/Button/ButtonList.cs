@@ -193,6 +193,12 @@ public class ButtonList : MonoBehaviour
         m_CurrentButtonId = 0;
         m_PrevButtonId = 0;
     }
+
+    public void ClearEvents()
+    {
+        KeyArrowActioneEvent = null;
+        m_CancelAction = null;
+    }
     #endregion
 
     #region Private
