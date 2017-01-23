@@ -59,7 +59,7 @@ public class JourneySystem : MonoBehaviour
             GameManager.GetInstance();
             PlayerData.GetInstance().NewGameDataInit();
             PlayerInventory.GetInstance().NewGameDataInit();
-            m_EnemyGeneratorSystem.Generate(RoomSystem.GetInstance().currentRoomId);
+            EnemyGenerate(RoomSystem.GetInstance().currentRoomId);
         }
 #endif
     }
