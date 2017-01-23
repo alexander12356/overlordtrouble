@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System.Collections.Generic;
+
+using UnityEngine;
 
 public enum ControlType
 {
@@ -13,12 +13,16 @@ public enum ControlType
 public class JourneySystem : MonoBehaviour
 {
     private static JourneySystem m_Instance;
+    private ControlType m_CurrentControlType = ControlType.Player;
 
     [SerializeField]
     private JourneyPlayer m_Player = null;
 
     [SerializeField]
     private PanelManager m_PanelManager = null;
+
+    [SerializeField]
+    private EnemyGeneratorSystem m_EnemyGeneratorSystem = null;
 
     public PanelManager panelManager
     {
@@ -40,30 +44,49 @@ public class JourneySystem : MonoBehaviour
         }
         return true;
     }
+    public ControlType currentControlType
+    {
+        get { return m_CurrentControlType; }
+    }
 
     public void Awake()
     {
         m_Instance = this;
-        //CutsceneSystem.GetInstance().StartCutscene("Intro");
-        SetControl(ControlType.Player);
 
+#if UNITY_EDITOR
         if (GameManager.IsInstance() == false)
         {
             GameManager.GetInstance();
-            PlayerData.GetInstance().ResetData();
+            PlayerData.GetInstance().NewGameDataInit();
+            PlayerInventory.GetInstance().NewGameDataInit();
+            EnemyGenerate(RoomSystem.GetInstance().currentRoomId);
         }
+#endif
+    }
+
+    public void Start()
+    {
+        SaveSystem.GetInstance().LoadFromMemory();
+
+        LocationWarpSystem.GetInstance().SetPlayerPos();
+
+        SetControl(ControlType.Player);
         m_Player.LoadImprove();
     }
 
-    public void StartDialog(string p_DialogId, int p_SubDialogId)
+    public DialogPanel StartDialog(string p_DialogId, List<ActionStruct> p_AnswerActionList = null)
     {
-        SetControl(ControlType.Panel);
+        if (m_CurrentControlType != ControlType.Cutscene)
+        {
+            SetControl(ControlType.Panel);
+        }
 
-        DialogManager.GetInstance().StartDialog(p_DialogId, p_SubDialogId);
+        return DialogManager.GetInstance().StartDialog(p_DialogId, p_AnswerActionList);
     }
 
     public void SetControl(ControlType p_Type)
     {
+        m_CurrentControlType = p_Type;
         switch (p_Type)
         {
             case ControlType.Panel:
@@ -72,12 +95,20 @@ public class JourneySystem : MonoBehaviour
                 CutsceneSystem.GetInstance().enabled = false;
                 break;
             case ControlType.Player:
+                if (m_PanelManager.panelCount > 0)
+                {
+                    break;
+                }
                 m_PanelManager.enabled = false;
                 m_Player.StartLogic();
                 CutsceneSystem.GetInstance().enabled = false;
                 break;
             case ControlType.Cutscene:
-                m_PanelManager.enabled = false;
+                if (m_PanelManager.panelCount > 0)
+                {
+                    break;
+                }
+                m_PanelManager.enabled = true;
                 m_Player.StopLogic();
                 CutsceneSystem.GetInstance().enabled = true;
                 break;
@@ -102,7 +133,18 @@ public class JourneySystem : MonoBehaviour
 
     public void StartLocation(string p_LocationId)
     {
+        SaveSystem.GetInstance().SaveToMemory();
+        SaveSystem.GetInstance().ClearCache();
+        SaveSystem.GetInstance().Init(p_LocationId);
+
         m_PanelManager.StartLocation(p_LocationId);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        PlayerPrefs.DeleteAll();
+        SaveSystem.ShutDown();
+        m_PanelManager.StartLocation("MainMenu");
     }
 
     public void OpenProfile()
@@ -114,4 +156,19 @@ public class JourneySystem : MonoBehaviour
     {
         m_Player.LoadImprove();
     }
+
+    public void EnemyGenerate(string p_RoomId)
+    {
+        if (m_EnemyGeneratorSystem != null)
+        {
+            m_EnemyGeneratorSystem.Generate(p_RoomId);
+        }
+    }
+
+#if UNITY_EDITOR
+    public void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+#endif
 }

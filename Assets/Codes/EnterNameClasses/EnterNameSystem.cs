@@ -47,6 +47,11 @@ public class EnterNameSystem : MonoBehaviour
             l_TextPanel.SetText(new List<string>() { LocalizationDataBase.GetInstance().GetText("GUI:EnterName:EnterName") });
             ShowPanel(l_TextPanel);
         }
+
+        if (Input.GetKeyUp(KeyCode.Z))
+        {
+            m_MovieTexture.Stop();
+        }
     }
 
     public void ShowPanel(Panel p_Panel, bool p_WithOverlay = false)
@@ -56,6 +61,10 @@ public class EnterNameSystem : MonoBehaviour
 
     public void StartGame()
     {
+        PlayerPrefs.SetString("SenderLocation", "NewGame");
+        PlayerPrefs.SetString("TargetRoomId", "HeroHome");
+        SaveSystem.GetInstance().StartDuration();
+        SaveSystem.GetInstance().Init("Town");
         m_PanelManager.StartLocation("Town");
     }
 

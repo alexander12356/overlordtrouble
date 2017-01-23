@@ -45,7 +45,7 @@ public class PauseMenuPanel : Panel
 
     private void ConfirmReturnToMenu()
     {
-        JourneySystem.GetInstance().StartLocation("MainMenu");
+        JourneySystem.GetInstance().ReturnToMainMenu();
     }
 
     private void OpenQuitQuestionPanel()
@@ -76,7 +76,7 @@ public class PauseMenuPanel : Panel
 
     private void ReturnToJourney()
     {
-        JourneySystem.GetInstance().SetControl(ControlType.Player);
         Close();
+        JourneySystem.GetInstance().SetControl(ControlType.Player);
     }
 }

@@ -13,6 +13,8 @@ public class RoomSystem : MonoBehaviour
 {
     private static RoomSystem m_Instance;
     private Dictionary<string, Room> m_RoomDictionary = new Dictionary<string, Room>();
+
+    [SerializeField]
     private string m_CurrentRoom = "HeroHome";
 
     [SerializeField]
@@ -25,12 +27,14 @@ public class RoomSystem : MonoBehaviour
     {
         return m_Instance;
     }
+    public string currentRoomId
+    {
+        get { return m_CurrentRoom; }
+    }
 
     public void Awake()
     {
         m_Instance = this;
-
-        //m_BoundSortingOrder.Add("Town", 256);
 
         for (int i = 0; i < m_RoomList.Count; i++)
         {
@@ -47,5 +51,7 @@ public class RoomSystem : MonoBehaviour
     {
         m_CurrentRoom = p_TargetId;
         m_CamerFollow.SetCameraBounds(m_RoomDictionary[m_CurrentRoom].cameraBounds);
+
+        JourneySystem.GetInstance().EnemyGenerate(p_TargetId);
     }
 }

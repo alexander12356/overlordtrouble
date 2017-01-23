@@ -163,7 +163,6 @@ public class StorePanel : Panel
     private void CloseStore()
     {
         m_TextBox.SetTalking(false);
-        PlayerInventory.GetInstance().SaveAll();
         Close();
     }
 
@@ -186,7 +185,12 @@ public class StorePanel : Panel
         HideButtonList();
 
         m_TextBox.Activate(true);
-        m_TextBox.SetText(DialogDataBase.GetInstance().GetDialog("StoreDialog").subDialogs[0].phrases);
+
+        List<string> l_Text = new List<string>();
+        l_Text.Add(LocalizationDataBase.GetInstance().GetText("Dialog:Store:1"));
+        l_Text.Add(LocalizationDataBase.GetInstance().GetText("Dialog:Store:2"));
+
+        m_TextBox.SetText(l_Text);
         m_TextBox.ShowText();
 
         m_TextBox.AddEndAction(StartWelcomeDialog);
@@ -197,7 +201,8 @@ public class StorePanel : Panel
         ShowButtonList();
 
         m_TextBox.Activate(true);
-        m_TextBox.SetText(DialogDataBase.GetInstance().GetDialog("StoreWelcome").subDialogs[0].phrases);
+        List<string> l_Text = new List<string>() { LocalizationDataBase.GetInstance().GetText("Dialog:Store:Welcome") };
+        m_TextBox.SetText(l_Text);
         m_TextBox.ShowText();
 
         m_TextBox.AddEndAction(DisactiveTextBox);

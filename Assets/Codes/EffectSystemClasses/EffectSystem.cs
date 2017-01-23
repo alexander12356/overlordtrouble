@@ -11,6 +11,7 @@ public enum EffectIds
     DefenseDebuff,
     Healing,
     Restoring,
+    Training,
     ClearSpecialStatus
 }
 
@@ -62,6 +63,16 @@ public class EffectSystem : Singleton<EffectSystem>
                 float l_AttackBuffDuration = Convert.ToSingle(p_EffectData.parameters[1]);
 
                 l_Effect = new AttackBuffEffect(p_Special, l_AttackBuffValue, l_AttackBuffDuration);
+                break;
+            case EffectIds.Training:
+                int l_ExperienceValue = Convert.ToInt32(p_EffectData.parameters[0]);
+
+                l_Effect = new TrainingEffect(p_Special, l_ExperienceValue);
+                break;
+            case EffectIds.Restoring:
+                float l_RestoringValue = Convert.ToSingle(p_EffectData.parameters[0]);
+
+                l_Effect = new RestoringEffect(p_Special, l_RestoringValue);
                 break;
         }
 
@@ -149,6 +160,18 @@ public class EffectSystem : Singleton<EffectSystem>
 
                     EffectData l_AttackBuffEffect = new EffectData(l_EffectType, new string[] { l_AttackBuffStat.ToString(), l_AttackBuffDuration.ToString() });
                     p_EffectList.Add(l_AttackBuffEffect);
+                    break;
+                case EffectIds.Training:
+                    float l_TrainingValue = p_JsonObject[i]["Value"].f;
+
+                    EffectData l_TrainingEffect = new EffectData(l_EffectType, new string[] { l_TrainingValue.ToString() });
+                    p_EffectList.Add(l_TrainingEffect);
+                    break;
+                case EffectIds.Restoring:
+                    float l_RestoringValue = p_JsonObject[i]["Value"].f;
+
+                    EffectData l_RestoringEffect = new EffectData(l_EffectType, new string[] { l_RestoringValue.ToString() });
+                    p_EffectList.Add(l_RestoringEffect);
                     break;
             }
         }

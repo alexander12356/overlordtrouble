@@ -18,7 +18,7 @@ public class HealingEffect : BaseEffect
 
         p_Sender.health += m_HealingValue;
 
-        if (BattleSystem.GetInstance().IsInstance())
+        if (BattleSystem.IsInstance())
         {
             BattleActor l_Sender = p_Sender as BattleActor;
             DamageSystem.GetInstance().AddRestoration(l_Sender, RestorationType.Healing, m_HealingValue);

@@ -7,8 +7,6 @@ using System.Linq;
 public class PlayerInventory : Singleton<PlayerInventory>
 {
     #region Variables;
-    private string m_ItemsPersistentPathFile = Application.persistentDataPath + "/InventoryItems.json";
-    private string m_SlotDataPersistentPathFile = Application.persistentDataPath + "/InventorySlotData.json";
     private string m_ItemsDefaultPathFile = "Data/InventoryItems";
     private string m_SlotDataDefaultPathFile = "Data/InventorySlotData";
 
@@ -33,8 +31,6 @@ public class PlayerInventory : Singleton<PlayerInventory>
 
     public PlayerInventory()
     {
-        ParseItemList();
-        ParseSlotData();
     }
 
     public Dictionary<string, InventoryItemData> GetInventoryItems()
@@ -72,48 +68,13 @@ public class PlayerInventory : Singleton<PlayerInventory>
     private void ParseSlotData()
     {
         string lDecodedString = "";
-        try
-        {
-            if (File.Exists(m_ItemsPersistentPathFile))
-            {
-                StreamReader streamReader = File.OpenText(m_SlotDataPersistentPathFile);
-                lDecodedString = streamReader.ReadToEnd();
-                streamReader.Close();
-            }
-            else
-            {
-                TextAsset l_TextAsset = (TextAsset)Resources.Load(m_SlotDataDefaultPathFile);
-                lDecodedString = l_TextAsset.ToString();
-            }
-        }
-        catch
-        {
-            Debug.LogError("CANNOT READ FOR " + GetType());
-        }
 
-        JSONObject l_SlotDataList = new JSONObject(lDecodedString)["SlotData"];
+        TextAsset l_TextAsset = (TextAsset)Resources.Load(m_SlotDataDefaultPathFile);
+        lDecodedString = l_TextAsset.ToString();
 
-        for(int i = 0; i < l_SlotDataList.Count; i++)
-        {
-            string l_SlotId = l_SlotDataList[i]["SlotId"].str;
-            eSlotType l_SlotType = (eSlotType)Enum.Parse(typeof(eSlotType), l_SlotDataList[i]["SlotType"].str);
-            Slot lSlot = null;
-            switch (l_SlotType)
-            {
-                case eSlotType.normal:
-                    lSlot = new NormalSlot();
-                    break;
-                case eSlotType.weapon:
-                    lSlot = new WeaponSlot();
-                    break;
-                case eSlotType.universal:
-                    lSlot = new UniversalSlot();
-                    break;
-            }
-            string l_ItemId = l_SlotDataList[i]["ItemId"].str;
-            InventorySlotData l_SlotData = new InventorySlotData(l_SlotId, lSlot, l_ItemId);
-            m_SlotData.Add(l_SlotId, l_SlotData);
-        }
+        JSONObject l_SlotDataJson = new JSONObject(lDecodedString);
+
+        InitSlot(l_SlotDataJson);
     }
 
     public void SaveSlotData()
@@ -130,64 +91,39 @@ public class PlayerInventory : Singleton<PlayerInventory>
             jList.Add(jListElement);
         }
         string lEncodedString = jSlotData.Print(true);
-        File.WriteAllText(m_SlotDataPersistentPathFile, lEncodedString);
+        File.WriteAllText(PlayerData.GetInstance().GetSavePath() + "InventorySlotData.json", lEncodedString);
     }
 
     private void ParseItemList()
     {
         string lDecodedString = "";
-        try
-        {
-            if (File.Exists(m_ItemsPersistentPathFile))
-            {
-                StreamReader streamReader = File.OpenText(m_ItemsPersistentPathFile);
-                lDecodedString = streamReader.ReadToEnd();
-                streamReader.Close();
-            }
-            else
-            {
-                TextAsset l_TextAsset = (TextAsset)Resources.Load(m_ItemsDefaultPathFile);
-                lDecodedString = l_TextAsset.ToString();
-            }
-        }
-        catch
-        {
-            Debug.LogError("CANNOT READ FOR " + GetType());
-        }
+
+        TextAsset l_TextAsset = (TextAsset)Resources.Load(m_ItemsDefaultPathFile);
+        lDecodedString = l_TextAsset.ToString();
 
         JSONObject l_JSONObject = new JSONObject(lDecodedString);
 
-        m_Coins = (int) l_JSONObject["Coins"].i;
-
-        JSONObject l_ItemList = new JSONObject(lDecodedString)["Items"];
-
-        for(int i = 0; i < l_ItemList.Count; i++)
-        {
-            string l_ItemId = l_ItemList[i]["Id"].str;
-            int l_ItemCount = (int)l_ItemList[i]["Count"].i;
-            InventoryItemData l_ItemData = new InventoryItemData(l_ItemId, l_ItemCount);
-            m_Items.Add(l_ItemId, l_ItemData);
-        }
+        InitItems(l_JSONObject);
     }
 
     public void SaveItemList()
     {
-        JSONObject jItemList = new JSONObject(JSONObject.Type.OBJECT);
-        jItemList.AddField("Coins", m_Coins);
-        JSONObject jList = new JSONObject(JSONObject.Type.ARRAY);
-        jItemList.AddField("Items", jList);
+        JSONObject l_ItemList = new JSONObject(JSONObject.Type.OBJECT);
+        l_ItemList.AddField("Coins", m_Coins);
+        JSONObject l_List = new JSONObject(JSONObject.Type.ARRAY);
+        l_ItemList.AddField("Items", l_List);
         foreach(var lKey in m_Items.Keys)
         {
-            JSONObject jListElement = new JSONObject(JSONObject.Type.OBJECT);
-            jListElement.AddField("Id", m_Items[lKey].id);
-            jListElement.AddField("Count", m_Items[lKey].count);
-            jList.Add(jListElement);
+            JSONObject l_ListElement = new JSONObject(JSONObject.Type.OBJECT);
+            l_ListElement.AddField("Id", m_Items[lKey].id);
+            l_ListElement.AddField("Count", m_Items[lKey].count);
+            l_List.Add(l_ListElement);
         }
-        string lEncodedString = jItemList.Print(true);
-        File.WriteAllText(m_ItemsPersistentPathFile, lEncodedString);
+        string l_EncodedString = l_ItemList.Print(true);
+        File.WriteAllText(PlayerData.GetInstance().GetSavePath() + "InventoryItems.json", l_EncodedString);
     }
 
-    public void SaveAll()
+    public void SaveToDisk()
     {
         SaveItemList();
         SaveSlotData();
@@ -244,6 +180,68 @@ public class PlayerInventory : Singleton<PlayerInventory>
         {
             return 0;
         }
+    }
+
+    public void InitItems(JSONObject p_ItemsJson)
+    {
+        m_Coins = (int)p_ItemsJson["Coins"].i;
+
+        JSONObject l_ItemList = p_ItemsJson["Items"];
+
+        for (int i = 0; i < l_ItemList.Count; i++)
+        {
+            string l_ItemId = l_ItemList[i]["Id"].str;
+            int l_ItemCount = (int)l_ItemList[i]["Count"].i;
+            InventoryItemData l_ItemData = new InventoryItemData(l_ItemId, l_ItemCount);
+            m_Items.Add(l_ItemId, l_ItemData);
+        }
+    }
+
+    public void InitSlot(JSONObject p_SlotJson)
+    {
+        JSONObject l_SlotDataList = p_SlotJson["SlotData"];
+
+        for (int i = 0; i < l_SlotDataList.Count; i++)
+        {
+            string l_SlotId = l_SlotDataList[i]["SlotId"].str;
+            eSlotType l_SlotType = (eSlotType)Enum.Parse(typeof(eSlotType), l_SlotDataList[i]["SlotType"].str);
+            Slot lSlot = null;
+            switch (l_SlotType)
+            {
+                case eSlotType.normal:
+                    lSlot = new NormalSlot();
+                    break;
+                case eSlotType.weapon:
+                    lSlot = new WeaponSlot();
+                    break;
+                case eSlotType.universal:
+                    lSlot = new UniversalSlot();
+                    break;
+            }
+            string l_ItemId = l_SlotDataList[i]["ItemId"].str;
+            InventorySlotData l_SlotData = new InventorySlotData(l_SlotId, lSlot, l_ItemId);
+            m_SlotData.Add(l_SlotId, l_SlotData);
+        }
+    }
+
+    public void LoadData(JSONObject p_ItemsJson, JSONObject p_SlotJson)
+    {
+        Clear();
+        InitItems(p_ItemsJson);
+        InitSlot(p_SlotJson);
+    }
+
+    public void Clear()
+    {
+        m_Items.Clear();
+        m_SlotData.Clear();
+    }
+
+    public void NewGameDataInit()
+    {
+        Clear();
+        ParseItemList();
+        ParseSlotData();
     }
     #endregion
 }

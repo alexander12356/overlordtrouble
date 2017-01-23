@@ -1,75 +1,692 @@
 ﻿<?xml version="1.0"?>
 <DialogList>
-	<Dialog id="SkeletonChild" avatarPath="Sprites/Creations/SkeletonChild/Avatar">
-		<Text>Dialog:SkeletonChild:1</Text>
-		<Text>Dialog:SkeletonChild:2</Text>
-	</Dialog>
-	<Dialog id="SnailKid" avatarPath="Sprites/Creations/SnailKid/Avatar">
-		<Text>Dialog:SnailKid:1</Text>
-		<Text>Dialog:SnailKid:2</Text>
-	</Dialog>
-	<Dialog id="Bokalisk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
-		<Text>Dialog:Bokalisk:1</Text>
-		<Text>Dialog:Bokalisk:2</Text>
-	</Dialog>
-	<Dialog id="Bokalisk1" avatarPath="Sprites/Creations/Bokalisk/Avatar">
-		<Text>Dialog:Bokalisk1:1</Text>
-		<Text>Dialog:Bokalisk1:2</Text>
-	</Dialog>
-	<Dialog id="StoreWelcome" avatarPath="Sprites/Creations/Store/Avatar">
-		<Text>Dialog:Store:Welcome</Text>
-	</Dialog>
-	<Dialog id="StoreDialog" avatarPath="Sprites/Creations/Store/Avatar">
-		<Text>Dialog:Store:1</Text>
-		<Text>Dialog:Store:2</Text>
-	</Dialog>
-	<Dialog id="VillageElder" avatarPath="Sprites/Creations/VillageElder/Avatar">
-		<Text>Dialog:VillageElder:1</Text>
-		<Text>Dialog:VillageElder:2</Text>
-		<Text>Dialog:VillageElder:3</Text>
-	</Dialog>
-	<Dialog id="GoatPerson" avatarPath="Sprites/Creations/GoatPerson/Avatar">
-		<SubDialog>
-			<Text>Dialog:GoatPerson:1</Text>
-			<Text>Dialog:GoatPerson:2</Text>
-			<Text>Dialog:GoatPerson:3</Text>
-		</SubDialog>
-		<SubDialog>
-			<Text>Dialog:GoatPerson:3</Text>
-		</SubDialog>
-	</Dialog>
-	<Dialog id="Terner" avatarPath="Sprites/Creations/Terner/Avatar">
-		<Text>Dialog:Terner:1</Text>
-	</Dialog>
-	<Dialog id="VillageFountain" avatarPath="">
-		<Text>Dialog:OldWell</Text>
-	</Dialog>
-	<Dialog id="GiantCock" avatarPath="Sprites/Creations/GiantCock/Avatar">
-		<Text>Dialog:GiantCock:1</Text>
-		<Text>Dialog:GiantCock:2</Text>
-	</Dialog>
-	<Dialog id="Uniceros" avatarPath="Sprites/Creations/Uniceros/Avatar">
-		<Text>Dialog:Uniceros:1</Text>
+	<!-- Hero Home -->
+	<Dialog id="HeroHouse:Bed" startNode="WantSleep" avatarPath="">
+		<DialogNode id="WantSleep">
+			<Text>Dialog:HeroHouse:Bed</Text>
+			<Question>
+				<Answer id="YesSleep"/>
+				<Answer id="NoSleep"/>
+			</Question>
+		</DialogNode>
 	</Dialog>
 	
-	<!-- Hero House -->
+	<Dialog id="HeroHouse:Cupboard" startNode="AboutCupboard" avatarPath="">
+		<DialogNode id="AboutCupboard">
+			<Text>Dialog:HeroHouse:Cupboard</Text>
+		</DialogNode>
+	</Dialog>
 	
-	<Dialog id="HeroBed" avatarPath="">
-		<Text>Dialog:HeroBed</Text>
+	<Dialog id="HeroHouse:Candle" startNode="AboutCandle" avatarPath="">
+		<DialogNode id="AboutCandle">
+			<Text>Dialog:HeroHouse:Candle</Text>
+		</DialogNode>
 	</Dialog>
-	<Dialog id="HeroCupboard" avatarPath="">
-		<Text>Dialog:HeroCupBoard</Text>
+	
+	<Dialog id="HeroHouse:Stove" startNode="AboutStove"  avatarPath="">
+		<DialogNode id="AboutStove">
+			<Text>Dialog:HeroHouse:Stove</Text>
+		</DialogNode>
 	</Dialog>
-	<Dialog id="HeroCandle" avatarPath="">
-		<Text>Dialog:HeroCandle</Text>
+	
+	<Dialog id="HeroHouse:Picture" startNode="AboutPicture" avatarPath="">
+		<DialogNode id="AboutPicture">
+			<Text>Dialog:HeroHouse:Picture</Text>
+		</DialogNode>
 	</Dialog>
-	<Dialog id="HeroStove" avatarPath="">
-		<Text>Dialog:HeroStove</Text>
+	
+	<Dialog id="HeroHouse:Flower" startNode="AboutFlower" avatarPath="">
+		<DialogNode id="AboutFlower">
+			<Text>Dialog:HeroHouse:Flower</Text>
+		</DialogNode>
 	</Dialog>
-	<Dialog id="HeroPicture" avatarPath="">
-		<Text>Dialog:HeroPicture</Text>
+	
+	<!-- Village Elder Dialogs-->
+	<Dialog id="VillageElder:Hey" startNode="Hey" avatarPath="">
+		<DialogNode id="Hey">
+			<Text>Dialog:VillageElder:Hey:1</Text>
+			<Text>Dialog:VillageElder:Hey:2</Text>
+		</DialogNode>
 	</Dialog>
-	<Dialog id="HeroFlower" avatarPath="">
-		<Text>Dialog:HeroFlower</Text>
+	
+	<Dialog id="VillageElder:FirstTask" startNode="AboutFirstTask" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="AboutFirstTask">
+			<Text>Dialog:VillageElder:FirstTask:1</Text>
+			<Text>Dialog:VillageElder:FirstTask:2</Text>
+			<Text>Dialog:VillageElder:FirstTask:3</Text>
+			<Text>Dialog:VillageElder:FirstTask:4</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElder:AboutTraining:1" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:AboutTraining:1</Text>
+			<Text>Dialog:VillageElder:AboutTraining:2</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="VillageElder:AboutTraining:2" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:AboutTraining:3</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="VillageElder:AboutTraining:3" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:AboutTraining:4</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="VillageElder:AboutTraining:4" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:AboutTraining:5</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElder:GoToForest:1" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:GoToForest:1</Text>
+			<Text>Dialog:VillageElder:GoToForest:2</Text>
+			<Text>Dialog:VillageElder:GoToForest:3</Text>
+			<Text>Dialog:VillageElder:GoToForest:4</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="VillageElder:GoToForest:2" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:GoToForest:5</Text>
+			<Text>Dialog:VillageElder:GoToForest:6</Text>
+			<Text>Dialog:VillageElder:GoToForest:7</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElder:Gift:1" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:Gift:1</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElder:Gift:2" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:Gift:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElder:GoodLuck" startNode="Talking" avatarPath="Sprites/Creations/VillageElder/Avatar">
+		<DialogNode id="Talking">
+			<Text>Dialog:VillageElder:GoodLuck</Text>
+		</DialogNode>
+	</Dialog>
+
+	<!-- Terner Dialogs -->
+	<Dialog id="Terner:BokaliskBattle" startNode="FromWho" avatarPath="Sprites/Creations/Terner/Avatar">
+		<DialogNode id="FromWho">
+			<Text>Dialog:Terner:Ask</Text>
+			<Question>
+				<Answer id="FromElder"/>
+				<Answer id="NotFromElder"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="FromElder">
+			<Text>Dialog:Terner:FromElder:1</Text>
+			<Text>Dialog:Terner:FromElder:2</Text>
+			<Text>Dialog:Terner:FromElder:3</Text>
+			<Text>Dialog:Terner:FromElder:4</Text>
+			<Text>Dialog:Terner:FromElder:5</Text>
+			<Text>Dialog:Terner:FromElder:6</Text>
+			<Question>
+				<Answer id="WantLearnMonstyle"/>
+				<Answer id="NotWantLearnMonstyle"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="NotFromElder">
+			<Text>Dialog:Terner:NotFromElder</Text>
+		</DialogNode>
+		<DialogNode id="WantLearnMonstyle">
+			<Text>Dialog:Terner:WantLearnMonstyle:1</Text>
+			<Text>Dialog:Terner:WantLearnMonstyle:2</Text>
+			<Text>Dialog:Terner:WantLearnMonstyle:3</Text>
+		</DialogNode>
+		<DialogNode id="NotWantLearnMonstyle">
+			<Text>Dialog:Terner:NotWantLearnMonstyle</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Terner:TutorialWin" startNode="Talk" avatarPath="Sprites/Creations/Terner/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Terner:TutorialWin</Text>
+			<Text>Dialog:Terner:SaveLive</Text>
+			<Text>Dialog:Terner:GoScamper</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Terner:TutorialLose" startNode="Talk" avatarPath="Sprites/Creations/Terner/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Terner:TutorialLose:1</Text>
+			<Text>Dialog:Terner:TutorialLose:2</Text>
+			<Text>Dialog:Terner:SaveLive</Text>
+			<Text>Dialog:Terner:GoScamper</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Terner:Scamper" startNode="Talk" avatarPath="Sprites/Creations/Terner/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Terner:Scamper:1</Text>
+			<Text>Dialog:Terner:Scamper:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Skeleton child Dialogs -->
+	<Dialog id="SkeletonChild:AboutFlower" startNode="AboutFlower" avatarPath="Sprites/Creations/SkeletonChild/Avatar">
+		<DialogNode id="AboutFlower">
+			<Text>Dialog:SkeletonChild:AboutFlower:1</Text>
+			<Text>Dialog:SkeletonChild:AboutFlower:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Snail kid Dialogs-->
+	<Dialog id="SnailKid:AboutFlower" startNode="AboutFlower" avatarPath="Sprites/Creations/SnailKid/Avatar">
+		<DialogNode id="AboutFlower">
+			<Text>Dialog:SnailKid:AboutFlower:1</Text>
+			<Text>Dialog:SnailKid:AboutFlower:2</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="SnailKid:Quest:FoodForSnailKid" startNode="Talk" avatarPath="Sprites/Creations/SnailKid/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:SnailKid:Quest:FoodForSnailKid:1</Text>
+			<Text>Dialog:SnailKid:Quest:FoodForSnailKid:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- GoatPerson Dialogs -->
+	<Dialog id="GoatPerson:AboutWater:1" startNode="AboutWater" avatarPath="Sprites/Creations/GoatPerson/Avatar">
+		<DialogNode id="AboutWater">
+			<Text>Dialog:GoatPerson:AboutWater:1</Text>
+			<Text>Dialog:GoatPerson:AboutWater:2</Text>
+			<Text>Dialog:GoatPerson:AboutWater:3</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="GoatPerson:AboutWater:2" startNode="AboutWater" avatarPath="Sprites/Creations/GoatPerson/Avatar">
+		<DialogNode id="AboutWater">
+			<Text>Dialog:GoatPerson:AboutWater:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- SunPriestG -->
+	<Dialog id="SunPriestG:AboutSave:1" startNode="AboutSave" avatarPath="Sprites/Creations/SunPriestG/Avatar">
+		<DialogNode id="AboutSave">
+			<Text>Dialog:SunPriestG:AboutSave:1</Text>
+			<Text>Dialog:SunPriestG:AboutSave:2</Text>
+			<Text>Dialog:SunPriestG:AboutSave:3</Text>
+			<Text>Dialog:SunPriestG:AboutSave:4</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="SunPriestG:AboutSave:2" startNode="AboutSave" avatarPath="Sprites/Creations/SunPriestG/Avatar">
+		<DialogNode id="AboutSave">
+			<Text>Dialog:SunPriestG:AboutSave:5</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- SunPriest -->
+	<Dialog id="SunPriest:Welcome" startNode="Welcome" avatarPath="Sprites/Creations/SunPriest/Avatar">
+		<DialogNode id="Welcome">
+			<Text>Dialog:SunPriest:Welcome</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="SunPriest:AboutTeleport:1" startNode="AboutTeleport" avatarPath="Sprites/Creations/SunPriest/Avatar">
+		<DialogNode id="AboutTeleport">
+			<Text>Dialog:SunPriest:AboutTeleport:1</Text>
+			<Text>Dialog:SunPriest:AboutTeleport:2</Text>
+			<Text>Dialog:SunPriest:AboutTeleport:3</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="SunPriest:AboutTeleport:2" startNode="AboutTeleport" avatarPath="Sprites/Creations/SunPriest/Avatar">
+		<DialogNode id="AboutTeleport">
+			<Text>Dialog:SunPriest:AboutTeleport:4</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SunPriest:TryTeleport" startNode="Talk" avatarPath="Sprites/Creations/SunPriest/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:SunPriest:TryTeleport</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Sun Home -->
+	<Dialog id="SunHome:Stove" startNode="AboutStove" avatarPath="">
+		<DialogNode id="AboutStove">
+			<Text>Dialog:SunHome:Stove</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SunHome:Bucket" startNode="AboutBucket" avatarPath="">
+		<DialogNode id="AboutBucket">
+			<Text>Dialog:SunHome:Bucket</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SunHome:Box" startNode="AboutBox" avatarPath="">
+		<DialogNode id="AboutBox">
+			<Text>Dialog:SunHome:Box</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SunHome:Cactus" startNode="AboutCactus" avatarPath="">
+		<DialogNode id="AboutCactus">
+			<Text>Dialog:SunHome:Cactus</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Bokalisk Dialogs -->
+	<Dialog id="Bokalisk:StartBattle" startNode="StartBattle" avatarPath="Sprites/Creations/Bokalisk/Avatar">
+		<DialogNode id="StartBattle">
+			<Text>Dialog:Bokalisk:StartBattle:1</Text>
+			<Text>Dialog:Bokalisk:StartBattle:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="BokaliskOrda:StartBattle" startNode="StartBattle" avatarPath="Sprites/Creations/Bokalisk/Avatar">
+		<DialogNode id="StartBattle">
+			<Text>Dialog:BokaliskOrda:StartBattle:1</Text>
+			<Text>Dialog:BokaliskOrda:StartBattle:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Village Fountain Dialog -->
+	<Dialog id="VillageFountain:AboutWell" startNode="AboutWell" avatarPath="">
+		<DialogNode id="AboutWell">
+			<Text>Dialog:OldWell:AboutWell</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageFountain:Coop" startNode="Catchup" avatarPath="">
+		<DialogNode id="Catchup">
+			<Text>Dialog:OldWell:Coop:1</Text>
+			<Text>Dialog:OldWell:Coop:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Giant Cock Dialog -->
+	<Dialog id="GiantCock" startNode="AboutGiantCock" avatarPath="Sprites/Creations/GiantCock/Avatar">
+		<DialogNode id="AboutGiantCock">
+			<Text>Dialog:GiantCock:1</Text>
+			<Text>Dialog:GiantCock:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Uniceros Dialog -->
+	<Dialog id="Uniceros" startNode="Piew" avatarPath="Sprites/Creations/Uniceros/Avatar">
+		<DialogNode id="Piew">
+			<Text>Dialog:Uniceros:1</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Mama Snail Dialog -->
+	<Dialog id="MamaSnail:Task" startNode="Ask" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+		<DialogNode id="Ask">
+			<Text>Dialog:MamaSnail:Task:Ask</Text>
+			<Question>
+				<Answer id="Help"/>
+				<Answer id="NotHelp"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="Help">
+			<Text>Dialog:MamaSnail:Task:Thank</Text>
+		</DialogNode>
+		<DialogNode id="NotHelp">
+			<Text>Dialog:MamaSnail:Task:Sorry</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSnail:QuestAccepted" startNode="Talk" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSnail:QuestAccepted</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSnail:QuestDenied" startNode="Ask" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+		<DialogNode id="Ask">
+			<Text>Dialog:MamaSnail:QuestDenied</Text>
+			<Question>
+				<Answer id="Help"/>
+				<Answer id="NotHelp"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="Help">
+			<Text>Dialog:MamaSnail:Task:Thank</Text>
+		</DialogNode>
+		<DialogNode id="NotHelp">
+			<Text>Dialog:MamaSnail:Task:Sorry</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSnail:QuestCompleted" startNode="Thanks" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+		<DialogNode id="Thanks">
+			<Text>Dialog:MamaSnail:QuestCompleted</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSnail:AboutSnail" startNode="Talk" avatarPath="Sprites/Creations/MamaSnail/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSnail:AboutSnail:1</Text>
+			<Text>Dialog:MamaSnail:AboutSnail:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Papa Snail Dialog -->
+	<Dialog id="PapaSnail:Congratulation:1" startNode="Talk" avatarPath="Sprites/Creations/PapaSnail/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:PapaSnail:Congratulation:1</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="PapaSnail:Congratulation:2" startNode="Talk" avatarPath="Sprites/Creations/PapaSnail/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:PapaSnail:Congratulation:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Snail House -->
+	<Dialog id="SnailHouse:Cupboard" startNode="AboutCupboard" avatarPath="">
+		<DialogNode id="AboutCupboard">
+			<Text>Dialog:SnailHouse:Cupboard</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Not A Cat -->
+	<Dialog id="NotACat:Murr:1" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:1</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="NotACat:Murr:2" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:2</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="NotACat:Murr:3" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:3</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="NotACat:Murr:4" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:4</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="NotACat:Murr:5" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:5</Text>
+			<Text>Dialog:NotACat:Murr:6</Text>
+			<Text>Dialog:NotACat:Murr:7</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="NotACat:Murr:6" startNode="Talk" avatarPath="Sprites/Creations/NotACat/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:NotACat:Murr:8</Text>
+			<Text>Dialog:NotACat:Murr:9</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Snowoman -->
+	<Dialog id="Snowoman:AboutBookshelf:1" startNode="Talk" avatarPath="Sprites/Creations/Snowoman/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Snowoman:AboutBookshelf:1</Text>
+			<Text>Dialog:Snowoman:AboutBookshelf:2</Text>
+			<Text>Dialog:Snowoman:AboutBookshelf:3</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Snowoman:AboutBookshelf:2" startNode="Talk" avatarPath="Sprites/Creations/Snowoman/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Snowoman:AboutBookshelf:4</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Snowoman:Complete" startNode="Talk" avatarPath="Sprites/Creations/Snowoman/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Snowoman:Complete:1</Text>
+			<Text>Dialog:Snowoman:Complete:2</Text>
+			<Text>Dialog:Snowoman:Complete:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Snowoman:PreComplete" startNode="Talk" avatarPath="Sprites/Creations/Snowoman/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Snowoman:PreComplete:1</Text>
+			<Text>Dialog:Snowoman:PreComplete:2</Text>
+			<Text>Dialog:Snowoman:PreComplete:3</Text>
+			<Text>Dialog:Snowoman:PreComplete:4</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Snowoman:Common" startNode="Talk" avatarPath="Sprites/Creations/Snowoman/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Snowoman:Common</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Library -->
+	<Dialog id="Library:Bookshelf:1" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:1</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:2" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:2</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:3" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:3</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:4" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:4</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:5" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:5</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:6" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:6</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:7" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:7</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Library:Bookshelf:8" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Bookshelf:8</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Library:Coathanger" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Coathanger</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Library:Iceout" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Library:Iceout</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Mama Skeleton -->
+	<Dialog id="MamaSkeleton:Task:1" startNode="Talk" avatarPath="Sprites/Creations/MamaSkeleton/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSkeleton:Task:1</Text>
+			<Text>Dialog:MamaSkeleton:Task:2</Text>
+			<Text>Dialog:MamaSkeleton:Task:3</Text>
+			<Text>Dialog:MamaSkeleton:Task:4</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="MamaSkeleton:Task:2" startNode="Talk" avatarPath="Sprites/Creations/MamaSkeleton/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSkeleton:Task:5</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSkeleton:Task:Complete" startNode="TaskComplete" avatarPath="Sprites/Creations/MamaSkeleton/Avatar">
+		<DialogNode id="TaskComplete">
+			<Text>Dialog:MamaSkeleton:Task:Complete:1</Text>
+			<Text>Dialog:MamaSkeleton:Task:Complete:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="MamaSkeleton:AboutFamily" startNode="Talk" avatarPath="Sprites/Creations/MamaSkeleton/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:MamaSkeleton:AboutFamily</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Skeleton House -->
+	<Dialog id="SkeletonHouse:Picture" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SkeletonHouse:Picture</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SkeletonHouse:KostellaBed" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SkeletonHouse:KostellaBed</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SkeletonHouse:KostellaShelf" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SkeletonHouse:KostellaShelf</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Joshua -->
+	<Dialog id="Joshua:AboutDay:1" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:AboutDay:1</Text>
+			<Text>Dialog:Joshua:AboutDay:2</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Joshua:AboutDay:2" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:AboutDay:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:TalkWithVillageElder" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:TalkWithVillageElder</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:AboutTask" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:AboutTask</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:AboutYoungTime" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:AboutYoungTime</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:Common" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:Common</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:SaleBook" startNode="Sale" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Sale">
+			<Text>Dialog:Joshua:SaleBook</Text>
+			<Question>
+				<Answer id="Yes"/>
+				<Answer id="No"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="No">
+			<Text>Dialog:Joshua:SaleBook:WhyNot</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:SaleBook:Success" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:SaleBook:Success:1</Text>
+			<Text>Dialog:Joshua:SaleBook:Success:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:SaleBook:Fail" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:SaleBook:Fail</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Joshua:GoToForest" startNode="Talk" avatarPath="Sprites/Creations/Joshua/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Joshua:GoToForest</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Village Elder House -->
+	<Dialog id="VillageElderHouse:BigOven" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:VillageElderHouse:BigOven</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElderHouse:Boxes" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:VillageElderHouse:Boxes</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElderHouse:Pipe" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:VillageElderHouse:Pipe</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="VillageElderHouse:Chest" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:VillageElderHouse:Chest</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Others -->
+	<Dialog id="OtherBed" startNode="AboutBed" avatarPath="">
+		<DialogNode id="AboutBed">
+			<Text>Dialog:OtherBed</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="NoEntry" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:NoEntry</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Save" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Save:1</Text>
+			<Text>Dialog:Save:2</Text>
+			<Question>
+				<Answer id="Yes"/>
+				<Answer id="No"/>
+			</Question>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="SaveComplete" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SaveComplete</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="EmptyChest" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:EmptyChest</Text>
+		</DialogNode>
 	</Dialog>
 </DialogList>

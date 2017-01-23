@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-
+﻿using System.IO;
 using System.Collections.Generic;
-using System;
+
+using UnityEngine;
 
 public class PlayerData : Singleton<PlayerData>
 {
@@ -56,22 +56,83 @@ public class PlayerData : Singleton<PlayerData>
         set { m_ClassImprovePoints = value; }
     }
 
-    public void ResetData()
-    {
-        Reset();
-        m_PlayerStat.ResetData();
-        m_PlayerSkills.ResetData();
-        m_PlayerEnchancement.ResetData();
-        Parse();
-        ParseLevelupList();
-        ParseClassupList();
-    }
-
     public PlayerData()
     {
         m_PlayerStat = new PlayerStat();
         m_PlayerSkills = new PlayerSkills();
         m_PlayerEnchancement = new PlayerEnchancement();
+
+        ParseLevelupList();
+        ParseClassupList();
+    }
+
+    public void ClearData()
+    {
+        Clear();
+        m_PlayerStat.Clear();
+        m_PlayerSkills.Clear();
+        m_PlayerEnchancement.Clear();
+    }
+
+    public void NewGameDataInit()
+    {
+        ClearData();
+        Parse();
+
+        AddEnchancement("DewElemental");
+    }
+
+    public void LoadData(JSONObject p_PlayerData)
+    {
+        ClearData();
+
+        m_PlayerName = p_PlayerData["Name"].str;
+
+        m_AttackValue[0] = (int)p_PlayerData["AttackValue"][0].i;
+        m_AttackValue[1] = (int)p_PlayerData["AttackValue"][1].i;
+
+        m_Level = (int)p_PlayerData["Level"].i;
+        m_Class = (int)p_PlayerData["Class"].i;
+        m_Experience = (int)p_PlayerData["Experience"].i;
+        m_StatImprovePoints = (int)p_PlayerData["StatImprovePoints"].i;
+        m_ClassImprovePoints = (int)p_PlayerData["ClassImprovePoints"].i;
+
+        m_PlayerStat.SetStatData(p_PlayerData["Stats"]);
+
+        m_HealthPoints = m_PlayerStat.GetStatValue("HealthPoints");
+        m_MonstylePoints = m_PlayerStat.GetStatValue("HealthPoints");
+
+        LoadSpecials(p_PlayerData["Specials"]);
+
+        m_PlayerEnchancement.SetEnchancementId(p_PlayerData["Enchancement"].str);
+    }
+
+    public void SaveToDisk()
+    {
+        JSONObject l_PlayerDataJson = new JSONObject();
+
+        l_PlayerDataJson.AddField("Name", m_PlayerName);
+
+        JSONObject l_AttackValueJson = new JSONObject();
+        l_AttackValueJson.Add(m_AttackValue[0]);
+        l_AttackValueJson.Add(m_AttackValue[1]);
+        l_PlayerDataJson.AddField("AttackValue", l_AttackValueJson);
+
+        l_PlayerDataJson.AddField("Level", m_Level);
+        l_PlayerDataJson.AddField("Class", m_Class);
+        l_PlayerDataJson.AddField("Experience", m_Experience);
+        l_PlayerDataJson.AddField("StatImprovePoints", m_StatImprovePoints);
+        l_PlayerDataJson.AddField("ClassImprovePoints", m_ClassImprovePoints);
+
+        JSONObject l_StatJson = m_PlayerStat.GetJson();
+        l_PlayerDataJson.AddField("Stats", l_StatJson);
+
+        l_PlayerDataJson.AddField("Enchancement", m_PlayerEnchancement.GetCurrentEnchancement());
+
+        JSONObject l_SpecialsJson = m_PlayerSkills.GetJson();
+        l_PlayerDataJson.AddField("Specials", l_SpecialsJson);
+
+        File.WriteAllText(GetSavePath() + "PlayerData.json", l_PlayerDataJson.Print(true));
     }
 
     public void AddExperience(int p_Experience)
@@ -137,7 +198,7 @@ public class PlayerData : Singleton<PlayerData>
 
     public void AddEnchancement(string p_EnchancementId)
     {
-        m_PlayerEnchancement.AddEnchancement(p_EnchancementId);
+        m_PlayerEnchancement.UpgradeClass(p_EnchancementId);
     }
 
     public Sprite GetProfileAvatar()
@@ -169,8 +230,7 @@ public class PlayerData : Singleton<PlayerData>
 
     public void InitTestStats()
     {
-        ResetData();
-        //AddExperience(999);
+        NewGameDataInit();
     }
 
     public void AddLevelupNotification(PanelActionHandler p_Action)
@@ -186,6 +246,11 @@ public class PlayerData : Singleton<PlayerData>
     public string GetCurrentEnchancement()
     {
         return m_PlayerEnchancement.GetCurrentEnchancement();
+    }
+
+    public string GetSavePath()
+    {
+        return Application.persistentDataPath + "/Saves/" + m_PlayerName + Path.DirectorySeparatorChar;
     }
     #endregion
 
@@ -302,7 +367,7 @@ public class PlayerData : Singleton<PlayerData>
         }
     }
 
-    private void Reset()
+    private void Clear()
     {
         m_PlayerName = "";
         m_AttackValue = new int[2];
@@ -313,10 +378,17 @@ public class PlayerData : Singleton<PlayerData>
         m_StatImprovePoints = 0;
         m_HealthPoints = 0;
         m_MonstylePoints = 0;
-        m_Levelup = new List<int>();
-        m_Classup = new List<int>();
-        m_LevelupNotification = null;
-        m_ClassupNotification = null;
+    }
+
+    private void LoadSpecials(JSONObject p_Skill)
+    {
+        List<SpecialData> m_SpecialList = new List<SpecialData>();
+        for (int i = 0; i < p_Skill.Count; i++)
+        {
+            m_SpecialList.Add(SpecialDataBase.GetInstance().GetSpecialData(p_Skill[i].str));
+        }
+
+        AddSkills(m_SpecialList);
     }
     #endregion
 }

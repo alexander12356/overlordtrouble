@@ -52,11 +52,6 @@ public class CutsceneSystem : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-            Skip();
-        }
-
         m_Cutscenes[m_CurrentCutscene][m_CurrentStep].UpdateStep();
     }
 

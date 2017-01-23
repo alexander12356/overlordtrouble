@@ -3,22 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestSaveData
-{
-    public string username;
-    public int level;
-    public DateTime saveDate;
-    public DateTime gameDuration;
-
-    public TestSaveData(string p_Username, int p_Level, DateTime p_DateTime, DateTime p_GameDuration)
-    {
-        username = p_Username;
-        level = p_Level;
-        saveDate = p_DateTime;
-        gameDuration = p_GameDuration;
-    }
-}
-
 public class LoadingPanel : Panel
 {
     public static LoadingPanel m_Prefab = null;
@@ -28,7 +12,7 @@ public class LoadingPanel : Panel
     private event PanelActionHandler m_CancelAction;
 
     // test data
-    private List<TestSaveData> m_TestSaveData = null;
+    private List<SaveData> m_TestSaveData = new List<SaveData>();
 
     public static LoadingPanel prefab
     {
@@ -69,21 +53,27 @@ public class LoadingPanel : Panel
     public override void Awake()
     {
         base.Awake();
-        // test fill
-        FillSaveData();
+
+        SaveDataBase.GetInstance().Parse();
+
         InitButtonList();
     }
 
     private void InitButtonList()
     {
-        // test data 
-        foreach (var testData in m_TestSaveData)
+        foreach (SaveData l_SaveData in SaveDataBase.GetInstance().GetSaves().Values)
         {
-            LoadButton loadButton = Instantiate(LoadButton.prefab);
-            loadButton.title = String.Format("{0} {1} уровень. {2} \nвремя игры {3}", testData.username, testData.level, testData.saveDate, testData.gameDuration.ToShortTimeString());
-            savesList.AddButton(loadButton);
+            string l_LevelText = LocalizationDataBase.GetInstance().GetText("GUI:Profile:Level");
+            string l_DurationText = LocalizationDataBase.GetInstance().GetText("GUI:LoadingPanel:GameDuration");
+
+            LoadButton l_LoadButton = Instantiate(LoadButton.prefab);
+            l_LoadButton.title = l_SaveData.userName + " " + l_SaveData.level + " " + l_LevelText + ". " + l_SaveData.saveDate.ToString() + "\n" + l_SaveData.gameDuration + " " + l_DurationText;
+            l_LoadButton.AddAction(LoadGame);
+            l_LoadButton.Init(l_SaveData);
+            savesList.AddButton(l_LoadButton);
         }
         savesList.AddKeyArrowAction(savesListScrolling.CheckScrolling);
+        savesList.AddCancelAction(Cancel);
         savesList.isActive = true;
 
         savesListScrolling.Init(244.0f, 1);
@@ -94,13 +84,12 @@ public class LoadingPanel : Panel
     {
         base.UpdatePanel();
 
-        savesList.UpdateKey();
-
-        if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Backspace))
+        if (moving)
         {
-            Cancel();
-            Input.ResetInputAxes();
+            return;
         }
+
+        savesList.UpdateKey();
 
         if(Input.GetKeyDown(KeyCode.Delete))
         {
@@ -113,6 +102,7 @@ public class LoadingPanel : Panel
         YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
         l_YesNoPanel.AddYesAction(DeleteSave);
         l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("GUI:Profile:QuestionImproveStats"));
+
         MainMenuSystem.GetInstance().ShowPanel(l_YesNoPanel, true);
     }
 
@@ -121,11 +111,37 @@ public class LoadingPanel : Panel
         LoadButton l_LoadButton = (LoadButton)savesList.currentButton;
         string removedButtonId = l_LoadButton.id;
         savesList.RemoveButton(savesList.currentButtonId);
+
+        SaveDataBase.GetInstance().DeleteSave(l_LoadButton.saveData.userName);
     }
 
-    private void RunNewGame()
+    private void LoadGame()
     {
+        YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
+        l_YesNoPanel.AddYesAction(StartLoadedGame);
+        l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("GUI:LoadingPanel:Shure"));
+        MainMenuSystem.GetInstance().ShowPanel(l_YesNoPanel, true);
+    }
 
+    private void StartLoadedGame()
+    {
+        GameManager.GetInstance().isTesting = false;
+
+        SaveData l_SaveData = (m_SavesList.currentButton as LoadButton).saveData;
+
+        PlayerData.GetInstance().LoadData(l_SaveData.playerData);
+        SaveSystem.GetInstance().LoadFromFile(l_SaveData.worldState);
+        SaveSystem.GetInstance().StartDuration();
+        PlayerInventory.GetInstance().LoadData(l_SaveData.inventoryItems, l_SaveData.equipmentSlotData);
+
+        string l_SenderLocation = l_SaveData.location["SenderLocation"].str;
+        string l_TargetRoom = l_SaveData.location["TargetRoom"].str;
+        string l_Scene = l_SaveData.location["Scene"].str;
+
+        SaveSystem.GetInstance().Init(l_Scene);
+        PlayerPrefs.SetString("SenderLocation", l_SenderLocation);
+        PlayerPrefs.SetString("TargetRoomId", l_TargetRoom);
+        MainMenuSystem.GetInstance().StartLocation(l_Scene);
     }
 
     private void Cancel()
@@ -146,20 +162,5 @@ public class LoadingPanel : Panel
     public void RemoveCancelAction(PanelActionHandler p_Action)
     {
         m_CancelAction -= p_Action;
-    }
-
-    // test 
-    private void FillSaveData()
-    {
-        m_TestSaveData = new List<TestSaveData>();
-        TestSaveData l_TestSaveData;
-        l_TestSaveData = new TestSaveData("Кеша", 1, DateTime.Now, DateTime.Now);
-        m_TestSaveData.Add(l_TestSaveData);
-        l_TestSaveData = new TestSaveData("Юрген", 10, DateTime.Now, DateTime.Now);
-        m_TestSaveData.Add(l_TestSaveData);
-        l_TestSaveData = new TestSaveData("Володя", 99, DateTime.Now, DateTime.Now);
-        m_TestSaveData.Add(l_TestSaveData);
-        l_TestSaveData = new TestSaveData("Flea", 12, DateTime.Now, DateTime.Now);
-        m_TestSaveData.Add(l_TestSaveData);
     }
 }

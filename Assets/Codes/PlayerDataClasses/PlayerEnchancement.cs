@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class PlayerEnchancement
 {
-    private List<ImproveData> m_Enchancement = new List<ImproveData>();
     private string m_CurrentEnchancement = string.Empty;
 
     public PlayerEnchancement()
     {
     }
 
-    public void AddEnchancement(string p_Id)
+    public void UpgradeClass(string p_Id)
     {
         ImproveData l_ImproveData = ImproveDataBase.GetInstance().GetImprove(p_Id);
         PlayerData.GetInstance().AddSkills(l_ImproveData.skills);
 
+        m_CurrentEnchancement = p_Id;
+    }
+
+    public void SetEnchancementId(string p_Id)
+    {
         m_CurrentEnchancement = p_Id;
     }
 
@@ -41,11 +44,8 @@ public class PlayerEnchancement
         return Resources.Load<Sprite>(l_Temp);
     }
 
-    public void ResetData()
+    public void Clear()
     {
-        m_Enchancement = new List<ImproveData>();
         m_CurrentEnchancement = string.Empty;
-
-        AddEnchancement("DewElemental");
     }
 }

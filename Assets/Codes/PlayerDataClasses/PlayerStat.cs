@@ -42,8 +42,22 @@ public class PlayerStat
         m_Stats[p_StatName] = p_Value;
     }
 
-    public void ResetData()
+    public void Clear()
     {
         m_Stats = new Dictionary<string, int>();
+    }
+
+    public JSONObject GetJson()
+    {
+        JSONObject l_StatJson = new JSONObject();
+
+        l_StatJson.AddField("HealthPoints", m_Stats["HealthPoints"]);
+        l_StatJson.AddField("MonstylePoints", m_Stats["MonstylePoints"]);
+        l_StatJson.AddField("Attack", m_Stats["Attack"]);
+        l_StatJson.AddField("Defense", m_Stats["Defense"]);
+        l_StatJson.AddField("Speed", m_Stats["Speed"]);
+        l_StatJson.AddField("Fortune", m_Stats["Fortune"]);
+
+        return l_StatJson;
     }
 }

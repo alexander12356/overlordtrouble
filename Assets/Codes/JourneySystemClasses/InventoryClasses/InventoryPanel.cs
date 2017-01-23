@@ -111,9 +111,8 @@ public class InventoryPanel : Panel
 
     private void CloseInventory()
     {
-        JourneySystem.GetInstance().SetControl(ControlType.Player);
-        PlayerInventory.GetInstance().SaveAll();
         Close();
+        JourneySystem.GetInstance().SetControl(ControlType.Player);
     }
 
     public override void UpdatePanel()

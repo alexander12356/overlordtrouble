@@ -6,9 +6,6 @@ public class MovingActorStep : BaseStep
     protected JourneyActor m_JourneyActor;
 
     [SerializeField]
-    private Vector3 m_DestPosition = Vector3.zero;
-
-    [SerializeField]
     private string m_AnimationName = string.Empty;
 
     [SerializeField]
@@ -17,11 +14,11 @@ public class MovingActorStep : BaseStep
     public override void UpdateStep()
     {
         base.UpdateStep();
-
-        m_JourneyActor.myTransform.localPosition = Vector3.MoveTowards(m_JourneyActor.myTransform.localPosition, m_DestPosition, m_Speed * Time.deltaTime);
+        
         m_JourneyActor.myAnimator.SetBool(m_AnimationName, true);
+        m_JourneyActor.GoTo(transform.position, m_Speed * Time.deltaTime);
 
-        if ((m_JourneyActor.myTransform.localPosition - m_DestPosition).sqrMagnitude < 0.25f)
+        if ((m_JourneyActor.myTransform.position - transform.position).sqrMagnitude < 0.05f)
         {
             EndStep();
             m_JourneyActor.myAnimator.SetBool(m_AnimationName, false);

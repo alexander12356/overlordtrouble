@@ -17,6 +17,57 @@
 			"Bokalisk"
 		]
 	},
+	"BattleSkwatwolf_1": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf"
+		]
+	},
+	"BattleSkwatwolf_2": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf",
+			"Skwatwolf"
+		]
+	},
+	"BattleSkwatwolf_3": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf",
+			"Skwatwolf",
+			"Skwatwolf"
+		]
+	},
+	"BattleSkwatwolf_4": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf"
+		]
+	},
+	"BattleSkwatwolf_5": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf"
+		]
+	},
+	"BattleSkwatwolf_6": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",

@@ -24,6 +24,70 @@
 					"Value" : 40.0
 				}
 			}
+		},
+		{
+			"Id" : "SaltCucumber",
+			"Image" : "Sprites/Items/Key/SaltCucumber",
+			"Type" : "Key",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "SmallExperiencePotion",
+			"Image" : "Sprites/Items/SingleUse/SmallExperiencePotion",
+			"Type" : "SingleUse",
+			"Effect":
+			{				
+				"Training" :
+				{
+					"Value" : 40.0
+				}
+			}
+		},
+		{
+			"Id" : "Scoop",
+			"Image" : "Sprites/Items/Key/Scoop",
+			"Type" : "Key",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "Apple",
+			"Image" : "Sprites/Items/SingleUse/Apple",
+			"Type" : "SingleUse",
+			"Effect":
+			{
+				"Healing" :
+				{
+					"Value" : 4.0
+				}
+			}
+		},
+		{
+			"Id" : "BookAboutSpoon",
+			"Image" : "Sprites/Items/Key/BookAboutSpoon",
+			"Type" : "Key",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "OldHelmet",
+			"Image" : "Sprites/Items/Key/OldHelmet",
+			"Type" : "Equipment",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "RustyAxe",
+			"Image" : "Sprites/Items/Key/RustyAxe",
+			"Type" : "Equipment",
+			"Effect":
+			{
+			}
 		}
 	]
 }

@@ -27,6 +27,8 @@ public class EnterNamePanel : Panel
         m_ButtonList = GetComponentInChildren<ButtonList>();
 
         m_ButtonList[0].AddAction(ShowConfirmPanel);
+
+        SaveDataBase.GetInstance().Parse();
     }
 
     public void Start()
@@ -37,6 +39,11 @@ public class EnterNamePanel : Panel
     public override void UpdatePanel()
     {
         base.UpdatePanel();
+
+        if (moving)
+        {
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -60,16 +67,27 @@ public class EnterNamePanel : Panel
 
     private void ShowConfirmPanel()
     {
-        YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
-        l_YesNoPanel.AddYesAction(ConfirmPanel);
-        l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("GUI:EnterName:AreYouShure"));
+        if (SaveDataBase.GetInstance().HasSave(m_InputField.text))
+        {
+            WarningPanel l_WarningPanel = Instantiate(WarningPanel.prefab);
+            l_WarningPanel.SetText(LocalizationDataBase.GetInstance().GetText("GUI:EnterName:Warning"));
 
-        EnterNameSystem.GetInstance().ShowPanel(l_YesNoPanel, true);
+            EnterNameSystem.GetInstance().ShowPanel(l_WarningPanel, true);
+        }
+        else
+        {
+            YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
+            l_YesNoPanel.AddYesAction(ConfirmPanel);
+            l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("GUI:EnterName:AreYouShure"));
+
+            EnterNameSystem.GetInstance().ShowPanel(l_YesNoPanel, true);
+        }
     }
 
     private void ConfirmPanel()
     {
-        PlayerData.GetInstance().ResetData();
+        PlayerData.GetInstance().NewGameDataInit();
+        PlayerInventory.GetInstance().NewGameDataInit();
         GameManager.GetInstance().isTesting = false;
         PlayerData.GetInstance().SetPlayerName(m_InputField.text);
         EnterNameSystem.GetInstance().StartGame();

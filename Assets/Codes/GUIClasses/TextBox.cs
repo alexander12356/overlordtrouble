@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -17,21 +18,43 @@ public class TextBox : MonoBehaviour
     private Animator m_ActiveButtonAnimator = null;
     private Animator m_TalkingAnimator = null;
     private string m_TalkingAnimationId = string.Empty;
+    private Image m_ActiveKey = null;
+    private Text m_ActiveKeyText = null;
 
     [SerializeField]
     private float m_ShowingTextSpeed = 0.5f;
+
+    [SerializeField]
+    private int m_PageMaxSymbolCount = 255;
     #endregion
 
     #region Interface
+    public bool isActiveButton
+    {
+        set
+        {
+            m_ActiveKey.enabled = value;
+            m_ActiveKeyText.enabled = value;
+            m_ActiveButtonAnimator.enabled = value; 
+        }
+    }
+
     public void Awake()
     {
         m_Text = GetComponentInChildren<Text>();
         m_ActiveButtonAnimator = GetComponent<Animator>();
+        m_ActiveKey = GetComponentInChildren<Image>();
+
+        Transform l_ActiveKeyTransform = transform.FindChild("ActiveKeyText");
+        if (l_ActiveKeyTransform != null)
+        {
+            m_ActiveKeyText = l_ActiveKeyTransform.GetComponent<Text>();
+        }
     }
 
     public void SetText(List<string> p_Text)
     {
-        m_FullText = p_Text;
+        m_FullText = ResizeText(p_Text);
 
         m_Text.text     = "";
         m_CurrentPhrase = 0;
@@ -142,6 +165,35 @@ public class TextBox : MonoBehaviour
         {
             m_EndAction();
         }
+    }
+
+    private List<string> ResizeText(List<string> p_FullText)
+    {
+        List<string> l_NewFullText = new List<string>();
+
+        for (int i = 0; i < p_FullText.Count; i++)
+        {
+            string[] l_Words = p_FullText[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+            string l_Text = "";
+            for (int j = 0; j < l_Words.Length; j++)
+            {
+                if (l_Text.Length + l_Words[j].Length + 4 < m_PageMaxSymbolCount)
+                {
+                    l_Text += l_Words[j] + " ";
+                }
+                else
+                {
+                    l_Text += " ...";
+                    l_NewFullText.Add(l_Text);
+                    l_Text = l_Words[j] + " ";
+                }
+            }
+
+            l_NewFullText.Add(l_Text);
+        }
+
+        return l_NewFullText;
     }
     #endregion
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public delegate void PanelButtonActionHandler();
 
@@ -11,6 +12,7 @@ public class PanelButton : MonoBehaviour
     protected Image m_SelectedImage;
     protected Text  m_TitleText;
 	private RectTransform m_RectTransform = null;
+    private UnityEvent m_ConfirmUnityAction = null;
 
     [SerializeField]
     protected string m_Title = string.Empty;
@@ -112,6 +114,11 @@ public class PanelButton : MonoBehaviour
         m_ConfirmAction += p_Action;
     }
 
+    public virtual void AddAction(UnityEvent p_UnityEvent)
+    {
+        m_ConfirmUnityAction = p_UnityEvent;
+    }
+
     public virtual void RemoveAction(PanelButtonActionHandler p_Action)
     {
         m_ConfirmAction -= p_Action;
@@ -126,6 +133,11 @@ public class PanelButton : MonoBehaviour
         else
         {
             Debug.LogWarning("Button: " + gameObject.name + " not have a action!");
+        }
+
+        if (m_ConfirmUnityAction != null)
+        {
+            m_ConfirmUnityAction.Invoke();
         }
     }
 

@@ -44,6 +44,13 @@
 	<!-- items -->
 	<Text id="Item:SmallHealthPotion">Малое зелье жизни</Text>
 	<Text id="Item:SmallSpecialPotion">Малое зелье энергии</Text>
+	<Text id="Item:SmallExperiencePotion">Малая сфера опыта</Text>
+	<Text id="Item:SaltCucumber">Соленые огурчики</Text>
+	<Text id="Item:Scoop">Ковшик</Text>
+	<Text id="Item:Apple">Яблоко</Text>
+	<Text id="Item:BookAboutSpoon">Книжка про ложки</Text>
+	<Text id="Item:OldHelmet">Старый шлем</Text>
+	<Text id="Item:RustyAxe">Ржавый топор</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>
@@ -116,6 +123,11 @@
 	<Text id="GUI:Journey:Inventory:Wear">Надеть</Text>
 	<Text id="GUI:Journey:Inventory:Items">Предметы</Text>
 	
+	<Text id="GUI:Journey:Sleep">Вся усталость сошла на нет</Text>
+	
+	<Text id="GUI:Journey:ItemCatched">Вы получили %d</Text>
+	<Text id="GUI:Journey:AddMonett">Вы нашли %d монетт.</Text>
+	
 	<Text id="GUI:Profile:Level">Уровень</Text>
 	<Text id="GUI:Profile:NextLevelup">до следующего уровня:</Text>
 	<Text id="GUI:Profile:StatsPoints">Осталось очков: %d</Text>
@@ -150,7 +162,7 @@
 	<Text id="GUI:BattleSystem:Select">Выбрать</Text>
 	<Text id="GUI:BattleSystem:Cancel">Назад</Text>
 	<Text id="GUI:BattleSystem:UseSpecials">Исполнить</Text>
-	<Text id="GUI:BattleSystem:Win">Враги убиты.\nВы победили.\nГГ получает %d exp</Text>
+	<Text id="GUI:BattleSystem:Win">Враги повержены.\nВы победили.\nГГ получает %d exp</Text>
 	<Text id="GUI:BattleSystem:Lose">Кеша больше не может сражаться дальше, Кеша потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли.</Text>
 	<Text id="GUI:BattleSystem:And">и</Text>
 	<Text id="GUI:BattleSystem:AttackFail">Атака не прошла</Text>
@@ -167,6 +179,8 @@
 	<Text id="GUI:Improve:СlassChoosed">Вы выбрали класс %d, вы получили следующие приемы:\n%d</Text>
 	<Text id="GUI:YesNoPanel:Confirm">Да</Text>
 	<Text id="GUI:YesNoPanel:Cancel">Нет</Text>
+	
+	<Text id="GUI:Ok">Ок</Text>
 	
 	<!-- Main Menu -->
 	<Text id="GUI:MainMenuPanel:NewGame">Новая игра</Text>
@@ -188,35 +202,230 @@
 	<Text id="GUI:EnterName:EnterName">Перед тем как мы начнем,\nНапишите - как вас называть.</Text>
 	<Text id="GUI:EnterName:Standart">Кеша</Text>
 	<Text id="GUI:EnterName:AreYouShure">Вы уверены?</Text>
+	<Text id="GUI:EnterName:Warning">Это имя уже используется.</Text>
+	
+	<Text id="GUI:LoadingPanel:Shure">Вы уверены, что хотите загрузить эту игру?</Text>
+	<Text id="GUI:LoadingPanel:GameDuration">время игры</Text>
 	
 	<!-- Dialogs -->
-	<Text id="Dialog:SkeletonChild:1">Привет!</Text>
-	<Text id="Dialog:SkeletonChild:2">Посмотри на этот цветочек! Разве он не милый?</Text>
-	<Text id="Dialog:SnailKid:1">Привет.</Text>
-	<Text id="Dialog:SnailKid:2">Этот цветок внезапно возник сегодня. Мы делаем счастливый танец, чтобы помочь ему вырасти.</Text>
-	<Text id="Dialog:Bokalisk:1">Куд-кудах! Куд-кудах!</Text>
-	<Text id="Dialog:Bokalisk:2">КОООООООООКОКОКОКОК!</Text>
-	<Text id="Dialog:Bokalisk1:1">Куд-кудахи! Куд-кудахи!</Text>
-	<Text id="Dialog:Bokalisk1:2">КОКОКОКОКОККООООКХХ!!!</Text>
+	<!-- Skeleton child Dialogs -->
+	<Text id="Dialog:SkeletonChild:AboutFlower:1">Привет!</Text>
+	<Text id="Dialog:SkeletonChild:AboutFlower:2">Посмотри на этот цветочек! Разве он не милый?</Text>
+	
+	<!-- Snail kid Dialogs -->
+	<Text id="Dialog:SnailKid:AboutFlower:1">Привет.</Text>
+	<Text id="Dialog:SnailKid:AboutFlower:2">Этот цветок внезапно возник сегодня. Мы делаем счастливый танец, чтобы помочь ему вырасти.</Text>
+	<Text id="Dialog:SnailKid:Quest:FoodForSnailKid:1">Мама послала мне еду?</Text>
+	<Text id="Dialog:SnailKid:Quest:FoodForSnailKid:2">Мммм. Обожаю соленые огурчики~♥</Text>
+	
+	<!-- Bokalisk Dialogs -->
+	<Text id="Dialog:Bokalisk:StartBattle:1">Куд-кудах! Куд-кудах!</Text>
+	<Text id="Dialog:Bokalisk:StartBattle:2">КОООООООООКОКОКОКОК!</Text>
+	<Text id="Dialog:BokaliskOrda:StartBattle:1">Куд-кудахи! Куд-кудахи!</Text>
+	<Text id="Dialog:BokaliskOrda:StartBattle:2">КОКОКОКОКОККООООКХХ!!!</Text>
+	
+	<!-- Store Dialogs -->
 	<Text id="Dialog:Store:Welcome">Добро пожаловать в мой скромный магазинчик. Хотите ли произвести покупку?</Text>
 	<Text id="Dialog:Store:1">Все мои товары отличаются большой прочностью и принадлежали храбрым воинам, которые вызвали на бой дракона</Text>
 	<Text id="Dialog:Store:2">Никто из них не выжил, в отличии от их экипировки</Text>
-	<Text id="Dialog:VillageElder:1">Вижу, ты проснулся.</Text>
-	<Text id="Dialog:VillageElder:2">Я все еще сонный.</Text>
-	<Text id="Dialog:VillageElder:3">На этом пока все.</Text>
-	<Text id="Dialog:GoatPerson:1">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
-	<Text id="Dialog:GoatPerson:2">Но сегодня до меня дошла мысль, что если наполнить ведра ровно до половины я смогу нести два ведра одновременно.</Text>
-	<Text id="Dialog:GoatPerson:3">Разве я не гений?</Text>
-	<Text id="Dialog:Terner:1">Привет</Text>
-	<Text id="Dialog:OldWell">Колодец... полон воды… ее можно пить.</Text>
+	
+	<!-- Goat person Dialogs-->
+	<Text id="Dialog:GoatPerson:AboutWater:1">Обычно я прихожу с одним ведром так как я не могу удержать два ведра с водой.</Text>
+	<Text id="Dialog:GoatPerson:AboutWater:2">Но сегодня до меня дошла мысль, что если наполнить ведра ровно до половины я смогу нести два ведра одновременно.</Text>
+	<Text id="Dialog:GoatPerson:AboutWater:3">Разве я не гений?</Text>
+	
+	<!-- Terner Dialogs -->
+	<Text id="Dialog:Terner:Ask">Хахах! Привет малой! Тебя послал старик?</Text>
+	<Text id="Dialog:Terner:FromElder:1">Кхм-кхм! Вот и наступил этот день когда ты уже готов пойти в мир.</Text>
+	<Text id="Dialog:Terner:FromElder:2">Я бы сейчас заплакал от радости…</Text>
+	<Text id="Dialog:Terner:FromElder:3">НО!</Text>
+	<Text id="Dialog:Terner:FromElder:4">Я должен тебя подготовить к жестокости мира снаружи… и куриц.</Text>
+	<Text id="Dialog:Terner:FromElder:5">Поэтому ты должен будешь сразиться с одной из них. Знай - эти курицы гораздо сильнее любой мелкой сошки которая сейчас ходит по дорогам, поэтому не недооценивай их.</Text>
+	<Text id="Dialog:Terner:FromElder:6">Иии... перед тем как начнешь, хочешь я расскажу тебе, что я понял о монстайлах которые ты используешь?</Text>
+	<Text id="Dialog:Terner:NotFromElder">О...</Text>
+	<Text id="Dialog:Terner:WantLearnMonstyle:1">Монстайлы используются только во время боя, для их использования нажми на надпись монстайл и выбери от одного до четырех специальных приемов. Потом, выбери оппонента на котором они будут использованы, после чего ты должен нажать правильные кнопки, и запомни - если ты ошибешься хотя бы один раз то прием не будет произведен и даже не возвратит свою стоимость.</Text>
+	<Text id="Dialog:Terner:WantLearnMonstyle:2">Надо же сколько разных терминов. Я даже не знаю где ты найдешь кнопки во время боя… у меня такое чувство что я что-то разрушил.</Text>
+	<Text id="Dialog:Terner:WantLearnMonstyle:3">ВОоо всяком случае! Удачи с тренировкой!</Text>
+	<Text id="Dialog:Terner:NotWantLearnMonstyle">Хохо! Тогда удачи с тренировкой!</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:FromElder">Да</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:NotFromElder">Нет</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:WantLearnMonstyle">Да</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:NotWantLearnMonstyle">Нет</Text>
+	<Text id="Dialog:Terner:TutorialWin">Молодцом малой! Мало кто может похвастаться тем что победил Кокотрикса с первого раза! Думаю ты готов! Так что иди к старику и скажи, что прошел тренировку.</Text>
+	<Text id="Dialog:Terner:TutorialLose:1">Ну, всяко случается. Эти куры далеко не так слабы как кажутся. Но думаю что основную часть ты понял. Так что можешь идти к старику и скажи что ты готов.</Text>
+	<Text id="Dialog:Terner:TutorialLose:2">Не боись, снаружи деревни опасности будут гораздо слабее наших кур.</Text>
+	<Text id="Dialog:Terner:SaveLive">Если хочешь, то можешь попытаться сразиться с курами еще раз, но советую перед этим посетить палатку солнца. Это может помочь тебе сохранить свою жизнь.</Text>
+	<Text id="Dialog:Terner:GoScamper">Ну а я пошел на пробежку.</Text>
+	<Text id="Dialog:Terner:Scamper:1">Может со стороны и не похоже, что я бегаю, но я бегаю</Text>
+	<Text id="Dialog:Terner:Scamper:2">Надеюсь я ничего не разбил?</Text>
+	
+	<!-- Hero House Dialogs -->
+	<Text id="Dialog:HeroHouse:Bed">Может поспать?</Text>
+	<Text id="Dialog:HeroHouse:Bed:YesSleep">Да</Text>
+	<Text id="Dialog:HeroHouse:Bed:NoSleep">Нет</Text>
+	<Text id="Dialog:HeroHouse:Cupboard">Здесь хранятся всякие безделушки</Text>
+	<Text id="Dialog:HeroHouse:Candle">Ей еще светить и светить</Text>
+	<Text id="Dialog:HeroHouse:Stove">Печка как печка, но пока без огня.</Text>
+	<Text id="Dialog:HeroHouse:Picture">Хорошие воспоминания всегда нужно помнить</Text>
+	<Text id="Dialog:HeroHouse:Flower">Самое обычное комнатное растение, делает воздух чище.</Text>
+	
+	<!-- Village Elder Dialogs -->
+	<Text id="Dialog:VillageElder:Hey:1">Эй!</Text>
+	<Text id="Dialog:VillageElder:Hey:2">%PlayerName, подойди сюда.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:1">Вижу, ты проснулся.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:2">У меня для тебя хорошие новости.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:3">Ты достиг достаточного возраста для более серьезной работы, чем кормежка единорога.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:4">В общем так, для начала нужно проверить насколько хорошо ты сможешь себя защитить, поэтому пойди к тренировочной площадке, там должен быть Тернер скажи что тебе нужно проверить свои силы, он поймет</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:1">Хмм? Тренировочная площадка?</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:2">Хехехе, это наш загон с курицами.</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:3">Да, загон с курицами также является тренировочной площадкой.</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:4">Ты поймешь почему, когда поговоришь с Тернером.</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:5">Чего стоим? Кого ждем?</Text>
+	<Text id="Dialog:VillageElder:GoToForest:1">Хммм… вижу ты прошел тренировку.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:2">Теперь ты можешь считаться самостоятельным молодым… монстром.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:3">И твой первый шаг в новый мир ты сделаешь прямо сейчас, из-за того что появилась проблема.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:4">Как ты видишь Джошуа человек, он приходил просто погостить и сейчас хотел отправиться домой но… </Text>
+	<Text id="Dialog:VillageElder:GoToForest:5">На самом деле - алтарь ни к чему сейчас не может подключиться. Как ты знаешь, алтари служат порталами, которые можно использовать для перемещения из одной точки в другую.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:6">И вот мы решили попытаться восстановить связь нашей деревни с его деревней, для этого ты должен пойти к его деревне и использовать тамошний алтарь для перехода к нашему.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:7">Но чтобы дойти до туда ты должен пройти через лес… будь осторожен у меня чувство будто что-то назревает.</Text>
+	<Text id="Dialog:VillageElder:Gift:1">Раз уж так вышло, что ты зашел в мой дом, думаю я дам тебе подарок в честь твоего взросления.</Text>
+	<Text id="Dialog:VillageElder:Gift:2">Не знаю насколько долго ты это будешь носить, но уверен, что этот шлем тебе неплохо поможет.</Text>
+	<Text id="Dialog:VillageElder:GoodLuck">Удачи в твоем пути.</Text>
+	
+	<!-- SunPriestG Dialogs -->
+	<Text id="Dialog:SunPriestG:AboutSave:1">Видишь этот знак на полу? Это знак солнца, он позволяет чуток взглянуть в свое будущее, в зависимости от того кто на него ступает четкость видения может разниться. Также он исцеляет все повреждения на теле.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:2">Можно даже сказать, что знак солнца <b>сохраняет</b>  того кто им воспользовался.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:3">Знаки солнца очень распространены, и их можно найти в самых неожиданных местах.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:4">Я не умею хорошо ими пользоваться, но я могу их создавать.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:5">Запомни, знак солнца <b>сохраняет</b> тех, кто им пользуется.</Text>
+	
+	<!-- SunPriest Dialogs -->
+	<Text id="Dialog:SunPriest:Welcome">Добро пожаловать в храм солнца! А также в мой дом.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:1">Алтарь солнца может подключаться к другим подобным алтарям, то есть это очень удобное средство передвижения. Но сейчас он не работает.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:2">На самом деле он перестал работать неделю назад, но я думал, что это пройдет со временем.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:3">Он все еще не работает.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:4">Я жалею что не взял инструкцию к нему.</Text>
+	<Text id="Dialog:SunPriest:TryTeleport">Все еще не работает хммм.</Text>
+	
+	<!-- SunPriest Home -->
+	<Text id="Dialog:SunHome:Stove">Одна печка и четыре трубы, непрактично но выглядит неплохо.</Text>
+	<Text id="Dialog:SunHome:Bucket">Пусто.</Text>
+	<Text id="Dialog:SunHome:Box">Его наполняют повседневным мусором.</Text>
+	<Text id="Dialog:SunHome:Cactus">Самое обычное комнатное растение, делает воздух чище. Это кактус.</Text>
+	
+	<!-- Mama Snail Dialogs -->
+	<Text id="Dialog:MamaSnail:Task:Ask">%PlayerName, можно попросить твоей помощи? Сынок забыл свою еду, можешь ему это передать за нас?</Text>
+	<Text id="Dialog:MamaSnail:Task:Help">Да</Text>
+	<Text id="Dialog:MamaSnail:Task:NotHelp">Нет</Text>
+	<Text id="Dialog:MamaSnail:Task:Thank">Ох! Спасибо тебе большое, мы бы сами доставили но как видишь мы очень медленные.</Text>
+	<Text id="Dialog:MamaSnail:Task:Sorry">Ох жаль. Наверное ты торопишься.</Text>
+	<Text id="Dialog:MamaSnail:QuestAccepted">Думаю он сейчас играет с Костеллой, у дерева.</Text>
+	<Text id="Dialog:MamaSnail:QuestDenied">Все таки решился помочь?</Text>
+	<Text id="Dialog:MamaSnail:QuestDenied:Help">Да</Text>
+	<Text id="Dialog:MamaSnail:QuestDenied:NotHelp">Нет</Text>
+	<Text id="Dialog:MamaSnail:QuestCompleted">Ты их доставил? Ох даже не знаю что бы мы без тебя делали. Вот прими это в качестве благодарности.</Text>
+	<Text id="Dialog:MamaSnail:AboutSnail:1">Мы выглядим как улитки и двигаемся очень медленно, но на этом сходства кончаются. Многие удивляются тому, что мы любим соленую еду.</Text>
+	<Text id="Dialog:MamaSnail:AboutSnail:2">Но ты ведь об этом знал?</Text>
+	
+	<!-- Papa Snail Dialogs -->
+	<Text id="Dialog:PapaSnail:Congratulation:1">Охохо %PlayerName! Я слышал ты уже достаточно взрослый чтобы выйти за пределы деревни. Поздравляю!</Text>
+	<Text id="Dialog:PapaSnail:Congratulation:2">Жду не дождусь того как сынок тоже достигнет этого возраста.</Text>
+	
+	<!-- Snail House -->
+	<Text id="Dialog:SnailHouse:Cupboard">Тут стоит большое число банок… все помечены как соль.</Text>
+	
+	<!-- NotACat Dialogs -->
+	<Text id="Dialog:NotACat:Murr:1">Муйау</Text>
+	<Text id="Dialog:NotACat:Murr:2">Мияоу</Text>
+	<Text id="Dialog:NotACat:Murr:3">Мувр</Text>
+	<Text id="Dialog:NotACat:Murr:4">Эээ… Мурияу?</Text>
+	<Text id="Dialog:NotACat:Murr:5">Ладно у меня это не выходит.</Text>
+	<Text id="Dialog:NotACat:Murr:6">Ты когда нибудь пробовал мяукать точно так же как обычная кошшшка?</Text>
+	<Text id="Dialog:NotACat:Murr:7">Это очень сссложно.</Text>
+	<Text id="Dialog:NotACat:Murr:8">Я все ещщще помню то, как был огромной змеей.</Text>
+	<Text id="Dialog:NotACat:Murr:9">Но зато в этом теле мне гораздо теплее даже рядом ссс ней.</Text>
+	
+	<!-- Snowoman Dialog -->
+	<Text id="Dialog:Snowoman:AboutBookshelf:1">А, %PlayerName пришел почитать книги?</Text>
+	<Text id="Dialog:Snowoman:AboutBookshelf:2">Я решила немного освежить здешнюю атмосферу, и припрятала в некоторых книжках монетты.</Text>
+	<Text id="Dialog:Snowoman:AboutBookshelf:3">Если будешь внимательным то, возможно, найдешь их.</Text>
+	<Text id="Dialog:Snowoman:AboutBookshelf:4">Ну как? Нашел что нибудь?</Text>
+	<Text id="Dialog:Snowoman:Complete:1">Ах! %PlayerName. Ты нашел 80 монетт! Великолепно! За твою тягу к знаниям</Text>
+	<Text id="Dialog:Snowoman:Complete:2">или возможно к деньгам.</Text>
+	<Text id="Dialog:Snowoman:Complete:3">Позволь тебя вознаградить 20 монеттами! И возьми эту сферу опыта.</Text>
+	<Text id="Dialog:Snowoman:PreComplete:1">А... надо же ты зашел и уже прочитал все нужные книги.</Text>
+	<Text id="Dialog:Snowoman:PreComplete:2">Твоя тяга к знаниям не может меня не радовать!</Text>
+	<Text id="Dialog:Snowoman:PreComplete:3">И ты нашел все монетты, что я там спрятала! Поздравляю!</Text>
+	<Text id="Dialog:Snowoman:PreComplete:4">Позволь тебя вознаградить 20 монеттами! И возьми эту сферу опыта.</Text>
+	<Text id="Dialog:Snowoman:Common">Думаю прятать по 10 монетт почти в каждую книгу была не лучшей моей затеей...</Text>
+	
+	<!-- Library -->
+	<Text id="Dialog:Library:Coathanger">Такая вешалка всего лишь одна на всю деревню, ею не пользуется даже ее обладательница</Text>
+	<Text id="Dialog:Library:Iceout">Создано специально для слишком холодных монстров, Ледогон 2000 выводит лишний холод из дома. Таким образом, в доме нету инея.</Text>
+	<Text id="Dialog:Library:Bookshelf:1">История Вельтоны. Известно, что изначальными жителями Вельтионы были люди. Потом от них появились эльфы, гномы, полурослики. Через какое-то время в этот мир попали монстры. Из-за значительных отличий в их строении обе стороны испытали сильное отвращение друг к другу и началась война. Несмотря на то, что известны все эти события, о дате этих событий известно лишь то, что это было очень давно.</Text>
+	<Text id="Dialog:Library:Bookshelf:2">Культ Солнца. Эта вера начала свое распространение 137 лет назад, но создана была еще раньше, примерно 834 года назад. Ее основали человек и сфинкс. Их народы жили в пустынях, и когда пришла великая засуха нужно было работать сообща, чтобы выжить. Чтобы создать что-то общее между двумя народами было решено создать новую веру, для новой веры было нужно новое чудо. Этим чудом стали порталы алтарей солнца и знаки солнца. Неизвестно каким образом были созданы эти объекты, но если судить по рассказам тамошних народов, то это было послание Солнца. Вера, из-за удобства порталов и знаков, была быстро принята народами пустыни, и они первыми достигли перемирия, доказав таким образом, что мир между монстрами и людьми возможен.</Text>
+	<Text id="Dialog:Library:Bookshelf:3">Монетты. Монстры очень долго использовали бартерную систему, но ближе к концу войны везде уже пользовались курсом Монетт. Эти деньги делают из меди, митрилла, серебра и золота. Для проверки на подлинность используют специальные магические устройства для просмотра состава монет.</Text>
+	<Text id="Dialog:Library:Bookshelf:4">Монстры. Монстры не являются коренными жителями этого мира, несмотря на разнообразие своих форм монстров можно назвать одной расой. Это из-за того, что все монстры изначально имели способность изменять свои характеристики и внешний вид во время своей молодости. Для удовлетворения условий “повышения класса” монстр должен быть получить опыт в любом его виде. Наиболее простой способ это победа в бою. Но чем старше монстр тем больше опыта ему нужно для повышения класса. Большинство кланов монстров отказались от способности повышать класс, так как это дает одно преимущество, дети рождаются не существами низшего ранга а того же вида что и один из родителей. Однако, чем больше ранг родителя тем дольше будет расти ребенок.</Text>
+	<Text id="Dialog:Library:Bookshelf:5">Люди Вельтионы часть I - Эльфы. Эльфы известны продолжительностью своей жизни, из-за чего они известны как историки. У эльфов очень медленно развивается мускулатура, из-за чего они больше предпочитают магию. Большинство эльфов известны как известные философы, чародеи и лучники, но бывают и те, которые овладели путем клинка, они используют, специально созданные для них, изогнутые клинки.</Text>
+	<Text id="Dialog:Library:Bookshelf:6">Люди Вельтионы часть II - Гномы. Гномы живут в основном в два раза дольше чем люди, имеют низкий уровень магии и маленький рост. У них очень сильно развита мускулатура, из-за чего они обычно шире в плечах чем люди. Гномы обычно предпочитают развивать технологии и кузнечное мастерство, и из-за их природной прочности они способны легко пережить инженерные ошибки которые могут убить любого другого из рода людского. Однако бывают случаи когда гном имеет высокий уровень магии. Гномы маги обычно используют магии Електричества, Огня и Земли, также гномы очень часто изучают некромантию, вызванные трупы они очищают до костей и раскрашивают в яркие цвета.</Text>
+	<Text id="Dialog:Library:Bookshelf:7">Люди Вельтионы часть III - Полурослики. Полурослики имеют схожий рост с гномами, но их мускулатура такая же какая была бы у людей такого роста. Уровень их магии такой же как у людей. Их низкий рост компенсируется большой скоростью мысли, высокой выносливостью а также продолжительностью жизни схожей с гномами, полурослики специализируются в сфере продаж и искусства.</Text>
+	<Text id="Dialog:Library:Bookshelf:8">Люди Вельтионы часть IV - Люди. Люди не живут так же долго как и другие члены их расы, но несмотря на это они процветают в качестве одной из старейшей рас Вельтионы без изменений. Это из-за того, что люди очень гибки, имеют достаточно высокий уровень рождаемости, превосходную обучаемость а также настойчивость. Люди из-за своей малой продолжительности жизни наиболее склонны к таким вещам как жадность, лень, зависть и т.п. Но именно из-за их высокой эмоциональности они достигли наибольших высот в своем мире.</Text>
+	
+	<!-- MamaSkeleton -->
+	<Text id="Dialog:MamaSkeleton:Task:1">Интересно куда пропал мой счастливый ковшик…</Text>
+	<Text id="Dialog:MamaSkeleton:Task:2">М?…</Text>
+	<Text id="Dialog:MamaSkeleton:Task:3">С добрым утром %PlayerName я тебя не сразу заметила. Я хотела сварить суп, но ковшик пропал.</Text>
+	<Text id="Dialog:MamaSkeleton:Task:4">В последний раз я видела его когда давала дочке поиграть в рыцарей рядом с колодцем...</Text>
+	<Text id="Dialog:MamaSkeleton:Task:5">Рядом с колодцем я его не нашла, надеюсь он не упал внутрь колодца. Мои кости совсем не любят подобную сырость.</Text>
+	<Text id="Dialog:MamaSkeleton:Task:Complete:1">?!</Text>
+	<Text id="Dialog:MamaSkeleton:Task:Complete:2">Ты нашел мой ковшик! Ты мой маленький спаситель, дай я тебя отблагодарю.</Text>
+	<Text id="Dialog:MamaSkeleton:AboutFamily">Дочка и муж очень любят суп, а этот ковшик придает ему особый вкус.</Text>
+	
+	<!-- Skeleton House -->
+	<Text id="Dialog:SkeletonHouse:Picture">Тут изображены Папа, мама и дочка, и все улыбаются во весь череп.</Text>
+	<Text id="Dialog:SkeletonHouse:KostellaBed">В ней спит маленькая Костелла, под кроватью лежит большое количество цветных карандашей в форме маленьких косточек.</Text>
+	<Text id="Dialog:SkeletonHouse:KostellaShelf">Тетрадка полна рисунков, на тетрадке полно следов от жидкости. Судя по цвету, это молоко.</Text>
+	
+	<!-- Old Well -->
+	<Text id="Dialog:OldWell:AboutWell">Колодец... полон воды… ее можно пить.</Text>
+	<Text id="Dialog:OldWell:Coop:1">Колодец, кто-то забыл вытащить ведро.</Text>
+	<Text id="Dialog:OldWell:Coop:2">Там что-то есть. Вы вытащили ведро и взглянули внутрь.</Text>
+	
+	<!-- Joshua -->
+	<Text id="Dialog:Joshua:AboutDay:1">Какой хороший однако денек!</Text>
+	<Text id="Dialog:Joshua:AboutDay:2">Ммм? Я ни от кого не прячусь, я же сейчас стою прямо перед тобой, в удобненькой тени этого дерева.</Text>
+	<Text id="Dialog:Joshua:AboutDay:3">Иногда хорошо вот так вот отдыхать от работы, хохохо!</Text>
+	<Text id="Dialog:Joshua:GoToForest">Алтарь солнца не может подключиться к моей деревне!</Text>
+	<Text id="Dialog:Joshua:AboutTask">Хм-хм-хм. Даже не знаю как это случилось.</Text>
+	<Text id="Dialog:Joshua:AboutYoungTime">Хочешь расскажу момент из моей молодости? Как никак я участвовал в войне и помню момент когда огласили мир! В свои молодые годы я был “Уххх!” или даже “Умффф!”, но даже так я был просто молокососом который пошел на войну ради славы. И, поверь мне, я очень сильно об этом пожалел, не слушай тех, кто говорит, что время войны было временем подвигов и триумфа, это была просто мясорубка. Но чем дальше солдаты были от столиц тем меньше было их желание воевать, и это относилось к двум сторонам. И вот сидим мы в никудыкиных болотах, усталые и печальные, как вдруг подходит к нашему отряду большой такой орк. Естественно, мы разшелопанились и подготовились уже к засаде, но он такой: “я это… хочу обмен сделать.” и по всему отряду пробежало молчание, а он продолжает “Вы нам соль и овощи а мы вам мясо.” И вот так начался обмен по тихому вначале конечно мы ему не особо доверяли. Но дни шли и подобные обмены становились все чаще и чаще, после дело перешло к крепкой дружбе. И знаешь? Первый обмен произошел из-за того что у них кончились овощи для супа! Х-хах!</Text>
+	<Text id="Dialog:Joshua:SaleBook">Но раз уж так вышло что я тут остаюсь чуток дольше, не хочешь ли ты купить вот эту вот книжку под названием: “Создание ложек, больших и маленьких.”? Оно стоит всего лишь 9000 монетт.</Text>
+	<Text id="Dialog:Joshua:SaleBook:Yes">Да</Text>
+	<Text id="Dialog:Joshua:SaleBook:No">Нет</Text>
+	<Text id="Dialog:Joshua:SaleBook:Success:1">О-о… Я-я этого не ожидал. Ну, я имею в виду это же просто демка на кой тебе эта книжка? И как ты вообще замозолил такую сумму?</Text>
+	<Text id="Dialog:Joshua:SaleBook:Success:2">Знаешь что, наплевать! Бери ее, заслужил! Только у нее никакой роли в этой демке нет. Х-Хах!</Text>
+	<Text id="Dialog:Joshua:SaleBook:Fail">Прости сынок но денег то не хватает.</Text>
+	<Text id="Dialog:Joshua:SaleBook:WhyNot">Неужели тебе не нужна способность заделывать себе ложки?</Text>
+	<Text id="Dialog:Joshua:Common">Ну, все что я тебе сейчас могу предложить, так это пустоту в моем мешке. Х-Хах!</Text>
+	<Text id="Dialog:Joshua:TalkWithVillageElder">Сперва поговори с этим старым орком</Text>
+	
+	<!-- Village Elder House -->
+	<Text id="Dialog:VillageElderHouse:BigOven">Печка как печка, но пока без огня.</Text>
+	<Text id="Dialog:VillageElderHouse:Boxes">Он наверное просто любит сами ящики, так как все они пустые.</Text>
+	<Text id="Dialog:VillageElderHouse:Pipe">Труба.</Text>
+	<Text id="Dialog:VillageElderHouse:Chest">Интересно, что он тут хранит.</Text>
+	
+	<!-- Others -->
+	<Text id="Dialog:OtherBed">Ты же не собираешься спать на чужой кровати?</Text>
 	<Text id="Dialog:GiantCock:1">...</Text>
 	<Text id="Dialog:GiantCock:2">*Он спит*</Text>
 	<Text id="Dialog:Uniceros:1">Пьинь?</Text>
+	<Text id="Dialog:NoEntry">Тут стоит надпись: Чужим вход запрещен.</Text>
+	<Text id="Dialog:EmptyChest">Пусто</Text>
 	
-	<Text id="Dialog:HeroBed">Может поспать?</Text>
-	<Text id="Dialog:HeroCupBoard">Здесь хранятся всякие безделушки</Text>
-	<Text id="Dialog:HeroCandle">Ей еще светить и светить</Text>
-	<Text id="Dialog:HeroStove">Печка как печка, но пока без огня.</Text>
-	<Text id="Dialog:HeroPicture">Хорошие воспоминания всегда нужно помнить</Text>
-	<Text id="Dialog:HeroFlower">Самое обычное комнатное растение, делает воздух чище.</Text>
+	<!-- Save -->
+	<Text id="Dialog:Save:1">Вы чувствуете, что вам стало гораздо лучше.</Text>
+	<Text id="Dialog:Save:2">Хотите сохраниться?</Text>
+	<Text id="Dialog:Save:Yes">Да</Text>
+	<Text id="Dialog:Save:No">Нет</Text>
+	<Text id="Dialog:SaveComplete">Игра сохранена</Text>
 </Localization>
