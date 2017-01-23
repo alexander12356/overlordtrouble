@@ -57,6 +57,7 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
         string  l_Id          = l_JSONObject["Id"].str;
         float   l_AttackStat  = l_JSONObject["Attack"].f;
         float   l_DefenseStat = l_JSONObject["Defense"].f;
+        float   l_SpeedStat   = l_JSONObject["Speed"].f;
         int     l_Level       = (int)l_JSONObject["Level"].i;
         float   l_Health      = l_JSONObject["Health"].f;
         Element l_Element     = (Element)Enum.Parse(typeof(Element), l_JSONObject["Element"].str);
@@ -67,7 +68,7 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
 
         string[] l_Property = ParseProperty(l_JSONObject["Property"]);
         
-        EnemyData l_ImproveData = new EnemyData(l_Id, l_AttackStat, l_DefenseStat, l_Level, l_Health, l_Element, l_AttackDataList, l_Experience, l_LootList, l_Property);
+        EnemyData l_ImproveData = new EnemyData(l_Id, l_AttackStat, l_DefenseStat, l_SpeedStat, l_Level, l_Health, l_Element, l_AttackDataList, l_Experience, l_LootList, l_Property);
 
         m_EnemyBase.Add(l_Id, l_ImproveData);
     }

@@ -173,6 +173,8 @@
 	<Text id="GUI:BattleSystem:DebuffClear">%d исцелился от вредных эффектов</Text>
 	<Text id="GUI:BattleSystem:BadDebuffClear">%d не имеет никаких статусных эффектов. Очищающий прием ничего не сделал</Text>
 	<Text id="GUI:BattleSystem:MegaHealing">%d восстановил %d очков хп и исцелился от вредных эффектов</Text>
+	<Text id="GUI:BattleSystem:RunFail">Убежать не удалось.</Text>
+	<Text id="GUI:BattleSystem:CannotRun">Нельзя убежать.</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Побуду собой</Text>
 	<Text id="GUI:Improve:AreYouShure">Вы уверены что хотите выбрать этот\nкласс?\nВернуть обратно уже не выйдет.</Text>

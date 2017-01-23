@@ -33,6 +33,7 @@ public struct EnemyData
     public string id;
     public float attackStat;
     public float defenseStat;
+    public float speedStat;
     public int level;
     public float health;
     public Element element;
@@ -41,11 +42,12 @@ public struct EnemyData
     public List<EnemyLootData> lootList;
     public string[] property;
 
-    public EnemyData(string p_Id, float p_AttackStat, float p_DefenseStat, int p_Level, float p_Health, Element p_Element, List<EnemyAttackData> p_AttackList, int p_Experience, List<EnemyLootData> p_LootList, string[] p_Property)
+    public EnemyData(string p_Id, float p_AttackStat, float p_DefenseStat, float p_SpeedStat, int p_Level, float p_Health, Element p_Element, List<EnemyAttackData> p_AttackList, int p_Experience, List<EnemyLootData> p_LootList, string[] p_Property)
     {
         id = p_Id;
         attackStat = p_AttackStat;
         defenseStat = p_DefenseStat;
+        speedStat = p_SpeedStat;
         level = p_Level;
         health = p_Health;
         element = p_Element;

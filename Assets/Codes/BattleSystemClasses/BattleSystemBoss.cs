@@ -52,6 +52,17 @@ public class BattleSystemBoss : BattleSystem
         }
     }
 
+    public override void Retreat()
+    {
+        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:CannotRun");
+
+        TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+        l_TextPanel.SetText(new List<string>() { l_Text });
+
+        ShowPanel(l_TextPanel);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
