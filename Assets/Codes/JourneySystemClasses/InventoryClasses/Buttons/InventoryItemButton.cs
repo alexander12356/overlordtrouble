@@ -58,13 +58,16 @@ public class InventoryItemButton : PanelButtonUpdateKey
 
     private void RemoveItem(int p_CountToRemove)
     {
-        int l_ItemCount = itemCount - p_CountToRemove;
-        if (l_ItemCount <= 0)
+        int l_ResultItemCount = itemCount - p_CountToRemove;
+        if (l_ResultItemCount <= 0)
         {
             itemCount = 0;
             StartCoroutine(DestroyButton());
         }
-        itemCount = l_ItemCount;
+        else
+        {
+            itemCount = l_ResultItemCount;
+        }
         PlayerInventory.GetInstance().SetItemCount(itemId, itemCount);
     }
 

@@ -47,4 +47,9 @@ public class InventoryStandingView : InventoryView
     {
         return false;
     }
+
+    public override bool isNull()
+    {
+        return false;
+    }
 }

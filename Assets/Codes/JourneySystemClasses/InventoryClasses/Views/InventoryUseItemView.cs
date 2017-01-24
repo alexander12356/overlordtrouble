@@ -95,4 +95,9 @@ public class InventoryUseItemView : InventoryView
         ShowGroupMemberInfo();
         return true;
     }
+
+    public override bool isNull()
+    {
+        return false;
+    }
 }

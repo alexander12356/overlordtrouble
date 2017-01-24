@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +60,7 @@ public class InventoryItemsView : InventoryView
 
     public override void AddItem(InventoryItemData p_InventoryItemData)
     {
-        InventoryItemButton l_Button = Object.Instantiate(InventoryItemButton.prefab);
+        InventoryItemButton l_Button = UnityEngine.Object.Instantiate(InventoryItemButton.prefab);
         l_Button.title = LocalizationDataBase.GetInstance().GetText("Item:" + p_InventoryItemData.id);
         l_Button.itemId = p_InventoryItemData.id;
         l_Button.itemCount = p_InventoryItemData.count;
@@ -93,5 +94,10 @@ public class InventoryItemsView : InventoryView
     public override void UpdateKey()
     {
         itemButtonList.UpdateKey();
+    }
+
+    public override bool isNull()
+    {
+        return false;
     }
 }

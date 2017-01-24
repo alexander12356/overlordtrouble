@@ -199,8 +199,8 @@ public class ItemActionPanel : Panel
         }
         ShowMessage("Test test test test", CancelAction);
         // TODO : Использование предмета
-        //Item l_Item = ItemDataBase.GetInstance().GetItem(itemId).CreateItem();
-        //l_Item.Run(JourneySystem.GetInstance().player.statistics);
+        Item l_Item = ItemDataBase.GetInstance().GetItem(itemId).CreateItem();
+        l_Item.Run(JourneySystem.GetInstance().player.statistics);
     }
 
     private void ShowMessage(string p_Message, PanelButtonActionHandler p_CancelAction)
@@ -220,6 +220,7 @@ public class ItemActionPanel : Panel
     private void TryToRemove()
     {
         YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
+        // TODO : Заменить локализованным текстом
         l_YesNoPanel.SetText(string.Format("Вы действительно хотите выбросить {0} ?", LocalizationDataBase.GetInstance().GetText("Item:" + itemId)));
         l_YesNoPanel.AddYesAction(RemovingAction);
         JourneySystem.GetInstance().ShowPanel(l_YesNoPanel, true);

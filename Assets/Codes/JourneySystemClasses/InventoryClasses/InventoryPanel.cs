@@ -9,7 +9,7 @@ public class InventoryPanel : Panel
     [SerializeField]
     private ButtonList m_ViewButtonsList = null;
 
-    private InventoryView m_CurrOpenedTab = null;
+    private InventoryView m_CurrOpenedView = null;
 
     #endregion
 
@@ -88,11 +88,13 @@ public class InventoryPanel : Panel
 
         m_ViewButtonsList.SelectMoveDown();
         m_ViewButtonsList.isActive = true;
+
+        m_CurrOpenedView = new NullInventoryView();
     }
 
     private void ConfirmView()
     {
-        if (m_CurrOpenedTab.Confrim())
+        if (m_CurrOpenedView.Confrim())
         {
             m_ViewButtonsList.isActive = false;
             m_ViewButtonsList.currentButton.selected = true;
@@ -101,12 +103,14 @@ public class InventoryPanel : Panel
 
     public void ShowView()
     {
-        if(m_CurrOpenedTab != null)
-            m_CurrOpenedTab.Disable();
-        InventoryViewButton l_ViewButton;
-        l_ViewButton = (InventoryViewButton)m_ViewButtonsList[m_ViewButtonsList.currentButtonId];
-        m_CurrOpenedTab = l_ViewButton.inventoryView;
-        m_CurrOpenedTab.Init();
+        m_CurrOpenedView.Disable();
+        m_CurrOpenedView = GetCurrentView();
+        m_CurrOpenedView.Init();
+    }
+
+    private InventoryView GetCurrentView()
+    {
+        return (m_ViewButtonsList[m_ViewButtonsList.currentButtonId] as InventoryViewButton).inventoryView;
     }
 
     private void CloseInventory()
@@ -120,7 +124,7 @@ public class InventoryPanel : Panel
         base.UpdatePanel();
 
         m_ViewButtonsList.UpdateKey();
-        m_CurrOpenedTab.UpdateKey();
+        m_CurrOpenedView.UpdateKey();
     }
 
     #endregion

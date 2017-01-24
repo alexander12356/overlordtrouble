@@ -144,4 +144,9 @@ public class InventoryEquipmentView : InventoryView
         itemButtonList.UpdateKey();
         groupButtonList.UpdateKey();
     }
+
+    public override bool isNull()
+    {
+        return false;
+    }
 }

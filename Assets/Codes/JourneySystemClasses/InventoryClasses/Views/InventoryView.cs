@@ -117,6 +117,7 @@ public abstract class InventoryView
     public virtual void CancelAction() { }
     public virtual void SelectItem() { }
     public virtual void UpdateKey() { }
+    public abstract bool isNull();
 
     public void InitGroupData()
     {
