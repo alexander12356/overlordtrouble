@@ -116,6 +116,7 @@
 	<Text id="GUI:Journey:Store:Tab:SingleUse">Разовые</Text>
 	<Text id="GUI:Journey:Store:Tab:MultipleUse">Многоразовые</Text>
 	
+	<Text id="GUI:Journey:Inventory">Инвентарь</Text>
 	<Text id="GUI:Journey:Inventory:Back">Назад</Text>
 	<Text id="GUI:Journey:Inventory:Description">Описание\n</Text>
     <Text id="GUI:Journey:Inventory:Use">Использовать</Text>
@@ -124,6 +125,9 @@
 	<Text id="GUI:Journey:Inventory:Throw">Выбросить</Text>
 	<Text id="GUI:Journey:Inventory:Wear">Надеть</Text>
 	<Text id="GUI:Journey:Inventory:Items">Предметы</Text>
+	
+	<Text id="GUI:Journey:Profile">Профиль</Text>
+	<Text id="GUI:Journey:Encyclopedia">Энциклопедия</Text>
 	
 	<Text id="GUI:Journey:Sleep">Вся усталость сошла на нет</Text>
 	

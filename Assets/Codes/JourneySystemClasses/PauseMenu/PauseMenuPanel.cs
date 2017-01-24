@@ -27,8 +27,18 @@ public class PauseMenuPanel : Panel
         m_ButtonList[0].AddAction(OpenProfilePanel);
         m_ButtonList[1].AddAction(OpenInventoryPanel);
         m_ButtonList[2].AddAction(OpenEncyclopedia);
-        m_ButtonList[3].AddAction(OpenQuitQuestionPanel);
+        //m_ButtonList[3].AddAction(OpenOptions);
+        m_ButtonList[4].AddAction(OpenQuitQuestionPanel);
         m_ButtonList.AddCancelAction(ReturnToJourney);
+    }
+
+    public void Start()
+    {
+        m_ButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Profile");
+        m_ButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory");
+        m_ButtonList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Encyclopedia");
+        m_ButtonList[3].title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:Settings");
+        m_ButtonList[4].title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:Exit");
     }
 
     public override void UpdatePanel()
@@ -54,7 +64,7 @@ public class PauseMenuPanel : Panel
         YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
         l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("GUI:Journey:ReturnMainMenu"));
         l_YesNoPanel.AddYesAction(ConfirmReturnToMenu);
-        JourneySystem.GetInstance().ShowPanel(l_YesNoPanel);
+        JourneySystem.GetInstance().ShowPanel(l_YesNoPanel, true);
     }
 
     private void OpenProfilePanel()
@@ -66,7 +76,7 @@ public class PauseMenuPanel : Panel
     {
         JourneySystem.GetInstance().SetControl(ControlType.Panel);
         InventoryPanel lInventoryPanel = Instantiate(InventoryPanel.prefab);
-        JourneySystem.GetInstance().ShowPanel(lInventoryPanel);
+        JourneySystem.GetInstance().ShowPanel(lInventoryPanel, true);
     }
 
     private void OpenEncyclopedia()
