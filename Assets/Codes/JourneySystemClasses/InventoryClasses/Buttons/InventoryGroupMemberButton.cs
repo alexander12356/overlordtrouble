@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class InventoryGroupMemberButton : PanelButton
 {
     private static InventoryGroupMemberButton m_Prefab = null;
-    private Image m_PlayerImage = null;
+    private Image m_AvatarImage = null;
     private Text m_HealthText = null;
     private Text m_SpecialText = null;
     private Image m_HealthPointBar = null;
@@ -16,7 +16,7 @@ public class InventoryGroupMemberButton : PanelButton
     {
         get
         {
-            if(m_Prefab == null)
+            if (m_Prefab == null)
             {
                 m_Prefab = Resources.Load<InventoryGroupMemberButton>("Prefabs/Button/GroupMemberButton");
             }
@@ -24,19 +24,15 @@ public class InventoryGroupMemberButton : PanelButton
         }
     }
 
-    public Image playerImage
+    public Image avatarImage
     {
         get
         {
-            if(m_PlayerImage == null)
+            if (m_AvatarImage == null)
             {
-                m_PlayerImage = transform.GetChild(1).gameObject.GetComponent<Image>();
+                m_AvatarImage = transform.GetChild(1).gameObject.GetComponent<Image>();
             }
-            return m_PlayerImage;
-        }
-        set
-        {
-            m_PlayerImage = value;
+            return m_AvatarImage;
         }
     }
 
@@ -76,10 +72,10 @@ public class InventoryGroupMemberButton : PanelButton
 
     public override void Awake()
     {
-        m_PlayerImage = playerImage;
+        m_AvatarImage = avatarImage;
         m_SelectedImage = selectedImage;
 
-        playerImage.gameObject.SetActive(true);
+        avatarImage.gameObject.SetActive(true);
         selectedImage.gameObject.SetActive(false);
 
         GameObject l_PlayerStatInfo = transform.FindChild("Info").gameObject;
@@ -106,5 +102,10 @@ public class InventoryGroupMemberButton : PanelButton
             m_BlinkingAnimator.enabled = true;
             m_BlinkingAnimator.SetTrigger("Blinking");
         }
+    }
+
+    public void SetAvatar(Sprite p_AvatarSprite)
+    {
+        m_AvatarImage.sprite = p_AvatarSprite;
     }
 }

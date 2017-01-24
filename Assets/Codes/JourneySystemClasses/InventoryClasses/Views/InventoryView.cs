@@ -154,7 +154,7 @@ public abstract class InventoryView
     {
         InventoryGroupMemberButton l_Button = UnityEngine.Object.Instantiate(InventoryGroupMemberButton.prefab);
         l_Button.groupMemberData = groupMemberData;
-        l_Button.playerImage.sprite = groupMemberData.avatatarSprite;
+        l_Button.SetAvatar(groupMemberData.avatatarSprite);
         l_Button.AddAction(GroupMemberButtonAction);
         groupButtonList.AddButton(l_Button);
     }
