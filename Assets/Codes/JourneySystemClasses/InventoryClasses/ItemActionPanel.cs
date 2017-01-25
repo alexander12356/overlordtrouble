@@ -125,6 +125,10 @@ public class ItemActionPanel : Panel
             {
                 TryToRemove();
             }
+            else if (Input.GetKeyUp(KeyCode.X))
+            {
+                CancelRemove();
+            }
         }
         else if (useItemView.enabled)
         {
@@ -134,6 +138,12 @@ public class ItemActionPanel : Panel
         {
             m_ActionsButtonList.UpdateKey();
         }
+    }
+
+    private void CancelRemove()
+    {
+        m_RemovingArrows.SetActive(false);
+        countToRemove = 0;
     }
 
     public void InitActionButtonList(string p_ItemId)
