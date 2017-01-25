@@ -30,6 +30,8 @@ public class PauseMenuPanel : Panel
         //m_ButtonList[3].AddAction(OpenOptions);
         m_ButtonList[4].AddAction(OpenQuitQuestionPanel);
         m_ButtonList.AddCancelAction(ReturnToJourney);
+
+        JourneySystem.GetInstance().Pause();
     }
 
     public void Start()
@@ -88,7 +90,9 @@ public class PauseMenuPanel : Panel
     private void ReturnToJourney()
     {
         Close();
+
         JourneySystem.GetInstance().SetControl(ControlType.Player);
+        JourneySystem.GetInstance().Resume();
 
         AudioSystem.GetInstance().ResumeMainTheme();
     }

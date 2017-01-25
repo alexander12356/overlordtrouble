@@ -1,10 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
 
-using UnityEngine;
-
-public class JourneyNPC : JourneyActor
+public class JourneyNPC : JourneyActor, IPausable
 {
     #region Interface
+
+    public override void Start()
+    {
+        base.Start();
+
+        JourneySystem.GetInstance().AddOnPauseListener(OnPause);
+        JourneySystem.GetInstance().AddOnResumeListener(OnResume);
+    }
+
     public override void GoTo(Vector3 p_Target, float p_Delay)
     {
         base.GoTo(p_Target, p_Delay);
@@ -41,5 +48,23 @@ public class JourneyNPC : JourneyActor
             }
         }
     }
-#endregion
+
+    public void OnPause()
+    {
+        StopLogic();
+        m_Animator.enabled = false;
+    }
+
+    public void OnResume()
+    {
+        m_Animator.enabled = true;
+        StartLogic();
+    }
+
+    public void OnDestroy()
+    {
+        JourneySystem.GetInstance().RemoveOnPauseListener(OnPause);
+        JourneySystem.GetInstance().RemoveOnResumeListener(OnResume);
+    }
+    #endregion
 }

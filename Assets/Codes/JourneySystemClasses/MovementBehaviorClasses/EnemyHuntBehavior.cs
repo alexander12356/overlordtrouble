@@ -48,7 +48,7 @@ public class EnemyHuntBehavior : BaseMovement
                 journeyActor.myAnimator.SetBool("IsWalking", false);
                 break;
             case HuntState.Hunt:
-                if ((m_StartPosition - m_JourneyPlayer.myTransform.position).sqrMagnitude < (m_MaxHuntDistance * m_MaxHuntDistance) && m_JourneyPlayer.enabled)
+                if ((m_StartPosition - m_JourneyPlayer.myTransform.position).sqrMagnitude < (m_MaxHuntDistance * m_MaxHuntDistance) && (m_JourneyPlayer.enabled || JourneySystem.GetInstance().isPause))
                 {
                     journeyActor.myAnimator.SetBool("IsWalking", true);
                     journeyActor.GoTo(m_JourneyPlayer.myTransform.position, m_Speed * Time.deltaTime);

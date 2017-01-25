@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum ControlType
 {
@@ -14,6 +15,9 @@ public class JourneySystem : MonoBehaviour
 {
     private static JourneySystem m_Instance;
     private ControlType m_CurrentControlType = ControlType.Player;
+    private UnityEvent m_OnPauseEvent = null;
+    private UnityEvent m_OnResumeEvent = null;
+    private bool m_IsPause = false;
 
     [SerializeField]
     private JourneyPlayer m_Player = null;
@@ -48,10 +52,17 @@ public class JourneySystem : MonoBehaviour
     {
         get { return m_CurrentControlType; }
     }
+    public bool isPause
+    {
+        get { return m_IsPause; }
+    }
 
     public void Awake()
     {
         m_Instance = this;
+
+        m_OnPauseEvent = new UnityEvent();
+        m_OnResumeEvent = new UnityEvent();
 
 #if UNITY_EDITOR
         if (GameManager.IsInstance() == false)
@@ -176,12 +187,12 @@ public class JourneySystem : MonoBehaviour
 
     public void RunPauseMenu()
     {
-        SetControl(ControlType.Panel);
-
         PauseMenuPanel l_PauseMenuPanel = Instantiate(PauseMenuPanel.prefab);
         ShowPanel(l_PauseMenuPanel);
 
         AudioSystem.GetInstance().ChangeThemeVolume(0.1f);
+
+        SetControl(ControlType.Panel);
     }
 
     public void OpenInventory()
@@ -194,5 +205,37 @@ public class JourneySystem : MonoBehaviour
     public void OnApplicationQuit()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    public void AddOnPauseListener(UnityAction p_Action)
+    {
+        m_OnPauseEvent.AddListener(p_Action);
+    }
+
+    public void RemoveOnPauseListener(UnityAction p_Action)
+    {
+        m_OnPauseEvent.RemoveListener(p_Action);
+    }
+
+    public void AddOnResumeListener(UnityAction p_Action)
+    {
+        m_OnResumeEvent.AddListener(p_Action);
+    }
+
+    public void RemoveOnResumeListener(UnityAction p_Action)
+    {
+        m_OnResumeEvent.RemoveListener(p_Action);
+    }
+
+    public void Pause()
+    {
+        m_IsPause = true;
+        m_OnPauseEvent.Invoke();
+    }
+
+    public void Resume()
+    {
+        m_OnResumeEvent.Invoke();
+        m_IsPause = false;
     }
 }
