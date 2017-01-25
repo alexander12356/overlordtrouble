@@ -45,12 +45,14 @@ public class InventoryEquipmentView : InventoryView
     {
         groupButtonList.isActive = false;
         slotButtonList.isActive = true;
+        InitItemList();
     }
 
     private void DeselectSlotList()
     {
         groupButtonList.isActive = true;
         slotButtonList.isActive = false;
+        itemButtonList.Clear();
     }
 
     public override void Disable()
