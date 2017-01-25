@@ -84,7 +84,7 @@
 		{
 			"Id" : "RustyAxe",
 			"Image" : "Sprites/Items/Key/RustyAxe",
-			"Type" : "Bling",
+			"Type" : "Weapon",
 			"Effect":
 			{
 			}
