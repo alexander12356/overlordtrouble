@@ -86,7 +86,6 @@ public class InventoryPanel : Panel
         InventoryStandingView l_StandingView = new InventoryStandingView(this);
         l_StandingView.Init();
 
-        m_ViewButtonsList.SelectMoveDown();
         m_ViewButtonsList.isActive = true;
 
         m_CurrOpenedView = new NullInventoryView();
