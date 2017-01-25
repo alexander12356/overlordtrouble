@@ -91,7 +91,7 @@ public class InventoryPanel : Panel
         m_CurrOpenedView = new NullInventoryView();
     }
 
-    private void ConfirmView()
+    public void ConfirmView()
     {
         if (m_CurrOpenedView.Confrim())
         {

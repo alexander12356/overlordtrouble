@@ -76,5 +76,6 @@ public class InventoryItemButton : PanelButtonUpdateKey
         yield return new WaitForSeconds(0.1f);
         InventoryPanel l_InventoryPanel = GetComponentInParent<InventoryPanel>();
         l_InventoryPanel.ShowView();
+        l_InventoryPanel.ConfirmView();
     }
 }
