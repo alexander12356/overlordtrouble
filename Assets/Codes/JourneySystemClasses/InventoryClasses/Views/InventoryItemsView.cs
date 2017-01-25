@@ -65,6 +65,7 @@ public class InventoryItemsView : InventoryView
         l_Button.itemId = p_InventoryItemData.id;
         l_Button.itemCount = p_InventoryItemData.count;
         l_Button.AddAction(SelectItem);
+        l_Button.AddRemovingAction(ShowDescription);
 
         itemButtonList.AddButton(l_Button);
     }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class InventoryItemButton : PanelButtonUpdateKey
 {
     private static InventoryItemButton m_Prefab = null;
+    private PanelButtonActionHandler m_RemovingAction = null;
     private int m_ItemCount;
     private string m_ItemId = string.Empty; 
     [SerializeField]
@@ -68,7 +69,13 @@ public class InventoryItemButton : PanelButtonUpdateKey
         {
             itemCount = l_ResultItemCount;
         }
+
         PlayerInventory.GetInstance().SetItemCount(itemId, itemCount);
+
+        if (m_RemovingAction != null)
+        {
+            m_RemovingAction();
+        }
     }
 
     private IEnumerator DestroyButton()
@@ -77,5 +84,10 @@ public class InventoryItemButton : PanelButtonUpdateKey
         InventoryPanel l_InventoryPanel = GetComponentInParent<InventoryPanel>();
         l_InventoryPanel.ShowView();
         l_InventoryPanel.ConfirmView();
+    }
+
+    public void AddRemovingAction(PanelButtonActionHandler p_Action)
+    {
+        m_RemovingAction += p_Action;
     }
 }
