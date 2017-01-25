@@ -60,14 +60,19 @@ public class JourneySystem : MonoBehaviour
             PlayerData.GetInstance().NewGameDataInit();
             PlayerInventory.GetInstance().NewGameDataInit();
             EnemyGenerate(RoomSystem.GetInstance().currentRoomId);
+            AudioSystem.GetInstance().SetTheme(GameManager.GetInstance().currentSceneName);
+            AudioSystem.GetInstance().PlayTheme();
+            AudioSystem.GetInstance().ResumeMainTheme();
         }
 #endif
     }
 
     public void Start()
     {
-        SaveSystem.GetInstance().LoadFromMemory();
+        AudioSystem.GetInstance().PlayTheme();
 
+        SaveSystem.GetInstance().LoadFromMemory();
+        
         LocationWarpSystem.GetInstance().SetPlayerPos();
 
         SetControl(ControlType.Player);
@@ -126,9 +131,15 @@ public class JourneySystem : MonoBehaviour
     }
 
     public void AddScene(string p_SceneId)
-    {
+    {    
         m_PanelManager.AddScene(p_SceneId);
         SetControl(ControlType.None);
+    }
+
+    public void StartBattle()
+    {
+        AudioSystem.GetInstance().StopTheme();
+        AddScene("BattleSystem");
     }
 
     public void StartLocation(string p_LocationId)
@@ -136,6 +147,9 @@ public class JourneySystem : MonoBehaviour
         SaveSystem.GetInstance().SaveToMemory();
         SaveSystem.GetInstance().ClearCache();
         SaveSystem.GetInstance().Init(p_LocationId);
+
+        AudioSystem.GetInstance().StopTheme();
+        AudioSystem.GetInstance().SetTheme(p_LocationId);
 
         m_PanelManager.StartLocation(p_LocationId);
     }
@@ -145,11 +159,6 @@ public class JourneySystem : MonoBehaviour
         PlayerPrefs.DeleteAll();
         SaveSystem.ShutDown();
         m_PanelManager.StartLocation("MainMenu");
-    }
-
-    public void OpenProfile()
-    {
-        m_PanelManager.OpenProfile();
     }
 
     public void OnEnable()
@@ -165,10 +174,25 @@ public class JourneySystem : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR
+    public void RunPauseMenu()
+    {
+        SetControl(ControlType.Panel);
+
+        PauseMenuPanel l_PauseMenuPanel = Instantiate(PauseMenuPanel.prefab);
+        ShowPanel(l_PauseMenuPanel);
+
+        AudioSystem.GetInstance().ChangeThemeVolume(0.1f);
+    }
+
+    public void OpenInventory()
+    {
+        SetControl(ControlType.Panel);
+        InventoryPanel lInventoryPanel = Instantiate(InventoryPanel.prefab);
+        ShowPanel(lInventoryPanel);
+    }
+
     public void OnApplicationQuit()
     {
         PlayerPrefs.DeleteAll();
     }
-#endif
 }

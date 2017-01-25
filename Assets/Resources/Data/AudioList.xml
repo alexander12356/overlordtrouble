@@ -15,4 +15,9 @@
 	<Audio id="TailWhapMonstyle"   path="Sounds/Monstyle/TailWhap"/>
 	<Audio id="WaterDropsMonstyle" path="Sounds/Monstyle/WaterDrops"/>
 	<Audio id="SlapMonstyle"       path="Sounds/Monstyle/Slap"/>
+	
+	<Audio id="Town" path="Musics/Living Voyage"/>
+	<Audio id="Battle" path="Musics/Crusade"/>
+	<Audio id="Road" path="Musics/Lord of the Land"/>
+	<Audio id="MainMenu" path="Musics/Close_To_Flame"/>
 </AudioList>

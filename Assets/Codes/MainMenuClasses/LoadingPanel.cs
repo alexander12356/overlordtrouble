@@ -141,6 +141,10 @@ public class LoadingPanel : Panel
         SaveSystem.GetInstance().Init(l_Scene);
         PlayerPrefs.SetString("SenderLocation", l_SenderLocation);
         PlayerPrefs.SetString("TargetRoomId", l_TargetRoom);
+
+        AudioSystem.GetInstance().StopMusic("MainMenu");
+        AudioSystem.GetInstance().SetTheme(l_Scene);
+
         MainMenuSystem.GetInstance().StartLocation(l_Scene);
     }
 

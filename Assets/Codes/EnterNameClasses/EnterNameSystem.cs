@@ -65,6 +65,7 @@ public class EnterNameSystem : MonoBehaviour
         PlayerPrefs.SetString("TargetRoomId", "HeroHome");
         SaveSystem.GetInstance().StartDuration();
         SaveSystem.GetInstance().Init("Town");
+        AudioSystem.GetInstance().SetTheme("Town");
         m_PanelManager.StartLocation("Town");
     }
 

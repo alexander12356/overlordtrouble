@@ -75,6 +75,8 @@ public class BattleSystem : MonoBehaviour
         m_Player = BattlePlayer.GetInstance();
         PlayerData.GetInstance().AddLevelupNotification(LevelupNotification);
         PlayerData.GetInstance().AddClassupNotification(ClassupNotification);
+
+        AudioSystem.GetInstance().PlayMusic("Battle");
     }
 
     public void SetVisibleAvatarPanel(bool p_Value)
@@ -238,6 +240,8 @@ public class BattleSystem : MonoBehaviour
     #region Private
     private void ReturnToJourney()
     {
+        AudioSystem.GetInstance().StopMusic("Battle");
+        AudioSystem.GetInstance().PlayTheme();
         if (m_BattleData.id.Contains("TestBattle"))
         {
             SceneManager.LoadScene("DemoMainScene");
@@ -255,6 +259,7 @@ public class BattleSystem : MonoBehaviour
 
     private void ReturnToMainMenu()
     {
+        AudioSystem.GetInstance().StopMusic("Battle");
         if (m_BattleData.id.Contains("TestBattle"))
         {
             SceneManager.LoadScene("DemoMainScene");

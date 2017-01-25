@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager m_Prefab;
     private static GameManager m_Instance = null;
     private string m_CurrentSceneName = string.Empty;
     private bool m_IsTesting = true;
@@ -15,22 +16,28 @@ public class GameManager : MonoBehaviour
         get { return m_IsTesting;  }
         set { m_IsTesting = value; }
     }
-
+    public static GameManager prefab
+    {
+        get
+        {
+            if (m_Prefab == null)
+            {
+                m_Prefab = Resources.Load<GameManager>("Prefabs/GameManager");
+            }
+            return m_Prefab;
+        }
+    }
     public static GameManager GetInstance()
     {
         if (m_Instance == null)
         {
-            GameObject gameObject = new GameObject();
-            gameObject.name = "SceneManager";
-            gameObject.AddComponent<GameManager>();
-
-            m_Instance = gameObject.GetComponent<GameManager>();
-
-#if UNITY_EDITOR
-            
-#endif
+            m_Instance = Instantiate(prefab);
         }
         return m_Instance;
+    }
+    public string currentSceneName
+    {
+        get { return m_CurrentSceneName; }
     }
 
     public static bool IsInstance()
@@ -45,6 +52,8 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         m_Instance = this;
+        m_CurrentSceneName = SceneManager.GetActiveScene().name;
+
         DontDestroyOnLoad(gameObject);
     }
 

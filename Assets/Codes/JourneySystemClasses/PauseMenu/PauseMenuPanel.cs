@@ -55,6 +55,7 @@ public class PauseMenuPanel : Panel
 
     private void ConfirmReturnToMenu()
     {
+        AudioSystem.GetInstance().StopTheme();
         JourneySystem.GetInstance().ReturnToMainMenu();
     }
 
@@ -88,5 +89,7 @@ public class PauseMenuPanel : Panel
     {
         Close();
         JourneySystem.GetInstance().SetControl(ControlType.Player);
+
+        AudioSystem.GetInstance().ResumeMainTheme();
     }
 }

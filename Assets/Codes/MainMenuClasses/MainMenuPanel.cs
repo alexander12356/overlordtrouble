@@ -56,11 +56,17 @@ public class MainMenuPanel : Panel
     {
         base.Awake();
 
-        Cursor.visible = false;
+        GameManager.GetInstance();
 
+        Cursor.visible = false;
         MainMenuSystem.GetInstance().ShowPanel(this);
 
         InitButtonList();
+    }
+
+    public void Start()
+    {
+        AudioSystem.GetInstance().PlayMusic("MainMenu");
     }
 
     private void InitButtonList()
@@ -168,6 +174,7 @@ public class MainMenuPanel : Panel
     private void RunNewGame()
     {
         MainMenuSystem.GetInstance().StartLocation("EnterName");
+        AudioSystem.GetInstance().StopMusic("MainMenu");
     }
 
     private void QuitGame()

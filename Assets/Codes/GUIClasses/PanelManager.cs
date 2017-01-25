@@ -80,11 +80,6 @@ public class PanelManager : MonoBehaviour
     {
         StartCoroutine(StartingLocation(p_LocationId));
     }
-
-    public void OpenProfile()
-    {
-        //StartCoroutine();
-    }
     #endregion
 
     #region Private
