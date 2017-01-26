@@ -261,6 +261,8 @@ public class BattleSystem : MonoBehaviour
 
     private void ReturnToMainMenu()
     {
+        SaveSystem.ShutDown();
+        PlayerPrefs.DeleteAll();
         AudioSystem.GetInstance().StopMusic("Battle");
         if (m_BattleData.id.Contains("TestBattle"))
         {
