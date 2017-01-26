@@ -261,6 +261,7 @@ public class BattleSystem : MonoBehaviour
 
     private void ReturnToMainMenu()
     {
+        //TODO создать единый выгружатель при смерти или при выходе из локаций
         SaveSystem.ShutDown();
         PlayerPrefs.DeleteAll();
         AudioSystem.GetInstance().StopMusic("Battle");
