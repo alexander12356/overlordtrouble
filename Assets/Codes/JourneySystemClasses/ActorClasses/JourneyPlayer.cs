@@ -104,7 +104,7 @@ public class JourneyPlayer : JourneyActor
 
     public void FixedUpdate()
     {
-        m_RigidBody2d.MovePosition(m_RigidBody2d.position + m_Speed * m_InputDirection.normalized * Time.deltaTime);
+        m_RigidBody2d.MovePosition(m_RigidBody2d.position + m_Speed * m_InputDirection.normalized * Time.fixedDeltaTime);
     }
 
     public override void StopLogic()
