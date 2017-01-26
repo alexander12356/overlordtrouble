@@ -27,7 +27,7 @@ public class PauseMenuPanel : Panel
         m_ButtonList[0].AddAction(OpenProfilePanel);
         m_ButtonList[1].AddAction(OpenInventoryPanel);
         m_ButtonList[2].AddAction(OpenEncyclopedia);
-        //m_ButtonList[3].AddAction(OpenOptions);
+        m_ButtonList[3].AddAction(OpenSettings);
         m_ButtonList[4].AddAction(OpenQuitQuestionPanel);
         m_ButtonList.AddCancelAction(ReturnToJourney);
 
@@ -85,6 +85,12 @@ public class PauseMenuPanel : Panel
     private void OpenEncyclopedia()
     {
         JourneySystem.GetInstance().AddScene("Encyclopedia");
+    }
+
+    private void OpenSettings()
+    {
+        SettingsPanel l_SettingsPanel = Instantiate(SettingsPanel.prefab);
+        JourneySystem.GetInstance().ShowPanel(l_SettingsPanel, true);
     }
 
     private void ReturnToJourney()

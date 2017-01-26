@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
 
     public void StartLocation(string p_LocationId)
     {
+        Debug.Log("Start Location: " + p_LocationId);
+
         m_SceneIds.Clear();
         m_SceneIds.Push(p_LocationId);
         m_CurrentSceneName = p_LocationId;
@@ -67,6 +69,8 @@ public class GameManager : MonoBehaviour
 
     public void AddScene(string p_SceneId)
     {
+        Debug.Log("Add scene: " + p_SceneId);
+
         if (m_SceneIds.Count == 0)
         {
             if (isTesting)
@@ -85,6 +89,7 @@ public class GameManager : MonoBehaviour
 
     public void UnloadScene()
     {
+        Debug.Log("Start Unload scene: " + m_SceneIds.Peek());
         if (m_SceneIds.Count == 0)
         {
             if (isTesting)
@@ -98,12 +103,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        SceneManager.UnloadSceneAsync(m_SceneIds.Pop());
+        AsyncOperation l_Unloading = SceneManager.UnloadSceneAsync(m_SceneIds.Pop());
         SetActiveForAllObjects(true);
     }
 
     private void SetActiveForAllObjects(bool p_Value)
     {
+        Debug.Log("SetActiveObjects: " + p_Value.ToString());
         GameObject[] l_RootGameObjects = SceneManager.GetSceneByName(m_SceneIds.Peek()).GetRootGameObjects();
         for (int i = 0; i < l_RootGameObjects.Length; i++)
         {

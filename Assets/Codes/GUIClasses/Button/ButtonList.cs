@@ -5,6 +5,12 @@ using UnityEngine;
 public delegate void KeyArrowActionHandler();
 public class ButtonList : MonoBehaviour
 {
+    private enum SlideDirection
+    {
+        Horizontal,
+        Vertical
+    }    
+
     #region Variables
     [SerializeField]
     private List<PanelButton> m_ButtonsList = null;
@@ -15,9 +21,14 @@ public class ButtonList : MonoBehaviour
 
     private event KeyArrowActionHandler KeyArrowActioneEvent;
     private event PanelButtonActionHandler m_CancelAction;
+    private event PanelButtonActionHandler m_UpOutwardAction;
+    private event PanelButtonActionHandler m_DownOutwardAction;
 
     [SerializeField]
     private bool m_IsActive = true;
+
+    [SerializeField]
+    private SlideDirection m_SliderDirection = SlideDirection.Vertical;
     #endregion
 
     #region Interface
@@ -102,6 +113,16 @@ public class ButtonList : MonoBehaviour
         CheckSelectPosition();
     }
 
+    public void AddUpOutwardAction(PanelButtonActionHandler p_Action)
+    {
+        m_UpOutwardAction += p_Action;
+    }
+
+    public void AddDownOutwardAction(PanelButtonActionHandler p_Action)
+    {
+        m_DownOutwardAction += p_Action;
+    }
+
     public void SelectMoveDown()
     {
         m_PrevButtonId = m_CurrentButtonId;
@@ -159,16 +180,34 @@ public class ButtonList : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        switch (m_SliderDirection)
         {
-            SelectMoveUp();
-            KeyArrowAction();
-        }
+            case SlideDirection.Vertical:
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    SelectMoveUp();
+                    KeyArrowAction();
+                }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            SelectMoveDown();
-            KeyArrowAction();
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    SelectMoveDown();
+                    KeyArrowAction();
+                }
+                break;
+            case SlideDirection.Horizontal:
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    SelectMoveUp();
+                    KeyArrowAction();
+                }
+
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    SelectMoveDown();
+                    KeyArrowAction();
+                }
+                break;
         }
 
         if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp(KeyCode.Z))
@@ -232,10 +271,13 @@ public class ButtonList : MonoBehaviour
         if (m_CurrentButtonId < 0)
         {
             m_CurrentButtonId = m_ButtonsList.Count - 1;
+            UpOutwardAction();
+            
         }
         else if (m_CurrentButtonId >= m_ButtonsList.Count)
         {
             m_CurrentButtonId = 0;
+            DownOutwardAction();
         }
 
         m_ButtonsList[m_PrevButtonId].selected = false;
@@ -264,6 +306,22 @@ public class ButtonList : MonoBehaviour
         if (m_CancelAction != null)
         {
             m_CancelAction();
+        }
+    }
+
+    private void UpOutwardAction()
+    {
+        if (m_UpOutwardAction != null)
+        {
+            m_UpOutwardAction();
+        }
+    }
+
+    private void DownOutwardAction()
+    {
+        if (m_DownOutwardAction != null)
+        {
+            m_DownOutwardAction();
         }
     }
     #endregion

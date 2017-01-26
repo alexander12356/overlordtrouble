@@ -4,12 +4,25 @@ using UnityEngine;
 public class AudioSystem : MonoBehaviour
 {
     private static AudioSystem m_Instance = null;
-    private Dictionary<string, AudioObject> m_AudioList = new Dictionary<string, AudioObject>();
+    private Dictionary<string, AudioObject> m_MusicList = new Dictionary<string, AudioObject>();
+    private Dictionary<string, AudioObject> m_SoundList = new Dictionary<string, AudioObject>();
     private string m_ThemeId = string.Empty;
+    private float m_MusicVolume = 1.0f;
+    private float m_SoundVolume = 1.0f;
 
     public static AudioSystem GetInstance()
     {
         return m_Instance;
+    }
+    public float musicVolume
+    {
+        get { return m_MusicVolume; }
+        set { m_MusicVolume = value; }
+    }
+    public float soundVolume
+    {
+        get { return m_SoundVolume; }
+        set { m_SoundVolume = value; }
     }
 
     public void Awake()
@@ -20,7 +33,7 @@ public class AudioSystem : MonoBehaviour
     public void PlayMusic(string p_Id)
     {
         AudioClip l_AudioClip = AudioDataBase.GetInstance().GetAudioClip(p_Id);
-        if (l_AudioClip == null)
+        if (l_AudioClip == null || m_MusicList.ContainsKey(p_Id))
         {
             return;
         }
@@ -28,7 +41,7 @@ public class AudioSystem : MonoBehaviour
         AudioObject l_AudioObject = Instantiate(AudioObject.prefab);
         l_AudioObject.transform.SetParent(transform);
         l_AudioObject.Play(l_AudioClip);
-        m_AudioList.Add(p_Id, l_AudioObject);
+        m_MusicList.Add(p_Id, l_AudioObject);
 
 
         Debug.Log("Play Music:" + p_Id);
@@ -36,7 +49,7 @@ public class AudioSystem : MonoBehaviour
 
     public void PlayTheme()
     {
-        if (!m_AudioList.ContainsKey(m_ThemeId))
+        if (!m_MusicList.ContainsKey(m_ThemeId))
         {
             PlayMusic(m_ThemeId);
         }
@@ -49,13 +62,13 @@ public class AudioSystem : MonoBehaviour
 
     public void ChangeVolume(string p_Id, float p_Value)
     {
-        m_AudioList[p_Id].ChangeVolume(p_Value);
+        m_MusicList[p_Id].ChangeVolume(p_Value);
     }
 
     public void StopMusic(string p_Id)
     {
-        m_AudioList[p_Id].Stop();
-        m_AudioList.Remove(p_Id);
+        m_MusicList[p_Id].Stop();
+        m_MusicList.Remove(p_Id);
     }
 
     public void SetTheme(string p_ThemeId)
@@ -65,7 +78,7 @@ public class AudioSystem : MonoBehaviour
 
     public void ChangeThemeVolume(float p_Volume)
     {
-        m_AudioList[m_ThemeId].ChangeVolume(p_Volume);
+        m_MusicList[m_ThemeId].ChangeVolume(p_Volume);
     }
 
     public void PlaySound(string p_Id)
@@ -83,5 +96,31 @@ public class AudioSystem : MonoBehaviour
         {
             ChangeThemeVolume(0.5f);
         }
+    }
+
+    public void ChangeSoundVolume(float p_Value)
+    {
+    }
+
+    public void ChangeMusicVolume(float p_Value)
+    {
+        if (m_MusicVolume == 0)
+        {
+
+        }
+        foreach (AudioObject l_Audio in m_MusicList.Values)
+        {
+            float l_Coeff = l_Audio.volume / m_MusicVolume;
+            if (p_Value == 0.0f)
+            {
+                l_Audio.mute = true;
+            }
+            else
+            {
+                l_Audio.mute = false;
+                l_Audio.volume = l_Coeff * p_Value;
+            }
+        }
+        m_MusicVolume = p_Value > 0 ? p_Value : m_MusicVolume;
     }
 }

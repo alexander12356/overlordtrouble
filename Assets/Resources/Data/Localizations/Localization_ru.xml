@@ -1,4 +1,7 @@
 ﻿<Localization>
+	<Text id="Lang:ru">Русский</Text>
+	<Text id="Lang:en">English</Text>
+
 	<!-- Specials	-->
 	<!-- DewElemental -->
 	<Text id="Special:WaterDrops">Капли</Text>
@@ -199,7 +202,10 @@
 	<Text id="GUI:MainMenuPanel:Settings">Опции</Text>
 	<Text id="GUI:MainMenuPanel:Exit">Выход</Text>
 	<!-- Settings Panel -->
-	<Text id="GUI:SettingsPanel:Volume">Громкость</Text>
+	<Text id="GUI:SettingsPanel:MusicVolume">Громкость музыки</Text>
+	<Text id="GUI:SettingsPanel:EffectVolume">Громкость эффектов</Text>
+	<Text id="GUI:SettingsPanel:Brightness">Яркость</Text>
+	<Text id="GUI:SettingsPanel:Contrast">Контраст</Text>
 	<Text id="GUI:SettingsPanel:Language">Язык</Text>
 	<Text id="GUI:SettingsPanel:Subtitles">Субтитры</Text>
 	<Text id="GUI:SettingsPanel:Resolution">Разрешение</Text>

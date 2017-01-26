@@ -11,6 +11,11 @@ public class PanelDropdown : Dropdown
     public int currentValue
     {
         get { return m_CurrentValue; }
+        set
+        {
+            m_CurrentValue = value;
+            this.value = value;
+        }
     }
 
     public bool isActive
@@ -27,13 +32,13 @@ public class PanelDropdown : Dropdown
 
     private void SelectMoveUp()
     {
-        m_CurrentValue--;
+        currentValue--;
         CheckSelectPosition();
     }
 
     private void SelectMoveDown()
     {
-        m_CurrentValue++;
+        currentValue++;
         CheckSelectPosition();
     }
 
@@ -44,13 +49,13 @@ public class PanelDropdown : Dropdown
             return;
         }
 
-        if (m_CurrentValue < 0)
+        if (currentValue < 0)
         {
-            m_CurrentValue = 0;
+            currentValue = 0;
         }
-        else if (m_CurrentValue >= options.Count)
+        else if (currentValue >= options.Count)
         {
-            m_CurrentValue = options.Count;
+            currentValue = options.Count;
         }
     }
 
@@ -68,7 +73,7 @@ public class PanelDropdown : Dropdown
             SelectMoveDown();
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Backspace))
+        if (Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Backspace))
         {
             CancelAction();
         }

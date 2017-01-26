@@ -7,6 +7,9 @@ public class AudioObject : MonoBehaviour
     private AudioSource m_AudioSource = null;
     private float m_Speed = 1.0f;
 
+    
+    private float m_MaxValue;
+
     public static AudioObject prefab
     {
         get
@@ -17,6 +20,16 @@ public class AudioObject : MonoBehaviour
             }
             return m_Prefab;
         }
+    }
+    public float volume
+    {
+        get { return m_AudioSource.volume; }
+        set { m_AudioSource.volume = value; }
+    }
+    public bool mute
+    {
+        get { return m_AudioSource.mute; }
+        set { m_AudioSource.mute = value; }
     }
 
     public void Awake()
