@@ -25,10 +25,10 @@ public class ResourceLoader : MonoBehaviour {
 
     IEnumerator LoadingResources()
     {
-        yield return null;
+        yield return new WaitForSeconds(1);
+        IEnumerable<Type> typeList = ConcatTypes(GetTypeList(typeof(Panel)), GetTypeList(typeof(PanelButton)));
         m_AsyncOp = SceneManager.LoadSceneAsync("MainMenu");
         m_AsyncOp.allowSceneActivation = false;
-        IEnumerable<Type> typeList = ConcatTypes(GetTypeList(typeof(Panel)), GetTypeList(typeof(PanelButton)));
         while (m_AsyncOp.progress < 0.9f || !m_PrefabsLoadedComplete)
         {
             SetProgressBarValue();
