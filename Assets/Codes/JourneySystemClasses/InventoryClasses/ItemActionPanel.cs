@@ -171,7 +171,7 @@ public class ItemActionPanel : Panel
         else if (ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.Key)
         {
             string l_UseStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Use");
-            AddActionButton(l_UseStr, TryUseItem);
+            AddActionButton(l_UseStr, TryUseKeyItem);
 
             string l_BackStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
             AddActionButton(l_BackStr, CancelAction);
@@ -199,6 +199,22 @@ public class ItemActionPanel : Panel
         useItemView.Confrim();
         useItemView.AddCancelAction(CancelAction);
         useItemView.AddUseAction(UseItem);
+    }
+
+    private void TryUseKeyItem()
+    {
+        useItemView.Init();
+        useItemView.Confrim();
+        useItemView.AddCancelAction(CancelAction);
+        useItemView.AddUseAction(UseKeyItem);
+    }
+
+    private void UseKeyItem()
+    {
+        ShowMessage("Test test test test", CancelAction);
+        // TODO : Использование предмета
+        Item l_Item = ItemDataBase.GetInstance().GetItem(itemId).CreateItem();
+        l_Item.Run(JourneySystem.GetInstance().player.statistics);
     }
 
     private void UseItem()
