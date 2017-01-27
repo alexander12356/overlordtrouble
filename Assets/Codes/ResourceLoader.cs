@@ -11,7 +11,9 @@ public class ResourceLoader : MonoBehaviour {
 
     [SerializeField]
     private Slider m_ProgressBar = null;
-    AsyncOperation op;
+    [SerializeField]
+    private ScreenFader m_ScreenFader = null;
+    AsyncOperation m_AsyncOp;
     float m_PercentPrefabsLoaded;
     bool m_PrefabsLoadedComplete;
     void Start()
@@ -24,22 +26,23 @@ public class ResourceLoader : MonoBehaviour {
     IEnumerator LoadingResources()
     {
         yield return null;
-        op = SceneManager.LoadSceneAsync("MainMenu");
-        op.allowSceneActivation = false;
+        m_AsyncOp = SceneManager.LoadSceneAsync("MainMenu");
+        m_AsyncOp.allowSceneActivation = false;
         IEnumerable<Type> typeList = ConcatTypes(GetTypeList(typeof(Panel)), GetTypeList(typeof(PanelButton)));
-        while (op.progress < 0.9f || !m_PrefabsLoadedComplete)
+        while (m_AsyncOp.progress < 0.9f || !m_PrefabsLoadedComplete)
         {
             SetProgressBarValue();
             yield return StartCoroutine(LoadPrefabs(typeList));
         }
-        op.allowSceneActivation = true;
-        while (!op.isDone)
+        LoadDataBases();
+        yield return StartCoroutine(m_ScreenFader.FadeToBlack());
+        m_AsyncOp.allowSceneActivation = true;
+        while (!m_AsyncOp.isDone)
         {
-            SetProgressBarValue();
-            LoadDataBases();
+            SetProgressBarValue(); // TODO: в принципе бесполезно, т.к. к этому времени ScreenFader затемнит сцену, но пусть пока стоит. P.S. весь цикл по идее бесполезен
             yield return null;
         }
-        yield return op;
+        yield return m_AsyncOp;
     }
 
     private void LoadDataBases()
@@ -65,7 +68,7 @@ public class ResourceLoader : MonoBehaviour {
     IEnumerator LoadPrefabs(IEnumerable<Type> p_TypeList)
     {
         int l_PrefabsCount = p_TypeList.Count();
-        int i = 0;
+        int i = 1; // счет начинается с одного, чтобы i в конце цикла было равно l_PrefabsCount
         foreach (var type in p_TypeList)
         {
             Debug.Log(type);
@@ -75,7 +78,7 @@ public class ResourceLoader : MonoBehaviour {
             m_PercentPrefabsLoaded = ((float)i / l_PrefabsCount);
             SetProgressBarValue();
             i++;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.05f); // искусственная задержка, чтобы загрузка не была слишком быстрой
         }
         m_PrefabsLoadedComplete = true;
     }
@@ -92,7 +95,8 @@ public class ResourceLoader : MonoBehaviour {
 
     private void SetProgressBarValue()
     {
-        float l_ProgressValue = op.progress / 2.0f + m_PercentPrefabsLoaded / 2.0f;
+        // op.progress делится не на 2, а на 1.8 потому что максимальное значение op.progress в текущей реализации равно 0.9
+        float l_ProgressValue = m_AsyncOp.progress / 1.8f + m_PercentPrefabsLoaded / 2.0f;
         if (l_ProgressValue > 1.0f)
             l_ProgressValue = 1.0f;
         m_ProgressBar.value = l_ProgressValue;
