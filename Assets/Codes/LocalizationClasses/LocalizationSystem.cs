@@ -8,9 +8,15 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
     #region Variables
     private Dictionary<string, string> m_Texts = null;
 	private const string m_PathFile = "Data/Localizations/Localization";
+    private string m_CurrentLanguageId = string.Empty;
     #endregion
 
     #region Interface
+    public string currentLanguage
+    {
+        get { return m_CurrentLanguageId; }
+    }
+
     public LocalizationDataBase()
 	{
 		string l_LangId = DetectLanguage();
@@ -49,24 +55,29 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
 
     public void ChangeLanguage(string p_LangId)
     {
-        Parse(p_LangId);
+        m_CurrentLanguageId = p_LangId;
+        Parse(m_CurrentLanguageId);
+    }
+
+    public List<string> GetLanguages()
+    {
+        return new List<string>() { "en", "ru" };
     }
     #endregion
 
     #region Private
     private string DetectLanguage()
 	{
-		string l_LangId = "en";
 		switch (Application.systemLanguage)
 		{
 			case SystemLanguage.English:
-				l_LangId = "en";
+                m_CurrentLanguageId = "en";
 				break;
 			case SystemLanguage.Russian:
-				l_LangId = "ru";
+                m_CurrentLanguageId = "ru";
 				break;
 		}
-		return l_LangId;
+        return m_CurrentLanguageId;
 	}
 
 	private void Parse(string langId)

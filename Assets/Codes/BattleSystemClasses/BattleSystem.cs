@@ -75,6 +75,8 @@ public class BattleSystem : MonoBehaviour
         m_Player = BattlePlayer.GetInstance();
         PlayerData.GetInstance().AddLevelupNotification(LevelupNotification);
         PlayerData.GetInstance().AddClassupNotification(ClassupNotification);
+
+        AudioSystem.GetInstance().PlayMusic("Battle");
     }
 
     public void SetVisibleAvatarPanel(bool p_Value)
@@ -100,7 +102,8 @@ public class BattleSystem : MonoBehaviour
 
     public virtual void Retreat()
     {
-        int l_RetreatChance = Random.Range(0, 100);
+        System.Random l_SystemRandom = new System.Random();
+        int l_RetreatChance = l_SystemRandom.Next(0, 100);
 
         int l_PlayerSpeed = PlayerData.GetInstance().GetStatValue("Speed");
         int l_EnemySpeed = GetEnemyMaxSpeed();
@@ -156,12 +159,13 @@ public class BattleSystem : MonoBehaviour
     public void AddExperience(int p_Experience)
     {
         m_Experience += p_Experience;
-        PlayerData.GetInstance().AddExperience(m_Experience);
     }
 
     public void Win()
     {
         SetVisibleAvatarPanel(false);
+
+        PlayerData.GetInstance().AddExperience(m_Experience);
 
         List<string> l_WinText = new List<string>();
         l_WinText.Add(LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Win", new string[] { m_Experience.ToString() }));
@@ -238,6 +242,8 @@ public class BattleSystem : MonoBehaviour
     #region Private
     private void ReturnToJourney()
     {
+        AudioSystem.GetInstance().StopMusic("Battle");
+        AudioSystem.GetInstance().PlayTheme();
         if (m_BattleData.id.Contains("TestBattle"))
         {
             SceneManager.LoadScene("DemoMainScene");
@@ -255,6 +261,10 @@ public class BattleSystem : MonoBehaviour
 
     private void ReturnToMainMenu()
     {
+        //TODO создать единый выгружатель при смерти или при выходе из локаций
+        SaveSystem.ShutDown();
+        PlayerPrefs.DeleteAll();
+        AudioSystem.GetInstance().StopMusic("Battle");
         if (m_BattleData.id.Contains("TestBattle"))
         {
             SceneManager.LoadScene("DemoMainScene");

@@ -7,6 +7,7 @@ public struct Room
     public string id;
     public BoxCollider2D cameraBounds;
     public int sortingOrder;
+    public bool main;
 }
 
 public class RoomSystem : MonoBehaviour
@@ -31,6 +32,10 @@ public class RoomSystem : MonoBehaviour
     {
         get { return m_CurrentRoom; }
     }
+    public bool currentRoomIsMain
+    {
+        get { return m_RoomDictionary[m_CurrentRoom].main; }
+    }
 
     public void Awake()
     {
@@ -51,6 +56,15 @@ public class RoomSystem : MonoBehaviour
     {
         m_CurrentRoom = p_TargetId;
         m_CamerFollow.SetCameraBounds(m_RoomDictionary[m_CurrentRoom].cameraBounds);
+
+        if (!m_RoomDictionary[m_CurrentRoom].main)
+        {
+            AudioSystem.GetInstance().ChangeThemeVolume(0.5f);
+        }
+        else
+        {
+            AudioSystem.GetInstance().ChangeThemeVolume(1.0f);
+        }
 
         JourneySystem.GetInstance().EnemyGenerate(p_TargetId);
     }

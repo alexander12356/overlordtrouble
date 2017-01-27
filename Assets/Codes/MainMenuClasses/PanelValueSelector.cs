@@ -68,6 +68,7 @@ public class PanelValueSelector : MonoBehaviour
         set
         {
             m_CurrentIndex = value;
+            CheckSelectPosition();
         }
     }
 

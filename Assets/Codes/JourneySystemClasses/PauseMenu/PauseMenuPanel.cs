@@ -27,9 +27,11 @@ public class PauseMenuPanel : Panel
         m_ButtonList[0].AddAction(OpenProfilePanel);
         m_ButtonList[1].AddAction(OpenInventoryPanel);
         m_ButtonList[2].AddAction(OpenEncyclopedia);
-        //m_ButtonList[3].AddAction(OpenOptions);
+        m_ButtonList[3].AddAction(OpenSettings);
         m_ButtonList[4].AddAction(OpenQuitQuestionPanel);
         m_ButtonList.AddCancelAction(ReturnToJourney);
+
+        JourneySystem.GetInstance().Pause();
     }
 
     public void Start()
@@ -55,6 +57,7 @@ public class PauseMenuPanel : Panel
 
     private void ConfirmReturnToMenu()
     {
+        AudioSystem.GetInstance().StopTheme();
         JourneySystem.GetInstance().ReturnToMainMenu();
     }
 
@@ -84,9 +87,19 @@ public class PauseMenuPanel : Panel
         JourneySystem.GetInstance().AddScene("Encyclopedia");
     }
 
+    private void OpenSettings()
+    {
+        SettingsPanel l_SettingsPanel = Instantiate(SettingsPanel.prefab);
+        JourneySystem.GetInstance().ShowPanel(l_SettingsPanel, true);
+    }
+
     private void ReturnToJourney()
     {
         Close();
+
         JourneySystem.GetInstance().SetControl(ControlType.Player);
+        JourneySystem.GetInstance().Resume();
+
+        AudioSystem.GetInstance().ResumeMainTheme();
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StartBattleStep : BaseStep
 {
@@ -19,6 +17,7 @@ public class StartBattleStep : BaseStep
 
         BattleStarter.GetInstance().InitBattle(m_Enemy, m_BattleId);
         JourneySystem.GetInstance().AddScene(m_SceneId);
+        AudioSystem.GetInstance().StopTheme();
 
         EndStep();
     }

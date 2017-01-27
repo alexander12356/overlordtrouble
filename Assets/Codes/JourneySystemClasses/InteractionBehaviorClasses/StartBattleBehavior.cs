@@ -21,7 +21,7 @@ public class StartBattleBehavior : BaseCollideBehavior
         m_JourneyActor.StopLogic();
 
         BattleStarter.GetInstance().InitBattle(m_JourneyActor as JourneyEnemy, m_CurrentBattleId);
-        JourneySystem.GetInstance().AddScene("BattleSystem");
+        JourneySystem.GetInstance().StartBattle();
     }
 
     private string GetRandomBattle()

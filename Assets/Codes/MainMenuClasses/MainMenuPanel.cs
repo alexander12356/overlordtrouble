@@ -56,11 +56,17 @@ public class MainMenuPanel : Panel
     {
         base.Awake();
 
-        Cursor.visible = false;
+        GameManager.GetInstance();
 
+        Cursor.visible = false;
         MainMenuSystem.GetInstance().ShowPanel(this);
 
         InitButtonList();
+    }
+
+    public void Start()
+    {
+        AudioSystem.GetInstance().PlayMusic("MainMenu");
     }
 
     private void InitButtonList()
@@ -113,17 +119,10 @@ public class MainMenuPanel : Panel
         mainMenuTransitionAnimator.SetTrigger("StartTransition");
     }
 
-    private void SelectMainMenu()
-    {
-        mainMenuButtonList.isActive = true;
-    }
-
     private void OpenSettings()
     {
-        mainMenuButtonList.isActive = false;
-        SettingsPanel l_SettingsPanel = Instantiate(SettingsPanel.prefab);
-        MainMenuSystem.GetInstance().ShowPanel(l_SettingsPanel);
-        l_SettingsPanel.AddCancelAction(SelectMainMenu);
+        MainSettingsPanel l_SettingsPanel = Instantiate(MainSettingsPanel.prefab);
+        MainMenuSystem.GetInstance().ShowPanel(l_SettingsPanel, true);
     }
 
     private void LoadGame()
@@ -144,9 +143,7 @@ public class MainMenuPanel : Panel
 
     private void RunNewGamePlus()
     {
-        mainMenuButtonList.isActive = false;
         LoadingPanel l_LoadingPanel = Instantiate(LoadingPanel.prefab);
-        l_LoadingPanel.AddCancelAction(SelectMainMenu);
         MainMenuSystem.GetInstance().ShowPanel(l_LoadingPanel);
     }
 
@@ -168,6 +165,7 @@ public class MainMenuPanel : Panel
     private void RunNewGame()
     {
         MainMenuSystem.GetInstance().StartLocation("EnterName");
+        AudioSystem.GetInstance().StopMusic("MainMenu");
     }
 
     private void QuitGame()

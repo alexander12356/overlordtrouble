@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum ControlType
 {
@@ -14,6 +15,9 @@ public class JourneySystem : MonoBehaviour
 {
     private static JourneySystem m_Instance;
     private ControlType m_CurrentControlType = ControlType.Player;
+    private UnityEvent m_OnPauseEvent = null;
+    private UnityEvent m_OnResumeEvent = null;
+    private bool m_IsPause = false;
 
     [SerializeField]
     private JourneyPlayer m_Player = null;
@@ -48,10 +52,17 @@ public class JourneySystem : MonoBehaviour
     {
         get { return m_CurrentControlType; }
     }
+    public bool isPause
+    {
+        get { return m_IsPause; }
+    }
 
     public void Awake()
     {
         m_Instance = this;
+
+        m_OnPauseEvent = new UnityEvent();
+        m_OnResumeEvent = new UnityEvent();
 
 #if UNITY_EDITOR
         if (GameManager.IsInstance() == false)
@@ -60,14 +71,19 @@ public class JourneySystem : MonoBehaviour
             PlayerData.GetInstance().NewGameDataInit();
             PlayerInventory.GetInstance().NewGameDataInit();
             EnemyGenerate(RoomSystem.GetInstance().currentRoomId);
+            AudioSystem.GetInstance().SetTheme(GameManager.GetInstance().currentSceneName);
+            AudioSystem.GetInstance().PlayTheme();
+            AudioSystem.GetInstance().ResumeMainTheme();
         }
 #endif
     }
 
     public void Start()
     {
-        SaveSystem.GetInstance().LoadFromMemory();
+        AudioSystem.GetInstance().PlayTheme();
 
+        SaveSystem.GetInstance().LoadFromMemory();
+        
         LocationWarpSystem.GetInstance().SetPlayerPos();
 
         SetControl(ControlType.Player);
@@ -126,9 +142,15 @@ public class JourneySystem : MonoBehaviour
     }
 
     public void AddScene(string p_SceneId)
-    {
+    {    
         m_PanelManager.AddScene(p_SceneId);
         SetControl(ControlType.None);
+    }
+
+    public void StartBattle()
+    {
+        AudioSystem.GetInstance().StopTheme();
+        AddScene("BattleSystem");
     }
 
     public void StartLocation(string p_LocationId)
@@ -136,6 +158,9 @@ public class JourneySystem : MonoBehaviour
         SaveSystem.GetInstance().SaveToMemory();
         SaveSystem.GetInstance().ClearCache();
         SaveSystem.GetInstance().Init(p_LocationId);
+
+        AudioSystem.GetInstance().StopTheme();
+        AudioSystem.GetInstance().SetTheme(p_LocationId);
 
         m_PanelManager.StartLocation(p_LocationId);
     }
@@ -145,11 +170,6 @@ public class JourneySystem : MonoBehaviour
         PlayerPrefs.DeleteAll();
         SaveSystem.ShutDown();
         m_PanelManager.StartLocation("MainMenu");
-    }
-
-    public void OpenProfile()
-    {
-        m_PanelManager.OpenProfile();
     }
 
     public void OnEnable()
@@ -165,10 +185,57 @@ public class JourneySystem : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR
+    public void RunPauseMenu()
+    {
+        PauseMenuPanel l_PauseMenuPanel = Instantiate(PauseMenuPanel.prefab);
+        ShowPanel(l_PauseMenuPanel);
+
+        AudioSystem.GetInstance().ChangeThemeVolume(0.1f);
+
+        SetControl(ControlType.Panel);
+    }
+
+    public void OpenInventory()
+    {
+        SetControl(ControlType.Panel);
+        InventoryPanel lInventoryPanel = Instantiate(InventoryPanel.prefab);
+        ShowPanel(lInventoryPanel);
+    }
+
     public void OnApplicationQuit()
     {
         PlayerPrefs.DeleteAll();
     }
-#endif
+
+    public void AddOnPauseListener(UnityAction p_Action)
+    {
+        m_OnPauseEvent.AddListener(p_Action);
+    }
+
+    public void RemoveOnPauseListener(UnityAction p_Action)
+    {
+        m_OnPauseEvent.RemoveListener(p_Action);
+    }
+
+    public void AddOnResumeListener(UnityAction p_Action)
+    {
+        m_OnResumeEvent.AddListener(p_Action);
+    }
+
+    public void RemoveOnResumeListener(UnityAction p_Action)
+    {
+        m_OnResumeEvent.RemoveListener(p_Action);
+    }
+
+    public void Pause()
+    {
+        m_IsPause = true;
+        m_OnPauseEvent.Invoke();
+    }
+
+    public void Resume()
+    {
+        m_OnResumeEvent.Invoke();
+        m_IsPause = false;
+    }
 }
