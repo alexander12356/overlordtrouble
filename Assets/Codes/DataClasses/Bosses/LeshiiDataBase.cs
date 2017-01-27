@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.IO;
 
 using UnityEngine;
 
 using BattleSystemClasses.Bosses.Leshii;
+
+using System.Collections.Generic;
 
 public class LeshiiDataBase : Singleton<LeshiiDataBase>
 {
@@ -64,14 +66,22 @@ public class LeshiiDataBase : Singleton<LeshiiDataBase>
     private void Parse()
     {
         string l_DecodedString = "";
-        try
+
+        if (File.Exists(Application.streamingAssetsPath + "/" + m_PathFile + ".json"))
         {
-            TextAsset l_TextAsset = (TextAsset)Resources.Load(m_PathFile);
-            l_DecodedString = l_TextAsset.ToString();
+            l_DecodedString = File.ReadAllText(Application.streamingAssetsPath + "/" + m_PathFile + ".json");
         }
-        catch
+        else
         {
-            Debug.LogError("CANNOT READ FOR " + GetType());
+            try
+            {
+                TextAsset l_TextAsset = (TextAsset)Resources.Load(m_PathFile);
+                l_DecodedString = l_TextAsset.ToString();
+            }
+            catch
+            {
+                Debug.LogError("CANNOT READ FOR " + GetType());
+            }
         }
 
         JSONObject l_JSONObject = new JSONObject(l_DecodedString);

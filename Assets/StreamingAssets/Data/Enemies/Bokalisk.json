@@ -1,0 +1,50 @@
+{
+	"Id" : "Bokalisk",
+	"Attack" : 1,
+	"Defense" : 1,
+	"Speed" : 1,
+	"Level" : 1,
+	"Health" : 10,
+	"Element": "Live",
+	"Attacks" :
+	[
+		{
+			"Id" : "PeckerAttack",
+			"Type" : "Attack",
+			"Element" : "Physical",
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 2,
+					"Value2" : 4
+				}
+			}
+		},
+		{
+			"Id" : "HollowLook",
+			"Type" : "Attack",
+			"Element" : "Dark",
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 0,
+					"Value2" : 0
+				}
+			}
+		}
+	],
+	"Experience" : 15,
+	"Loot" :
+	[
+		{
+			"Id" : "BokaliskMeat",
+			"Count" : 1
+		}
+	],
+	"Property" :
+	{
+		"LeaveChance" : 10
+	}
+}

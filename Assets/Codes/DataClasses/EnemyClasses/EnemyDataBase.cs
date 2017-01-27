@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -38,21 +39,29 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
     #region Private
     private void Parse()
     {
-        TextAsset[] l_TextAssets = Resources.LoadAll<TextAsset>(m_PathFile);
-
-        for (int i = 0; i < l_TextAssets.Length; i++)
+        if (Directory.Exists(Application.streamingAssetsPath + "/Data/Enemies/"))
         {
-            ParseEnemy(l_TextAssets[i]);
+            string[] l_FilesPath = Directory.GetFiles(Application.streamingAssetsPath + "/Data/Enemies/", "*.json");
+            
+            for (int i = 0; i < l_FilesPath.Length; i++)
+            {
+                ParseEnemy(File.ReadAllText(l_FilesPath[i]));
+            }
+        }
+        else
+        {
+            TextAsset[] l_TextAssets = Resources.LoadAll<TextAsset>(m_PathFile);
+            for (int i = 0; i < l_TextAssets.Length; i++)
+            {
+                ParseEnemy(l_TextAssets[i].ToString());
+            }
         }
     }
 
-    private void ParseEnemy(TextAsset p_TextAsset)
+    private void ParseEnemy(string p_DecodedString)
     {
-        string l_DecodedString = "";
 
-        l_DecodedString = p_TextAsset.ToString();
-
-        JSONObject l_JSONObject = new JSONObject(l_DecodedString);
+        JSONObject l_JSONObject = new JSONObject(p_DecodedString);
 
         string  l_Id          = l_JSONObject["Id"].str;
         float   l_AttackStat  = l_JSONObject["Attack"].f;

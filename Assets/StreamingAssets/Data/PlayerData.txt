@@ -1,0 +1,20 @@
+{
+	"Name" : "Newbie",
+	"AttackValue" : 
+	[
+		5,
+		8
+	],
+	"Level" : 0,
+	"Class" : 0,
+	"Experience" : 0,
+	"Stats" : 
+	{
+		"HealthPoints" : 22,
+		"MonstylePoints" : 22,
+		"Attack" : 1,
+        "Defense" : 1,
+        "Speed" : 1,
+        "Fortune" : 1
+	}
+}

@@ -258,14 +258,22 @@ public class PlayerData : Singleton<PlayerData>
     private void Parse()
     {
         string l_DecodedString = "";
-        try
+
+        if (File.Exists(Application.streamingAssetsPath + "/" + m_ProfileDataPathFile + ".txt"))
         {
-            TextAsset l_TextAsset = (TextAsset)Resources.Load(m_ProfileDataPathFile);
-            l_DecodedString = l_TextAsset.ToString();
+            l_DecodedString = File.ReadAllText(Application.streamingAssetsPath + "/" + m_ProfileDataPathFile + ".txt");
         }
-        catch
+        else
         {
-            Debug.LogError("CANNOT READ FOR " + GetType());
+            try
+            {
+                TextAsset l_TextAsset = (TextAsset)Resources.Load(m_ProfileDataPathFile);
+                l_DecodedString = l_TextAsset.ToString();
+            }
+            catch
+            {
+                Debug.LogError("CANNOT READ FOR " + GetType());
+            }
         }
 
         JSONObject l_JSONObject = new JSONObject(l_DecodedString);
@@ -287,14 +295,22 @@ public class PlayerData : Singleton<PlayerData>
     private void ParseLevelupList()
     {
         string l_DecodedString = "";
-        try
+
+        if (File.Exists(Application.streamingAssetsPath + "/" + m_LevelupListPathFile + ".json"))
         {
-            TextAsset l_TextAsset = (TextAsset)Resources.Load(m_LevelupListPathFile);
-            l_DecodedString = l_TextAsset.ToString();
+            l_DecodedString = File.ReadAllText(Application.streamingAssetsPath + "/" + m_LevelupListPathFile + ".json");
         }
-        catch
+        else
         {
-            Debug.LogError("CANNOT READ FOR " + GetType());
+            try
+            {
+                TextAsset l_TextAsset = (TextAsset)Resources.Load(m_LevelupListPathFile);
+                l_DecodedString = l_TextAsset.ToString();
+            }
+            catch
+            {
+                Debug.LogError("CANNOT READ FOR " + GetType());
+            }
         }
 
         JSONObject l_JSONObject = new JSONObject(l_DecodedString);
@@ -308,14 +324,22 @@ public class PlayerData : Singleton<PlayerData>
     private void ParseClassupList()
     {
         string l_DecodedString = "";
-        try
+
+        if (File.Exists(Application.streamingAssetsPath + "/" + m_ClassupListPathFile + ".json"))
         {
-            TextAsset l_TextAsset = (TextAsset)Resources.Load(m_ClassupListPathFile);
-            l_DecodedString = l_TextAsset.ToString();
+            l_DecodedString = File.ReadAllText(Application.streamingAssetsPath + "/" + m_ClassupListPathFile + ".json");
         }
-        catch
+        else
         {
-            Debug.LogError("CANNOT READ FOR " + GetType());
+            try
+            {
+                TextAsset l_TextAsset = (TextAsset)Resources.Load(m_ClassupListPathFile);
+                l_DecodedString = l_TextAsset.ToString();
+            }
+            catch
+            {
+                Debug.LogError("CANNOT READ FOR " + GetType());
+            }
         }
 
         JSONObject l_JSONObject = new JSONObject(l_DecodedString);

@@ -1,0 +1,176 @@
+{
+	"WaterDrops" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : true,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 1.0
+			}
+		}
+	},
+	"Slap" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 3.0
+			}
+		}
+	},
+	"ProtectiveShell" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"Defense" :
+			{
+				"Value" : 2.0,
+				"Duration" : 3.0
+			}
+		}
+	},
+	"WaterBullet" :
+	{
+		"Sp" : 4.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 4.0
+			}
+		}
+	},
+	"WaterDash" :
+	{
+		"Sp" : 9.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 8.0
+			}
+		}
+	},
+	"HealingSplash" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Water",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"Healing" :
+			{
+				"Value" : 5.0
+			}
+		}
+	},
+	"TailWhap" :
+	{
+		"Sp" : 5.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" : 
+			{
+				"AttackValue" : 5.0
+			}
+		}
+	},
+	"Slash" :
+	{
+		"Sp" : 6.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 6.0
+			}
+		}
+	},
+	"Molting" :
+	{
+		"Sp" : 5.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"ClearSpecialStatus" :
+			{
+			}
+		}
+	},
+	"StaffStrike" :
+	{
+		"Sp" : 4.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 4.0
+			}
+		}
+	},
+	"Ember" :
+	{
+		"Sp" : 8.0,
+		"Element" : "Fire",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 7.0
+			}
+		}
+	},
+	"Concentration" :
+	{
+		"Sp" : 2.0,
+		"Element" : "Fire",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"AttackBuff" :
+			{
+				"Value" : 5,
+				"Duration" : 5
+			}
+		}
+	},
+	"StonePress" :
+	{
+		"Sp" : 5.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 10.0
+			}
+		}
+	}
+}
