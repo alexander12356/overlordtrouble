@@ -141,8 +141,8 @@ public class Panel : MonoBehaviour
         gameObject.SetActive(false);
         if (m_Close)
         {
-            
             PopAction();
+            m_PanelManager.PanelDestroyed(this);
             Destroy(gameObject);
         }
     }

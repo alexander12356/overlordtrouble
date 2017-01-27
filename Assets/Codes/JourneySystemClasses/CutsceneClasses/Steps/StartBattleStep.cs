@@ -17,6 +17,7 @@ public class StartBattleStep : BaseStep
 
         BattleStarter.GetInstance().InitBattle(m_Enemy, m_BattleId);
         JourneySystem.GetInstance().AddScene(m_SceneId);
+        JourneySystem.GetInstance().SetControl(ControlType.StartBattle);
         AudioSystem.GetInstance().StopTheme();
 
         EndStep();

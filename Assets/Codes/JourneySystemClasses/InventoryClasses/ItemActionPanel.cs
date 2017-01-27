@@ -217,8 +217,8 @@ public class ItemActionPanel : Panel
     {
         InventoryTextPanel l_TextPanel = Instantiate(InventoryTextPanel.prefab);
         l_TextPanel.SetText(new List<string>() { p_Message });
-        l_TextPanel.AddButtonAction(p_CancelAction);
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
+        l_TextPanel.AddButtonAction(p_CancelAction);
         JourneySystem.GetInstance().ShowPanel(l_TextPanel, true);
     }
 

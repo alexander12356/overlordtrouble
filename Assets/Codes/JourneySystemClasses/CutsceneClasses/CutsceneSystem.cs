@@ -34,7 +34,11 @@ public class CutsceneSystem : MonoBehaviour
     public void EndCutscene()
     {
         enabled = false;
-        JourneySystem.GetInstance().SetControl(ControlType.Player);
+
+        if (JourneySystem.GetInstance().currentControlType != ControlType.StartBattle)
+        {
+            JourneySystem.GetInstance().SetControl(ControlType.Player);
+        }
     }
 
     public void NextStep()

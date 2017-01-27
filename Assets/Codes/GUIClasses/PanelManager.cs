@@ -19,6 +19,7 @@ public class PanelManager : MonoBehaviour
     private Stack<Panel> m_PanelStack = new Stack<Panel>();
     private static PanelManager m_Instance;
     private ScreenFader m_ScreenFader;
+    private List<Panel> m_ClosingPanel = new List<Panel>();
     #endregion
 
     #region Interface
@@ -58,7 +59,12 @@ public class PanelManager : MonoBehaviour
 
     public void ClosePanel()
     {
-        m_PanelStack.Pop();
+        m_ClosingPanel.Add(m_PanelStack.Pop());
+    }
+
+    public void PanelDestroyed(Panel p_Panel)
+    {
+        m_ClosingPanel.Remove(p_Panel);
     }
 
     public void AddScene(string p_SceneId)
@@ -95,7 +101,7 @@ public class PanelManager : MonoBehaviour
 
     private void Update()
     {
-        if (m_PanelStack.Count == 0)
+        if (m_PanelStack.Count == 0 || m_ClosingPanel.Count > 0)
         {
             return;
         }

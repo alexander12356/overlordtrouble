@@ -8,7 +8,8 @@ public enum ControlType
     None,
     Player,
     Panel,
-    Cutscene
+    Cutscene,
+    StartBattle
 }
 
 public class JourneySystem : MonoBehaviour
@@ -133,6 +134,12 @@ public class JourneySystem : MonoBehaviour
                 m_Player.StopLogic();
                 CutsceneSystem.GetInstance().enabled = false;
                 break;
+            case ControlType.StartBattle:
+                m_PanelManager.enabled = false;
+                m_Player.StopLogic();
+                CutsceneSystem.GetInstance().enabled = false;
+                break;
+                break;
         }
     }
 
@@ -151,6 +158,7 @@ public class JourneySystem : MonoBehaviour
     {
         AudioSystem.GetInstance().StopTheme();
         AddScene("BattleSystem");
+        SetControl(ControlType.StartBattle);
     }
 
     public void StartLocation(string p_LocationId)
