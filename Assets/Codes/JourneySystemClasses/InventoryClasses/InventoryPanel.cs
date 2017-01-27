@@ -124,6 +124,11 @@ public class InventoryPanel : Panel
 
         m_ViewButtonsList.UpdateKey();
         m_CurrOpenedView.UpdateKey();
+
+        if (Input.GetKeyDown(KeyCode.X) && !moving)
+        {
+            CloseInventory();
+        }
     }
 
     #endregion
