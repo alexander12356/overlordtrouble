@@ -49,6 +49,7 @@ public class InventoryPanel : Panel
     private void InitViewButtonList()
     {
         m_ViewButtonsList.AddKeyArrowAction(ShowView);
+        m_ViewButtonsList.AddCancelAction(CloseInventory);
         m_ViewButtonsList[0].AddAction(ConfirmView);
         m_ViewButtonsList[1].AddAction(ConfirmView);
         m_ViewButtonsList[2].AddAction(ConfirmView);
