@@ -49,6 +49,7 @@ public class InventoryPanel : Panel
     private void InitViewButtonList()
     {
         m_ViewButtonsList.AddKeyArrowAction(ShowView);
+        m_ViewButtonsList.AddCancelAction(CloseInventory);
         m_ViewButtonsList[0].AddAction(ConfirmView);
         m_ViewButtonsList[1].AddAction(ConfirmView);
         m_ViewButtonsList[2].AddAction(ConfirmView);
@@ -124,11 +125,6 @@ public class InventoryPanel : Panel
 
         m_ViewButtonsList.UpdateKey();
         m_CurrOpenedView.UpdateKey();
-
-        if (Input.GetKeyDown(KeyCode.X) && !moving)
-        {
-            CloseInventory();
-        }
     }
 
     #endregion
