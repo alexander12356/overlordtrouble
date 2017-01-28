@@ -99,6 +99,11 @@ public class LoadingPanel : Panel
 
     private void TryDeleteSave()
     {
+        if (savesList.count == 0)
+        {
+            return;
+        }
+
         YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
         l_YesNoPanel.AddYesAction(DeleteSave);
         l_YesNoPanel.SetText(LocalizationDataBase.GetInstance().GetText("GUI:Profile:QuestionImproveStats"));
@@ -113,6 +118,9 @@ public class LoadingPanel : Panel
         savesList.RemoveButton(savesList.currentButtonId);
 
         SaveDataBase.GetInstance().DeleteSave(l_LoadButton.saveData.userName);
+
+        savesListScrolling.Init(244.0f, 1);
+        savesListScrolling.scrollRect.verticalNormalizedPosition = 1.0f;
     }
 
     private void LoadGame()
