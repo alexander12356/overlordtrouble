@@ -291,6 +291,8 @@ public class ButtonList : MonoBehaviour
             m_ButtonsList[i].transform.localPosition = new Vector3(220, -70.0f - i * 50, 0.0f);
             m_ButtonsList[i].transform.localScale = Vector3.one;
         }
+        m_PrevButtonId = m_CurrentButtonId = 0;
+        CheckSelectPosition();
     }
 
     private void ConfirmAction()

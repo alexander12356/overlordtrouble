@@ -114,13 +114,16 @@ public class LoadingPanel : Panel
     private void DeleteSave()
     {
         LoadButton l_LoadButton = (LoadButton)savesList.currentButton;
-        string removedButtonId = l_LoadButton.id;
         savesList.RemoveButton(savesList.currentButtonId);
 
-        SaveDataBase.GetInstance().DeleteSave(l_LoadButton.saveData.userName);
+        Vector2 l_SizeDelta = savesList.rectTransform.sizeDelta;
+        l_SizeDelta.y = 0.0f;
+        savesList.rectTransform.sizeDelta = l_SizeDelta;
 
         savesListScrolling.Init(244.0f, 1);
         savesListScrolling.scrollRect.verticalNormalizedPosition = 1.0f;
+
+        SaveDataBase.GetInstance().DeleteSave(l_LoadButton.saveData.userName);
     }
 
     private void LoadGame()
