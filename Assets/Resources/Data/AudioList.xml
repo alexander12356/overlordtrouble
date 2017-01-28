@@ -20,4 +20,5 @@
 	<Audio id="Battle" path="Musics/Crusade"/>
 	<Audio id="Road" path="Musics/Lord of the Land"/>
 	<Audio id="MainMenu" path="Musics/Close_To_Flame"/>
+	<Audio id="Forest" path="Musics/A Mission"/>
 </AudioList>
