@@ -5,7 +5,6 @@ public class BattleEnemy : BattleActor
 {
     #region Variables
     private static BattleEnemy m_Prefab = null;
-    private Animator m_Animator = null;
     private AudioSource m_AudioSource = null;
     private bool m_Selected = false;
     private SpriteRenderer m_SelectedArrow = null;
@@ -13,6 +12,7 @@ public class BattleEnemy : BattleActor
     private SpriteRenderer m_Renderer = null;
 
     protected EnemyData m_EnemyData;
+    protected Animator m_Animator = null;
     #endregion
 
     #region Interface

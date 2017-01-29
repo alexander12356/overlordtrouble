@@ -129,12 +129,39 @@
 			"Skwatwolf"
 		]
 	},
+	"ThirdsortRobber_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"ThirdsortRobber",
+			"ThirdsortRobber"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",
 		"Enemy": 
 		[
-			"Skwatwolf"
+			"ThirdsortRobber"
 		],
 		"Player":
 		{

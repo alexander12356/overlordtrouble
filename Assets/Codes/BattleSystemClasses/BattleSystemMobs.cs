@@ -74,6 +74,9 @@ public class BattleSystemMobs : BattleSystem
             case "FeralSlime":
                 l_BattleEnemy = Instantiate(FeralSlime.prefab);
                 break;
+            case "ThirdsortRobber":
+                l_BattleEnemy = Instantiate(ThirdsortRobber.prefab);
+                break;
             default:
                 l_BattleEnemy = Instantiate(BattleEnemy.prefab);
                 break;

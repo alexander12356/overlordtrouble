@@ -79,7 +79,9 @@
 	<Text id="Enemy:Dualent:Bite">Укус</Text>
 	<Text id="Enemy:Dualent:DoubleAttack">Вторая голова дуалента решила атаковать</Text>
 	<Text id="Enemy:ThirdsortRobber">Третьесортный разбойник</Text>
-	<Text id="Enemy:ThirdsortRobber:Attack">Пырнуть ножом</Text>
+	<Text id="Enemy:ThirdsortRobber:Stab">Пырнуть ножом</Text>
+	<Text id="Enemy:ThirdsortRobber:Run">Третьесортный разбойник убежал с поля боя.</Text>
+	<Text id="Enemy:ThirdsortRobber:StealMonett">ЭЙ! Он украл %d монетт!</Text>
 	<Text id="Enemy:FeralSlime">Дикая слизь</Text>
 	<Text id="Enemy:FeralSlime:Tackle">Толчок</Text>
 	
