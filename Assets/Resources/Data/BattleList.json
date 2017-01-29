@@ -156,6 +156,52 @@
 			"ThirdsortRobber"
 		]
 	},
+	"Willwhishp_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"Willwhishp",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_4": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_5": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"ThirdsortRobber",
+			"Willwhishp"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",
