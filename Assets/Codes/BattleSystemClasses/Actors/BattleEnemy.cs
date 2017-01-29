@@ -81,28 +81,51 @@ public class BattleEnemy : BattleActor
 
         EnemyAttackData l_AttackData = m_EnemyData.attackList[Random.Range(0, m_EnemyData.attackList.Count)];
 
-        string l_AttackEffectPrefabPath = "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + l_AttackData.id;
-        VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>(l_AttackEffectPrefabPath));
+        UsingAttack(p_Actor, l_AttackData);
+    }
 
-        if (l_AttackData.playerTarget)
+    public void UsingAttack(BattleActor p_Actor, EnemyAttackData p_EnemyAttackData)
+    {
+        string l_AttackEffectPrefabPath = "Prefabs/BattleEffects/" + m_EnemyData.id + "/" + p_EnemyAttackData.id;
+        
+
+        BattleBaseStep l_VisualEffectStep = null;
+        switch (p_EnemyAttackData.targetId)
         {
-            l_AttackEffect.Init(BattlePlayer.GetInstance(), BattlePlayer.GetInstance().rendererTransform);
+            case EnemyAttackTarget.NONE:
+                VisualEffect l_AttackEffect = Instantiate(Resources.Load<VisualEffect>(l_AttackEffectPrefabPath));
+                l_AttackEffect.Init(p_Actor, rendererTransform);
+                l_VisualEffectStep = new BattlePlayEffectStep(l_AttackEffect);
+                break;
+            case EnemyAttackTarget.Player:
+                VisualEffect l_CanvasEffect = Instantiate(Resources.Load<VisualEffect>(l_AttackEffectPrefabPath));
+                l_CanvasEffect.Init(BattlePlayer.GetInstance(), BattlePlayer.GetInstance().rendererTransform);
+                l_VisualEffectStep = new BattlePlayEffectStep(l_CanvasEffect);
+                break;
+            case EnemyAttackTarget.Enemies:
+                List<VisualEffect> l_VisualEffectList = new List<VisualEffect>();
+                List<BattleEnemy> l_EnemyList = BattleSystem.GetInstance().GetEnemyList();
+                for (int i = 0; i < l_EnemyList.Count; i++)
+                {
+                    if (l_EnemyList[i] != this)
+                    {
+                        VisualEffect l_AoeAttackEffect = Instantiate(Resources.Load<VisualEffect>(l_AttackEffectPrefabPath));
+                        l_AoeAttackEffect.Init(l_EnemyList[i], l_EnemyList[i].rendererTransform);
+                        l_VisualEffectList.Add(l_AoeAttackEffect);
+                    }
+                }
+                l_VisualEffectStep = new BattlePlayManyEffectStep(l_VisualEffectList);
+                break;
         }
-        else
-        {
-            l_AttackEffect.Init(p_Actor, rendererTransform);
-        }
+        DamageSystem.GetInstance().AddVisualEffectStep(l_VisualEffectStep);
 
-        BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_AttackEffect);
-        DamageSystem.GetInstance().AddVisualEffectStep(l_Step);
-
-        Special l_Special = new Special(l_AttackData.id, l_AttackData.element, false, false);
+        Special l_Special = new Special(p_EnemyAttackData.id, p_EnemyAttackData.element, false, false);
         l_Special.specialName = LocalizationDataBase.GetInstance().GetText("Enemy:" + id + ":" + l_Special.id);
 
         List<BaseEffect> l_EffectList = new List<BaseEffect>();
-        for (int i = 0; i < l_AttackData.effectList.Count; i++)
+        for (int i = 0; i < p_EnemyAttackData.effectList.Count; i++)
         {
-            l_EffectList.Add(EffectSystem.GetInstance().CreateEffect(l_Special, l_AttackData.effectList[i]));
+            l_EffectList.Add(EffectSystem.GetInstance().CreateEffect(l_Special, p_EnemyAttackData.effectList[i]));
         }
 
         l_Special.SetEffects(l_EffectList);

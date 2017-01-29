@@ -12,7 +12,8 @@ public enum EffectIds
     Healing,
     Restoring,
     Training,
-    ClearSpecialStatus
+    ClearSpecialStatus,
+    EnemyHealing
 }
 
 public class EffectSystem : Singleton<EffectSystem>
@@ -73,6 +74,11 @@ public class EffectSystem : Singleton<EffectSystem>
                 float l_RestoringValue = Convert.ToSingle(p_EffectData.parameters[0]);
 
                 l_Effect = new RestoringEffect(p_Special, l_RestoringValue);
+                break;
+            case EffectIds.EnemyHealing:
+                float l_EnemyHealingValue = Convert.ToSingle(p_EffectData.parameters[0]);
+
+                l_Effect = new EnemyHealing(p_Special, l_EnemyHealingValue);
                 break;
         }
 
@@ -172,6 +178,12 @@ public class EffectSystem : Singleton<EffectSystem>
 
                     EffectData l_RestoringEffect = new EffectData(l_EffectType, new string[] { l_RestoringValue.ToString() });
                     p_EffectList.Add(l_RestoringEffect);
+                    break;
+                case EffectIds.EnemyHealing:
+                    float l_EnemyHealingValue = p_JsonObject[i]["Value"].f;
+
+                    EffectData l_EnemyHealingEffect = new EffectData(l_EffectType, new string[] { l_EnemyHealingValue.ToString() });
+                    p_EffectList.Add(l_EnemyHealingEffect);
                     break;
             }
         }

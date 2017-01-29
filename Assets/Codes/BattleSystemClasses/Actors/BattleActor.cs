@@ -310,5 +310,10 @@ public class BattleActor : MonoBehaviour, IEffectInfluenced
         }
         return false;
     }
+
+    public virtual float ElementKickback(Element p_Element)
+    {
+        return 0.0f;
+    }
     #endregion
 }

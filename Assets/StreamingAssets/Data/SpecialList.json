@@ -83,7 +83,7 @@
 	"TailWhap" :
 	{
 		"Sp" : 5.0,
-		"Element" : "Earth",
+		"Element" : "Physical",
 		"Aoe" : false,
 		"Effect" :
 		{
@@ -96,7 +96,7 @@
 	"Slash" :
 	{
 		"Sp" : 6.0,
-		"Element" : "Earth",
+		"Element" : "Physical",
 		"Aoe" : false,
 		"Effect" :
 		{

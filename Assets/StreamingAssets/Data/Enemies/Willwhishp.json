@@ -1,0 +1,45 @@
+{
+	"Id" : "Willwhishp",
+	"Attack" : 1,
+	"Defense" : 1,
+	"Speed" : 1,
+	"Level" : 1,
+	"Health" : 18,
+	"Element": "Live",
+	"Attacks" :
+	[
+		{
+			"Id" : "EnEmber",
+			"Type" : "Attack",
+			"Element" : "Fire",
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 2,
+					"Value2" : 4
+				}
+			}
+		},
+		{
+			"Id" : "HealingLight",
+			"Element" : "NONE",
+			"Target" : "Enemies",
+			"Effect" :
+			{
+				"EnemyHealing" :
+				{
+					"Value" : 0.3
+				}
+			}
+		}
+	],
+	"Experience" : 15,
+	"Loot" :
+	[
+	],
+	"Property" :
+	{
+		"FireResist" : 2
+	}
+}

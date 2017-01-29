@@ -38,6 +38,7 @@ public class ThirdsortRobber : BattleEnemy
 
         if (TurnSystem.GetInstance().currentTurn > 0 && l_RunChance > 50)
         {
+            //TODO для побега реализовать отдельный эффект. Вдруг появится спешл страх, который заставляет убежать врагов от битвы
             Run();
         }
         else

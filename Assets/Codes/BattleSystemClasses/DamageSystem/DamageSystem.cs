@@ -58,6 +58,7 @@ public class DamageSystem : Singleton<DamageSystem>
     private List<BattleBaseStep> m_VisualEffectSteps = new List<BattleBaseStep>();
     private List<BattleBaseStep> m_BeforeAttackSteps = new List<BattleBaseStep>();
     private List<BattleBaseStep> m_AfterAttackSteps  = new List<BattleBaseStep>();
+    private float m_ElementKickBackDamage = 0.0f;
 
     public void Attack(BattleActor p_Sender, BattleActor p_Target, Element l_AttackElement, float p_DamageValue, string p_Text = "")
     {
@@ -219,6 +220,11 @@ public class DamageSystem : Singleton<DamageSystem>
         m_ImmunitySpecials[p_Target].Add(p_Special);
     }
 
+    public void AddKickBackDamageValue(float p_Value)
+    {
+        m_ElementKickBackDamage += 0.0f;
+    }
+
     private void ShowResult()
     {
         RunBeforeAttackSteps();
@@ -274,6 +280,11 @@ public class DamageSystem : Singleton<DamageSystem>
 
         BattleCheckDeathStep l_CheckDeathStep = new BattleCheckDeathStep();
         ResultSystem.GetInstance().AddStep(l_CheckDeathStep);
+
+        if (m_ElementKickBackDamage > 0.0f)
+        {
+            ShowKickbackAttack();
+        }
 
         RunAfterAttackSteps();
 
@@ -409,6 +420,18 @@ public class DamageSystem : Singleton<DamageSystem>
         ResultSystem.GetInstance().AddStep(l_Step);
     }
 
+    private void ShowKickbackAttack()
+    {
+        string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:ElementKickback", new string[] { BattlePlayer.GetInstance().actorName, m_ElementKickBackDamage.ToString() });
+
+        TextPanel l_TextPanel = Object.Instantiate(TextPanel.prefab);
+        l_TextPanel.SetText(new List<string>() { l_Text });
+        l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+        BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+        ResultSystem.GetInstance().AddStep(l_Step);
+    }
+
     private string GetSpecialNames(List<Special> p_SpecialList)
     {
         string l_Text = string.Empty;
@@ -453,10 +476,14 @@ public class DamageSystem : Singleton<DamageSystem>
         m_AfterAttackSteps.Clear();
         m_Bonuses.Clear();
         m_StatisticText = string.Empty;
+        m_ElementKickBackDamage = 0.0f;
     }
 
     private float CalculateDamage(BattleActor p_SenderActor, BattleActor p_TargetActor, float l_AttackDamage, Element l_AttackElement)
     {
+        m_ElementKickBackDamage += p_TargetActor.ElementKickback(l_AttackElement);
+        p_SenderActor.health -= p_TargetActor.ElementKickback(l_AttackElement);
+
         float l_SenderLevel = p_SenderActor.level;
         float l_TargetLevel = p_TargetActor.level;
         float l_SenderAttackStat = p_SenderActor.attackStat;

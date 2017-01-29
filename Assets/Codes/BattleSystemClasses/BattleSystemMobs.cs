@@ -77,6 +77,9 @@ public class BattleSystemMobs : BattleSystem
             case "ThirdsortRobber":
                 l_BattleEnemy = Instantiate(ThirdsortRobber.prefab);
                 break;
+            case "Willwhishp":
+                l_BattleEnemy = Instantiate(Willwhishp.prefab);
+                break;
             default:
                 l_BattleEnemy = Instantiate(BattleEnemy.prefab);
                 break;

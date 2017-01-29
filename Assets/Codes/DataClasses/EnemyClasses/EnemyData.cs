@@ -4,14 +4,14 @@ public struct EnemyAttackData
 {
     public string id;
     public Element element;
-    public bool playerTarget;
+    public EnemyAttackTarget targetId;
     public List<EffectData> effectList;
 
-    public EnemyAttackData(string p_Id, Element p_Element, bool p_PlayerTarget, List<EffectData> p_EffectList)
+    public EnemyAttackData(string p_Id, Element p_Element, EnemyAttackTarget p_TargetId, List<EffectData> p_EffectList)
     {
         id = p_Id;
         element = p_Element;
-        playerTarget = p_PlayerTarget;
+        targetId = p_TargetId;
         effectList = p_EffectList;
     }
 }

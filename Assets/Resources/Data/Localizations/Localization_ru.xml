@@ -84,6 +84,9 @@
 	<Text id="Enemy:ThirdsortRobber:StealMonett">ЭЙ! Он украл %d монетт!</Text>
 	<Text id="Enemy:FeralSlime">Дикая слизь</Text>
 	<Text id="Enemy:FeralSlime:Tackle">Толчок</Text>
+	<Text id="Enemy:Willwhishp">Вилвисп</Text>
+	<Text id="Enemy:Willwhishp:EnEmber">Искра</Text>
+	<Text id="Enemy:Willwhishp:HealingLight">Лечащий свет</Text>
 	
 	<!-- enemy's description -->
 	<Text id="Enemy:Bokalisk:Description">Похож на василиска, но в отличие от своего грозного родственника не умеет замораживать взглядом. К тому же выглядит крупно. Некоторые особи могут достигать значительных размеров.</Text>
@@ -186,6 +189,7 @@
 	<Text id="GUI:BattleSystem:MegaHealing">%d восстановил %d очков хп и исцелился от вредных эффектов</Text>
 	<Text id="GUI:BattleSystem:RunFail">Убежать не удалось.</Text>
 	<Text id="GUI:BattleSystem:CannotRun">Нельзя убежать.</Text>
+	<Text id="GUI:BattleSystem:ElementKickback">%d получил %d очка урона</Text>
 	
 	<Text id="GUI:Improve:StayMyself">Побуду собой</Text>
 	<Text id="GUI:Improve:AreYouShure">Вы уверены что хотите выбрать этот\nкласс?\nВернуть обратно уже не выйдет.</Text>
