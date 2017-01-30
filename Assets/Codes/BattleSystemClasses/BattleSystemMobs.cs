@@ -83,6 +83,9 @@ public class BattleSystemMobs : BattleSystem
             case "Jackalope":
                 l_BattleEnemy = Instantiate(Jackalope.prefab);
                 break;
+            case "Ogre":
+                l_BattleEnemy = Instantiate(Ogre.prefab);
+                break;
             default:
                 l_BattleEnemy = Instantiate(BattleEnemy.prefab);
                 break;

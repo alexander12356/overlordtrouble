@@ -1,0 +1,47 @@
+{
+	"Id" : "Ogre",
+	"Attack" : 1,
+	"Defense" : 1,
+	"Speed" : 1,
+	"Level" : 1,
+	"Health" : 20,
+	"Element": "Earth",
+	"Attacks" :
+	[
+		{
+			"Id" : "Crush",
+			"Element" : "Physical",
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 2,
+					"Value2" : 4
+				},
+				"StunPossibility" :
+				{
+					"Chance" : 10
+				}
+			}
+		},
+		{
+			"Id" : "Rest",
+			"Element" : "NONE",
+			"Effect" :
+			{
+				"Healing" :
+				{	
+					"Value" : 4.0
+				}
+			}
+		}
+	],
+	"Experience" : 15,
+	"Loot" :
+	[
+	],
+	"Property" :
+	{
+		"FireDefense" : 0.8
+	}
+}

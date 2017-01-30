@@ -13,7 +13,8 @@ public enum EffectIds
     Restoring,
     Training,
     ClearSpecialStatus,
-    EnemyHealing
+    EnemyHealing,
+    StunPossibility
 }
 
 public class EffectSystem : Singleton<EffectSystem>
@@ -80,6 +81,11 @@ public class EffectSystem : Singleton<EffectSystem>
 
                 l_Effect = new EnemyHealing(p_Special, l_EnemyHealingValue);
                 break;
+            case EffectIds.StunPossibility:
+                int l_StunChance = Convert.ToInt32(p_EffectData.parameters[0]);
+
+                l_Effect = new StunPossibility(p_Special, l_StunChance);
+                break;
         }
 
         return l_Effect;
@@ -119,7 +125,7 @@ public class EffectSystem : Singleton<EffectSystem>
 
         for (int i = 0; i < p_JsonObject.Count; i++)
         {
-            EffectIds l_EffectType = (EffectIds)Enum.Parse(typeof(EffectIds), p_JsonObject.keys[0]);
+            EffectIds l_EffectType = (EffectIds)Enum.Parse(typeof(EffectIds), p_JsonObject.keys[i]);
 
             switch (l_EffectType)
             {
@@ -184,6 +190,12 @@ public class EffectSystem : Singleton<EffectSystem>
 
                     EffectData l_EnemyHealingEffect = new EffectData(l_EffectType, new string[] { l_EnemyHealingValue.ToString() });
                     p_EffectList.Add(l_EnemyHealingEffect);
+                    break;
+                case EffectIds.StunPossibility:
+                    int l_StunChance = (int)p_JsonObject[i]["Chance"].i;
+
+                    EffectData l_StunPossibilityEffect = new EffectData(l_EffectType, new string[] { l_StunChance.ToString() });
+                    p_EffectList.Add(l_StunPossibilityEffect);
                     break;
             }
         }

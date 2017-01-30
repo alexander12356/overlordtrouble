@@ -6,7 +6,7 @@ public class StunEffect : BaseEffect
 {
     private int m_Duration = 5;
     private int m_DurationCounter = 0;
-    private BattlePlayer m_Player = null;
+    protected BattlePlayer m_Player = null;
 
     public StunEffect(Special p_Special) : base(p_Special)
     {
