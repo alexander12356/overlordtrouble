@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemActionButton : PanelButton
+public class ItemActionButton : InventoryPanelButton
 {
     private static ItemActionButton m_Prefab = null;
 

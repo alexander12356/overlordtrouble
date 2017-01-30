@@ -62,6 +62,7 @@ public class ButtonList : MonoBehaviour
             if (m_IsActive)
             {
                 currentButton.selected = true;
+                currentButton.choosed = false;
             }
             else
             {
@@ -282,6 +283,7 @@ public class ButtonList : MonoBehaviour
 
         m_ButtonsList[m_PrevButtonId].selected = false;
         m_ButtonsList[m_CurrentButtonId].selected = true;
+        m_ButtonsList[m_PrevButtonId].choosed = false;
     }
 
     private void ReconstructButtons()
@@ -300,6 +302,7 @@ public class ButtonList : MonoBehaviour
         if (m_ButtonsList.Count > 0)
         {
             m_ButtonsList[m_CurrentButtonId].RunAction();
+            m_ButtonsList[m_CurrentButtonId].choosed = true;
         }
     }
 

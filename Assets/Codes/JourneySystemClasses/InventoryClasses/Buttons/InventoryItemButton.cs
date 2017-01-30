@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryItemButton : PanelButtonUpdateKey
+public class InventoryItemButton : InventoryPanelButton
 {
     private static InventoryItemButton m_Prefab = null;
     private PanelButtonActionHandler m_RemovingAction = null;
