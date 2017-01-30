@@ -75,7 +75,7 @@
 	<Text id="Enemy:Skwatwolf:Strike">Удар</Text>
 	<Text id="Enemy:Skwatwolf:Gopogovor">Гопоговор</Text>
 	<Text id="Enemy:Dualent">Дуалэнт</Text>
-	<Text id="Enemy:Dualent:DriedRoots">Сухие корни</Text>
+	<Text id="Enemy:Dualent:DryRoots">Сухие корни</Text>
 	<Text id="Enemy:Dualent:Bite">Укус</Text>
 	<Text id="Enemy:Dualent:DoubleAttack">Вторая голова дуалента решила атаковать</Text>
 	<Text id="Enemy:ThirdsortRobber">Третьесортный разбойник</Text>

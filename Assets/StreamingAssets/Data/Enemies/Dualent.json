@@ -9,7 +9,7 @@
 	"Attacks" :
 	[
 		{
-			"Id" : "DriedRoots",
+			"Id" : "DryRoots",
 			"Type" : "Attack",
 			"Element" : "Nature",
 			"Effect" :
