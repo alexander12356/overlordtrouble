@@ -303,6 +303,91 @@
 			"Ogre"
 		]
 	},
+	"Dualent_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent"
+		]
+	},
+	"Dualent_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Dualent"
+		]
+	},
+	"Dualent_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Dualent",
+			"Dualent"
+		]
+	},
+	"Dualent_4": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Jackalope"
+		]
+	},
+	"Dualent_5": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Dualent",
+			"Jackalope"
+		]
+	},
+	"Dualent_6": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Jackalope",
+			"Dualent"
+		]
+	},
+	"Dualent_7": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Willwhishp"
+		]
+	},
+	"Dualent_8": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Willwhishp",
+			"Dualent"
+		]
+	},
+	"Dualent_9": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Dualent",
+			"Willwhishp"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",
