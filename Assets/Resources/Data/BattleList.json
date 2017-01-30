@@ -374,6 +374,16 @@
 			"Jackalope"
 		]
 	},
+	"Jackalope_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Dualent",
+			"Jackalope"
+		]
+	},
 	"Jackalope_4": 
 	{
 		"Location" : "ForestCreeps",
@@ -382,6 +392,16 @@
 			"ThirdsortRobber",
 			"Jackalope",
 			"ThirdsortRobber"
+		]
+	},
+	"Jackalope_5": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Jackalope",
+			"Willwhishp"
 		]
 	},
 	"Jackalope_6": 
