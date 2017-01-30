@@ -80,6 +80,9 @@ public class BattleSystemMobs : BattleSystem
             case "Willwhishp":
                 l_BattleEnemy = Instantiate(Willwhishp.prefab);
                 break;
+            case "Jackalope":
+                l_BattleEnemy = Instantiate(Jackalope.prefab);
+                break;
             default:
                 l_BattleEnemy = Instantiate(BattleEnemy.prefab);
                 break;

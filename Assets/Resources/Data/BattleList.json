@@ -207,9 +207,7 @@
 		"Location" : "RoadThugs",
 		"Enemy": 
 		[
-			"Willwhishp",
-			"Bokalisk",
-			"Bokalisk"
+			"Skwatwolf"
 		],
 		"Player":
 		{

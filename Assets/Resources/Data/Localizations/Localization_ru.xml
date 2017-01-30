@@ -87,6 +87,8 @@
 	<Text id="Enemy:Willwhishp">Вилвисп</Text>
 	<Text id="Enemy:Willwhishp:EnEmber">Искра</Text>
 	<Text id="Enemy:Willwhishp:HealingLight">Лечащий свет</Text>
+	<Text id="Enemy:Jackalope">Зайццелопы</Text>
+	<Text id="Enemy:Jackalope:HornStrike">Удар рогами</Text>
 	
 	<!-- enemy's description -->
 	<Text id="Enemy:Bokalisk:Description">Похож на василиска, но в отличие от своего грозного родственника не умеет замораживать взглядом. К тому же выглядит крупно. Некоторые особи могут достигать значительных размеров.</Text>
