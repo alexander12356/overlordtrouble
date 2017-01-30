@@ -275,7 +275,7 @@
 		"Location" : "ForestCreeps",
 		"Enemy": 
 		[
-			"ThirdsortRobber",
+			"Jackalope",
 			"Willwhishp"
 		]
 	},
@@ -284,9 +284,76 @@
 		"Location" : "ForestCreeps",
 		"Enemy": 
 		[
+			"Jackalope",
+			"Willwhishp",
+			"Jackalope"
+		]
+	},
+	"Willwhishp_6": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_7": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"Dualent",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_8": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_9": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
 			"Willwhishp",
 			"ThirdsortRobber",
 			"Willwhishp"
+		]
+	},
+	"Willwhishp_10": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_11": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Willwhishp",
+			"Ogre"
+		]
+	},
+	"Willwhishp_12": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Willwhishp",
+			"Ogre"
 		]
 	},
 	"Jackalope_1": 
