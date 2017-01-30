@@ -257,6 +257,52 @@
 			"Willwhishp"
 		]
 	},
+	"Ogre_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre"
+		]
+	},
+	"Ogre_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Ogre"
+		]
+	},
+	"Ogre_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Willwhishp"
+		]
+	},
+	"Ogre_4": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"Ogre",
+			"Willwhishp"
+		]
+	},
+	"Ogre_7": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Jackalope",
+			"Ogre"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",
