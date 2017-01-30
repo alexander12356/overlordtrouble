@@ -202,6 +202,61 @@
 			"Willwhishp"
 		]
 	},
+	"Jackalope_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope"
+		]
+	},
+	"Jackalope_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Jackalope",
+			"Jackalope"
+		]
+	},
+	"Jackalope_4": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Jackalope",
+			"ThirdsortRobber"
+		]
+	},
+	"Jackalope_6": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Jackalope"
+		]
+	},
+	"Jackalope_7": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"ThirdsortRobber"
+		]
+	},
+	"Jackalope_8": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Willwhishp"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",
