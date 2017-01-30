@@ -20,6 +20,8 @@ public class StartBattleBehavior : BaseCollideBehavior
         m_JourneyActor.ApplyTo(p_Sender);
         m_JourneyActor.StopLogic();
 
+        Debug.Log("StartBattle id: " + m_CurrentBattleId);
+
         BattleStarter.GetInstance().InitBattle(m_JourneyActor as JourneyEnemy, m_CurrentBattleId);
         JourneySystem.GetInstance().StartBattle();
     }

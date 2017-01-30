@@ -156,6 +156,93 @@
 			"ThirdsortRobber"
 		]
 	},
+	"ThirdsortRobber_4": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Willwhishp",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_5": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_6": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_7": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Dualent"
+		]
+	},
+	"ThirdsortRobber_8": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Dualent",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_9": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"ThirdsortRobber",
+			"Ogre"
+		]
+	},
+	"ThirdsortRobber_10": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Willwhishp",
+			"Jackalope"
+		]
+	},
+	"ThirdsortRobber_11": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Dualent",
+			"Willwhishp"
+		]
+	},
+	"ThirdsortRobber_12": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Jackalope",
+			"ThirdsortRobber"
+		]
+	},
 	"Willwhishp_1": 
 	{
 		"Location" : "ForestCreeps",
