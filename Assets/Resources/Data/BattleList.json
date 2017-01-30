@@ -447,6 +447,25 @@
 			"Willwhishp"
 		]
 	},
+	"Ogre_5": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Dualent"
+		]
+	},
+	"Ogre_6": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Ogre",
+			"Dualent"
+		]
+	},
 	"Ogre_7": 
 	{
 		"Location" : "ForestCreeps",
@@ -454,6 +473,16 @@
 		[
 			"Ogre",
 			"Jackalope",
+			"Ogre"
+		]
+	},
+	"Ogre_8": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Dualent",
 			"Ogre"
 		]
 	},
