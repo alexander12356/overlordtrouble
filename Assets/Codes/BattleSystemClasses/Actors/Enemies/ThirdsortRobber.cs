@@ -70,9 +70,9 @@ public class ThirdsortRobber : BattleEnemy
         BattlePlayEffectStep l_PlayEffectStep = new BattlePlayEffectStep(l_RunVisualEffect);
         ResultSystem.GetInstance().AddStep(l_PlayEffectStep);
 
-        string l_TextAboutКгт = LocalizationDataBase.GetInstance().GetText("Enemy:ThirdsortRobber:Run");
+        string l_TextAboutRun = LocalizationDataBase.GetInstance().GetText("Enemy:ThirdsortRobber:Run");
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { l_TextAboutКгт });
+        l_TextPanel.SetText(new List<string>() { l_TextAboutRun });
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
         BattleShowPanelStep l_ShowPanelStep = new BattleShowPanelStep(l_TextPanel);
@@ -82,7 +82,7 @@ public class ThirdsortRobber : BattleEnemy
     //Called from Animation
     public void Runned()
     {
-        BattleSystem.GetInstance().EnemyDied(this);
+        BattleSystem.GetInstance().EnemyRun(this);
 
         Destroy(gameObject);
 

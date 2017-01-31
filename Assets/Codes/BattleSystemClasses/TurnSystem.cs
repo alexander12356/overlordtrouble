@@ -36,6 +36,12 @@ public class TurnSystem : MonoBehaviour
         m_ActorList.Remove(p_Enemy);
     }
 
+    public void EnemyRunned(BattleEnemy p_Enemy)
+    {
+        RemoveEnemy(p_Enemy);
+        m_CurrentActor--;
+    }
+
     public void RunGame()
     {
         m_ActorList.Insert(0, BattlePlayer.GetInstance());
