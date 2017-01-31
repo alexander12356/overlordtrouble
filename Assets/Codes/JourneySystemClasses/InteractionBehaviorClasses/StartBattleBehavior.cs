@@ -22,8 +22,17 @@ public class StartBattleBehavior : BaseCollideBehavior
 
         Debug.Log("StartBattle id: " + m_CurrentBattleId);
 
-        BattleStarter.GetInstance().InitBattle(m_JourneyActor as JourneyEnemy, m_CurrentBattleId);
-        JourneySystem.GetInstance().StartBattle();
+        if (m_CurrentBattleId == "BossLeshii")
+        {
+            AudioSystem.GetInstance().StopTheme();
+            JourneySystem.GetInstance().AddScene("BossBattleSystem");
+            JourneySystem.GetInstance().SetControl(ControlType.StartBattle);
+        }
+        else
+        {
+            BattleStarter.GetInstance().InitBattle(m_JourneyActor as JourneyEnemy, m_CurrentBattleId);
+            JourneySystem.GetInstance().StartBattle();
+        }
     }
 
     private string GetRandomBattle()
