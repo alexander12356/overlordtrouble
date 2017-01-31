@@ -1,0 +1,619 @@
+{
+	"BattleAtFarm1":
+	{
+		"Location" : "ChickenFight",
+		"Enemy": 
+		[
+			"Bokalisk"
+		]
+	},
+	"BattleAtFarm2":
+	{
+		"Location" : "ChickenFight",
+		"Enemy": 
+		[
+			"Bokalisk",
+			"Bokalisk",
+			"Bokalisk"
+		]
+	},
+	"BattleSkwatwolf_1": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf"
+		]
+	},
+	"BattleSkwatwolf_2": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf",
+			"Skwatwolf"
+		]
+	},
+	"BattleSkwatwolf_3": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf",
+			"Skwatwolf",
+			"Skwatwolf"
+		]
+	},
+	"BattleSkwatwolf_4": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf",
+			"FeralSlime"
+		]
+	},
+	"BattleSkwatwolf_5": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf",
+			"Skwatwolf",
+			"FeralSlime"
+		]
+	},
+	"BattleSkwatwolf_6": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Skwatwolf",
+			"FeralSlime",
+			"FeralSlime"
+		]
+	},
+	"FeralSlime_1": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime"
+		]
+	},
+	"FeralSlime_2": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime",
+			"FeralSlime"
+		]
+	},
+	"FeralSlime_3": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime",
+			"FeralSlime",
+			"FeralSlime"
+		]
+	},
+	"FeralSlime_4": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime",
+			"Skwatwolf"
+		]
+	},
+	"FeralSlime_5": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime",
+			"FeralSlime",
+			"Skwatwolf"
+		]
+	},
+	"FeralSlime_6": 
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"FeralSlime",
+			"Skwatwolf",
+			"Skwatwolf"
+		]
+	},
+	"ThirdsortRobber_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"ThirdsortRobber",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_4": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Willwhishp",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_5": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_6": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_7": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Dualent"
+		]
+	},
+	"ThirdsortRobber_8": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Dualent",
+			"ThirdsortRobber"
+		]
+	},
+	"ThirdsortRobber_9": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"ThirdsortRobber",
+			"Ogre"
+		]
+	},
+	"ThirdsortRobber_10": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Willwhishp",
+			"Jackalope"
+		]
+	},
+	"ThirdsortRobber_11": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Dualent",
+			"Willwhishp"
+		]
+	},
+	"ThirdsortRobber_12": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Jackalope",
+			"ThirdsortRobber"
+		]
+	},
+	"Willwhishp_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"Willwhishp",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_4": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_5": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Willwhishp",
+			"Jackalope"
+		]
+	},
+	"Willwhishp_6": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_7": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"Dualent",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_8": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_9": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"ThirdsortRobber",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_10": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Willwhishp"
+		]
+	},
+	"Willwhishp_11": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Willwhishp",
+			"Ogre"
+		]
+	},
+	"Willwhishp_12": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Willwhishp",
+			"Ogre"
+		]
+	},
+	"Jackalope_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope"
+		]
+	},
+	"Jackalope_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Jackalope",
+			"Jackalope"
+		]
+	},
+	"Jackalope_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Dualent",
+			"Jackalope"
+		]
+	},
+	"Jackalope_4": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"ThirdsortRobber",
+			"Jackalope",
+			"ThirdsortRobber"
+		]
+	},
+	"Jackalope_5": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Jackalope",
+			"Willwhishp"
+		]
+	},
+	"Jackalope_6": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Jackalope"
+		]
+	},
+	"Jackalope_7": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"ThirdsortRobber"
+		]
+	},
+	"Jackalope_8": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Willwhishp"
+		]
+	},
+	"Ogre_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre"
+		]
+	},
+	"Ogre_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Ogre"
+		]
+	},
+	"Ogre_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Willwhishp"
+		]
+	},
+	"Ogre_4": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Willwhishp",
+			"Ogre",
+			"Willwhishp"
+		]
+	},
+	"Ogre_5": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Dualent"
+		]
+	},
+	"Ogre_6": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Ogre",
+			"Dualent"
+		]
+	},
+	"Ogre_7": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Jackalope",
+			"Ogre"
+		]
+	},
+	"Ogre_8": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Ogre",
+			"Dualent",
+			"Ogre"
+		]
+	},
+	"Dualent_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent"
+		]
+	},
+	"Dualent_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Dualent"
+		]
+	},
+	"Dualent_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Dualent",
+			"Dualent"
+		]
+	},
+	"Dualent_4": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Jackalope"
+		]
+	},
+	"Dualent_5": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Dualent",
+			"Jackalope"
+		]
+	},
+	"Dualent_6": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Jackalope",
+			"Dualent"
+		]
+	},
+	"Dualent_7": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Willwhishp"
+		]
+	},
+	"Dualent_8": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Dualent",
+			"Willwhishp",
+			"Dualent"
+		]
+	},
+	"Dualent_9": 
+	{
+		"Location" : "ForestCreeps",
+		"Enemy": 
+		[
+			"Jackalope",
+			"Dualent",
+			"Willwhishp"
+		]
+	},
+	"TestBattleSkwatwolf":
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+			"Dualent"
+		],
+		"Player":
+		{
+			"HP" : 20,
+			"MP" : 20
+		}
+	},
+	"TestBattleBossLeshii":
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+		],
+		"Player":
+		{
+			"HP" : 20,
+			"MP" : 20
+		}
+	}
+}

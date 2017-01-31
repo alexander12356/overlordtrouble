@@ -11,15 +11,12 @@ public class DemoMainScene : MonoBehaviour
 
         m_ButtonList = GetComponent<ButtonList>();
 
-        m_ButtonList[0].AddAction(StartGopolak);
+        m_ButtonList[0].AddAction(StartTestBattle);
         m_ButtonList[1].AddAction(StartMap);
         m_ButtonList[2].AddAction(StartEncyclopedia);
         m_ButtonList[3].AddAction(StartProfile);
         m_ButtonList[4].AddAction(StartImprove);
-        m_ButtonList[5].AddAction(StartDualent);
-        m_ButtonList[6].AddAction(StartTroicya);
-        m_ButtonList[7].AddAction(StartBoss);
-        m_ButtonList[8].AddAction(StartRoad);
+        m_ButtonList[5].AddAction(StartBoss);
     }
 
     private void Update()
@@ -32,21 +29,9 @@ public class DemoMainScene : MonoBehaviour
         m_ButtonList.UpdateKey();
     }
 
-    private void StartGopolak()
+    private void StartTestBattle()
     {
         BattleStarter.GetInstance().InitBattle(null, "TestBattleSkwatwolf");
-        SceneManager.LoadScene("BattleSystem");
-    }
-
-    private void StartDualent()
-    {
-        BattleStarter.GetInstance().InitBattle(null, "TestBattleDualent");
-        SceneManager.LoadScene("BattleSystem");
-    }
-
-    private void StartTroicya()
-    {
-        BattleStarter.GetInstance().InitBattle(null, "TestBattleWithTroicya");
         SceneManager.LoadScene("BattleSystem");
     }
 

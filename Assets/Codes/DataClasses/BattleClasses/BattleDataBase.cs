@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.IO;
 using System.Collections.Generic;
+
+using UnityEngine;
 
 public class BattleDataBase : Singleton<BattleDataBase>
 {
@@ -32,14 +34,15 @@ public class BattleDataBase : Singleton<BattleDataBase>
     private void Parse()
     {
         string l_DecodedString = "";
-        try
+
+        if (File.Exists(Application.streamingAssetsPath + "/Data/BattleList.json"))
+        {
+            l_DecodedString = File.ReadAllText(Application.streamingAssetsPath + "/Data/BattleList.json");
+        }
+        else
         {
             TextAsset l_TextAsset = (TextAsset)Resources.Load(m_PathFile);
             l_DecodedString = l_TextAsset.ToString();
-        }
-        catch
-        {
-            Debug.LogError("CANNOT READ FOR " + GetType());
         }
 
         JSONObject l_JSONObject = new JSONObject(l_DecodedString);

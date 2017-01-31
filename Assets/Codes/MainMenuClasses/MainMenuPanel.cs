@@ -187,6 +187,7 @@ public class MainMenuPanel : Panel
 
         if (Input.GetKeyUp(KeyCode.F12))
         {
+            AudioSystem.GetInstance().StopMusic("MainMenu");
             SceneManager.LoadScene("DemoMainScene");
             GameManager.GetInstance().isTesting = true;
             PlayerData.GetInstance().InitTestStats();
