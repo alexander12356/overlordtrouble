@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System;
 
 public delegate void PanelButtonActionHandler();
 
@@ -9,6 +10,7 @@ public class PanelButton : MonoBehaviour
     #region Variables
     protected event PanelButtonActionHandler m_ConfirmAction;
     protected bool    m_Selected;
+    protected bool m_Choosed = false;
     protected Image m_SelectedImage;
     protected Text  m_TitleText;
 	private RectTransform m_RectTransform = null;
@@ -86,6 +88,18 @@ public class PanelButton : MonoBehaviour
             Select(value);
         }
     }
+    public bool choosed
+    {
+        get
+        {
+            return m_Choosed;
+        }
+        set
+        {
+            Choose(value);
+        }
+    }
+
     public Image selectedImage
     {
         get
@@ -145,6 +159,10 @@ public class PanelButton : MonoBehaviour
     {
         m_Selected = p_Value;
         selectedImage.gameObject.SetActive(m_Selected);
+    }
+    public virtual void Choose(bool p_Value)
+    {
+        m_Choosed = p_Value;
     }
     #endregion
 }

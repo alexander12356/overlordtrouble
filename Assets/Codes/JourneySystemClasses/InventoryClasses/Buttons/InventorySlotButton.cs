@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySlotButton : PanelButton
+public class InventorySlotButton : InventoryPanelButton
 {
     private static InventorySlotButton m_Prefab = null;
     private InventorySlotData m_SlotData;

@@ -123,8 +123,11 @@ public class InventoryPanel : Panel
     {
         base.UpdatePanel();
 
-        m_ViewButtonsList.UpdateKey();
-        m_CurrOpenedView.UpdateKey();
+        if (!moving)
+        {
+            m_ViewButtonsList.UpdateKey();
+            m_CurrOpenedView.UpdateKey();
+        }
     }
 
     #endregion
