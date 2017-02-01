@@ -301,8 +301,8 @@ public class ButtonList : MonoBehaviour
     {
         if (m_ButtonsList.Count > 0)
         {
-            m_ButtonsList[m_CurrentButtonId].RunAction();
             m_ButtonsList[m_CurrentButtonId].choosed = true;
+            m_ButtonsList[m_CurrentButtonId].RunAction();
         }
     }
 

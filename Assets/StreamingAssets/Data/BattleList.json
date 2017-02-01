@@ -591,6 +591,17 @@
 			"Willwhishp"
 		]
 	},
+	"EventBattle_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Event" : true,
+		"Enemy": 
+		[
+			"Skwatwolf",
+			"Skwatwolf",
+			"Skwatwolf"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",

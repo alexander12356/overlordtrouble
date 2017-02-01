@@ -53,6 +53,21 @@ public class SaveSystem : Singleton<SaveSystem>
         m_LocationSaves[m_LocationId].AddCheckCounter(p_CheckCounter);
     }
 
+    public void AddWarp(Warp p_Warp)
+    {
+        m_LocationSaves[m_LocationId].AddWarp(p_Warp);
+    }
+
+    public void AddRoomGenerator(RoomEnemyGenerator p_RoomGenerator)
+    {
+        m_LocationSaves[m_LocationId].AddRoomGenerator(p_RoomGenerator);
+    }
+
+    public void AddAnimationObject(AnimationObject p_AnimationObject)
+    {
+        m_LocationSaves[m_LocationId].AddAnimationObject(p_AnimationObject);
+    }
+
     public void ActorDie(string p_Id)
     {
         m_LocationSaves[m_LocationId].ActorDie(p_Id);

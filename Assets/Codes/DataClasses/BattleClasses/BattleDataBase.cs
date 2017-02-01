@@ -51,22 +51,27 @@ public class BattleDataBase : Singleton<BattleDataBase>
         {
             string l_BattleId = l_JSONObject.keys[i];
             string l_LocationBackground = l_JSONObject[i]["Location"].str;
-            List<string> p_EnemyList = new List<string>();
-            Dictionary<string, int> p_PlayerSettings = new Dictionary<string, int>();
+            List<string> l_EnemyList = new List<string>();
+            Dictionary<string, int> l_PlayerSettings = new Dictionary<string, int>();
+            bool l_IsEvent = false;
 
             for (int j = 0; j < l_JSONObject[i]["Enemy"].Count; j++)
             {
-                p_EnemyList.Add(l_JSONObject[i]["Enemy"][j].str);
+                l_EnemyList.Add(l_JSONObject[i]["Enemy"][j].str);
             }
             if (l_JSONObject[i].HasField("Player"))
             {
                 for (int j = 0; j < l_JSONObject[i]["Player"].Count; j++)
                 {
-                    p_PlayerSettings.Add(l_JSONObject[i]["Player"].keys[j], (int)l_JSONObject[i]["Player"][j].f);
+                    l_PlayerSettings.Add(l_JSONObject[i]["Player"].keys[j], (int)l_JSONObject[i]["Player"][j].f);
                 }
             }
+            if (l_JSONObject[i].HasField("Event"))
+            {
+                l_IsEvent = l_JSONObject[i]["Event"].b;
+            }
 
-            BattleData l_ImproveData = new BattleData(l_BattleId, l_LocationBackground, p_EnemyList, p_PlayerSettings);
+            BattleData l_ImproveData = new BattleData(l_BattleId, l_LocationBackground, l_EnemyList, l_PlayerSettings, l_IsEvent);
             m_BattleBase.Add(l_BattleId, l_ImproveData);
         }
     }

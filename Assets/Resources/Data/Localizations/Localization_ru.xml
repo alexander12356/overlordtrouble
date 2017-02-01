@@ -453,4 +453,14 @@
 	<Text id="Dialog:Save:Yes">Да</Text>
 	<Text id="Dialog:Save:No">Нет</Text>
 	<Text id="Dialog:SaveComplete">Игра сохранена</Text>
+	
+	<!-- Leshii -->
+	<Text id="Dialog:Leshii_1">Это мой лес! Чужакам сюда вход запрещен!</Text>
+	
+	<!-- Event Mobs -->
+	<Text id="Dialog:StartBattle_1">Ничего личного это просто… эээ… бизнес?</Text>
+	
+	<Text id="Dialog:AfterBattle1_Mob_1">Босс обычно не такой замкнутый. Это просто такой период.</Text>
+	<Text id="Dialog:AfterBattle1_Mob_2">Ты это…  прости, но Босс получил указ от… ой-ой я слишком много сказал.</Text>
+	<Text id="Dialog:AfterBattle1_Mob_3">Нынешний леший совсем не похож на своего отца, да и возможно не дорастет до него, но что поделать - по закону леса мы должны ему подчиняться.</Text>
 </Localization>
