@@ -34,5 +34,14 @@
 		"Ember",
 		"Concentration"
     ]
+  },
+  "EarthElemental": {
+	"Profile": "Sprites/Creations/EarthElemental/Profile",
+	"Elemental": "Earth",
+	"Skills": [
+		"Playercrush",
+		"Pillarstones",
+		"Refresh"
+	]
   }
 }

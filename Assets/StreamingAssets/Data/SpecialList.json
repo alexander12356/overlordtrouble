@@ -160,16 +160,41 @@
 			}
 		}
 	},
-	"StonePress" :
+	"Playercrush" :
 	{
-		"Sp" : 5.0,
+		"Sp" : 12.0,
 		"Element" : "Earth",
 		"Aoe" : false,
 		"Effect" :
 		{
 			"Attack" :
 			{
-				"AttackValue" : 10.0
+				"AttackValue" : 12.0
+			}
+		}
+	},
+	"Pillarstones" :
+	{
+		"Sp" : 5.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 7.0
+			}
+		}
+	},
+	"Refresh" :
+	{
+		"Sp" : 4.0,
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"ClearSpecialStatus" :
+			{
 			}
 		}
 	}
