@@ -14,7 +14,6 @@ public class ProfilePanel : Panel
         SpecialList
     }
 
-    private ArrayList m_SelectedSpecialsList;
     private int m_StatImprovePoints = 0;
     private int m_BaseStatImprovePoints = 0;
     private bool m_HaveStatPoints = false;
@@ -37,7 +36,7 @@ public class ProfilePanel : Panel
     private Image m_ProfileAvatar = null;
 
     [SerializeField]
-    private int m_MaxSelectedSpecialCount = 4;
+    private int m_MaxSelectedSpecialCount = 5;
 
     #region Interface
     public int statImprovePoints
@@ -148,16 +147,18 @@ public class ProfilePanel : Panel
 
     private void InitMonstyles()
     {
-        List<SpecialData> m_MonstyleList = PlayerData.GetInstance().GetSkills();
-        for (int i = 0; i < m_MonstyleList.Count; i++)
+        List<SpecialData> l_MonstyleList = PlayerData.GetInstance().GetSkills();
+        List<SpecialData> l_SelectedSpecialsList = PlayerData.GetInstance().GetSelectedSkills();
+        for (int i = 0; i < l_MonstyleList.Count; i++)
         {
             PanelButtonProfileSpecial l_PanelButton = Instantiate(PanelButtonProfileSpecial.prefab);
             l_PanelButton.AddAction(SelectSpecial);
-            l_PanelButton.monstyleId = m_MonstyleList[i].id;
-
+            l_PanelButton.monstyleId = l_MonstyleList[i].id;
+            // проверка на то, был ли выбран этот спешл ранее
+            if (l_SelectedSpecialsList.Contains(SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.monstyleId)))
+                l_PanelButton.chosen = true;
             m_SpecialsButtonList.AddButton(l_PanelButton);
         }
-        m_SelectedSpecialsList = new ArrayList();
         m_SpecialButtonListScrolling.Init(51.0f, 6);
     }
 
@@ -204,22 +205,21 @@ public class ProfilePanel : Panel
         if (!l_PanelButtonProfileSpecial.chosen)
         {
             l_PanelButtonProfileSpecial.chosen = true;
-            m_SelectedSpecialsList.Add(l_PanelButtonProfileSpecial);
+            PlayerData.GetInstance().SelectSkill(l_PanelButtonProfileSpecial.monstyleId);
             m_SpecialStatus.Selected(true);
 
-            if (m_SelectedSpecialsList.Count > m_MaxSelectedSpecialCount)
+            if (PlayerData.GetInstance().GetSelectedSkills().Count > m_MaxSelectedSpecialCount)
             {
-                PanelButtonProfileSpecial l_PanelButtonProfileSpecialHead = (PanelButtonProfileSpecial)m_SelectedSpecialsList[0];
-                l_PanelButtonProfileSpecialHead.chosen = false;
+                l_PanelButtonProfileSpecial.chosen = false;
                 m_SpecialStatus.Selected(false);
-                m_SelectedSpecialsList.RemoveAt(0);
+                PlayerData.GetInstance().RemoveFirstSelectedSkill();
             }
         }
         else
         {
             l_PanelButtonProfileSpecial.chosen = false;
             m_SpecialStatus.Selected(false);
-            m_SelectedSpecialsList.Remove(l_PanelButtonProfileSpecial);
+            PlayerData.GetInstance().UnselectSkill(l_PanelButtonProfileSpecial.monstyleId);
         }
     }
 
