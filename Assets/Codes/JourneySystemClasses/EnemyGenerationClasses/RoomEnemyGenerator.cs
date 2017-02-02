@@ -17,9 +17,25 @@ public class RoomEnemyGenerator : MonoBehaviour
     private Dictionary<string, JourneyEnemy> m_EnemyList = new Dictionary<string, JourneyEnemy>();
 
     [SerializeField]
+    private string m_Id;
+
+    [SerializeField]
+    private bool m_CanGenerate = true;
+
+    [SerializeField]
     private List<EnemyOption> m_EnemyOptionList =  null;
 
-	public void Awake()
+    public string id
+    {
+        get { return m_Id; }
+    }
+    public bool generateEnable
+    {
+        get { return m_CanGenerate; }
+        set { m_CanGenerate = value; }
+    }
+
+    public void Awake()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -39,7 +55,11 @@ public class RoomEnemyGenerator : MonoBehaviour
     public void Generate()
     {
         Clear();
-        GenerateEnemies();
+
+        if (m_CanGenerate)
+        {
+            GenerateEnemies();
+        }
     }
 
     private void GenerateEnemies()

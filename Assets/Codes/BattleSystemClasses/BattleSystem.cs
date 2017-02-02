@@ -108,6 +108,18 @@ public class BattleSystem : MonoBehaviour
 
     public virtual void Retreat()
     {
+        if (m_BattleData.isEvent)
+        {
+            string l_Text = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:CannotRun");
+
+            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
+            l_TextPanel.SetText(new List<string>() { l_Text });
+
+            ShowPanel(l_TextPanel);
+            return;
+        }
+
         System.Random l_SystemRandom = new System.Random();
         int l_RetreatChance = l_SystemRandom.Next(0, 100);
 

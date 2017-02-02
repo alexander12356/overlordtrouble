@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class LocationSave
 {
+    //TODO отрефакторить нахрен!
+
     private string m_Id = string.Empty;
     private Dictionary<string, JourneyActor> m_Actors = new Dictionary<string, JourneyActor>();
     private Dictionary<string, FrontDoor> m_Doors = new Dictionary<string, FrontDoor>();
     private Dictionary<string, GameEventTrigger> m_GameEventTriggers = new Dictionary<string, GameEventTrigger>();
     private Dictionary<string, CheckCounterAction> m_CheckCounterActions = new Dictionary<string, CheckCounterAction>();
+    private Dictionary<string, Warp> m_Warps = new Dictionary<string, Warp>();
+    private Dictionary<string, RoomEnemyGenerator> m_RoomGenerators = new Dictionary<string, RoomEnemyGenerator>();
+    private Dictionary<string, AnimationObject> m_AnimationObjects = new Dictionary<string, AnimationObject>();
     private Dictionary<string, ActorState> m_ActorsState = new Dictionary<string, ActorState>();
     private Dictionary<string, bool> m_DoorState = new Dictionary<string, bool>();
     private List<string> m_DieActorsIds = new List<string>();
     private List<string> m_DestroyedTriggers = new List<string>();
     private Dictionary<string, int> m_CheckCounterValues = new Dictionary<string, int>();
+    private Dictionary<string, string> m_WarpState = new Dictionary<string, string>();
+    private Dictionary<string, bool> m_RoomGeneratorStates = new Dictionary<string, bool>();
+    private Dictionary<string, string> m_AnimationObjectStates = new Dictionary<string, string>();
 
     public LocationSave(string p_Id)
     {
@@ -26,12 +34,18 @@ public class LocationSave
         m_Doors.Clear();
         m_GameEventTriggers.Clear();
         m_CheckCounterActions.Clear();
+        m_Warps.Clear();
+        m_RoomGenerators.Clear();
+        m_AnimationObjects.Clear();
     }
 
     public void Save()
     {
         SaveActorStates();
         SaveDoorState();
+        SaveWarpStates();
+        SaveRoomGeneratorStates();
+        SaveAnimationObjectStates();
     }
 
     public void Load()
@@ -41,6 +55,9 @@ public class LocationSave
         LoadDoorState();
         LoadDestroyedTriggers();
         LoadCheckCounterValues();
+        LoadWarpStates();
+        LoadRoomGeneratorStates();
+        LoadAnimationObjectStates();
     }
 
     public void AddActor(JourneyActor p_JourneyActor)
@@ -61,6 +78,21 @@ public class LocationSave
     public void AddCheckCounter(CheckCounterAction p_CheckCounterAction)
     {
         m_CheckCounterActions.Add(p_CheckCounterAction.id, p_CheckCounterAction);
+    }
+
+    public void AddWarp(Warp p_Warp)
+    {
+        m_Warps.Add(p_Warp.id, p_Warp);
+    }
+
+    public void AddRoomGenerator(RoomEnemyGenerator p_RoomGenerator)
+    {
+        m_RoomGenerators.Add(p_RoomGenerator.id, p_RoomGenerator);
+    }
+
+    public void AddAnimationObject(AnimationObject p_AnimationObject)
+    {
+        m_AnimationObjects.Add(p_AnimationObject.id, p_AnimationObject);
     }
 
     public void ActorDie(string p_Id)
@@ -108,6 +140,18 @@ public class LocationSave
         {
             LoadFromFileCheckCounterValues(p_LocationJson["CheckCounterValues"]);
         }
+        if (p_LocationJson.HasField("WarpsState"))
+        {
+            LoadFromFileWarpsState(p_LocationJson["WarpsState"]);
+        }
+        if (p_LocationJson.HasField("RoomGenerators"))
+        {
+            LoadFromFileRoomGenerators(p_LocationJson["RoomGenerators"]);
+        }
+        if (p_LocationJson.HasField("AnimationObjects"))
+        {
+            LoadFromFileAnimationObjects(p_LocationJson["AnimationObjects"]);
+        }
     }
 
     public JSONObject GetJson()
@@ -122,6 +166,9 @@ public class LocationSave
         l_LocationSaveJson.AddField("DoorsState", DoorsStateGetJson());
         l_LocationSaveJson.AddField("DestroyedTriggers", DestroyedTriggersGetJson());
         l_LocationSaveJson.AddField("CheckCounterValues", CheckCounterValuesGetJson());
+        l_LocationSaveJson.AddField("WarpsState", WarpsStateGetJson());
+        l_LocationSaveJson.AddField("RoomGenerators", RoomGeneratorsGetJson());
+        l_LocationSaveJson.AddField("AnimationObjects", AnimationObjectsGetJson());
 
         return l_LocationSaveJson;
     }
@@ -165,6 +212,51 @@ public class LocationSave
         }
     }
 
+    private void SaveWarpStates()
+    {
+        foreach (Warp l_Warp in m_Warps.Values)
+        {
+            if (m_WarpState.ContainsKey(l_Warp.id))
+            {
+                m_WarpState[l_Warp.id] = l_Warp.currentBehavior;
+            }
+            else
+            {
+                m_WarpState.Add(l_Warp.id, l_Warp.currentBehavior);
+            }
+        }
+    }
+
+    private void SaveRoomGeneratorStates()
+    {
+        foreach (RoomEnemyGenerator l_RoomGenerator in m_RoomGenerators.Values)
+        {
+            if (m_RoomGeneratorStates.ContainsKey(l_RoomGenerator.id))
+            {
+                m_RoomGeneratorStates[l_RoomGenerator.id] = l_RoomGenerator.generateEnable;
+            }
+            else
+            {
+                m_RoomGeneratorStates.Add(l_RoomGenerator.id, l_RoomGenerator.generateEnable);
+            }
+        }
+    }
+
+    private void SaveAnimationObjectStates()
+    {
+        foreach (AnimationObject l_AnimationObject in m_AnimationObjects.Values)
+        {
+            if (m_AnimationObjectStates.ContainsKey(l_AnimationObject.id))
+            {
+                m_AnimationObjectStates[l_AnimationObject.id] = l_AnimationObject.currentState;
+            }
+            else
+            {
+                m_AnimationObjectStates.Add(l_AnimationObject.id, l_AnimationObject.currentState);
+            }
+        }
+    }
+
     private void LoadDoorState()
     {
         foreach (string l_DoorId in m_DoorState.Keys)
@@ -179,6 +271,14 @@ public class LocationSave
         {
             Object.Destroy(m_Actors[m_DieActorsIds[i]].gameObject);
             m_Actors.Remove(m_DieActorsIds[i]);
+        }
+    }
+
+    private void LoadWarpStates()
+    {
+        foreach (string l_WarpId in m_WarpState.Keys)
+        {
+            m_Warps[l_WarpId].ChangeBehavior(m_WarpState[l_WarpId]);
         }
     }
 
@@ -218,6 +318,22 @@ public class LocationSave
         foreach (string l_Id in m_CheckCounterValues.Keys)
         {
             m_CheckCounterActions[l_Id].counter = m_CheckCounterValues[l_Id];
+        }
+    }
+
+    private void LoadRoomGeneratorStates()
+    {
+        foreach (string l_Id in m_RoomGeneratorStates.Keys)
+        {
+            m_RoomGenerators[l_Id].generateEnable = m_RoomGeneratorStates[l_Id];
+        }
+    }
+
+    private void LoadAnimationObjectStates()
+    {
+        foreach (string l_Id in m_AnimationObjectStates.Keys)
+        {
+            m_AnimationObjects[l_Id].SetState(m_AnimationObjectStates[l_Id]);
         }
     }
 
@@ -276,6 +392,30 @@ public class LocationSave
         for (int i = 0; i < p_CheckCounterValuesJson.Count; i++)
         {
             m_CheckCounterValues.Add(p_CheckCounterValuesJson[i]["Id"].str, (int)p_CheckCounterValuesJson[i]["Value"].i);
+        }
+    }
+
+    private void LoadFromFileWarpsState(JSONObject p_WarpsStateJson)
+    {
+        for (int i = 0; i < p_WarpsStateJson.Count; i++)
+        {
+            m_WarpState.Add(p_WarpsStateJson[i]["Id"].str, p_WarpsStateJson[i]["BehaviorId"].str);
+        }
+    }
+
+    private void LoadFromFileRoomGenerators(JSONObject p_RoomGeneratorJson)
+    {
+        for (int i = 0; i < p_RoomGeneratorJson.Count; i++)
+        {
+            m_RoomGeneratorStates.Add(p_RoomGeneratorJson[i]["Id"].str, p_RoomGeneratorJson[i]["CanGenerate"].b);
+        }
+    }
+
+    private void LoadFromFileAnimationObjects(JSONObject p_AnimationObjectsJson)
+    {
+        for (int i = 0; i < p_AnimationObjectsJson.Count; i++)
+        {
+            m_AnimationObjectStates.Add(p_AnimationObjectsJson[i]["Id"].str, p_AnimationObjectsJson[i]["State"].str);
         }
     }
 
@@ -348,5 +488,53 @@ public class LocationSave
         }
 
         return l_CheckCounterListJson;
+    }
+
+    private JSONObject WarpsStateGetJson()
+    {
+        JSONObject l_WarpStates = new JSONObject();
+
+        foreach (string l_WarpId in m_WarpState.Keys)
+        {
+            JSONObject l_WarpState = new JSONObject();
+            l_WarpState.AddField("Id", l_WarpId);
+            l_WarpState.AddField("BehaviorId", m_WarpState[l_WarpId]);
+
+            l_WarpStates.Add(l_WarpState);
+        }
+
+        return l_WarpStates;
+    }
+
+    private JSONObject RoomGeneratorsGetJson()
+    {
+        JSONObject l_RoomGeneratorListJson = new JSONObject();
+
+        foreach (string l_RoomId in m_RoomGeneratorStates.Keys)
+        {
+            JSONObject l_RoomGenerator = new JSONObject();
+            l_RoomGenerator.AddField("Id", l_RoomId);
+            l_RoomGenerator.AddField("CanGenerate", m_RoomGeneratorStates[l_RoomId]);
+
+            l_RoomGeneratorListJson.Add(l_RoomGenerator);
+        }
+
+        return l_RoomGeneratorListJson;
+    }
+
+    private JSONObject AnimationObjectsGetJson()
+    {
+        JSONObject l_AnimationObjectsListJson = new JSONObject();
+
+        foreach (string l_RoomId in m_AnimationObjectStates.Keys)
+        {
+            JSONObject l_AnimationGenerator = new JSONObject();
+            l_AnimationGenerator.AddField("Id", l_RoomId);
+            l_AnimationGenerator.AddField("State", m_AnimationObjectStates[l_RoomId]);
+
+            l_AnimationObjectsListJson.Add(l_AnimationGenerator);
+        }
+
+        return l_AnimationObjectsListJson;
     }
 }
