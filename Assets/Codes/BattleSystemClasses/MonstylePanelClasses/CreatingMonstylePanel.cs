@@ -267,7 +267,7 @@ public class CreatingMonstylePanel : Panel
 
     private void InitSpecials()
     {
-        List<SpecialData> l_PlayerSkills = PlayerData.GetInstance().GetSkills();
+        List<SpecialData> l_PlayerSkills = PlayerData.GetInstance().GetSelectedSkills();
         for (int i = 0; i < l_PlayerSkills.Count; i++)
         {
             PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using UnityEngine;
+using System;
 
 public class PlayerData : Singleton<PlayerData>
 {
@@ -71,6 +72,7 @@ public class PlayerData : Singleton<PlayerData>
         Clear();
         m_PlayerStat.Clear();
         m_PlayerSkills.Clear();
+        m_PlayerSkills.ClearSelectedSkills();
         m_PlayerEnchancement.Clear();
     }
 
@@ -103,6 +105,7 @@ public class PlayerData : Singleton<PlayerData>
         m_MonstylePoints = m_PlayerStat.GetStatValue("HealthPoints");
 
         LoadSpecials(p_PlayerData["Specials"]);
+        LoadSelectedSpecials(p_PlayerData["SelectedSpecials"]);
 
         m_PlayerEnchancement.SetEnchancementId(p_PlayerData["Enchancement"].str);
     }
@@ -131,6 +134,9 @@ public class PlayerData : Singleton<PlayerData>
 
         JSONObject l_SpecialsJson = m_PlayerSkills.GetJson();
         l_PlayerDataJson.AddField("Specials", l_SpecialsJson);
+
+        JSONObject l_SelectedSpecialsJson = m_PlayerSkills.GetSelectedSkillsJson();
+        l_PlayerDataJson.AddField("SelectedSpecials", l_SelectedSpecialsJson);
 
         File.WriteAllText(GetSavePath() + "PlayerData.json", l_PlayerDataJson.Print(true));
     }
@@ -166,6 +172,11 @@ public class PlayerData : Singleton<PlayerData>
         m_PlayerSkills.AddSkills(p_SkillList);
     }
 
+    public void AddSelectedSkills(List<SpecialData> p_SkillList, bool overwrite = false)
+    {
+        m_PlayerSkills.AddSelectedSkills(p_SkillList, overwrite);
+    }
+
     public List<SpecialData> GetSkills()
     {
         return m_PlayerSkills.GetSkills();
@@ -181,7 +192,12 @@ public class PlayerData : Singleton<PlayerData>
         m_PlayerSkills.UnselectSkill(p_Id);
     }
 
-    public Dictionary<string, SpecialData> GetSelectedSkills()
+    public void RemoveFirstSelectedSkill()
+    {
+        m_PlayerSkills.RemoveFirstSelectedSkill();
+    }
+
+    public List<SpecialData> GetSelectedSkills()
     {
         return m_PlayerSkills.GetSelectedSkills();
     }
@@ -406,13 +422,24 @@ public class PlayerData : Singleton<PlayerData>
 
     private void LoadSpecials(JSONObject p_Skill)
     {
-        List<SpecialData> m_SpecialList = new List<SpecialData>();
+        List<SpecialData> l_SpecialList = new List<SpecialData>();
         for (int i = 0; i < p_Skill.Count; i++)
         {
-            m_SpecialList.Add(SpecialDataBase.GetInstance().GetSpecialData(p_Skill[i].str));
+            l_SpecialList.Add(SpecialDataBase.GetInstance().GetSpecialData(p_Skill[i].str));
         }
 
-        AddSkills(m_SpecialList);
+        AddSkills(l_SpecialList);
+    }
+
+    private void LoadSelectedSpecials(JSONObject p_Skill)
+    {
+        List<SpecialData> l_SpecialList = new List<SpecialData>();
+        for (int i = 0; i < p_Skill.Count; i++)
+        {
+            l_SpecialList.Add(SpecialDataBase.GetInstance().GetSpecialData(p_Skill[i].str));
+        }
+
+        AddSelectedSkills(l_SpecialList);
     }
     #endregion
 }
