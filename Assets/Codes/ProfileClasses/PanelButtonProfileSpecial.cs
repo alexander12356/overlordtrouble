@@ -34,6 +34,21 @@ public class PanelButtonProfileSpecial : PanelButton
             }
         }
     }
+    public bool initChoosen
+    {
+        set
+        {
+            m_Chosen = value;
+            if (m_Chosen)
+            {
+                text.color = Color.green;
+            }
+            else
+            {
+                text.color = Color.black;
+            }
+        }
+    }
     public string monstyleId
     {
         get { return m_MonstyleId; }

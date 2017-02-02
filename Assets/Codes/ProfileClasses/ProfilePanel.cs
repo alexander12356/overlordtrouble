@@ -151,13 +151,13 @@ public class ProfilePanel : Panel
         List<SpecialData> l_SelectedSpecialsList = PlayerData.GetInstance().GetSelectedSkills();
         for (int i = 0; i < l_MonstyleList.Count; i++)
         {
-            PanelButtonProfileSpecial l_PanelButton = Instantiate(PanelButtonProfileSpecial.prefab);
-            l_PanelButton.AddAction(SelectSpecial);
-            l_PanelButton.monstyleId = l_MonstyleList[i].id;
+            PanelButtonProfileSpecial l_ProfileButton = Instantiate(PanelButtonProfileSpecial.prefab);
+            l_ProfileButton.AddAction(SelectSpecial);
+            l_ProfileButton.monstyleId = l_MonstyleList[i].id;
             // проверка на то, был ли выбран этот спешл ранее
-            if (l_SelectedSpecialsList.Contains(SpecialDataBase.GetInstance().GetSpecialData(l_PanelButton.monstyleId)))
-                l_PanelButton.chosen = true;
-            m_SpecialsButtonList.AddButton(l_PanelButton);
+            if (l_SelectedSpecialsList.Contains(SpecialDataBase.GetInstance().GetSpecialData(l_ProfileButton.monstyleId)))
+                l_ProfileButton.initChoosen = true;
+            m_SpecialsButtonList.AddButton(l_ProfileButton);
         }
         m_SpecialButtonListScrolling.Init(51.0f, 6);
     }
