@@ -39,6 +39,11 @@ public class AnimationObject : MonoBehaviour
         m_UnityEvent.AddListener(p_Action);
     }
 
+    public void RemoveEndAnimaitonAction(UnityAction p_Action)
+    {
+        m_UnityEvent.RemoveListener(p_Action);
+    }
+
     public void EndAnimation()
     {
         m_UnityEvent.Invoke();

@@ -17,4 +17,11 @@ public class StartAnimationStep : BaseStep
         m_AnimationObject.SetState(m_TriggerId);
         m_AnimationObject.AddEndAnimationAction(EndStep);
     }
+
+    public override void EndStep()
+    {
+        base.EndStep();
+
+        m_AnimationObject.RemoveEndAnimaitonAction(EndStep);
+    }
 }

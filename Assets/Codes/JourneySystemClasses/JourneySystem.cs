@@ -75,6 +75,7 @@ public class JourneySystem : MonoBehaviour
             AudioSystem.GetInstance().SetTheme(GameManager.GetInstance().currentSceneName);
             AudioSystem.GetInstance().PlayTheme();
             AudioSystem.GetInstance().ResumeMainTheme();
+            RoomSystem.GetInstance().ChangeRoom(RoomSystem.GetInstance().currentRoomId);
         }
 #endif
     }

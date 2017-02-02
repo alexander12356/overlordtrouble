@@ -17,6 +17,8 @@ public class BaseStep : MonoBehaviour
 
     public virtual void EndStep()
     {
+        Debug.Log("En step id: " + m_StepId);
+
         CutsceneSystem.GetInstance().NextStep();
     }
 }

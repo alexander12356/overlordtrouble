@@ -602,6 +602,17 @@
 			"Skwatwolf"
 		]
 	},
+	"EventBattle_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Event" : true,
+		"Enemy": 
+		[
+			"Dualent",
+			"Willwhishp",
+			"Dualent"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",

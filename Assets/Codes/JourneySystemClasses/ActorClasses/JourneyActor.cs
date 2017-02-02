@@ -216,6 +216,33 @@ public class JourneyActor : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    public void SetDirection(ActorDirection p_Direction)
+    {
+        switch (p_Direction)
+        {
+            case ActorDirection.Up:
+                m_Animator.SetTrigger("Up");
+                m_Animator.SetFloat("Input_Y", 1.0f);
+                m_ActorDirection = ActorDirection.Up;
+                break;
+            case ActorDirection.Down:
+                m_Animator.SetTrigger("Down");
+                m_Animator.SetFloat("Input_Y", -1.0f);
+                m_ActorDirection = ActorDirection.Down;
+                break;
+            case ActorDirection.Right:
+                m_Animator.SetTrigger("Right");
+                m_Animator.SetFloat("Input_X", 1.0f);
+                m_ActorDirection = ActorDirection.Right;
+                break;
+            case ActorDirection.Left:
+                m_Animator.SetTrigger("Left");
+                m_Animator.SetFloat("Input_X", -1.0f);
+                m_ActorDirection = ActorDirection.Left;
+                break;
+        }
+    }
     #endregion
 
     private void InitInteractBehavior()
