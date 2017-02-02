@@ -709,6 +709,18 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="Leshii_3_1" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_3_1</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_3_2" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_3_2</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- EventMobs -->
 	<Dialog id="StartBattle_1" startNode="Talk" avatarPath="">
 		<DialogNode id="Talk">
@@ -755,6 +767,30 @@
 	<Dialog id="AfterBattle2_Mob_3" startNode="Talk" avatarPath="">
 		<DialogNode id="Talk">
 			<Text>Dialog:AfterBattle2_Mob_3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="StartBattle_3" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:StartBattle_3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="AfterBattle3_Mob_1" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:AfterBattle3_Mob_1</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="AfterBattle3_Mob_2" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:AfterBattle3_Mob_2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="AfterBattle3_Mob_3" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:AfterBattle3_Mob_3</Text>
 		</DialogNode>
 	</Dialog>
 </DialogList>

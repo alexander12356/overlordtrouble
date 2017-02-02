@@ -7,11 +7,18 @@ public class CameraFollow : MonoBehaviour
     private Transform m_Transform = null;
     private Vector3 m_Delta = Vector3.zero;
     private Vector3 borderMin, borderMax;
+    private bool m_IsFollow = true;
 
     [SerializeField]
     private Transform m_Target = null;
     [SerializeField]
     private BoxCollider2D Bounds = null;
+
+    public bool isFollow
+    {
+        get { return m_IsFollow; }
+        set { m_IsFollow = value; }
+    }
 
     public void Awake()
     {
@@ -34,7 +41,7 @@ public class CameraFollow : MonoBehaviour
 	
 	public void Update()
     {
-        if (m_Target != null)
+        if (m_IsFollow && m_Target != null)
         {
             m_Transform.position = Vector3.Lerp(m_Transform.position, m_Target.position, 0.1f) + m_Delta;
             var cameraHalfWidth = GetComponent<Camera>().orthographicSize * ((float)Screen.width / Screen.height);

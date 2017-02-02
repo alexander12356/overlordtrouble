@@ -613,6 +613,17 @@
 			"Dualent"
 		]
 	},
+	"EventBattle_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Event" : true,
+		"Enemy": 
+		[
+			"Ogre",
+			"Ogre",
+			"Ogre"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",
