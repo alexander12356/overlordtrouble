@@ -12,8 +12,8 @@
 	{
 		"HealthPoints" : 22,
 		"MonstylePoints" : 22,
-		"Attack" : 10,
-        "Defense" : 4,
+		"Attack" : 1,
+        "Defense" : 1,
         "Speed" : 1,
         "Fortune" : 1
 	}
