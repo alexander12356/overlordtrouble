@@ -3,19 +3,12 @@
 public class StayMovement : BaseMovement
 {
     #region Variables
-    private enum Direction
-    {
-        Left,
-        Right,
-        Up,
-        Down
-    }
 
     private float m_WaitTime    = 0.0f;
     private float m_ElapsedTime = 0.0f;
 
     [SerializeField]
-    private Direction m_PrevDirection = 0;
+    private ActorDirection m_PrevDirection = 0;
     #endregion
 
     #region Interface
@@ -41,7 +34,7 @@ public class StayMovement : BaseMovement
         {
             m_WaitTime = GetNewWaitTime();
             m_ElapsedTime = 0.0f;
-            Direction l_NewDirection = GetNewDirection();
+            ActorDirection l_NewDirection = GetNewDirection();
 
             while (l_NewDirection == m_PrevDirection)
             {
@@ -54,15 +47,15 @@ public class StayMovement : BaseMovement
     #endregion
 
     #region Private
-    private void ChangeDirection(Direction p_NewDirection)
+    private void ChangeDirection(ActorDirection p_NewDirection)
     {
         m_PrevDirection = p_NewDirection;
-        journeyActor.myAnimator.SetTrigger(p_NewDirection.ToString());
+        journeyActor.SetDirection(p_NewDirection);
     }
 
-    private Direction GetNewDirection()
+    private ActorDirection GetNewDirection()
     {
-        return (Direction)Random.Range((int)Direction.Left, (int)Direction.Down);
+        return (ActorDirection)Random.Range((int)ActorDirection.Right, (int)ActorDirection.Down);
     }
 
     private float GetNewWaitTime()

@@ -721,6 +721,95 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="Leshii_StartFight_Simple" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_StartFight_Simple</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Simple:1" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Simple:1</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Simple:2" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Simple:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Simple:3" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Simple:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Simple:4" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Simple:4</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Simple:5" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Simple:5</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Simple:6" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Simple:6</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Common_Simple" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Common_Simple</Text>
+			<Question>
+				<Answer id="Ask"/>
+				<Answer id="NotAsk"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="Ask">
+			<Text>Dialog:Leshii_Common_Simple:Yes</Text>
+		</DialogNode>
+		<DialogNode id="NotAsk">
+			<Text>Dialog:Leshii_Common_Simple:No</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Fairy -->
+	<Dialog id="Fairy_Simple:1" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Simple:1</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Fairy_Simple:2" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Simple:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Fairy_Simple:3" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Simple:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Fairy_Simple:4" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Simple:4</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Fairy_Simple:5" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Simple:5</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<!-- EventMobs -->
 	<Dialog id="StartBattle_1" startNode="Talk" avatarPath="">
 		<DialogNode id="Talk">
@@ -791,6 +880,30 @@
 	<Dialog id="AfterBattle3_Mob_3" startNode="Talk" avatarPath="">
 		<DialogNode id="Talk">
 			<Text>Dialog:AfterBattle3_Mob_3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Sign -->
+	<Dialog id="Sign:Common:1" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Sign:Common:1</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Sign:Common:2" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Sign:Common:2</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="Sign:Common:3" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Sign:Common:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Complete Bokalisk-->
+	<Dialog id="CompleteBokalisk:Simple" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:CompleteBokalisk:Simple</Text>
 		</DialogNode>
 	</Dialog>
 </DialogList>

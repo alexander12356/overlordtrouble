@@ -648,5 +648,12 @@
 			"HP" : 20,
 			"MP" : 20
 		}
+	},
+	"BattleBossLeshii_Simple":
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+		]
 	}
 }

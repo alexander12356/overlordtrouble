@@ -7,6 +7,9 @@ public class AnimationObject : MonoBehaviour
 {
     private Animator m_Animator = null;
     private UnityEvent m_UnityEvent = new UnityEvent();
+    //TODO fix
+    private UnityEvent m_KostilEvent = new UnityEvent();
+    private string m_KostilTrigger = "";
 
     [SerializeField]
     private string m_Id;
@@ -26,10 +29,17 @@ public class AnimationObject : MonoBehaviour
     public void Awake()
     {
         m_Animator = GetComponent<Animator>();
+        m_KostilEvent = new UnityEvent();
     }
 
     public void SetState(string p_Trigger)
     {
+        if (gameObject.activeInHierarchy == false)
+        {
+            m_KostilTrigger = p_Trigger;
+            m_KostilEvent.AddListener(KostilSetState);
+            return;
+        }
         m_Trigger = p_Trigger;
         m_Animator.SetTrigger(m_Trigger);
     }
@@ -47,5 +57,17 @@ public class AnimationObject : MonoBehaviour
     public void EndAnimation()
     {
         m_UnityEvent.Invoke();
+    }
+
+    public void OnEnable()
+    {
+        m_KostilEvent.Invoke();
+        m_KostilEvent.RemoveAllListeners();
+    }
+
+    private void KostilSetState()
+    {
+        m_Trigger = m_KostilTrigger;
+        m_Animator.SetTrigger(m_Trigger);
     }
 }

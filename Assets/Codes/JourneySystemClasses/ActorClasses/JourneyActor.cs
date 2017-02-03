@@ -171,24 +171,16 @@ public class JourneyActor : MonoBehaviour
         switch(p_JourneyActor.direction)
         {
             case ActorDirection.Down:
-                m_Animator.SetTrigger("Up");
-                m_Animator.SetFloat("Input_Y", 1.0f);
-                m_ActorDirection = ActorDirection.Up;
+                SetDirection(ActorDirection.Up);
                 break;
             case ActorDirection.Up:
-                m_Animator.SetTrigger("Down");
-                m_Animator.SetFloat("Input_Y", -1.0f);
-                m_ActorDirection = ActorDirection.Down;
+                SetDirection(ActorDirection.Down);
                 break;
             case ActorDirection.Left:
-                m_Animator.SetTrigger("Right");
-                m_Animator.SetFloat("Input_X", 1.0f);
-                m_ActorDirection = ActorDirection.Right;
+                SetDirection(ActorDirection.Right);
                 break;
             case ActorDirection.Right:
-                m_Animator.SetTrigger("Left");
-                m_Animator.SetFloat("Input_X", -1.0f);
-                m_ActorDirection = ActorDirection.Left;
+                SetDirection(ActorDirection.Left);
                 break;
         }
     }
@@ -223,22 +215,26 @@ public class JourneyActor : MonoBehaviour
         {
             case ActorDirection.Up:
                 m_Animator.SetTrigger("Up");
+                m_Animator.SetFloat("Input_X", 0.0f);
                 m_Animator.SetFloat("Input_Y", 1.0f);
                 m_ActorDirection = ActorDirection.Up;
                 break;
             case ActorDirection.Down:
                 m_Animator.SetTrigger("Down");
+                m_Animator.SetFloat("Input_X", 0.0f);
                 m_Animator.SetFloat("Input_Y", -1.0f);
                 m_ActorDirection = ActorDirection.Down;
                 break;
             case ActorDirection.Right:
                 m_Animator.SetTrigger("Right");
                 m_Animator.SetFloat("Input_X", 1.0f);
+                m_Animator.SetFloat("Input_Y", 0.0f);
                 m_ActorDirection = ActorDirection.Right;
                 break;
             case ActorDirection.Left:
                 m_Animator.SetTrigger("Left");
                 m_Animator.SetFloat("Input_X", -1.0f);
+                m_Animator.SetFloat("Input_Y", 0.0f);
                 m_ActorDirection = ActorDirection.Left;
                 break;
         }
