@@ -906,4 +906,18 @@
 			<Text>Dialog:CompleteBokalisk:Simple</Text>
 		</DialogNode>
 	</Dialog>
+	
+	<!-- OpenDoorCrystall -->
+	<Dialog id="OpenDoorCrystal:OpenDoor:1" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:OpenDoorCrystal:OpenDoor:1</Text>
+			<Text>Dialog:OpenDoorCrystal:OpenDoor:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="OpenDoorCrystal:Common" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:OpenDoorCrystal:Common</Text>
+		</DialogNode>
+	</Dialog>
 </DialogList>

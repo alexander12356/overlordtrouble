@@ -504,4 +504,9 @@
 	
 	<!-- Complte Bokalisk -->
 	<Text id="Dialog:CompleteBokalisk:Simple">Тебя же предупреждааали! Это место еще до кококонца не закококодировано! Кооо... ты можешь начать игру заново, по моему ты еще не все сделал</Text>
+	
+	<!-- OpenDoorCrystal -->
+	<Text id="Dialog:OpenDoorCrystal:OpenDoor:1">Выглядит подозрительно… вы притронулись к кристаллу.</Text>
+	<Text id="Dialog:OpenDoorCrystal:OpenDoor:2">вы почувствовали небольшую тряску.</Text>
+	<Text id="Dialog:OpenDoorCrystal:Common">Если Вова читаешь это, то текста на этот случай не было</Text>
 </Localization>
