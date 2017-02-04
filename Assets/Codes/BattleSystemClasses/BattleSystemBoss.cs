@@ -28,6 +28,8 @@ public class BattleSystemBoss : BattleSystem
     {
         base.InitBattle();
 
+        m_BattleData = BattleStarter.GetInstance().GetBattle();
+
         if (m_BattleData.id == null)
         {
             BattleStarter.GetInstance().InitBattle(null, "TestBattleBossLeshii");
@@ -61,22 +63,6 @@ public class BattleSystemBoss : BattleSystem
         l_TextPanel.SetText(new List<string>() { l_Text });
 
         ShowPanel(l_TextPanel);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            m_Leshii.bodyAnimator.SetTrigger("Attack");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            m_Leshii.bodyAnimator.SetTrigger("StartCharge");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            m_Leshii.bodyAnimator.SetTrigger("AttackCharge");
-        }
     }
 
     private void RunBossIntro()

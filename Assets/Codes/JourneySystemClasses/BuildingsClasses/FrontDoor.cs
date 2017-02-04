@@ -72,6 +72,11 @@ public class FrontDoor : MonoBehaviour
         }
     }
 
+    public void OpenDoor(bool p_Closed)
+    {
+        closed = p_Closed;
+    }
+
     private void Start()
     {
         m_CheckCollide.AddCollideEnterAction(OpenDoor);
