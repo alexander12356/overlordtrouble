@@ -189,6 +189,7 @@
 	"Refresh" :
 	{
 		"Sp" : 4.0,
+		"Element" : "NONE",
 		"Aoe" : false,
 		"Myself" : true,
 		"Effect" :

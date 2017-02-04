@@ -630,7 +630,7 @@
 		"Event" : true,
 		"Enemy": 
 		[
-			"ThirdsortRobber"
+			"SecondRateRobber"
 		]
 	},
 	"TestBattleSkwatwolf":
@@ -638,7 +638,7 @@
 		"Location" : "RoadThugs",
 		"Enemy": 
 		[
-			"Dualent"
+			"SecondRateRobber"
 		],
 		"Player":
 		{

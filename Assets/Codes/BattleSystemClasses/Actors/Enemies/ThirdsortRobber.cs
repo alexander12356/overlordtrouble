@@ -50,9 +50,9 @@ public class ThirdsortRobber : BattleEnemy
             {
                 PlayerInventory.GetInstance().coins -= m_StealMonettCount;
 
-                string l_TextAboutКгт = LocalizationDataBase.GetInstance().GetText("Enemy:ThirdsortRobber:StealMonett", new string[] { m_StealMonettCount.ToString() });
+                string l_Text = LocalizationDataBase.GetInstance().GetText("Enemy:ThirdsortRobber:StealMonett", new string[] { m_StealMonettCount.ToString() });
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-                l_TextPanel.SetText(new List<string>() { l_TextAboutКгт });
+                l_TextPanel.SetText(new List<string>() { l_Text });
                 l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
                 BattleShowPanelStep l_ShowPanelStep = new BattleShowPanelStep(l_TextPanel);

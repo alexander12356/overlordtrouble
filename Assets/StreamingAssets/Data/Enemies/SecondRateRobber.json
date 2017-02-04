@@ -1,0 +1,34 @@
+{
+	"Id" : "SecondRateRobber",
+	"Attack" : 1,
+	"Defense" : 1,
+	"Speed" : 1,
+	"Level" : 1,
+	"Health" : 8,
+	"Element": "Live",
+	"Attacks" :
+	[
+		{
+			"Id" : "Stab",
+			"Type" : "Attack",
+			"Element" : "Physical",
+			"Effect" :
+			{
+				"AttackRange" :
+				{
+					"Value1" : 2,
+					"Value2" : 4
+				}
+			}
+		}
+	],
+	"Experience" : 15,
+	"Loot" :
+	[
+	],
+	"Property" :
+	{
+		"StealChanse" : 10,
+		"StealMonettCount" : 4
+	}
+}

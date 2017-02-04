@@ -86,6 +86,9 @@ public class BattleSystemMobs : BattleSystem
             case "Ogre":
                 l_BattleEnemy = Instantiate(Ogre.prefab);
                 break;
+            case "SecondRateRobber":
+                l_BattleEnemy = Instantiate(SecondRateRobber.prefab);
+                break;
             default:
                 l_BattleEnemy = Instantiate(BattleEnemy.prefab);
                 break;
