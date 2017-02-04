@@ -3,9 +3,6 @@
 public class SwapItemAction : MonoBehaviour
 {
     [SerializeField]
-    private string m_SaleItemID = "";
-
-    [SerializeField]
     private string m_NeedItemId ="";
 
     [SerializeField]

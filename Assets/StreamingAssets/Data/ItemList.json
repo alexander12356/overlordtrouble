@@ -88,6 +88,14 @@
 			"Effect":
 			{
 			}
+		},
+		{
+			"Id" : "SeedOfMemory",
+			"Image" : "Sprites/Items/Key/SeedOfMemory",
+			"Type" : "Key",
+			"Effect":
+			{
+			}
 		}
 	]
 }

@@ -509,4 +509,41 @@
 	<Text id="Dialog:OpenDoorCrystal:OpenDoor:1">Выглядит подозрительно… вы притронулись к кристаллу.</Text>
 	<Text id="Dialog:OpenDoorCrystal:OpenDoor:2">вы почувствовали небольшую тряску.</Text>
 	<Text id="Dialog:OpenDoorCrystal:Common">Если Вова читаешь это, то текста на этот случай не было</Text>
+	
+	<!-- SecondRateRobber -->
+	<Text id="Dialog:SecondRateRobber:BuyFail">Мммм, да у тебя денег не хватает. Приходи позже.</Text>
+	<Text id="Dialog:SecondRateRobber:Lose">Я это тебе еще запомню!</Text>
+	
+	<Text id="Dialog:SecondRateRobber:1">Эй, если дашь мне 10 монетт я расскажу тебе кое-что интересное.</Text>
+	<Text id="Dialog:SecondRateRobber:1:Pass">Предложение все еще в силе если передумаешь.</Text>
+	<Text id="Dialog:SecondRateRobber:1:Buy">Ок</Text>
+	<Text id="Dialog:SecondRateRobber:1:NotBuy">Нет</Text>
+	<Text id="Dialog:SecondRateRobber:1:Buy:1">Я не вру.</Text>
+	<Text id="Dialog:SecondRateRobber:1:Buy:2">да, это и есть интересная часть.</Text>
+	
+	<Text id="Dialog:SecondRateRobber:2">Эй, если дашь мне еще 30 монетт я расскажу тебе кое-что важное.</Text>
+	<Text id="Dialog:SecondRateRobber:2:Pass">Ты ведь не хочешь об этом пожалеть? Это действительно важно.</Text>
+	<Text id="Dialog:SecondRateRobber:2:Buy">Ок</Text>
+	<Text id="Dialog:SecondRateRobber:2:NotBuy">Нет</Text>
+	<Text id="Dialog:SecondRateRobber:2:Buy:1">У меня есть вот это вот зерно, я взял его еще когда у этого лешего в дереве была рука. Как ты видишь, сейчас от него осталась только голова.</Text>
+	<Text id="Dialog:SecondRateRobber:2:Buy:2">Пришлось чуток повозиться чтобы это достать.</Text>
+	
+	<Text id="Dialog:SecondRateRobber:3">Эй, если дашь мне 100 монетт я продам тебе это зерно… Не смотри на меня так, оно на самом деле стоит гораздо больше!</Text>
+	<Text id="Dialog:SecondRateRobber:3:BuyFail">Мммм, тебе нужно чуток больше денег, за просто так я это не дам.</Text>
+	<Text id="Dialog:SecondRateRobber:3:Pass">Ну как хочешь, я, знаешь ли кому угодно мог предложить это зерно, но сделал эту услугу только тебе.</Text>
+	<Text id="Dialog:SecondRateRobber:3:Buy">Ок</Text>
+	<Text id="Dialog:SecondRateRobber:3:NotBuy">Нет</Text>
+	<Text id="Dialog:SecondRateRobber:3:Buy:1">Вот держи хехехе...</Text>
+	<Text id="Dialog:SecondRateRobber:3:Buy:2">...............</Text>
+	<Text id="Dialog:SecondRateRobber:3:Buy:3">Если подумать, раз ты это купил, оно действительно очень ценное, боюсь, что отдавать тебе это зерно я не буду. Но придется заставить тебя замолчать.</Text>
+	
+	<!-- Seed Of Memory -->
+	<Text id="Dialog:SeedOfMemory:1">Вы подобрали зерно памяти.</Text>
+	<Text id="Dialog:SeedOfMemory:2">вы внезапно почувствовали, будто в вашу голову идут слова.</Text>
+	<Text id="Dialog:SeedOfMemory:3">Сын мой, я хочу попросить у тебя прощения. Хоть я и прожил очень долго и даже считался мудрейшим, я не смог заметить того, что моя слава ущемляла тебя. И даже когда ты попросил моей помощи, я просто отказал тебе, подумав, что ты можешь справиться сам… Но ослепленный своей гордыней я забыл, что ты все еще очень молод, что привело к нашей ссоре. Я знаю, что ты не придешь, когда я стану одним целым с великим древом, поэтому вместе со всеми знаниями леса я решил передать тебе свои извинения, чтобы когда это зерно дошло до тебя ты понял: Я очень горжусь тобой. Я верю что в твоих руках лес будет в справедливости и безопасности, ведь ты мой единственный ребенок. Прости, что не сказал тебе этого раньше и прости, что не смог быть с тобою дольше.</Text>
+	
+	<!-- Big Tree -->
+	<Text id="Dialog:Forest:BigTree:1">Это великое древо. Его легко можно увидеть за пределами леса.</Text>
+	<Text id="Dialog:Forest:BigTree:2">если приглядеться, то это громадное лицо выглядит очень знакомым.</Text>
+	<Text id="Dialog:Forest:BigTree:3">ваши хп и сп восстановлены до максимума.</Text>
 </Localization>

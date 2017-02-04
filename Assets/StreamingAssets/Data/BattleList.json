@@ -624,6 +624,15 @@
 			"Ogre"
 		]
 	},
+	"SecondRateRobberFight": 
+	{
+		"Location" : "ForestCreeps",
+		"Event" : true,
+		"Enemy": 
+		[
+			"ThirdsortRobber"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",

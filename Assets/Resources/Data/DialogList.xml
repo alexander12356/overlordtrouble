@@ -920,4 +920,99 @@
 			<Text>Dialog:OpenDoorCrystal:Common</Text>
 		</DialogNode>
 	</Dialog>
+	
+	<!-- SecondRateRobber -->
+	<Dialog id="SecondRateRobber:BuyFail" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SecondRateRobber:BuyFail</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SecondRateRobber:1" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SecondRateRobber:1</Text>
+			<Question>
+				<Answer id="Buy"/>
+				<Answer id="NotBuy"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="NotBuy">
+			<Text>Dialog:SecondRateRobber:1:Pass</Text>
+		</DialogNode>
+	</Dialog>	
+	<Dialog id="SecondRateRobber:1:Success" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SecondRateRobber:1:Buy:1</Text>
+			<Text>Dialog:SecondRateRobber:1:Buy:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SecondRateRobber:2" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SecondRateRobber:2</Text>
+			<Question>
+				<Answer id="Buy"/>
+				<Answer id="NotBuy"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="NotBuy">
+			<Text>Dialog:SecondRateRobber:2:Pass</Text>
+		</DialogNode>
+	</Dialog>	
+	<Dialog id="SecondRateRobber:2:Success" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SecondRateRobber:2:Buy:1</Text>
+			<Text>Dialog:SecondRateRobber:2:Buy:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SecondRateRobber:3" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SecondRateRobber:3</Text>
+			<Question>
+				<Answer id="Buy"/>
+				<Answer id="NotBuy"/>
+			</Question>
+		</DialogNode>
+		<DialogNode id="NotBuy">
+			<Text>Dialog:SecondRateRobber:3:Pass</Text>
+		</DialogNode>
+	</Dialog>	
+	<Dialog id="SecondRateRobber:3:Success" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SecondRateRobber:3:Buy:1</Text>
+			<Text>Dialog:SecondRateRobber:3:Buy:2</Text>
+			<Text>Dialog:SecondRateRobber:3:Buy:3</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="SecondRateRobber:3:BuyFail" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SecondRateRobber:3:BuyFail</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="SecondRateRobber:Lose" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SecondRateRobber:Lose</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- Seed Of Memory -->
+	<Dialog id="SeedOfMemory" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:SeedOfMemory:1</Text>
+			<Text>Dialog:SeedOfMemory:2</Text>
+			<Text>Dialog:SeedOfMemory:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<!-- BigTree -->
+	<Dialog id="Forest:BigTree" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Forest:BigTree:1</Text>
+			<Text>Dialog:Forest:BigTree:2</Text>
+			<Text>Dialog:Forest:BigTree:3</Text>
+		</DialogNode>
+	</Dialog>
+	
 </DialogList>
