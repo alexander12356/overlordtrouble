@@ -18,10 +18,12 @@ public class SwapItemAction : MonoBehaviour
     {
         if (m_NeedItemId == "Monett" && PlayerInventory.GetInstance().coins >= m_NeedItemCount)
         {
+            PlayerInventory.GetInstance().coins -= m_NeedItemCount;
             m_SuccessAction.actionEvent.Invoke();
         }
         else if (PlayerInventory.GetInstance().GetItemCount(m_NeedItemId) >= m_NeedItemCount)
         {
+            PlayerInventory.GetInstance().AddItem(m_NeedItemId, -m_NeedItemCount);
             m_SuccessAction.actionEvent.Invoke();
         }
         else

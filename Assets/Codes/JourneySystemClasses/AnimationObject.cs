@@ -34,6 +34,11 @@ public class AnimationObject : MonoBehaviour
 
     public void SetState(string p_Trigger)
     {
+        if (p_Trigger == "")
+        {
+            return;
+        }
+
         if (gameObject.activeInHierarchy == false)
         {
             m_KostilTrigger = p_Trigger;

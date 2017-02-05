@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DestroyObjectStep : BaseStep
+public class DestroyActorStep : BaseStep
 {
     [SerializeField]
     private JourneyActor m_TargetObject = null;

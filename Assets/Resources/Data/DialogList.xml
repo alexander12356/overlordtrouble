@@ -727,6 +727,23 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="Leshii_StartFight_Special:1" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_StartFight_Special:1</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_StartFight_Special:2" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_StartFight_Special:2</Text>
+			<Text>Dialog:Leshii_StartFight_Special:3</Text>
+			<Text>Dialog:Leshii_StartFight_Special:4</Text>
+			<Text>Dialog:Leshii_StartFight_Special:5</Text>
+			<Text>Dialog:Leshii_StartFight_Special:6</Text>
+			<Text>Dialog:Leshii_StartFight_Special:7</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<Dialog id="Leshii_Defated_Simple:1" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:Leshii_Defated_Simple:1</Text>
@@ -763,6 +780,55 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="Leshii_Defated_Special:1" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Special:1</Text>
+			<Text>Dialog:Leshii_Defated_Special:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Special:2" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Special:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Special:3" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Special:4</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Special:4" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Special:5</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Special:5" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Special:6</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Special:6" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Special:7</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Special:7" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Special:8</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Defated_Special:8" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Special:9</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<Dialog id="Leshii_Common_Simple" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:Leshii_Common_Simple</Text>
@@ -776,6 +842,20 @@
 		</DialogNode>
 		<DialogNode id="NotAsk">
 			<Text>Dialog:Leshii_Common_Simple:No</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Common_Special:1" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Common_Special:1</Text>
+			<Text>Dialog:Leshii_Common_Special:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Leshii_Common_Special:2" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Common_Special:3</Text>
+			<Text>Dialog:Leshii_Common_Special:4</Text>
 		</DialogNode>
 	</Dialog>
 	
@@ -807,6 +887,43 @@
 	<Dialog id="Fairy_Simple:5" startNode="Talk" avatarPath="">
 		<DialogNode id="Talk">
 			<Text>Dialog:Fairy_Simple:5</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Fairy_Special:1" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Special:1</Text>
+			<Text>Dialog:Fairy_Special:2</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Fairy_Special:2" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Special:3</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Fairy_Special:3" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Special:4</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Fairy_Special:4" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Special:5</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Fairy_Special:5" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Special:6</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="Fairy_Special:6" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:Fairy_Special:7</Text>
 		</DialogNode>
 	</Dialog>
 	
@@ -904,6 +1021,17 @@
 	<Dialog id="CompleteBokalisk:Simple" startNode="Talk" avatarPath="">
 		<DialogNode id="Talk">
 			<Text>Dialog:CompleteBokalisk:Simple</Text>
+		</DialogNode>
+	</Dialog>
+	
+	<Dialog id="CompleteBokalisk:Special:1" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:CompleteBokalisk:Special:1</Text>
+		</DialogNode>
+	</Dialog>
+	<Dialog id="CompleteBokalisk:Special:2" startNode="Talk" avatarPath="">
+		<DialogNode id="Talk">
+			<Text>Dialog:CompleteBokalisk:Special:2</Text>
 		</DialogNode>
 	</Dialog>
 	
