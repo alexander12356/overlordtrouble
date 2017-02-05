@@ -546,7 +546,7 @@
 	<!-- OpenDoorCrystal -->
 	<Text id="Dialog:OpenDoorCrystal:OpenDoor:1">Выглядит подозрительно… вы притронулись к кристаллу.</Text>
 	<Text id="Dialog:OpenDoorCrystal:OpenDoor:2">вы почувствовали небольшую тряску.</Text>
-	<Text id="Dialog:OpenDoorCrystal:Common">Если Вова читаешь это, то текста на этот случай не было</Text>
+	<Text id="Dialog:OpenDoorCrystal:Common">Вы попробовали прикоснуться еще раз, но на этот раз ничего не произошло</Text>
 	
 	<!-- SecondRateRobber -->
 	<Text id="Dialog:SecondRateRobber:BuyFail">Мммм, да у тебя денег не хватает. Приходи позже.</Text>
