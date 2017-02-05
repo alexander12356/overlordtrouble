@@ -54,6 +54,7 @@
 	<Text id="Item:BookAboutSpoon">Книжка про ложки</Text>
 	<Text id="Item:OldHelmet">Старый шлем</Text>
 	<Text id="Item:RustyAxe">Ржавый топор</Text>
+	<Text id="Item:SeedOfMemory">Зерно памяти</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>
