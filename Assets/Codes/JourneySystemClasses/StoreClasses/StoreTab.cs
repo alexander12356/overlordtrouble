@@ -26,9 +26,8 @@ public class StoreTab : MonoBehaviour
 
     public void Awake()
     {
-        m_ItemsButtonList = itemsButtonList;
-        m_ItemsButtonList.AddCancelAction(CancelAction);
-        m_ItemsButtonList.AddKeyArrowAction(ShowItemDescription);
+        itemsButtonList.AddCancelAction(CancelAction);
+        itemsButtonList.AddKeyArrowAction(ShowItemDescription);
 
         m_DescriptionText = GetComponentInChildren<Text>();
         m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
@@ -52,14 +51,14 @@ public class StoreTab : MonoBehaviour
     public void Confirm()
     {
         ShowItemDescription();
-        m_ItemsButtonList.isActive = true;
+        itemsButtonList.isActive = true;
     }
 
     public void CheckCountInInventory()
     {
-        for (int i = 0; i < m_ItemsButtonList.count; i++)
+        for (int i = 0; i < itemsButtonList.count; i++)
         {
-            StoreItemButton l_StoreItemButton = (StoreItemButton)m_ItemsButtonList[i];
+            StoreItemButton l_StoreItemButton = (StoreItemButton)itemsButtonList[i];
             l_StoreItemButton.itemCost = PlayerInventory.GetInstance().GetItemCount(l_StoreItemButton.itemId);
         }
     }
@@ -68,14 +67,14 @@ public class StoreTab : MonoBehaviour
     #region Private
     private void CancelAction()
     {
-        m_ItemsButtonList.isActive = false;
+        itemsButtonList.isActive = false;
         m_StorePanel.tabButtonList.isActive = true;
         m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
     }
 
     private void ShowItemDescription()
     {
-        StoreItemButton m_StoreItemButton = (StoreItemButton)m_ItemsButtonList.currentButton;
+        StoreItemButton m_StoreItemButton = (StoreItemButton)itemsButtonList.currentButton;
         int l_CountInInventory = PlayerInventory.GetInstance().GetItemCount(m_StoreItemButton.itemId);
         string l_DescriptionText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
         string l_InInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
@@ -84,29 +83,29 @@ public class StoreTab : MonoBehaviour
 
     private void SelectItem()
     {
-        StoreItemButton l_StoreItemButton = (StoreItemButton)m_ItemsButtonList.currentButton;
+        StoreItemButton l_StoreItemButton = (StoreItemButton)itemsButtonList.currentButton;
         l_StoreItemButton.Activate(true);
         l_StoreItemButton.AddCancelAction(DeselectItem);
         l_StoreItemButton.AddBuyAction(Buy);
-        m_ItemsButtonList.isActive = false;
+        itemsButtonList.isActive = false;
 
         m_StorePanel.currentSelectedItem = l_StoreItemButton;
     }
 
     private void DeselectItem()
     {
-        StoreItemButton l_StoreItemButton = (StoreItemButton)m_ItemsButtonList.currentButton;
+        StoreItemButton l_StoreItemButton = (StoreItemButton)itemsButtonList.currentButton;
         l_StoreItemButton.Activate(false);
         l_StoreItemButton.RemoveCancelAction(DeselectItem);
         l_StoreItemButton.RemoveBuyAction(Buy);
 
         m_StorePanel.currentSelectedItem = null;
-        m_ItemsButtonList.isActive = true;
+        itemsButtonList.isActive = true;
     }
 
     private void Buy()
     {
-        StoreItemButton l_StoreItemButton = (StoreItemButton)m_ItemsButtonList.currentButton;
+        StoreItemButton l_StoreItemButton = (StoreItemButton)itemsButtonList.currentButton;
         int    l_CountToBuy = l_StoreItemButton.countToBuy;
         string l_ItemId     = l_StoreItemButton.itemId;
         int    l_ItemCost = l_StoreItemButton.itemCost;
