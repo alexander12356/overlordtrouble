@@ -54,6 +54,18 @@
 	<Text id="Item:BookAboutSpoon">Книжка про ложки</Text>
 	<Text id="Item:OldHelmet">Старый шлем</Text>
 	<Text id="Item:RustyAxe">Ржавый топор</Text>
+	<Text id="Item:Water">Вода</Text>
+	<Text id="Item:Key">Ключ</Text>
+	<Text id="Item:OldBoots">Старые ботинки</Text>
+	<Text id="Item:BokaliskMeat">Мясо кокотрикса</Text>
+	<Text id="Item:OldBreastplate">Старый нагрудник</Text>
+	<Text id="Item:CheapHelmet">Дешевый шлем</Text>
+	<Text id="Item:CheapBoots">Дешевые ботинки</Text>
+	<Text id="Item:CheapBreastplate">Дешевый нагрудник</Text>
+	<Text id="Item:CheapSword">Дешевый меч</Text>
+	<Text id="Item:Club">Дубинка</Text>
+	<Text id="Item:Shield">Щит</Text>
+	<Text id="Item:SeedOfMemory">Зерно памяти</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>

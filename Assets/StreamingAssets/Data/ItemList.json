@@ -74,16 +74,8 @@
 			}
 		},
 		{
-			"Id" : "OldHelmet",
-			"Image" : "Sprites/Items/Key/OldHelmet",
-			"Type" : "Bling",
-			"Effect":
-			{
-			}
-		},
-		{
 			"Id" : "RustyAxe",
-			"Image" : "Sprites/Items/Key/RustyAxe",
+			"Image" : "Sprites/Items/Weapon/RustyAxe",
 			"Type" : "Weapon",
 			"Effect":
 			{
@@ -93,6 +85,110 @@
 			"Id" : "SeedOfMemory",
 			"Image" : "Sprites/Items/Key/SeedOfMemory",
 			"Type" : "Key",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "Water",
+			"Image" : "Sprites/Items/SingleUse/Water",
+			"Type" : "SingleUse",
+			"Effect":
+			{
+				"Restoring" :
+					{
+						"Value" : 4.0
+					}
+			}
+		},
+		{
+			"Id" : "Key",
+			"Image" : "Sprites/Items/Key/Key",
+			"Type" : "Key",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "OldHelmet",
+			"Image" : "Sprites/Items/Bling/OldHelmet",
+			"Type" : "Bling",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "OldBoots",
+			"Image" : "Sprites/Items/Bling/OldBoots",
+			"Type" : "Bling",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "OldBreastplate",
+			"Image" : "Sprites/Items/Bling/OldBreastplate",
+			"Type" : "Bling",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "BakoliskMeat",
+			"Image" : "Sprites/Items/SingleUse/BakoliskMeat",
+			"Type" : "SingleUse",
+			"Effect":
+			{
+				"Restoring" :
+						{
+							"Value" : 4.0
+						}
+			}
+		},
+		{
+			"Id" : "CheapHelmet",
+			"Image" : "Sprites/Items/Bling/CheapHelmet",
+			"Type" : "Bling",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "CheapBoots",
+			"Image" : "Sprites/Items/Bling/CheapBoots",
+			"Type" : "Bling",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "CheapBreastplate",
+			"Image" : "Sprites/Items/Bling/CheapBreastplate",
+			"Type" : "Bling",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "CheapSword",
+			"Image" : "Sprites/Items/Weapon/CheapSword",
+			"Type" : "Weapon",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "Club",
+			"Image" : "Sprites/Items/Weapon/Club",
+			"Type" : "Weapon",
+			"Effect":
+			{
+			}
+		},
+		{
+			"Id" : "Shield",
+			"Image" : "Sprites/Items/MultipleUse/Shield",
+			"Type" : "MultipleUse",
 			"Effect":
 			{
 			}

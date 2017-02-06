@@ -2,12 +2,44 @@
 	"Items" :
 	{
 		{
+			"Id" : "Apple",
+			"Cost" : 5
+		},
+		{
+			"Id" : "Water",
+			"Cost" : 5
+		},
+		{
 			"Id" : "SmallHealthPotion",
 			"Cost" : 20
 		},
 		{
 			"Id" : "SmallSpecialPotion",
 			"Cost" : 20
+		},
+		{
+			"Id" : "CheapHelmet",
+			"Cost" : 50
+		},
+		{
+			"Id" : "CheapBoots",
+			"Cost" : 40
+		},
+		{
+			"Id" : "CheapBreastplate",
+			"Cost" : 60
+		},
+		{
+			"Id" : "Club",
+			"Cost" : 30
+		},
+		{
+			"Id" : "CheapSword",
+			"Cost" : 50
+		},
+		{
+			"Id" : "Shield",
+			"Cost" : 100
 		}
 	]
 }

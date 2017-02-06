@@ -30,12 +30,28 @@
 	<Text id="Improvement:ShellLizard">Shell lizard</Text>
 	<Text id="Improvement:Brownie">Brownie</Text>
 	
-	<!-- items -->
-	<Text id="Item:HealthPotion">Health potion</Text>
-	<Text id="Item:ManaPotion">Mana potion</Text>
-	<Text id="Item:FireBallScroll">Fire ball scroll</Text>
-	<Text id="Item:AirDefenseScroll">Air armor scroll</Text>
-	<Text id="Item:AncientArmor">Ancient armor</Text>
+		<!-- items -->
+	<Text id="Item:SmallHealthPotion">Small health potion</Text>
+	<Text id="Item:SmallSpecialPotion">Small special potion</Text>
+	<Text id="Item:SmallExperiencePotion">Small experience potion</Text>
+	<Text id="Item:SaltCucumber">Salt cucumber</Text>
+	<Text id="Item:Scoop">Scoop</Text>
+	<Text id="Item:Apple">Apple</Text>
+	<Text id="Item:BookAboutSpoon">Book about spoon</Text>
+	<Text id="Item:OldHelmet">Old helmet</Text>
+	<Text id="Item:RustyAxe">Rusty Axe</Text>
+	<Text id="Item:Water">Water</Text>
+	<Text id="Item:Key">Key</Text>
+	<Text id="Item:OldBoots">Old boots</Text>
+	<Text id="Item:BokaliskMeat">Bokalist meat</Text>
+	<Text id="Item:OldBreastplate">Old breastplate</Text>
+	<Text id="Item:CheapHelmet">Cheap helmet</Text>
+	<Text id="Item:CheapBoots">Cheap boots</Text>
+	<Text id="Item:CheapBreastplate">Cheap breastplate</Text>
+	<Text id="Item:CheapSword">Cheap sword</Text>
+	<Text id="Item:Club">Club</Text>
+	<Text id="Item:Shield">Shield</Text>
+	<Text id="Item:SeedOfMemory">Seed of memory</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Element</Text>
