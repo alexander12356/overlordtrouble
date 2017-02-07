@@ -4,8 +4,8 @@ namespace BattleSystemClasses.Bosses.Leshii
 {
     public class LeshiiOrgan : BattleEnemy
     {
-        private OrganType m_OrganType = OrganType.NONE;
-        private Leshii m_Leshii = null;
+        protected OrganType m_OrganType = OrganType.NONE;
+        protected Leshii m_Leshii = null;
 
         public override void Awake()
         {
@@ -22,10 +22,10 @@ namespace BattleSystemClasses.Bosses.Leshii
         public override void InitStats()
         {
             actorName = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:" + m_OrganType);
-            health = baseHealth = LeshiiDataBase.GetInstance().GetHealth(m_OrganType);
-            level = LeshiiDataBase.GetInstance().GetLevel();
-            attackStat = LeshiiDataBase.GetInstance().GetAttackStat();
-            defenseStat = LeshiiDataBase.GetInstance().GetDefenseStat();
+            health = baseHealth = m_Leshii.leshiiData.organHealthValue[m_OrganType];
+            level = m_Leshii.level;
+            attackStat = m_Leshii.attackStat;
+            defenseStat = m_Leshii.defenseStat;
         }
 
         public override void Damage(float p_DamageValue)
@@ -61,8 +61,10 @@ namespace BattleSystemClasses.Bosses.Leshii
 
             if (m_OrganType == OrganType.Body)
             {
+                string l_DieText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Die");
+
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-                l_TextPanel.SetText(new List<string>() { "Ой ой…" });
+                l_TextPanel.SetText(new List<string>() { l_DieText });
                 l_TextPanel.SetTalkingAnimator(m_Leshii.headAnimator, "Talking");
                 l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
@@ -73,10 +75,12 @@ namespace BattleSystemClasses.Bosses.Leshii
             }
             else
             {
+                string l_HandsDieText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:HandsDie", new string[] { actorName });
+
                 m_Leshii.OrganDie(m_OrganType);
 
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-                l_TextPanel.SetText(new List<string>() { actorName + " потеряла силу" });
+                l_TextPanel.SetText(new List<string>() { l_HandsDieText });
                 l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
                 BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
