@@ -65,7 +65,12 @@ public class PlayerSkills
         m_SelectedSkills = new List<SpecialData>();
     }
 
-    public JSONObject GetJson()
+    public void DefaultSkillSelection()
+    {
+        m_SelectedSkills.AddRange(m_SkillList);
+    }
+
+    public JSONObject GetSkillsJson()
     {
         JSONObject l_SpecialsJson = new JSONObject();
 

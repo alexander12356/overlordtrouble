@@ -82,6 +82,7 @@ public class PlayerData : Singleton<PlayerData>
         Parse();
 
         AddEnchancement("DewElemental");
+        m_PlayerSkills.DefaultSkillSelection();
     }
 
     public void LoadData(JSONObject p_PlayerData)
@@ -132,7 +133,7 @@ public class PlayerData : Singleton<PlayerData>
 
         l_PlayerDataJson.AddField("Enchancement", m_PlayerEnchancement.GetCurrentEnchancement());
 
-        JSONObject l_SpecialsJson = m_PlayerSkills.GetJson();
+        JSONObject l_SpecialsJson = m_PlayerSkills.GetSkillsJson();
         l_PlayerDataJson.AddField("Specials", l_SpecialsJson);
 
         JSONObject l_SelectedSpecialsJson = m_PlayerSkills.GetSelectedSkillsJson();
