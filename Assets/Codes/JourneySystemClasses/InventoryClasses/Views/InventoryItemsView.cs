@@ -65,9 +65,16 @@ public class InventoryItemsView : InventoryView
         l_Button.itemId = p_InventoryItemData.id;
         l_Button.itemCount = p_InventoryItemData.count;
         l_Button.AddAction(SelectItem);
-        l_Button.AddRemovingAction(ShowDescription);
+        l_Button.AddRemovingAction(ChangeItemButtonList);
 
         itemButtonList.AddButton(l_Button);
+    }
+
+    private void ChangeItemButtonList()
+    {
+        InventoryItemButton l_ItemButton = (InventoryItemButton) itemButtonList.currentButton;
+        itemButtonList.RemoveButton(l_ItemButton);
+        ShowDescription();
     }
 
     public override void ItemButtonListCancelAction()
