@@ -4,8 +4,8 @@ namespace BattleSystemClasses.Bosses.Leshii
 {
     public class LeshiiOrgan : BattleEnemy
     {
-        private OrganType m_OrganType = OrganType.NONE;
-        private Leshii m_Leshii = null;
+        protected OrganType m_OrganType = OrganType.NONE;
+        protected Leshii m_Leshii = null;
 
         public override void Awake()
         {
