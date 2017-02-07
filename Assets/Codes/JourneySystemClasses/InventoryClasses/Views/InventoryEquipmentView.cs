@@ -33,8 +33,6 @@ public class InventoryEquipmentView : InventoryView
         l_InventoryItems = l_SlotButton.slotType.GetInventoryItemData();
         foreach (var lKey in l_InventoryItems.Keys)
         {
-            if (PlayerInventory.GetInstance().ItemAlreadyUsed(l_SlotButton.slotId, l_InventoryItems[lKey].id))
-                continue;
             AddItem(l_InventoryItems[lKey]);
         }
         // Add deselect button
@@ -126,7 +124,8 @@ public class InventoryEquipmentView : InventoryView
     {
         // TODO : Экипировать игрока выбранным предметом
         InventoryItemButton l_ItemButton = (InventoryItemButton)itemButtonList.currentButton;
-        InventorySlotButton l_SlotButton = (InventorySlotButton)slotButtonList.currentButton;
+        InventorySlotButton l_SlotButton = (InventorySlotButton)slotButtonList.currentButton;    
+        ChangeItemCount(l_SlotButton.itemId, l_ItemButton.itemId);
         l_SlotButton.SelectItem(l_ItemButton.itemId);
         // TODO: Переделать под группу
         PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
@@ -136,8 +135,44 @@ public class InventoryEquipmentView : InventoryView
     {
         InventoryItemButton l_ItemButton = (InventoryItemButton)itemButtonList.currentButton;
         InventorySlotButton l_SlotButton = (InventorySlotButton)slotButtonList.currentButton;
+        ChangeItemCount(l_SlotButton.itemId, l_ItemButton.itemId);
         l_SlotButton.DeselectItem();
         PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
+    }
+
+    private void ChangeItemCount(string p_SlotItemId, string p_ItemId)
+    {
+        if (p_ItemId == p_SlotItemId)
+            return;
+        if (IsSelectAnotherItem(p_SlotItemId, p_ItemId))
+        {
+            PlayerInventory.GetInstance().SetItemCount(p_SlotItemId, PlayerInventory.GetInstance().GetItemCount(p_SlotItemId) + 1);
+            PlayerInventory.GetInstance().SetItemCount(p_ItemId, PlayerInventory.GetInstance().GetItemCount(p_ItemId) - 1);
+        }
+        else if (IsSlotItemDeselect(p_SlotItemId, p_ItemId))
+        {
+            PlayerInventory.GetInstance().SetItemCount(p_SlotItemId, PlayerInventory.GetInstance().GetItemCount(p_SlotItemId) + 1);
+        }
+        else if (IsSelectNewSlotItem(p_SlotItemId, p_ItemId))
+        {
+            PlayerInventory.GetInstance().SetItemCount(p_ItemId, PlayerInventory.GetInstance().GetItemCount(p_ItemId) - 1);
+        }
+        InitItemList();
+    }
+
+    private bool IsSelectNewSlotItem(string p_SlotItemId, string p_ItemId)
+    {
+        return p_SlotItemId == String.Empty && p_ItemId != String.Empty;
+    }
+
+    private bool IsSlotItemDeselect(string p_SlotItemId, string p_ItemId)
+    {
+        return p_SlotItemId != String.Empty && p_ItemId == String.Empty;
+    }
+
+    private bool IsSelectAnotherItem(string p_SlotItemId, string p_ItemId)
+    {
+        return p_SlotItemId != String.Empty && p_ItemId != String.Empty;
     }
 
     public override void UpdateKey()

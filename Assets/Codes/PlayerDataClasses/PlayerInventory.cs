@@ -55,11 +55,6 @@ public class PlayerInventory : Singleton<PlayerInventory>
         }
     }
 
-    public bool ItemAlreadyUsed(string pCurrentSlotId, string pTtemId)
-    {
-        return m_SlotData.Where(obj => obj.Key != pCurrentSlotId).Any(x => x.Value.itemId == pTtemId);
-    }
-
     public bool SlotsContainItem(string pItemId)
     {
         return m_SlotData.Values.Any(x => x.itemId == pItemId);
