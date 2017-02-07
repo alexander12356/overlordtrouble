@@ -6,11 +6,9 @@ namespace BattleSystemClasses.Bosses.Leshii
     {
         public override void InitStats()
         {
+            m_LeshiiData = LeshiiDataBase.GetInstance().GetSimpleLeshiiData();
+
             base.InitStats();
-            
-            level = LeshiiDataBase.GetInstance().GetLevel();
-            attackStat = LeshiiDataBase.GetInstance().GetAttackStat();
-            defenseStat = LeshiiDataBase.GetInstance().GetDefenseStat();
         }
 
         public override void RunTurn()
@@ -41,7 +39,7 @@ namespace BattleSystemClasses.Bosses.Leshii
                     }
                     break;
                 case Mode.HandsDied:
-                    if (m_Body.health < 35)
+                    if (m_Body.health < m_CritivalHealthValue)
                     {
                         SummonHands();
                         StartCharge();

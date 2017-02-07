@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+using UnityEngine;
 
 namespace BattleSystemClasses.Bosses.Leshii
 {
@@ -31,6 +32,8 @@ namespace BattleSystemClasses.Bosses.Leshii
         protected bool m_ChargeMode = false;
         protected int m_ChargeCounter = 0;
         protected int m_ChargeCount = 3;
+        protected LeshiiData m_LeshiiData;
+        protected float m_CritivalHealthValue = 35.0f;
 
         private bool m_IsHealCast = false;
         private bool m_IsStun = false;
@@ -55,6 +58,10 @@ namespace BattleSystemClasses.Bosses.Leshii
         public bool isChargeMode
         {
             get { return m_ChargeMode; }
+        }
+        public LeshiiData leshiiData
+        {
+            get { return m_LeshiiData; }
         }
 
         public override void Awake()
@@ -90,6 +97,13 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public override void InitStats()
         {
+            attackStat = m_LeshiiData.attackStat;
+            defenseStat = m_LeshiiData.defenseStat;
+            level = m_LeshiiData.level;
+            m_SummonHandsCount = m_LeshiiData.summonHandsCount;
+            m_ChargeCount = m_LeshiiData.specialAttackChargeCount;
+            m_CritivalHealthValue = m_LeshiiData.criticalHealthValue;
+
             m_BodyAnimator = GetComponent<Animator>();
             m_HeadAnimator = transform.FindChild(OrganType.Headmain.ToString()).GetComponentInChildren<Animator>();
 
@@ -283,18 +297,18 @@ namespace BattleSystemClasses.Bosses.Leshii
             BattlePlayEffectStep l_AnimationStep = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_AnimationStep);
 
-            float l_HealthEffect = LeshiiDataBase.GetInstance().GetEffectChanse(OrganType.RightHand);
-            float l_DamageValue = LeshiiDataBase.GetInstance().GetDamageValue(OrganType.RightHand);
+            float l_HealthEffect = m_LeshiiData.handsEffectChance[OrganType.RightHand];
+            float l_DamageValue = m_LeshiiData.handsAttackValue[OrganType.RightHand];
 
             if (m_Body.health < m_Body.baseHealth && Random.Range(0, 100) < l_HealthEffect)
             {
                 m_IsHealCast = true;
 
-                float l_HealthValue = LeshiiDataBase.GetInstance().GetHealthValue();
-                m_Body.health += l_HealthValue;
+                float l_HealingValue = m_LeshiiData.rightHandHealingValue;
+                m_Body.health += l_HealingValue;
 
                 TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-                string l_Text = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Health", new string[] { m_RightHand.actorName, l_HealthValue.ToString() });
+                string l_Text = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Health", new string[] { m_RightHand.actorName, l_HealingValue.ToString() });
                 l_TextPanel.SetText(new List<string>() { l_Text });
                 l_TextPanel.AddButtonAction(l_TextPanel.Close);
 
@@ -330,8 +344,8 @@ namespace BattleSystemClasses.Bosses.Leshii
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
 
-            float l_StunChance = LeshiiDataBase.GetInstance().GetEffectChanse(OrganType.LeftHand);
-            float l_DamageValue = LeshiiDataBase.GetInstance().GetDamageValue(OrganType.LeftHand);
+            float l_StunChance = m_LeshiiData.handsEffectChance[OrganType.LeftHand];
+            float l_DamageValue = m_LeshiiData.handsAttackValue[OrganType.LeftHand];
 
             if (Random.Range(0, 100) < l_StunChance)
             {
@@ -381,7 +395,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
 
-            float l_DamageValue = LeshiiDataBase.GetInstance().GetSpecialAttackValue();
+            float l_DamageValue = m_LeshiiData.specialAttackValue;
             Special l_NatureFury = new Special("NatureFury", Element.Physical, false, false);
             l_NatureFury.specialName = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:NatureFury");
 
@@ -445,7 +459,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         private void StartCharge_ShowText()
         {
             List<string> l_Text = new List<string>();
-            l_Text.Add("Ну всеее… с меня ДОСТАТОЧНО!");
+            l_Text.Add(LocalizationDataBase.GetInstance().GetText("Boss:Leshii:StartCharge"));
 
             TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
             l_TextPanel.SetTalkingAnimator(m_HeadAnimator, "Talking");

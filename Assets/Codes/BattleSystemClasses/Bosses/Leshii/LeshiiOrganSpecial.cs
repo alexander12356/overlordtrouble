@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace BattleSystemClasses.Bosses.Leshii
+﻿namespace BattleSystemClasses.Bosses.Leshii
 {
     public class LeshiiOrganSpecial : LeshiiOrgan
     {

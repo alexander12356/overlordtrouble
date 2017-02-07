@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace BattleSystemClasses.Bosses.Leshii
+﻿namespace BattleSystemClasses.Bosses.Leshii
 {
     public class LeshiiSpecial : Leshii
     {
@@ -11,11 +9,9 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public override void InitStats()
         {
-            base.InitStats();
+            m_LeshiiData = LeshiiDataBase.GetInstance().GetSpecialLeshiiData();
 
-            level = LeshiiDataBase.GetInstance().GetLevel();
-            attackStat = LeshiiDataBase.GetInstance().GetAttackStat();
-            defenseStat = LeshiiDataBase.GetInstance().GetDefenseStat();
+            base.InitStats();
 
             m_ChargeMode = true;
             m_Mode = Mode.Charge;
@@ -29,7 +25,6 @@ namespace BattleSystemClasses.Bosses.Leshii
             switch (m_Mode)
             {
                 case Mode.Idle:
-                    m_Animator.SetBool("SimpleMode", true);
                     if (IsAllHandsDied())
                     {
                         SummonHands();
@@ -40,7 +35,7 @@ namespace BattleSystemClasses.Bosses.Leshii
                     }
                     break;
                 case Mode.Charge:
-                    if (m_Body.health < 35)
+                    if (m_Body.health < m_CritivalHealthValue)
                     {
                         if (!m_LeftHand.isDead)
                         {
@@ -105,6 +100,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             }
         }
 
+        #region SET_SIMPLE_MODE
         private void SetSimpleMode()
         {
             BattleRunActionStep l_Step = new BattleRunActionStep(ChangeAnimatorMode);
@@ -116,6 +112,7 @@ namespace BattleSystemClasses.Bosses.Leshii
             m_Animator.SetBool("SimpleMode", true);
             SummonHands();
         }
+        #endregion
 
         public override void LeshiiDie()
         {
