@@ -651,6 +651,7 @@
 		"Location" : "RoadThugs",
 		"Enemy": 
 		[
+			
 		],
 		"Player":
 		{
@@ -659,6 +660,13 @@
 		}
 	},
 	"BattleBossLeshii_Simple":
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+		]
+	},
+	"BattleBossLeshii_Special":
 	{
 		"Location" : "RoadThugs",
 		"Enemy": 

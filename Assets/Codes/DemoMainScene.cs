@@ -17,6 +17,7 @@ public class DemoMainScene : MonoBehaviour
         m_ButtonList[3].AddAction(StartProfile);
         m_ButtonList[4].AddAction(StartImprove);
         m_ButtonList[5].AddAction(StartBoss);
+        m_ButtonList[6].AddAction(StartBossSpecial);
     }
 
     private void Update()
@@ -58,6 +59,11 @@ public class DemoMainScene : MonoBehaviour
     private void StartBoss()
     {
         SceneManager.LoadScene("BossBattleSystem");
+    }
+
+    private void StartBossSpecial()
+    {
+        SceneManager.LoadScene("BossSpecialBattleSystem");
     }
 
     private void StartRoad()

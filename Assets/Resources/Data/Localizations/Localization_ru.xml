@@ -125,9 +125,10 @@
 	<Text id="Boss:Leshii:Steps">хода</Text>
 	<Text id="Boss:Leshii:HandsDie">%d потеряла силу</Text>
 	<Text id="Boss:Leshii:Die">Ой ой…</Text>
-	<Text id="Boss:Leshii:Stun">Стан</Text>
+	<Text id="Boss:Leshii:Stun">Оглушение</Text>
 	<Text id="Boss:Leshii:Health">%d восстановил %d очков здоровья</Text>
 	<Text id="Boss:Leshii:NatureFury">Ярость леса</Text>
+	<Text id="Boss:Leshii:StartCharge">Ну всеее… с меня ДОСТАТОЧНО!</Text>
 	
 	<!-- UI -->
 	<Text id="GUI:Journey:ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>
@@ -196,7 +197,7 @@
 	<Text id="GUI:BattleSystem:Cancel">Назад</Text>
 	<Text id="GUI:BattleSystem:UseSpecials">Исполнить</Text>
 	<Text id="GUI:BattleSystem:Win">Враги повержены.\nВы победили.\nГГ получает %d exp</Text>
-	<Text id="GUI:BattleSystem:Lose">Кеша больше не может сражаться дальше, Кеша потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли.</Text>
+	<Text id="GUI:BattleSystem:Lose">%d больше не может сражаться дальше, Кеша потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли.</Text>
 	<Text id="GUI:BattleSystem:And">и</Text>
 	<Text id="GUI:BattleSystem:AttackFail">Атака не прошла</Text>
 	<Text id="GUI:BattleSystem:Bonus">%d восстановил %d в качестве бонуса</Text>
