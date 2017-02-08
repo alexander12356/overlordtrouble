@@ -52,13 +52,21 @@ public class StoreTabCell : StoreTab
 
     public override void DeselectItem()
     {
-        StoreCellButton l_StoreItemButton = (StoreCellButton)itemsButtonList.currentButton;
-        l_StoreItemButton.Activate(false);
-        l_StoreItemButton.RemoveCancelAction(DeselectItem);
-        l_StoreItemButton.RemoveAction(Cell);
+        if (itemsButtonList != null && itemsButtonList.count > 0)
+        {
+            StoreCellButton l_StoreItemButton = (StoreCellButton)itemsButtonList.currentButton;
+            l_StoreItemButton.Activate(false);
+            l_StoreItemButton.RemoveCancelAction(DeselectItem);
+            l_StoreItemButton.RemoveAction(Cell);
 
-        parent.currentSelectedItem = null;
-        itemsButtonList.isActive = true;
+            parent.currentSelectedItem = null;
+            itemsButtonList.isActive = true;
+        }
+        else
+        {
+            Disable();
+            CancelAction();
+        }
     }
 
     private void Cell()
@@ -67,9 +75,12 @@ public class StoreTabCell : StoreTab
         int l_CountToCell = l_StoreItemButton.countToAction;
         string l_ItemId = l_StoreItemButton.itemId;
         int l_ItemCost = l_StoreItemButton.itemCost;
+        int l_ItemCount = PlayerInventory.GetInstance().GetItemCount(l_ItemId);
 
         parent.playerCoins += l_ItemCost * l_CountToCell;
-        PlayerInventory.GetInstance().AddItem(l_ItemId, -l_CountToCell);
+        PlayerInventory.GetInstance().SetItemCount(l_ItemId, l_ItemCount - l_CountToCell);
+        if ((l_ItemCount - l_CountToCell) <= 0)
+            itemsButtonList.RemoveButton(l_StoreItemButton);
         ShowItemDescription();
     }
 

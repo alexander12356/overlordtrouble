@@ -41,6 +41,7 @@ public class StoreCellButton : StoreItemButton
             YesNoPanel l_YesNoPanel = Instantiate(YesNoPanel.prefab);
             l_YesNoPanel.SetText("Вы действительно хотите продать " + title + "?");
             l_YesNoPanel.AddYesAction(action);
+            l_YesNoPanel.AddPopAction(CancelAction);
 
             JourneySystem.GetInstance().ShowPanel(l_YesNoPanel, true);
         }
