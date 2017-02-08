@@ -148,16 +148,45 @@ public class InventoryEquipmentView : InventoryView
         {
             PlayerInventory.GetInstance().SetItemCount(p_SlotItemId, PlayerInventory.GetInstance().GetItemCount(p_SlotItemId) + 1);
             PlayerInventory.GetInstance().SetItemCount(p_ItemId, PlayerInventory.GetInstance().GetItemCount(p_ItemId) - 1);
+            CheckItemButtonList(p_SlotItemId, PlayerInventory.GetInstance().GetItemCount(p_SlotItemId));
+            CheckItemButtonList(p_ItemId, PlayerInventory.GetInstance().GetItemCount(p_ItemId));
         }
         else if (IsSlotItemDeselect(p_SlotItemId, p_ItemId))
         {
             PlayerInventory.GetInstance().SetItemCount(p_SlotItemId, PlayerInventory.GetInstance().GetItemCount(p_SlotItemId) + 1);
+            CheckItemButtonList(p_SlotItemId, PlayerInventory.GetInstance().GetItemCount(p_SlotItemId));
         }
         else if (IsSelectNewSlotItem(p_SlotItemId, p_ItemId))
         {
             PlayerInventory.GetInstance().SetItemCount(p_ItemId, PlayerInventory.GetInstance().GetItemCount(p_ItemId) - 1);
+            CheckItemButtonList(p_ItemId, PlayerInventory.GetInstance().GetItemCount(p_ItemId));
         }
-        InitItemList();
+    }
+
+    private void CheckItemButtonList(string p_ItemId, int p_ItemCount)
+    {
+        InventoryItemButton l_ItemButton = null;
+        for(int i = 0; i < itemButtonList.count; i++)
+        {
+            if((itemButtonList[i] as InventoryItemButton).itemId == p_ItemId)
+            {
+                l_ItemButton = itemButtonList[i] as InventoryItemButton;
+                break;
+            }
+        }
+        if (p_ItemCount <= 0)
+        {
+            itemButtonList.RemoveButton(l_ItemButton);
+            if(itemButtonList.count <= 0)
+            {
+                ItemButtonListCancelAction();
+            }
+        }
+        else
+        {
+            l_ItemButton.itemCount = p_ItemCount;
+            ShowDescription();
+        }
     }
 
     private bool IsSelectNewSlotItem(string p_SlotItemId, string p_ItemId)
