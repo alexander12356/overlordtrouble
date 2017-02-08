@@ -32,6 +32,15 @@
                     else
                     {
                         Attack(BattlePlayer.GetInstance());
+
+                        if (m_RightHand.isDead)
+                        {
+                            SummonHands();
+                        }
+                        if (m_LeftHand.isDead)
+                        {
+                            SummonHands();
+                        }
                     }
                     break;
                 case Mode.Charge:
