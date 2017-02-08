@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class StoreDataBase : Singleton<StoreDataBase>
 {
@@ -13,7 +14,7 @@ public class StoreDataBase : Singleton<StoreDataBase>
 
     public Dictionary<string, StoreItemData> GetStoreItem()
     {
-        return m_StoreItems;
+        return m_StoreItems.Where(obj => obj.Value.buyCost != 0).ToDictionary(obj => obj.Key, obj => obj.Value);
     }
 
     public StoreItemData GetItem(string p_Id)
@@ -47,9 +48,10 @@ public class StoreDataBase : Singleton<StoreDataBase>
         for (int i = 0; i < l_ItemTypeList.Count; i++)
         {
             string l_ItemId = l_ItemTypeList[i]["Id"].str;
-            int l_ItemCost = (int)l_ItemTypeList[i]["Cost"].n;
+            int l_ItemBuyCost = (int)l_ItemTypeList[i]["BuyCost"].n;
+            int l_ItemCellCost = (int)l_ItemTypeList[i]["CellCost"].n;
 
-            StoreItemData l_ItemData = new StoreItemData(l_ItemId, l_ItemCost);
+            StoreItemData l_ItemData = new StoreItemData(l_ItemId, l_ItemBuyCost, l_ItemCellCost);
             m_StoreItems.Add(l_ItemId, l_ItemData);
         }
     }

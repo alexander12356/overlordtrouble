@@ -94,7 +94,7 @@ public class InventoryPanel : Panel
 
     public void ConfirmView()
     {
-        if (m_CurrOpenedView.Confrim())
+        if (m_CurrOpenedView.Confirm())
         {
             m_ViewButtonsList.isActive = false;
             m_ViewButtonsList.currentButton.selected = true;

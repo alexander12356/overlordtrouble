@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 
 using System.Collections.Generic;
+using System;
 
 public class StorePanel : Panel
 {
@@ -11,6 +12,7 @@ public class StorePanel : Panel
     private TextBox    m_TextBox       = null;
     private StoreTab   m_CurrOpenedTab = null;
     private StoreItemButton m_CurrentSelectedItem = null;
+    private List<StoreTab> m_StoreTabs = null;
 
     [SerializeField]
     private ButtonList m_TabButtonsList = null;
@@ -20,9 +22,6 @@ public class StorePanel : Panel
 
     [SerializeField]
     private Text m_PlayerCoinsText = null;
-
-    [SerializeField]
-    private List<StoreTab> m_StoreTabs = null;
     #endregion
 
     #region Interface
@@ -66,7 +65,8 @@ public class StorePanel : Panel
 
         InitTextBox();
         InitButtonActions();
-        InitTabs();
+        InitTabButtonList();
+        m_CurrOpenedTab = new NullStoreTab();
 
         HideButtonList();
         m_TabButtonsList.isActive = false;
@@ -78,7 +78,7 @@ public class StorePanel : Panel
 
         m_ButtonList.UpdateKey();
         m_TabButtonsList.UpdateKey();
-        m_CurrOpenedTab.itemsButtonList.UpdateKey();
+        m_CurrOpenedTab.UpdateKey();
 
         if (m_CurrentSelectedItem != null)
         {
@@ -105,9 +105,9 @@ public class StorePanel : Panel
     {
         m_ButtonList = GetComponentInChildren<ButtonList>();
 
-        m_ButtonList[0].AddAction(OpenTabs);
+        m_ButtonList[0].AddAction(InitBuyTabs);
         m_ButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Buy");
-        m_ButtonList[1].AddAction(OpenTabs);
+        m_ButtonList[1].AddAction(InitCellTabs);
         m_ButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Sell");
         m_ButtonList[2].AddAction(StartDialog);
         m_ButtonList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Talk");
@@ -115,7 +115,7 @@ public class StorePanel : Panel
         m_ButtonList[3].title = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Leave");
     }
 
-    private void InitTabs()
+    private void InitTabButtonList()
     {
         m_TabButtonsList.AddCancelAction(CloseTabs);
         m_TabButtonsList.AddKeyArrowAction(ShowTab);
@@ -124,31 +124,61 @@ public class StorePanel : Panel
         m_TabButtonsList[2].AddAction(ConfirmTab);
         m_TabButtonsList[3].AddAction(ConfirmTab);
         m_TabButtonsList[4].AddAction(ConfirmTab);
+    }
 
-        Dictionary<string, StoreItemData> l_StoreItems = StoreDataBase.GetInstance().GetStoreItem();
-        foreach (string l_Key in l_StoreItems.Keys)
-        {
-            ItemType l_ItemDataType = ItemDataBase.GetInstance().GetItem(l_Key).itemType;
-            switch (l_ItemDataType)
-            {
-                case ItemType.SingleUse:
-                    m_StoreTabs[3].AddItem(l_StoreItems[l_Key]);
-                    break;
-                case ItemType.MultipleUse:
-                    m_StoreTabs[4].AddItem(l_StoreItems[l_Key]);
-                    break;
-                case ItemType.Bling:
-                    m_StoreTabs[2].AddItem(l_StoreItems[l_Key]);
-                    break;
-                case ItemType.Weapon:
-                    m_StoreTabs[1].AddItem(l_StoreItems[l_Key]);
-                    break;
-            }
-            m_StoreTabs[0].AddItem(l_StoreItems[l_Key]);
-        }
+    private void InitBuyTabs()
+    {
+        StoreTabBuy l_TabBuy = null;
+
+        if (m_StoreTabs != null)
+            m_StoreTabs.Clear();
+        m_StoreTabs = new List<StoreTab>();
+
+        l_TabBuy = new StoreTabBuy(this, new AllGetter());
+        m_StoreTabs.Add(l_TabBuy);
+
+        l_TabBuy = new StoreTabBuy(this, new WepsGetter());
+        m_StoreTabs.Add(l_TabBuy);
+
+        l_TabBuy = new StoreTabBuy(this, new BlingGetter());
+        m_StoreTabs.Add(l_TabBuy);
+
+        l_TabBuy = new StoreTabBuy(this, new SingleUseGetter());
+        m_StoreTabs.Add(l_TabBuy);
+
+        l_TabBuy = new StoreTabBuy(this, new MultiUseGetter());
+        m_StoreTabs.Add(l_TabBuy);
 
         m_CurrOpenedTab = m_StoreTabs[0];
-        m_CurrOpenedTab.itemsButtonList.isActive = false;
+        m_CurrOpenedTab.Init();
+        OpenTabs();
+    }
+
+    private void InitCellTabs()
+    {
+        StoreTabCell l_TabBuy = null;
+        if (m_StoreTabs != null)
+            m_StoreTabs.Clear();
+        m_StoreTabs = new List<StoreTab>();
+
+        l_TabBuy = new StoreTabCell(this, new AllGetter());
+        m_StoreTabs.Add(l_TabBuy);
+
+        l_TabBuy = new StoreTabCell(this, new WepsGetter());
+        m_StoreTabs.Add(l_TabBuy);
+
+        l_TabBuy = new StoreTabCell(this, new BlingGetter());
+        m_StoreTabs.Add(l_TabBuy);
+
+        l_TabBuy = new StoreTabCell(this, new SingleUseGetter());
+        m_StoreTabs.Add(l_TabBuy);
+
+        l_TabBuy = new StoreTabCell(this, new MultiUseGetter());
+        m_StoreTabs.Add(l_TabBuy);
+
+        m_CurrOpenedTab = m_StoreTabs[0];
+        m_CurrOpenedTab.Init();
+        OpenTabs();
     }
 
     private void InitTextBox()
@@ -175,6 +205,7 @@ public class StorePanel : Panel
         m_Window.SetActive(false);
         m_ButtonList.isActive = true;
         m_TabButtonsList.isActive = false;
+        m_CurrOpenedTab.Disable();
     }
 
     private void StartDialog()
@@ -225,17 +256,22 @@ public class StorePanel : Panel
 
     private void ShowTab()
     {
-        m_CurrOpenedTab.gameObject.SetActive(false);
-        m_StoreTabs[m_TabButtonsList.currentButtonId].gameObject.SetActive(true);
-        m_CurrOpenedTab = m_StoreTabs[m_TabButtonsList.currentButtonId];
-        //m_CurrOpenedTab.CheckCountInInventory();
+        m_CurrOpenedTab.Disable();
+        m_CurrOpenedTab = GetCurrentTab();
+        m_CurrOpenedTab.Init();
+    }
+
+    private StoreTab GetCurrentTab()
+    {
+        return m_StoreTabs[m_TabButtonsList.currentButtonId];
     }
 
     private void ConfirmTab()
     {
-        m_CurrOpenedTab.Confirm();
-        
-        m_TabButtonsList.isActive = false;
-        m_TabButtonsList.currentButton.selected = true;
+        if (m_CurrOpenedTab.Confirm())
+        {
+            m_TabButtonsList.isActive = false;
+            m_TabButtonsList.currentButton.selected = true;
+        }
     }
 }

@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class InventoryItemsView : InventoryView
 {
     #region Variables
-    private IInventoryItemsGetter m_InventoryItemsGetter = null;
+    private IItemsGetter m_InventoryItemsGetter = null;
     #endregion
 
     #region Interface
 
-    public IInventoryItemsGetter inventoryItemsGetter
+    public IItemsGetter inventoryItemsGetter
     {
         get
         {
@@ -24,7 +24,7 @@ public class InventoryItemsView : InventoryView
     }
     #endregion
 
-    public InventoryItemsView(InventoryPanel p_Parent, IInventoryItemsGetter p_Getter)
+    public InventoryItemsView(InventoryPanel p_Parent, IItemsGetter p_Getter)
     {
         parent = p_Parent;
         inventoryItemsGetter = p_Getter;
@@ -50,7 +50,7 @@ public class InventoryItemsView : InventoryView
         ClearDescription();
         if (inventoryItemsGetter != null)
         {
-            Dictionary<string, InventoryItemData> l_InventoryItems = inventoryItemsGetter.GetItems();
+            Dictionary<string, InventoryItemData> l_InventoryItems = inventoryItemsGetter.GetInventoryItems();
             foreach (var lKey in l_InventoryItems.Keys)
             {
                 AddItem(l_InventoryItems[lKey]);
@@ -83,7 +83,7 @@ public class InventoryItemsView : InventoryView
         parent.tabButtonList.isActive = true;
     }
 
-    public override bool Confrim()
+    public override bool Confirm()
     {
         if (itemButtonList != null && itemButtonList.count > 0)
         {

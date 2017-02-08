@@ -1,6 +1,6 @@
 ﻿public class NullInventoryView : InventoryView
 {
-    public override bool Confrim()
+    public override bool Confirm()
     {
         return false;
     }

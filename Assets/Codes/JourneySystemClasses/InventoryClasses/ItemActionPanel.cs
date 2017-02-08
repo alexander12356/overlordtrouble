@@ -196,7 +196,7 @@ public class ItemActionPanel : Panel
     private void TryUseItem()
     {
         useItemView.Init();
-        useItemView.Confrim();
+        useItemView.Confirm();
         useItemView.AddCancelAction(CancelAction);
         useItemView.AddUseAction(UseItem);
     }
@@ -204,7 +204,7 @@ public class ItemActionPanel : Panel
     private void TryUseKeyItem()
     {
         useItemView.Init();
-        useItemView.Confrim();
+        useItemView.Confirm();
         useItemView.AddCancelAction(CancelAction);
         useItemView.AddUseAction(UseKeyItem);
     }

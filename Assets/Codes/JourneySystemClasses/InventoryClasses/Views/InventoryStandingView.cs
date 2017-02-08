@@ -43,7 +43,7 @@ public class InventoryStandingView : InventoryView
         InitEmptySlots();
     }
 
-    public override bool Confrim()
+    public override bool Confirm()
     {
         return false;
     }

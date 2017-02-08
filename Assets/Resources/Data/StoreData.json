@@ -3,43 +3,83 @@
 	{
 		{
 			"Id" : "Apple",
-			"Cost" : 5
+			"BuyCost" : 5,
+			"CellCost" : 1
 		},
 		{
 			"Id" : "Water",
-			"Cost" : 5
+			"BuyCost" : 5,
+			"CellCost" : 1
 		},
 		{
 			"Id" : "SmallHealthPotion",
-			"Cost" : 20
+			"BuyCost" : 20,
+			"CellCost" : 5
 		},
 		{
 			"Id" : "SmallSpecialPotion",
-			"Cost" : 20
+			"BuyCost" : 20,
+			"CellCost" : 5
 		},
 		{
 			"Id" : "CheapHelmet",
-			"Cost" : 50
+			"BuyCost" : 50,
+			"CellCost" : 13
 		},
 		{
 			"Id" : "CheapBoots",
-			"Cost" : 40
+			"BuyCost" : 40,
+			"CellCost" : 9
 		},
 		{
 			"Id" : "CheapBreastplate",
-			"Cost" : 60
+			"BuyCost" : 60,
+			"CellCost" : 15
 		},
 		{
 			"Id" : "Club",
-			"Cost" : 30
+			"BuyCost" : 30,
+			"CellCost" : 5
 		},
 		{
 			"Id" : "CheapSword",
-			"Cost" : 50
+			"BuyCost" : 50,
+			"CellCost" : 13
 		},
 		{
 			"Id" : "Shield",
-			"Cost" : 100
+			"BuyCost" : 100,
+			"CellCost" : 20
+		},
+		{
+			"Id" : "SmallExperiencePotion",
+			"BuyCost" : 0,
+			"CellCost" : 10
+		},
+		{
+			"Id" : "OldBoots",
+			"BuyCost" : 0,
+			"CellCost" : 8
+		},
+		{
+			"Id" : "OldHelmet",
+			"BuyCost" : 0,
+			"CellCost" : 12
+		},
+		{
+			"Id" : "BakoliskMeat",
+			"BuyCost" : 0,
+			"CellCost" : 6
+		},
+		{
+			"Id" : "RustyAxe",
+			"BuyCost" : 0,
+			"CellCost" : 6
+		},
+		{
+			"Id" : "OldBreastplate",
+			"BuyCost" : 0,
+			"CellCost" : 14
 		}
 	]
 }

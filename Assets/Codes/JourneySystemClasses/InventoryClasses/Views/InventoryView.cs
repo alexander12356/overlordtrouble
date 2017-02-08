@@ -111,7 +111,7 @@ public abstract class InventoryView
     #region Methods
     public InventoryPanel parent { get; set; }
     public abstract void Init();
-    public abstract bool Confrim();
+    public abstract bool Confirm();
     public virtual void Disable() { }
     public virtual void AddItem(InventoryItemData pInventoryItemData) { }
     public virtual void CancelAction() { }

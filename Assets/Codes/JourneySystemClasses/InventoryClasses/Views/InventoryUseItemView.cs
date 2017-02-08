@@ -89,7 +89,7 @@ public class InventoryUseItemView : InventoryView
         m_CancelAction -= p_Action;
     }
 
-    public override bool Confrim()
+    public override bool Confirm()
     {
         groupButtonList.isActive = true;
         ShowGroupMemberInfo();

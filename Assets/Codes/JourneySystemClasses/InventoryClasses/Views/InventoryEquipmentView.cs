@@ -113,7 +113,7 @@ public class InventoryEquipmentView : InventoryView
         ClearGroupMemberInfo();
     }
 
-    public override bool Confrim()
+    public override bool Confirm()
     {
         groupButtonList.isActive = true;
         ShowGroupMemberInfo();
