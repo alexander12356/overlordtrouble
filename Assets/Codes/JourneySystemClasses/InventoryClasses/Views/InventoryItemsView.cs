@@ -72,9 +72,22 @@ public class InventoryItemsView : InventoryView
 
     private void ChangeItemButtonList()
     {
-        InventoryItemButton l_ItemButton = (InventoryItemButton) itemButtonList.currentButton;
-        itemButtonList.RemoveButton(l_ItemButton);
-        ShowDescription();
+        if (itemButtonList != null)
+        {
+            InventoryItemButton l_ItemButton = (InventoryItemButton)itemButtonList.currentButton;
+            if (PlayerInventory.GetInstance().GetItemCount(l_ItemButton.itemId) <= 0)
+                itemButtonList.RemoveButton(l_ItemButton);
+            if (itemButtonList.count > 0)
+            {
+                itemButtonList.isActive = true;
+                ShowDescription();
+            }
+            else
+            {
+                Disable();
+                ItemButtonListCancelAction();
+            }
+        }
     }
 
     public override void ItemButtonListCancelAction()

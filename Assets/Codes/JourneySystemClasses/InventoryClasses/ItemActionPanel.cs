@@ -249,6 +249,7 @@ public class ItemActionPanel : Panel
         // TODO : Заменить локализованным текстом
         l_YesNoPanel.SetText(string.Format("Вы действительно хотите выбросить {0} ?", LocalizationDataBase.GetInstance().GetText("Item:" + itemId)));
         l_YesNoPanel.AddYesAction(RemovingAction);
+        l_YesNoPanel.AddPopAction(CancelAction);
         JourneySystem.GetInstance().ShowPanel(l_YesNoPanel, true);
     }
 
@@ -258,7 +259,6 @@ public class ItemActionPanel : Panel
         {
             m_RemovingAction(countToRemove);
         }
-        CancelAction();
     }
 
     private void CancelAction()
