@@ -125,7 +125,7 @@
 	<Text id="Boss:Leshii:Steps">хода</Text>
 	<Text id="Boss:Leshii:HandsDie">%d потеряла силу</Text>
 	<Text id="Boss:Leshii:Die">Ой ой…</Text>
-	<Text id="Boss:Leshii:Stun">Стан</Text>
+	<Text id="Boss:Leshii:Stun">Оглушение</Text>
 	<Text id="Boss:Leshii:Health">%d восстановил %d очков здоровья</Text>
 	<Text id="Boss:Leshii:NatureFury">Ярость леса</Text>
 	<Text id="Boss:Leshii:StartCharge">Ну всеее… с меня ДОСТАТОЧНО!</Text>
