@@ -22,6 +22,18 @@ namespace BattleSystemClasses.Bosses.Leshii
 
     public class Leshii : BattleEnemy
     {
+        protected struct HealthDialogStruct
+        {
+            public string textId;
+            public bool isUsed;
+
+            public HealthDialogStruct(string p_Id, bool p_IsUsed)
+            {
+                textId = p_Id;
+                isUsed = p_IsUsed;
+            }
+        }
+
         protected Animator m_BodyAnimator = null;
         protected Animator m_HeadAnimator = null;
         protected Vector2 m_HandsLive = Vector2.zero;
@@ -34,6 +46,7 @@ namespace BattleSystemClasses.Bosses.Leshii
         protected int m_ChargeCount = 3;
         protected LeshiiData m_LeshiiData;
         protected float m_CritivalHealthValue = 35.0f;
+        protected List<HealthDialogStruct> m_HealthDialogList = new List<HealthDialogStruct>();
 
         private bool m_IsHealCast = false;
         private bool m_IsStun = false;
@@ -126,6 +139,42 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public override void RunTurn()
         {
+        }
+
+        public void ShowHealthDialog()
+        {
+            float l_HealthPercent = m_Body.health / m_Body.baseHealth * 100;
+            int l_Index = 0;
+
+            if (l_HealthPercent >= 75)
+            {
+                l_Index = 0;
+            }
+            else if (l_HealthPercent >= 50)
+            {
+                l_Index = 1;
+            }
+            else
+            {
+                l_Index = 2;
+            }
+
+            if (!m_HealthDialogList[l_Index].isUsed)
+            {
+                HealthDialogStruct l_HealthDialog = m_HealthDialogList[l_Index];
+                l_HealthDialog.isUsed = true;
+                m_HealthDialogList[l_Index] = l_HealthDialog;
+
+                TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+                l_TextPanel.SetTalkingAnimator(headAnimator, "Talking");
+                l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+                string l_Text = LocalizationDataBase.GetInstance().GetText(l_HealthDialog.textId);
+                l_TextPanel.SetText(new List<string>() { l_Text });
+
+                BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+                ResultSystem.GetInstance().AddStep(l_Step);
+            }
         }
 
         #region SUMMON_HANDS

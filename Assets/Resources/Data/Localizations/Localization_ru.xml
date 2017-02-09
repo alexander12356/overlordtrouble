@@ -132,6 +132,13 @@
 	<Text id="Boss:Leshii:Health">%d восстановил %d очков здоровья</Text>
 	<Text id="Boss:Leshii:NatureFury">Ярость леса</Text>
 	<Text id="Boss:Leshii:StartCharge">Ну всеее… с меня ДОСТАТОЧНО!</Text>
+	<Text id="Boss:Leshii:Simple:100hp">Что за?! Я не могу поднять руки!</Text>
+	<Text id="Boss:Leshii:Simple:75hp">Хаха! Я все еще цел!</Text>
+	<Text id="Boss:Leshii:Simple:50hp">Ай!!</Text>
+	<Text id="Boss:Leshii:Special:100hp">Этого недостаточно.</Text>
+	<Text id="Boss:Leshii:Special:75hp">Я не ПРОИГРАЮ!</Text>
+	<Text id="Boss:Leshii:Special:50hp">Почему я не могу тебя победить?!</Text>
+	<Text id="Boss:Leshii:BothHandDestroy">Такое не каждый день случается.</Text>
 	
 	<!-- UI -->
 	<Text id="GUI:Journey:ReturnMainMenu">Вы точно хотите вернуться в главное меню? Несохраненные данные будут потеряны</Text>
