@@ -8,7 +8,7 @@ public class BattleSystemBoss : BattleSystem
     private bool m_IsPlayerTurn = true;
 
     [SerializeField]
-    private Leshii m_Leshii = null;
+    protected Leshii m_Leshii = null;
 
     public override void Awake()
     {
@@ -65,12 +65,14 @@ public class BattleSystemBoss : BattleSystem
         ShowPanel(l_TextPanel);
     }
 
-    private void RunBossIntro()
+    public virtual void RunBossIntro()
     {
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { "Тебе меня не победить!" });
         l_TextPanel.SetTalkingAnimator(m_Leshii.headAnimator, "Talking");
-        
+
+        string l_Text = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Intro");
+        l_TextPanel.SetText(new List<string>() { l_Text });
+
         l_TextPanel.AddButtonAction(l_TextPanel.Close);
         l_TextPanel.AddButtonAction(StartGame);
         ShowPanel(l_TextPanel);
@@ -80,6 +82,6 @@ public class BattleSystemBoss : BattleSystem
 
     private void StartGame()
     {
-        TurnSystem.GetInstance().RunGame();
+        TurnSystem.GetInstance().NextActorRun();
     }
 }

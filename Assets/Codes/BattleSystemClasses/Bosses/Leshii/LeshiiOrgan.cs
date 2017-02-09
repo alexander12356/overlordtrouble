@@ -61,16 +61,6 @@ namespace BattleSystemClasses.Bosses.Leshii
 
             if (m_OrganType == OrganType.Body)
             {
-                string l_DieText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Die");
-
-                TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-                l_TextPanel.SetText(new List<string>() { l_DieText });
-                l_TextPanel.SetTalkingAnimator(m_Leshii.headAnimator, "Talking");
-                l_TextPanel.AddButtonAction(l_TextPanel.Close);
-
-                BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
-                ResultSystem.GetInstance().AddStep(l_Step);
-
                 m_Leshii.OrganDie(m_OrganType);
             }
             else

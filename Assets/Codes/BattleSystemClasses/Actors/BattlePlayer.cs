@@ -109,6 +109,8 @@ public class BattlePlayer : BattleActor
         l_AvatarImage.sprite = PlayerData.GetInstance().GetBattleAvatar();
 
         InitComponents();
+
+        // TODO инициализацию перебросить на Start и очистить Script Execution Order
         InitStats();
     }
 

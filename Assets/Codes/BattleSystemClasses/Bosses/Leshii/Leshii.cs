@@ -63,6 +63,10 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             get { return m_LeshiiData; }
         }
+        public VisualEffectChecker endEffectChecker
+        {
+            get { return m_EndEffectChecker; }
+        }
 
         public override void Awake()
         {
@@ -219,12 +223,24 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public virtual void LeshiiDie()
         {
+            LeshiiDie_ShowText();
+            LeshiiDie_PlayAnim();
+        }
+
+        public virtual void LeshiiDie_ShowText()
+        {
+            
+        }
+
+        public virtual void LeshiiDie_PlayAnim()
+        {
             LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(LeshiiAttackEffect.prefab);
             l_LeshiiAttackEffect.AddPlayAction(Die);
             m_EndEffectChecker.AddAttackEffect(l_LeshiiAttackEffect);
 
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
+
         }
 
         public override void Die()
