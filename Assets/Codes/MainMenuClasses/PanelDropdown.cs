@@ -55,7 +55,7 @@ public class PanelDropdown : Dropdown
         }
         else if (currentValue >= options.Count)
         {
-            currentValue = options.Count;
+            currentValue = options.Count - 1;
         }
     }
 

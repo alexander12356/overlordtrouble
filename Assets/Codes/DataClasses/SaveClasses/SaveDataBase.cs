@@ -27,11 +27,14 @@ public class SaveDataBase : Singleton<SaveDataBase>
     {
         Clear();
 
-        string[] l_SavesPath = Directory.GetDirectories(m_SavesPath);
-
-        for (int i = 0; i < l_SavesPath.Length; i++)
+        if (Directory.Exists(m_SavesPath))
         {
-            ParseSave(l_SavesPath[i]);
+            string[] l_SavesPath = Directory.GetDirectories(m_SavesPath);
+
+            for (int i = 0; i < l_SavesPath.Length; i++)
+            {
+                ParseSave(l_SavesPath[i]);
+            }
         }
     }
 
