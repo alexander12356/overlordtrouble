@@ -73,7 +73,7 @@ public class PanelDropdown : Dropdown
             SelectMoveDown();
         }
 
-        if (Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Backspace))
+        if (Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Backspace) || Input.GetKeyUp(KeyCode.Return))
         {
             CancelAction();
         }
