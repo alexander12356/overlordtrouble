@@ -1,4 +1,6 @@
-﻿namespace BattleSystemClasses.Bosses.Leshii
+﻿using System.Collections.Generic;
+
+namespace BattleSystemClasses.Bosses.Leshii
 {
     public class LeshiiSpecial : Leshii
     {
@@ -96,6 +98,7 @@
         }
         #endregion
 
+        #region ATTACK
         public override void Attack(BattleActor p_Target)
         {
             if (!m_LeftHand.isDead)
@@ -108,6 +111,22 @@
                 AttackRightHand();   
             }
         }
+        #endregion
+
+        #region DIE
+        public override void LeshiiDie_ShowText()
+        {
+            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+            l_TextPanel.SetTalkingAnimator(headAnimator, "Talking");
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+            string l_DieText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Die:Special");
+            l_TextPanel.SetText(new List<string>() { l_DieText });
+
+            BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+            ResultSystem.GetInstance().AddStep(l_Step);
+        }
+        #endregion
 
         #region SET_SIMPLE_MODE
         public override void LeshiiDie()

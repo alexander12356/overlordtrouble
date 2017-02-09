@@ -19,6 +19,11 @@ public class TurnSystem : MonoBehaviour
         m_Instance = this;
     }
 
+    public void Start()
+    {
+        m_ActorList.Insert(0, BattlePlayer.GetInstance());
+    }
+
     public static TurnSystem GetInstance()
     {
         return m_Instance;
@@ -38,12 +43,6 @@ public class TurnSystem : MonoBehaviour
     {
         RemoveEnemy(p_Enemy);
         m_CurrentActor--;
-    }
-
-    public void RunGame()
-    {
-        m_ActorList.Insert(0, BattlePlayer.GetInstance());
-        RunTurn();
     }
 
     private void RunTurn()

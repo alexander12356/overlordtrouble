@@ -54,6 +54,21 @@ namespace BattleSystemClasses.Bosses.Leshii
             ResultSystem.GetInstance().ShowResult();
         }
 
+        #region DIE
+        public override void LeshiiDie_ShowText()
+        {
+            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+            l_TextPanel.SetTalkingAnimator(headAnimator, "Talking");
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+            string l_DieText = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:Die");
+            l_TextPanel.SetText(new List<string>() { l_DieText });
+
+            BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+            ResultSystem.GetInstance().AddStep(l_Step);
+        }
+        #endregion
+
         #region CHECK_SUMMON_HANDS
         private void CheckSummonHands()
         {

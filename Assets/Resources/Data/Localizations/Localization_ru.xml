@@ -116,6 +116,8 @@
 	<!-- Bosses -->
 	<!-- Leshii -->
 	<Text id="Boss:Leshii">Леший</Text>
+	<Text id="Boss:Leshii:Intro">Тебе меня не победить!</Text>
+	<Text id="Boss:Leshii:IntroSpecial">Поздравляю… ты смог меня разозлить.</Text>
 	<Text id="Boss:Leshii:RightHand">Правая рука</Text>
 	<Text id="Boss:Leshii:Body">Тело</Text>
 	<Text id="Boss:Leshii:LeftHand">Левая рука</Text>
@@ -125,6 +127,7 @@
 	<Text id="Boss:Leshii:Steps">хода</Text>
 	<Text id="Boss:Leshii:HandsDie">%d потеряла силу</Text>
 	<Text id="Boss:Leshii:Die">Ой ой…</Text>
+	<Text id="Boss:Leshii:Die:Special">…</Text>
 	<Text id="Boss:Leshii:Stun">Оглушение</Text>
 	<Text id="Boss:Leshii:Health">%d восстановил %d очков здоровья</Text>
 	<Text id="Boss:Leshii:NatureFury">Ярость леса</Text>

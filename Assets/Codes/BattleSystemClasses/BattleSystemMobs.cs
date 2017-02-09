@@ -16,7 +16,7 @@ public class BattleSystemMobs : BattleSystem
     {
         base.Start();
 
-        TurnSystem.GetInstance().RunGame();
+        TurnSystem.GetInstance().NextActorRun();
     }
 
     public override void InitBattle()
