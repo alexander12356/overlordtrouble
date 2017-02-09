@@ -22,6 +22,7 @@ public class BattleActor : MonoBehaviour, IEffectInfluenced
     private List<string> m_DeleteSpecials = new List<string>();
     private Transform m_RendererTransform = null;
     private Dictionary<Element, float> m_ElementBalance = new Dictionary<Element, float>();
+    private int m_DeathOrder = 0;
     #endregion
 
     #region Interface
@@ -110,6 +111,11 @@ public class BattleActor : MonoBehaviour, IEffectInfluenced
     {
         get { return m_IsAoeAttack; }
         set { m_IsAoeAttack = value; }
+    }
+    public int deathOrder
+    {
+        get { return m_DeathOrder; }
+        set { m_DeathOrder = value; }
     }
 
     public virtual void Awake()

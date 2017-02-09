@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -9,7 +8,6 @@ public class TurnSystem : MonoBehaviour
     private List<BattleActor> m_ActorList = new List<BattleActor>();
     private int m_CurrentTurn = 0;
     private int m_CurrentActor = 0;
-    private bool m_EndTurn = false;
 
     public int currentTurn
     {
@@ -45,54 +43,46 @@ public class TurnSystem : MonoBehaviour
     public void RunGame()
     {
         m_ActorList.Insert(0, BattlePlayer.GetInstance());
-        StartCoroutine(Running());
+        RunTurn();
     }
 
-    private IEnumerator Running()
+    private void RunTurn()
     {
-        while (true)
+        if (m_CurrentActor >= m_ActorList.Count)
         {
-            if (m_CurrentActor >= m_ActorList.Count)
+            m_CurrentActor = 0;
+            NextTurn();
+        }
+        else
+        {
+            m_ActorList[m_CurrentActor].RunTurn();
+
+            if (m_CurrentActor == 0)
             {
-                m_CurrentActor = 0;
-                NextTurn();
+                BattleSystem.GetInstance().SetVisibleAvatarPanel(true);
+                BattleSystem.GetInstance().ShowMainPanel();
             }
             else
             {
-                m_ActorList[m_CurrentActor].RunTurn();
-
-                if (m_CurrentActor == 0)
-                {
-                    BattleSystem.GetInstance().SetVisibleAvatarPanel(true);
-                    BattleSystem.GetInstance().ShowMainPanel();
-                }
-                else
-                {
-                    BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
-                }
-
-                m_CurrentActor++;
+                BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
             }
 
-            while (!m_EndTurn)
-            {
-                yield return null;
-            }
-            m_EndTurn = false;
+            m_CurrentActor++;
         }
     }
 
     public void NextActorRun()
     {
-        if (BattleSystem.GetInstance().CheckWin() || BattleSystem.GetInstance().IsLose())
-        {
-            return;
-        }
-        m_EndTurn = true;
+        RunTurn();
     }
 
     private void NextTurn()
     {
+        if (BattleSystem.GetInstance().CheckWin() || BattleSystem.GetInstance().IsLose())
+        {
+            return;
+        }
+
         m_CurrentTurn++;
         EffectSystem.GetInstance().CheckEffects();
         ResultSystem.GetInstance().ShowResult();

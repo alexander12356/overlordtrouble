@@ -110,6 +110,20 @@
         }
 
         #region SET_SIMPLE_MODE
+        public override void LeshiiDie()
+        {
+            if (!m_LeftHand.CheckDeath())
+            {
+                OrganDie(OrganType.LeftHand);
+            }
+            if (!m_RightHand.CheckDeath())
+            {
+                OrganDie(OrganType.RightHand);
+            }
+
+            base.LeshiiDie();
+        }
+
         private void SetSimpleMode()
         {
             BattleRunActionStep l_Step = new BattleRunActionStep(ChangeAnimatorMode);
@@ -122,25 +136,5 @@
             SummonHands();
         }
         #endregion
-
-        public override void LeshiiDie()
-        {
-            if (!m_LeftHand.isDead)
-            {
-                OrganDie(OrganType.LeftHand);
-            }
-
-            if (!m_RightHand.isDead)
-            {
-                OrganDie(OrganType.RightHand);
-            }
-
-            LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(LeshiiAttackEffect.prefab);
-            l_LeshiiAttackEffect.AddPlayAction(Die);
-            m_EndEffectChecker.AddAttackEffect(l_LeshiiAttackEffect);
-
-            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
-            ResultSystem.GetInstance().AddStep(l_Step);
-        }
     }
 }

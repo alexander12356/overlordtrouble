@@ -113,6 +113,10 @@ namespace BattleSystemClasses.Bosses.Leshii
             m_LeftHand.Init(OrganType.LeftHand, this);
             m_Body.Init(OrganType.Body, this);
 
+            m_LeftHand.deathOrder = 0;
+            m_RightHand.deathOrder = 1;
+            m_Body.deathOrder = 2;
+
             CalculateIdle(m_HandsLive);
         }
 
@@ -202,10 +206,10 @@ namespace BattleSystemClasses.Bosses.Leshii
             switch (p_OrganIds)
             {
                 case OrganType.LeftHand:
-                    RightHandDie();
+                    LeftHandDie();
                     break;
                 case OrganType.RightHand:
-                    LeftHandDie();
+                    RightHandDie();
                     break;
                 case OrganType.Body:
                     LeshiiDie();
@@ -227,32 +231,12 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             m_BodyAnimator.SetTrigger("Die");
             BattleSystem.GetInstance().EnemyDied(m_Body);
+            BattleSystem.GetInstance().EnemyDied(this);
         }
         #endregion
 
         #region RIGHT_HAND_DIE
         private void RightHandDie()
-        {
-            LeshiiAttackEffect l_LeftHandDieEffect = Instantiate(LeshiiAttackEffect.prefab);
-            l_LeftHandDieEffect.AddPlayAction(PlayLeftHandDie);
-            m_EndEffectChecker.AddAttackEffect(l_LeftHandDieEffect);
-
-            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeftHandDieEffect);
-            ResultSystem.GetInstance().AddStep(l_Step);
-
-            m_HandsLive.x = 1.0f;
-            BattleSystem.GetInstance().EnemyDied(m_LeftHand);
-        }
-
-        private void PlayRightHandDie()
-        {
-            m_BodyAnimator.SetTrigger("RightHandDestroy");
-            CalculateIdle(m_HandsLive);
-        }
-        #endregion
-
-        #region LEFT_HAND_DIE
-        private void LeftHandDie()
         {
             LeshiiAttackEffect l_RightHandDieEffect = Instantiate(LeshiiAttackEffect.prefab);
             l_RightHandDieEffect.AddPlayAction(PlayRightHandDie);
@@ -261,13 +245,36 @@ namespace BattleSystemClasses.Bosses.Leshii
             BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_RightHandDieEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
 
-            m_HandsLive.y = 1.0f;
             BattleSystem.GetInstance().EnemyDied(m_RightHand);
+        }
+
+        private void PlayRightHandDie()
+        {
+            m_BodyAnimator.SetTrigger("RightHandDestroy");
+
+            m_HandsLive.y = 1.0f;
+            CalculateIdle(m_HandsLive);
+        }
+        #endregion
+
+        #region LEFT_HAND_DIE
+        private void LeftHandDie()
+        {
+            LeshiiAttackEffect l_LeftHandDieEffect = Instantiate(LeshiiAttackEffect.prefab);
+            l_LeftHandDieEffect.AddPlayAction(PlayLeftHandDie);
+            m_EndEffectChecker.AddAttackEffect(l_LeftHandDieEffect);
+
+            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeftHandDieEffect);
+            ResultSystem.GetInstance().AddStep(l_Step);
+            
+            BattleSystem.GetInstance().EnemyDied(m_LeftHand);
         }
 
         private void PlayLeftHandDie()
         {
             m_BodyAnimator.SetTrigger("LeftHandDestroy");
+
+            m_HandsLive.x = 1.0f;
             CalculateIdle(m_HandsLive);
         }
         #endregion
@@ -388,11 +395,11 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             m_ChargeCounter = 0;
 
-            LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(LeshiiAttackEffect.prefab);
-            l_LeshiiAttackEffect.AddPlayAction(PlaySpecialAttack);
-            m_EndEffectChecker.AddAttackEffect(l_LeshiiAttackEffect);
+            LeshiiAttackEffect l_LeshiiSpecialAttackEffect = Instantiate(LeshiiAttackEffect.prefab);
+            l_LeshiiSpecialAttackEffect.AddPlayAction(PlaySpecialAttack);
+            m_EndEffectChecker.AddAttackEffect(l_LeshiiSpecialAttackEffect);
 
-            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiAttackEffect);
+            BattlePlayEffectStep l_Step = new BattlePlayEffectStep(l_LeshiiSpecialAttackEffect);
             ResultSystem.GetInstance().AddStep(l_Step);
 
             float l_DamageValue = m_LeshiiData.specialAttackValue;
@@ -472,11 +479,11 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         protected void StartCharge_AnimStart()
         {
-            LeshiiAttackEffect l_LeshiiAttackEffect = Instantiate(LeshiiAttackEffect.prefab);
-            l_LeshiiAttackEffect.AddPlayAction(PlayStartCharge);
-            m_EndEffectChecker.AddAttackEffect(l_LeshiiAttackEffect);
+            LeshiiAttackEffect l_LeshiiStartChargeEffect = Instantiate(LeshiiAttackEffect.prefab);
+            l_LeshiiStartChargeEffect.AddPlayAction(PlayStartCharge);
+            m_EndEffectChecker.AddAttackEffect(l_LeshiiStartChargeEffect);
 
-            BattlePlayEffectStep l_PlayStep = new BattlePlayEffectStep(l_LeshiiAttackEffect);
+            BattlePlayEffectStep l_PlayStep = new BattlePlayEffectStep(l_LeshiiStartChargeEffect);
             ResultSystem.GetInstance().AddStep(l_PlayStep);
         }
 
