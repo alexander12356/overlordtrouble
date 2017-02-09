@@ -13,6 +13,10 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             m_LeshiiData = LeshiiDataBase.GetInstance().GetSpecialLeshiiData();
 
+            m_HealthDialogList.Add(new HealthDialogStruct("Boss:Leshii:Special:100hp", false));
+            m_HealthDialogList.Add(new HealthDialogStruct("Boss:Leshii:Special:75hp", false));
+            m_HealthDialogList.Add(new HealthDialogStruct("Boss:Leshii:Special:50hp", false));
+
             base.InitStats();
 
             m_ChargeMode = true;
@@ -75,6 +79,11 @@ namespace BattleSystemClasses.Bosses.Leshii
                     else
                     {
                         Attack(BattlePlayer.GetInstance());
+                    }
+
+                    if (m_LeftHand.isDead)
+                    {
+                        ShowHealthDialog();
                     }
 
                     if (!m_RightHand.isDead)

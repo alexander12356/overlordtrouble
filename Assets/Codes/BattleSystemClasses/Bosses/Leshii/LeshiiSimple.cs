@@ -8,6 +8,10 @@ namespace BattleSystemClasses.Bosses.Leshii
         {
             m_LeshiiData = LeshiiDataBase.GetInstance().GetSimpleLeshiiData();
 
+            m_HealthDialogList.Add(new HealthDialogStruct("Boss:Leshii:Simple:100hp", false));
+            m_HealthDialogList.Add(new HealthDialogStruct("Boss:Leshii:Simple:75hp", false));
+            m_HealthDialogList.Add(new HealthDialogStruct("Boss:Leshii:Simple:50hp", false));
+
             base.InitStats();
         }
 
@@ -20,6 +24,7 @@ namespace BattleSystemClasses.Bosses.Leshii
                 case Mode.Idle:
                     if (IsAllHandsDied())
                     {
+                        ShowHealthDialog();
                         CheckSummonHands();
                         m_Mode = Mode.HandsDied;
                     }
