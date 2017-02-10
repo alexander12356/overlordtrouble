@@ -50,6 +50,8 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         private bool m_IsHealCast = false;
         private bool m_IsStun = false;
+        private Vector2 m_CheckBothHandsDied = Vector2.zero;
+        private bool m_IsShowedBothHandDied = false;
 
         [SerializeField]
         protected LeshiiOrgan m_RightHand = null;
@@ -139,6 +141,25 @@ namespace BattleSystemClasses.Bosses.Leshii
 
         public override void RunTurn()
         {
+            if (!m_IsShowedBothHandDied && m_CheckBothHandsDied == Vector2.one)
+            {
+                ShowBothHandDiedDialog();
+                m_IsShowedBothHandDied = true;
+            }
+            m_CheckBothHandsDied = Vector2.zero;
+        }
+
+        private void ShowBothHandDiedDialog()
+        {
+            TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
+            l_TextPanel.SetTalkingAnimator(headAnimator, "Talking");
+            l_TextPanel.AddButtonAction(l_TextPanel.Close);
+
+            string l_Text = LocalizationDataBase.GetInstance().GetText("Boss:Leshii:BothHandDestroy");
+            l_TextPanel.SetText(new List<string>() { l_Text });
+
+            BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
+            ResultSystem.GetInstance().AddStep(l_Step);
         }
 
         public void ShowHealthDialog()
@@ -314,6 +335,8 @@ namespace BattleSystemClasses.Bosses.Leshii
 
             BattleRunActionStep l_ActionStep = new BattleRunActionStep(CalculateIdle);
             ResultSystem.GetInstance().AddStep(l_ActionStep);
+
+            m_CheckBothHandsDied.x = 1.0f;
         }
 
         private void PlayRightHandDie()
@@ -339,6 +362,8 @@ namespace BattleSystemClasses.Bosses.Leshii
 
             BattleRunActionStep l_ActionStep = new BattleRunActionStep(CalculateIdle);
             ResultSystem.GetInstance().AddStep(l_ActionStep);
+
+            m_CheckBothHandsDied.y = 1.0f;
         }
 
         private void PlayLeftHandDie()
