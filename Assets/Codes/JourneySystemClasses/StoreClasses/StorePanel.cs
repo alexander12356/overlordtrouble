@@ -134,7 +134,7 @@ public class StorePanel : Panel
             m_StoreTabs.Clear();
         m_StoreTabs = new List<StoreTab>();
 
-        l_TabBuy = new StoreTabBuy(this, new AllGetter());
+        l_TabBuy = new StoreTabBuy(this, new AllGetterForStore());
         m_StoreTabs.Add(l_TabBuy);
 
         l_TabBuy = new StoreTabBuy(this, new WepsGetter());
@@ -161,7 +161,7 @@ public class StorePanel : Panel
             m_StoreTabs.Clear();
         m_StoreTabs = new List<StoreTab>();
 
-        l_TabBuy = new StoreTabCell(this, new AllGetter());
+        l_TabBuy = new StoreTabCell(this, new AllGetterForStore());
         m_StoreTabs.Add(l_TabBuy);
 
         l_TabBuy = new StoreTabCell(this, new WepsGetter());
