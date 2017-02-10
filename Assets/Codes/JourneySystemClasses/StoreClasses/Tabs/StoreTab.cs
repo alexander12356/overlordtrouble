@@ -57,7 +57,7 @@ public abstract class StoreTab : MonoBehaviour
         {
             if(m_ButtonListScrolling == null)
             {
-                m_ButtonListScrolling = parent.transform.FindChild("Window").FindChild("ItemList").GetComponentInChildren<ButtonListScrolling>();
+                m_ButtonListScrolling = parent.transform.FindChild("Window").FindChild("ItemList").GetComponent<ButtonListScrolling>();
             }
             return m_ButtonListScrolling;
         }
@@ -67,7 +67,11 @@ public abstract class StoreTab : MonoBehaviour
 
     public abstract void SelectItem();
     public abstract void DeselectItem();
-    public abstract void InitItemList();
+    public virtual void InitItemList()
+    {
+        buttonListScrolling.Init(70.0f, 8);
+        buttonListScrolling.scrollRect.verticalNormalizedPosition = 1.0f;
+    }
 
     public void Init()
     {
@@ -81,7 +85,6 @@ public abstract class StoreTab : MonoBehaviour
         itemsButtonList.AddCancelAction(CancelAction);
         itemsButtonList.AddKeyArrowAction(ShowItemDescription);
         itemsButtonList.isActive = false;
-        buttonListScrolling.Init(70.0f, 8);
         itemsButtonList.AddKeyArrowAction(buttonListScrolling.CheckScrolling);
     }
 

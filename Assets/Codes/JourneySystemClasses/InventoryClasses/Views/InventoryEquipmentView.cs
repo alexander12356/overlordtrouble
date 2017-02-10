@@ -37,6 +37,7 @@ public class InventoryEquipmentView : InventoryView
         }
         // Add deselect button
         AddItem(DeselectItem, "----------");
+        base.InitItemList();
     }
 
     public override void GroupMemberButtonAction()
@@ -59,6 +60,7 @@ public class InventoryEquipmentView : InventoryView
         slotButtonList.RemoveKeyArrowAction(InitItemList);
         itemButtonList.RemoveCancelAction(ItemButtonListCancelAction);
         itemButtonList.RemoveKeyArrowAction(ShowDescription);
+        itemButtonList.RemoveKeyArrowAction(itemButtonListScrolling.CheckScrolling);
     }
 
     public override void AddSlot(InventorySlotData p_SlotData)
