@@ -219,7 +219,7 @@ public abstract class InventoryView
     // Операция-зацепка для InitItemButtonList
     public virtual void ItemButtonListCancelAction() { }
 
-    public void ShowDescription()
+    public virtual void ShowDescription()
     {
         if (itemButtonList != null && itemButtonList.count > 0)
         {
