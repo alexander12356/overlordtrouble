@@ -38,6 +38,13 @@ public class PlayerInventory : Singleton<PlayerInventory>
         return m_Items;
     }
 
+    public InventoryItemData GetInventoryItemData(string p_ItemId)
+    {
+        if (m_Items.ContainsKey(p_ItemId))
+            return m_Items[p_ItemId];
+        else return new InventoryItemData(p_ItemId, 0);
+    }
+
     public Dictionary<string, InventorySlotData> GetInventorySlotData()
     {
         return m_SlotData;

@@ -188,7 +188,17 @@ public class InventoryEquipmentView : InventoryView
                 break;
             }
         }
-        if (p_ItemCount <= 0)
+        if(l_ItemButton == null)
+        {
+            InventoryItemData l_ItemData = PlayerInventory.GetInstance().GetInventoryItemData(p_ItemId);
+            if (l_ItemData.count > 0)
+            {
+                // TODO : this is kostyl
+                InitItemList();
+                itemButtonList.currentButton.selected = true;
+            }
+        }
+        else if (p_ItemCount <= 0)
         {
             itemButtonList.RemoveButton(l_ItemButton);
             if(itemButtonList.count <= 0)
