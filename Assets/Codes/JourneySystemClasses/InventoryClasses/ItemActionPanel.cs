@@ -171,7 +171,7 @@ public class ItemActionPanel : Panel
         else if (ItemDataBase.GetInstance().GetItem(itemId).itemType == ItemType.Key)
         {
             string l_UseStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Use");
-            AddActionButton(l_UseStr, TryUseKeyItem);
+            AddActionButton(l_UseStr, UseKeyItem);
 
             string l_BackStr = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Back");
             AddActionButton(l_BackStr, CancelAction);
@@ -199,14 +199,6 @@ public class ItemActionPanel : Panel
         useItemView.Confirm();
         useItemView.AddCancelAction(CancelAction);
         useItemView.AddUseAction(UseItem);
-    }
-
-    private void TryUseKeyItem()
-    {
-        useItemView.Init();
-        useItemView.Confirm();
-        useItemView.AddCancelAction(CancelAction);
-        useItemView.AddUseAction(UseKeyItem);
     }
 
     private void UseKeyItem()
