@@ -7,10 +7,10 @@ public class SecretPassTrigger : MonoBehaviour
     private CheckCollide m_CheckCollide = null;
 
     [SerializeField]
-    private SpriteRenderer m_TargetRenderer = null;
+    private float m_TargetAplha = 0.2f;
 
     [SerializeField]
-    private float m_TargetAplha = 0.2f;
+    private SpriteRenderer[] m_TargetRenderer = null;
 	
     public void Awake()
     {
@@ -37,14 +37,12 @@ public class SecretPassTrigger : MonoBehaviour
 
     private IEnumerator Appearing()
     {
-        while (m_TargetRenderer.color.a > m_TargetAplha)
+        while (GetSpriteAlpha() > m_TargetAplha)
         {
-            float l_Alpha = m_TargetRenderer.color.a;
+            float l_Alpha = GetSpriteAlpha();
             l_Alpha = Mathf.MoveTowards(l_Alpha, m_TargetAplha, Time.deltaTime);
 
-            Color l_Color = m_TargetRenderer.color;
-            l_Color.a = l_Alpha;
-            m_TargetRenderer.color = l_Color;
+            SetSpriteAlpha(l_Alpha);
 
             yield return new WaitForEndOfFrame();
         }
@@ -52,16 +50,29 @@ public class SecretPassTrigger : MonoBehaviour
 
     private IEnumerator Fading()
     {
-        while (m_TargetRenderer.color.a < 1.0f)
+        while (GetSpriteAlpha() < 1.0f)
         {
-            float l_Alpha = m_TargetRenderer.color.a;
+            float l_Alpha = GetSpriteAlpha();
             l_Alpha = Mathf.MoveTowards(l_Alpha, 1.0f, Time.deltaTime);
 
-            Color l_Color = m_TargetRenderer.color;
-            l_Color.a = l_Alpha;
-            m_TargetRenderer.color = l_Color;
+            SetSpriteAlpha(l_Alpha);
 
             yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private float GetSpriteAlpha()
+    {
+        return m_TargetRenderer[0].color.a;
+    }
+
+    private void SetSpriteAlpha(float p_AlphaValue)
+    {
+        for (int i = 0; i < m_TargetRenderer.Length; i++)
+        {
+            Color l_Color = m_TargetRenderer[i].color;
+            l_Color.a = p_AlphaValue;
+            m_TargetRenderer[i].color = l_Color;
         }
     }
 }
