@@ -9,7 +9,7 @@ public class ItemActionPanel : Panel
     private ButtonList m_ActionsButtonList;
 
     private InventoryUseItemView m_UseItemView = null;
-    private PanelActionHandlerWithParameter m_RemovingAction;
+    private PanelActionHandlerWithParameter m_ItemListRefreshAction;
     private Animator m_Animator = null;
     private string m_ItemId;
 
@@ -188,9 +188,9 @@ public class ItemActionPanel : Panel
         actionButtonList.AddButton(l_ItemActionButton);
     }
 
-    public void AddRemovingAction(PanelActionHandlerWithParameter p_Action)
+    public void AddItemListRefreshAction(PanelActionHandlerWithParameter p_Action)
     {
-        m_RemovingAction += p_Action;
+        m_ItemListRefreshAction += p_Action;
     }
 
     private void TryUseItem()
@@ -219,9 +219,9 @@ public class ItemActionPanel : Panel
 
     private void UseItem()
     {
-        if (m_RemovingAction != null)
+        if (m_ItemListRefreshAction != null)
         {
-            m_RemovingAction(1);
+            m_ItemListRefreshAction(1);
         }
         ShowMessage("Test test test test", CancelAction);
         // TODO : Использование предмета
@@ -255,14 +255,15 @@ public class ItemActionPanel : Panel
 
     private void RemovingAction()
     {
-        if (m_RemovingAction != null)
+        if (m_ItemListRefreshAction != null)
         {
-            m_RemovingAction(countToRemove);
+            m_ItemListRefreshAction(countToRemove);
         }
     }
 
     private void CancelAction()
     {
+        RemovingAction();
         Close();
     }
 }

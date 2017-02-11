@@ -53,7 +53,7 @@ public class InventoryEquipmentItemButton : InventoryPanelButton
     {
         ItemActionPanel l_ItemActionPanel = Instantiate(ItemActionPanel.prefab);
         l_ItemActionPanel.InitActionButtonList(itemId);
-        l_ItemActionPanel.AddRemovingAction(RemoveItem);
+        l_ItemActionPanel.AddItemListRefreshAction(RemoveItem);
         JourneySystem.GetInstance().ShowPanel(l_ItemActionPanel, true);
     }
 

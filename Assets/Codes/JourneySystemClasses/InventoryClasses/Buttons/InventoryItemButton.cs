@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class InventoryItemButton : InventoryPanelButton
 {
     private static InventoryItemButton m_Prefab = null;
-    private PanelButtonActionHandler m_RemovingAction = null;
+    private PanelButtonActionHandler m_ItemListRefreshAction = null;
     private int m_ItemCount;
     private string m_ItemId = string.Empty; 
     [SerializeField]
@@ -53,11 +53,11 @@ public class InventoryItemButton : InventoryPanelButton
     {
         ItemActionPanel l_ItemActionPanel = Instantiate(ItemActionPanel.prefab);
         l_ItemActionPanel.InitActionButtonList(itemId);
-        l_ItemActionPanel.AddRemovingAction(RemoveItem);
+        l_ItemActionPanel.AddItemListRefreshAction(RefreshItemCount);
         JourneySystem.GetInstance().ShowPanel(l_ItemActionPanel, true);
     }
 
-    private void RemoveItem(int p_CountToRemove)
+    private void RefreshItemCount(int p_CountToRemove)
     {
         int l_ResultItemCount = itemCount - p_CountToRemove;
         if (l_ResultItemCount <= 0)
@@ -67,14 +67,14 @@ public class InventoryItemButton : InventoryPanelButton
 
         PlayerInventory.GetInstance().SetItemCount(itemId, itemCount);
 
-        if (m_RemovingAction != null)
+        if (m_ItemListRefreshAction != null)
         {
-            m_RemovingAction();
+            m_ItemListRefreshAction();
         }
     }
 
-    public void AddRemovingAction(PanelButtonActionHandler p_Action)
+    public void AddItemListRefreshAction(PanelButtonActionHandler p_Action)
     {
-        m_RemovingAction += p_Action;
+        m_ItemListRefreshAction += p_Action;
     }
 }
