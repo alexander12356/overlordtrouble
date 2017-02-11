@@ -10,6 +10,7 @@ public abstract class InventoryView
     private ButtonList m_GroupButtonList = null;
     private ButtonList m_SlotButtonList = null;
     private ButtonList m_ItemButtonsList = null;
+    private ButtonListScrolling m_ItemButtonListScrolling = null;
     private GameObject m_PlayerStat;
     private Text m_HealthStatText;
     private Text m_SpecialPointStatText;
@@ -55,6 +56,18 @@ public abstract class InventoryView
                 m_ItemButtonsList = parent.transform.FindChild("ItemList").GetComponentInChildren<ButtonList>();
             }
             return m_ItemButtonsList;
+        }
+    }
+
+    public ButtonListScrolling itemButtonListScrolling
+    {
+        get
+        {
+            if(m_ItemButtonListScrolling == null)
+            {
+                m_ItemButtonListScrolling = parent.transform.FindChild("ItemList").GetComponent<ButtonListScrolling>();
+            }
+            return m_ItemButtonListScrolling;
         }
     }
 
@@ -199,12 +212,14 @@ public abstract class InventoryView
         m_ItemButtonsList.AddCancelAction(ItemButtonListCancelAction);
         m_ItemButtonsList.AddKeyArrowAction(ShowDescription);
         m_ItemButtonsList.isActive = false;
+        m_ItemButtonListScrolling = itemButtonListScrolling;
+        m_ItemButtonsList.AddKeyArrowAction(m_ItemButtonListScrolling.CheckScrolling);
     }
 
     // Операция-зацепка для InitItemButtonList
     public virtual void ItemButtonListCancelAction() { }
 
-    public void ShowDescription()
+    public virtual void ShowDescription()
     {
         if (itemButtonList != null && itemButtonList.count > 0)
         {
@@ -215,7 +230,11 @@ public abstract class InventoryView
         }
     }
 
-    public virtual void InitItemList() { }
+    public virtual void InitItemList()
+    {
+        itemButtonListScrolling.Init(42.0f, 12);
+        itemButtonListScrolling.scrollRect.verticalNormalizedPosition = 1.0f;
+    }
 
     public void ClearGroupMemberInfo()
     {

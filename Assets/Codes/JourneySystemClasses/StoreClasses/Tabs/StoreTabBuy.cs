@@ -23,6 +23,7 @@ public class StoreTabBuy : StoreTab
                 AddItem(l_StoreItems[lKey]);
             }
         }
+        base.InitItemList();
     }
 
     public void AddItem(StoreItemData p_StoreItemData)
@@ -92,6 +93,7 @@ public class StoreTabBuy : StoreTab
     {
         itemsButtonList.RemoveCancelAction(CancelAction);
         itemsButtonList.RemoveKeyArrowAction(ShowItemDescription);
+        itemsButtonList.RemoveKeyArrowAction(buttonListScrolling.CheckScrolling);
         itemsButtonList.Clear();
     }
 }

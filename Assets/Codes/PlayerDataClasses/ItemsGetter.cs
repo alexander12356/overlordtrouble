@@ -12,6 +12,19 @@ public class AllGetter : IItemsGetter
 {
     public Dictionary<string, InventoryItemData> GetInventoryItems()
     {
+        return PlayerInventory.GetInstance().GetInventoryItems();
+    }
+
+    public Dictionary<string, StoreItemData> GetStoreItems()
+    {
+        return StoreDataBase.GetInstance().GetStoreItem();
+    }
+}
+
+public class AllGetterForStore : IItemsGetter
+{
+    public Dictionary<string, InventoryItemData> GetInventoryItems()
+    {
         return PlayerInventory.GetInstance().GetInventoryItems().Where(obj => ItemDataBase.GetInstance().GetItem(obj.Key).itemType != ItemType.Key).ToDictionary(obj => obj.Key, obj => obj.Value);
     }
 

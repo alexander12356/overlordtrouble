@@ -23,6 +23,7 @@ public class StoreTabCell : StoreTab
                 AddItem(l_StoreItems[lKey]);
             }
         }
+        base.InitItemList();
     }
 
     public void AddItem(InventoryItemData p_StoreItemData)
@@ -100,6 +101,7 @@ public class StoreTabCell : StoreTab
     {
         itemsButtonList.RemoveCancelAction(CancelAction);
         itemsButtonList.RemoveKeyArrowAction(ShowItemDescription);
+        itemsButtonList.RemoveKeyArrowAction(buttonListScrolling.CheckScrolling);
         itemsButtonList.Clear();
     }
 }

@@ -37,6 +37,18 @@ public class InventoryEquipmentView : InventoryView
         }
         // Add deselect button
         AddItem(DeselectItem, "----------");
+        base.InitItemList();
+    }
+
+    public override void ShowDescription()
+    {
+        if (itemButtonList != null && itemButtonList.count > 0)
+        {
+            InventoryEquipmentItemButton lItemButton = (InventoryEquipmentItemButton)itemButtonList.currentButton;
+            int lCountInInventory = PlayerInventory.GetInstance().GetItemCount(lItemButton.itemId);
+            string lInInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
+            descriptionText.text = lItemButton.title + "_Description" + lInInventoryText + lCountInInventory;
+        }
     }
 
     public override void GroupMemberButtonAction()
@@ -59,6 +71,7 @@ public class InventoryEquipmentView : InventoryView
         slotButtonList.RemoveKeyArrowAction(InitItemList);
         itemButtonList.RemoveCancelAction(ItemButtonListCancelAction);
         itemButtonList.RemoveKeyArrowAction(ShowDescription);
+        itemButtonList.RemoveKeyArrowAction(itemButtonListScrolling.CheckScrolling);
     }
 
     public override void AddSlot(InventorySlotData p_SlotData)
@@ -74,7 +87,7 @@ public class InventoryEquipmentView : InventoryView
 
     public override void AddItem(InventoryItemData pInventoryItemData)
     {
-        InventoryItemButton l_ItemButton = UnityEngine.Object.Instantiate(InventoryItemButton.prefab);
+        InventoryEquipmentItemButton l_ItemButton = UnityEngine.Object.Instantiate(InventoryEquipmentItemButton.prefab);
         l_ItemButton.title = LocalizationDataBase.GetInstance().GetText("Item:" + pInventoryItemData.id);
         l_ItemButton.itemId = pInventoryItemData.id;
         l_ItemButton.AddAction(SelectItem);
@@ -84,7 +97,7 @@ public class InventoryEquipmentView : InventoryView
 
     public void AddItem(PanelButtonActionHandler p_Action, string p_Title)
     {
-        InventoryItemButton l_ItemButton = UnityEngine.Object.Instantiate(InventoryItemButton.prefab);
+        InventoryEquipmentItemButton l_ItemButton = UnityEngine.Object.Instantiate(InventoryEquipmentItemButton.prefab);
         l_ItemButton.title = p_Title;
         l_ItemButton.AddAction(p_Action);
         itemButtonList.AddButton(l_ItemButton);
@@ -123,7 +136,7 @@ public class InventoryEquipmentView : InventoryView
     public override void SelectItem()
     {
         // TODO : Экипировать игрока выбранным предметом
-        InventoryItemButton l_ItemButton = (InventoryItemButton)itemButtonList.currentButton;
+        InventoryEquipmentItemButton l_ItemButton = (InventoryEquipmentItemButton)itemButtonList.currentButton;
         InventorySlotButton l_SlotButton = (InventorySlotButton)slotButtonList.currentButton;    
         ChangeItemCount(l_SlotButton.itemId, l_ItemButton.itemId);
         l_SlotButton.SelectItem(l_ItemButton.itemId);
@@ -133,7 +146,7 @@ public class InventoryEquipmentView : InventoryView
 
     public void DeselectItem()
     {
-        InventoryItemButton l_ItemButton = (InventoryItemButton)itemButtonList.currentButton;
+        InventoryEquipmentItemButton l_ItemButton = (InventoryEquipmentItemButton)itemButtonList.currentButton;
         InventorySlotButton l_SlotButton = (InventorySlotButton)slotButtonList.currentButton;
         ChangeItemCount(l_SlotButton.itemId, l_ItemButton.itemId);
         l_SlotButton.DeselectItem();
@@ -165,12 +178,13 @@ public class InventoryEquipmentView : InventoryView
 
     private void CheckItemButtonList(string p_ItemId, int p_ItemCount)
     {
-        InventoryItemButton l_ItemButton = null;
+        InventoryEquipmentItemButton l_ItemButton = null;
+        // TODO : this is govnocode
         for(int i = 0; i < itemButtonList.count; i++)
         {
-            if((itemButtonList[i] as InventoryItemButton).itemId == p_ItemId)
+            if((itemButtonList[i] as InventoryEquipmentItemButton).itemId == p_ItemId)
             {
-                l_ItemButton = itemButtonList[i] as InventoryItemButton;
+                l_ItemButton = itemButtonList[i] as InventoryEquipmentItemButton;
                 break;
             }
         }

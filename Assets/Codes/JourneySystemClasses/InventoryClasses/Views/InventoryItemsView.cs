@@ -41,6 +41,7 @@ public class InventoryItemsView : InventoryView
     {
         itemButtonList.RemoveCancelAction(ItemButtonListCancelAction);
         itemButtonList.RemoveKeyArrowAction(ShowDescription);
+        itemButtonList.RemoveKeyArrowAction(itemButtonListScrolling.CheckScrolling);
         itemButtonList.Clear();
     }
 
@@ -56,6 +57,7 @@ public class InventoryItemsView : InventoryView
                 AddItem(l_InventoryItems[lKey]);
             }
         }
+        base.InitItemList();
     }
 
     public override void AddItem(InventoryItemData p_InventoryItemData)
