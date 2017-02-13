@@ -373,6 +373,7 @@ public class PlayerData : Singleton<PlayerData>
         {
             m_Level++;
             m_StatImprovePoints += 4;
+            m_PlayerStat.AddStatValue("HealthPoints", m_PlayerStat.GetStatValue("HealthPoints") + 3);
             LevelupNotification();
 
             CheckClassup();
