@@ -203,7 +203,7 @@ public class ItemActionPanel : Panel
 
     private void UseKeyItem()
     {
-        ShowMessage("Test test test test", CancelAction);
+        ShowMessage(LocalizationDataBase.GetInstance().GetText("Item:" + itemId), CancelAction);
         // TODO : Использование предмета
         Item l_Item = ItemDataBase.GetInstance().GetItem(itemId).CreateItem();
         l_Item.Run(JourneySystem.GetInstance().player.statistics);
