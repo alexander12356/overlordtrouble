@@ -17,7 +17,7 @@
         if (BattleSystem.IsInstance())
         {
             BattleActor l_Sender = p_Sender as BattleActor;
-            DamageSystem.GetInstance().AddRestoration(l_Sender, RestorationType.Healing, m_SpecialPointsValue);
+            DamageSystem.GetInstance().AddRestoration(l_Sender, RestorationType.Restoring, m_SpecialPointsValue);
         }
     }
 

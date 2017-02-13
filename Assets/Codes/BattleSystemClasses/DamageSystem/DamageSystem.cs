@@ -12,6 +12,7 @@ public enum RestorationType
 {
     NONE = -1,
     Healing,
+    Restoring,
     DebuffClear,
     MegaHealing
 }
@@ -29,7 +30,7 @@ public struct RestorationData
 
     public void Upgrade(RestorationType p_Type, float p_Value)
     {
-        if (type == RestorationType.Healing && p_Type == RestorationType.DebuffClear)
+        if ((type == RestorationType.Healing || type == RestorationType.Restoring) && p_Type == RestorationType.DebuffClear)
         {
             type = RestorationType.MegaHealing;
         }

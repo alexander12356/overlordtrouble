@@ -215,6 +215,7 @@
 	<Text id="GUI:BattleSystem:HpBonus">%d HP</Text>
 	<Text id="GUI:BattleSystem:SpBonus">%d SP</Text>
 	<Text id="GUI:BattleSystem:Healing">%d восстановил %d очков HP</Text>
+	<Text id="GUI:BattleSystem:Restoring">%d восстановил %d очков SP</Text>
 	<Text id="GUI:BattleSystem:DebuffClear">%d исцелился от вредных эффектов</Text>
 	<Text id="GUI:BattleSystem:BadDebuffClear">%d не имеет никаких статусных эффектов. Очищающий прием ничего не сделал</Text>
 	<Text id="GUI:BattleSystem:MegaHealing">%d восстановил %d очков хп и исцелился от вредных эффектов</Text>
