@@ -189,6 +189,7 @@
 	<Text id="GUI:BattleSystem:Damage">и нанес %d урона</Text>
 	<Text id="GUI:BattleSystem:BadAttack">%d старался напрасно</Text>
 	<Text id="GUI:BattleSystem:MonstyleUsing">%d использовал %d</Text>
+	<Text id="GUI:BattleSystem:ItemUsing">%d использовал %d на %d</Text>
 	<Text id="GUI:BattleSystem:MonstyleDamage">, он нанес %d урона по %d</Text>
 	<Text id="GUI:BattleSystem:AoeUsing">%d попал под %d</Text>
 	<Text id="GUI:BattleSystem:AoeDamage">, он получил %d урона</Text>
