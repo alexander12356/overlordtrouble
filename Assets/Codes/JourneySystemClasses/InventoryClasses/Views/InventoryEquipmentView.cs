@@ -45,9 +45,16 @@ public class InventoryEquipmentView : InventoryView
         if (itemButtonList != null && itemButtonList.count > 0)
         {
             InventoryEquipmentItemButton lItemButton = (InventoryEquipmentItemButton)itemButtonList.currentButton;
-            int lCountInInventory = PlayerInventory.GetInstance().GetItemCount(lItemButton.itemId);
-            string lInInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
-            descriptionText.text = lItemButton.title + "_Description" + lInInventoryText + lCountInInventory;
+            if (lItemButton.itemId != String.Empty)
+            {
+                int lCountInInventory = PlayerInventory.GetInstance().GetItemCount(lItemButton.itemId);
+                string lInInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
+                descriptionText.text = LocalizationDataBase.GetInstance().GetText("Item:" + lItemButton.itemId + ":Description") + "\n" + LocalizationDataBase.GetInstance().GetText("Item:" + lItemButton.itemId + ":Effect") + lInInventoryText + lCountInInventory;
+            }
+            else
+            {
+                descriptionText.text = String.Empty;
+            }
         }
     }
 

@@ -226,7 +226,7 @@ public abstract class InventoryView
             InventoryItemButton lItemButton = (InventoryItemButton)itemButtonList.currentButton;
             int lCountInInventory = PlayerInventory.GetInstance().GetItemCount(lItemButton.itemId);
             string lInInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
-            descriptionText.text = lItemButton.title + "_Description" + lInInventoryText + lCountInInventory;
+            descriptionText.text = LocalizationDataBase.GetInstance().GetText("Item:" + lItemButton.itemId + ":Description") + lInInventoryText + lCountInInventory;
         }
     }
 
