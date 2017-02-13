@@ -1,4 +1,22 @@
 {
    "Coins":200,
-   "Items":[]
+   "Items":
+   [
+		{	
+			"Id":"Water",
+			"Count":1
+		},
+		{	
+			"Id":"Apple",
+			"Count":4
+		},
+		{	
+			"Id":"SmallSpecialPotion",
+			"Count":2
+		},
+		{	
+			"Id":"SmallHealthPotion",
+			"Count":2
+		}
+   ]
 }

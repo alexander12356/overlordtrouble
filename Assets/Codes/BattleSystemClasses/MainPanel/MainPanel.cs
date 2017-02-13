@@ -58,6 +58,7 @@ public class MainPanel : Panel
         m_ButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MainPanelAttack");
         m_ButtonList[1].AddAction(Special);
         m_ButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MainPanelMonstyle");
+        m_ButtonList[2].AddAction(OpenItemsPanel);
         m_ButtonList[2].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MainPanelItems");
         m_ButtonList[3].AddAction(Retreat);
         m_ButtonList[3].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MainPanelRetreat");
@@ -79,6 +80,12 @@ public class MainPanel : Panel
     private void AttackEnemy()
     {
         BattlePlayer.GetInstance().Attack(m_ChoosedEnemyPanel.choosedEnemy);
+    }
+
+    private void OpenItemsPanel()
+    {
+        ItemsPanel l_ItemsPanel = Instantiate(ItemsPanel.prefab);
+        BattleSystem.GetInstance().ShowPanel(l_ItemsPanel, true, BattleSystem.GetInstance().mainPanelTransform);
     }
 
     private void Retreat()

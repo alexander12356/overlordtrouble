@@ -72,6 +72,14 @@ public class BattlePlayer : BattleActor
         BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
     }
 
+    public void UseItem(BattleActor p_Target, Item p_Item)
+    {
+        DamageSystem.GetInstance().UseItem(this, p_Target, p_Item);
+
+        ResultSystem.GetInstance().ShowResult();
+        BattleSystem.GetInstance().SetVisibleAvatarPanel(false);
+    }
+
     public override void Die()
     {
         base.Die();

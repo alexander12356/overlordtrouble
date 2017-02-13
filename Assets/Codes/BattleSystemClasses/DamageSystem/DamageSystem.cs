@@ -140,6 +140,18 @@ public class DamageSystem : Singleton<DamageSystem>
         ShowResult();
     }
 
+    public void UseItem(BattleActor p_Sender, BattleActor p_Target, Item p_Item)
+    {
+        string l_SenderName = p_Sender.actorName;
+        string l_TargetName = p_Target.actorName;
+
+        m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:ItemUsing", new string[] { l_SenderName, p_Item.itemName, l_TargetName });
+
+        p_Item.Run(p_Sender);
+
+        ShowResult();
+    }
+
     public void AddBeforeAttackSteps(BattleBaseStep l_Step)
     {
         m_BeforeAttackSteps.Add(l_Step);

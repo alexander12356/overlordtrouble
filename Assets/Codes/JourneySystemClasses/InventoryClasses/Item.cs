@@ -27,7 +27,7 @@ public class Item : MonoBehaviour
         m_EffectsList = p_Effects;
     }
 
-    public void Run(PlayerStatistics p_Sender)
+    public void Run(IEffectInfluenced p_Sender)
     {
         for (int i = 0; i < m_EffectsList.Count; i++)
         {
