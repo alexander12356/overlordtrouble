@@ -122,7 +122,7 @@ public class InventoryEquipmentView : InventoryView
     {
         itemButtonList.isActive = false;
         slotButtonList.isActive = true;
-        descriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Inventory:Description");
+        ClearDescription();
     }
 
     public override void GroupButtonListCancelAction()
