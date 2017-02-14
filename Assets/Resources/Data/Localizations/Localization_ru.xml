@@ -86,8 +86,8 @@
 	<Text id="Item:Water:Effect">Восстанавливает 4сп</Text>
 	
 	<Text id="Item:Key">Ключ</Text>
-	<Text id="Item:Key:Description">Ключ</Text>
-	<Text id="Item:Key:Effect">Ключ</Text>
+	<Text id="Item:Key:Description">Он от чердака.</Text>
+	<Text id="Item:Key:Effect">Ключ от чердака твоего дома. Нужно взять то что там находится, сегодня важный день.</Text>
 	
 	<Text id="Item:OldBoots">Старые ботинки</Text>
 	<Text id="Item:OldBoots:Description">Они старые и поношенные, но все еще пригодны для путешествий.</Text>
