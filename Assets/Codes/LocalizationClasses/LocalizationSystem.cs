@@ -41,16 +41,24 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
             return p_Id;
         }
 
-        string l_Text = m_Texts[p_Id];
-
-        for (int i = 0; i < p_Value.Length; i++)
+        try
         {
-            int l_Index = l_Text.IndexOf("%d");
-            l_Text = l_Text.Remove(l_Index, 2);
-            l_Text = l_Text.Insert(l_Index, p_Value[i]);
-        }
+            string l_Text = m_Texts[p_Id];
 
-        return l_Text;
+            for (int i = 0; i < p_Value.Length; i++)
+            {
+                int l_Index = l_Text.IndexOf("%d");
+                l_Text = l_Text.Remove(l_Index, 2);
+                l_Text = l_Text.Insert(l_Index, p_Value[i]);
+            }
+
+            return l_Text;
+        }
+        catch
+        {
+            Debug.LogError("id: " + p_Id + " !ERROR!");
+            return "id: " + p_Id + " !ERROR!";
+        }
     }
 
     public void ChangeLanguage(string p_LangId)
