@@ -83,9 +83,9 @@ public class StoreTabBuy : StoreTab
         {
             StoreBuyButton m_StoreItemButton = (StoreBuyButton)itemsButtonList.currentButton;
             int l_CountInInventory = PlayerInventory.GetInstance().GetItemCount(m_StoreItemButton.itemId);
-            string l_DescriptionText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
+            string l_DescriptionText = LocalizationDataBase.GetInstance().GetText("Item:" + m_StoreItemButton.itemId + ":Description") + "\n" + LocalizationDataBase.GetInstance().GetText("Item:" + m_StoreItemButton.itemId + ":Effect");
             string l_InInventoryText = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:InInventory");
-            descriptionText.text = l_DescriptionText + m_StoreItemButton.title + "_Description" + l_InInventoryText + l_CountInInventory;
+            descriptionText.text = l_DescriptionText + l_InInventoryText + l_CountInInventory;
         }
     }
 

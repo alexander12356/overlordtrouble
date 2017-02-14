@@ -46,26 +46,88 @@
 	
 	<!-- items -->
 	<Text id="Item:SmallHealthPotion">Малое зелье жизни</Text>
+	<Text id="Item:SmallHealthPotion:Description">Сделано из эссенции 10 яблок.</Text>
+	<Text id="Item:SmallHealthPotion:Effect">Восстанавливает 40 хп</Text>
+	
 	<Text id="Item:SmallSpecialPotion">Малое зелье энергии</Text>
+	<Text id="Item:SmallSpecialPotion:Description">Лечит усталость.</Text>
+	<Text id="Item:SmallSpecialPotion:Effect">Восстанавливает 30сп</Text>
+	
 	<Text id="Item:SmallExperiencePotion">Малая сфера опыта</Text>
+	<Text id="Item:SmallExperiencePotion:Description">Сфера опыта является концентрированной магией создавшего ее и используется людьми и монстрами для получения опыта, однако сфера опыта от одной и той же личности не может быть использована дважды и их создание требует большого количества времени, из-за чего создать мощную армию используя их невозможно, выгоднее просто потренироваться.</Text>
+	<Text id="Item:SmallExperiencePotion:Effect">Дает 20 очков опыта</Text>
+	
 	<Text id="Item:SaltCucumber">Соленые огурчики</Text>
+	<Text id="Item:SaltCucumber:Description">Обернуты в салфетку.</Text>
+	<Text id="Item:SaltCucumber:Effect">В них так много соли что можно увидеть кристалики.</Text>
+	
 	<Text id="Item:Scoop">Ковшик</Text>
+	<Text id="Item:Scoop:Description">Ням ням!</Text>
+	<Text id="Item:Scoop:Effect">Ковшик для супа, похож на кость.</Text>
+	
 	<Text id="Item:Apple">Яблоко</Text>
+	<Text id="Item:Apple:Description">Вкусное, свежее и неотравленное.</Text>
+	<Text id="Item:Apple:Effect">Восстанавливает 4хп</Text>
+	
 	<Text id="Item:BookAboutSpoon">Книжка про ложки</Text>
+	<Text id="Item:BookAboutSpoon:Description">Как создавать ложки, и куда их класть.</Text>
+	<Text id="Item:BookAboutSpoon:Effect">Наверное вы уже жалеете, что потратили столько усилий для этой штуки… эммм… поздравляем?</Text>
+	
 	<Text id="Item:OldHelmet">Старый шлем</Text>
+	<Text id="Item:OldHelmet:Description">Этот шлем наполнен пылью, но все же, лучше чем ничего.</Text>
+	<Text id="Item:OldHelmet:Effect">+4 защиты\n+2 сп</Text>
+	
 	<Text id="Item:RustyAxe">Ржавый топор</Text>
+	<Text id="Item:RustyAxe:Description">Выглядит как боевой топор, но некоторые куски сломаны ржавчиной.</Text>
+	<Text id="Item:RustyAxe:Effect">+6 силы</Text>
+	
 	<Text id="Item:Water">Вода</Text>
+	<Text id="Item:Water:Description">Она в бутылке.</Text>
+	<Text id="Item:Water:Effect">Восстанавливает 4сп</Text>
+	
 	<Text id="Item:Key">Ключ</Text>
+	<Text id="Item:Key:Description">Он от чердака.</Text>
+	<Text id="Item:Key:Effect">Ключ от чердака твоего дома. Нужно взять то что там находится, сегодня важный день.</Text>
+	
 	<Text id="Item:OldBoots">Старые ботинки</Text>
-	<Text id="Item:BokaliskMeat">Мясо кокотрикса</Text>
+	<Text id="Item:OldBoots:Description">Они старые и поношенные, но все еще пригодны для путешествий.</Text>
+	<Text id="Item:OldBoots:Effect">+2 защиты\n+4 скорости</Text>
+	
+	<Text id="Item:BakoliskMeat">Мясо кокотрикса</Text>
+	<Text id="Item:BakoliskMeat:Description">Маленький кусок хвоста… ага, сам кокотрикс не пострадал.</Text>
+	<Text id="Item:BakoliskMeat:Effect">Восстанавивает 13хп и 13сп.</Text>
+	
 	<Text id="Item:OldBreastplate">Старый нагрудник</Text>
+	<Text id="Item:OldBreastplate:Description">Почти как новый?</Text>
+	<Text id="Item:OldBreastplate:Effect">+8 защиты</Text>
+	
 	<Text id="Item:CheapHelmet">Дешевый шлем</Text>
+	<Text id="Item:CheapHelmet:Description">Только храбрец наденет такой шлем против дракона.</Text>
+	<Text id="Item:CheapHelmet:Effect">+5 сп\n+4 защиты</Text>
+	
 	<Text id="Item:CheapBoots">Дешевые ботинки</Text>
+	<Text id="Item:CheapBoots:Description">Только смелый осмелиться это надеть против дракона.</Text>
+	<Text id="Item:CheapBoots:Effect">+4 скорости\n+3 защиты</Text>
+	
 	<Text id="Item:CheapBreastplate">Дешевый нагрудник</Text>
+	<Text id="Item:CheapBreastplate:Description">Только отважные осмелятся надеть это против дракона.</Text>
+	<Text id="Item:CheapBreastplate:Effect">+10 защиты</Text>
+	
 	<Text id="Item:CheapSword">Дешевый меч</Text>
+	<Text id="Item:CheapSword:Description">Только безумец пойдет с этим на дракона.</Text>
+	<Text id="Item:CheapSword:Effect">+4 силы\n+2 скорости</Text>
+	
 	<Text id="Item:Club">Дубинка</Text>
+	<Text id="Item:Club:Description">Просто толстая ветка.</Text>
+	<Text id="Item:Club:Effect">+4 силы\n10% шанс на оглушение обычным ударом.</Text>
+	
 	<Text id="Item:Shield">Щит</Text>
+	<Text id="Item:Shield:Description">Щит весьма полезен в бою.</Text>
+	<Text id="Item:Shield:Effect">+30% к защите на один ход.</Text>
+	
 	<Text id="Item:SeedOfMemory">Зерно памяти</Text>
+	<Text id="Item:SeedOfMemory:Description">Содержит знания леших.</Text>
+	<Text id="Item:SeedOfMemory:Effect">Сын мой, я хочу попросить у тебя прощения. Хоть я и прожил очень долго и даже считался мудрейшим, я не смог заметить того, что моя слава ущемляла тебя. И даже когда ты попросил моей помощи, я просто отказал тебе, подумав, что ты можешь справиться сам… Но ослепленный своей гордыней я забыл, что ты все еще очень молод, что привело к нашей ссоре. Я знаю, что ты не придешь, когда я стану одним целым с великим древом, поэтому вместе со всеми знаниями леса я решил передать тебе свои извинения, чтобы когда это зерно дошло до тебя ты понял: Я очень горжусь тобой. Я верю что в твоих руках лес будет в справедливости и безопасности, ведь ты мой единственный ребенок. Прости, что не сказал тебе этого раньше и прости, что не смог быть с тобою дольше.</Text>
 	
 	<!-- elemental -->
 	<Text id="Element">Элемент</Text>

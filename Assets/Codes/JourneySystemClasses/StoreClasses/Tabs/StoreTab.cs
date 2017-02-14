@@ -77,7 +77,6 @@ public abstract class StoreTab : MonoBehaviour
     {
         InitItemsButtonList();
         InitItemList();
-        ShowItemDescription();
     }
 
     private void InitItemsButtonList()
@@ -93,6 +92,7 @@ public abstract class StoreTab : MonoBehaviour
         if (itemsButtonList != null && itemsButtonList.count > 0)
         {
             itemsButtonList.isActive = true;
+            ShowItemDescription();
             return true;
         }
         return false;
@@ -102,7 +102,7 @@ public abstract class StoreTab : MonoBehaviour
     {
         itemsButtonList.isActive = false;
         parent.tabButtonList.isActive = true;
-        m_DescriptionText.text = LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Description");
+        ClearDescription();
     }
 
     public virtual void ShowItemDescription()

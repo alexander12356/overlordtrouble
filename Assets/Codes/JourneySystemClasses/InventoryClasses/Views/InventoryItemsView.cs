@@ -34,7 +34,6 @@ public class InventoryItemsView : InventoryView
     {
         InitItemButtonList();     
         InitItemList();
-        ShowDescription();
     }
 
     public override void Disable()
@@ -96,6 +95,7 @@ public class InventoryItemsView : InventoryView
     {
         itemButtonList.isActive = false;
         parent.tabButtonList.isActive = true;
+        ClearDescription();
     }
 
     public override bool Confirm()
@@ -103,6 +103,7 @@ public class InventoryItemsView : InventoryView
         if (itemButtonList != null && itemButtonList.count > 0)
         {
             itemButtonList.isActive = true;
+            ShowDescription();
             return true;
         }
         return false;
