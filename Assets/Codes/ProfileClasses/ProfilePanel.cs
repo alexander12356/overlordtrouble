@@ -81,7 +81,14 @@ public class ProfilePanel : Panel
                 if (l_PanelButtonStat.addedStatValue > 0)
                 {
                     l_PanelButtonStat.PlayAnim("StatMinus");
-                    l_PanelButtonStat.addedStatValue -= 1;
+                    if (l_PanelButtonStat.statId == "HealthPoints")
+                    {
+                        l_PanelButtonStat.addedStatValue -= 3;
+                    }
+                    else
+                    {
+                        l_PanelButtonStat.addedStatValue -= 1;
+                    }
                     statImprovePoints += 1;
                 }
                 else
@@ -95,7 +102,14 @@ public class ProfilePanel : Panel
                 if (statImprovePoints > 0)
                 {
                     l_PanelButtonStat.PlayAnim("StatPlus");
-                    l_PanelButtonStat.addedStatValue += 1;
+                    if (l_PanelButtonStat.statId == "HealthPoints")
+                    {
+                        l_PanelButtonStat.addedStatValue += 3;
+                    }
+                    else
+                    {
+                        l_PanelButtonStat.addedStatValue += 1;
+                    }
                     statImprovePoints -= 1;
                 }
                 else
