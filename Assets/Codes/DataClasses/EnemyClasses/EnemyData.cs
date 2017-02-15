@@ -19,10 +19,10 @@ public struct EnemyAttackData
 public struct EnemyLootData
 {
     public string id;
-    public int count;
+    public int[] count;
     public float chance;
 
-    public EnemyLootData(string p_Id, int p_Count, float p_Chance)
+    public EnemyLootData(string p_Id, int[] p_Count, float p_Chance)
     {
         id = p_Id;
         count = p_Count;

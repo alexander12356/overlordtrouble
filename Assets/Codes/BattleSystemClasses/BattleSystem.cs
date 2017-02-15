@@ -18,6 +18,7 @@ public class BattleSystem : MonoBehaviour
     private bool m_IsClassup = false;
     private bool m_IsLevelup = false;
     private MainPanel m_MainPanel = null;
+    private Dictionary<string, int> m_LootList = new Dictionary<string, int>();
 
     protected List<BattleEnemy> m_EnemyList = new List<BattleEnemy>();
     protected int m_CurrentTurn = -1;
@@ -186,7 +187,12 @@ public class BattleSystem : MonoBehaviour
         PlayerData.GetInstance().AddExperience(m_Experience);
 
         List<string> l_WinText = new List<string>();
-        l_WinText.Add(LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Win", new string[] { m_Experience.ToString() }));
+
+        string l_RewardText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Win", new string[] { m_Experience.ToString() });
+        l_RewardText += GiveLoot();
+
+        l_WinText.Add(l_RewardText);
+
         if (m_IsLevelup)
         {
             string l_LevelText = (PlayerData.GetInstance().GetLevel() + 1).ToString();
@@ -255,6 +261,87 @@ public class BattleSystem : MonoBehaviour
 
         BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
         ResultSystem.GetInstance().AddStep(l_Step);
+    }
+
+    public void AddLoot(EnemyLootData p_LootData)
+    {
+        System.Random l_Random = new System.Random();
+        int l_Chance = l_Random.Next(0, 100);
+
+        if (p_LootData.chance < l_Chance)
+        {
+            return;
+        }
+
+        int p_Count = l_Random.Next(p_LootData.count[0], p_LootData.count[1]);
+        string p_Id = p_LootData.id;
+
+        if (p_Id != "Monett")
+        {
+            PlayerInventory.GetInstance().AddItem(p_Id, p_Count);
+        }
+        else
+        {
+            PlayerInventory.GetInstance().coins += p_Count;
+        }
+
+        if (!m_LootList.ContainsKey(p_Id))
+        {
+            m_LootList.Add(p_Id, p_Count);
+        }
+        else
+        {
+            m_LootList[p_Id] += p_Count;
+        }
+    }
+
+    public string GiveLoot()
+    {
+        string l_Text = string.Empty;
+        int l_MonettCount = 0;
+
+        if (m_LootList.ContainsKey("Monett"))
+        {
+            l_MonettCount = m_LootList["Monett"];
+            m_LootList.Remove("Monett");
+        }
+
+        string l_ItemsText = "";
+        int l_Index = 0;
+        foreach (string l_ItemId in m_LootList.Keys)
+        {
+            string l_ItemName = LocalizationDataBase.GetInstance().GetText("Item:" + l_ItemId);
+            int l_ItemCount = m_LootList[l_ItemId];
+
+            if (l_ItemCount > 1)
+            {
+                l_ItemName += " x" + l_ItemCount;
+            }
+
+            if ((l_Index == m_LootList.Count - 2 && l_MonettCount == 0) || (m_LootList.Count == 1 && l_MonettCount == 0))
+            {
+                l_ItemsText += " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " ";
+            }
+            else if (l_Index == m_LootList.Count - 1 && l_MonettCount == 0)
+            {
+                l_ItemsText += "";
+            }
+            else
+            {
+                l_ItemsText += ", ";
+            }
+
+            l_ItemsText += l_ItemName;
+
+            l_Index++;
+        }
+
+        if (l_MonettCount > 0)
+        {
+            l_ItemsText += " " + LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:And") + " " + l_MonettCount + " " + LocalizationDataBase.GetInstance().GetText("GUI:Journey:Store:Monet");
+        }
+
+        return l_ItemsText;
     }
     #endregion
 

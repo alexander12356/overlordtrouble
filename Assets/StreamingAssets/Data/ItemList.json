@@ -134,8 +134,8 @@
 			}
 		},
 		{
-			"Id" : "BakoliskMeat",
-			"Image" : "Sprites/Items/SingleUse/BakoliskMeat",
+			"Id" : "BokaliskMeat",
+			"Image" : "Sprites/Items/SingleUse/BokaliskMeat",
 			"Type" : "SingleUse",
 			"Effect":
 			{

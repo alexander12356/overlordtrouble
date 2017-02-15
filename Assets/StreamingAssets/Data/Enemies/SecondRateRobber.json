@@ -25,6 +25,10 @@
 	"Experience" : 15,
 	"Loot" :
 	[
+		{
+			"Id" : "Monett",
+			"Count" : 140
+		}
 	],
 	"Property" :
 	{

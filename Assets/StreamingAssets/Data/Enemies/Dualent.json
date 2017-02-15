@@ -39,8 +39,17 @@
 	"Loot" :
 	[
 		{
-			"Id" : "BokaliskMeat",
-			"Count" : 1
+			"Id" : "Monett",
+			"Count" : 
+			[
+				6,
+				8
+			]
+		},
+		{
+			"Id" : "SmallHealthPotion",
+			"Count" : 1,
+			"Chance" : 10
 		}
 	],
 	"Property" :

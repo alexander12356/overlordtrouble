@@ -158,6 +158,7 @@ public class BattleEnemy : BattleActor
         base.Died();
 
         BattleSystem.GetInstance().AddExperience(m_EnemyData.experience);
+        SetLoot();
         BattleSystem.GetInstance().EnemyDied(this);
 
         Destroy(gameObject);
@@ -193,6 +194,16 @@ public class BattleEnemy : BattleActor
     private void PlayDieAnimation()
     {
         m_Animator.SetTrigger("Die");
+    }
+
+    private void SetLoot()
+    {
+        List<EnemyLootData> l_LootList = m_EnemyData.lootList;
+
+        for (int i = 0; i < l_LootList.Count; i++)
+        {
+            BattleSystem.GetInstance().AddLoot(l_LootList[i]);
+        }
     }
     #endregion
 }

@@ -37,6 +37,19 @@
 	"Experience" : 15,
 	"Loot" :
 	[
+		{
+			"Id" : "Monett",
+			"Count" : 
+			[
+				4,
+				5
+			]
+		},
+		{
+			"Id" : "SmallSpecialPotion",
+			"Count" : 1,
+			"Chance" : 20
+		}
 	],
 	"Property" :
 	{

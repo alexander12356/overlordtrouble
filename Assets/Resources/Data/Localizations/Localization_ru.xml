@@ -93,9 +93,9 @@
 	<Text id="Item:OldBoots:Description">Они старые и поношенные, но все еще пригодны для путешествий.</Text>
 	<Text id="Item:OldBoots:Effect">+2 защиты\n+4 скорости</Text>
 	
-	<Text id="Item:BakoliskMeat">Мясо кокотрикса</Text>
-	<Text id="Item:BakoliskMeat:Description">Маленький кусок хвоста… ага, сам кокотрикс не пострадал.</Text>
-	<Text id="Item:BakoliskMeat:Effect">Восстанавивает 13хп и 13сп.</Text>
+	<Text id="Item:BokaliskMeat">Мясо кокотрикса</Text>
+	<Text id="Item:BokaliskMeat:Description">Маленький кусок хвоста… ага, сам кокотрикс не пострадал.</Text>
+	<Text id="Item:BokaliskMeat:Effect">Восстанавивает 13хп и 13сп.</Text>
 	
 	<Text id="Item:OldBreastplate">Старый нагрудник</Text>
 	<Text id="Item:OldBreastplate:Description">Почти как новый?</Text>
@@ -210,7 +210,7 @@
 	<Text id="GUI:Journey:Store:Leave">Уйти</Text>
 	<Text id="GUI:Journey:Store:Description">Описание\n</Text>
 	<Text id="GUI:Journey:Store:InInventory">\nУ тебя в инвентаре: </Text>
-	<Text id="GUI:Journey:Store:Monet">Монет</Text>
+	<Text id="GUI:Journey:Store:Monet">Монетт</Text>
 	<Text id="GUI:Journey:Store:Tab:All">Все</Text>
 	<Text id="GUI:Journey:Store:Tab:Equipments">Шмотки</Text>
 	<Text id="GUI:Journey:Store:Tab:SingleUse">Разовые</Text>

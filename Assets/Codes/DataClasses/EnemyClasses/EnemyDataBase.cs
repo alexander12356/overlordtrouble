@@ -117,18 +117,36 @@ public class EnemyDataBase : Singleton<EnemyDataBase>
         List<EnemyLootData> l_LootList = new List<EnemyLootData>();
         for (int i = 0; i < p_JSONObject.Count; i++)
         {
-            string l_Id = p_JSONObject[i]["Id"].str;
-            int l_Count = (int)p_JSONObject[i]["Count"].i;
-            float l_Chance = 100;
-            if (p_JSONObject[i].HasField("Chance"))
-            {
-                l_Chance = p_JSONObject[i]["Chance"].f;
-            }
-            EnemyLootData l_Data = new EnemyLootData(l_Id, l_Count, l_Chance);
-
-            l_LootList.Add(l_Data);
+            l_LootList.Add(ParseLoot(p_JSONObject[i]));
         }
         return l_LootList;
+    }
+
+    private EnemyLootData ParseLoot(JSONObject p_LootJson)
+    {
+        string l_Id = p_LootJson["Id"].str;
+
+        float l_Chance = 100;
+        if (p_LootJson.HasField("Chance"))
+        {
+            l_Chance = p_LootJson["Chance"].f;
+        }
+        
+        int l_Value1 = 1;
+        int l_Value2 = 1;
+        if (p_LootJson["Count"].Count > 0)
+        {
+            l_Value1 = (int)p_LootJson["Count"][0].i;
+            l_Value2 = (int)p_LootJson["Count"][1].i;
+        }
+        else
+        {
+            l_Value1 = (int)p_LootJson["Count"].i;
+            l_Value2 = (int)p_LootJson["Count"].i;
+        }
+        int[] l_Count = new int[2] { l_Value1, l_Value2 };
+
+        return new EnemyLootData(l_Id, l_Count, l_Chance);
     }
 
     private string[] ParseProperty(JSONObject p_JSONObject)
