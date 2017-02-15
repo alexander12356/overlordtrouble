@@ -1,0 +1,12 @@
+{
+	"DewElemental" :
+	{
+		"LesserWaterElemental",
+		"ShellLizard",
+		"Brownie"
+	},
+	"LesserWaterElemental" :
+	{
+		"EarthElemental"
+	}
+}

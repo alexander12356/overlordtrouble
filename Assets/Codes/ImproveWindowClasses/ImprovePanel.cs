@@ -6,27 +6,56 @@ using System.Collections.Generic;
 
 public class ImprovePanel : Panel
 {
-    #region Variables
     private ButtonList m_ImproveButtonList = null;
+    private ButtonList m_CancelButtonList = null;
     private Animator   m_Animator = null;
     private Image m_BackgroundAfterSelectImage = null;
     private Image m_BackgroundBeforeSelectImage = null;
+    private string m_CurrentClassId = null;
+    private GridLayoutGroup m_ClassesLayoutGroup = null;
+    private GridLayoutGroup m_CancelLayoutGroup = null;
 
     [SerializeField]
     private Image m_ImproveCompleteImage = null;
-    #endregion
-
-    #region Interface
+    
     public override void Awake()
     {
         base.Awake();
 
-        ImproveSystem.GetInstance().ShowPanel(this);
+#if UNITY_EDITOR
+        if (GameManager.IsInstance() == false)
+        {
+            PlayerData.GetInstance().AddEnchancement("DewElemental");
+        }
+#endif
+
         m_BackgroundAfterSelectImage  = myTransform.FindChild("BackgroundAfterSelect").GetComponent<Image>();
         m_BackgroundBeforeSelectImage = myTransform.FindChild("BackgroundBeforeSelect").GetComponent<Image>();
-        m_ImproveButtonList = GetComponent<ButtonList>();
+        m_ImproveButtonList = transform.FindChild("Buttons").FindChild("NewClasses").GetComponent<ButtonList>();
+        m_CancelButtonList = transform.FindChild("Buttons").FindChild("Cancel").GetComponent<ButtonList>();
         m_Animator = GetComponent<Animator>();
-        InitImproveIcons();
+        m_ClassesLayoutGroup = transform.FindChild("Buttons").FindChild("NewClasses").GetComponent<GridLayoutGroup>();
+        m_CancelLayoutGroup = transform.FindChild("Buttons").FindChild("Cancel").GetComponent<GridLayoutGroup>();
+    }
+
+    public void Start()
+    {
+        ImproveSystem.GetInstance().ShowPanel(this);
+
+        m_CurrentClassId = PlayerData.GetInstance().GetCurrentEnchancement();
+        InitNewClassesIcon();
+        InitCancelIcon();
+
+        if (m_ImproveButtonList.count > 0)
+        {
+            m_ImproveButtonList.isActive = true;
+            m_CancelButtonList.isActive = false;
+        }
+        else
+        {
+            m_ImproveButtonList.isActive = false;
+            m_CancelButtonList.isActive = true;
+        }
     }
 
     public override void UpdatePanel()
@@ -34,13 +63,26 @@ public class ImprovePanel : Panel
         base.UpdatePanel();
 
         m_ImproveButtonList.UpdateKey();
+        m_CancelButtonList.UpdateKey();
 
         if (Input.GetKey(KeyCode.X))
         {
             ReturnToMainMenu();
         }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && m_ImproveButtonList.count > 0)
+        {
+            m_ImproveButtonList.isActive = true;
+            m_CancelButtonList.isActive = false;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            m_ImproveButtonList.isActive = false;
+            m_CancelButtonList.isActive = true;
+        }
     }
 
+    #region IMPROVE
     // Called from Animation
     public void ImproveComplete()
     {
@@ -76,23 +118,6 @@ public class ImprovePanel : Panel
         SelectImprove();
     }
 
-    #endregion
-
-    #region Private
-    private void InitImproveIcons()
-    {
-        for (int i = 0; i < m_ImproveButtonList.count - 1; i++)
-        {
-            m_ImproveButtonList[i].AddAction(ShowYesNoPanel);
-        }
-        ((PanelButtonImprove)m_ImproveButtonList[0]).improveData = ImproveDataBase.GetInstance().GetImprove("LesserWaterElemental");
-        ((PanelButtonImprove)m_ImproveButtonList[1]).improveData = ImproveDataBase.GetInstance().GetImprove("ShellLizard");
-        ((PanelButtonImprove)m_ImproveButtonList[2]).improveData = ImproveDataBase.GetInstance().GetImprove("Brownie");
-
-        m_ImproveButtonList[m_ImproveButtonList.count - 1].AddAction(ReturnToMainMenu);
-        m_ImproveButtonList[m_ImproveButtonList.count - 1].title = LocalizationDataBase.GetInstance().GetText("GUI:Improve:StayMyself");
-    }
-
     private void ShowYesNoPanel()
     {
         PanelButtonImprove l_PanelButtonImprove = (PanelButtonImprove)m_ImproveButtonList.currentButton;
@@ -107,6 +132,8 @@ public class ImprovePanel : Panel
 
     private void SelectImprove()
     {
+        LayoutDisable();
+
         PanelButtonImprove l_PanelButtonImprove = (PanelButtonImprove)m_ImproveButtonList.currentButton;
         l_PanelButtonImprove.StartBlinking();
         l_PanelButtonImprove.AddAfterBlinkingAnimation(RemoveImproveIconsButExcept);
@@ -127,6 +154,8 @@ public class ImprovePanel : Panel
                 ((PanelButtonImprove)m_ImproveButtonList[i]).Away();
             }
         }
+        (m_CancelButtonList[0] as PanelButtonImprove).Away();
+
         m_ImproveButtonList.isActive = false;
     }
 
@@ -137,10 +166,42 @@ public class ImprovePanel : Panel
         m_ImproveCompleteImage.SetNativeSize();
         m_Animator.SetTrigger("Improve");
     }
+    #endregion
+
+    #region INIT_BUTTONS
+    private void InitNewClassesIcon()
+    {
+        List<string> l_NewClassesIds = ImproveHierarchyDataBase.GetInstance().GetImproveList(m_CurrentClassId);
+
+        for (int i = 0; i < l_NewClassesIds.Count; i++)
+        {
+            PanelButtonImprove l_Button = Instantiate(PanelButtonImprove.prefab);
+            l_Button.improveData = ImproveDataBase.GetInstance().GetImprove(l_NewClassesIds[i]);
+            l_Button.AddAction(ShowYesNoPanel);
+
+            m_ImproveButtonList.AddButton(l_Button);
+        }
+    }
+
+    private void InitCancelIcon()
+    {
+        PanelButtonImprove l_Button = Instantiate(PanelButtonImprove.prefab);
+        l_Button.improveData = ImproveDataBase.GetInstance().GetImprove(m_CurrentClassId);
+        l_Button.title = LocalizationDataBase.GetInstance().GetText("GUI:Improve:StayMyself");
+        l_Button.AddAction(ReturnToMainMenu);
+
+        m_CancelButtonList.AddButton(l_Button);
+    }
+
+    private void LayoutDisable()
+    {
+        m_ClassesLayoutGroup.enabled = false;
+        m_CancelLayoutGroup.enabled = false;
+    }
+    #endregion
 
     private void ReturnToMainMenu()
     {
         ImproveSystem.GetInstance().UnloadScene();
     }
-    #endregion
 }
