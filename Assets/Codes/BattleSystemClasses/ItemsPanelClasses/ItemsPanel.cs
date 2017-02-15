@@ -98,7 +98,7 @@ public class ItemsPanel : Panel
             ItemPanelButton l_Button = Instantiate(ItemPanelButton.prefab);
             l_Button.itemId = l_ItemData.id;
             l_Button.title = LocalizationDataBase.GetInstance().GetText("Item:" + l_ItemData.id);
-            l_Button.description = LocalizationDataBase.GetInstance().GetText("Item:" + l_ItemData.id + ":Description");
+            l_Button.description = LocalizationDataBase.GetInstance().GetText("Item:" + l_ItemData.id + ":Effect");
             l_Button.AddAction(ChooseItem);
 
             m_ItemsButtonList.AddButton(l_Button);
