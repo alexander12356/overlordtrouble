@@ -241,7 +241,7 @@ public class PlayerData : Singleton<PlayerData>
         }
         else
         {
-            return m_Experience;
+            return 0;
         }
     }
 

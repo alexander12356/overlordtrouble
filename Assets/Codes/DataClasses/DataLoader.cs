@@ -21,5 +21,6 @@ public class DataLoader : Singleton<DataLoader>
         BattleDataBase.GetInstance();
         ElementSystem.GetInstance();
         LeshiiDataBase.GetInstance();
+        ImproveHierarchyDataBase.GetInstance();
     }
 }

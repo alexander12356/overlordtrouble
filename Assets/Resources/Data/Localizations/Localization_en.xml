@@ -1,17 +1,25 @@
 ﻿<Localization>
-	<!-- Monstyle	-->
-	<Text id="Skill:WaterDrops">Water drops</Text>
-	<Text id="Skill:WaterDrops:Description">Attack technique: 2sп\n\n2 points of damage on all enemies\n\nElement: Water\n\nThose things hurt a little more than finger touch</Text>
-	<Text id="Skill:Slap">Slap</Text>
-	<Text id="Skill:ProtectiveCoat">Protective coat</Text>
-	<Text id="Skill:Strike">Strike</Text>
-	<Text id="Skill:Defense">Defence</Text>
-	<Text id="Skill:TailWhap">Tail whap</Text>
-	<Text id="Skill:Slash">Slash</Text>
-	<Text id="Skill:ShellDefense">Shell defence</Text>
-	<Text id="Skill:BlobeStrike">Bubble strike</Text>
-	<Text id="Skill:HealingWater">Healing water</Text>
-	<Text id="Skill:StonePress">Pillar attack</Text>
+	<!-- Specials	-->
+	<!-- DewElemental -->
+	<Text id="Special:WaterDrops">Water Drops</Text>
+	<Text id="Special:WaterDrops:Description">Прием атаки: 2сп\n\nУрон 2 очка по всем врагам\n\nЭлемент: Вода\n\nЭти капли бьют чуток больнее чем тычки пальцами</Text>
+	<Text id="Special:Slap">Slap</Text>
+	<Text id="Special:ProtectiveShell">Protective Coat</Text>
+	
+	<!-- LesserWaterElemental -->
+	<Text id="Special:WaterBullet">Water Bullet</Text>
+	<Text id="Special:WaterDash">Water Dash</Text>
+	<Text id="Special:HealingSplash">Healing Splash</Text>
+	
+	<!-- Salamanti -->
+	<Text id="Special:TailWhap">Tail Whap</Text>
+	<Text id="Special:Slash">Slash</Text>
+	<Text id="Special:Molting">Molting</Text>
+	
+	<!-- Brownie -->
+	<Text id="Special:StaffStrike">Staff Strike</Text>
+	<Text id="Special:Ember">Ember</Text>
+	<Text id="Special:Concentration">Concentration</Text>
 	
 	<!-- stats -->
 	<Text id="Stat:HealthPoints">HP</Text>
@@ -30,7 +38,7 @@
 	<Text id="Improvement:ShellLizard">Shell lizard</Text>
 	<Text id="Improvement:Brownie">Brownie</Text>
 	
-		<!-- items -->
+	<!-- items -->
 	<Text id="Item:SmallHealthPotion">Small health potion</Text>
 	<Text id="Item:SmallHealthPotion:Description">Сделано из эссенции 10 яблок.</Text>
 	<Text id="Item:SmallHealthPotion:Effect">Восстанавливает 40 хп</Text>
@@ -132,6 +140,31 @@
 	<Text id="Enemy:ThirdsortRobber">Third sort robber</Text>
 	<Text id="Enemy:ThirdsortRobber:Attack">Shank</Text>
 	
+	<Text id="Boss:Leshii">Леший</Text>
+	<Text id="Boss:Leshii:Intro">You won't defeat me!</Text>
+	<Text id="Boss:Leshii:IntroSpecial">Поздравляю… ты смог меня разозлить.</Text>
+	<Text id="Boss:Leshii:RightHand">Правая рука</Text>
+	<Text id="Boss:Leshii:Body">Тело</Text>
+	<Text id="Boss:Leshii:LeftHand">Левая рука</Text>
+	<Text id="Boss:Leshii:SummonHands">До воскрешения рук осталось %d %d</Text>
+	<Text id="Boss:Leshii:CheckSpecialAttack">Осталось %d %d до атаки.</Text>
+	<Text id="Boss:Leshii:Step">ход</Text>
+	<Text id="Boss:Leshii:Steps">хода</Text>
+	<Text id="Boss:Leshii:HandsDie">%d потеряла силу</Text>
+	<Text id="Boss:Leshii:Die">Ой ой…</Text>
+	<Text id="Boss:Leshii:Die:Special">…</Text>
+	<Text id="Boss:Leshii:Stun">Оглушение</Text>
+	<Text id="Boss:Leshii:Health">%d восстановил %d очков здоровья</Text>
+	<Text id="Boss:Leshii:NatureFury">Ярость леса</Text>
+	<Text id="Boss:Leshii:StartCharge">ENOUGH!</Text>
+	<Text id="Boss:Leshii:Simple:100hp">Что за?! Я не могу поднять руки!</Text>
+	<Text id="Boss:Leshii:Simple:75hp">Хаха! Я все еще цел!</Text>
+	<Text id="Boss:Leshii:Simple:50hp">Ай!!</Text>
+	<Text id="Boss:Leshii:Special:100hp">Этого недостаточно.</Text>
+	<Text id="Boss:Leshii:Special:75hp">Я не ПРОИГРАЮ!</Text>
+	<Text id="Boss:Leshii:Special:50hp">Почему я не могу тебя победить?!</Text>
+	<Text id="Boss:Leshii:BothHandDestroy">Такое не каждый день случается.</Text>
+	
 	<!-- UI -->
 	<Text id="GUI:Journey:ReturnMainMenu">Are you sure you want to go to the main menu? Unsaved data will be lost.</Text>
 	<Text id="GUI:Journey:Store:Buy">Buy</Text>
@@ -154,6 +187,8 @@
 	<Text id="GUI:Journey:Inventory:Throw">Throw</Text>
 	<Text id="GUI:Journey:Inventory:Wear">Wear</Text>
 	<Text id="GUI:Journey:Inventory:Items">Items</Text>
+	
+	<Text id="GUI:Journey:ItemCatched">You've got %d</Text>
 	
 	<Text id="GUI:Profile:Level">Level</Text>
 	<Text id="GUI:Profile:NextLevelup">Until next level:</Text>

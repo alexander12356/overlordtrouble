@@ -59,6 +59,7 @@ public class ProfilePanel : Panel
             PlayerData.GetInstance().InitTestStats();
         }
 
+        //TODO GetComponent оставить в Awake а инициализации перенести в Start
         InitAdditionalInfo();
         InitButtonLists();
         InitStats();
@@ -352,7 +353,15 @@ public class ProfilePanel : Panel
 
         m_LevelText.text = LocalizationDataBase.GetInstance().GetText("GUI:Profile:Level") + " " + (PlayerData.GetInstance().GetLevel() + 1);
         m_PlayerNameText.text = PlayerData.GetInstance().GetPlayerName();
-        m_NextLevelupText.text = LocalizationDataBase.GetInstance().GetText("GUI:Profile:NextLevelup") + " " + PlayerData.GetInstance().GetNextLevelupExperience() + " exp";
+
+        if (PlayerData.GetInstance().GetNextLevelupExperience() > 0)
+        {
+            m_NextLevelupText.text = LocalizationDataBase.GetInstance().GetText("GUI:Profile:NextLevelup") + " " + PlayerData.GetInstance().GetNextLevelupExperience() + " exp";
+        }
+        else
+        {
+            m_NextLevelupText.text = "";
+        }
 
         m_ProfileAvatar.sprite = PlayerData.GetInstance().GetProfileAvatar();
         m_ProfileAvatar.SetNativeSize();
