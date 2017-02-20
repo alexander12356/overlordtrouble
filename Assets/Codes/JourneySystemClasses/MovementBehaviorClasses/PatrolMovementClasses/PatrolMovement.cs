@@ -5,14 +5,14 @@ public class PatrolMovement : BaseMovement
 {
     #region Variables
     private List<PatrolPosition> m_Patrol = new List<PatrolPosition>();
-    private int   m_CurrentPoint = 0;
+    private int m_CurrentPoint = 0;
     private float m_ElapsedTime = 0.0f;
+    private bool m_PathBlocked = false;
 
     [SerializeField]
     private Transform m_PatrolPointsTransform;
     #endregion
-
-    #region Interface
+    
     public override void Awake()
     {
         base.Awake();
@@ -22,17 +22,13 @@ public class PatrolMovement : BaseMovement
             m_Patrol.Add(m_PatrolPointsTransform.GetChild(i).GetComponent<PatrolPosition>());
         }
     }
-
-    public override void LogicStart()
-    {
-        base.LogicStart();
-    }
-
+    
+    #region LOGIC
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if (m_Patrol.Count == 0)
+        if (m_Patrol.Count == 0 || m_PathBlocked)
         {
             return;
         }
@@ -67,7 +63,6 @@ public class PatrolMovement : BaseMovement
     }
     #endregion
 
-    #region Private
     private float GetWaitTime()
     {
         return Random.Range(1.0f, 2.5f);
@@ -83,15 +78,21 @@ public class PatrolMovement : BaseMovement
         }
     }
 
-    [ContextMenu("GeneratePoints")]
-    public void GeneratePointPositions()
+    public void OnTriggerEnter2D(Collider2D p_Other)
     {
-        for (int i = 0; i < m_Patrol.Count; i++)
+        //TODO надо избавиться от этого выделив новый слой
+        if (p_Other.tag == "Player")
         {
-            GameObject l_GameObject = new GameObject();
-            l_GameObject.transform.SetParent(transform);
-            l_GameObject.transform.position = m_Patrol[i].myPosition;
+            m_PathBlocked = true;
+            journeyActor.myAnimator.SetBool("IsWalking", false);
         }
     }
-    #endregion
+
+    public void OnTriggerExit2D(Collider2D p_Other)
+    {
+        if (p_Other.tag == "Player")
+        {
+            m_PathBlocked = false;
+        }
+    }
 }
