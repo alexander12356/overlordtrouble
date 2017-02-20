@@ -37,12 +37,13 @@ public class AudioObject : MonoBehaviour
         m_AudioSource = GetComponent<AudioSource>();
     }
 
-    public void Play(AudioClip p_AudioClip)
+    public void Play(AudioClip p_AudioClip, bool p_IsLoop)
     {
         StopAllCoroutines();
         m_AudioSource.clip = p_AudioClip;
         m_AudioSource.volume = 0.0f;
         m_AudioSource.Play();
+        m_AudioSource.loop = p_IsLoop;
         StartCoroutine(Appearance());
     }
 

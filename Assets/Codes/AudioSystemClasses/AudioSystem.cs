@@ -30,7 +30,7 @@ public class AudioSystem : MonoBehaviour
         m_Instance = this;
     }
 
-    public void PlayMusic(string p_Id)
+    public void PlayMusic(string p_Id, bool p_IsLooped = true)
     {
         AudioClip l_AudioClip = AudioDataBase.GetInstance().GetAudioClip(p_Id);
         if (l_AudioClip == null || m_MusicList.ContainsKey(p_Id))
@@ -40,9 +40,8 @@ public class AudioSystem : MonoBehaviour
 
         AudioObject l_AudioObject = Instantiate(AudioObject.prefab);
         l_AudioObject.transform.SetParent(transform);
-        l_AudioObject.Play(l_AudioClip);
+        l_AudioObject.Play(l_AudioClip, p_IsLooped);
         m_MusicList.Add(p_Id, l_AudioObject);
-
 
         Debug.Log("Play Music:" + p_Id);
     }
