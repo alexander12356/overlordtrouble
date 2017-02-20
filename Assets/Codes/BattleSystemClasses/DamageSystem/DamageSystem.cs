@@ -50,7 +50,7 @@ public struct RestorationData
 public class DamageSystem : Singleton<DamageSystem>
 {    
     private string m_StatisticText = string.Empty;
-    private Dictionary<BattleActor, float> m_DamageValues = new Dictionary<BattleActor, float>();
+    private Dictionary<BattleActor, int> m_DamageValues = new Dictionary<BattleActor, int>();
     private Dictionary<BattleActor, List<Special>> m_AoeSpecials = new Dictionary<BattleActor, List<Special>>();
     private Dictionary<BattleActor, List<Special>> m_ImmunitySpecials = new Dictionary<BattleActor, List<Special>>();
     private Dictionary<BattleActor, List<Special>> m_AddedSpecials = new Dictionary<BattleActor, List<Special>>();
@@ -165,15 +165,17 @@ public class DamageSystem : Singleton<DamageSystem>
     
     public void AddDamageValue(BattleActor p_Sender, BattleActor p_Target, float p_Value, Element p_AttackElement)
     {
-        float l_DamageValue = CalculateDamage(p_Sender, p_Target, p_Value, p_AttackElement);
+        float l_FloatDamage = CalculateDamage(p_Sender, p_Target, p_Value, p_AttackElement);
+        Debug.Log("Float damage: " + l_FloatDamage);
+        int l_IntDamage = System.Convert.ToInt32(System.Math.Ceiling(l_FloatDamage));
 
         if (!m_DamageValues.ContainsKey(p_Target))
         {
-            m_DamageValues.Add(p_Target, l_DamageValue);
+            m_DamageValues.Add(p_Target, l_IntDamage);
         }
         else
         {
-            m_DamageValues[p_Target] += l_DamageValue;
+            m_DamageValues[p_Target] += l_IntDamage;
         }
     }
     
