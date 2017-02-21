@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainSettingsPanel : SettingsPanel
 {
@@ -102,7 +104,7 @@ public class MainSettingsPanel : SettingsPanel
         if (m_OldLanguageId != m_NewLanguageId)
         {
             LocalizationDataBase.GetInstance().ChangeLanguage(m_NewLanguageId);
-            MainMenuSystem.GetInstance().StartLocation("MainMenu");
+            SceneManager.LoadScene("MainMenu");
         }
         else
         {
