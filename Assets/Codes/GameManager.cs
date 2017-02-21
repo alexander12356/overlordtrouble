@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour
 
     public void UnloadScene()
     {
-        Debug.Log("Start Unload scene: " + m_SceneIds.Peek());
         if (m_SceneIds.Count == 0)
         {
             if (isTesting)
@@ -102,6 +101,8 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("Oppanki");
             }
         }
+
+        Debug.Log("Start Unload scene: " + m_SceneIds.Peek());
 
         AsyncOperation l_Unloading = SceneManager.UnloadSceneAsync(m_SceneIds.Pop());
         SetActiveForAllObjects(true);
