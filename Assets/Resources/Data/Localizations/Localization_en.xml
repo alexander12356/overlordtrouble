@@ -255,9 +255,9 @@
 	<Text id="Dialog:VillageElder:1">You woke up i see.</Text>
 	<Text id="Dialog:VillageElder:2">I'm still sleepy.</Text>
 	<Text id="Dialog:VillageElder:3">That's all for now.</Text>
-	<Text id="Dialog:GoatPerson:1">Usually i use one bucket 'cause imma not strong enough for two.</Text>
-	<Text id="Dialog:GoatPerson:2">But today i here got an idea! If i fill only a half o' the bucket i can hold two o' dem at the same time!</Text>
-	<Text id="Dialog:GoatPerson:3">Am i not the genius?</Text>
+	<Text id="Dialog:GoatPerson:AboutWater:1">Usually i use one bucket 'cause imma not strong enough for two.</Text>
+	<Text id="Dialog:GoatPerson:AboutWater:2">But today i here got an idea! If i fill only a half o' the bucket i can hold two o' dem at the same time!</Text>
+	<Text id="Dialog:GoatPerson:AboutWater:3">Am i not the genius?</Text>
 	<Text id="Dialog:Terner:1">He-hey lil' one!</Text>
 	<Text id="Dialog:OldWell">It is a well... it has water… you drink water.</Text>
 	<Text id="Dialog:GiantCock:1">...</Text>
