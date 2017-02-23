@@ -9,6 +9,7 @@ public struct EnemyOption
     public string id;
     public JourneyEnemy prefab;
     public int chance;
+    public string[] customBattleIds;
 }
 
 public class RoomEnemyGenerator : MonoBehaviour
@@ -24,6 +25,8 @@ public class RoomEnemyGenerator : MonoBehaviour
 
     [SerializeField]
     private List<EnemyOption> m_EnemyOptionList =  null;
+
+    private string[] m_CurrentBattleIds = null;
 
     public string id
     {
@@ -72,6 +75,8 @@ public class RoomEnemyGenerator : MonoBehaviour
             l_NewEnemy.myTransform.SetParent(m_EnemySpawnTransform[i]);
             l_NewEnemy.myTransform.position = m_EnemySpawnTransform[i].position;
             l_NewEnemy.actorId += "_" + i;
+            if (m_CurrentBattleIds != null && m_CurrentBattleIds.Length > 0)
+                l_NewEnemy.customBattleIds = m_CurrentBattleIds;
 
             JourneyActorUnityEvent l_OnDieEvent = new JourneyActorUnityEvent();
             l_OnDieEvent.AddListener(OnDestroyEvent);
@@ -92,6 +97,7 @@ public class RoomEnemyGenerator : MonoBehaviour
             l_EnemyChance += m_EnemyOptionList[i].chance;
             if (l_Chance < l_EnemyChance)
             {
+                m_CurrentBattleIds = m_EnemyOptionList[i].customBattleIds;
                 return m_EnemyOptionList[i].prefab;
             }
         }

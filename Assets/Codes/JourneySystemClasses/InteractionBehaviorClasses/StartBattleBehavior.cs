@@ -20,6 +20,11 @@ public class StartBattleBehavior : BaseCollideBehavior
         m_JourneyActor.ApplyTo(p_Sender);
         m_JourneyActor.StopLogic();
 
+        if(m_JourneyActor is JourneyEnemy && (m_JourneyActor as JourneyEnemy).customBattleIds != null)
+        {
+            m_CurrentBattleId = GetRandomBattle((m_JourneyActor as JourneyEnemy).customBattleIds);
+        }
+
         Debug.Log("StartBattle id: " + m_CurrentBattleId);
 
         if (m_CurrentBattleId == "BossLeshii")
@@ -39,5 +44,11 @@ public class StartBattleBehavior : BaseCollideBehavior
     {
         int l_RandomBattle = Random.Range(0, m_BattleIds.Length);
         return m_BattleIds[l_RandomBattle];
+    }
+
+    private string GetRandomBattle(string[] p_BattleIds)
+    {
+        int l_RandomBattle = Random.Range(0, p_BattleIds.Length);
+        return p_BattleIds[l_RandomBattle];
     }
 }

@@ -7,6 +7,7 @@ public class JourneyEnemy : JourneyNPC
 {
     private Dictionary<string, ResultBehavior> m_WinActions = new Dictionary<string, ResultBehavior>();
     private Dictionary<string, ResultBehavior> m_LoseActions = new Dictionary<string, ResultBehavior>();
+    private string[] m_CustomBattleIds = null;
 
     [SerializeField]
     private float m_StartLogicCooldown = 2.0f;
@@ -24,6 +25,18 @@ public class JourneyEnemy : JourneyNPC
     public string loseBehaviorId
     {
         get { return m_LoseBehaviorId; }
+    }
+
+    public string[] customBattleIds
+    {
+        get
+        {
+            return m_CustomBattleIds;
+        }
+        set
+        {
+            m_CustomBattleIds = value;
+        }
     }
 
     public override void Awake()
