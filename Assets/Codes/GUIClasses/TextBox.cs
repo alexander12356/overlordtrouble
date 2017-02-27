@@ -74,7 +74,7 @@ public class TextBox : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyUp(KeyCode.Z))
+        if (ControlSystem.EnterButton())
         {
             if (m_ActiveButtonAnimator != null)
             {

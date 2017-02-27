@@ -65,7 +65,7 @@ public class ImprovePanel : Panel
         m_ImproveButtonList.UpdateKey();
         m_CancelButtonList.UpdateKey();
 
-        if (Input.GetKey(KeyCode.X))
+        if (ControlSystem.ExitButton())
         {
             ReturnToMainMenu();
         }

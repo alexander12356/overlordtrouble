@@ -76,7 +76,7 @@ public class CreatingMonstylePanel : Panel
         m_SpecialButtonList.UpdateKey();
         m_ConfirmButtonList.UpdateKey();
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (ControlSystem.ExitButton())
         {
             if (m_ConfirmButtonList.isActive)
             {

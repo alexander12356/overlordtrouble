@@ -211,12 +211,12 @@ public class ButtonList : MonoBehaviour
                 break;
         }
 
-        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp(KeyCode.Z))
+        if (ControlSystem.EnterButton())
         {
             ConfirmAction();
             Input.ResetInputAxes();
         }
-        if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Backspace))
+        if (ControlSystem.ExitButton())
         {
             CancelAction();
             Input.ResetInputAxes();

@@ -75,7 +75,7 @@ public class ItemsPanel : Panel
         m_ItemsButtonList.UpdateKey();
         m_ConfirmButtonList.UpdateKey();
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (ControlSystem.ExitButton())
         {
             if (m_ConfirmButtonList.isActive)
             {

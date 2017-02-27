@@ -61,7 +61,7 @@ public class ChooseEnemyPanel : Panel
         m_EnemyButtonList.UpdateKey();
         m_ConfirmButtonList.UpdateKey();
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (ControlSystem.ExitButton())
         {
             Cancel();
         }

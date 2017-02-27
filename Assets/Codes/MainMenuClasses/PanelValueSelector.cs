@@ -133,7 +133,7 @@ public class PanelValueSelector : MonoBehaviour
             SelectMoveForward();
         }
 
-        if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Backspace))
+        if (ControlSystem.ExitButton())
         {
             CancelAction();
         }

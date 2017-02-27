@@ -48,7 +48,7 @@ public class PanelSlider : Slider
         if (!enabled || !m_IsActive)
             return;
 
-        if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Backspace))
+        if (ControlSystem.ExitButton())
         {
             CancelAction();
         }
