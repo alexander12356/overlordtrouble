@@ -37,8 +37,6 @@ public class ItemsPanel : Panel
     {
         base.Awake();
 
-        PlayerInventory.GetInstance().NewGameDataInit();
-
         m_ItemsButtonList = GetComponentInChildren<ButtonList>();
     }
 
@@ -51,41 +49,58 @@ public class ItemsPanel : Panel
         m_ItemsButtonList.AddKeyArrowAction(m_ButtonListScrolling.CheckScrolling);
 
         m_TeamButtonList.isActive = false;
-        m_ConfirmButtonList.isActive = false;
+        m_ItemsButtonList.isActive = m_ItemsButtonList.count > 0 ? true : false;
+        m_ConfirmButtonList.isActive = m_ItemsButtonList.count > 0 ? false : true;
 
-        m_ConfirmButtonList[0].AddAction(UseItem);
+        if (m_ItemsButtonList.count > 0)
+        {
+            m_ConfirmButtonList[0].AddAction(UseItem);
+        }
         m_ConfirmButtonList[0].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:UseSpecials");
+        m_ConfirmButtonList[1].AddAction(ReturnToMain);
+
+        m_ItemsButtonList.AddCancelAction(TryExit);
+        m_ConfirmButtonList.AddCancelAction(TryExit);
     }
 
     public override void UpdatePanel()
     {
         base.UpdatePanel();
 
-        if (m_ItemsButtonList.isActive && Input.GetKeyDown(KeyCode.RightArrow))
+        if (m_ItemsButtonList.count > 0)
         {
-            m_ItemsButtonList.isActive = false;
-            m_ConfirmButtonList.isActive = true;
-        }
-        if (m_ConfirmButtonList && Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            m_ItemsButtonList.isActive = true;
-            m_ConfirmButtonList.isActive = false;
-        }
-
-        m_ItemsButtonList.UpdateKey();
-        m_ConfirmButtonList.UpdateKey();
-
-        if (ControlSystem.ExitButton())
-        {
-            if (m_ConfirmButtonList.isActive)
+            if (m_ItemsButtonList.isActive && Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                m_ItemsButtonList.isActive = false;
+                m_ConfirmButtonList.isActive = true;
+            }
+            if (m_ConfirmButtonList && Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 m_ItemsButtonList.isActive = true;
                 m_ConfirmButtonList.isActive = false;
             }
-            else
-            {
-                ReturnToMain();
-            }
+        }
+
+        m_ItemsButtonList.UpdateKey();
+        m_ConfirmButtonList.UpdateKey();
+    }
+
+    private void TryExit()
+    {
+        if (m_ItemsButtonList.count == 0)
+        {
+            ReturnToMain();
+            return;
+        }
+
+        if (m_ConfirmButtonList.isActive)
+        {
+            m_ItemsButtonList.isActive = true;
+            m_ConfirmButtonList.isActive = false;
+        }
+        else
+        {
+            ReturnToMain();
         }
     }
 

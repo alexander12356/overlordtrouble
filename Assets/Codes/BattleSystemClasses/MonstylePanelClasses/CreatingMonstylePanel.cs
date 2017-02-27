@@ -51,6 +51,9 @@ public class CreatingMonstylePanel : Panel
 
         m_ButtonListScrolling.Init(120.0f, 3);
         m_SpecialButtonList.AddKeyArrowAction(m_ButtonListScrolling.CheckScrolling);
+
+        m_ConfirmButtonList.AddCancelAction(TryExit);
+        m_SpecialButtonList.AddCancelAction(TryExit);
     }
 
     public override void UpdatePanel()
@@ -75,18 +78,18 @@ public class CreatingMonstylePanel : Panel
 
         m_SpecialButtonList.UpdateKey();
         m_ConfirmButtonList.UpdateKey();
+    }
 
-        if (ControlSystem.ExitButton())
+    private void TryExit()
+    {
+        if (m_ConfirmButtonList.isActive)
         {
-            if (m_ConfirmButtonList.isActive)
-            {
-                m_SpecialButtonList.isActive = true;
-                m_ConfirmButtonList.isActive = false;
-            }
-            else
-            {
-                ReturnToMain();
-            }
+            m_SpecialButtonList.isActive = true;
+            m_ConfirmButtonList.isActive = false;
+        }
+        else
+        {
+            ReturnToMain();
         }
     }
     #endregion
@@ -142,8 +145,11 @@ public class CreatingMonstylePanel : Panel
 
     private void Confirm()
     {
-        AddPopAction(ShowChooseEnemy);
-        Close();
+        if (m_ChoosedSkills.Count > 0)
+        {
+            AddPopAction(ShowChooseEnemy);
+            Close();
+        }
     }
 
     private void ShowChooseEnemy()
