@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class EnterNamePanel : Panel
@@ -6,6 +7,7 @@ public class EnterNamePanel : Panel
     private static EnterNamePanel m_Prefab;
     private InputField m_InputField = null;
     private ButtonList m_ButtonList = null;
+    private bool m_IsButtonFocused = false;
 
     public static EnterNamePanel prefab
     {
@@ -49,6 +51,7 @@ public class EnterNamePanel : Panel
         {
             m_InputField.DeactivateInputField();
             m_ButtonList.isActive = true;
+            m_IsButtonFocused = true;
 
             if (m_InputField.text == "")
             {
@@ -60,6 +63,13 @@ public class EnterNamePanel : Panel
             m_InputField.ActivateInputField();
             m_InputField.Select();
             m_ButtonList.isActive = false;
+            m_IsButtonFocused = false;
+        }
+
+        if(!m_IsButtonFocused && !m_InputField.isFocused)
+        {
+            EventSystem.current.SetSelectedGameObject(m_InputField.gameObject, null);
+            m_InputField.OnPointerClick(new PointerEventData(EventSystem.current));
         }
 
         m_ButtonList.UpdateKey();
