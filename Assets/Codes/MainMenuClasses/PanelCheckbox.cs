@@ -44,7 +44,7 @@ public class PanelCheckbox : Toggle
             Toggle();
         }
 
-        if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Backspace))
+        if (ControlSystem.ExitButton())
         {
             CancelAction();
         }

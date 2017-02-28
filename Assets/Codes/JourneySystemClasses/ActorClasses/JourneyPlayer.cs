@@ -48,7 +48,7 @@ public class JourneyPlayer : JourneyActor
     {
         base.Update();
 
-        if (Input.GetKeyUp(KeyCode.Z))
+        if (ControlSystem.EnterButton())
         {
             PressActiveButtonAction();
         }

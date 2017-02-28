@@ -638,7 +638,8 @@
 		"Location" : "RoadThugs",
 		"Enemy": 
 		[
-			"SecondRateRobber"
+			"Willwhishp",
+			"Jackalope"
 		],
 		"Player":
 		{

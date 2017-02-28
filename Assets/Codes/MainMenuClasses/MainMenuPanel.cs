@@ -192,18 +192,6 @@ public class MainMenuPanel : Panel
             GameManager.GetInstance().isTesting = true;
             PlayerData.GetInstance().InitTestStats();
         }
-        else if (Input.GetKeyUp(KeyCode.X))
-        {
-            GameManager.GetInstance().UnloadScene();
-        }
-        else if (Input.GetKeyUp(KeyCode.R))
-        {
-            ChangeLaguage("ru");
-        }
-        else if (Input.GetKeyUp(KeyCode.E))
-        {
-            ChangeLaguage("en");
-        }
     }
 
     #endregion

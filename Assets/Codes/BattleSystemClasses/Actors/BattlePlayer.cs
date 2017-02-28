@@ -163,7 +163,7 @@ public class BattlePlayer : BattleActor
         {
             l_RestoreSpecialPoints = 10 + baseSpecialPoints / 10.0f;
         }
-        specialPoints += l_RestoreSpecialPoints;
+        specialPoints += System.Convert.ToInt32(System.Math.Ceiling(l_RestoreSpecialPoints));
     }
 
     #endregion

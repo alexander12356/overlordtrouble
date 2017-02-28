@@ -22,7 +22,7 @@ public class DemoMainScene : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (ControlSystem.ExitButton())
         {
             SceneManager.LoadScene("MainMenu");
         }

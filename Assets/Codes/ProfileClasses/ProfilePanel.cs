@@ -118,14 +118,14 @@ public class ProfilePanel : Panel
                     l_PanelButtonStat.PlayAnim("StatCannotPlus");
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Z))
+            else if (ControlSystem.EnterButton())
             {
                 if (m_BaseStatImprovePoints != m_StatImprovePoints)
                 {
                     QuestionStatImprove();
                 }
             }
-            else if (Input.GetKeyUp(KeyCode.X))
+            else if (ControlSystem.ExitButton())
             {
                 CancelStatImprove();
             }

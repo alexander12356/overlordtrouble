@@ -92,11 +92,11 @@ public abstract class StoreItemButton : PanelButtonUpdateKey
             countToAction -= 10;
             m_Animator.SetTrigger("DownArrow");
         }
-        else if (Input.GetKeyUp(KeyCode.Z))
+        else if (ControlSystem.EnterButton())
         {
             StoreItemButtonAction();
         }
-        else if (Input.GetKeyUp(KeyCode.X))
+        else if (ControlSystem.ExitButton())
         {
             Cancel();
         }

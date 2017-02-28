@@ -48,7 +48,7 @@ public class EnterNameSystem : MonoBehaviour
             ShowPanel(l_TextPanel);
         }
 
-        if (Input.GetKeyUp(KeyCode.Z))
+        if (ControlSystem.EnterButton())
         {
             m_MovieTexture.Stop();
         }

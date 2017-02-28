@@ -47,6 +47,9 @@ public class ChooseEnemyPanel : Panel
         m_ConfirmButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Cancel");
 
         m_EnemyButtonList.AddKeyArrowAction(SelectEnemyAvatar);
+
+        m_EnemyButtonList.AddCancelAction(Cancel);
+        m_ConfirmButtonList.AddCancelAction(Cancel);
     }
 
     public override void UpdatePanel()
@@ -60,11 +63,6 @@ public class ChooseEnemyPanel : Panel
 
         m_EnemyButtonList.UpdateKey();
         m_ConfirmButtonList.UpdateKey();
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Cancel();
-        }
     }
 
     public void AddChoosedAction(PanelActionHandler p_Action)

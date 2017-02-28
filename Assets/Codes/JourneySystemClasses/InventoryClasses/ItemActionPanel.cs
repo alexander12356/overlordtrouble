@@ -121,11 +121,11 @@ public class ItemActionPanel : Panel
                 countToRemove -= 10;
                 m_Animator.SetTrigger("DownArrow");
             }
-            else if (Input.GetKeyUp(KeyCode.Z))
+            else if (ControlSystem.EnterButton())
             {
                 TryToRemove();
             }
-            else if (Input.GetKeyUp(KeyCode.X))
+            else if (ControlSystem.ExitButton())
             {
                 CancelRemove();
             }
