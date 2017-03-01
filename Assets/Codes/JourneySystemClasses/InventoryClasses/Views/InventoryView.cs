@@ -135,12 +135,14 @@ public abstract class InventoryView
     public void InitGroupData()
     {
         m_GroupMemberDataList = new List<GroupMemberData>();
-        float l_Health = PlayerData.GetInstance().GetStatValue("HealthPoints");
-        float l_SpecialPoints = PlayerData.GetInstance().GetStatValue("MonstylePoints");
+        float l_Health = PlayerData.GetInstance().health;
+        float l_MaxHealth = PlayerData.GetInstance().GetStatValue("HealthPoints");
+        float l_SpecialPoints = PlayerData.GetInstance().specialPoints;
+        float l_MaxSpecialPoints = PlayerData.GetInstance().GetStatValue("MonstylePoints");
         float l_AttackStat = PlayerData.GetInstance().GetStatValue("Attack");
         float l_DefenseStat = PlayerData.GetInstance().GetStatValue("Defense");
         float l_SpeedStat = PlayerData.GetInstance().GetStatValue("Speed");
-        GroupMemberData l_GroupMemberData = new GroupMemberData(l_Health, l_Health, l_SpecialPoints, l_SpecialPoints, l_AttackStat, l_DefenseStat, l_SpeedStat);
+        GroupMemberData l_GroupMemberData = new GroupMemberData(l_Health, l_MaxHealth, l_SpecialPoints, l_MaxSpecialPoints, l_AttackStat, l_DefenseStat, l_SpeedStat);
         l_GroupMemberData.avatatarSprite = PlayerData.GetInstance().GetBattleAvatar();
         m_GroupMemberDataList.Add(l_GroupMemberData);
     }
