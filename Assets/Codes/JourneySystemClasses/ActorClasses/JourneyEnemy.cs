@@ -8,6 +8,7 @@ public class JourneyEnemy : JourneyNPC
     private Dictionary<string, ResultBehavior> m_WinActions = new Dictionary<string, ResultBehavior>();
     private Dictionary<string, ResultBehavior> m_LoseActions = new Dictionary<string, ResultBehavior>();
     private string[] m_CustomBattleIds = null;
+    private Rigidbody2D m_RigidBody = null;
 
     [SerializeField]
     private float m_StartLogicCooldown = 2.0f;
@@ -62,6 +63,8 @@ public class JourneyEnemy : JourneyNPC
                 m_LoseActions.Add(l_ActionStruct.id, l_ActionStruct);
             }
         }
+
+        m_RigidBody = GetComponent<Rigidbody2D>();
     }
 
     public void ChangeWinBehavior(string p_Id)
@@ -93,6 +96,20 @@ public class JourneyEnemy : JourneyNPC
     public void PlayerRetreated()
     {
         GameManager.GetInstance().StartCoroutine(WaitingLogicStart(m_StartLogicCooldown));
+    }
+
+    public override void StartLogic()
+    {
+        base.StartLogic();
+
+        m_RigidBody.bodyType = RigidbodyType2D.Dynamic;
+    }
+
+    public override void StopLogic()
+    {
+        base.StopLogic();
+
+        m_RigidBody.bodyType = RigidbodyType2D.Static;
     }
 
     private IEnumerator WaitingLogicStart(float m_Time)
