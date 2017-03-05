@@ -246,5 +246,51 @@
 				"Duration" : 1.0
 			}
 		}
+	},
+	"BreathOfEarth" : 
+	{
+		"Sp" : 10.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 13.0
+			}
+		}
+	},
+	"GroundPower" :
+	{
+		"Sp" : 10.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 9.0
+			}
+		}
+	},
+	"RammingAttack" : 
+	{
+		"Sp" : 6.0,
+		"Element" : "NONE",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"AttackBuff" :
+			{
+				"Value" : 10.0,
+				"Duration" : 5.0
+			},
+			"Defense" :
+			{
+				"Value" : 10.0,
+				"Duration" : 5.0
+			}
+		}
 	}
 }
