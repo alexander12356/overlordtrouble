@@ -58,8 +58,8 @@
 	"Elemental": "Earth",
 	"Skills": [
 		"BreathOfEarth",
-		"GroundPower",
-		"RammingAttack"
+		"RammingAttack",
+		"GroundPower"
 	]
   }
 }

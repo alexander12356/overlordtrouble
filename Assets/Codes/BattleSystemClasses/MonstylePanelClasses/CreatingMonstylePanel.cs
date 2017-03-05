@@ -208,6 +208,10 @@ public class CreatingMonstylePanel : Panel
         CreateSpecialButton("WaterFusillade");
         CreateSpecialButton("IceHarpoon");
         CreateSpecialButton("IceShield");
+
+        CreateSpecialButton("BreathOfEarth");
+        CreateSpecialButton("RammingAttack");
+        CreateSpecialButton("GroundPower");
     }
 
     private void InitSpecials()

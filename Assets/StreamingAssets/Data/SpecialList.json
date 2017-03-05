@@ -260,7 +260,7 @@
 			}
 		}
 	},
-	"GroundPower" :
+	"RammingAttack" :
 	{
 		"Sp" : 10.0,
 		"Element" : "Earth",
@@ -273,7 +273,7 @@
 			}
 		}
 	},
-	"RammingAttack" : 
+	"GroundPower" : 
 	{
 		"Sp" : 6.0,
 		"Element" : "NONE",
