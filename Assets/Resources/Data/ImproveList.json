@@ -43,5 +43,14 @@
 		"Pillarstones",
 		"Refresh"
 	]
+  },
+  "MudDragling": {
+	"Profile": "Sprites/Creations/MudDragling/Profile",
+	"Elemental": "Earth",
+	"Skills": [
+		"BreathOfEarth",
+		"GroundPower",
+		"RammingAttack"
+	]
   }
 }
