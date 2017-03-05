@@ -35,6 +35,15 @@
 		"Concentration"
     ]
   },
+  "WaterElemental": {
+	"Profile": "Sprites/Creations/WaterElemental/Profile",
+	"Elemental": "Water",
+	"Skills": [
+		"WaterFusillade",
+		"IceHarpoon",
+		"IceShield"
+	]
+  },
   "EarthElemental": {
 	"Profile": "Sprites/Creations/EarthElemental/Profile",
 	"Elemental": "Earth",
