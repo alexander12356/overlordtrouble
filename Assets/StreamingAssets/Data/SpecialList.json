@@ -222,6 +222,12 @@
 			"Attack" :
 			{
 				"AttackValue" : 10.0
+			},
+			"AttackDebuff":
+			{
+				"Chance" : 100,
+				"Value" : 20,
+				"Duration" : 2
 			}
 		}
 	},
@@ -233,9 +239,10 @@
 		"Myself" : true,
 		"Effect" :
 		{
-			"Defense" :
+			"DefensePercent" :
 			{
-				"Value" : 2.0,
+				"Chance" : 100,
+				"Value" : 60,
 				"Duration" : 1.0
 			}
 		}
