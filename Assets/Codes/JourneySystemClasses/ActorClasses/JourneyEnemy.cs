@@ -102,14 +102,20 @@ public class JourneyEnemy : JourneyNPC
     {
         base.StartLogic();
 
-        m_RigidBody.bodyType = RigidbodyType2D.Dynamic;
+        if (m_RigidBody)
+        {
+            m_RigidBody.bodyType = RigidbodyType2D.Dynamic;
+        }
     }
 
     public override void StopLogic()
     {
         base.StopLogic();
 
-        m_RigidBody.bodyType = RigidbodyType2D.Static;
+        if (m_RigidBody)
+        {
+            m_RigidBody.bodyType = RigidbodyType2D.Static;
+        }
     }
 
     private IEnumerator WaitingLogicStart(float m_Time)

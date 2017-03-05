@@ -198,5 +198,46 @@
 			{
 			}
 		}
+	},
+	"WaterFusillade" :
+	{
+		"Sp" : 6.0,
+		"Element" : "Water",
+		"Aoe" : true,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 4.0
+			}
+		}
+	},
+	"IceHarpoon" :
+	{
+		"Sp" : 11.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 10.0
+			}
+		}
+	},
+	"IceShield" :
+	{
+		"Sp" : 5.0,
+		"Element" : "NONE",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"Defense" :
+			{
+				"Value" : 2.0,
+				"Duration" : 1.0
+			}
+		}
 	}
 }
