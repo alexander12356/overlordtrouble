@@ -6,8 +6,10 @@ public enum EffectIds
     NONE = -1,
     Attack,
     AttackBuff,
+    AttackDebuff,
     AttackRange,
     Defense,
+    DefensePercent,
     DefenseDebuff,
     Healing,
     Restoring,
@@ -40,11 +42,17 @@ public class EffectSystem : Singleton<EffectSystem>
                 l_Effect = new AttackRangeEffect(p_Special, l_AttackRangeValue);
                 break;
             case EffectIds.Defense:
-
                 float l_DefenseValue = Convert.ToSingle(p_EffectData.parameters[0]);
                 int l_Duration = Convert.ToInt32(p_EffectData.parameters[1]);
 
                 l_Effect = new DefenseEffect(p_Special, l_DefenseValue, l_Duration);
+                break;
+            case EffectIds.DefensePercent:
+                int l_DefensePercentChance = Convert.ToInt32(p_EffectData.parameters[0]);
+                int l_DefensePercentValue = Convert.ToInt32(p_EffectData.parameters[1]);
+                int l_DefensePercentDuration = Convert.ToInt32(p_EffectData.parameters[2]);
+
+                l_Effect = new DefensePercent(p_Special, l_DefensePercentChance, l_DefensePercentValue, l_DefensePercentDuration);
                 break;
             case EffectIds.DefenseDebuff:
                 float l_DefenseDebuffValue = Convert.ToSingle(p_EffectData.parameters[0]);
@@ -85,6 +93,13 @@ public class EffectSystem : Singleton<EffectSystem>
                 int l_StunChance = Convert.ToInt32(p_EffectData.parameters[0]);
 
                 l_Effect = new StunPossibility(p_Special, l_StunChance);
+                break;
+            case EffectIds.AttackDebuff:
+                int l_DefenseDebuffPercentChance = Convert.ToInt32(p_EffectData.parameters[0]);
+                int l_DefenseDebuffPercentValue = Convert.ToInt32(p_EffectData.parameters[1]);
+                int l_DefenseDebuffPercentDuration = Convert.ToInt32(p_EffectData.parameters[2]);
+
+                l_Effect = new AttackDebuff(p_Special, l_DefenseDebuffPercentChance, l_DefenseDebuffPercentValue, l_DefenseDebuffPercentDuration);
                 break;
         }
 
@@ -149,6 +164,14 @@ public class EffectSystem : Singleton<EffectSystem>
                     EffectData l_DefenseEffect = new EffectData(l_EffectType, new string[] { l_DefenseValue.ToString(), l_Duration.ToString() });
                     p_EffectList.Add(l_DefenseEffect);
                     break;
+                case EffectIds.DefensePercent:
+                    int l_DefensePercentChance = (int)p_JsonObject[i]["Chance"].i;
+                    int l_DefensePercentValue = (int)p_JsonObject[i]["Value"].i;
+                    int l_DefensePercentDuration = (int)p_JsonObject[i]["Duration"].i;
+
+                    EffectData l_DefensePercentEffect = new EffectData(l_EffectType, new string[] { l_DefensePercentChance.ToString(), l_DefensePercentValue.ToString(), l_DefensePercentDuration.ToString() });
+                    p_EffectList.Add(l_DefensePercentEffect);
+                    break;
                 case EffectIds.DefenseDebuff:
                     float l_DefenseDebuffValue = p_JsonObject[i]["Value"].f;
                     float l_DefenseDebuffDuration = p_JsonObject[i]["Duration"].f;
@@ -196,6 +219,14 @@ public class EffectSystem : Singleton<EffectSystem>
 
                     EffectData l_StunPossibilityEffect = new EffectData(l_EffectType, new string[] { l_StunChance.ToString() });
                     p_EffectList.Add(l_StunPossibilityEffect);
+                    break;
+                case EffectIds.AttackDebuff:
+                    int l_DefenseDebuffPercentChance = (int)p_JsonObject[i]["Chance"].i;
+                    int l_DefenseDebuffPercentValue = (int)p_JsonObject[i]["Value"].i;
+                    int l_DefenseDebuffPercentDuration = (int)p_JsonObject[i]["Duration"].i;
+
+                    EffectData l_EffectDefenseDebufPercent = new EffectData(l_EffectType, new string[] { l_DefenseDebuffPercentChance.ToString(), l_DefenseDebuffPercentValue.ToString(), l_DefenseDebuffPercentDuration.ToString() });
+                    p_EffectList.Add(l_EffectDefenseDebufPercent);
                     break;
             }
         }

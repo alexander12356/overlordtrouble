@@ -185,90 +185,33 @@ public class CreatingMonstylePanel : Panel
 
     private void InitTestSpecials()
     {
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "WaterDrops";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "Slap";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "ProtectiveShell";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "WaterBullet";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "WaterDash";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "HealingSplash";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "TailWhap";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "Slash";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "Molting";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "StaffStrike";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "Ember";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
-        for (int i = 0; i < 1; i++)
-        {
-            PanelButtonSpecial l_MonstyleButton = Instantiate(PanelButtonSpecial.prefab);
-            l_MonstyleButton.specialId = "Concentration";
-            l_MonstyleButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_MonstyleButton);
-        }
+        CreateSpecialButton("WaterDrops");
+        CreateSpecialButton("Slap");
+        CreateSpecialButton("ProtectiveShell");
+
+        CreateSpecialButton("WaterBullet");
+        CreateSpecialButton("WaterDash");
+        CreateSpecialButton("HealingSplash");
+
+        CreateSpecialButton("TailWhap");
+        CreateSpecialButton("Slash");
+        CreateSpecialButton("Molting");
+
+        CreateSpecialButton("StaffStrike");
+        CreateSpecialButton("Ember");
+        CreateSpecialButton("Concentration");
+
+        CreateSpecialButton("Playercrush");
+        CreateSpecialButton("Pillarstones");
+        CreateSpecialButton("Refresh");
+
+        CreateSpecialButton("WaterFusillade");
+        CreateSpecialButton("IceHarpoon");
+        CreateSpecialButton("IceShield");
+
+        CreateSpecialButton("BreathOfEarth");
+        CreateSpecialButton("RammingAttack");
+        CreateSpecialButton("GroundPower");
     }
 
     private void InitSpecials()
@@ -276,11 +219,16 @@ public class CreatingMonstylePanel : Panel
         List<SpecialData> l_PlayerSkills = PlayerData.GetInstance().GetSelectedSkills();
         for (int i = 0; i < l_PlayerSkills.Count; i++)
         {
-            PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
-            l_SpecialButton.specialId = l_PlayerSkills[i].id;
-            l_SpecialButton.AddAction(ChooseSpecial);
-            m_SpecialButtonList.AddButton(l_SpecialButton);
+            CreateSpecialButton(l_PlayerSkills[i].id);
         }
+    }
+
+    private void CreateSpecialButton(string p_Id)
+    {
+        PanelButtonSpecial l_SpecialButton = Instantiate(PanelButtonSpecial.prefab);
+        l_SpecialButton.specialId = p_Id;
+        l_SpecialButton.AddAction(ChooseSpecial);
+        m_SpecialButtonList.AddButton(l_SpecialButton);
     }
 
     private void ShowUpgradePanel()

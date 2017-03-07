@@ -9,5 +9,9 @@
 	{
 		"WaterElemental",
 		"EarthElemental"
+	},
+	"ShellLizard" : 
+	{
+		"MudDragling"
 	}
 }
