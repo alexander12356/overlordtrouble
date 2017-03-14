@@ -212,6 +212,14 @@ public class CreatingMonstylePanel : Panel
         CreateSpecialButton("BreathOfEarth");
         CreateSpecialButton("RammingAttack");
         CreateSpecialButton("GroundPower");
+
+        CreateSpecialButton("BigClaw");
+        CreateSpecialButton("WaveOfDarkness");
+        CreateSpecialButton("MirrorOfTheAbyss");
+
+        CreateSpecialButton("PoisonedDagger");
+        CreateSpecialButton("ManaBeam");
+        CreateSpecialButton("Accelerate");
     }
 
     private void InitSpecials()

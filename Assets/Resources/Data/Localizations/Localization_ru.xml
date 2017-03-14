@@ -281,6 +281,7 @@
 	<Text id="GUI:BattleSystem:DebuffClear">%d исцелился от вредных эффектов</Text>
 	<Text id="GUI:BattleSystem:BadDebuffClear">%d не имеет никаких статусных эффектов. Очищающий прием ничего не сделал</Text>
 	<Text id="GUI:BattleSystem:MegaHealing">%d восстановил %d очков хп и исцелился от вредных эффектов</Text>
+	<Text id="GUI:BattleSystem:DamageFromEffect">%d получил %d очков урона от %d</Text>
 	<Text id="GUI:BattleSystem:RunFail">Убежать не удалось.</Text>
 	<Text id="GUI:BattleSystem:CannotRun">Нельзя убежать.</Text>
 	<Text id="GUI:BattleSystem:ElementKickback">%d получил %d очка урона</Text>

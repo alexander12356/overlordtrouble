@@ -16,12 +16,13 @@ public class HealingEffect : BaseEffect
     {
         base.Run(p_Sender, p_Target);
 
-        p_Sender.health += m_HealingValue;
+        int l_IntHealingValue = System.Convert.ToInt32(System.Math.Ceiling(m_HealingValue));
+        p_Sender.health += l_IntHealingValue;
 
         if (BattleSystem.IsInstance())
         {
             BattleActor l_Sender = p_Sender as BattleActor;
-            DamageSystem.GetInstance().AddRestoration(l_Sender, RestorationType.Healing, m_HealingValue);
+            DamageSystem.GetInstance().AddRestoration(l_Sender, RestorationType.Healing, l_IntHealingValue);
         }
     }
 

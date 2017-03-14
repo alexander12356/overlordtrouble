@@ -12,12 +12,14 @@
     {
         base.Run(p_Sender, p_Target);
 
-        p_Sender.specialPoints += m_SpecialPointsValue;
+        int l_IntRestoringValue = System.Convert.ToInt32(System.Math.Ceiling(m_SpecialPointsValue));
+
+        p_Sender.specialPoints += l_IntRestoringValue;
 
         if (BattleSystem.IsInstance())
         {
             BattleActor l_Sender = p_Sender as BattleActor;
-            DamageSystem.GetInstance().AddRestoration(l_Sender, RestorationType.Restoring, m_SpecialPointsValue);
+            DamageSystem.GetInstance().AddRestoration(l_Sender, RestorationType.Restoring, l_IntRestoringValue);
         }
     }
 

@@ -16,7 +16,8 @@ public enum EffectIds
     Training,
     ClearSpecialStatus,
     EnemyHealing,
-    StunPossibility
+    StunPossibility,
+    Poison
 }
 
 public class EffectSystem : Singleton<EffectSystem>
@@ -100,6 +101,12 @@ public class EffectSystem : Singleton<EffectSystem>
                 int l_DefenseDebuffPercentDuration = Convert.ToInt32(p_EffectData.parameters[2]);
 
                 l_Effect = new AttackDebuff(p_Special, l_DefenseDebuffPercentChance, l_DefenseDebuffPercentValue, l_DefenseDebuffPercentDuration);
+                break;
+            case EffectIds.Poison:
+                int l_PoisonChance = Convert.ToInt32(p_EffectData.parameters[0]);
+                int l_PoisonDuration = Convert.ToInt32(p_EffectData.parameters[1]);
+
+                l_Effect = new PoisonEffect(p_Special, l_PoisonChance, l_PoisonDuration);
                 break;
         }
 
@@ -227,6 +234,13 @@ public class EffectSystem : Singleton<EffectSystem>
 
                     EffectData l_EffectDefenseDebufPercent = new EffectData(l_EffectType, new string[] { l_DefenseDebuffPercentChance.ToString(), l_DefenseDebuffPercentValue.ToString(), l_DefenseDebuffPercentDuration.ToString() });
                     p_EffectList.Add(l_EffectDefenseDebufPercent);
+                    break;
+                case EffectIds.Poison:
+                    int l_PoisonEffect = (int)p_JsonObject[i]["Chance"].i;
+                    int l_PoisonDuration = (int)p_JsonObject[i]["Duration"].i;
+
+                    EffectData l_PoisonData = new EffectData(l_EffectType, new string[] { l_PoisonEffect.ToString(), l_PoisonDuration.ToString() });
+                    p_EffectList.Add(l_PoisonData);
                     break;
             }
         }

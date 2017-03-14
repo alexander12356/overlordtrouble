@@ -309,7 +309,7 @@
 	"WaveOfDarkness" :
 	{
 		"Sp" : 8.0,
-		"Element" : "Darkness",
+		"Element" : "Dark",
 		"Aoe" : true,
 		"Effect" :
 		{
@@ -322,6 +322,49 @@
 	"MirrorOfTheAbyss" : 
 	{
 		"Sp" : 6.0,
+		"Element" : "NONE",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			
+		}
+	},
+	"PoisonedDagger":
+	{
+		"Sp" : 6.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 5.0
+			},
+			"Poison" :
+			{
+				"Chance" : 100,
+				"Duration" : 2
+			}
+		}
+	},
+	"ManaBeam":
+	{
+		"Sp" : 10.0,
+		"Element" : "Mana",
+		"Aoe" : false,
+		"Myself" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 10.0
+			}
+		}
+	},
+	"Accelerate" :
+	{
+		"Sp" : 8.0,
 		"Element" : "NONE",
 		"Aoe" : false,
 		"Myself" : true,

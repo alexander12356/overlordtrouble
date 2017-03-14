@@ -22,7 +22,7 @@ public class SpecialDataBase : Singleton<SpecialDataBase>
         }
         catch
         {
-            Debug.LogError("Cannot find special for id: " + p_Id);
+            Debug.LogError("Cannot find special " + p_Id);
             return new SpecialData();
         }
     }
@@ -51,21 +51,28 @@ public class SpecialDataBase : Singleton<SpecialDataBase>
 
         for (int i = 0; i < l_JSONObject.Count; i++)
         {
-            List<EffectData> l_EffectList = EffectSystem.GetInstance().ParseEffect(l_JSONObject[i]["Effect"]);
-
-            string l_SpecialId = l_JSONObject.keys[i];
-            float  l_Sp        = l_JSONObject[i]["Sp"].f;
-            Element l_Element  = (Element)Enum.Parse(typeof(Element), l_JSONObject[i]["Element"].str);
-            bool   l_IsAoe     = l_JSONObject[i]["Aoe"].b;
-            bool   l_MySelf    = false;
-            if (l_JSONObject[i].HasField("Myself"))
+            try
             {
-                l_MySelf = l_JSONObject[i]["Myself"].b;
+                List<EffectData> l_EffectList = EffectSystem.GetInstance().ParseEffect(l_JSONObject[i]["Effect"]);
+
+                string l_SpecialId = l_JSONObject.keys[i];
+                float l_Sp = l_JSONObject[i]["Sp"].f;
+                Element l_Element = (Element)Enum.Parse(typeof(Element), l_JSONObject[i]["Element"].str);
+                bool l_IsAoe = l_JSONObject[i]["Aoe"].b;
+                bool l_MySelf = false;
+                if (l_JSONObject[i].HasField("Myself"))
+                {
+                    l_MySelf = l_JSONObject[i]["Myself"].b;
+                }
+
+                SpecialData l_SpecialData = new SpecialData(l_SpecialId, l_Sp, l_Element, l_IsAoe, l_MySelf, l_EffectList);
+
+                m_SpecialDictionary.Add(l_SpecialId, l_SpecialData);
             }
-            
-            SpecialData l_SpecialData = new SpecialData(l_SpecialId, l_Sp, l_Element, l_IsAoe, l_MySelf, l_EffectList);
-            
-            m_SpecialDictionary.Add(l_SpecialId, l_SpecialData);
+            catch
+            {
+                Debug.LogError("Cannot parse effect for special: " + l_JSONObject.keys[i]);
+            }
         }
     }
 
