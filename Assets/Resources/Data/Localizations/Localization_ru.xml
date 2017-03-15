@@ -44,6 +44,16 @@
 	<Text id="Special:RammingAttack">Дыхание земли</Text>
 	<Text id="Special:GroundPower">Сила земли</Text>
 	
+	<!-- Cat Shi -->
+	<Text id="Special:WaveOfDarkness">Волна тьмы</Text>
+	<Text id="Special:BigClaw">Большой коготь</Text>
+	<Text id="Special:MirrorOfTheAbyss">Зеркало тьмы</Text>
+	
+	<!-- Domovoy -->
+	<Text id="Special:MagicPunch">Волшебный кулак</Text>
+	<Text id="Special:MagicSphere">Сфера магии</Text>
+	<Text id="Special:Cleanliness">Чистота</Text>
+	
 	<!-- effect's description -->
 	<Text id="Effects:Attack">Урон: %d</Text>
 	
@@ -66,6 +76,8 @@
 	<Text id="Improvement:EarthElemental">Элементаль земли</Text>
 	<Text id="Improvement:MudDragling">Грязевой драконид</Text>
 	<Text id="Improvement:Hobgoblin">Хобгоблин</Text>
+	<Text id="Improvement:CatSi">Кат ши</Text>
+	<Text id="Improvement:Domovoy">Домовой</Text>
 	
 	<!-- items -->
 	<Text id="Item:SmallHealthPotion">Малое зелье жизни</Text>
