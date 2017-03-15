@@ -70,5 +70,14 @@
 		"ManaBeam",
 		"Accelerate"
 	]
+  },
+  "Domovoy": {
+	"Profile": "Sprites/Creations/Domovoy/Profile",
+	"Elemental": "Mana",
+	"Skills": [
+		"MagicPunch",
+		"MagicSphere",
+		"Cleanliness"
+	]
   }
 }
