@@ -24,6 +24,26 @@
 	<Text id="Special:Ember">Искра</Text>
 	<Text id="Special:Concentration">Концентрация</Text>
 	
+	<!-- Water Elemental -->
+	<Text id="Special:WaterFusillade">Водный пулемет</Text>
+	<Text id="Special:IceHarpoon">Ледяной гарпун</Text>
+	<Text id="Special:IceShield">Ледяной щит</Text>
+	
+	<!-- Earth Elemental -->
+	<Text id="Special:Playercrush">Каменный пресс</Text>
+	<Text id="Special:Pillarstones">Сокрушение</Text>
+	<Text id="Special:Refresh">Обновление</Text>
+	
+	<!-- Hobgoblin -->
+	<Text id="Special:PoisonedDagger">Ядовитый кинжал</Text>
+	<Text id="Special:ManaBeam">Луч маны</Text>
+	<Text id="Special:Accelerate">Ускорение</Text>
+	
+	<!-- Mud Dragling -->
+	<Text id="Special:BreathOfEarth">Таран</Text>
+	<Text id="Special:RammingAttack">Дыхание земли</Text>
+	<Text id="Special:GroundPower">Сила земли</Text>
+	
 	<!-- effect's description -->
 	<Text id="Effects:Attack">Урон: %d</Text>
 	
@@ -42,7 +62,10 @@
 	
 	<Text id="Improvement:LesserWaterElemental">Меньший элементаль воды</Text>
 	<Text id="Improvement:ShellLizard">Ящер панциря</Text>
-	<Text id="Improvement:Brownie">Брауни</Text>
+	<Text id="Improvement:WaterElemental">Элементаль воды</Text>
+	<Text id="Improvement:EarthElemental">Элементаль земли</Text>
+	<Text id="Improvement:MudDragling">Грязевой драконид</Text>
+	<Text id="Improvement:Hobgoblin">Хобгоблин</Text>
 	
 	<!-- items -->
 	<Text id="Item:SmallHealthPotion">Малое зелье жизни</Text>

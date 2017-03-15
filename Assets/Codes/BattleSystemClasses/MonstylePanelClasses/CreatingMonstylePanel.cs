@@ -220,6 +220,10 @@ public class CreatingMonstylePanel : Panel
         CreateSpecialButton("PoisonedDagger");
         CreateSpecialButton("ManaBeam");
         CreateSpecialButton("Accelerate");
+
+        CreateSpecialButton("MagicPunch");
+        CreateSpecialButton("MagicSphere");
+        CreateSpecialButton("Cleanliness");
     }
 
     private void InitSpecials()
