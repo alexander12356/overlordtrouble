@@ -35,9 +35,9 @@ public class PoisonEffect : BaseEffect
         {
             m_Target.AddEffect(m_Special.id, this);
             m_DamageValue = m_Target.baseHealth * 7.0f / 100.0f;
-        }
 
-        DamageSystem.GetInstance().AddEffectSpecial(m_Target, m_Special);
+            DamageSystem.GetInstance().AddEffectSpecial(m_Target, m_Special);
+        }
     }
 
     public override void Upgrade()

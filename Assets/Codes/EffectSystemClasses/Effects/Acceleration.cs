@@ -40,9 +40,9 @@ public class Acceleration : BaseEffect
         {
             m_Sender.AddEffect(m_Special.id, this);
             m_Sender.AddBuffIcon();
-        }
 
-        DamageSystem.GetInstance().AddEffectSpecial(m_Sender, m_Special);
+            DamageSystem.GetInstance().AddEffectSpecial(m_Sender, m_Special);
+        }
     }
 
     public override void Effective()
@@ -66,6 +66,6 @@ public class Acceleration : BaseEffect
 
     public override void Stack(BaseEffect p_Effect)
     {
-        m_Duration = 0;
+        m_DurationCounter = 0;
     }
 }
