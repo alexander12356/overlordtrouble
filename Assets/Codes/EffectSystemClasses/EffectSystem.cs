@@ -17,7 +17,8 @@ public enum EffectIds
     ClearSpecialStatus,
     EnemyHealing,
     StunPossibility,
-    Poison
+    Poison,
+    Acceleration
 }
 
 public class EffectSystem : Singleton<EffectSystem>
@@ -107,6 +108,13 @@ public class EffectSystem : Singleton<EffectSystem>
                 int l_PoisonDuration = Convert.ToInt32(p_EffectData.parameters[1]);
 
                 l_Effect = new PoisonEffect(p_Special, l_PoisonChance, l_PoisonDuration);
+                break;
+            case EffectIds.Acceleration:
+                int l_AccelerationChance = Convert.ToInt32(p_EffectData.parameters[0]);
+                int l_AccelerationRepeatCount = Convert.ToInt32(p_EffectData.parameters[1]);
+                int l_AccelerationDuration = Convert.ToInt32(p_EffectData.parameters[2]);
+
+                l_Effect = new Acceleration(p_Special, l_AccelerationChance, l_AccelerationRepeatCount, l_AccelerationDuration);
                 break;
         }
 
@@ -241,6 +249,14 @@ public class EffectSystem : Singleton<EffectSystem>
 
                     EffectData l_PoisonData = new EffectData(l_EffectType, new string[] { l_PoisonEffect.ToString(), l_PoisonDuration.ToString() });
                     p_EffectList.Add(l_PoisonData);
+                    break;
+                case EffectIds.Acceleration:
+                    int l_AccelerationChance = (int)p_JsonObject[i]["Chance"].i;
+                    int l_AccelerationRepeatCount = (int)p_JsonObject[i]["RepeatCount"].i;
+                    int l_AccelerationDuration = (int)p_JsonObject[i]["Duration"].i;
+
+                    EffectData l_AccelerationData = new EffectData(l_EffectType, new string[] { l_AccelerationChance.ToString(), l_AccelerationRepeatCount.ToString(), l_AccelerationDuration.ToString() });
+                    p_EffectList.Add(l_AccelerationData);
                     break;
             }
         }

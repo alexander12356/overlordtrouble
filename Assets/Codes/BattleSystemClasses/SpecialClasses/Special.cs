@@ -62,4 +62,16 @@ public class Special
         }
         return;
     }
+
+    public bool HasEffect(string p_EffectId)
+    {
+        for (int i = 0; i < m_EffectsList.Count; i++)
+        {
+            if (m_EffectsList[i].id == p_EffectId)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

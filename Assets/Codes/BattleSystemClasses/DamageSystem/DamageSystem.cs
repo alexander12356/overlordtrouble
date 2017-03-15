@@ -97,6 +97,8 @@ public class DamageSystem : Singleton<DamageSystem>
         string l_SenderName = p_Sender.actorName;
         string l_TargetName = p_Target.actorName;
 
+        CheckAccelerationEffect(p_Sender, p_Target, p_SpecialList);
+
         m_StatisticText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:MonstyleUsing", new string[] { l_SenderName, l_UsesSpecialNames });
         
         if (m_DamageValues.ContainsKey(p_Target))
@@ -116,6 +118,23 @@ public class DamageSystem : Singleton<DamageSystem>
         }
 
         ShowResult();
+    }
+
+    private void CheckAccelerationEffect(BattleActor p_Sender, BattleActor p_Target, List<Special> p_SpecialList)
+    {
+        if (p_Sender.HasEffect("Acceleration"))
+        {
+            for (int i = p_SpecialList.Count - 1; i >= 0; i--)
+            {
+                if (!p_SpecialList[i].HasEffect("Acceleration"))
+                {
+                    Special l_Special = p_SpecialList[i];
+
+                    MonstyleSystem.GetInstance().UsingMonstyle(p_Sender, p_Target, new List<Special>() { l_Special });
+                    return;
+                }
+            }
+        }
     }
 
     public void EnemyAttack(BattleActor p_Sender, BattleActor p_Target, Special p_Special)

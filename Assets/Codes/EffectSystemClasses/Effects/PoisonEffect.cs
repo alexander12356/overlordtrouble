@@ -11,7 +11,7 @@ public class PoisonEffect : BaseEffect
 
     public PoisonEffect(Special p_Special, int p_Chanse, int p_Duration) : base(p_Special)
     {
-        id = "Defense";
+        id = "Poison";
         m_Chanse = p_Chanse;
         m_Duration = p_Duration;
     }
@@ -35,9 +35,9 @@ public class PoisonEffect : BaseEffect
         {
             m_Target.AddEffect(m_Special.id, this);
             m_DamageValue = m_Target.baseHealth * 7.0f / 100.0f;
-        }
 
-        DamageSystem.GetInstance().AddEffectSpecial(m_Target, m_Special);
+            DamageSystem.GetInstance().AddEffectSpecial(m_Target, m_Special);
+        }
     }
 
     public override void Upgrade()

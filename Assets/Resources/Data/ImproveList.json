@@ -61,5 +61,14 @@
 		"RammingAttack",
 		"GroundPower"
 	]
+  },
+  "Hobgoblin": {
+	"Profile": "Sprites/Creations/Hobgoblin/Profile",
+	"Elemental": "Live",
+	"Skills": [
+		"PoisonedDagger",
+		"ManaBeam",
+		"Accelerate"
+	]
   }
 }
