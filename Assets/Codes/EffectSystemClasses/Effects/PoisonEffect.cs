@@ -11,7 +11,7 @@ public class PoisonEffect : BaseEffect
 
     public PoisonEffect(Special p_Special, int p_Chanse, int p_Duration) : base(p_Special)
     {
-        id = "Defense";
+        id = "Poison";
         m_Chanse = p_Chanse;
         m_Duration = p_Duration;
     }

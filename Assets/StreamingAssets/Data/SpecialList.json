@@ -370,7 +370,12 @@
 		"Myself" : true,
 		"Effect" :
 		{
-			
+			"Acceleration" :
+			{
+				"Chance" : 100,
+				"RepeatCount" : 2,
+				"Duration" : 4
+			}
 		}
 	}
 }
