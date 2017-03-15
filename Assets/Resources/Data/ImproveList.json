@@ -62,6 +62,15 @@
 		"GroundPower"
 	]
   },
+  "CatSi": {
+	"Profile": "Sprites/Creations/CatSi/Profile",
+	"Elemental": "Mana",
+	"Skills": [
+		"BigClaw",
+		"MirrorOfTheAbyss",
+		"WaveOfTheDarkness"
+	]
+  },
   "Hobgoblin": {
 	"Profile": "Sprites/Creations/Hobgoblin/Profile",
 	"Elemental": "Live",
