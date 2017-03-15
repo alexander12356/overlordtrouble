@@ -377,5 +377,50 @@
 				"Duration" : 4
 			}
 		}
+	},
+	"MagicPunch":
+	{
+		"Sp" : 9.0,
+		"Element" : "Mana",
+		"Aoe" : false,
+		"Myself" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 8.0
+			}
+		}
+	},
+	"MagicSphere":
+	{
+		"Sp" : 13.0,
+		"Element" : "Mana",
+		"Aoe" : false,
+		"Myself" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 12.0
+			}
+		}
+	},
+	"Cleanliness" :
+	{
+		"Sp" : 4.0,
+		"Element" : "NONE",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 4.0
+			},
+			"ClearSpecialStatus" :
+			{
+			}
+		}
 	}
 }
