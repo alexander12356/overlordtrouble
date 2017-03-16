@@ -525,7 +525,7 @@ public class DamageSystem : Singleton<DamageSystem>
         float l_Modif = ElementSystem.GetInstance().GetModif(l_AttackElement, p_TargetActor.element);
         l_Modif *= p_TargetActor.GetModif(l_AttackElement);
 
-        float l_Damage = (l_SenderAttackStat / l_TargetDefenseStat) * (l_SenderLevel / l_TargetLevel) * l_AttackDamage * l_Modif;
+        float l_Damage = (l_SenderAttackStat / l_TargetDefenseStat) * l_AttackDamage * l_Modif;
         
         return l_Damage;
     }

@@ -95,7 +95,7 @@ public class ChooseEnemyPanel : Panel
         for (int i = 0; i < m_EnemyList.Count; i++)
         {
 			PanelButtonEnemyChoise l_PanelButton = Instantiate (PanelButtonEnemyChoise.prefab);
-            l_PanelButton.title = m_EnemyList[i].actorName + " " + m_EnemyList[i].health + "/" + m_EnemyList[i].baseHealth + " Lv" + m_EnemyList[i].level;
+            l_PanelButton.title = m_EnemyList[i].actorName + " " + m_EnemyList[i].health + "/" + m_EnemyList[i].baseHealth;
 			l_PanelButton.titleSizeW = 500;
 
             l_PanelButton.AddAction(Choose);
