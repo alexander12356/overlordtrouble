@@ -414,10 +414,6 @@
 		"Myself" : true,
 		"Effect" :
 		{
-			"Attack" :
-			{
-				"AttackValue" : 4.0
-			},
 			"ClearSpecialStatus" :
 			{
 			}
