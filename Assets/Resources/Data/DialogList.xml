@@ -823,7 +823,7 @@
 		</DialogNode>
 	</Dialog>
 	
-	<Dialog id="Leshii_Defated_Special:8" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+	<Dialog id="Leshii_Defated_Special:8" startNode="Talk" avatarPath="Sprites/Creations/Leshii/LeshiyTrueFormAvatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:Leshii_Defated_Special:9</Text>
 		</DialogNode>
@@ -845,14 +845,14 @@
 		</DialogNode>
 	</Dialog>
 	
-	<Dialog id="Leshii_Common_Special:1" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+	<Dialog id="Leshii_Common_Special:1" startNode="Talk" avatarPath="Sprites/Creations/Leshii/LeshiyTrueFormAvatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:Leshii_Common_Special:1</Text>
 			<Text>Dialog:Leshii_Common_Special:2</Text>
 		</DialogNode>
 	</Dialog>
 	
-	<Dialog id="Leshii_Common_Special:2" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
+	<Dialog id="Leshii_Common_Special:2" startNode="Talk" avatarPath="Sprites/Creations/Leshii/LeshiyTrueFormAvatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:Leshii_Common_Special:3</Text>
 			<Text>Dialog:Leshii_Common_Special:4</Text>
