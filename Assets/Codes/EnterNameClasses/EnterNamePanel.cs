@@ -47,7 +47,7 @@ public class EnterNamePanel : Panel
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             m_InputField.DeactivateInputField();
             m_ButtonList.isActive = true;
@@ -58,7 +58,7 @@ public class EnterNamePanel : Panel
                 m_InputField.text = LocalizationDataBase.GetInstance().GetText("GUI:EnterName:Standart");
             }
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             m_InputField.ActivateInputField();
             m_InputField.Select();
