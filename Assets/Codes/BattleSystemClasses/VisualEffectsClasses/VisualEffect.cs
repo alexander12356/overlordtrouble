@@ -69,7 +69,7 @@ public class VisualEffect : MonoBehaviour
     public void PlaySound()
     {
         m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_Id));
-        m_Target.PlayHitSound();
+        //m_Target.PlayHitSound();
     }
 
     public void AddEndAnimationAction(PanelActionHandler p_Action)
