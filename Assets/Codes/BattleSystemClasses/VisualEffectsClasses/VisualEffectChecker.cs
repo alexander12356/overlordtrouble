@@ -11,6 +11,12 @@ public class VisualEffectChecker : MonoBehaviour
     }
 
     // Called from Animation
+    public void PlaySound(string p_Id)
+    {
+        AudioSystem.GetInstance().PlaySound(p_Id);
+    }
+
+    // Called from Animation
     public void EndAnimation()
     {
         Destroy(l_AttackEffectQueue.Dequeue().gameObject);

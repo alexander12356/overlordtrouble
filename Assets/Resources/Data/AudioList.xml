@@ -74,6 +74,8 @@
 	
 	<!-- Leshii Roar -->
 	<Audio id="LeshiiRoar" path="Sounds/Roar_leshiy"/>
+	<Audio id="LeshiiAttack" path="Sounds/BiggerDamage"/>
+	<Audio id="LeshiiHeal" path="Sounds/Heal"/>
 	
 	<!-- GUI -->
 	<Audio id="SelectOption" path="Sounds/SelectOptions"/>
