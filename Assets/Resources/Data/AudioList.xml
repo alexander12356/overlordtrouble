@@ -72,6 +72,9 @@
 	<Audio id="MainMenu" path="Musics/Close_To_Flame"/>
 	<Audio id="Forest" path="Musics/A Mission"/>
 	
+	<!-- Leshii Roar -->
+	<Audio id="LeshiiRoar" path="Sounds/Roar_leshiy"/>
+	
 	<!-- GUI -->
 	<Audio id="SelectOption" path="Sounds/SelectOptions"/>
 	<Audio id="ChooseOption" path="Sounds/ChosenOptions"/>

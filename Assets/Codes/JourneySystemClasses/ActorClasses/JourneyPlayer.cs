@@ -58,6 +58,7 @@ public class JourneyPlayer : JourneyActor
         }
         if (Input.GetKeyUp(KeyCode.Escape))
         {
+            AudioSystem.GetInstance().PlaySound("ChooseOption");
             JourneySystem.GetInstance().RunPauseMenu();
         }
         if (Input.GetKeyUp(KeyCode.I))
