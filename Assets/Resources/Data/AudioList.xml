@@ -35,17 +35,48 @@
 	<Audio id="Refresh"          path="Sounds/BuffSound"/>
 	<Audio id="GroundPower"      path="Sounds/BuffSound"/>
 	
+	<!-- Enemy Attacks -->
+	<!-- Bokalisk -->
+	<Audio id="HollowLook"   path="Sounds/BiggerDamage"/>
+	<Audio id="PeckerAttack" path="Sounds/BiggerDamage"/>
+	
+	<!-- Dualent -->
+	<Audio id="Bite"     path="Sounds/BiggerDamage"/>
+	<Audio id="DryRoots" path="Sounds/BiggerDamage"/>
+	
+	<!-- Feral slime -->
+	<Audio id="Tackle"   path="Sounds/BiggerDamage"/>
+	
+	<!-- Jackalope -->
+	<Audio id="HornStrike" path="Sounds/BiggerDamage"/>
+	
+	<!-- Ogre -->
+	<Audio id="Crush" path="Sounds/BiggerDamage"/>
+	<Audio id="Rest"  path="Sounds/Heal"/>
+	
+	<!-- ThirdsortRobber/SecondsortRobber -->
+	<Audio id="Stab" path="Sounds/BiggerDamage"/>
+	
+	<!-- Skwatwolf -->
+	<Audio id="Strike" path="Sounds/BiggerDamage"/>
+	<Audio id="Gopogovor"  path="Sounds/Debuff"/>
+	
+	<!-- Whillwhisp -->
+	<Audio id="EnEmber" path="Sounds/BiggerDamage"/>
+	<Audio id="HealingLight"  path="Sounds/Heal"/>
+	
+	<!-- Musics -->
 	<Audio id="Town" path="Musics/Living Voyage"/>
 	<Audio id="Battle" path="Musics/Crusade"/>
 	<Audio id="Road" path="Musics/Lord of the Land"/>
 	<Audio id="MainMenu" path="Musics/Close_To_Flame"/>
 	<Audio id="Forest" path="Musics/A Mission"/>
 	
-	<!-- Button -->
+	<!-- GUI -->
 	<Audio id="SelectOption" path="Sounds/SelectOptions"/>
 	<Audio id="ChooseOption" path="Sounds/ChosenOptions"/>
-	
 	<Audio id="ChangeLocation" path="Sounds/ChangeLocation"/>
 	
+	<!-- Journey -->
 	<Audio id="OpenChest" path="Sounds/OpenChest"/>	
 </AudioList>

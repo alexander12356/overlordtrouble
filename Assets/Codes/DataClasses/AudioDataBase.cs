@@ -21,7 +21,7 @@ public class AudioDataBase : Singleton<AudioDataBase>
         }
         catch
         {
-            Debug.LogWarning("Cannot find AudioClip, id: " + p_AudioId);
+            Debug.LogWarning("GAME_LOG: Cannot find AudioClip, id: " + p_AudioId);
             return null;
         }
     }

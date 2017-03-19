@@ -46,7 +46,7 @@ public class AudioSystem : MonoBehaviour
         l_AudioObject.Play(l_AudioClip, p_IsLooped);
         m_MusicList.Add(p_Id, l_AudioObject);
 
-        Debug.Log("Play Music:" + p_Id);
+        Debug.Log("GAME_LOG: Play Music:" + p_Id);
     }
 
     public void PlayTheme()
@@ -92,7 +92,7 @@ public class AudioSystem : MonoBehaviour
         }
         m_SoundAudioSource.PlayOneShot(l_AudioClip);
 
-        Debug.Log("Play Sound:" + p_Id);
+        Debug.Log("GAME_LOG: Play Sound:" + p_Id);
     }
 
     public void ResumeMainTheme()
