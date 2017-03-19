@@ -2,57 +2,87 @@
 	<Text id="Lang:ru">Русский</Text>
 	<Text id="Lang:en">English</Text>
 
-	<!-- Specials	-->
+	<!-- Specials -->
 	<!-- DewElemental -->
 	<Text id="Special:WaterDrops">Капли</Text>
 	<Text id="Special:WaterDrops:Description">Прием атаки: 2сп\n\nУрон 2 очка по всем врагам\n\nЭлемент: Вода\n\nЭти капли бьют чуток больнее, чем тычки пальцами</Text>
 	<Text id="Special:Slap">Шлепок</Text>
+	<Text id="Special:Slap:Description">Прием атаки: 2сп\n\nУрон 3 очка\n\nЭлемент: Физический\n\nКогда твои руки как лапша</Text>
 	<Text id="Special:ProtectiveShell">Защитная оболочка</Text>
+	<Text id="Special:ProtectiveShell:Description">Прием защиты: 2сп\n\nУвеличивает стат защиты на 2 очка, действует 3 хода\n\nПредставь, что этот пузырь тебя защищает, ведь он держится на твоем честном слове.</Text>
 	
 	<!-- LesserWaterElemental -->
 	<Text id="Special:WaterBullet">Водяная пуля</Text>
+	<Text id="Special:WaterBullet:Description">Прием атаки: 4сп\n\nУрон 4 очка\n\nЭлемент: Вода\n\nКапля воды, разогнанная до пугающих скоростей</Text>
 	<Text id="Special:WaterDash">Ударный рывок</Text>
+	<Text id="Special:WaterDash:Description">Прием атаки: 9сп\n\nУрон 8 очка\n\nЭлемент: Физический\n\nУдар с разгона, использующий большую струю воды для ускорения.</Text>
 	<Text id="Special:HealingSplash">Целебная струя</Text>
+	<Text id="Special:HealingSplash:Description">Прием исцеления: 2сп\n\nЛечит 5хп\n\nИспользуя окружающую магию на воде можно дать ей целебные свойства.</Text>
 	
 	<!-- Salamanti -->
 	<Text id="Special:TailWhap">Удар хвостом</Text>
+	<Text id="Special:TailWhap:Description">Прием атаки: 5сп\n\nУрон 5 очков\n\nЭлемент: физический\n\nСлабее чем меч, но мощнее чем палка.</Text>
 	<Text id="Special:Slash">Разрез</Text>
+	<Text id="Special:Slash:Description">Прием атаки: 6сп\n\nУрон 6 очков\n\nЭлемент: физический\n\nЭти когти не для красоты.</Text>
 	<Text id="Special:Molting">Сброс кожи</Text>
+	<Text id="Special:Molting:Description">Прием исцеления: 5сп\n\nУбирает дебаффы\n\nСнимать свою кожу во время битвы… чуток магии и это сработает.</Text>
+	
 	
 	<!-- Brownie -->
 	<Text id="Special:StaffStrike">Удар тростью</Text>
+	<Text id="Special:StaffStrike:Description">Прием атаки: 4сп\n\nУрон 4 очка\n\nЭлемент: Физический\n\nУсиленный с помощью магии удар тростью.</Text>
 	<Text id="Special:Ember">Искра</Text>
+	<Text id="Special:Ember:Description">Прием атаки: 8сп\n\nУрон 7 очков\n\nЭлемент: Огонь\n\nДаже низшие заклинания элемента огня способны вызывать страх.</Text>
 	<Text id="Special:Concentration">Концентрация</Text>
+	<Text id="Special:Concentration:Description">Прием улучшения: 2 сп\n\nПовышение стата атаки на 5 очков, действует 5 ходов\n\nКонцентрируя окружающую ману в плотный сгусток, можно усилить мощь своих атак используя силу из этого сгустка.</Text>
 	
 	<!-- Water Elemental -->
 	<Text id="Special:WaterFusillade">Водный пулемет</Text>
+	<Text id="Special:WaterFusillade:Description">Прием атаки: 6сп\n\nУрон 4 очка по всем врагам\n\nЭлемент: Вода\n\nКогда одной пули недостаточно.</Text>
 	<Text id="Special:IceHarpoon">Ледяной гарпун</Text>
+	<Text id="Special:IceHarpoon:Description">Прием атаки: 11сп\n\nУрон 10 очков, 30% шанс на понижение урона врага на 20%.\n\nЭлемент: Физический\n\nЗамороженная струя воды, попасть под это будет неприятно.</Text>
 	<Text id="Special:IceShield">Ледяной щит</Text>
+	<Text id="Special:IceShield:Description">Прием защиты: 5сп\n\nПонижает получаемый урон на 60%, действует 1 ход\n\nМоментальный щит из льда, действует недолго но эффективно.</Text>
 	
 	<!-- Earth Elemental -->
 	<Text id="Special:Playercrush">Каменный пресс</Text>
+	<Text id="Special:Playercrush:Description">Прием атаки: 12сп\n\nУрон 12 очков\n\nЭлемент: Земля\n\nБыть между двумя каменными столбами, когда они несутся на тебя мягко говоря неприятно.</Text>
 	<Text id="Special:Pillarstones">Сокрушение</Text>
+	<Text id="Special:Pillarstones:Description">Прием атаки: 5сп\n\nУрон 7 очков\n\nЭлемент: Физический\n\nКто сказал, что грубая сила ничего не решает?</Text>
 	<Text id="Special:Refresh">Обновление</Text>
+	<Text id="Special:Refresh:Description">Прием исцеления: 4сп\n\nУбирает дебаффы\n\nКакими бы ни были неприятности достаточно просто их проигнорировать.</Text>
 	
 	<!-- Hobgoblin -->
 	<Text id="Special:PoisonedDagger">Ядовитый кинжал</Text>
+	<Text id="Special:PoisonedDagger:Description">Прием атаки: 6сп\n\nУрон: 5 очков, отравляет врага, 2 урона за ход, действует 5 ходов.\n\n Элемент: физический\n\nОдноразовый кинжал, он настолько грязный, что стал ядовитым.</Text>
 	<Text id="Special:ManaBeam">Луч маны</Text>
+	<Text id="Special:ManaBeam:Description">Прием атаки: 10сп\n\nУрон: 10 очков\n\nЭлемент: Мана\n\nКозырь хобгоблина - мощный луч маны.</Text>
 	<Text id="Special:Accelerate">Ускорение</Text>
+	<Text id="Special:Accelerate:Description">Прием улучшения: 8сп\n\nПоследняя атака монстайла производится 2 раза, действует 4 хода\n\nВ бою зачастую решает не сила, а скорость.</Text>
 	
 	<!-- Mud Dragling -->
 	<Text id="Special:BreathOfEarth">Таран</Text>
+	<Text id="Special:BreathOfEarth:Description">Прием атаки: 14сп\n\nУрон 13 очков\n\nЭлемент: Физический\n\nМассивный удар головой с разгона.</Text>
 	<Text id="Special:RammingAttack">Дыхание земли</Text>
+	<Text id="Special:RammingAttack:Description">Прием атаки: 10сп\n\nУрон 9 очков\n\nЭлемент: Земля\n\nГрязь покрытая мощными пищеварительными соками, добавьте к этому щепотку магии и вы получите дыхание земли.</Text>
 	<Text id="Special:GroundPower">Сила земли</Text>
+	<Text id="Special:GroundPower:Description">Прием улучшения: 6сп\n\nПовышение статов защиты и атаки на 10 очков, действует 5 ходов\n\nДля принятия силы земли нужно быть в контакте с нею.</Text>
 	
 	<!-- Cat Shi -->
 	<Text id="Special:WaveOfDarkness">Волна тьмы</Text>
+	<Text id="Special:WaveOfDarkness:Description">Прием атаки: 8сп\n\nУрон 5 очков по всем врагам\n\nЭлемент: Тьма.\n\nОпасна не сама тьма, а то, что в ней скрывается… в данном случае скрываться в ней будете вы.</Text>
 	<Text id="Special:BigClaw">Большой коготь</Text>
+	<Text id="Special:BigClaw:Description">Прием атаки: 7сп\n\nУрон 8 очков\n\nЭлемент: Физический\n\nВы показываете большой коготь врагам… то есть вы царапаете им врагов.</Text>
 	<Text id="Special:MirrorOfTheAbyss">Зеркало тьмы</Text>
+	<Text id="Special:MirrorOfTheAbyss:Description">Прием защиты: 6сп\n\n40% вражеского урона будет возвращено обратно, действует до конца хода\n\nТеперь вы бездна которая смотрит на того, кто смотрит в бездну.</Text>
 	
 	<!-- Domovoy -->
 	<Text id="Special:MagicPunch">Волшебный кулак</Text>
+	<Text id="Special:MagicPunch:Description">Прием атаки: 9сп\n\nУрон 8 очков\n\nЭлемент: Мана\n\nУлучшенная версия удара тростью, но на кулаке.</Text>
 	<Text id="Special:MagicSphere">Сфера магии</Text>
+	<Text id="Special:MagicSphere:Description">Прием атаки: 13сп\n\nУрон 12 очков\n\nЭлемент: Мана\n\nКонцентрируя окружающую ману в плотный сгусток, можно также бросить его на врагов, но это требует большего опыта и магии.</Text>
 	<Text id="Special:Cleanliness">Чистота</Text>
+	<Text id="Special:Cleanliness:Description">Прием исцеления: 4сп\n\nУбирает статусные эффекты\n\nЧистка хорошо влияет на разум и тело.</Text>
 	
 	<!-- effect's description -->
 	<Text id="Effects:Attack">Урон: %d</Text>

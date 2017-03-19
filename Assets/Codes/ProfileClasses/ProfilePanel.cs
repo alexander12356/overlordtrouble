@@ -219,6 +219,12 @@ public class ProfilePanel : Panel
         }
     }
 
+    private void HideSpecialDescription()
+    {
+        m_SpecialDescriptionText.text = "";
+        m_SpecialStatus.Selected(false);
+    }
+
     private void SelectSpecial()
     {
         PanelButtonProfileSpecial l_SpecialButton = (PanelButtonProfileSpecial)m_SpecialsButtonList.currentButton;
@@ -307,6 +313,7 @@ public class ProfilePanel : Panel
         m_SpecialsButtonList.isActive = false;
         m_SpecialsButtonList.AddKeyArrowAction(ShowSpecialDescription);
         m_SpecialsButtonList.AddCancelAction(ActiveProfilePanel);
+        m_SpecialsButtonList.AddCancelAction(HideSpecialDescription);
 
         m_SpecialButtonListScrolling = transform.FindChild("SpecialList").GetComponentInChildren<ButtonListScrolling>();
         m_SpecialsButtonList.AddKeyArrowAction(m_SpecialButtonListScrolling.CheckScrolling);
@@ -320,6 +327,7 @@ public class ProfilePanel : Panel
         m_ProfileButtonList[1].AddAction(OpenImprovePanel);
         m_ProfileButtonList[1].title = LocalizationDataBase.GetInstance().GetText("GUI:Profile:OpenImprovePanel");
         m_ProfileButtonList[2].AddAction(ActiveSpecialListPanel);
+        m_ProfileButtonList[2].AddAction(ShowSpecialDescription);
         m_ProfileButtonList.AddCancelAction(ReturnToJourney);
     }
 
