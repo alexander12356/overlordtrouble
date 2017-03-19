@@ -1,24 +1,51 @@
 <AudioList>
-	<Audio id="Player_BaseAttack" path="Sounds/Player/Attack"/>
-	<Audio id="Player_Hit"        path="Sounds/Player/Hit"/>
+	<Audio id="Player_BaseAttack" path="Sounds/BiggerDamage"/>
 	
-	<Audio id="PeckerAttack" path="Sounds/Skwatwolf/Attack"/>
-	<Audio id="Attack" path="Sounds/Skwatwolf/Attack"/>
-	<Audio id="Fisting"   path="Sounds/Skwatwolf/Attack"/>
-	<Audio id="Racket"   path="Sounds/Skwatwolf/Attack"/>
+	<!-- Special -->
+	<Audio id="BigClaw"          path="Sounds/BiggerDamage"/>
+	<Audio id="BreathOfEarth"    path="Sounds/BiggerDamage"/>
+	<Audio id="Ember" 		     path="Sounds/BiggerDamage"/>
+	<Audio id="IceHarpoon"       path="Sounds/BiggerDamage"/>
+	<Audio id="MagicPunch"       path="Sounds/BiggerDamage"/>
+	<Audio id="MagicSphere"      path="Sounds/BiggerDamage"/>
+	<Audio id="ManaBeam"         path="Sounds/BiggerDamage"/>
+	<Audio id="Pillarstones"     path="Sounds/BiggerDamage"/>
+	<Audio id="Playercrush" 	 path="Sounds/BiggerDamage"/>
+	<Audio id="PoisonedDagger"   path="Sounds/BiggerDamage"/>
+	<Audio id="RammingAttack"    path="Sounds/BiggerDamage"/>
+	<Audio id="Slap"             path="Sounds/BiggerDamage"/>
+	<Audio id="Slash"            path="Sounds/BiggerDamage"/>
+	<Audio id="StaffStrike"      path="Sounds/BiggerDamage"/>
+	<Audio id="StonePress"       path="Sounds/BiggerDamage"/>
+	<Audio id="TailWhap"         path="Sounds/BiggerDamage"/>
+	<Audio id="WaterBullet"      path="Sounds/BiggerDamage"/>
+	<Audio id="WaterDash"        path="Sounds/BiggerDamage"/>
+	<Audio id="WaterDrops"       path="Sounds/BiggerDamage"/>
+	<Audio id="WaterFusillade"   path="Sounds/BiggerDamage"/>
+	<Audio id="WaveOfDarkness"   path="Sounds/BiggerDamage"/>
 	
-	<Audio id="Bokalisk_Hit"    path="Sounds/Skwatwolf/hit"/>
-	<Audio id="Dualent_Hit"    path="Sounds/Skwatwolf/hit"/>
-	<Audio id="Skwatwolf_Hit"    path="Sounds/Skwatwolf/hit"/>
-	<Audio id="ThirdsortRobber_Hit"    path="Sounds/Skwatwolf/hit"/>
-	
-	<Audio id="TailWhapMonstyle"   path="Sounds/Monstyle/TailWhap"/>
-	<Audio id="WaterDropsMonstyle" path="Sounds/Monstyle/WaterDrops"/>
-	<Audio id="SlapMonstyle"       path="Sounds/Monstyle/Slap"/>
+	<Audio id="Accelerate"       path="Sounds/BuffSound"/>
+	<Audio id="Cleanliness"      path="Sounds/BuffSound"/>
+	<Audio id="Concentration"    path="Sounds/BuffSound"/>
+	<Audio id="HealingSplash"    path="Sounds/Heal"/>
+	<Audio id="IceShield"        path="Sounds/BuffSound"/>
+	<Audio id="Molting"          path="Sounds/BuffSound"/>
+	<Audio id="MirrorOfTheAbyss" path="Sounds/BuffSound"/>
+	<Audio id="ProtectiveShell"  path="Sounds/BuffSound"/>
+	<Audio id="Refresh"          path="Sounds/BuffSound"/>
+	<Audio id="GroundPower"      path="Sounds/BuffSound"/>
 	
 	<Audio id="Town" path="Musics/Living Voyage"/>
 	<Audio id="Battle" path="Musics/Crusade"/>
 	<Audio id="Road" path="Musics/Lord of the Land"/>
 	<Audio id="MainMenu" path="Musics/Close_To_Flame"/>
 	<Audio id="Forest" path="Musics/A Mission"/>
+	
+	<!-- Button -->
+	<Audio id="SelectOption" path="Sounds/SelectOptions"/>
+	<Audio id="ChooseOption" path="Sounds/ChosenOptions"/>
+	
+	<Audio id="ChangeLocation" path="Sounds/ChangeLocation"/>
+	
+	<Audio id="OpenChest" path="Sounds/OpenChest"/>	
 </AudioList>

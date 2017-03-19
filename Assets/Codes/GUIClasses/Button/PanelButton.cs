@@ -143,6 +143,8 @@ public class PanelButton : MonoBehaviour
         if (m_ConfirmAction != null)
         {
             m_ConfirmAction();
+
+            AudioSystem.GetInstance().PlaySound("ChooseOption");
         }
         else
         {
@@ -152,6 +154,8 @@ public class PanelButton : MonoBehaviour
         if (m_ConfirmUnityAction != null)
         {
             m_ConfirmUnityAction.Invoke();
+
+            AudioSystem.GetInstance().PlaySound("ChooseOption");
         }
     }
 

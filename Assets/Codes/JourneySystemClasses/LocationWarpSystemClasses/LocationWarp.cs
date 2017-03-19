@@ -18,6 +18,8 @@ public class LocationWarp : MonoBehaviour
         Transform collTransform = otherCollider.gameObject.transform.parent;
         if (collTransform.tag == "Player" && enabled)
         {
+            AudioSystem.GetInstance().PlaySound("ChangeLocation");
+
             PlayerPrefs.SetString("SenderLocation", m_SenderLocationId);
             PlayerPrefs.SetString("TargetRoomId", m_TargetRoomId);
             JourneySystem.GetInstance().StartLocation(m_TargetLocationId);

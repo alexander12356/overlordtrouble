@@ -112,6 +112,8 @@ public class ButtonList : MonoBehaviour
         m_CurrentButtonId--;
 
         CheckSelectPosition();
+
+        AudioSystem.GetInstance().PlaySound("SelectOption");
     }
 
     public void AddUpOutwardAction(PanelButtonActionHandler p_Action)
@@ -130,6 +132,8 @@ public class ButtonList : MonoBehaviour
         m_CurrentButtonId++;
 
         CheckSelectPosition();
+
+        AudioSystem.GetInstance().PlaySound("SelectOption");
     }
 
     public void AddButton(PanelButton p_Button)

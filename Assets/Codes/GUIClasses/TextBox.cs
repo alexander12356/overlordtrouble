@@ -136,6 +136,8 @@ public class TextBox : MonoBehaviour
 
     private void NextPhrase()
     {
+        AudioSystem.GetInstance().PlaySound("SelectOption");
+
         if (m_IsTextShowing == true)
         {
             SetTalking(false);

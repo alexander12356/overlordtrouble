@@ -9,6 +9,7 @@ public class AudioSystem : MonoBehaviour
     private string m_ThemeId = string.Empty;
     private float m_MusicVolume = 1.0f;
     private float m_SoundVolume = 1.0f;
+    private AudioSource m_SoundAudioSource = null;
 
     public static AudioSystem GetInstance()
     {
@@ -28,6 +29,8 @@ public class AudioSystem : MonoBehaviour
     public void Awake()
     {
         m_Instance = this;
+
+        m_SoundAudioSource = GetComponent<AudioSource>();
     }
 
     public void PlayMusic(string p_Id, bool p_IsLooped = true)
@@ -82,7 +85,14 @@ public class AudioSystem : MonoBehaviour
 
     public void PlaySound(string p_Id)
     {
+        AudioClip l_AudioClip = AudioDataBase.GetInstance().GetAudioClip(p_Id);
+        if (l_AudioClip == null)
+        {
+            return;
+        }
+        m_SoundAudioSource.PlayOneShot(l_AudioClip);
 
+        Debug.Log("Play Sound:" + p_Id);
     }
 
     public void ResumeMainTheme()

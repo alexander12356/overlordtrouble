@@ -42,6 +42,8 @@ public class Warp : MonoBehaviour
         Transform collTransform = otherCollider.gameObject.transform.parent;
         if (collTransform.tag == "Player" && enabled)
         {
+            AudioSystem.GetInstance().PlaySound("ChangeLocation");
+
             ScreenFader l_ScreenFader = JourneySystem.GetInstance().panelManager.screenFader;
 
             collTransform.GetComponent<JourneyPlayer>().SetActive(false);

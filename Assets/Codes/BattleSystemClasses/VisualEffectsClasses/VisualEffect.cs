@@ -68,7 +68,8 @@ public class VisualEffect : MonoBehaviour
     // Called from animation
     public void PlaySound()
     {
-        m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_Id));
+        AudioSystem.GetInstance().PlaySound(m_Id);
+        //m_AudioSource.PlayOneShot(AudioDataBase.GetInstance().GetAudioClip(m_Id));
         //m_Target.PlayHitSound();
     }
 
