@@ -413,7 +413,7 @@ public class ProfilePanel : Panel
     {
         m_ClassName.text = LocalizationDataBase.GetInstance().GetText("Improvement:" + PlayerData.GetInstance().GetCurrentEnchancement());
         m_ClassDescription.text = LocalizationDataBase.GetInstance().GetText("Improvement:" + PlayerData.GetInstance().GetCurrentEnchancement() + ":Description");
-        m_ClassSpecialty.text = LocalizationDataBase.GetInstance().GetText("Improvement:" + PlayerData.GetInstance().GetCurrentEnchancement() + ":Specialty");
+        m_ClassSpecialty.text = "";//LocalizationDataBase.GetInstance().GetText("Improvement:" + PlayerData.GetInstance().GetCurrentEnchancement() + ":Specialty");
     }
     #endregion
 }
