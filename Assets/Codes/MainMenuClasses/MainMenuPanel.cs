@@ -111,6 +111,10 @@ public class MainMenuPanel : Panel
         l_ButtonSettings.title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:Settings");
         mainMenuButtonList.AddButton(l_ButtonSettings);
 
+        GreenlightButton l_GreenlightButton = Instantiate(GreenlightButton.prefab);
+        l_GreenlightButton.AddAction(OpenGreenlightPage);
+        mainMenuButtonList.AddButton(l_GreenlightButton);
+
         MainMenuButton l_ButtonQuit = Instantiate(MainMenuButton.prefab);
         l_ButtonQuit.AddAction(QuitGame);
         l_ButtonQuit.title = LocalizationDataBase.GetInstance().GetText("GUI:MainMenuPanel:Exit");
@@ -177,6 +181,11 @@ public class MainMenuPanel : Panel
     {
         LocalizationDataBase.GetInstance().ChangeLanguage(p_LangId);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void OpenGreenlightPage()
+    {
+        Application.OpenURL("http://steamcommunity.com/sharedfiles/filedetails/?id=868855714");
     }
 
     public override void UpdatePanel()

@@ -755,4 +755,9 @@
 	<Text id="Dialog:Forest:BigTree:1">Это Великое Древо. Его легко можно увидеть за пределами леса.</Text>
 	<Text id="Dialog:Forest:BigTree:2">если приглядеться, то это громадное лицо выглядит очень знакомым.</Text>
 	<Text id="Dialog:Forest:BigTree:3">ваши хп и сп восстановлены до максимума.</Text>
+	
+	<!-- Greenlight -->
+	<Text id="Dialog:Greenlight">Хотите проголосовать за эту игру в SteamGreenlight?</Text>
+	<Text id="Dialog:Greenlight:Yes">Да</Text>
+	<Text id="Dialog:Greenlight:No">Нет</Text>
 </Localization>
