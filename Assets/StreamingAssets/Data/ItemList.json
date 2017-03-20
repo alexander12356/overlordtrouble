@@ -140,9 +140,13 @@
 			"Effect":
 			{
 				"Restoring" :
-						{
-							"Value" : 4.0
-						}
+				{
+					"Value" : 20.0
+				},
+				"Healing" :
+				{
+					"Value" : 20.0
+				}
 			}
 		},
 		{
