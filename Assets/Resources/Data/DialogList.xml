@@ -829,6 +829,12 @@
 		</DialogNode>
 	</Dialog>
 	
+	<Dialog id="Leshii_Defated_Special:9" startNode="Talk" avatarPath="Sprites/Creations/Leshii/LeshiyTrueFormAvatar">
+		<DialogNode id="Talk">
+			<Text>Dialog:Leshii_Defated_Special:10</Text>
+		</DialogNode>
+	</Dialog>
+	
 	<Dialog id="Leshii_Common_Simple" startNode="Talk" avatarPath="Sprites/Creations/Leshii/Avatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:Leshii_Common_Simple</Text>
