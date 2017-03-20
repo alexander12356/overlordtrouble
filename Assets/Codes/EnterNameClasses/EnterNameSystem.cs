@@ -22,6 +22,7 @@ public class EnterNameSystem : MonoBehaviour
 
     public void Awake()
     {
+        GameManager.GetInstance();
         m_Instance = this;
         m_MovieTexture = m_MeshRenderer.material.mainTexture as MovieTexture;
     }
