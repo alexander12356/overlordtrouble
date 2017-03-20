@@ -1024,18 +1024,18 @@
 	</Dialog>
 	
 	<!-- Complete Bokalisk-->
-	<Dialog id="CompleteBokalisk:Simple" startNode="Talk" avatarPath="">
+	<Dialog id="CompleteBokalisk:Simple" startNode="Talk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:CompleteBokalisk:Simple</Text>
 		</DialogNode>
 	</Dialog>
 	
-	<Dialog id="CompleteBokalisk:Special:1" startNode="Talk" avatarPath="">
+	<Dialog id="CompleteBokalisk:Special:1" startNode="Talk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:CompleteBokalisk:Special:1</Text>
 		</DialogNode>
 	</Dialog>
-	<Dialog id="CompleteBokalisk:Special:2" startNode="Talk" avatarPath="">
+	<Dialog id="CompleteBokalisk:Special:2" startNode="Talk" avatarPath="Sprites/Creations/Bokalisk/Avatar">
 		<DialogNode id="Talk">
 			<Text>Dialog:CompleteBokalisk:Special:2</Text>
 		</DialogNode>
