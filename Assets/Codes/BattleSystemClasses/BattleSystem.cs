@@ -256,7 +256,7 @@ public class BattleSystem : MonoBehaviour
         SetVisibleAvatarPanel(false);
 
         TextPanel l_TextPanel = Instantiate(TextPanel.prefab);
-        l_TextPanel.SetText(new List<string>() { LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Lose", new string[] { BattlePlayer.GetInstance().actorName } ) });
+        l_TextPanel.SetText(new List<string>() { LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Lose", new string[] { BattlePlayer.GetInstance().actorName, BattlePlayer.GetInstance().actorName } ) });
         l_TextPanel.AddButtonAction(ReturnToMainMenu);
 
         BattleShowPanelStep l_Step = new BattleShowPanelStep(l_TextPanel);
