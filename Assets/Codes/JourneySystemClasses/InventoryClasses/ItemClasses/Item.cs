@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item
 {
     private List<BaseEffect> m_EffectsList = new List<BaseEffect>();
     private string m_Id;
@@ -33,6 +32,13 @@ public class Item : MonoBehaviour
         {
             m_EffectsList[i].Run(p_Sender, p_Sender);
         }
-        return;
+    }
+
+    public void FinishEffects(IEffectInfluenced p_Target)
+    {
+        for (int i = 0; i < m_EffectsList.Count; i++)
+        {
+            m_EffectsList[i].EndImmediately(p_Target);
+        }
     }
 }

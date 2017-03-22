@@ -18,7 +18,9 @@ public enum EffectIds
     EnemyHealing,
     StunPossibility,
     Poison,
-    Acceleration
+    Acceleration,
+    GeneralSpecialPointsBuff,
+    SpeedBuff
 }
 
 public class EffectSystem : Singleton<EffectSystem>
@@ -115,6 +117,20 @@ public class EffectSystem : Singleton<EffectSystem>
                 int l_AccelerationDuration = Convert.ToInt32(p_EffectData.parameters[2]);
 
                 l_Effect = new Acceleration(p_Special, l_AccelerationChance, l_AccelerationRepeatCount, l_AccelerationDuration);
+                break;
+            case EffectIds.GeneralSpecialPointsBuff:
+                int l_GeneralSpecialPointsBuffChance = Convert.ToInt32(p_EffectData.parameters[0]);
+                int l_GeneralSpecialPointsValue = Convert.ToInt32(p_EffectData.parameters[1]);
+                int l_GeneralSpecialPointsDuration = Convert.ToInt32(p_EffectData.parameters[2]);
+
+                l_Effect = new GeneralSpecialPointsBuff(p_Special, l_GeneralSpecialPointsBuffChance, l_GeneralSpecialPointsValue, l_GeneralSpecialPointsDuration);
+                break;
+            case EffectIds.SpeedBuff:
+                int l_SpeedBuffChance = Convert.ToInt32(p_EffectData.parameters[0]);
+                int l_SpeedBuffPointsValue = Convert.ToInt32(p_EffectData.parameters[1]);
+                int l_SpeedBuffDuration = Convert.ToInt32(p_EffectData.parameters[2]);
+
+                l_Effect = new SpeedBuff(p_Special, l_SpeedBuffChance, l_SpeedBuffPointsValue, l_SpeedBuffDuration);
                 break;
         }
 
@@ -257,6 +273,22 @@ public class EffectSystem : Singleton<EffectSystem>
 
                     EffectData l_AccelerationData = new EffectData(l_EffectType, new string[] { l_AccelerationChance.ToString(), l_AccelerationRepeatCount.ToString(), l_AccelerationDuration.ToString() });
                     p_EffectList.Add(l_AccelerationData);
+                    break;
+                case EffectIds.GeneralSpecialPointsBuff:
+                    int l_GeneralSpecialPointsBuffChance = (int)p_JsonObject[i]["Chance"].i;
+                    int l_GeneralSpecialPointsValue = (int)p_JsonObject[i]["Value"].i;
+                    int l_GeneralSpecialPointsDuration = (int)p_JsonObject[i]["Duration"].i;
+
+                    EffectData l_GeneralSpecialPointsBuffData = new EffectData(l_EffectType, new string[] { l_GeneralSpecialPointsBuffChance.ToString(), l_GeneralSpecialPointsValue.ToString(), l_GeneralSpecialPointsDuration.ToString() });
+                    p_EffectList.Add(l_GeneralSpecialPointsBuffData);
+                    break;
+                case EffectIds.SpeedBuff:
+                    int l_SpeedBuffChance = (int)p_JsonObject[i]["Chance"].i;
+                    int l_SpeedBuffValue = (int)p_JsonObject[i]["Value"].i;
+                    int l_SpeedBuffDuration = (int)p_JsonObject[i]["Duration"].i;
+
+                    EffectData l_SpeedBuffData = new EffectData(l_EffectType, new string[] { l_SpeedBuffChance.ToString(), l_SpeedBuffValue.ToString(), l_SpeedBuffDuration.ToString() });
+                    p_EffectList.Add(l_SpeedBuffData);
                     break;
             }
         }

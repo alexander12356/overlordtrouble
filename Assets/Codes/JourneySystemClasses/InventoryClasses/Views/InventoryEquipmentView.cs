@@ -144,9 +144,22 @@ public class InventoryEquipmentView : InventoryView
     {
         // TODO : Экипировать игрока выбранным предметом
         InventoryEquipmentItemButton l_ItemButton = (InventoryEquipmentItemButton)itemButtonList.currentButton;
-        InventorySlotButton l_SlotButton = (InventorySlotButton)slotButtonList.currentButton;    
+        InventorySlotButton l_SlotButton = (InventorySlotButton)slotButtonList.currentButton;
+
+        if (l_ItemButton.itemId != "")
+        {
+            Item l_Item = ItemDataBase.GetInstance().GetItem(l_ItemButton.itemId).CreateItem();
+            l_Item.Run(JourneySystem.GetInstance().player.statistics);
+        }
+        if (l_SlotButton.itemId != "")
+        {
+            Item l_Item = ItemDataBase.GetInstance().GetItem(l_SlotButton.itemId).CreateItem();
+            l_Item.FinishEffects(JourneySystem.GetInstance().player.statistics);
+        }
+
         ChangeItemCount(l_SlotButton.itemId, l_ItemButton.itemId);
         l_SlotButton.SelectItem(l_ItemButton.itemId);
+
         // TODO: Переделать под группу
         PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
     }
@@ -156,6 +169,13 @@ public class InventoryEquipmentView : InventoryView
         InventoryEquipmentItemButton l_ItemButton = (InventoryEquipmentItemButton)itemButtonList.currentButton;
         InventorySlotButton l_SlotButton = (InventorySlotButton)slotButtonList.currentButton;
         ChangeItemCount(l_SlotButton.itemId, l_ItemButton.itemId);
+
+        if (l_SlotButton.itemId != "")
+        {
+            Item l_Item = ItemDataBase.GetInstance().GetItem(l_SlotButton.itemId).CreateItem();
+            l_Item.FinishEffects(JourneySystem.GetInstance().player.statistics);
+        }
+
         l_SlotButton.DeselectItem();
         PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
     }

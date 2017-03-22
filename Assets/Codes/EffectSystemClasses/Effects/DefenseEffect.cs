@@ -17,20 +17,28 @@
     {
         base.Run(p_Sender, p_Target);
 
-        m_Sender = p_Sender as BattleActor;
-
-        if (m_Sender.HasSpecial(m_Special.id))
+        if (BattleSystem.IsInstance())
         {
-            m_Sender.StackEffect(m_Special.id, this);
+
+            m_Sender = p_Sender as BattleActor;
+
+            if (m_Sender.HasSpecial(m_Special.id))
+            {
+                m_Sender.StackEffect(m_Special.id, this);
+            }
+            else
+            {
+                m_Sender.defenseStat += m_DefenseValue;
+                m_Sender.AddEffect(m_Special.id, this);
+                m_Sender.AddBuffIcon();
+            }
+
+            DamageSystem.GetInstance().AddEffectSpecial(m_Sender, m_Special);
         }
         else
         {
-            m_Sender.defenseStat += m_DefenseValue;
-            m_Sender.AddEffect(m_Special.id, this);
-            m_Sender.AddBuffIcon();
+            p_Target.defenseStat += m_DefenseValue;
         }
-
-        DamageSystem.GetInstance().AddEffectSpecial(m_Sender, m_Special);
     }
 
     public override void Upgrade()
@@ -71,5 +79,12 @@
 
         m_Sender.defenseStat += l_Effect.m_DefenseValue;
         m_DefenseValue += l_Effect.m_DefenseValue;
+    }
+
+    public override void EndImmediately(IEffectInfluenced p_Actor)
+    {
+        base.EndImmediately(p_Actor);
+
+        p_Actor.defenseStat -= m_DefenseValue;
     }
 }

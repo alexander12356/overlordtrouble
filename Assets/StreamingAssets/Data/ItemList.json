@@ -79,6 +79,11 @@
 			"Type" : "Weapon",
 			"Effect":
 			{
+				"AttackBuff" :
+				{
+					"Value" : 6.0,
+					"Duration" : 0.0
+				}
 			}
 		},
 		{
@@ -96,9 +101,9 @@
 			"Effect":
 			{
 				"Restoring" :
-					{
-						"Value" : 4.0
-					}
+				{
+					"Value" : 4.0
+				}
 			}
 		},
 		{
@@ -115,6 +120,17 @@
 			"Type" : "Bling",
 			"Effect":
 			{
+				"Defense" :
+				{
+					"Value" : 4.0,
+					"Duration" : 0.0
+				},
+				"GeneralSpecialPointsBuff" :
+				{
+					"Chance" : 100,
+					"Value" : 2,
+					"Duration" : 0
+				}
 			}
 		},
 		{
@@ -123,6 +139,17 @@
 			"Type" : "Bling",
 			"Effect":
 			{
+				"Defense" :
+				{
+					"Value" : 2.0,
+					"Duration" : 0.0
+				},
+				"SpeedBuff" :
+				{
+					"Chance" : 100,
+					"Value" : 4,
+					"Duration" : 0
+				}
 			}
 		},
 		{
@@ -131,6 +158,11 @@
 			"Type" : "Bling",
 			"Effect":
 			{
+				"Defense" :
+				{
+					"Value" : 8.0,
+					"Duration" : 0.0
+				}
 			}
 		},
 		{
@@ -155,6 +187,17 @@
 			"Type" : "Bling",
 			"Effect":
 			{
+				"Defense" :
+				{
+					"Value" : 4.0,
+					"Duration" : 0.0
+				},
+				"GeneralSpecialPointsBuff" :
+				{
+					"Chance" : 100,
+					"Value" : 5,
+					"Duration" : 0
+				}
 			}
 		},
 		{
@@ -163,6 +206,17 @@
 			"Type" : "Bling",
 			"Effect":
 			{
+				"Defense" :
+				{
+					"Value" : 3.0,
+					"Duration" : 0.0
+				},
+				"SpeedBuff" :
+				{
+					"Chance" : 100,
+					"Value" : 4,
+					"Duration" : 0
+				}
 			}
 		},
 		{
@@ -171,6 +225,11 @@
 			"Type" : "Bling",
 			"Effect":
 			{
+				"Defense" :
+				{
+					"Value" : 10.0,
+					"Duration" : 0.0
+				}
 			}
 		},
 		{
@@ -179,6 +238,17 @@
 			"Type" : "Weapon",
 			"Effect":
 			{
+				"AttackBuff" :
+				{
+					"Value" : 4.0,
+					"Duration" : 0.0
+				},
+				"SpeedBuff" :
+				{
+					"Chance" : 100,
+					"Value" : 2,
+					"Duration" : 0
+				}
 			}
 		},
 		{
@@ -187,6 +257,11 @@
 			"Type" : "Weapon",
 			"Effect":
 			{
+				"AttackBuff" :
+				{
+					"Value" : 4.0,
+					"Duration" : 0.0
+				}
 			}
 		},
 		{
@@ -195,6 +270,12 @@
 			"Type" : "MultipleUse",
 			"Effect":
 			{
+				"DefensePercent" :
+				{
+					"Chance" : 100,
+					"Value" : 30,
+					"Duration" : 1.0
+				}
 			}
 		}
 	]

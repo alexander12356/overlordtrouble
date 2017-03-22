@@ -44,4 +44,8 @@
     public virtual void EndImmediately()
     {
     }
+
+    public virtual void EndImmediately(IEffectInfluenced p_Actor)
+    {
+    }
 }

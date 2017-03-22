@@ -50,6 +50,11 @@ public class PlayerStatistics : MonoBehaviour, IEffectInfluenced
         get { return PlayerData.GetInstance().GetLevel(); }
         set { }
     }
+    public float speedStat
+    {
+        get { return PlayerData.GetInstance().GetStatValue("Speed"); }
+        set { PlayerData.GetInstance().GetStats()["Speed"] = (int)value; }
+    }
 
     public void Awake()
     {
