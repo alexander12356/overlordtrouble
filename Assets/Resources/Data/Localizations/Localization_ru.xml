@@ -45,10 +45,10 @@
 	<Text id="Special:IceShield:Description">Прием защиты: 5сп\n\nПонижает получаемый урон на 60%, действует 1 ход\n\nМоментальный щит из льда, действует недолго но эффективно.</Text>
 	
 	<!-- Earth Elemental -->
-	<Text id="Special:Playercrush">Каменный пресс</Text>
-	<Text id="Special:Playercrush:Description">Прием атаки: 12сп\n\nУрон 12 очков\n\nЭлемент: Земля\n\nБыть между двумя каменными столбами, когда они несутся на тебя, мягко говоря неприятно.</Text>
-	<Text id="Special:Pillarstones">Сокрушение</Text>
-	<Text id="Special:Pillarstones:Description">Прием атаки: 5сп\n\nУрон 7 очков\n\nЭлемент: Физический\n\nКто сказал, что грубая сила ничего не решает?</Text>
+	<Text id="Special:Playercrush">Сокрушение</Text>
+	<Text id="Special:Playercrush:Description">Прием атаки: 5сп\n\nУрон 7 очков\n\nЭлемент: Физический\n\nКто сказал, что грубая сила ничего не решает?</Text>
+	<Text id="Special:Pillarstones">Каменный пресс</Text>
+	<Text id="Special:Pillarstones:Description">Прием атаки: 12сп\n\nУрон 12 очков\n\nЭлемент: Земля\n\nБыть между двумя каменными столбами, когда они несутся на тебя, мягко говоря неприятно.</Text>
 	<Text id="Special:Refresh">Обновление</Text>
 	<Text id="Special:Refresh:Description">Прием исцеления: 4сп\n\nУбирает дебаффы\n\nКакими бы ни были неприятности, достаточно просто их проигнорировать.</Text>
 	
