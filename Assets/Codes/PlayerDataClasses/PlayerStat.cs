@@ -16,7 +16,6 @@ public class PlayerStat
         m_Stats.Add("Attack",         (int)p_JsonObject["Attack"].f);
         m_Stats.Add("Defense",        (int)p_JsonObject["Defense"].f);
         m_Stats.Add("Speed",          (int)p_JsonObject["Speed"].f);
-        m_Stats.Add("Fortune",        (int)p_JsonObject["Fortune"].f);
     }
 
     public Dictionary<string, int> GetStats()
