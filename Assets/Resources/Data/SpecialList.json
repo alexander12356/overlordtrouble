@@ -8,20 +8,20 @@
 		{
 			"Attack" :
 			{
-				"AttackValue" : 1.0
+				"AttackValue" : 3.0
 			}
 		}
 	},
 	"Slap" :
 	{
 		"Sp" : 2.0,
-		"Element" : "Water",
+		"Element" : "Physical",
 		"Aoe" : false,
 		"Effect" :
 		{
 			"Attack" :
 			{
-				"AttackValue" : 3.0
+				"AttackValue" : 6.0
 			}
 		}
 	},
@@ -35,7 +35,7 @@
 		{
 			"Defense" :
 			{
-				"Value" : 2.0,
+				"Value" : 3.0,
 				"Duration" : 3.0
 			}
 		}
@@ -49,26 +49,26 @@
 		{
 			"Attack" :
 			{
-				"AttackValue" : 4.0
+				"AttackValue" : 10.0
 			}
 		}
 	},
 	"WaterDash" :
 	{
-		"Sp" : 9.0,
+		"Sp" : 6.0,
 		"Element" : "Water",
 		"Aoe" : false,
 		"Effect" :
 		{
 			"Attack" :
 			{
-				"AttackValue" : 8.0
+				"AttackValue" : 15.0
 			}
 		}
 	},
 	"HealingSplash" :
 	{
-		"Sp" : 2.0,
+		"Sp" : 4.0,
 		"Element" : "Water",
 		"Aoe" : false,
 		"Myself" : true,
@@ -76,39 +76,39 @@
 		{
 			"Healing" :
 			{
-				"Value" : 5.0
+				"Value" : 12.0
 			}
 		}
 	},
 	"TailWhap" :
 	{
-		"Sp" : 5.0,
-		"Element" : "Earth",
+		"Sp" : 4.0,
+		"Element" : "Physical",
 		"Aoe" : false,
 		"Effect" :
 		{
 			"Attack" : 
 			{
-				"AttackValue" : 5.0
+				"AttackValue" : 11.0
 			}
 		}
 	},
 	"Slash" :
 	{
-		"Sp" : 6.0,
-		"Element" : "Earth",
+		"Sp" : 5.0,
+		"Element" : "Physical",
 		"Aoe" : false,
 		"Effect" :
 		{
 			"Attack" :
 			{
-				"AttackValue" : 6.0
+				"AttackValue" : 12.5
 			}
 		}
 	},
 	"Molting" :
 	{
-		"Sp" : 5.0,
+		"Sp" : 7.0,
 		"Element" : "Earth",
 		"Aoe" : false,
 		"Myself" : true,
@@ -128,26 +128,26 @@
 		{
 			"Attack" :
 			{
-				"AttackValue" : 4.0
+				"AttackValue" : 11.0
 			}
 		}
 	},
 	"Ember" :
 	{
-		"Sp" : 8.0,
+		"Sp" : 4.0,
 		"Element" : "Fire",
 		"Aoe" : false,
 		"Effect" :
 		{
 			"Attack" :
 			{
-				"AttackValue" : 7.0
+				"AttackValue" : 8.0
 			}
 		}
 	},
 	"Concentration" :
 	{
-		"Sp" : 2.0,
+		"Sp" : 7.0,
 		"Element" : "Fire",
 		"Aoe" : false,
 		"Myself" : true,
@@ -155,21 +155,267 @@
 		{
 			"AttackBuff" :
 			{
-				"Value" : 5,
+				"Value" : 7,
 				"Duration" : 5
 			}
 		}
 	},
-	"StonePress" :
+	"Pillarstones" :
 	{
-		"Sp" : 5.0,
+		"Sp" : 8.0,
 		"Element" : "Earth",
 		"Aoe" : false,
 		"Effect" :
 		{
 			"Attack" :
 			{
+				"AttackValue" : 22.0
+			}
+		}
+	},
+	"Playercrush" :
+	{
+		"Sp" : 6.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 14.0
+			}
+		}
+	},
+	"Refresh" :
+	{
+		"Sp" : 7.0,
+		"Element" : "NONE",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"ClearSpecialStatus" :
+			{
+			}
+		}
+	},
+	"WaterFusillade" :
+	{
+		"Sp" : 7.0,
+		"Element" : "Water",
+		"Aoe" : true,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 9.0
+			}
+		}
+	},
+	"IceHarpoon" :
+	{
+		"Sp" : 7.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 17.0
+			},
+			"AttackDebuff":
+			{
+				"Chance" : 100,
+				"Value" : 20,
+				"Duration" : 2
+			}
+		}
+	},
+	"IceShield" :
+	{
+		"Sp" : 5.0,
+		"Element" : "NONE",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"DefensePercent" :
+			{
+				"Chance" : 100,
+				"Value" : 60,
+				"Duration" : 1.0
+			}
+		}
+	},
+	"BreathOfEarth" : 
+	{
+		"Sp" : 7.0,
+		"Element" : "Earth",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 18.0
+			}
+		}
+	},
+	"RammingAttack" :
+	{
+		"Sp" : 8.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 20.0
+			}
+		}
+	},
+	"GroundPower" : 
+	{
+		"Sp" : 9.0,
+		"Element" : "NONE",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"AttackBuff" :
+			{
+				"Value" : 10.0,
+				"Duration" : 5.0
+			},
+			"Defense" :
+			{
+				"Value" : 10.0,
+				"Duration" : 5.0
+			}
+		}
+	},
+	"BigClaw" :
+	{
+		"Sp" : 6.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 15.0
+			}
+		}
+	},
+	"WaveOfDarkness" :
+	{
+		"Sp" : 5.0,
+		"Element" : "Dark",
+		"Aoe" : true,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 8.0
+			}
+		}
+	},
+	"MirrorOfTheAbyss" : 
+	{
+		"Sp" : 4.0,
+		"Element" : "NONE",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			
+		}
+	},
+	"PoisonedDagger":
+	{
+		"Sp" : 5.0,
+		"Element" : "Physical",
+		"Aoe" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
 				"AttackValue" : 10.0
+			},
+			"Poison" :
+			{
+				"Chance" : 100,
+				"Duration" : 2
+			}
+		}
+	},
+	"ManaBeam":
+	{
+		"Sp" : 8.0,
+		"Element" : "Mana",
+		"Aoe" : false,
+		"Myself" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 20.0
+			}
+		}
+	},
+	"Accelerate" :
+	{
+		"Sp" : 8.0,
+		"Element" : "NONE",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"Acceleration" :
+			{
+				"Chance" : 100,
+				"RepeatCount" : 2,
+				"Duration" : 4
+			}
+		}
+	},
+	"MagicPunch":
+	{
+		"Sp" : 7.0,
+		"Element" : "Mana",
+		"Aoe" : false,
+		"Myself" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 18.0
+			}
+		}
+	},
+	"MagicSphere":
+	{
+		"Sp" : 8.0,
+		"Element" : "Mana",
+		"Aoe" : false,
+		"Myself" : false,
+		"Effect" :
+		{
+			"Attack" :
+			{
+				"AttackValue" : 22.0
+			}
+		}
+	},
+	"Cleanliness" :
+	{
+		"Sp" : 8.0,
+		"Element" : "NONE",
+		"Aoe" : false,
+		"Myself" : true,
+		"Effect" :
+		{
+			"ClearSpecialStatus" :
+			{
 			}
 		}
 	}

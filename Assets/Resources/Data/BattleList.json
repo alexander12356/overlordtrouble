@@ -591,40 +591,55 @@
 			"Willwhishp"
 		]
 	},
+	"EventBattle_1": 
+	{
+		"Location" : "ForestCreeps",
+		"Event" : true,
+		"Enemy": 
+		[
+			"Skwatwolf",
+			"Skwatwolf",
+			"Skwatwolf"
+		]
+	},
+	"EventBattle_2": 
+	{
+		"Location" : "ForestCreeps",
+		"Event" : true,
+		"Enemy": 
+		[
+			"Dualent",
+			"Willwhishp",
+			"Dualent"
+		]
+	},
+	"EventBattle_3": 
+	{
+		"Location" : "ForestCreeps",
+		"Event" : true,
+		"Enemy": 
+		[
+			"Ogre",
+			"Ogre",
+			"Ogre"
+		]
+	},
+	"SecondRateRobberFight": 
+	{
+		"Location" : "ForestCreeps",
+		"Event" : true,
+		"Enemy": 
+		[
+			"SecondRateRobber"
+		]
+	},
 	"TestBattleSkwatwolf":
 	{
 		"Location" : "RoadThugs",
 		"Enemy": 
 		[
-			"Skwatwolf"
-		],
-		"Player":
-		{
-			"HP" : 20,
-			"MP" : 20
-		}
-	},
-	"TestBattleDualent":
-	{
-		"Location" : "ForestCreeps",
-		"Enemy": 
-		[
-			"Dualent"
-		],
-		"Player":
-		{
-			"HP" : 20,
-			"MP" : 20
-		}
-	},
-	"TestBattleWithTroicya":
-	{
-		"Location" : "ForestCreeps",
-		"Enemy": 
-		[
-			"Bokalisk",
-			"Skwatwolf",
-			"Dualent"
+			"Willwhishp",
+			"Jackalope"
 		],
 		"Player":
 		{
@@ -637,11 +652,26 @@
 		"Location" : "RoadThugs",
 		"Enemy": 
 		[
+			
 		],
 		"Player":
 		{
 			"HP" : 20,
 			"MP" : 20
 		}
+	},
+	"BattleBossLeshii_Simple":
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+		]
+	},
+	"BattleBossLeshii_Special":
+	{
+		"Location" : "RoadThugs",
+		"Enemy": 
+		[
+		]
 	}
 }

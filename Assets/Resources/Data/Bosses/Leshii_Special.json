@@ -1,18 +1,29 @@
 {
+	"Level" : 15,
+	"Attack" : 25,
+	"Defense" : 17,
+	"RightHandHealingValue" : 30,
+	"HandSummonCount" : 0,
+	"CriticalHealthValue" : 350,
 	"LeftHand" : 
 	{
-		"Level" : 1,
-		"Attack" : 1,
-		"Defense" : 1
-		"EffectChanse" : 
+		"DamageValue" : 4,
+		"Health" : 21,
+		"EffectChanse" : 25
 	},
 	"RightHand" :
 	{
-		"Attack" : 1,
-		"Defense" : 1
+		"DamageValue" : 4,
+		"Health" : 21,
+		"EffectChanse" : 50
 	},
 	"Body" :
 	{
-		"Defense" : 1
+		"Health" : 800
+	},
+	"SpecialAttack" :
+	{
+		"DamageValue" : 16,
+		"ChargeCount" : 5
 	}
 }

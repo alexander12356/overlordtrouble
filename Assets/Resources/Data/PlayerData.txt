@@ -10,11 +10,11 @@
 	"Experience" : 0,
 	"Stats" : 
 	{
-		"HealthPoints" : 20,
-		"MonstylePoints" : 20,
-		"Attack" : 1,
-        "Defense" : 1,
-        "Speed" : 1,
-        "Fortune" : 1
+		"HealthPoints" : 30,
+		"MonstylePoints" : 30,
+		"Attack" : 10,
+        "Defense" : 10,
+        "Speed" : 10,
+        "Fortune" : 10
 	}
 }

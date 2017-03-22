@@ -1,10 +1,10 @@
 {
 	"Id" : "Bokalisk",
-	"Attack" : 1,
-	"Defense" : 1,
-	"Speed" : 1,
-	"Level" : 1,
-	"Health" : 10,
+	"Attack" : 22,
+	"Defense" : 15,
+	"Speed" : 15,
+	"Level" : 3,
+	"Health" : 50,
 	"Element": "Live",
 	"Attacks" :
 	[
@@ -35,7 +35,7 @@
 			}
 		}
 	],
-	"Experience" : 15,
+	"Experience" : 150,
 	"Loot" :
 	[
 		{

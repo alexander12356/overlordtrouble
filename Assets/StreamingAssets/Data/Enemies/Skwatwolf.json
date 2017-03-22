@@ -1,10 +1,10 @@
 {
 	"Id" : "Skwatwolf",
-	"Attack" : 1,
-	"Defense" : 1,
-	"Speed" : 1,
-	"Level" : 1,
-	"Health" : 20,
+	"Attack" : 12,
+	"Defense" : 11,
+	"Speed" : 10,
+	"Level" : 2,
+	"Health" : 30,
 	"Element": "Dark",
 	"Attacks" :
 	[
@@ -34,7 +34,7 @@
 			}
 		}
 	],
-	"Experience" : 50,
+	"Experience" : 84,
 	"Loot" : 
 	[
 		{
