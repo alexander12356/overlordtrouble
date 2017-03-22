@@ -55,7 +55,6 @@ public class PlayerStat
         l_StatJson.AddField("Attack", m_Stats["Attack"]);
         l_StatJson.AddField("Defense", m_Stats["Defense"]);
         l_StatJson.AddField("Speed", m_Stats["Speed"]);
-        l_StatJson.AddField("Fortune", m_Stats["Fortune"]);
 
         return l_StatJson;
     }

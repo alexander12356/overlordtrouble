@@ -14,7 +14,6 @@
 		"MonstylePoints" : 30,
 		"Attack" : 10,
         "Defense" : 10,
-        "Speed" : 10,
-        "Fortune" : 10
+        "Speed" : 10
 	}
 }
