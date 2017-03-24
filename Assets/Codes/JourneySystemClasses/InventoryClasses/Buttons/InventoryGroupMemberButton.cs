@@ -108,4 +108,18 @@ public class InventoryGroupMemberButton : PanelButton
     {
         m_AvatarImage.sprite = p_AvatarSprite;
     }
+
+    // Временный костыль, пока не реализованы группы 
+    public void RefreshMemberData()
+    {
+        float l_Health = PlayerData.GetInstance().health;
+        float l_MaxHealth = PlayerData.GetInstance().GetStatValue("HealthPoints");
+        float l_SpecialPoints = PlayerData.GetInstance().specialPoints;
+        float l_MaxSpecialPoints = PlayerData.GetInstance().GetStatValue("MonstylePoints");
+        float l_AttackStat = PlayerData.GetInstance().GetStatValue("Attack");
+        float l_DefenseStat = PlayerData.GetInstance().GetStatValue("Defense");
+        float l_SpeedStat = PlayerData.GetInstance().GetStatValue("Speed");
+        GroupMemberData l_GroupMemberData = new GroupMemberData(l_Health, l_MaxHealth, l_SpecialPoints, l_MaxSpecialPoints, l_AttackStat, l_DefenseStat, l_SpeedStat);
+        groupMemberData = l_GroupMemberData;
+    }
 }

@@ -190,6 +190,17 @@ public abstract class InventoryView
         m_SpeedStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Speed") + " : " + l_GroupMemberButton.groupMemberData.m_SpeedStat;
     }
 
+    public void RefreshGroupMemberInfo()
+    {
+        InventoryGroupMemberButton l_GroupMemberButton = (InventoryGroupMemberButton)groupButtonList[groupButtonList.currentButtonId];
+        l_GroupMemberButton.RefreshMemberData(); // Вызов метода-костыля
+        m_HealthStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:HealthPoints") + " : " + l_GroupMemberButton.groupMemberData.m_Health;
+        m_SpecialPointStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:MonstylePoints") + " : " + l_GroupMemberButton.groupMemberData.m_SpecialPoints;
+        m_AttackStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Attack") + " : " + l_GroupMemberButton.groupMemberData.m_AttackStat;
+        m_DefenseStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Defense") + " : " + l_GroupMemberButton.groupMemberData.m_DefenseStat;
+        m_SpeedStatText.text = LocalizationDataBase.GetInstance().GetText("Stat:Speed") + " : " + l_GroupMemberButton.groupMemberData.m_SpeedStat;
+    }
+
     // Шаблонный метод
     private void InitSlots(Dictionary<string, InventorySlotData> p_SlotData)
     {
