@@ -23,7 +23,7 @@ public class GeneralSpecialPointsBuff : BaseEffect
     {
         base.Run(p_Sender, p_Target);
 
-        if (m_Chance > m_Random.Next(0, 100))
+        if (m_Chance < m_Random.Next(0, 100))
         {
             return;
         }
@@ -38,7 +38,7 @@ public class GeneralSpecialPointsBuff : BaseEffect
             }
             else
             {
-                m_Target.specialPoints += m_Value;
+                m_Target.baseSpecialPoints += m_Value;
                 m_Target.AddEffect(m_Special.id, this);
                 m_Target.AddBuffIcon();
             }
@@ -47,7 +47,7 @@ public class GeneralSpecialPointsBuff : BaseEffect
         }
         else
         {
-            p_Target.specialPoints += m_Value;
+            p_Target.baseSpecialPoints += m_Value;
         }
     }
 
@@ -55,6 +55,6 @@ public class GeneralSpecialPointsBuff : BaseEffect
     {
         base.EndImmediately(p_Actor);
 
-        p_Actor.specialPoints -= m_Value;
+        p_Actor.baseSpecialPoints -= m_Value;
     }
 }
