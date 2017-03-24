@@ -4,7 +4,7 @@
 	"Defense" : 15,
 	"Speed" : 11,
 	"Level" : 4,
-	"Health" : 46,
+	"Health" : 35,
 	"Element": "Fire",
 	"Attacks" :
 	[

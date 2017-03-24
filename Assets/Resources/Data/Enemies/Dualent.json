@@ -4,7 +4,7 @@
 	"Defense" : 16,
 	"Speed" : 9,
 	"Level" : 4,
-	"Health" : 63,
+	"Health" : 45,
 	"Element": "Nature",
 	"Attacks" :
 	[

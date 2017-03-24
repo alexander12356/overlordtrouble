@@ -56,13 +56,13 @@
 	"WaterDash" :
 	{
 		"Sp" : 6.0,
-		"Element" : "Water",
+		"Element" : "Physical",
 		"Aoe" : false,
 		"Effect" :
 		{
 			"Attack" :
 			{
-				"AttackValue" : 15.0
+				"AttackValue" : 14.0
 			}
 		}
 	},
@@ -76,7 +76,7 @@
 		{
 			"Healing" :
 			{
-				"Value" : 12.0
+				"Value" : 14.0
 			}
 		}
 	},
@@ -147,7 +147,7 @@
 	},
 	"Concentration" :
 	{
-		"Sp" : 7.0,
+		"Sp" : 8.0,
 		"Element" : "Fire",
 		"Aoe" : false,
 		"Myself" : true,
@@ -155,7 +155,7 @@
 		{
 			"AttackBuff" :
 			{
-				"Value" : 7,
+				"Value" : 5,
 				"Duration" : 5
 			}
 		}
@@ -182,7 +182,7 @@
 		{
 			"Attack" :
 			{
-				"AttackValue" : 14.0
+				"AttackValue" : 16.0
 			}
 		}
 	},
@@ -225,7 +225,7 @@
 			},
 			"AttackDebuff":
 			{
-				"Chance" : 100,
+				"Chance" : 30,
 				"Value" : 20,
 				"Duration" : 2
 			}
@@ -321,7 +321,7 @@
 	},
 	"MirrorOfTheAbyss" : 
 	{
-		"Sp" : 4.0,
+		"Sp" : 2.0,
 		"Element" : "NONE",
 		"Aoe" : false,
 		"Myself" : true,
@@ -374,7 +374,7 @@
 			{
 				"Chance" : 100,
 				"RepeatCount" : 2,
-				"Duration" : 4
+				"Duration" : 3
 			}
 		}
 	},

@@ -4,7 +4,7 @@
 	"Defense" : 11,
 	"Speed" : 10,
 	"Level" : 2,
-	"Health" : 30,
+	"Health" : 25,
 	"Element": "Dark",
 	"Attacks" :
 	[

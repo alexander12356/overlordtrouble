@@ -4,7 +4,7 @@
 	"Defense" : 20,
 	"Speed" : 7,
 	"Level" : 8,
-	"Health" : 100,
+	"Health" : 80,
 	"Element": "Earth",
 	"Attacks" :
 	[
