@@ -346,7 +346,7 @@ public class BattleSystem : MonoBehaviour
     #endregion
 
     #region Private
-    private void ReturnToJourney()
+    protected void ReturnToJourney()
     {
         AudioSystem.GetInstance().StopMusic("Battle");
         AudioSystem.GetInstance().PlayTheme();
