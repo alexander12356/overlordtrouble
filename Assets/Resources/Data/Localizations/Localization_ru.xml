@@ -61,10 +61,10 @@
 	<Text id="Special:Accelerate:Description">Прием улучшения: 8сп\n\nПоследняя атака монстайла производится 2 раза, действует 4 хода\n\nВ бою зачастую решает не сила, а скорость.</Text>
 	
 	<!-- Mud Dragling -->
-	<Text id="Special:BreathOfEarth">Таран</Text>
-	<Text id="Special:BreathOfEarth:Description">Прием атаки: 14сп\n\nУрон 13 очков\n\nЭлемент: Физический\n\nМассивный удар головой с разгона.</Text>
-	<Text id="Special:RammingAttack">Дыхание земли</Text>
-	<Text id="Special:RammingAttack:Description">Прием атаки: 10сп\n\nУрон 9 очков\n\nЭлемент: Земля\n\nГрязь покрытая мощными пищеварительными соками, добавьте к этому щепотку магии и вы получите дыхание земли.</Text>
+	<Text id="Special:BreathOfEarth">Дыхание земли</Text>
+	<Text id="Special:BreathOfEarth:Description">Прием атаки: 10сп\n\nУрон 9 очков\n\nЭлемент: Земля\n\nГрязь покрытая мощными пищеварительными соками, добавьте к этому щепотку магии и вы получите дыхание земли.</Text>
+	<Text id="Special:RammingAttack">Таран</Text>
+	<Text id="Special:RammingAttack:Description">Прием атаки: 14сп\n\nУрон 13 очков\n\nЭлемент: Физический\n\nМассивный удар головой с разгона.</Text>
 	<Text id="Special:GroundPower">Сила земли</Text>
 	<Text id="Special:GroundPower:Description">Прием улучшения: 6сп\n\nПовышение статов защиты и атаки на 10 очков, действует 5 ходов\n\nДля принятия силы земли нужно быть в контакте с нею.</Text>
 	
