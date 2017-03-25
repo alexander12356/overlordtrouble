@@ -159,6 +159,7 @@ public class InventoryEquipmentView : InventoryView
 
         ChangeItemCount(l_SlotButton.itemId, l_ItemButton.itemId);
         l_SlotButton.SelectItem(l_ItemButton.itemId);
+        RefreshGroupMemberInfo();
 
         // TODO: Переделать под группу
         PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
@@ -177,6 +178,7 @@ public class InventoryEquipmentView : InventoryView
         }
 
         l_SlotButton.DeselectItem();
+        RefreshGroupMemberInfo();
         PlayerInventory.GetInstance().UpdateSlotData(l_SlotButton.slotId, l_SlotButton.slotData);
     }
 

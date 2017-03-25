@@ -37,6 +37,7 @@ public class InventoryUseItemView : InventoryView
             m_UseAction();
         }
         GroupMemberButtonAnimation();
+        RefreshGroupMemberInfo();
         Cancel();
     }
 
