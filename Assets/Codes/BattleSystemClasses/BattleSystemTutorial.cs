@@ -19,5 +19,8 @@ public class BattleSystemTutorial : BattleSystemMobs
     {
         BattleStarter.GetInstance().BattleRetreat();
         ReturnToJourney();
+
+        BattlePlayer.GetInstance().health = BattlePlayer.GetInstance().baseHealth;
+        BattlePlayer.GetInstance().specialPoints = BattlePlayer.GetInstance().baseSpecialPoints;
     }
 }
