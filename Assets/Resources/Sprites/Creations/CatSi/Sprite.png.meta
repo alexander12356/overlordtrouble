@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ff2023ed7cbd98f4bb54950abb8487fe
-timeCreated: 1489024597
+timeCreated: 1490432938
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -67,25 +67,25 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 512
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 512
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 512
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,10 +97,10 @@ TextureImporter:
       name: Sprite_0
       rect:
         serializedVersion: 2
-        x: 36
-        y: 386
-        width: 71
-        height: 116
+        x: 0
+        y: 384
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -110,10 +110,10 @@ TextureImporter:
       name: Sprite_1
       rect:
         serializedVersion: 2
-        x: 164
-        y: 385
-        width: 73
-        height: 116
+        x: 128
+        y: 384
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,10 +123,10 @@ TextureImporter:
       name: Sprite_2
       rect:
         serializedVersion: 2
-        x: 292
-        y: 386
-        width: 71
-        height: 116
+        x: 256
+        y: 384
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,10 +136,10 @@ TextureImporter:
       name: Sprite_3
       rect:
         serializedVersion: 2
-        x: 420
-        y: 388
-        width: 73
-        height: 113
+        x: 384
+        y: 384
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,10 +149,10 @@ TextureImporter:
       name: Sprite_4
       rect:
         serializedVersion: 2
-        x: 21
-        y: 258
-        width: 71
-        height: 116
+        x: 0
+        y: 256
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: Sprite_5
       rect:
         serializedVersion: 2
-        x: 147
-        y: 257
-        width: 73
-        height: 116
+        x: 128
+        y: 256
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,10 +175,10 @@ TextureImporter:
       name: Sprite_6
       rect:
         serializedVersion: 2
-        x: 277
-        y: 258
-        width: 71
-        height: 116
+        x: 256
+        y: 256
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,10 +188,10 @@ TextureImporter:
       name: Sprite_7
       rect:
         serializedVersion: 2
-        x: 403
-        y: 260
-        width: 73
-        height: 113
+        x: 384
+        y: 256
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: Sprite_8
       rect:
         serializedVersion: 2
-        x: 35
-        y: 131
-        width: 71
-        height: 113
+        x: 0
+        y: 128
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,10 +214,10 @@ TextureImporter:
       name: Sprite_9
       rect:
         serializedVersion: 2
-        x: 163
-        y: 132
-        width: 70
-        height: 112
+        x: 128
+        y: 128
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,10 +227,10 @@ TextureImporter:
       name: Sprite_10
       rect:
         serializedVersion: 2
-        x: 291
-        y: 131
-        width: 71
-        height: 113
+        x: 256
+        y: 128
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,10 +240,10 @@ TextureImporter:
       name: Sprite_11
       rect:
         serializedVersion: 2
-        x: 419
-        y: 132
-        width: 72
-        height: 112
+        x: 384
+        y: 128
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,10 +253,10 @@ TextureImporter:
       name: Sprite_12
       rect:
         serializedVersion: 2
-        x: 23
-        y: 3
-        width: 73
-        height: 113
+        x: 0
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,10 +266,10 @@ TextureImporter:
       name: Sprite_13
       rect:
         serializedVersion: 2
-        x: 152
-        y: 1
-        width: 70
-        height: 116
+        x: 128
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,10 +279,10 @@ TextureImporter:
       name: Sprite_14
       rect:
         serializedVersion: 2
-        x: 279
-        y: 3
-        width: 73
-        height: 113
+        x: 256
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,10 +292,10 @@ TextureImporter:
       name: Sprite_15
       rect:
         serializedVersion: 2
-        x: 404
-        y: 1
-        width: 74
-        height: 116
+        x: 384
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
