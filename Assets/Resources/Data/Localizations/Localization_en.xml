@@ -1,172 +1,292 @@
 ﻿<Localization>
-	<!-- Specials	-->
+	<Text id="Lang:ru">Русский</Text>
+	<Text id="Lang:en">English</Text>
+
+	<!-- Specials -->
 	<!-- DewElemental -->
 	<Text id="Special:WaterDrops">Water Drops</Text>
-	<Text id="Special:WaterDrops:Description">Прием атаки: 2сп\n\nУрон 2 очка по всем врагам\n\nЭлемент: Вода\n\nЭти капли бьют чуток больнее чем тычки пальцами</Text>
+	<Text id="Special:WaterDrops:Description">Attack skill: 2sp\n\nBase damage 3, hits all enemies\n\n Element: Water\n\nThese drops hurt a bit more than finger pokes.</Text>
 	<Text id="Special:Slap">Slap</Text>
-	<Text id="Special:ProtectiveShell">Protective Coat</Text>
+	<Text id="Special:Slap:Description">Attack skill: 2sp\n\nBase damage 6\n\n Element: Physical\n\nFor when you have noodles for arms.</Text>
+
+	<Text id="Special:ProtectiveShell">Bubble shield</Text>
+	<Text id="Special:ProtectiveShell:Description">Defense Skill: 2sp\n\nIncreases defense by 3 points, lasts 3 turns\n\nImagine that this bubble can protect you, after all it is the thoughts that count.</Text>
 	
 	<!-- LesserWaterElemental -->
 	<Text id="Special:WaterBullet">Water Bullet</Text>
-	<Text id="Special:WaterDash">Water Dash</Text>
+	<Text id="Special:WaterBullet:Description">Attack skill: 4sp\n\nBase damage 10\n\nElement: Water\n\nA water drop, accelerated to frightening speeds.</Text>
+	<Text id="Special:WaterDash">Bash Dash</Text>
+	<Text id="Special:WaterDash:Description">Attack skill: 6sp\n\nBase damage 14\n\nElement: Physical\n\nFull body strike accelerated by blowing jets of water.</Text>
+
 	<Text id="Special:HealingSplash">Healing Splash</Text>
+	<Text id="Special:HealingSplash:Description">Healing skill: 2sp\n\nHeals 14hp\n\By using the surrounding magic, it is possible to give water healing properties.</Text>
 	
 	<!-- Salamanti -->
 	<Text id="Special:TailWhap">Tail Whap</Text>
+	<Text id="Special:TailWhap:Description">Attack skill: 4sp\n\nBase damage 11\n\nElement: Physical\n\nWeaker than a sword, but stronger than a stick.</Text> 
 	<Text id="Special:Slash">Slash</Text>
+	<Text id="Special:Slash:Description">Attack skill: 5sp\n\nBase damage 12\n\nElement: Physical\n\nThese claws aren't just for show.</Text>
 	<Text id="Special:Molting">Molting</Text>
+	<Text id="Special:Molting:Description">Healing skill: 7sp\n\nRemoves debuffs\n\Removal of the skin during the heat of battle… A bit of magic can make this feat happen as easily as it can get.</Text>
 	
 	<!-- Brownie -->
 	<Text id="Special:StaffStrike">Staff Strike</Text>
+	<Text id="Special:StaffStrike:Description">Attack skill: 4sp\n\nBase damage 11\n\nElement: Physical\n\nStrikes with the staff, reinforced by magic.</Text>
 	<Text id="Special:Ember">Ember</Text>
+	<Text id="Special:Ember:Description">Attack skill: 8sp\n\nBase damage 8\n\nElement: Fire\n\nEven the low tier spells of the fire element can instill fear.</Text>
 	<Text id="Special:Concentration">Concentration</Text>
+	<Text id="Special:Concentration:Description">Buff skill: 2sp\n\nIncreases attack by 5 points, lasts 5 turns\nBy concentrating the surrounding mana into the dense sphere, you can strengthen the power of your attacks.</Text>
+	
+	<!-- Water Elemental -->
+	<Text id="Special:WaterFusillade">Water Fusillade</Text>
+	<Text id="Special:WaterFusillade:Description">Attack skill: 7sp\n\nBase damage 9, hits all enemies\n\nElement: Water\n\nWhen one bullet is just not enough.</Text>
+	<Text id="Special:IceHarpoon">Ice Harpoon</Text>
+	<Text id="Special:IceHarpoon:Description">Attack skill: 7sp\n\nBase damage 17, 30% chance to reduce damage of the target by 20%\n\nElement: Physical\n\nFrozen jet of water, it will be hardly pleasant to get hit by it.</Text>
+	<Text id="Special:IceShield">Ice Shield</Text>
+	<Text id="Special:IceShield:Description">Defense skill: 5sp\n\nReduces damage taken by 60%, lasts 1 turn\n\nInstant ice shield works really well but a short while.</Text>
+	
+	<!-- Earth Elemental -->
+	<Text id="Special:Playercrush"> Crush </Text>
+	<Text id="Special:Playercrush:Description">Attack skill: 6sp\n\nBase damage 16\n\nElement: Physical \n\n Who said that brute force doesn’t solve anything?</Text>
+	<Text id="Special:Pillarstones">Pillar stones </Text> 
+	<Text id="Special:Pillarstones:Description">Attack skill: 8sp\n\nBase damage 22 \n\nElement: Earth\n\nNo one would want to stay between two stone pillars, as they rush to them, to say the least.</Text>
+	<Text id="Special:Refresh">Refresh</Text>
+	<Text id="Special:Refresh:Description">Healing skill: 7sp \n\nRemoves debuffs \n\nWhatever your trouble is, you can simply ignore it..</Text>
+	
+	<!-- Hobgoblin -->
+	<Text id="Special:PoisonedDagger">Poisoned Dagger</Text>
+	<Text id="Special:PoisonedDagger:Description">Attack skill: 5sp\n\nBase damage 10, poisons enemy, 2 points of damage per turn, lasts 5 turns.\n\nElement: physical\n\nDisposable dagger, it’s so dirty that it has become poisonous.</Text>
+	<Text id="Special:ManaBeam">Mana Beam</Text>
+	<Text id="Special:ManaBeam:Description">Attack skill: 8sp\n\nBase damage 20\n\nElement: Mana\n\nHobgoblin's trump card - a powerful beam of mana.</Text>
+	<Text id="Special:Accelerate">Accelerate</Text>
+	<Text id="Special:Accelerate:Description">Buff skill: 8sp\n\nThe last attack of monstyle is used 2 times, lasts 3 turns\n\nIt is often not power, but speed, that decides the battle.</Text>
+	
+	<!-- Mud Dragling -->
+	<Text id="Special:RammingAttack">Ramming Attack</Text>
+	<Text id="Special: RammingAttack:Description">Attack skill: 14sp\n\nBase damage 20\n\nElement: Physical\n\nA headbutt, and a massive one at that.</Text>
+	<Text id="Special:BreathOfEarth ">Breath of Earth</Text>
+	<Text id="Special:BreathOfEarth:Description">Attack skill: 7sp\n\nBase damage 18\n\nElement: Earth\n\nMud mixed with powerful digestive juices, add just a right amount of magic, and you will get a breath of the earth.</Text>
+	<Text id="Special:GroundPower">Ground Power</Text>
+	<Text id="Special:GroundPower:Description">Buff skill: 9sp\n\nIncreases defense and attack by 10 points, lasts 5 turns\n\nTo accept the power of the earth you need to be in contact with it.</Text>
+	
+	<!-- Cat Shi -->
+	<Text id="Special:WaveOfDarkness">Wave of Darkness</Text>
+	<Text id="Special:WaveOfDarkness:Description">Attack skill: 5sp\n\nBase damage 8, hits all enemies\n\nElement: Darkness.\n\nIt is not the darkness itself that is dangerous, but the creatures that it conseals...in this case, you are the concealed one.</Text>
+	<Text id="Special:BigClaw">Big Claw</Text>
+	<Text id="Special:BigClaw:Description">Attack skill: 6sp\n\nBase damage 15\n\nElement: Physical\n\nYou show a big claw to enemies… which means you scratch them with it.</Text> 
+	<Text id="Special:MirrorOfTheAbyss">Mirror of the Abyss</Text>
+	<Text id="Special:MirrorOfTheAbyss:Description">Defence skill: 2sp\n\n40% of enemy damage will be returned back, lasts until the end of turn\n\nNow you are the abyss that gazes into the one who gazes into an abyss.</Text>
+	
+	<!-- Domovoy -->
+	<Text id="Special:MagicPunch">Magic Punch</Text>
+	<Text id="Special:MagicPunch:Description">Attack skill: 7sp\n\nBase damage 18 \n\nElement: Mana\n\nUpgraded version of a staff strike, but with a fist.</Text>
+	<Text id="Special:MagicSphere">Magic Sphere</Text>
+	<Text id="Special:MagicSphere:Description">Attack skill: 8sp\nBase damage  22\n\nElement: Mana\n\nBy concentrating the surrounding mana into the dense sphere, you can also throw it at enemies, but this requires a lot of experience and magic.</Text>
+	<Text id="Special:Cleanliness">Cleanliness</Text>
+	<Text id="Special:Cleanliness:Description">Healing skill: 8sp\n\nRemoves debuffs\n\nCleaning up will positively affect your body and your mind.</Text>
+	
+	<!-- effect's description -->
+	<Text id="Effects:Attack">Damage: %d</Text>
 	
 	<!-- stats -->
 	<Text id="Stat:HealthPoints">HP</Text>
 	<Text id="Stat:MonstylePoints">SP</Text>
 	<Text id="Stat:Attack">Attack</Text>
-	<Text id="Stat:Defense">Defence</Text>
+	<Text id="Stat:Defense">Defense</Text>
 	<Text id="Stat:Speed">Speed</Text>
 	<Text id="Stat:Fortune">Luck</Text>
 	
 	<!-- improvements -->
 	<Text id="Improvement:DewElemental">Dew elemental</Text>
-	<Text id="Improvement:DewElemental:Description">Element: Water\n\nDew elemental are creatures that stay lower hierarchically than lesser water elementals. However they are more rare than some high elementals. The reason is that they are not summoned by magic but are given birth by parents. They are very meek creatures.</Text>
-	<Text id="Improvement:DewElemental:Specialty">Speciality:\n10% chance to dodge any attack.</Text>
+	<Text id="Improvement:DewElemental:Description">Element: Water\n\nDew elemental. Hierarchically this creature stands below the lesser water elemental. However, they are less common than some representatives of higher elementals. The whole reason is that they do not appear by summoning, but biologically, from two parents. Often these are very meek creatures.</Text>
+	<Text id="Improvement:DewElemental:Specialty">Specialty:\n10% chance to evade any attack.</Text>
 	
 	<Text id="Improvement:LesserWaterElemental">Lesser water elemental</Text>
-	<Text id="Improvement:ShellLizard">Shell lizard</Text>
+	<Text id="Improvement:LesserWaterElemental:Description">The lesser water elementals are very flexible in choosing their next form. Natural born elementals are very different from summoned elementals. This elemental won’t lose even to the one stage higher normal emental if it is a summoned one.</Text>
+	
 	<Text id="Improvement:Brownie">Brownie</Text>
+	<Text id="Improvement:Brownie:Description">Brownies are known as the keepers of the hearth. They skillfully use magic and, with the help of their staff they can concentrate the surrounding mana in one spot and then use it. Brownies are very fond of milk and milk products also they hate dirt.</Text>	
+	<Text id="Improvement:ShellLizard">Salamanti</Text>
+	<Text id="Improvement:ShellLizard:Description">The swamp salamander subspecies, despite the fact that they mostly live in swamps, they can survive in deserts without any problems. Their claws can easily pass through the ground and their tail can withstand strong impacts.</Text>
+	
+	<Text id="Improvement:WaterElemental">Water elemental</Text>
+	<Text id="Improvement:WaterElemental:Description">Water elemental can create large amounts of water and it can effortlessly create rain. It can easily defeat the summoned higher elementals of any kind. Now they can change the physical properties of water.</Text>
+	
+	<Text id="Improvement:EarthElemental">Earth elemental</Text>
+	<Text id="Improvement:EarthElemental:Description">Anyone who is connected to the element of earth will be strong and tenacious. The earth elementals are the living proof of this fact. Large, strong and powerful, each step of the earth elementals can heal the land.</Text>
+	
+	<Text id="Improvement:MudDragling">Mud dragling</Text>
+	<Text id="Improvement:MudDragling:Description">All dragons are large masses of muscle and magic, and even their whelps can survive without the help of their parents. Without the ability to advance in the class tree, the draglings have to wait more than a hundred years to reach an adult state.</Text>
+	
+	<Text id="Improvement:Hobgoblin">Hobgoblin</Text>
+	<Text id="Improvement:Hobgoblin:Description">A bigger, stronger and smarter subspecies of goblins. Hobgoblins are smaller than orcs, but in battle, they are no less dangerous. They have some talents in magic. At the present time hobgoblins almost non-existent, unlike the goblins that are still numerous.</Text>
+	<Text id="Improvement:CatSi">Cat Si</Text>
+	<Text id="Improvement:CatSi:Description">Playful monsters that look like black cats. According to rumors they can steal souls, but in fact they steal magical energy. The side effect of a lack of magic is a feeling of weakness and emptiness, but this effect passes away after recovering mana.</Text>
+	<Text id="Improvement:Domovoy">Domovoy</Text>
+	<Text id="Improvement:Domovoy:Description">Professional hearth keepers, were kind to humankind even during the war. However, the result of their attempts to get closer to humans by changing their appearance to be more humanlike has led to the fact that they don’t like to be seen.</Text>
 	
 	<!-- items -->
 	<Text id="Item:SmallHealthPotion">Small health potion</Text>
-	<Text id="Item:SmallHealthPotion:Description">Сделано из эссенции 10 яблок.</Text>
-	<Text id="Item:SmallHealthPotion:Effect">Восстанавливает 40 хп</Text>
+	<Text id="Item:SmallHealthPotion:Description">Made from an extract of 10 apples.</Text>
+	<Text id="Item:SmallHealthPotion:Effect">Recovers 40 hp</Text>
 	
-	<Text id="Item:SmallSpecialPotion">Small special potion</Text>
-	<Text id="Item:SmallSpecialPotion:Description">Лечит усталость.</Text>
-	<Text id="Item:SmallSpecialPotion:Effect">Восстанавливает 30сп</Text>
+	<Text id="Item:SmallSpecialPotion">Small energy potion</Text>
+	<Text id="Item:SmallSpecialPotion:Description">Heals fatigue.</Text>
+	<Text id="Item:SmallSpecialPotion:Effect">Recovers 30sp</Text>
 	
-	<Text id="Item:SmallExperiencePotion">Small experience potion</Text>
-	<Text id="Item:SmallExperiencePotion:Description">Сфера опыта является концентрированной магией создавшего ее и используется людьми и монстрами для получения опыта, однако сфера опыта от одной и той же личности не может быть использована дважды и их создание требует большого количества времени, из-за чего создать мощную армию используя их невозможно, выгоднее просто потренироваться.</Text>
-	<Text id="Item:SmallExperiencePotion:Effect">Дает 20 очков опыта</Text>
-	
-	<Text id="Item:SaltCucumber">Salt cucumber</Text>
-	<Text id="Item:SaltCucumber:Description">Обернуты в салфетку.</Text>
-	<Text id="Item:SaltCucumber:Effect">В них так много соли что можно увидеть кристалики.</Text>
+	<Text id="Item:SmallExperiencePotion">Small sphere of experience</Text>
+	<Text id="Item:SmallExperiencePotion:Description">The sphere of experience is created from concentrated magic of the one who wish to make it. Used by people and monsters to gain experience, however, the sphere of the experience of one and the same person cannot be used twice, as well as its creation requires a large amount of time.</Text>
+	<Text id="Item:SmallExperiencePotion:Effect">Gives 20 experience points</Text>
+	<Text id="Item:SaltCucumber">Very salty pickles</Text>
+	<Text id="Item:SaltCucumber:Description">Wrapped in a napkin.</Text>
+	<Text id="Item:SaltCucumber:Effect">There is so much salt in them that you can see the salt crystals.</Text>
 	
 	<Text id="Item:Scoop">Scoop</Text>
-	<Text id="Item:Scoop:Description">Ням ням!</Text>
-	<Text id="Item:Scoop:Effect">Ковшик для супа, похож на кость.</Text>
+	<Text id="Item:Scoop:Description">Yum yum!</Text>
+	<Text id="Item:Scoop:Effect">A scoop for soup, looks like a bone.</Text>
 	
 	<Text id="Item:Apple">Apple</Text>
-	<Text id="Item:Apple:Description">Вкусное, свежее и неотравленное.</Text>
-	<Text id="Item:Apple:Effect">Восстанавливает 4хп</Text>
+	<Text id="Item:Apple:Description">Delicious, fresh and not poisoned.</Text>
+	<Text id="Item:Apple:Effect">Recovers 4 hp.</Text> 
 	
-	<Text id="Item:BookAboutSpoon">Book about spoon</Text>
-	<Text id="Item:BookAboutSpoon:Description">Как создавать ложки, и куда их класть.</Text>
-	<Text id="Item:BookAboutSpoon:Effect">Наверное вы уже жалеете, что потратили столько усилий для этой штуки… эммм… поздравляем?</Text>
+	<Text id="Item:BookAboutSpoon">Book about spoons</Text>
+	<Text id="Item:BookAboutSpoon:Description">How to create spoons, and where to put them.</Text> 
+	<Text id="Item:BookAboutSpoon:Effect">You've probably already regret that you spent so much effort for this thing ... umm ... congratulations?</Text>
 	
 	<Text id="Item:OldHelmet">Old helmet</Text>
-	<Text id="Item:OldHelmet:Description">Этот шлем наполнен пылью, но все же, лучше чем ничего.</Text>
-	<Text id="Item:OldHelmet:Effect">+4 защиты\n+2 сп</Text>
+	<Text id="Item:OldHelmet:Description">This helmet is filled with dust, but it’s still better than nothing.</Text>
+	<Text id="Item:OldHelmet:Effect">+4 Defense\n+2 sp</Text>
 	
-	<Text id="Item:RustyAxe">Rusty Axe</Text>
-	<Text id="Item:RustyAxe:Description">Выглядит как боевой топор, но некоторые куски сломаны ржавчиной.</Text>
-	<Text id="Item:RustyAxe:Effect">+6 силы</Text>
+	<Text id="Item:RustyAxe">Rusty axe</Text>
+	<Text id="Item:RustyAxe:Description">Looks like a battle axe, but some pieces are rusty and broken.</Text>
+	<Text id="Item:RustyAxe:Effect">+6 Attack</Text>
 	
 	<Text id="Item:Water">Water</Text>
-	<Text id="Item:Water:Description">Она в бутылке.</Text>
-	<Text id="Item:Water:Effect">Восстанавливает 4сп</Text>
+	<Text id="Item:Water:Description">It's in the bottle.</Text>
+	<Text id="Item:Water:Effect">Recovers 4 sp</Text>
 	
 	<Text id="Item:Key">Key</Text>
-	<Text id="Item:Key:Description">Ключ</Text>
-	<Text id="Item:Key:Effect">Ключ</Text>
+	<Text id="Item:Key:Description">The key to the attic.</Text>
+	<Text id="Item:Key:Effect">The key to the attic of your house. You may need to take some things from there. Today is an important day.</Text>
 	
 	<Text id="Item:OldBoots">Old boots</Text>
-	<Text id="Item:OldBoots:Description">Они старые и поношенные, но все еще пригодны для путешествий.</Text>
-	<Text id="Item:OldBoots:Effect">+2 защиты\n+4 скорости</Text>
+	<Text id="Item:OldBoots:Description">They are old and worn out, but still usable for traveling.</Text>
+	<Text id="Item:OldBoots:Effect">+2 Defense\n+4 Speed</Text>
 	
-	<Text id="Item:BokaliskMeat">Bokalist meat</Text>
-	<Text id="Item:BokaliskMeat:Description">Маленький кусок хвоста… ага, сам кокотрикс не пострадал.</Text>
-	<Text id="Item:BokaliskMeat:Effect">Восстанавивает 13хп и 13сп.</Text>
-	
+	<Text id="Item:BokaliskMeat">Bokalisk meat</Text>
+	<Text id="Item:BokaliskMeat:Description">A small piece of tail ... yeah, bokalisk itself wasn’t harmed.</Text>
+	<Text id="Item:BokaliskMeat:Effect">Recovers 13 hp and 13 sp.</Text>	
 	<Text id="Item:OldBreastplate">Old breastplate</Text>
-	<Text id="Item:OldBreastplate:Description">Почти как новый?</Text>
-	<Text id="Item:OldBreastplate:Effect">+8 защиты</Text>
+	<Text id="Item:OldBreastplate:Description">Almost like new?</Text>
+	<Text id="Item:OldBreastplate:Effect">+8 Defense</Text>
 	
 	<Text id="Item:CheapHelmet">Cheap helmet</Text>
-	<Text id="Item:CheapHelmet:Description">Только храбрец наденет такой шлем против дракона.</Text>
-	<Text id="Item:CheapHelmet:Effect">+5 сп\n+4 защиты</Text>
+	<Text id="Item:CheapHelmet:Description">Only bravest would wear such helmet in the battle against the dragon.</Text>
+	<Text id="Item:CheapHelmet:Effect">+5 sp\n+4 Defense</Text>
 	
 	<Text id="Item:CheapBoots">Cheap boots</Text>
-	<Text id="Item:CheapBoots:Description">Только смелый осмелиться это надеть против дракона.</Text>
-	<Text id="Item:CheapBoots:Effect">+4 скорости\n+3 защиты</Text>
+	<Text id="Item:CheapBoots:Description">Only courageous would dare to wear this against the dragon.</Text>
+	<Text id="Item:CheapBoots:Effect">+4 Speed\n+3 Defense</Text>
 	
 	<Text id="Item:CheapBreastplate">Cheap breastplate</Text>
-	<Text id="Item:CheapBreastplate:Description">Только отважные осмелятся надеть это против дракона.</Text>
-	<Text id="Item:CheapBreastplate:Effect">+10 защиты</Text>
+	<Text id="Item:CheapBreastplate:Description">Only the daring ones would dare to wear it against the dragon.</Text>
+	<Text id="Item:CheapBreastplate:Effect">+10 Defense</Text>
 	
-	<Text id="Item:CheapSword">Cheap sword</Text>
-	<Text id="Item:CheapSword:Description">Только безумец пойдет с этим на дракона.</Text>
-	<Text id="Item:CheapSword:Effect">+4 силы\n+2 скорости</Text>
+	<Text id="Item:CheapSword">Cheap Sword</Text>
+	<Text id="Item:CheapSword:Description">Only a madman would try to use this against the dragon.</Text>
+	<Text id="Item:CheapSword:Effect">+4 Attack\n+2 Speed</Text>
 	
 	<Text id="Item:Club">Club</Text>
-	<Text id="Item:Club:Description">Просто толстая ветка.</Text>
-	<Text id="Item:Club:Effect">+4 силы\n10% шанс на оглушение обычным ударом.</Text>
+	<Text id="Item:Club:Description">Just a thick stick.</Text>
+	<Text id="Item:Club:Effect">+4 Attack\n10% chance of stun with normal attack.</Text>
 	
 	<Text id="Item:Shield">Shield</Text>
-	<Text id="Item:Shield:Description">Щит весьма полезен в бою.</Text>
-	<Text id="Item:Shield:Effect">+30% к защите на один ход.</Text>
+	<Text id="Item:Shield:Description">Shield is very useful in battle.</Text>
+	<Text id="Item:Shield:Effect">+30% Defense for 1 turn.</Text>
 	
 	<Text id="Item:SeedOfMemory">Seed of memory</Text>
-	<Text id="Item:SeedOfMemory:Description">Содержит знания леших.</Text>
-	<Text id="Item:SeedOfMemory:Effect">Сын мой, я хочу попросить у тебя прощения. Хоть я и прожил очень долго и даже считался мудрейшим, я не смог заметить того, что моя слава ущемляла тебя. И даже когда ты попросил моей помощи, я просто отказал тебе, подумав, что ты можешь справиться сам… Но ослепленный своей гордыней я забыл, что ты все еще очень молод, что привело к нашей ссоре. Я знаю, что ты не придешь, когда я стану одним целым с великим древом, поэтому вместе со всеми знаниями леса я решил передать тебе свои извинения, чтобы когда это зерно дошло до тебя ты понял: Я очень горжусь тобой. Я верю что в твоих руках лес будет в справедливости и безопасности, ведь ты мой единственный ребенок. Прости, что не сказал тебе этого раньше и прости, что не смог быть с тобою дольше.</Text>
-	
+	<Text id="Item:SeedOfMemory:Description">It contains knowledge of the previous leshiy’s.</Text>
+	<Text id="Item:SeedOfMemory:Effect">"My son, I want to ask your forgiveness, even though I lived a very long live and was even considered the wisest one, I failed to notice that my fame pressured you. And when you asked for my help, I simply refused you, thinking that you could handle everything yourself... Blinded by my pride, I forgot that you are still very young, and it led to our quarrel. I know that you will not come, when I’ll become one with the Great Tree… So, together with all the knowledge of the forest, I decided to give you my apologies, so that when this seed reaches you, you will understand: I am very proud of you. I believe that the forest in your hands will be right and safe, because you are my only child. I am sorry that I did not tell you this before. Forgive me for not being able to be with you longer"</Text>
 	<!-- elemental -->
 	<Text id="Element">Element</Text>
 	<Text id="Elemental:Water">Water</Text>
 	<Text id="Elemental:Earth">Earth</Text>
 	<Text id="Elemental:Mana">Mana</Text>
+	<Text id="Elemental:Live">Life</Text>
+	<Text id="Elemental:Fire">Fire</Text>
+	<Text id="Elemental:Nature">Nature</Text>
+	<Text id="Elemental:Dark">Darkness</Text>
+	<Text id="Elemental:Physical">Physical</Text>
 	
 	<!-- enemy's -->
 	<Text id="Enemy:Bokalisk">Bokalisk</Text>
-	<Text id="Enemy:Bokalisk:PeckerAttack">Big pecker</Text>
+	<Text id="Enemy:Bokalisk:PeckerAttack">Peck</Text>
+	<Text id="Enemy:Bokalisk:HollowLook">Empty stare</Text>
+	<Text id="Enemy:Bokalisk:MissTurn">Bokalisk began to cluck continuously ... Bokalisk missed it’s turn.</Text>
 	<Text id="Enemy:Skwatwolf">Squatwolf</Text>
-	<Text id="Enemy:Skwatwolf:Fisting">Punch</Text>
-	<Text id="Enemy:Skwatwolf:Racket">Thug rage</Text>
+	<Text id="Enemy:Skwatwolf:Strike">Punch</Text>
+	<Text id="Enemy:Skwatwolf:Gopogovor">Bad vibes</Text>
 	<Text id="Enemy:Dualent">Dualent</Text>
-	<Text id="Enemy:Dualent:Attack">Strike</Text>
-	<Text id="Enemy:ThirdsortRobber">Third sort robber</Text>
-	<Text id="Enemy:ThirdsortRobber:Attack">Shank</Text>
+	<Text id="Enemy:Dualent:DryRoots">Dry roots</Text>
+	<Text id="Enemy:Dualent:Bite"></Text>
+	<Text id="Enemy:Dualent:DoubleAttack">Dualent’s second head decided to attack.</Text>
+	<Text id="Enemy:ThirdrateRobber">Third rate robber</Text>
+	<Text id="Enemy:ThirdrateRobber:Stab">Stab</Text>
+	<Text id="Enemy:ThirdrateRobber:Run">Third rate robber ran away from the battlefield..</Text>
+	<Text id="Enemy:ThirdrateRobber:StealMonett">HEY! He stole% d monett!</Text>
+	<Text id="Enemy:FeralSlime">Feral slime</Text>
+	<Text id="Enemy:FeralSlime:Tackle">Tackle</Text>
+	<Text id="Enemy:Willwhishp">Willwisp</Text>
+	<Text id="Enemy:Willwhishp:EnEmber">Ember</Text>
+	<Text id="Enemy:Willwhishp:HealingLight">Healing light</Text>
+	<Text id="Enemy:Jackalope">Jackalope</Text>
+	<Text id="Enemy:Jackalope:HornStrike">Horn strike</Text>
+	<Text id="Enemy:Ogre">Ogre</Text>
+	<Text id="Enemy:Ogre:Crush">Crush</Text>
+	<Text id="Enemy:Ogre:Rest">Rest</Text>
+	<Text id="Enemy:SecondRateRobber">Second rate robber</Text>
+	<Text id="Enemy:SecondRateRobber:Stab">Stab</Text>
 	
-	<Text id="Boss:Leshii">Леший</Text>
-	<Text id="Boss:Leshii:Intro">You won't defeat me!</Text>
-	<Text id="Boss:Leshii:IntroSpecial">Поздравляю… ты смог меня разозлить.</Text>
-	<Text id="Boss:Leshii:RightHand">Правая рука</Text>
-	<Text id="Boss:Leshii:Body">Тело</Text>
-	<Text id="Boss:Leshii:LeftHand">Левая рука</Text>
-	<Text id="Boss:Leshii:SummonHands">До воскрешения рук осталось %d %d</Text>
-	<Text id="Boss:Leshii:CheckSpecialAttack">Осталось %d %d до атаки.</Text>
-	<Text id="Boss:Leshii:Step">ход</Text>
-	<Text id="Boss:Leshii:Steps">хода</Text>
-	<Text id="Boss:Leshii:HandsDie">%d потеряла силу</Text>
-	<Text id="Boss:Leshii:Die">Ой ой…</Text>
+	<!-- enemy's description -->
+	<Text id="Enemy:Bokalisk:Description">A descendant of domesticated basilisks, who, unlike his formidable relative, does not have the ability to petrify with his gaze. Despite the fact that they look just like a large chicken, underestimating them would be a great mistake.</Text>
+	<Text id="Enemy:Skwatwolf:Description">Same as werewolf, but a natural jerk. Unlike werewolves, squatwolves form packs.</Text>
+	<Text id="Enemy:Dualent:Description">Living trees that come to life when two creatures die simultaneously in a battle against each other near the growing tree. Despite rumors saying that they contain souls of those whose death created them, it is actually just the released magic energy that gives them life. Despite complicated conditions for their creation, they are not few in number, mainly because those conditions can be satisfied even by two fighting mosquitoes.</Text>
+	<Text id="Enemy:ThirdrateRobber:Description">Nothing special about this guy. A weak person who wants some easy money. In the "off" time he’s hanging around in the taverns with dubious reputation.</Text>
+	<Text id="Enemy:SecondRateRobber:Description">A little bit more experienced representative of his profession, which makes him a little bit more successful. Because of his “successful” career, he is very confident in his abilities. Has many unpaid debts.</Text>
+	<Text id="Enemy:FeralSlime:Description">Very weak enemy. These slimes are actually the living pieces of flesh of the intelligent slimes, however they do not have any resemblance to consciousness, only desire feed.</Text>
+	<Text id="Enemy:Willwhishp:Description">Also known as wandering lights, these spheres of fiery magic have a mind of their own. They love to confuse those who went into the woods at night, their pleasant light can mislead travelers. Most often, the victims are the robbers who mistook their light for glitter of gold.</Text>
+	<Text id="Enemy:Ogre:Description">Remarkable strength is one of their most known traits. Many think that ogres are just big and strong idiots ... but this is a stereotype, except for the part where it says that they are big and strong.</Text>
+	<Text id="Enemy:Jackalope:Description">These large rodents have magnificent horns. They are very territorial but also very tasty. Many inhabitants of the forest like to hunt on jackalopes, that’s why you can meet various dangerous creatures next to them.</Text>
+	
+	<!-- Bosses -->
+	<!-- Leshii -->
+	<Text id="Boss:Leshii">Leshiy</Text>
+	<Text id="Boss:Leshii:Intro">You won’t defeat me!</Text>
+	<Text id="Boss:Leshii:IntroSpecial">Congratulations ... you’ve successfully made me angry.</Text>
+	<Text id="Boss:Leshii:RightHand">Right Hand</Text>
+	<Text id="Boss:Leshii:Body">Body</Text>
+	<Text id="Boss:Leshii:LeftHand">Left Hand</Text>
+	<Text id="Boss:Leshii:SummonHands">%d %d  remains until the hands recover.</Text>
+	<Text id="Boss:Leshii:CheckSpecialAttack">%d %d before the charged attack.</Text>
+	<Text id="Boss:Leshii:Step">turn</Text>
+	<Text id="Boss:Leshii:Steps">turns</Text>
+	<Text id="Boss:Leshii:HandsDie">%d  lost its power</Text>
+	<Text id="Boss:Leshii:Die">Oh oh…</Text>
 	<Text id="Boss:Leshii:Die:Special">…</Text>
-	<Text id="Boss:Leshii:Stun">Оглушение</Text>
-	<Text id="Boss:Leshii:Health">%d восстановил %d очков здоровья</Text>
-	<Text id="Boss:Leshii:NatureFury">Ярость леса</Text>
-	<Text id="Boss:Leshii:StartCharge">ENOUGH!</Text>
-	<Text id="Boss:Leshii:Simple:100hp">Что за?! Я не могу поднять руки!</Text>
-	<Text id="Boss:Leshii:Simple:75hp">Хаха! Я все еще цел!</Text>
-	<Text id="Boss:Leshii:Simple:50hp">Ай!!</Text>
-	<Text id="Boss:Leshii:Special:100hp">Этого недостаточно.</Text>
-	<Text id="Boss:Leshii:Special:75hp">Я не ПРОИГРАЮ!</Text>
-	<Text id="Boss:Leshii:Special:50hp">Почему я не могу тебя победить?!</Text>
-	<Text id="Boss:Leshii:BothHandDestroy">Такое не каждый день случается.</Text>
+	<Text id="Boss:Leshii:Stun">Stun</Text>
+	<Text id="Boss:Leshii:Health">%d recovered %d hp</Text>
+	<Text id="Boss:Leshii:NatureFury">Nature’s Fury</Text>
+	<Text id="Boss:Leshii:StartCharge">That is ENOUGH!</Text>
+	<Text id="Boss:Leshii:Simple:100hp">What the…?! I can’t raise my hands!</Text>
+	<Text id="Boss:Leshii:Simple:75hp">Ha-ha! I'm still safe and sound!</Text>
+	<Text id="Boss:Leshii:Simple:50hp">Ouch!</Text>
+	<Text id="Boss:Leshii:Special:100hp">This is not enough.</Text>
+	<Text id="Boss:Leshii:Special:75hp">I won’t LOSE!</Text>
+	<Text id="Boss:Leshii:Special:50hp">Why I can’t defeat you?!</Text>
+	<Text id="Boss:Leshii:BothHandDestroy">This... this is a first.</Text>
 	
 	<!-- UI -->
-	<Text id="GUI:Journey:ReturnMainMenu">Are you sure you want to go to the main menu? Unsaved data will be lost.</Text>
+	<Text id="GUI:Journey:ReturnMainMenu">Are you sure you want to return to the main menu? Unsaved data will be lost</Text>
 	<Text id="GUI:Journey:Store:Buy">Buy</Text>
 	<Text id="GUI:Journey:Store:Sell">Sell</Text>
 	<Text id="GUI:Journey:Store:Talk">Talk</Text>
@@ -175,23 +295,30 @@
 	<Text id="GUI:Journey:Store:InInventory">\nIn your inventory: </Text>
 	<Text id="GUI:Journey:Store:Monet">Monett</Text>
 	<Text id="GUI:Journey:Store:Tab:All">All</Text>
-	<Text id="GUI:Journey:Store:Tab:Equipments">Stuff</Text>
-	<Text id="GUI:Journey:Store:Tab:SingleUse">Single use items</Text>
-	<Text id="GUI:Journey:Store:Tab:MultipleUse">Multiple use items</Text>
+	<Text id="GUI:Journey:Store:Tab:Equipments">Equipment</Text>
+	<Text id="GUI:Journey:Store:Tab:SingleUse">Single Use</Text>
+	<Text id="GUI:Journey:Store:Tab:MultipleUse">Multiple Use</Text>
 	
+	<Text id="GUI:Journey:Inventory">Inventory</Text> 
 	<Text id="GUI:Journey:Inventory:Back">Back</Text>
 	<Text id="GUI:Journey:Inventory:Description">Description\n</Text>
-    <Text id="GUI:Journey:Inventory:Use">Use</Text>
+	<Text id="GUI:Journey:Inventory:Use">Use</Text>
 	<Text id="GUI:Journey:Inventory:Slot">Slot</Text>
 	<Text id="GUI:Journey:Inventory:SlotWeapon">Weapon</Text>	
-	<Text id="GUI:Journey:Inventory:Throw">Throw</Text>
-	<Text id="GUI:Journey:Inventory:Wear">Wear</Text>
+	<Text id="GUI:Journey:Inventory:Throw">Throw away</Text>
+	<Text id="GUI:Journey:Inventory:Wear">Equip</Text>
 	<Text id="GUI:Journey:Inventory:Items">Items</Text>
 	
-	<Text id="GUI:Journey:ItemCatched">You've got %d</Text>
+	<Text id="GUI:Journey:Profile">Profile</Text>
+	<Text id="GUI:Journey:Encyclopedia">Encyclopedia</Text>
+	
+	<Text id="GUI:Journey:Sleep">You feel refreshed.</Text>
+	
+	<Text id="GUI:Journey:ItemCatched">You’ve got %d</Text>
+	<Text id="GUI:Journey:AddMonett">You’ve got %d monett.</Text>
 	
 	<Text id="GUI:Profile:Level">Level</Text>
-	<Text id="GUI:Profile:NextLevelup">Until next level:</Text>
+	<Text id="GUI:Profile:NextLevelup">Until next level: </Text>
 	<Text id="GUI:Profile:StatsPoints">Points left: %d</Text>
 	<Text id="GUI:Profile:OpenImprovePanel">Class up</Text>
 	<Text id="GUI:Profile:SpecialSelected">Selected</Text>
@@ -199,68 +326,424 @@
 	<Text id="GUI:Profile:SpecialTitle">Monstyle</Text>
 	<Text id="GUI:Profile:QuestionImproveStats">Are you sure?</Text>
 	
-	<Text id="GUI:BattleSystem:Levelup">Leveled up to %d level</Text>
-	<Text id="GUI:BattleSystem:Classup">Got class up!</Text>
+	<Text id="GUI:BattleSystem:Levelup">A player reached %d level </Text>
+	<Text id="GUI:BattleSystem:Classup">reached a sufficient level to upgrade the class!</Text>
 	<Text id="GUI:BattleSystem:SelectMonstyle:Damage">Damage</Text>
-	<Text id="GUI:BattleSystem:EnemyAttack">%d used %d and deal'd %d damage</Text>
-	<Text id="GUI:BattleSystem:PlayerAttack">Player deal'd %d damage on the enemy</Text>
-	<Text id="GUI:BattleSystem:BadAttack">Your futile efforts made %d damage on %d</Text>
-	<Text id="GUI:BattleSystem:SpecialAttack">Bobble used "%d" %d it did %d damage</Text>
+	<Text id="GUI:BattleSystem:PlayerAttack">%d attacked "%d"</Text>
+	<Text id="GUI:BattleSystem:EnemyUsing">%d used %d</Text>
+	<Text id="GUI:BattleSystem:Damage"> and dealt %d damage</Text>
+	<Text id="GUI:BattleSystem:BadAttack">%d tried in vain</Text>
+	<Text id="GUI:BattleSystem:MonstyleUsing">%d used %d</Text>
+	<Text id="GUI:BattleSystem:ItemUsing">%d used %d on %d</Text>
+	<Text id="GUI:BattleSystem:MonstyleDamage">, he dealt %d damage on %d</Text>
+	<Text id="GUI:BattleSystem:AoeUsing">%d got hit by %d</Text>
+	<Text id="GUI:BattleSystem:AoeDamage">, he received %d damage</Text>
+	<Text id="GUI:BattleSystem:EffectUsing">%d received %d</Text>
+	<Text id="GUI:BattleSystem:RemoveEffect">%d stopped working on %d</Text>
+	<Text id="GUI:BattleSystem:RemoveManyEffect">%d stopped working on %d</Text>
+	<Text id="GUI:BattleSystem:EnemyDied">%d is out of the battle</Text>
+	<Text id="GUI:BattleSystem:AllEnemyDied">All enemies are defeated</Text>
+	<Text id="GUI:BattleSystem:Immunity">"%d" is invulnerable to %d</Text>
+	<Text id="GUI:BattleSystem:Immunites">"%d" is invulnerable to %d</Text>
 	<Text id="GUI:BattleSystem:MainPanelAttack">Attack</Text>
 	<Text id="GUI:BattleSystem:MainPanelMonstyle">Monstyle</Text>
 	<Text id="GUI:BattleSystem:MainPanelItems">Items</Text>
-	<Text id="GUI:BattleSystem:MainPanelRetreat">Run</Text>
+	<Text id="GUI:BattleSystem:MainPanelRetreat">Escape</Text>
 	<Text id="GUI:BattleSystem:Select">Select</Text>
-	<Text id="GUI:BattleSystem:Cancel">Back</Text>
+	<Text id="GUI:BattleSystem:Cancel">Cancel</Text>
 	<Text id="GUI:BattleSystem:UseSpecials">Use</Text>
-	<Text id="GUI:BattleSystem:Win">Enemies are defeated.\nYou won.\nBobble got %d exp</Text>
-	<Text id="GUI:BattleSystem:Lose">Bobbl can't fight much longer, Bobbl lost consciousness.\nNo one left to continue the fight...\nYou lost.</Text>
+	<Text id="GUI:BattleSystem:Win">The enemies are defeated.\nYou won.\n%d got %d exp.</Text>
+	<Text id="GUI:BattleSystem:Lose">%d can no longer fight on, %d fainted.\nThere was no one left who could continue the battle ...\nYou’ve lost.</Text>
 	<Text id="GUI:BattleSystem:And">and</Text>
-	
-	<Text id="GUI:Improve:StayMyself">Stay myself</Text>
-	<Text id="GUI:Improve:AreYouShure">Are you sure you want to choose this class? You won't be able to turn back.</Text>
-	<Text id="GUI:Improve:СlassChoosed">You choose %d, you got next techniques:\n%d</Text>
+	<Text id="GUI:BattleSystem:AttackFail"> Attack has failed</Text>
+	<Text id="GUI:BattleSystem:Bonus">%d recovered %d as a bonus</Text>
+	<Text id="GUI:BattleSystem:HpBonus">%d HP</Text>
+	<Text id="GUI:BattleSystem:SpBonus">%d SP</Text>
+	<Text id="GUI:BattleSystem:Healing">%d recovered %d HP</Text>
+	<Text id="GUI:BattleSystem:Restoring">%d recovered %d SP</Text>>
+	<Text id="GUI:BattleSystem:DebuffClear">%d is healed from harmful effects</Text>
+	<Text id="GUI:BattleSystem:BadDebuffClear">%d has no debuffs.</Text>
+	<Text id="GUI:BattleSystem:MegaHealing">%d restored %d hp and is healed from harmful effects</Text>
+	<Text id="GUI:BattleSystem:DamageFromEffect">%d received %d damage from %d</Text>
+	<Text id="GUI:BattleSystem:RunFail">Failed to escape.</Text>
+	<Text id="GUI:BattleSystem:CannotRun">Cannot run from this one</Text>
+	<Text id="GUI:BattleSystem:ElementKickback">%d received %d damage</Text>
+	<Text id="GUI:Improve:StayMyself">Stay as myself</Text>
+	<Text id="GUI:Improve:AreYouShure">Are you sure you want to select this\nclass?\nYou won’t be able to undo.</Text>
+	<Text id="GUI:Improve:СlassChoosed">You chose %d class and got the following skills:\n%d</Text> 
 	<Text id="GUI:YesNoPanel:Confirm">Yes</Text>
 	<Text id="GUI:YesNoPanel:Cancel">No</Text>
+	
+	<Text id="GUI:Ok">Ok</Text>
 	
 	<!-- Main Menu -->
 	<Text id="GUI:MainMenuPanel:NewGame">New Game</Text>
 	<Text id="GUI:MainMenuPanel:NewGamePlus">New Game+</Text>
-	<Text id="GUI:MainMenuPanel:NewGameAfterSecretEnding">NewGame?</Text>
+	<Text id="GUI:MainMenuPanel:NewGameAfterSecretEnding">New game?</Text>
 	<Text id="GUI:MainMenuPanel:Continue">Continue</Text>
 	<Text id="GUI:MainMenuPanel:Load">Load</Text>
 	<Text id="GUI:MainMenuPanel:Settings">Settings</Text>
 	<Text id="GUI:MainMenuPanel:Exit">Exit</Text>
 	<!-- Settings Panel -->
-	<Text id="GUI:SettingsPanel:Volume">Volume</Text>
+	<Text id="GUI:SettingsPanel:MusicVolume">Music Volume</Text>
+	<Text id="GUI:SettingsPanel:EffectVolume">Effects Volume</Text>
+	<Text id="GUI:SettingsPanel:Brightness">Brightness</Text>
+	<Text id="GUI:SettingsPanel:Contrast">Contrast</Text>
 	<Text id="GUI:SettingsPanel:Language">Language</Text>
 	<Text id="GUI:SettingsPanel:Subtitles">Subtitles</Text>
 	<Text id="GUI:SettingsPanel:Resolution">Resolution</Text>
-	<Text id="GUI:SettingsPanel:WindowedMode">Windowed mode</Text>
+	<Text id="GUI:SettingsPanel:WindowedMode">Window Mode</Text>
 	<Text id="GUI:SettingsPanel:Accept">Accept</Text>
 	<Text id="GUI:SettingsPanel:Cancel">Cancel</Text>
 	
+	<Text id="GUI:EnterName:EnterName">Before we start,\nplease enter your name.</Text>
+	<Text id="GUI:EnterName:Standart">Kesha</Text>
+	<Text id="GUI:EnterName:AreYouShure">Are you sure?</Text>
+	<Text id="GUI:EnterName:Warning">This name is already in use.</Text>
+	
+	<Text id="GUI:LoadingPanel:Shure">Are you sure you want to load this game?</Text>
+	<Text id="GUI:LoadingPanel:GameDuration">game duration</Text>
+	
 	<!-- Dialogs -->
-	<Text id="Dialog:SkeletonChild:1">Hi!</Text>
-	<Text id="Dialog:SkeletonChild:2">Look at this flower! It is so lovely!</Text>
-	<Text id="Dialog:SnailKid:1">Hi.</Text>
-	<Text id="Dialog:SnailKid:2">This flower suddenly appeared here today. We're doing happy dance to make it grow.</Text>
-	<Text id="Dialog:Bokalisk:1">Bok-bok-bok. Buk bugag!</Text>
-	<Text id="Dialog:Bokalisk:2">BOOKOOOOO!!!</Text>
-	<Text id="Dialog:Bokalisk1:1">Bookook!</Text>
-	<Text id="Dialog:Bokalisk1:2">Book BOOOK BUGAAAAAG!</Text>
-	<Text id="Dialog:Store:Welcome">Welcome to my humble little store! Do you want to buy something?</Text>
-	<Text id="Dialog:Store:1">All of my merchandise belonged to the brave warriors, that had enough guts to challenge a dragon!</Text>
-	<Text id="Dialog:Store:2">Well none of them survived, unlike their splendid equipment!</Text>
-	<Text id="Dialog:VillageElder:1">You woke up i see.</Text>
-	<Text id="Dialog:VillageElder:2">I'm still sleepy.</Text>
-	<Text id="Dialog:VillageElder:3">That's all for now.</Text>
-	<Text id="Dialog:GoatPerson:AboutWater:1">Usually i use one bucket 'cause imma not strong enough for two.</Text>
-	<Text id="Dialog:GoatPerson:AboutWater:2">But today i here got an idea! If i fill only a half o' the bucket i can hold two o' dem at the same time!</Text>
-	<Text id="Dialog:GoatPerson:AboutWater:3">Am i not the genius?</Text>
-	<Text id="Dialog:Terner:1">He-hey lil' one!</Text>
-	<Text id="Dialog:OldWell">It is a well... it has water… you drink water.</Text>
+	<!-- Skeleton child Dialogs -->
+	<Text id="Dialog:SkeletonChild:AboutFlower:1">Hello!</Text>
+	<Text id="Dialog:SkeletonChild:AboutFlower:2">Look at this flower! Isn’t it cute?</Text>
+	
+	<!-- Snail kid Dialogs -->
+	<Text id="Dialog:SnailKid:AboutFlower:1">Hi.</Text>
+	<Text id="Dialog:SnailKid:AboutFlower:2">This flower suddenly showed up today. We are dancing to help it grow up.</Text>
+	<Text id="Dialog:SnailKid:Quest:FoodForSnailKid:1">Mama sent me food?</Text>
+	<Text id="Dialog:SnailKid:Quest:FoodForSnailKid:2"> Mmm! I love salty-salty pickles ~♥</Text>
+	
+	<!-- Bokalisk Dialogs -->
+	<Text id="Dialog:Bokalisk:StartBattle:1">Bok-bokok! Bok-bokok!</Text> 
+	<Text id="Dialog:Bokalisk:StartBattle:2">BUGGAAAAAAK!</Text>
+	<Text id="Dialog:BokaliskOrda:StartBattle:1">Cluck cluck! Bok-Bugag!</Text> 
+	<Text id="Dialog:BokaliskOrda:StartBattle:2">BOOKAAAAWCK!!!</Text> 
+	
+	<!-- Store Dialogs -->
+	<Text id="Dialog:Store:Welcome">Welcome to my humble little shop. Would you like to make a purchase?</Text>
+	<Text id="Dialog:Store:1">All my goods are very reliable, all these stuff belonged to the brave warriors who challenged a dragon!</Text>
+	<Text id="Dialog:Store:2">None of them survived ... But fortunately, their equipment wasn’t damaged, he-he--heh.</Text>
+	
+	<!-- Goat person Dialogs-->
+	<Text id="Dialog:GoatPerson:AboutWater:1">Ah usually come here with one buckit, since I cannot hold two buckits full of watah at tha same time.</Text>
+	<Text id="Dialog:GoatPerson:AboutWater:2">But today me here had an ahdea! What if ah fill up these here buckits exactly to tha half, then ah can carry two buckits at tha same time!</Text>
+	<Text id="Dialog:GoatPerson:AboutWater:3">Am ah not tha geenius?</Text>
+	
+	<!-- Terner Dialogs -->
+	<Text id="Dialog:Terner:Ask">Hahah! Hello kid! Have the oldie sent you?</Text>
+	<Text id="Dialog:Terner:FromElder:1">Ah-hem! Today’s finally the day when you are ready to go into the outside world.</Text>
+	<Text id="Dialog:Terner:FromElder:2">I would have cried from happiness…</Text>
+	<Text id="Dialog:Terner:FromElder:3">BUT!</Text>
+	<Text id="Dialog:Terner:FromElder:4">I must prepare you for the cruelty of the world outside ... and of the chickens.</Text>
+	<Text id="Dialog:Terner:FromElder:5">Therefore, you will have to fight one of them. You should know - these chickens, also known as bokalisks, are much stronger than any of those small butt-fellas that infest the roads, so do not underestimate them.</Text>
+	<Text id="Dialog:Terner:FromElder:6">And ... Before you start, do you want me to tell you what I learned about monstyles that you use? </Text>
+	<Text id="Dialog:Terner:NotFromElder">O…</Text>
+	<Text id="Dialog:Terner:WantLearnMonstyle:1">Monstyles are used during the battle. To use them, click on the "Monstyle" text and choose 1-4 special skills. Then choose an opponent on which they will be used, and after that all you must do us press the right buttons. Remember: if you make a mistake, then the skill can’t be done and won’t even return its cost.</Text>
+	<Text id="Dialog:Terner:WantLearnMonstyle:2">Wow, how many different terminologies. I don’t even know, where you'll find the buttons during the fight... I have a feeling that I've destroyed something.</Text>
+	<Text id="Dialog:Terner:WantLearnMonstyle:3">Anyway ... Good luck with training!</Text>
+	<Text id="Dialog:Terner:NotWantLearnMonstyle">Hoho! Then good luck!</Text> 
+	<Text id="Dialog:Terner:BokaliskBattle:FromElder">Yes</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:NotFromElder">No</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:WantLearnMonstyle">Yes</Text>
+	<Text id="Dialog:Terner:BokaliskBattle:NotWantLearnMonstyle">No</Text>
+	<Text id="Dialog:Terner:TutorialWin">Well done kid! Hardly anybody can boast of having defeated Bokalisk in their first fight! I think you're ready! So go to the oldie and say that you've completed the training.</Text>
+	<Text id="Dialog:Terner:TutorialLose:1">Well, that can happens. These chickens are not as weak as they seem. Nevertheless, I think that you’ve grown quite a bit from this defeat. So you can go to the oldie and say that you are ready.</Text>
+	<Text id="Dialog:Terner:TutorialLose:2">Don’t be so stiff, the dangers that beset you outside the Village are much weaker than our chickens!</Text>
+	<Text id="Dialog:Terner:SaveLive">If you want, you can try to fight the chickens again, but I advise you to visit the Sun Tent before that. This can help you <b>save</b> your life.</Text>
+	<Text id="Dialog:Terner:GoScamper">Well, now I'll go run a bit.</Text> 
+	<Text id="Dialog:Terner:Scamper:1">Maybe it does not look like I'm running, but I am!</Text>
+	<Text id="Dialog:Terner:Scamper:2">I don’t know why, but I have a faint feeling that I broke something.</Text>	
+	<!-- Hero House Dialogs -->
+	<Text id="Dialog:HeroHouse:Bed">Take a nap?</Text>
+	<Text id="Dialog:HeroHouse:Bed:YesSleep">Yes</Text>
+	<Text id="Dialog:HeroHouse:Bed:NoSleep">No</Text>
+	<Text id="Dialog:HeroHouse:Cupboard">All sorts of knickknacks are stored here.</Text>
+	<Text id="Dialog:HeroHouse:Candle">It still can do a lot of glowing.</Text>
+	<Text id="Dialog:HeroHouse:Stove"> Just a stove, no fire in here.</Text>
+	<Text id="Dialog:HeroHouse:Picture">Good memories must always be remembered.</Text>
+	<Text id="Dialog:HeroHouse:Flower">The most common houseplant. It clears the air.</Text>
+	
+	<!-- Village Elder Dialogs -->
+	<Text id="Dialog:VillageElder:Hey:1">Hey!</Text>
+	<Text id="Dialog:VillageElder:Hey:2">%PlayerName, come here.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:1">I see you’re awake.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:2">I have good news for you.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:3">Now you’re old enough for more serious work than feeding a unicorn.</Text>
+	<Text id="Dialog:VillageElder:FirstTask:4">So, first, I need to check how well you can protect yourself, so go to the training area, Terner will be waiting there. Tell him that you need to test your strength, he will understand.</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:1">Hmm? Training area?</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:2">Heheheh, that is how we sometimes call our chicken house.</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:3">Yes, our chicken house also doubles as a training area.</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:4">You'll understand why, when you’ll talk to Terner.</Text>
+	<Text id="Dialog:VillageElder:AboutTraining:5">What are you waiting for? Hup-hup.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:1">Hmm ... I see you went through training.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:2">Now you can be considered an independent young ... monster.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:3">And your first step into a new world will be made right now. Because there is a problem.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:4">As you can see, Joshua is a human. He just came to stay here for a while and now he wanted to go home, but ... </Text>
+	<Text id="Dialog:VillageElder:GoToForest:5">Actually, the altar cannot connect to anything right now. As you know, altars serve as portals. You can use it to move from one point to another.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:6">And so we decided to restore the link between altars of our village and his village. To make this happen you must go to his village and try to use that altar to get here.</Text>
+	<Text id="Dialog:VillageElder:GoToForest:7">You have to go through the forest to get there,... Be careful though, I have a strange feeling that something is going to happen...</Text> 
+	<Text id="Dialog:VillageElder:Gift:1">While you’re here, I think I should give you my gift in honor of you reaching this age.</Text>
+	<Text id="Dialog:VillageElder:Gift:2">I don’t know, for how long you're going to wear it, but I'm sure that this helmet will help you a lot.</Text>
+	<Text id="Dialog:VillageElder:GoodLuck">Have a save journey.</Text>
+	<!-- SunPriestG Dialogs -->
+	<Text id="Dialog:SunPriestG:AboutSave:1">Do you see this mark on the floor? It is a mark of the Sun. It allows you to take a peek into your future. Quality of the vision differs for every person. Also, it heals body and soul.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:2">You can even say that the mark of the Sun <b> saves</b> the one who will use it.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:3">Marks of the Sun are very common, and they can be found in the most unexpected places.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:4">I can’t use them that well, but I can create them.</Text>
+	<Text id="Dialog:SunPriestG:AboutSave:5">Remember, mark of the Sun can <b>save</b> those who use it.</Text>
+	
+	<!-- SunPriest Dialogs -->
+	<Text id="Dialog:SunPriest:Welcome">Welcome to the temple of the Sun! It also doubles as my house.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:1">The Altar of the Sun can connect to other similar altars, that means, it’s a very convenient transportation device. But it doesn’t work for now.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:2">Actually, it stopped working a week ago, but I thought that it will start working again soon.</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:3">But it still doesn’t work..</Text>
+	<Text id="Dialog:SunPriest:AboutTeleport:4">I really want some manual to it.</Text>
+	<Text id="Dialog:SunPriest:TryTeleport">Still doesn’t work, hmm...</Text>
+	
+	<!-- SunPriest Home -->
+	<Text id="Dialog:SunHome:Stove">One stove and four pipes; this is impractical of course, but looks nice.</Text>
+	<Text id="Dialog:SunHome:Bucket">Empty.</Text>
+	<Text id="Dialog:SunHome:Box">It’s filled with everyday garbage.</Text>
+	<Text id="Dialog:SunHome:Cactus">The most common air-cleaning houseplant. This one’s a cactus.</Text>
+		<!-- Mama Snail Dialogs -->
+	<Text id="Dialog:MamaSnail:Task:Ask">%PlayerName, can I ask for your help? My son forgot his food, can you deliver it to him?</Text>
+	<Text id="Dialog:MamaSnail:Task:Help">Yes</Text>
+	<Text id="Dialog:MamaSnail:Task:NotHelp">No</Text>
+	<Text id="Dialog:MamaSnail:Task:Thank">Oh! Thank you very much! We would do it by ourselves, but as you can see, we aren’t fast enough.</Text>
+	<Text id="Dialog:MamaSnail:Task:Sorry">Oh, I’m really sorry. You're probably in a hurry.</Text>
+	<Text id="Dialog:MamaSnail:QuestAccepted">I think he's playing near the tree with Costella.</Text>
+	<Text id="Dialog:MamaSnail:QuestDenied">Have you probably changed your mind?</Text>
+	<Text id="Dialog:MamaSnail:QuestDenied:Help">Yes</Text>
+	<Text id="Dialog:MamaSnail:QuestDenied:NotHelp">No</Text>
+	<Text id="Dialog:MamaSnail:QuestCompleted">Did you deliver them to him? Oh, what would we do without you? Here, take this gift for your troubles.</Text>
+	<Text id="Dialog:MamaSnail:AboutSnail:1">We may look like snails and move really slowly, but we aren’t actually snails. Most will get really surprised when they see us eat salty food.</Text>
+	<Text id="Dialog:MamaSnail:AboutSnail:2">But you knew it already, didn’t you?</Text>
+		<!-- Papa Snail Dialogs -->
+	<Text id="Dialog:PapaSnail:Congratulation:1">Ohoho %PlayerName! I heard that you are old enough to go beyond the village. My congratulations!</Text>
+	<Text id="Dialog:PapaSnail:Congratulation:2">I can’t wait to see my son reach your age.</Text>
+	
+	<!-- Snail House -->
+	<Text id="Dialog:SnailHouse:Cupboard">There is a large number of glass jars ... all marked as salt.</Text>
+	
+	<!-- NotACat Dialogs -->
+	<Text id="Dialog:NotACat:Murr:1">Muyauuu.</Text> 
+	<Text id="Dialog:NotACat:Murr:2">Miyaooww.</Text> 
+	<Text id="Dialog:NotACat:Murr:3">Mayo.</Text>
+	<Text id="Dialog:NotACat:Murr:4">Ehmm… Maiuaurr?</Text>
+	<Text id="Dialog:NotACat:Murr:5">Okay, I can’t do thisss anymore.</Text>
+	<Text id="Dialog:NotACat:Murr:6">Have you ever tried to meow, jussssst like an ordinary cat?</Text>
+	<Text id="Dialog:NotACat:Murr:7">It’ssss very difficult.</Text>
+	<Text id="Dialog:NotACat:Murr:8">I ssstill remember the timesss when I wasss a huge sssnake.</Text>
+	<Text id="Dialog:NotACat:Murr:9">Well at leassst thisss body Iss much warmer than previousss one, even with her near me.</Text>
+	
+	<!-- Snowoman Dialog -->
+	<Text id="Dialog:Snowoman:AboutBookshelf:1">Oh, %PlayerName did come to read books?</Text>
+	<Text id="Dialog:Snowoman:AboutBookshelf:2">I decided to freshen up the local atmosphere and put quite a bit of monett in some books.</Text>
+	<Text id="Dialog:Snowoman:AboutBookshelf:3">If you have good attention, you may even find them.</Text>
+	<Text id="Dialog:Snowoman:AboutBookshelf:4">Well, did you find something?</Text>
+	<Text id="Dialog:Snowoman:Complete:1">Ah! % PlayerName. You found 80 monett! Great! For your thirst for knowledge…</Text>
+	<Text id="Dialog:Snowoman:Complete:2">…or maybe for money…</Text>
+	<Text id="Dialog:Snowoman:Complete:3">Let me reward you with 20 monett! And also take this sphere of experience.</Text>
+	<Text id="Dialog:Snowoman:PreComplete:1">A... wow, you must have come and already read all the necessary books.</Text>
+	<Text id="Dialog:Snowoman:PreComplete:2">Your thirst for knowledge makes me regally happy!</Text>
+	<Text id="Dialog:Snowoman:PreComplete:3">And you found all the monett that I hid there! Congrats!</Text>
+	<Text id="Dialog:Snowoman:PreComplete:4">Let me reward you with 20 monett! And also take this sphere of experience.</Text>
+	<Text id="Dialog:Snowoman:Common">I think hiding my entire salary in almost every book wasn’t my best idea ..</Text>
+	
+	<!-- Library -->
+	<Text id="Dialog:Library:Coathanger">This hanger is the only one in the entire village, it is not even used by its owner.</Text> 
+	<Text id="Dialog:Library:Iceout">Created especially for very cold monsters. Icechaser 2000 removes excess cold, so there is no more white frost in the house.</Text>
+	<Text id="Dialog:Library:Bookshelf:1">History of the Veltiona. It is known that the original inhabitants of the Veltiona were humans. Then, from humankind, came elves, dwarfs and halflings. Some time after, monsters were thrown into this world. Due to significant bodily differences, both sides experienced a strong disgust to each other and then the war began. Despite having learned all those events nobody knows when exactly they have happened.</Text>
+	<Text id="Dialog:Library:Bookshelf:2">Cult of the Sun. This faith began to spread 137 years ago, but it was created even earlier, approximately 834 years ago. It was founded by a man and a sphinx. Their people lived in deserts and, when the Big Drought came, they had to work together in order to survive. To create something common between the humans and monsters, they decided to bring a new faith. Only an unprecedented miracle could make that happen. The portals of the Sun altars and the marks of the Sun became this miracle. Nobody knows how these objects were created, but judging by the stories of the inhabitants of the desert, they were the gifts from the Sun. Faith, because of the convenience of portals and marks, was quickly adopted by the people of the desert, and they were the first ones to stop fighting each other, proving that peace between monsters and humans was possible.</Text>
+	<Text id="Dialog:Library:Bookshelf:3">Monett. For a long time, monsters used the barter system, however, near the end of the war everyone was using monett for exchange. This money is made from mix of copper, mithril, silver and gold. To test them for authenticity, special magic devices are used.</Text> 
+	<Text id="Dialog:Library:Bookshelf:4">Monsters. Monsters are not indigenous to this world. Despite the diversity of their size and forms, they still can be called one race. It is because all monsters initially had the ability to change their characteristics and appearance during their youth. To satisfy conditions of "class up" the monster had to gain experience of any kind. The easiest way is to win battles. The older the monster is, the more experience it needs to upgrade his class. Most monster clans refused the ability to raise their class, as this gives one advantage: children are not born as low ranked beings, but of the same species as one of the parents. However, the higher the parent's rank, the longer it will take for child to grow. </Text>
+	<Text id="Dialog:Library:Bookshelf:5">Humans of the Veltiona Part I - Elves. Elves are known for their long lives, that’s why most of them are historians. Development of their muscles goes at much slower rate than any other human being, so they prefer to use magic. Most elves are well-known philosophers, magicians and archers, but there are those who have mastered the path of the blade. They use peculiar curved blades specifically designed for them.</Text>
+	<Text id="Dialog:Library:Bookshelf:6">Humans of the Veltiona Part II - Dwarfs. Dwarfs life is usually two times than that of a normal human, they have a low amount of magic in them and also short builds. They have a very developed musculature, for this reason they are wider in the shoulders than humans. Dwarfs usually prefer to study technology and forging skills, because of their natural sturdiness they are able to survive mistakes that could kill any other member of the human race. However, there are cases when dwarfs have a high level of magic. Dwarven magicians have high affinity for magic of Electricity, Fire and Earth, most of them like to practice the necromancy. They clean revived corpses from flesh and paint the bones with radiant colors.</Text>
+	<Text id="Dialog:Library:Bookshelf:7">Humans of the Vetliona Part III - Halflings. Halflings have a length similar to that of dwarfs, but their overall strength is same as humans of equally small size. The level of their magic is mostly medium. Their short stature is compensated by the high speed of thought, high endurance, and length of lives similar to the dwarfs. Halflings usually are great vendors and artists.</Text>
+	<Text id="Dialog:Library:Bookshelf:8">Humans of the Veltiona Part IV - Humans. Humans do not live as long as other members of their race, but they thrive as one of the oldest races of the Veltiona without any change in their physiology. That is because humans are very flexible, have a sufficiently high level of fertility, excellent learning ability and great persistence. Since humans have a relatively short duration of life, they are most prone to such things as greed, laziness, envy, and the like. But precisely because of their high emotionality, this race has reached the greatest heights in this world.</Text>
+	
+	<!-- MamaSkeleton -->
+	<Text id="Dialog:MamaSkeleton:Task:1">I wonder where is my lucky scoop?</Text>
+	<Text id="Dialog:MamaSkeleton:Task:2">Hmm?</Text>
+	<Text id="Dialog:MamaSkeleton:Task:3">Good morning, %PlayerName, I didn’t notice you. I wanted to cook the soup, but I can’t find my scoop.</Text>
+	<Text id="Dialog:MamaSkeleton:Task:4">The last time I remember seeing it is when I lent it to my daughter to play knights near the well.</Text>
+	<Text id="Dialog:MamaSkeleton:Task:5">I haven’t found it near the well. I hope it hasn’t fallen into it. My bones cannot stand such dampness at all.</Text>
+	<Text id="Dialog:MamaSkeleton:Task:Complete:1">?!</Text>
+	<Text id="Dialog:MamaSkeleton:Task:Complete:2">You found my scoop! Oh, you little savior you, let me thank you with these.</Text>
+	<Text id="Dialog:MamaSkeleton:AboutFamily">My daughter and husband love my soup, and this scoop gives it a special taste.</Text>
+	<!-- Skeleton House -->
+	<Text id="Dialog:SkeletonHouse:Picture">Father, mother and daughter are depicted here. They have skull wide grins.</Text>
+	<Text id="Dialog:SkeletonHouse:KostellaBed">A little Costella sleeps here, there is a large number of colored pencils that look like small bones under her bed.</Text>
+	<Text id="Dialog:SkeletonHouse:KostellaShelf">The notebook is full of drawings, there are traces of liquid on it. Judging by the color, it was milk.</Text>
+	
+	<!-- Old Well -->
+	<Text id="Dialog:OldWell:AboutWell">The well... Full of water ... You can drink it.</Text>
+	<Text id="Dialog:OldWell:Coop:1">The well. Someone forgot to pull out the bucket.</Text>
+	<Text id="Dialog:OldWell:Coop:2">There's something in there. You pulled out the bucket and looked inside.</Text>
+	
+	<!-- Joshua -->
+	<Text id="Dialog:Joshua:AboutDay:1">What a nice day  is today!</Text>
+	<Text id="Dialog:Joshua:AboutDay:2">Hmm? I'm not hiding from anyone, I'm right front of you, in a comfortable shadow of this tree.</Text>
+	<Text id="Dialog:Joshua:AboutDay:3">Sometimes resting like that is superrific, hohoho!</Text>
+	<Text id="Dialog:Joshua:GoToForest">The Altar of the Sun cannot connect to my village!</Text>
+	<Text id="Dialog:Joshua:AboutTask">Hmm, hmm. I don’t even flabbergasting know how did this happen.</Text>
+	<Text id="Dialog:Joshua:AboutYoungTime">Do you want me to tell you one moment from the time of my youth? I saw the war and remember the times when the peace was announced! In my younger years, I was like "WOOH!" or even "OOOMPH!", but even like that I was just a greenhorn who went to war for the sake of glory. And, believe me, I so much regretted it, don’t listen to those who say that the war time was a time of glory and triumph, it was just a meat grinder. The farther soldiers were from the capitals, the less was their desire to fight, and this applied to both sides. And here we are sitting in the stupendously uncomfortable swamps, tired and sad, when suddenly an orc, and a big one at that, approaches our squad. Of course, we were all shtumpidazed and prepared for the worst but then out of nowhere he tells us: "I  kinda uh ... I want to make a product trade". Everyone went dead silent after that, and then he says: "You give us salt and vegetables, and we’ll give you meat." Therefore, secret exchanges have begun: of course we didn’t trust him at first, but the days went by and such exchanges became more and more frequent, and this businessy relationship turned into a strong friendship. You know, the first exchange was due to the fact that they ran out of vegetables for their soup! H-Hah!</Text>
+	<Text id="Dialog:Joshua:SaleBook">Wellp, since this situation is still going on and I’m staying here a bit longer, don’t you want to buy this book called "Making spoons, big and small"? It costs only 9000 monett.</Text>
+	<Text id="Dialog:Joshua:SaleBook:Yes">Yes</Text>
+	<Text id="Dialog:Joshua:SaleBook:No">No</Text>
+	<Text id="Dialog:Joshua:SaleBook:Success:1">O-Oh... I…  I didn’t expect that. I mean, it's just a demo! Why the hell do you need this book? And how did you obtainected such a sum? </Text>
+	<Text id="Dialog:Joshua:SaleBook:Success:2">You know what, whatever! Take it, you deserve it! It still plays no role in this demo though. H-Hah!</Text>
+	<Text id="Dialog:Joshua:SaleBook:Fail">Sorry, sonny, but you don’t have enough money.</Text>
+	<Text id="Dialog:Joshua:SaleBook:WhyNot">Don’t you want to know how to creanimake yerselfe spoons?</Text>
+	<Text id="Dialog:Joshua:Common">Well, all I can offer you right now is an emptiness in my bag. H-Hah!</Text>
+	<Text id="Dialog:Joshua:TalkWithVillageElder">First, talk to this grampa orc.</Text> 
+	
+	<!-- Village Elder House -->
+	<Text id="Dialog:VillageElderHouse:BigOven"> Just a stove, no fire in here.</Text>
+	<Text id="Dialog:VillageElderHouse:Boxes">He probably just loves the boxes, they are all empty.</Text>
+	<Text id="Dialog:VillageElderHouse:Pipe">A Pipe.</Text>
+	<Text id="Dialog:VillageElderHouse:Chest">Wonder what he keeps in here.</Text>
+	
+	<!-- Others -->
+	<Text id="Dialog:OtherBed">You're not going to sleep on someone else's bed, right?</Text>
 	<Text id="Dialog:GiantCock:1">...</Text>
-	<Text id="Dialog:GiantCock:2">*He's sleeping*</Text>
-	<Text id="Dialog:Uniceros:1">Pyin?</Text>
+	<Text id="Dialog:GiantCock:2">*He’s sleeping*</Text>
+	<Text id="Dialog:Uniceros:1">Pyuin?</Text>
+	<Text id="Dialog:NoEntry">Here is the sign: No entry to outsiders.</Text>
+	<Text id="Dialog:EmptyChest">Empty</Text>
+	
+	<!-- Save -->
+	<Text id="Dialog:Save:1">You feel much better now.</Text>
+	<Text id="Dialog:Save:2">Do you want to save?</Text>
+	<Text id="Dialog:Save:Yes">Yes</Text>
+	<Text id="Dialog:Save:No">No</Text>
+	<Text id="Dialog:SaveComplete">Save complete</Text>
+	
+	<!-- Leshii -->
+	<Text id="Dialog:Leshii_1">This is my forest! Strangers are not allowed in here.</Text>
+	<Text id="Dialog:Leshii_2_1">What?! How did you?..</Text>
+	<Text id="Dialog:Leshii_2_2">Ahehem ... Never mind! You will not pass further!</Text>
+	<Text id="Dialog:Leshii_3_1">Again?!</Text>
+	<Text id="Dialog:Leshii_3_2">Why did you come?! I told you that you cannot pass any further! See! Now I will repeat it again. You will not pass any further!.. …Please?</Text>
+	
+	<Text id="Dialog:Leshii_StartFight_Simple">My soldiers, apparently, weren’t able to stop you. But if I couldn’t prove myself as a commander, I’ll try to show just how much of a warrior I am!</Text>
+	
+	<Text id="Dialog:Leshii_StartFight_Special:1">My soldiers, apparently, weren’t able to stop you. But if ... what the?!</Text> 
+	<Text id="Dialog:Leshii_StartFight_Special:2">This ... This is from my father?</Text>
+	<Text id="Dialog:Leshii_StartFight_Special:3">No… no, no, no! NO!</Text>
+	<Text id="Dialog:Leshii_StartFight_Special:4">This is a lie!</Text>
+	<Text id="Dialog:Leshii_StartFight_Special:5">You just want me to give up on my destiny!</Text>
+	<Text id="Dialog:Leshii_StartFight_Special:6">I won’t be the same as my father, and I don’t want to!</Text>
+	<Text id="Dialog:Leshii_StartFight_Special:7">Go out of here!</Text>
+	<Text id="Dialog:Leshii_Defated_Simple:1">Buhh! I couldn’t show my true strength… also why did you even came to this forest? What? You need to get the next village? You know, it’s not the best time for a stroll. The second war between humans and monsters is about to begin.</Text>
+	<Text id="Dialog:Leshii_Defated_Simple:2">And I was invited to participate as the leader of this forest. Just imagine, all these legendary battles, historical moments! And I had a chance to get into history as one of the monster leaders who went against humans after all this time! Of course, cause you defeated me right now, I now have some doubts about my strength, and the strength of my army, but it's easy to fix by training and ...</Text>
+	<Text id="Dialog:Leshii_Defated_Simple:3">A-a-ah…yeah.</Text>
+	<Text id="Dialog:Leshii_Defated_Simple:4">Eehrm ... he's here for ... I mean he is now undergoing an interview to enter my army!</Text>
+	<Text id="Dialog:Leshii_Defated_Simple:5">Do you understand what is going to happen now? I will try to make sure that the place you came from will not be noticed, but please don’t tell anyone that I lost to you in a fight.</Text>
+	<Text id="Dialog:Leshii_Defated_Simple:6">And yeah, I won’t stop you any more, or it will affect the battle spirit.</Text>
+	<Text id="Dialog:Leshii_Defated_Special:1">I just wanted to be worthy.</Text>
+	<Text id="Dialog:Leshii_Defated_Special:2">I knew that the words coming from the seed actually belonged to my father, I just didn’t want to accept it. After your final strike I gave up on this fight and all the knowledge and feelings of my father could finally overcome my selfishness.</Text>
+	<Text id="Dialog:Leshii_Defated_Special:3">Did you knew? One powerful monster is gathering an army in order to start a war with humans. I loved to hear the stories about the legendary moments at war ... and I suspected that war is also a very cruel time. But I really wanted to be famous for something that I did, and when the messenger from this monster came with a request to join – I accepted it. However, as you see, many inhabitants of this forest do not like this idea. And I almost sent them to a war they did not wanted to be part of, just because I felt offended. The messenger will come again today, in order to sell us the necessary equipment, I will tell her that I refuse to participate in this war... Maybe this will attract hatred from some, but now I'm protected by the honor and knowledge of my father. Hmm? It seems she is already close.</Text>
+	<Text id="Dialog:Leshii_Defated_Special:4">I'm sorry, I cannot accept it.</Text>
+	<Text id="Dialog:Leshii_Defated_Special:5">No, I just decided to refuse participation in this war.</Text>
+	<Text id="Dialog:Leshii_Defated_Special:6">I will pay for the shipping cost, but I still won’t make a purchase.</Text>
+	<Text id="Dialog:Leshii_Defated_Special:7">...</Text>
+	<Text id="Dialog:Leshii_Defated_Special:8">Now that she's gone, I'll probably change back, I don’t think my father would have liked how I used his appearance.</Text>
+	<Text id="Dialog:Leshii_Defated_Special:9">And now I have to try to calm down the inhabitants of the forest, I don’t think that everything will go smoothly, but many will be able to sigh with relief.</Text>
+	<Text id="Dialog:Leshii_Common_Simple">What? You want me to refuse participation in this war?</Text>
+	<Text id="Dialog:Leshii_Common_Simple:Yes">Hah! I won’t give up my chance to become famous! You know that humans are much weaker than us. The fact that I lost to you doesn’t mean that I will lose during the war.</Text>
+	<Text id="Dialog:Leshii_Common_Simple:No">Then why are you eyeing me like that?</Text>
+	<Text id="Dialog:Leshii_Common_Simple:Ask">Yes</Text>
+	<Text id="Dialog:Leshii_Common_Simple:NotAsk">No</Text>
+	
+	<Text id="Dialog:Leshii_Common_Special:1">I wonder how everything would have went if you came here without a seed of memory ... no, actually I’m scared to even to think about it.</Text>
+	<Text id="Dialog:Leshii_Common_Special:2">I thank you for your help.</Text>
+	<Text id="Dialog:Leshii_Common_Special:3">Every time I feel like a crumpled leaf when I remember how I behaved before I got a seed of memory.</Text>
+	<Text id="Dialog:Leshii_Common_Special:4">Have you ever had such a thing? When you don’t want to remember some moments of your childhood?</Text>
+	
+	<!-- Fairy -->
+	<Text id="Dialog:Fairy_Simple:1">Ah! There you are!</Text>
+	<Text id="Dialog:Fairy_Simple:2">The shipment of enchanted weapons, and the healing dust is delivered, sign here, here and here.</Text>
+	<Text id="Dialog:Fairy_Simple:3">Is this one of yours? I haven’t seen him or his kind before.</Text>
+	<Text id="Dialog:Fairy_Simple:4">I see, I see. I’m going to report the news about the delivery, and don’t forget to pay the fee until next week.</Text>
+	<Text id="Dialog:Fairy_Simple:5">Psht, army..</Text>
+	
+	<Text id="Dialog:Fairy_Special:1">There you are! I was just looking for you.</Text>
+	<Text id="Dialog:Fairy_Special:2">All weapons and healing dust are delivered, you just need to sign he…</Text>
+	<Text id="Dialog:Fairy_Special:3">У вас не хватает монетт? Не беда, вы можете оплатить все рес-</Text>You don’t have enough monett? Don’t worry, you can pay everything with res….
+	<Text id="Dialog:Fairy_Special:4">Wh-what? What did you just say?! Have we brought all these goods in vain?! Do you know at least how much did it cost to get it here?! I-</Text>
+	<Text id="Dialog:Fairy_Special:5">Are you really such an idiot ?! What will your refusal to participate in the war decide? Why did you order all these goods?! I remember you used to talk about other things before!</Text>
+	<Text id="Dialog:Fairy_Special:6">YOU! I'm sure that all these expense happened because of you! I will remember what you just did!</Text>
+	<Text id="Dialog:Fairy_Special:7">And you! Don’t you think that you will get away with this!</Text>
+	
+	<!-- Event Mobs -->
+	<Text id="Dialog:StartBattle_1">Nothing personal, it's just ... uh ... business?</Text>
+	<Text id="Dialog:StartBattle_2">Uhhhhhhhhhh I just wana laaaze …</Text>
+	<Text id="Dialog:StartBattle_3">Please don’t hurt us too much.</Text>
+	<Text id="Dialog:AfterBattle1_Mob_1">The boss is usually not as reclusive. It’s just some kind of phase.</Text>
+	<Text id="Dialog:AfterBattle1_Mob_2">You uhh... I’m really sorry, it’s just the boss has received an order from the ... uh-oh, I said too much.</Text>
+	<Text id="Dialog:AfterBattle1_Mob_3">The current Leshiy is not like his father, and perhaps he’ll never be like him. But what can do? According to the law of the forest, we have to obey him.</Text>
+	<Text id="Dialog:AfterBattle2_Mob_1">MMmmmaaaaaannnn! I’m so tired, and you’ve beaten me pretty well. All we do is train and work, train and work. I want back those days when the father of the current Leshiy was the ruling one.</Text>
+	<Text id="Dialog:AfterBattle2_Mob_2">You may not believe it but our boss is less than 50 years old, he’s very young for a leshiy!  The previous one was about 750 years before he became one with the Great Tree. The path to this mighty tree is much harder to find than it might seem, but it's worth it! </Text>
+	<Text id="Dialog:AfterBattle2_Mob_3">Ya know? I knew our boss since he was very young. Many just like to compare him with his father, which made him very insecure. Imagine what will happen if a 7-year-old child is constantly told that he immediately has to achieve the same heights as the 100-year-old king.</Text>
+	
+	<Text id="Dialog:AfterBattle3_Mob_1">Sometimes a small glowing mosquito comes to our boss, after visits like this, leader forces us to train even harder. Before appearance of this mosquito, the boss was afraid to even show his face.</Text>
+	<Text id="Dialog:AfterBattle3_Mob_2">Pst, I will tell you a secret, the way our boss looks now is not his real form, this form is very similar to his father’s, only smaller in size. His real form is much more fitting for his age.</Text>
+	<Text id="Dialog:AfterBattle3_Mob_3">According to tradition, elder leshiy, in his last days, grants the younger one a seed of memory. This seed transfers all the knowledge of the previous leshiy to younger one to begin his growing phase, but the boss never got the seed. He quarreled with his father that day, and when he decided to make up with his father, it was too late. Similar situations happen very often, but this doesn’t make it any less sad.</Text>
+	
+	<!-- Sign -->
+	<Text id="Dialog:Sign:Common:1">Attention! This area was not programmed yet!</Text>
+	<Text id="Dialog:Sign:Common:2">But still what’s in there?..</Text>
+	<Text id="Dialog:Sign:Common:3">No one will notice, if this wall is removed for a while, right?</Text>
+	
+	<!-- Complte Bokalisk -->
+	<Text id="Dialog:CompleteBokalisk:Simple">You were waaaarned! This place hasn’t been fully cococoded yet! Cluuck... you caaan restart the game, bok I suppose you haven’t not finished some stuff.</Text>
+	<Text id="Dialog:CompleteBokalisk:Special:1">Cooooongratulations! You passed the bokbokboss successfully! Don’t forget that in the future trying a bit harder can be necessary to see the truth.</Text>
+	<Text id="Dialog:CompleteBokalisk:Special:2">In the future, when everything cococomes out.</Text>
+	
+	<!-- OpenDoorCrystal -->
+	<Text id="Dialog:OpenDoorCrystal:OpenDoor:1">It looks very suspicious ... you touched the crystal.</Text>
+	<Text id="Dialog:OpenDoorCrystal:OpenDoor:2">You felt a little shaking.</Text>
+	<Text id="Dialog:OpenDoorCrystal:Common">You tried to touch it again, but nothing happened.</Text>
+	
+	<!-- SecondRateRobber -->
+	<Text id="Dialog:SecondRateRobber:BuyFail">Hmm, ye don’t have enough money. Come back later.</Text>
+	<Text id="Dialog:SecondRateRobber:Lose">I'll remember this!</Text>
+	<Text id="Dialog:SecondRateRobber:1">Hey, if ye give me 10 monett, imma tell you something interesting.</Text>
+	<Text id="Dialog:SecondRateRobber:1:Pass">The offer is still valid if ye change yer mind.</Text>
+	<Text id="Dialog:SecondRateRobber:1:Buy">Ok</Text>
+	<Text id="Dialog:SecondRateRobber:1:NotBuy">No</Text>
+	<Text id="Dialog:SecondRateRobber:1:Buy:1">I tell no lies.</Text>
+	<Text id="Dialog:SecondRateRobber:1:Buy:2">Yep, this was the interesting part.</Text>
+	<Text id="Dialog:SecondRateRobber:2">Hey, If ye give me another 30 monett, imma tell ye something important.</Text>
+	<Text id="Dialog:SecondRateRobber:2:Pass">Ye really don’t want to regret about it. It’s really important.</Text>
+	<Text id="Dialog:SecondRateRobber:2:Buy">Ok</Text>
+	<Text id="Dialog:SecondRateRobber:2:NotBuy">No</Text>
+	<Text id="Dialog:SecondRateRobber:2:Buy:1">I have this seed here, I took from leshiy’s hand when he wasn’t fully absorbed by the tree. As ye can see, only his head remains.</Text>
+	<Text id="Dialog:SecondRateRobber:2:Buy:2">It was a bit tricky to get it done.</Text>	
+	<Text id="Dialog:SecondRateRobber:3">Hey, if ye give me 100 monett, imma sell ye me seed ... Don’t look at me like this, it actually costs much more than that!</Text>
+	<Text id="Dialog:SecondRateRobber:3:BuyFail">Hmm, ye need a little more money, I ain’t running charity here.</Text>
+	<Text id="Dialog:SecondRateRobber:3:Pass">Well, suit yerself then, ye know, I could offer me seed to anyone, but offered it to ye.</Text>
+	<Text id="Dialog:SecondRateRobber:3:Buy">Ok</Text>
+	<Text id="Dialog:SecondRateRobber:3:NotBuy">No</Text>
+	<Text id="Dialog:SecondRateRobber:3:Buy:1">Here, ye can have it, mwehehe…</Text>
+	<Text id="Dialog:SecondRateRobber:3:Buy:2">………..</Text>
+	<Text id="Dialog:SecondRateRobber:3:Buy:3">If I think about it… ye bought it, then it is actually valuable, I'm afraid that I won’t give ye me seed. But I’m really sorry but imma have to force ye to get silent.</Text>
+	
+	<!-- Seed Of Memory -->
+	<Text id="Dialog:SeedOfMemory:1">You picked up a seed of memory.</Text>
+	<Text id="Dialog:SeedOfMemory:2">You suddenly felt that as if words come to your head ...</Text>
+	<Text id="Dialog:SeedOfMemory:3">"My son, I want to ask your forgiveness, even though I lived a very long live and was even considered the wisest one, I failed to notice that my fame pressured you. And when you asked for my help, I simply refused you, thinking that you could handle everything yourself... Blinded by my pride, I forgot that you are still very young, and it led to our quarrel. I know that you will not come, when I’ll become one with the Great Tree… So, together with all the knowledge of the forest, I decided to give you my apologies, so that when this seed reaches you, you will understand: I am very proud of you. I believe that the forest in your hands will be right and safe, because you are my only child. I am sorry that I did not tell you this before. Forgive me for not being able to be with you longer"</Text>
+
+	<!-- Big Tree -->
+	<Text id="Dialog:Forest:BigTree:1">This is the Great Tree. It can be easily seen outside of the forest.</Text>
+	<Text id="Dialog:Forest:BigTree:2">If you look closer, this huge face looks very familiar.</Text>
+	<Text id="Dialog:Forest:BigTree:3">Your hp and sp are recovered to maximum.</Text>
+	
+	<!-- Greenlight -->
+	<Text id="Dialog:Greenlight">Do you want to vote for this game on SteamGreenlight?</Text>
+	<Text id="Dialog:Greenlight:Yes">Yes</Text>
+	<Text id="Dialog:Greenlight:No">No</Text>
 </Localization>
