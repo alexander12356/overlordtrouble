@@ -188,7 +188,7 @@ public class BattleSystem : MonoBehaviour
 
         List<string> l_WinText = new List<string>();
 
-        string l_RewardText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Win", new string[] { m_Experience.ToString() });
+        string l_RewardText = LocalizationDataBase.GetInstance().GetText("GUI:BattleSystem:Win", new string[] { BattlePlayer.GetInstance().actorName, m_Experience.ToString() });
         l_RewardText += GiveLoot();
 
         l_WinText.Add(l_RewardText);

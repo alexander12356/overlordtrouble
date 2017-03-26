@@ -357,7 +357,7 @@
 	<Text id="GUI:BattleSystem:Select">Выбрать</Text>
 	<Text id="GUI:BattleSystem:Cancel">Назад</Text>
 	<Text id="GUI:BattleSystem:UseSpecials">Исполнить</Text>
-	<Text id="GUI:BattleSystem:Win">Враги повержены.\nВы победили.\nГГ получает %d exp</Text>
+	<Text id="GUI:BattleSystem:Win">Враги повержены.\nВы победили.\n%d получает %d exp</Text>
 	<Text id="GUI:BattleSystem:Lose">%d больше не может сражаться дальше, %d потерял сознание.\nНе осталось никого кто мог бы продолжить сражение...\nВы проиграли.</Text>
 	<Text id="GUI:BattleSystem:And">и</Text>
 	<Text id="GUI:BattleSystem:AttackFail">Атака не прошла</Text>
