@@ -5,9 +5,9 @@
 	<!-- Specials -->
 	<!-- DewElemental -->
 	<Text id="Special:WaterDrops">Water Drops</Text>
-	<Text id="Special:WaterDrops:Description">Attack skill: 2sp\n\nBase damage 3, hits all enemies\n\n Element: Water\n\nThese drops hurt a bit more than finger pokes.</Text>
+	<Text id="Special:WaterDrops:Description">Attack skill: 2sp\n\nBase damage 3, hits all enemies\n\nElement: Water\n\nThese drops hurt a bit more than finger pokes.</Text>
 	<Text id="Special:Slap">Slap</Text>
-	<Text id="Special:Slap:Description">Attack skill: 2sp\n\nBase damage 6\n\n Element: Physical\n\nFor when you have noodles for arms.</Text>
+	<Text id="Special:Slap:Description">Attack skill: 2sp\n\nBase damage 6\n\nElement: Physical\n\nFor when you have noodles for arms.</Text>
 
 	<Text id="Special:ProtectiveShell">Bubble shield</Text>
 	<Text id="Special:ProtectiveShell:Description">Defense Skill: 2sp\n\nIncreases defense by 3 points, lasts 3 turns\n\nImagine that this bubble can protect you, after all it is the thoughts that count.</Text>
@@ -17,9 +17,8 @@
 	<Text id="Special:WaterBullet:Description">Attack skill: 4sp\n\nBase damage 10\n\nElement: Water\n\nA water drop, accelerated to frightening speeds.</Text>
 	<Text id="Special:WaterDash">Bash Dash</Text>
 	<Text id="Special:WaterDash:Description">Attack skill: 6sp\n\nBase damage 14\n\nElement: Physical\n\nFull body strike accelerated by blowing jets of water.</Text>
-
 	<Text id="Special:HealingSplash">Healing Splash</Text>
-	<Text id="Special:HealingSplash:Description">Healing skill: 2sp\n\nHeals 14hp\n\By using the surrounding magic, it is possible to give water healing properties.</Text>
+	<Text id="Special:HealingSplash:Description">Healing skill: 2sp\n\nHeals 14hp\n\nBy using the surrounding magic, it is possible to give water healing properties.</Text>
 	
 	<!-- Salamanti -->
 	<Text id="Special:TailWhap">Tail Whap</Text>
@@ -49,9 +48,9 @@
 	<Text id="Special:Playercrush"> Crush </Text>
 	<Text id="Special:Playercrush:Description">Attack skill: 6sp\n\nBase damage 16\n\nElement: Physical \n\n Who said that brute force doesn’t solve anything?</Text>
 	<Text id="Special:Pillarstones">Pillar stones </Text> 
-	<Text id="Special:Pillarstones:Description">Attack skill: 8sp\n\nBase damage 22 \n\nElement: Earth\n\nNo one would want to stay between two stone pillars, as they rush to them, to say the least.</Text>
+	<Text id="Special:Pillarstones:Description">Attack skill: 8sp\n\nBase damage 22\n\nElement: Earth\n\nNo one would want to stay between two stone pillars, as they rush to them, to say the least.</Text>
 	<Text id="Special:Refresh">Refresh</Text>
-	<Text id="Special:Refresh:Description">Healing skill: 7sp \n\nRemoves debuffs \n\nWhatever your trouble is, you can simply ignore it..</Text>
+	<Text id="Special:Refresh:Description">Healing skill: 7sp \n\nRemoves debuffs\n\nWhatever your trouble is, you can simply ignore it..</Text>
 	
 	<!-- Hobgoblin -->
 	<Text id="Special:PoisonedDagger">Poisoned Dagger</Text>
@@ -63,7 +62,7 @@
 	
 	<!-- Mud Dragling -->
 	<Text id="Special:RammingAttack">Ramming Attack</Text>
-	<Text id="Special: RammingAttack:Description">Attack skill: 14sp\n\nBase damage 20\n\nElement: Physical\n\nA headbutt, and a massive one at that.</Text>
+	<Text id="Special:RammingAttack:Description">Attack skill: 14sp\n\nBase damage 20\n\nElement: Physical\n\nA headbutt, and a massive one at that.</Text>
 	<Text id="Special:BreathOfEarth ">Breath of Earth</Text>
 	<Text id="Special:BreathOfEarth:Description">Attack skill: 7sp\n\nBase damage 18\n\nElement: Earth\n\nMud mixed with powerful digestive juices, add just a right amount of magic, and you will get a breath of the earth.</Text>
 	<Text id="Special:GroundPower">Ground Power</Text>
@@ -230,10 +229,10 @@
 	<Text id="Enemy:Dualent:DryRoots">Dry roots</Text>
 	<Text id="Enemy:Dualent:Bite"></Text>
 	<Text id="Enemy:Dualent:DoubleAttack">Dualent’s second head decided to attack.</Text>
-	<Text id="Enemy:ThirdrateRobber">Third rate robber</Text>
-	<Text id="Enemy:ThirdrateRobber:Stab">Stab</Text>
-	<Text id="Enemy:ThirdrateRobber:Run">Third rate robber ran away from the battlefield..</Text>
-	<Text id="Enemy:ThirdrateRobber:StealMonett">HEY! He stole% d monett!</Text>
+	<Text id="Enemy:ThirdsortRobber">Third rate robber</Text>
+	<Text id="Enemy:ThirdsortRobber:Stab">Stab</Text>
+	<Text id="Enemy:ThirdsortRobber:Run">Third rate robber ran away from the battlefield..</Text>
+	<Text id="Enemy:ThirdsortRobber:StealMonett">HEY! He stole %d monett!</Text>
 	<Text id="Enemy:FeralSlime">Feral slime</Text>
 	<Text id="Enemy:FeralSlime:Tackle">Tackle</Text>
 	<Text id="Enemy:Willwhishp">Willwisp</Text>
@@ -251,7 +250,7 @@
 	<Text id="Enemy:Bokalisk:Description">A descendant of domesticated basilisks, who, unlike his formidable relative, does not have the ability to petrify with his gaze. Despite the fact that they look just like a large chicken, underestimating them would be a great mistake.</Text>
 	<Text id="Enemy:Skwatwolf:Description">Same as werewolf, but a natural jerk. Unlike werewolves, squatwolves form packs.</Text>
 	<Text id="Enemy:Dualent:Description">Living trees that come to life when two creatures die simultaneously in a battle against each other near the growing tree. Despite rumors saying that they contain souls of those whose death created them, it is actually just the released magic energy that gives them life. Despite complicated conditions for their creation, they are not few in number, mainly because those conditions can be satisfied even by two fighting mosquitoes.</Text>
-	<Text id="Enemy:ThirdrateRobber:Description">Nothing special about this guy. A weak person who wants some easy money. In the "off" time he’s hanging around in the taverns with dubious reputation.</Text>
+	<Text id="Enemy:ThirdsortRobber:Description">Nothing special about this guy. A weak person who wants some easy money. In the "off" time he’s hanging around in the taverns with dubious reputation.</Text>
 	<Text id="Enemy:SecondRateRobber:Description">A little bit more experienced representative of his profession, which makes him a little bit more successful. Because of his “successful” career, he is very confident in his abilities. Has many unpaid debts.</Text>
 	<Text id="Enemy:FeralSlime:Description">Very weak enemy. These slimes are actually the living pieces of flesh of the intelligent slimes, however they do not have any resemblance to consciousness, only desire feed.</Text>
 	<Text id="Enemy:Willwhishp:Description">Also known as wandering lights, these spheres of fiery magic have a mind of their own. They love to confuse those who went into the woods at night, their pleasant light can mislead travelers. Most often, the victims are the robbers who mistook their light for glitter of gold.</Text>
