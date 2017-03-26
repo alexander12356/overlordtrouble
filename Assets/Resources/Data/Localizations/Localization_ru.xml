@@ -63,8 +63,8 @@
 	
 	<!-- Mud Dragling -->
 	<Text id="Special:RammingAttack">Таран</Text>
-	<Text id="Special: RammingAttack:Description">Прием атаки: 8сп\n\nБазовый урон 20\n\nЭлемент: Физический\n\nМассивный удар головой с разгона.</Text>
-	<Text id="Special:BreathOfEarth ">Дыхание земли</Text>
+	<Text id="Special:RammingAttack:Description">Прием атаки: 8сп\n\nБазовый урон 20\n\nЭлемент: Физический\n\nМассивный удар головой с разгона.</Text>
+	<Text id="Special:BreathOfEarth">Дыхание земли</Text>
 	<Text id="Special:BreathOfEarth:Description">Прием атаки: 7сп\n\nБазовый урон 18\n\nЭлемент: Земля\n\nГрязь, покрытая мощными пищеварительными соками, добавьте к этому щепотку магии и вы получите дыхание земли.</Text>
 	<Text id="Special:GroundPower">Сила земли</Text>
 	<Text id="Special:GroundPower:Description">Прием улучшения: 9сп\n\nПовышение защиты и атаки на 10 очков, действует 5 ходов\n\nДля принятия силы земли нужно быть в контакте с нею.</Text>
