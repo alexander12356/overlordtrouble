@@ -84,6 +84,9 @@ public class LocalizationDataBase : Singleton<LocalizationDataBase>
 			case SystemLanguage.Russian:
                 m_CurrentLanguageId = "ru";
 				break;
+            default:
+                m_CurrentLanguageId = "en";
+                break;
 		}
         return m_CurrentLanguageId;
 	}
