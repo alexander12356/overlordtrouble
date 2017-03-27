@@ -63,7 +63,7 @@
 	<!-- Mud Dragling -->
 	<Text id="Special:RammingAttack">Ramming Attack</Text>
 	<Text id="Special:RammingAttack:Description">Attack skill: 14sp\n\nBase damage 20\n\nElement: Physical\n\nA headbutt, and a massive one at that.</Text>
-	<Text id="Special:BreathOfEarth ">Breath of Earth</Text>
+	<Text id="Special:BreathOfEarth">Breath of Earth</Text>
 	<Text id="Special:BreathOfEarth:Description">Attack skill: 7sp\n\nBase damage 18\n\nElement: Earth\n\nMud mixed with powerful digestive juices, add just a right amount of magic, and you will get a breath of the earth.</Text>
 	<Text id="Special:GroundPower">Ground Power</Text>
 	<Text id="Special:GroundPower:Description">Buff skill: 9sp\n\nIncreases defense and attack by 10 points, lasts 5 turns\n\nTo accept the power of the earth you need to be in contact with it.</Text>
