@@ -150,6 +150,20 @@ public class ItemsPanel : Panel
         string l_ItemId = m_ChoosedItemButton.itemId;
         Item l_Item = ItemDataBase.GetInstance().GetItem(l_ItemId).CreateItem();
 
+        RemoveItem(l_ItemId, 1);
+
         BattlePlayer.GetInstance().UseItem(BattlePlayer.GetInstance(), l_Item);
+    }
+
+    private void RemoveItem(string p_ItemId, int p_CountToRemove)
+    {
+        int l_ItemCount = PlayerInventory.GetInstance().GetItemCount(p_ItemId);
+        int l_ResultItemCount = l_ItemCount - p_CountToRemove;
+        if (l_ResultItemCount <= 0)
+            l_ItemCount = 0;
+        else
+            l_ItemCount = l_ResultItemCount;
+
+        PlayerInventory.GetInstance().SetItemCount(p_ItemId, l_ItemCount);
     }
 }
