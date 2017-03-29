@@ -87,7 +87,16 @@ public class PanelButtonStat : PanelButton
     {
         int l_AddedValue = addedStatValue;
         addedStatValue = 0;
-        return l_AddedValue;
+
+        //TODO Kostil
+        if (m_StatId == "HealthPoints")
+        {
+            return l_AddedValue / 3;
+        }
+        else
+        {
+            return l_AddedValue;
+        }
     }
 
     public void PlayAnim(string p_TriggerId)
