@@ -22,7 +22,7 @@ public class PlayerStatistics : MonoBehaviour, IEffectInfluenced
     }
     public float specialPoints
     {
-        get { return m_SpecialPoints; }
+        get { return PlayerData.GetInstance().specialPoints; }
         set
         {
             m_SpecialPoints = value;
