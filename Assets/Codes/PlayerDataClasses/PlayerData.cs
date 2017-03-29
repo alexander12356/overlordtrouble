@@ -103,7 +103,7 @@ public class PlayerData : Singleton<PlayerData>
         m_PlayerStat.SetStatData(p_PlayerData["Stats"]);
 
         m_HealthPoints = m_PlayerStat.GetStatValue("HealthPoints");
-        m_MonstylePoints = m_PlayerStat.GetStatValue("HealthPoints");
+        m_MonstylePoints = m_PlayerStat.GetStatValue("MonstylePoints");
 
         LoadSpecials(p_PlayerData["Specials"]);
         LoadSelectedSpecials(p_PlayerData["SelectedSpecials"]);

@@ -11,7 +11,7 @@ public class PlayerStatistics : MonoBehaviour, IEffectInfluenced
         set
         {
             m_Health = value;
-            m_Health = m_Health > 0 ? baseHealth : m_Health;
+            m_Health = m_Health > baseHealth ? baseHealth : m_Health;
             PlayerData.GetInstance().health = (int)m_Health;
         }
     }
